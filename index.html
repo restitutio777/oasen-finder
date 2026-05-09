@@ -172,7 +172,7 @@
   .nav {
     display: flex;
     align-items: center;
-    gap: 36px;
+    gap: 30px;
   }
   .nav a {
     font-size: 13px;
@@ -856,6 +856,46 @@
     .termin__cta { justify-self: start; }
   }
 
+  /* ---------- Podcast (geplant) ---------- */
+  .podcast {
+    padding: clamp(72px, 9vw, 120px) 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .podcast__inner {
+    max-width: 720px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .podcast__eyebrow {
+    margin-bottom: 24px;
+    justify-content: center;
+  }
+  .podcast__eyebrow::before { display: none; }
+  .podcast__title {
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  .podcast__title em {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .podcast__lead {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 1.6vw, 22px);
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text-body);
+    margin-bottom: 36px;
+  }
+  .podcast__lead em {
+    color: var(--accent-rose);
+    font-style: italic;
+  }
+  .podcast__cta { margin-top: 4px; }
+
   /* ---------- Purpose / About snippet ---------- */
   .purpose {
     padding: clamp(80px, 10vw, 140px) 0;
@@ -1064,6 +1104,7 @@
     <nav class="nav" id="primary-nav" aria-label="Hauptnavigation">
       <a href="/orte" class="is-active">Orte</a>
       <a href="/termine">Termine</a>
+      <a href="#podcast">Podcast</a>
       <a href="/ueber">Über</a>
       <a href="/referenzen">Referenzen</a>
       <a href="/kontakt">Kontakt</a>
@@ -1154,12 +1195,12 @@
           alt="Lange Tafel im Garten — Gemeinschaftsabendessen, sinnbildlich"
           loading="lazy"
         />
-        <figcaption class="featured__caption">Schloss Tempelhof · Hohenlohe</figcaption>
+        <figcaption class="featured__caption">Am Tempelhof · Hohenlohe</figcaption>
       </figure>
 
       <article class="featured__body reveal">
         <span class="eyebrow featured__eyebrow">Im Profil — Ort 01</span>
-        <h2 class="featured__title">Schloss Tempelhof</h2>
+        <h2 class="featured__title">Am Tempelhof</h2>
         <p class="featured__region">Hohenlohe, Baden-Württemberg</p>
 
         <div class="featured__story">
@@ -1376,7 +1417,7 @@
           <h3 class="termin__title">Tag der offenen Tür</h3>
           <p class="termin__location">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            Schloss Tempelhof, Kreßberg
+            Am Tempelhof, Kreßberg
           </p>
           <p class="termin__desc">
             Einblick in den Alltag der Gemeinschaft: Führungen, Hofrundgang,
@@ -1407,6 +1448,30 @@
         </div>
         <a href="#" class="termin__cta">Anmelden</a>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PODCAST (geplant)
+     ============================================================ -->
+<section class="podcast" id="podcast">
+  <div class="container">
+    <div class="podcast__inner">
+      <span class="eyebrow podcast__eyebrow">Geplant</span>
+      <h2 class="podcast__title">Ein <em>Podcast</em>.</h2>
+      <p class="podcast__lead">
+        Gespräche mit Menschen, die seit Jahren in Gemeinschaft leben — und mit
+        denen, die gerade zum ersten Mal an die Tür klopfen. <em>Stand offen.</em>
+        Wer eine Mail hinterlässt, hört von der ersten Folge.
+      </p>
+      <a href="mailto:kontakt@oasenfinder.example?subject=Podcast%20%E2%80%94%20bitte%20Bescheid%20geben" class="btn btn--ghost podcast__cta">
+        Sag mir, wenn es losgeht
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"/>
+          <path d="m12 5 7 7-7 7"/>
+        </svg>
+      </a>
     </div>
   </div>
 </section>
