@@ -197,8 +197,80 @@
   .nav a.is-active::after { right: 0; }
   .nav a.is-active { color: var(--text-primary); }
 
+  /* ---------- Mobile hamburger ---------- */
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 60;
+    position: relative;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    margin: 5px 0;
+    transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+    transform-origin: center;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
   @media (max-width: 720px) {
-    .nav { display: none; }
+    .nav-toggle { display: block; }
+    .nav {
+      display: flex;
+      position: fixed;
+      top: 72px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: calc(100vh - 72px);
+      background: var(--bg-base);
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 0;
+      padding: 32px 24px 80px;
+      transform: translateY(-8px);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.3s var(--ease), opacity 0.3s var(--ease), visibility 0.3s;
+      z-index: 50;
+      overflow-y: auto;
+    }
+    .nav.is-open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    .nav a {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: -0.01em;
+      padding: 18px 0;
+      width: 100%;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+    }
+    .nav a::after { display: none; }
+    .nav a.is-active {
+      color: var(--accent);
+    }
+    body.nav-open { overflow: hidden; }
   }
 
   /* ---------- Hero ---------- */
@@ -989,13 +1061,18 @@
     <a href="/" class="brand" aria-label="Oasen Finder — Startseite">
       <span class="brand__noun">Oasen</span><em class="brand__qualifier">Finder</em>
     </a>
-    <nav class="nav" aria-label="Hauptnavigation">
+    <nav class="nav" id="primary-nav" aria-label="Hauptnavigation">
       <a href="/orte" class="is-active">Orte</a>
       <a href="/termine">Termine</a>
       <a href="/ueber">Über</a>
       <a href="/referenzen">Referenzen</a>
       <a href="/kontakt">Kontakt</a>
     </nav>
+    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="primary-nav" type="button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </header>
 
@@ -1073,8 +1150,8 @@
     <div class="featured__inner">
       <figure class="featured__media reveal">
         <img
-          src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&q=80&auto=format&fit=crop"
-          alt="Hofarchitektur am Schloss Tempelhof"
+          src="https://images.unsplash.com/photo-1738034950582-271276c5af7d?w=1200&q=80&auto=format&fit=crop"
+          alt="Lange Tafel im Garten — Gemeinschaftsabendessen, sinnbildlich"
           loading="lazy"
         />
         <figcaption class="featured__caption">Schloss Tempelhof · Hohenlohe</figcaption>
@@ -1146,7 +1223,7 @@
 
       <a href="/orte/sieben-linden" class="place place--lg reveal">
         <div class="place__media">
-          <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1200&q=80&auto=format&fit=crop" alt="Sieben Linden" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1515150144380-bca9f1650ed9?w=1200&q=80&auto=format&fit=crop" alt="Gießkanne über jungen Pflanzen — Selbstversorgung" loading="lazy" />
           <span class="place__num">02</span>
         </div>
         <h3 class="place__name">Sieben Linden</h3>
@@ -1165,7 +1242,7 @@
 
       <a href="/orte/zegg" class="place place--md reveal">
         <div class="place__media">
-          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80&auto=format&fit=crop" alt="ZEGG" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1516197067152-381321bc78e1?w=1200&q=80&auto=format&fit=crop" alt="Menschen an einer großen Holztafel — Werkstatt-Atmosphäre" loading="lazy" />
           <span class="place__num">03</span>
         </div>
         <h3 class="place__name">ZEGG</h3>
@@ -1183,7 +1260,7 @@
 
       <a href="/orte/lebensgarten" class="place place--sm reveal">
         <div class="place__media">
-          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80&auto=format&fit=crop" alt="Lebensgarten Steyerberg" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1659817675055-4923aeff6fca?w=1200&q=80&auto=format&fit=crop" alt="Permakultur-Bett mit Kapuzinerkresse" loading="lazy" />
           <span class="place__num">04</span>
         </div>
         <h3 class="place__name">Lebensgarten</h3>
@@ -1199,7 +1276,7 @@
 
       <a href="/orte/glarisegg" class="place place--offset reveal">
         <div class="place__media">
-          <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200&q=80&auto=format&fit=crop" alt="Schloss Glarisegg" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?w=1200&q=80&auto=format&fit=crop" alt="Hände an einem alten Baumstamm — geteilte Kontemplation" loading="lazy" />
           <span class="place__num">05</span>
         </div>
         <h3 class="place__name">Schloss Glarisegg</h3>
@@ -1423,6 +1500,28 @@
 </footer>
 
 <script>
+  // Mobile hamburger menu
+  (() => {
+    const toggle = document.querySelector('.nav-toggle')
+    const nav = document.getElementById('primary-nav')
+    if (!toggle || !nav) return
+    const close = () => {
+      toggle.setAttribute('aria-expanded', 'false')
+      toggle.setAttribute('aria-label', 'Menü öffnen')
+      nav.classList.remove('is-open')
+      document.body.classList.remove('nav-open')
+    }
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') !== 'true'
+      toggle.setAttribute('aria-expanded', String(open))
+      toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen')
+      nav.classList.toggle('is-open', open)
+      document.body.classList.toggle('nav-open', open)
+    })
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close))
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close() })
+  })()
+
   // Tiny reveal-on-scroll — graceful fallback if IO unavailable
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
