@@ -32,8 +32,8 @@
     --text-muted: #9a9d92;
     --text-inverse: #f6f4ee;
 
-    --accent: #b85a3c;              /* clay — Wärme-Signatur */
-    --accent-hover: #9c4830;
+    --accent: #a8392b;              /* clay-rot — Wärme-Signatur, klar nach Rot */
+    --accent-hover: #8a2c1e;
     --accent-soft: #e8b987;         /* warm peach — auf dunklem Grund */
     --accent-rose: #a87a72;         /* gedämpftes Mauve-Rosé — refiniert */
     --accent-green: #3d6b54;        /* fern — modern */
@@ -162,7 +162,7 @@
     gap: 10px;
   }
   .brand__globe {
-    color: var(--accent-green);
+    color: var(--accent);
     flex-shrink: 0;
     transform: translateY(-1px);
   }
@@ -208,12 +208,12 @@
   .hero::before {
     content: '';
     position: absolute;
-    inset: -80px;
-    background-image: url('https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=2000&q=70&auto=format&fit=crop');
+    inset: -40px;
+    background-image: url('https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=2200&q=75&auto=format&fit=crop');
     background-size: cover;
     background-position: center 45%;
-    filter: blur(72px) saturate(1.05);
-    opacity: 0.55;
+    filter: blur(14px) saturate(1.05) brightness(1.05);
+    opacity: 0.78;
     z-index: -2;
   }
   .hero::after {
@@ -221,11 +221,11 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(115deg,
-      rgba(246, 244, 238, 0.94) 0%,
-      rgba(246, 244, 238, 0.82) 38%,
-      rgba(212, 223, 208, 0.45) 62%,
-      rgba(168, 122, 114, 0.5) 86%,
-      rgba(184, 90, 60, 0.4) 100%);
+      rgba(246, 244, 238, 0.95) 0%,
+      rgba(246, 244, 238, 0.78) 32%,
+      rgba(246, 244, 238, 0.42) 58%,
+      rgba(168, 122, 114, 0.18) 82%,
+      rgba(168, 122, 114, 0.1) 100%);
     z-index: -1;
   }
   .hero__inner {
