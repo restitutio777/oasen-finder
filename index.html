@@ -389,14 +389,18 @@
     }
     /* Calm the background image on mobile so text stays legible */
     .hero::before {
-      opacity: 0.42;
-      filter: blur(10px) saturate(1) brightness(1.05);
+      opacity: 0.5;
+      filter: blur(8px) saturate(1.1) brightness(1.05);
     }
+    /* Three-stop colour flow on mobile: cream → sage → mauve */
     .hero::after {
-      background: linear-gradient(180deg,
-        rgba(246, 244, 238, 0.92) 0%,
-        rgba(246, 244, 238, 0.78) 45%,
-        rgba(246, 244, 238, 0.86) 100%);
+      background:
+        linear-gradient(168deg,
+          rgba(246, 244, 238, 0.93) 0%,
+          rgba(246, 244, 238, 0.74) 30%,
+          rgba(212, 223, 208, 0.42) 56%,
+          rgba(232, 185, 135, 0.38) 80%,
+          rgba(168, 122, 114, 0.5) 100%);
     }
   }
 
