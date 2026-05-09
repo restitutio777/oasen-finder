@@ -382,7 +382,22 @@
 
   @media (max-width: 720px) {
     .hero__inner { grid-template-columns: 1fr; }
-    .hero__meta { text-align: left; }
+    .hero__meta {
+      text-align: left;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+    /* Calm the background image on mobile so text stays legible */
+    .hero::before {
+      opacity: 0.42;
+      filter: blur(10px) saturate(1) brightness(1.05);
+    }
+    .hero::after {
+      background: linear-gradient(180deg,
+        rgba(246, 244, 238, 0.92) 0%,
+        rgba(246, 244, 238, 0.78) 45%,
+        rgba(246, 244, 238, 0.86) 100%);
+    }
   }
 
   /* Buttons */
