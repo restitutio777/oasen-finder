@@ -153,18 +153,21 @@
   }
   .brand {
     font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: -0.005em;
+    font-size: 26px;
+    letter-spacing: -0.012em;
+    line-height: 1;
     color: var(--text-primary);
     display: inline-flex;
-    align-items: center;
-    gap: 10px;
+    align-items: baseline;
+    gap: 0.22em;
   }
-  .brand__globe {
+  .brand__noun {
+    font-weight: 600;
+  }
+  .brand__qualifier {
+    font-weight: 400;
+    font-style: italic;
     color: var(--accent);
-    flex-shrink: 0;
-    transform: translateY(-1px);
   }
   .nav {
     display: flex;
@@ -827,6 +830,44 @@
     padding-bottom: 2px;
   }
   .purpose__text a:hover { color: var(--accent); }
+  .strands {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 4vw, 56px);
+    max-width: 640px;
+    margin: 44px auto 0;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-medium);
+    text-align: left;
+  }
+  .strand__label {
+    display: block;
+    font-family: var(--font-text);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .strand__text {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text-body);
+    margin: 0;
+  }
+  .strand__text a {
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 1px;
+  }
+  .strand__text a:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .strands { grid-template-columns: 1fr; }
+  }
+
   .purpose__signature {
     margin-top: 40px;
     font-family: var(--font-display);
@@ -863,9 +904,16 @@
   }
   .site-footer__brand {
     font-family: var(--font-display);
-    font-size: 24px;
+    font-size: 26px;
     color: var(--text-inverse);
     margin-bottom: 12px;
+    letter-spacing: -0.012em;
+  }
+  .site-footer__brand-noun { font-weight: 600; }
+  .site-footer__brand-qualifier {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--accent-soft);
   }
   .site-footer__intro {
     font-family: var(--font-display);
@@ -939,13 +987,7 @@
 <header class="site-header">
   <div class="container site-header__inner">
     <a href="/" class="brand" aria-label="Oasen Finder — Startseite">
-      <svg class="brand__globe" width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="16" cy="16" r="13" stroke-width="1.4"/>
-        <ellipse cx="16" cy="16" rx="13" ry="3.8" stroke-width="0.95" opacity="0.45"/>
-        <ellipse cx="16" cy="16" rx="3.8" ry="13" stroke-width="0.95" opacity="0.45"/>
-        <circle cx="21" cy="10" r="2.4" fill="currentColor" stroke="none"/>
-      </svg>
-      Oasen Finder
+      <span class="brand__noun">Oasen</span><em class="brand__qualifier">Finder</em>
     </a>
     <nav class="nav" aria-label="Hauptnavigation">
       <a href="/orte" class="is-active">Orte</a>
@@ -1307,13 +1349,30 @@
       </figure>
       <span class="eyebrow purpose__eyebrow">In welchem Geist</span>
       <p class="purpose__text">
-        Dieses Projekt entsteht aus einer einfachen Beobachtung: Es gibt
-        <em>mehr Orte</em>, an denen anders gelebt wird, als die meisten
-        von uns ahnen. Wir verstehen uns als Erkundung im Geist von Cynthia
-        Tinas <a href="https://communityfinders.com" target="_blank" rel="noopener">CommunityFinders</a> —
-        nicht als Reiseführer, sondern als ein langsam wachsender Atlas.
+        Eine zentrale Anlaufstelle für eine fortlaufende Recherche zum Thema
+        <em>Gemeinschaft</em> — was hier entsteht, ist die Bündelung dessen,
+        was kommt: Texte, Besuche, Begegnungen.
       </p>
-      <p class="purpose__signature">— die Redaktion, Frühjahr 2026</p>
+
+      <div class="strands">
+        <div class="strand">
+          <span class="strand__label">Theorie</span>
+          <p class="strand__text">
+            Lesen, Sammeln, Mitschreiben. Im Geist von Cynthia Tinas
+            <a href="https://communityfinders.com" target="_blank" rel="noopener">CommunityFinders</a>
+            und benachbarter Quellen.
+          </p>
+        </div>
+        <div class="strand">
+          <span class="strand__label">Praxis</span>
+          <p class="strand__text">
+            Besuche bei Projekten. Praktika. Wochen, die man im Hof verbringt
+            statt sie aus der Ferne zu beschreiben.
+          </p>
+        </div>
+      </div>
+
+      <p class="purpose__signature">— Frühjahr 2026  ·  Podcast denkbar, Stand offen</p>
       <a href="/ueber" class="btn btn--ghost purpose__cta">
         Mehr über das Projekt
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -1331,7 +1390,7 @@
   <div class="container">
     <div class="site-footer__grid">
       <div>
-        <p class="site-footer__brand">Oasen Finder</p>
+        <p class="site-footer__brand"><span class="site-footer__brand-noun">Oasen</span> <em class="site-footer__brand-qualifier">Finder</em></p>
         <p class="site-footer__intro">
           Eine wachsende Sammlung von Gemeinschaftsorten im deutschsprachigen
           Raum — kuratiert, nicht vollständig.
