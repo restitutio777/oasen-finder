@@ -26,8 +26,8 @@
     --bg-deep: #2c2530;             /* warm aubergine-charcoal */
     --bg-deep-soft: #38303a;
 
-    --text-primary: #1a1f1c;
-    --text-body: #3a3f39;
+    --text-primary: #2c2530;          /* warm aubergine, weicher als Schwarz */
+    --text-body: #3a3a3a;
     --text-secondary: #686b62;
     --text-muted: #9a9d92;
     --text-inverse: #f6f4ee;
@@ -286,22 +286,22 @@
     content: '';
     position: absolute;
     inset: -20px;
-    background-image: url('https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=2200&q=80&auto=format&fit=crop');
+    background-image: url('https://images.unsplash.com/photo-1738034950582-271276c5af7d?w=2400&q=80&auto=format&fit=crop');
     background-size: cover;
-    background-position: center 45%;
-    filter: blur(4px) saturate(1.1) brightness(1.05);
-    opacity: 0.95;
+    background-position: center 60%;
+    filter: blur(2px) saturate(1.05) brightness(1);
+    opacity: 1;
     z-index: -2;
   }
   .hero::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(110deg,
-      rgba(246, 244, 238, 0.94) 0%,
-      rgba(246, 244, 238, 0.72) 28%,
-      rgba(246, 244, 238, 0.34) 52%,
-      rgba(168, 122, 114, 0.06) 80%,
+    background: linear-gradient(105deg,
+      rgba(246, 244, 238, 0.88) 0%,
+      rgba(246, 244, 238, 0.62) 32%,
+      rgba(246, 244, 238, 0.28) 56%,
+      rgba(168, 122, 114, 0.08) 82%,
       rgba(168, 122, 114, 0) 100%);
     z-index: -1;
   }
@@ -338,13 +338,18 @@
     font-size: 1.05em;
     color: var(--text-primary);
   }
-  .hero__signature {
-    margin-top: 18px;
+  .hero__subtitle {
+    margin-top: clamp(24px, 3.5vw, 36px);
+    max-width: 560px;
     font-family: var(--font-display);
+    font-size: clamp(20px, 2vw, 26px);
     font-style: italic;
-    font-size: 16px;
-    color: var(--text-secondary);
-    line-height: 1.4;
+    line-height: 1.5;
+    color: var(--text-body);
+  }
+  .hero__subtitle em {
+    font-style: italic;
+    color: var(--accent);
   }
   .hero__cta-row {
     margin-top: clamp(28px, 4vw, 44px);
@@ -1687,18 +1692,11 @@
     <div class="hero__main">
       <span class="eyebrow hero__eyebrow">Eine Werkstatt · Frühjahr 2026</span>
       <h1 class="hero__title">
-        <em>Gemeinschaft</em><br>
-        — wie heute.
+        <em>Gemeinschaft</em>,<br>
+        gelebt.
       </h1>
-      <p class="hero__lead">
-        Ich reise zu Ökodörfern, Cohousing-Projekten und alternativen Höfen
-        und frage, was <em>gelebte Gemeinschaft</em> heute wirklich braucht.
-        Dazwischen lade ich zu Werkstätten ein — gemeinsames Tun, in dem
-        die Frage durchs Werken geklärt wird. Diese Seite sammelt, was
-        unterwegs ist: Notizen, Stationen, Stimmen, Lesestoff.
-      </p>
-      <p class="hero__signature">
-        — Katharina Offenborn · Ergotherapeutin, mit der Frage in der Hand
+      <p class="hero__subtitle">
+        Eine fortlaufende Suche — von <em>Katharina Offenborn</em>.
       </p>
       <div class="hero__cta-row">
         <a href="#notizen" class="btn btn--primary">
