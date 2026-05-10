@@ -293,25 +293,24 @@
     opacity: 0.9;
     z-index: -2;
   }
-  /* Wouuchh — natural colour sweep tying the image together */
+  /* Wouuchh — vertical sweep: light top, grounded bottom */
   .hero::after {
     content: '';
     position: absolute;
     inset: 0;
     background:
-      /* Cream wash on the text side, fades into image */
-      radial-gradient(ellipse 90% 110% at 18% 50%,
-        rgba(246, 244, 238, 0.97) 0%,
-        rgba(246, 244, 238, 0.82) 30%,
-        rgba(246, 244, 238, 0.45) 55%,
-        rgba(246, 244, 238, 0.15) 75%,
-        transparent 90%),
-      /* The sweep: sage → warm peach → mauve, diagonal */
-      linear-gradient(125deg,
-        rgba(212, 223, 208, 0.55) 0%,
-        rgba(232, 185, 135, 0.45) 45%,
-        rgba(168, 122, 114, 0.5) 80%,
-        rgba(168, 122, 114, 0.55) 100%);
+      /* Cream wash centred on the text area */
+      radial-gradient(ellipse 90% 95% at 22% 42%,
+        rgba(246, 244, 238, 0.96) 0%,
+        rgba(246, 244, 238, 0.7) 32%,
+        rgba(246, 244, 238, 0.32) 60%,
+        transparent 82%),
+      /* Vertical: airy top → warm middle → grounded bottom */
+      linear-gradient(180deg,
+        rgba(246, 244, 238, 0.5) 0%,
+        rgba(232, 185, 135, 0.32) 35%,
+        rgba(168, 122, 114, 0.4) 65%,
+        rgba(44, 37, 48, 0.62) 100%);
     z-index: -1;
   }
   .hero__inner {
