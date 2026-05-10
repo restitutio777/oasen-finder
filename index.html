@@ -680,6 +680,118 @@
     .featured__media { aspect-ratio: 3 / 4; max-height: 70vh; }
   }
 
+  /* ---------- Drei Pfeiler — drei Türen ---------- */
+  .pillars {
+    padding: clamp(60px, 8vw, 100px) 0;
+    background: var(--bg-base);
+  }
+  .pillars__head {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto clamp(40px, 5vw, 64px);
+  }
+  .pillars__title {
+    font-size: clamp(2.25rem, 4vw, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 18px 0 14px;
+  }
+  .pillars__title em { font-style: italic; color: var(--accent); }
+  .pillars__sub {
+    font-family: var(--font-display);
+    font-size: clamp(17px, 1.4vw, 20px);
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .pillars__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.4vw, 32px);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .pillar {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(28px, 3vw, 36px);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    color: inherit;
+    transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease), border-color var(--t-base) var(--ease);
+  }
+  .pillar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 48px -28px rgba(31, 29, 26, 0.18);
+    border-color: var(--accent);
+  }
+  .pillar__count {
+    font-family: var(--font-text);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .pillar__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(28px, 2.6vw, 36px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+  }
+  .pillar__desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-body);
+    margin: 0 0 22px;
+    flex: 1;
+  }
+  .pillar__latest {
+    margin: 0 0 22px;
+    padding: 14px 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .pillar__latest-label {
+    font-family: var(--font-text);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .pillar__latest-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.3;
+    color: var(--text-primary);
+  }
+  .pillar__link {
+    font-family: var(--font-text);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    align-self: flex-start;
+    transition: color var(--t-fast) var(--ease);
+  }
+  .pillar:hover .pillar__link { color: var(--accent-hover); }
+
+  @media (max-width: 800px) {
+    .pillars__grid { grid-template-columns: 1fr; }
+  }
+
   /* ---------- Section heading ---------- */
   .section-head {
     display: grid;
@@ -1555,8 +1667,7 @@
       <a href="#stationen">Stationen</a>
       <a href="#werkstatt">Werkstatt</a>
       <a href="#bibliothek">Bibliothek</a>
-      <a href="#podcast">Podcast</a>
-      <a href="#ueber">Über</a>
+      <a href="#mitkommen">Mitkommen</a>
     </nav>
     <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="primary-nav" type="button">
       <span></span>
@@ -1605,20 +1716,6 @@
   </div>
 </section>
 
-<!-- ============================================================
-     MANIFEST STRIP — drei Prinzipien, kompakt
-     ============================================================ -->
-<aside class="manifest">
-  <div class="container">
-    <p class="manifest__line">
-      <span><em>Besuchen</em>, statt vorbeifahren.</span>
-      <span aria-hidden="true">·</span>
-      <span><em>Zeigen</em>, nicht empfehlen.</span>
-      <span aria-hidden="true">·</span>
-      <span><em>Langsam</em> wachsen, bewusst kuratiert.</span>
-    </p>
-  </div>
-</aside>
 
 <!-- ============================================================
      WER ICH BIN
@@ -1655,90 +1752,6 @@
         </p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     PLACES GRID
-     ============================================================ -->
-<section class="places" id="stationen">
-  <div class="container">
-    <header class="section-head">
-      <div>
-        <span class="eyebrow">Stationen — fünf von vielen</span>
-        <h2 class="section-head__title">Wo ich <em>war</em></h2>
-        <p class="section-head__sub">
-          Eine wachsende Reise — verschieden in Form, verbunden in Frage.
-          Hinter jedem Ort steht eine Begegnung, an die ich zurückdenke.
-        </p>
-      </div>
-      <a href="#" class="section-head__link">
-        Alle Stationen
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
-    </header>
-
-    <div class="places__grid">
-
-      <a href="#stationen-tempelhof" class="place place--featured reveal">
-        <div class="place__media">
-          <img src="https://images.unsplash.com/photo-1738034950582-271276c5af7d?w=1600&q=80&auto=format&fit=crop" alt="Lange Tafel im Garten — Gemeinschaftsabendessen, sinnbildlich" loading="lazy" />
-          <span class="place__num">01</span>
-        </div>
-        <h3 class="place__name">Am Tempelhof</h3>
-        <p class="place__region">Hohenlohe, Baden-Württemberg</p>
-        <p class="place__desc">
-          Eine Gemeinschaft von rund 150 Menschen auf einem ehemaligen
-          Gutshof. Ökologische Landwirtschaft, Konsens­entscheidungen und
-          eine eigene Schule unter einem Dach.
-        </p>
-        <div class="place__tags">
-          <span class="tag">Gemeinschaft</span>
-          <span class="tag">Soziokratie</span>
-          <span class="tag">Bildung</span>
-        </div>
-      </a>
-
-      <a href="#stationen-sieben-linden" class="place reveal">
-        <div class="place__media">
-          <img src="https://images.unsplash.com/photo-1515150144380-bca9f1650ed9?w=1200&q=80&auto=format&fit=crop" alt="Gießkanne über jungen Pflanzen — Selbstversorgung" loading="lazy" />
-          <span class="place__num">02</span>
-        </div>
-        <h3 class="place__name">Sieben Linden</h3>
-        <p class="place__region">Altmark, Sachsen-Anhalt</p>
-        <p class="place__desc">
-          Eines der ältesten Ökodörfer im deutschsprachigen Raum.
-          Strohballen-Bau, Selbstversorgung, kleiner Fußabdruck.
-        </p>
-        <div class="place__tags">
-          <span class="tag">Ökodorf</span>
-          <span class="tag">Selbstversorgung</span>
-        </div>
-      </a>
-
-      <a href="#stationen-zegg" class="place reveal">
-        <div class="place__media">
-          <img src="https://images.unsplash.com/photo-1516197067152-381321bc78e1?w=1200&q=80&auto=format&fit=crop" alt="Menschen an einer großen Holztafel — Werkstatt-Atmosphäre" loading="lazy" />
-          <span class="place__num">03</span>
-        </div>
-        <h3 class="place__name">ZEGG</h3>
-        <p class="place__region">Bad Belzig, Brandenburg</p>
-        <p class="place__desc">
-          Zentrum für experimentelle Gesellschaftsgestaltung — Forum-Praxis
-          und offenes Seminarprogramm seit 1991.
-        </p>
-        <div class="place__tags">
-          <span class="tag">Forum</span>
-          <span class="tag">Seminar</span>
-        </div>
-      </a>
-
-    </div>
-
-    <a href="#" class="more-link">
-      Alle Stationen ansehen
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-    </a>
   </div>
 </section>
 
@@ -1826,139 +1839,63 @@
 </section>
 
 <!-- ============================================================
-     AUS DER BIBLIOTHEK — Lesestoff, Filme, Webseiten
+     DREI PFEILER — drei Türen zu Stationen, Werkstatt, Bibliothek
      ============================================================ -->
-<section class="library" id="bibliothek">
+<section class="pillars" id="ueberblick">
   <div class="container">
-    <header class="section-head">
-      <div>
-        <span class="eyebrow">Aus der Bibliothek</span>
-        <h2 class="section-head__title">Was mich <em>trägt</em></h2>
-        <p class="section-head__sub">
-          Bücher, Artikel, Filme, Webseiten — gesammelt mit kurzer Notiz,
-          warum sie hier stehen.
-        </p>
-      </div>
+    <header class="pillars__head">
+      <span class="eyebrow">Was hier liegt</span>
+      <h2 class="pillars__title">Drei <em>Türen</em></h2>
+      <p class="pillars__sub">
+        Reisen, Werkstätten, Lesefrüchte — wähl, wo du eintreten willst.
+      </p>
     </header>
 
-    <ul class="library__list">
+    <div class="pillars__grid">
 
-      <li class="resource reveal">
-        <span class="resource__type">Buch</span>
-        <h3 class="resource__title">Intentional Community</h3>
-        <span class="resource__author">Cynthia Tina</span>
-        <p class="resource__note">
-          „Cynthia bringt die Perspektive einer Kennerin — über 150 besuchte
-          Gemeinschaften. Anker für mich, weil sie dieselbe Frage stellt,
-          mit anderem Akzent."
+      <a href="#" class="pillar reveal" id="stationen">
+        <span class="pillar__count">5 Stationen</span>
+        <h3 class="pillar__title">Reisen</h3>
+        <p class="pillar__desc">
+          Ökodörfer, Cohousing-Projekte, spirituelle Höfe — Orte,
+          die ich besucht habe und an die ich zurückdenke.
         </p>
-        <a href="#" class="resource__link">Beim Verlag <span aria-hidden="true">↗</span></a>
-      </li>
-
-      <li class="resource reveal">
-        <span class="resource__type">Webseite</span>
-        <h3 class="resource__title">CommunityFinders</h3>
-        <span class="resource__author">Cynthia Tina · communityfinders.com</span>
-        <p class="resource__note">
-          „Praktische Roadmaps für die Suche, Quizze, Newsletter — sehr
-          amerikanisch im Ton, sehr nützlich in der Substanz."
+        <p class="pillar__latest">
+          <span class="pillar__latest-label">Zuletzt</span>
+          <span class="pillar__latest-title">Am Tempelhof, Hohenlohe</span>
         </p>
-        <a href="https://communityfinders.com" target="_blank" rel="noopener" class="resource__link">Zur Seite <span aria-hidden="true">↗</span></a>
-      </li>
-
-      <li class="resource reveal">
-        <span class="resource__type">Aufsatz</span>
-        <h3 class="resource__title">Die Dreigliederung des sozialen Organismus</h3>
-        <span class="resource__author">Rudolf Steiner · 1919</span>
-        <p class="resource__note">
-          „Nicht als Lehrgebäude, sondern als Werkzeug, sich Strukturen
-          anzusehen. Geistesleben, Rechtsleben, Wirtschaftsleben — drei
-          Funktionen, die nicht durcheinandergeraten dürfen."
-        </p>
-        <a href="#" class="resource__link">Volltext <span aria-hidden="true">↗</span></a>
-      </li>
-
-    </ul>
-
-    <a href="#" class="more-link">
-      Alle Lesefrüchte ansehen
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-    </a>
-  </div>
-</section>
-
-<!-- ============================================================
-     TERMINE
-     ============================================================ -->
-<section class="termine" id="werkstatt">
-  <div class="container">
-    <header class="section-head">
-      <div>
-        <span class="eyebrow">Werkstatt &amp; Begegnungen</span>
-        <h2 class="section-head__title">Was kommt — <em>komm mit</em></h2>
-        <p class="section-head__sub">
-          Eigene Werkstätten und Termine bei befreundeten Häusern.
-          Niedrige Schwelle: mitbringen, was du hast — Lust auf gemeinsames Tun.
-        </p>
-      </div>
-      <a href="#" class="section-head__link">
-        Alle Termine
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        <span class="pillar__link">Zu den Stationen →</span>
       </a>
-    </header>
 
-    <div class="termine__list">
+      <a href="mailto:kontakt@werkstatt-gemeinschaft.example?subject=Werkstatt%20Filzen%20am%2014.%20Juni" class="pillar reveal" id="werkstatt">
+        <span class="pillar__count">3 Termine</span>
+        <h3 class="pillar__title">Werkstatt</h3>
+        <p class="pillar__desc">
+          Eigene Werkstätten und Termine bei befreundeten Häusern —
+          gemeinsames Tun, niedrige Schwelle.
+        </p>
+        <p class="pillar__latest">
+          <span class="pillar__latest-label">Nächster</span>
+          <span class="pillar__latest-title">14. Juni · Filzen, Steyerberg</span>
+        </p>
+        <span class="pillar__link">Zur Werkstatt →</span>
+      </a>
 
-      <article class="termin termin--mine reveal">
-        <div class="termin__date">
-          <span class="termin__day">14</span>
-          <span class="termin__month">Juni</span>
-          <span class="termin__year">2026</span>
-        </div>
-        <div class="termin__body">
-          <span class="termin__badge">Meine Werkstatt</span>
-          <h3 class="termin__title">Filzen &amp; die Frage nach den Strukturen</h3>
-          <p class="termin__location">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            Lebensgarten, Steyerberg · Wochenende
-          </p>
-          <p class="termin__desc">
-            Ein Werkstatt-Wochenende mit kleiner Gruppe. Wir filzen miteinander
-            und halten dabei eine Frage offen: <em>Was tragen Strukturen, die
-            wir bauen?</em> Die Dreigliederung als Werkzeug, nicht als
-            Vorlesung. Erfahrung kommt zuerst.
-          </p>
-        </div>
-        <a href="mailto:kontakt@werkstatt-gemeinschaft.example?subject=Werkstatt%20Filzen%20am%2014.%20Juni" class="termin__cta">Anmelden</a>
-      </article>
-
-      <article class="termin reveal">
-        <div class="termin__date">
-          <span class="termin__day">21</span>
-          <span class="termin__month">Juni</span>
-          <span class="termin__year">2026</span>
-        </div>
-        <div class="termin__body">
-          <h3 class="termin__title">Tag der offenen Tür</h3>
-          <p class="termin__location">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            Am Tempelhof, Kreßberg
-          </p>
-          <p class="termin__desc">
-            Einblick in den Alltag der Gemeinschaft: Führungen, Hofrundgang,
-            Gespräche an offenen Tischen. Eintritt frei, eine Anmeldung ist
-            nicht erforderlich.
-          </p>
-        </div>
-        <a href="#" class="termin__cta">Details</a>
-      </article>
+      <a href="#" class="pillar reveal" id="bibliothek">
+        <span class="pillar__count">12 Quellen</span>
+        <h3 class="pillar__title">Bibliothek</h3>
+        <p class="pillar__desc">
+          Bücher, Artikel, Filme, Webseiten — gesammelt mit kurzer
+          Notiz, warum sie hier stehen.
+        </p>
+        <p class="pillar__latest">
+          <span class="pillar__latest-label">Empfehlung</span>
+          <span class="pillar__latest-title">„Intentional Community" · Cynthia Tina</span>
+        </p>
+        <span class="pillar__link">Zur Bibliothek →</span>
+      </a>
 
     </div>
-
-    <a href="#" class="more-link">
-      Alle Termine ansehen
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-    </a>
   </div>
 </section>
 
