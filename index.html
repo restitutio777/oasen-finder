@@ -450,47 +450,49 @@
   .btn svg { transition: transform var(--t-base) var(--ease); }
   .btn:hover svg { transform: translateX(4px); }
 
-  /* ---------- Manifest strip ---------- */
+  /* ---------- Manifest strip — kompakt, einzeilig ---------- */
   .manifest {
     border-top: 1px solid var(--border-subtle);
     border-bottom: 1px solid var(--border-subtle);
-    padding: clamp(40px, 6vw, 80px) 0;
+    padding: clamp(20px, 3vw, 28px) 0;
     background: var(--bg-warm);
+    text-align: center;
   }
-  .manifest__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(24px, 4vw, 56px);
-  }
-  .manifest__item {
-    position: relative;
-  }
-  .manifest__num {
+  .manifest__line {
+    margin: 0;
     font-family: var(--font-display);
-    font-style: italic;
-    font-size: 14px;
-    color: var(--accent-rose);
-    margin-bottom: 12px;
-    display: block;
-  }
-  .manifest__text {
-    font-family: var(--font-display);
-    font-size: clamp(20px, 1.8vw, 26px);
-    line-height: 1.35;
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 1.5;
     color: var(--text-primary);
-    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4em 1em;
   }
-  .manifest__text em { font-style: italic; color: var(--accent); }
+  .manifest__line em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .manifest__line span[aria-hidden] {
+    color: var(--accent-rose);
+    font-style: italic;
+    opacity: 0.7;
+  }
 
   @media (max-width: 720px) {
-    .manifest__grid { grid-template-columns: 1fr; gap: 32px; }
+    .manifest__line {
+      flex-direction: column;
+      gap: 8px;
+      font-size: 16px;
+    }
+    .manifest__line span[aria-hidden] { display: none; }
   }
 
-  /* ---------- Wer ich bin ---------- */
+  /* ---------- Wer ich bin (sekundär) ---------- */
   .who {
-    padding: clamp(80px, 10vw, 130px) 0;
+    padding: clamp(60px, 8vw, 100px) 0;
     background: var(--bg-base);
-    border-top: 1px solid var(--border-subtle);
   }
   .who__inner {
     display: grid;
@@ -725,13 +727,40 @@
 
   /* ---------- Places grid (asymmetric) ---------- */
   .places {
-    padding: clamp(80px, 10vw, 140px) 0;
+    padding: clamp(60px, 8vw, 100px) 0;
     background: var(--bg-base);
   }
   .places__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: clamp(40px, 5vw, 72px) clamp(28px, 3vw, 48px);
+    gap: clamp(40px, 5vw, 64px) clamp(28px, 3vw, 48px);
+  }
+  .place--featured {
+    grid-column: 1 / -1;
+  }
+  .place--featured .place__media { aspect-ratio: 16 / 8; }
+  .place--featured .place__name { font-size: clamp(28px, 2.6vw, 36px); }
+
+  /* Generic 'Mehr →' link, used at section ends */
+  .more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: clamp(40px, 5vw, 56px);
+    padding-bottom: 6px;
+    font-family: var(--font-text);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-medium);
+    transition: all var(--t-base) var(--ease);
+  }
+  .more-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    gap: 14px;
   }
   .place {
     position: relative;
@@ -994,7 +1023,7 @@
 
   /* ---------- Bibliothek (Lesestoff) ---------- */
   .library {
-    padding: clamp(80px, 10vw, 140px) 0;
+    padding: clamp(60px, 8vw, 100px) 0;
     background: var(--bg-warm);
   }
   .library__list {
@@ -1062,7 +1091,7 @@
 
   /* ---------- Termine ---------- */
   .termine {
-    padding: clamp(80px, 10vw, 140px) 0;
+    padding: clamp(60px, 8vw, 100px) 0;
   }
   .termin {
     display: grid;
@@ -1175,45 +1204,49 @@
     .termin__cta { justify-self: start; }
   }
 
-  /* ---------- Podcast (geplant) ---------- */
-  .podcast {
-    padding: clamp(72px, 9vw, 120px) 0;
+  /* ---------- Podcast bar — kompakt ---------- */
+  .podcast-bar {
+    padding: clamp(20px, 2.5vw, 28px) 0;
+    background: var(--bg-warm);
     border-top: 1px solid var(--border-subtle);
     border-bottom: 1px solid var(--border-subtle);
   }
-  .podcast__inner {
-    max-width: 720px;
-    text-align: center;
-    margin: 0 auto;
-  }
-  .podcast__eyebrow {
-    margin-bottom: 24px;
+  .podcast-bar__line {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px 22px;
     justify-content: center;
-  }
-  .podcast__eyebrow::before { display: none; }
-  .podcast__title {
-    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin-bottom: 24px;
-  }
-  .podcast__title em {
-    color: var(--accent);
-    font-style: italic;
-  }
-  .podcast__lead {
+    text-align: center;
     font-family: var(--font-display);
-    font-size: clamp(18px, 1.6vw, 22px);
-    font-style: italic;
-    line-height: 1.5;
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.45;
     color: var(--text-body);
-    margin-bottom: 36px;
   }
-  .podcast__lead em {
-    color: var(--accent-rose);
+  .podcast-bar__label {
     font-style: italic;
+    color: var(--accent);
+    font-weight: 500;
+    white-space: nowrap;
   }
-  .podcast__cta { margin-top: 4px; }
+  .podcast-bar__text {
+    color: var(--text-secondary);
+    max-width: 520px;
+  }
+  .podcast-bar__cta {
+    font-family: var(--font-text);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 3px;
+    white-space: nowrap;
+    transition: color var(--t-fast) var(--ease);
+  }
+  .podcast-bar__cta:hover { color: var(--accent-hover); }
 
   /* ---------- Mitkommen — drei Pfade ---------- */
   .invite {
@@ -1573,35 +1606,19 @@
 </section>
 
 <!-- ============================================================
-     MANIFEST STRIP
+     MANIFEST STRIP — drei Prinzipien, kompakt
      ============================================================ -->
-<section class="manifest">
+<aside class="manifest">
   <div class="container">
-    <div class="manifest__grid">
-      <div class="manifest__item reveal">
-        <span class="manifest__num">i.</span>
-        <p class="manifest__text">
-          Wir <em>besuchen</em>, hören zu und schreiben mit der Hand —
-          nicht im Vorbeifahren.
-        </p>
-      </div>
-      <div class="manifest__item reveal">
-        <span class="manifest__num">ii.</span>
-        <p class="manifest__text">
-          Wir empfehlen nichts. Wir <em>zeigen</em>, was es gibt,
-          und überlassen den Rest.
-        </p>
-      </div>
-      <div class="manifest__item reveal">
-        <span class="manifest__num">iii.</span>
-        <p class="manifest__text">
-          Eine Sammlung, die <em>langsam</em> wächst — bewusst klein,
-          bewusst kuratiert.
-        </p>
-      </div>
-    </div>
+    <p class="manifest__line">
+      <span><em>Besuchen</em>, statt vorbeifahren.</span>
+      <span aria-hidden="true">·</span>
+      <span><em>Zeigen</em>, nicht empfehlen.</span>
+      <span aria-hidden="true">·</span>
+      <span><em>Langsam</em> wachsen, bewusst kuratiert.</span>
+    </p>
   </div>
-</section>
+</aside>
 
 <!-- ============================================================
      WER ICH BIN
@@ -1642,63 +1659,6 @@
 </section>
 
 <!-- ============================================================
-     FEATURED PLACE
-     ============================================================ -->
-<section class="featured">
-  <div class="container">
-    <div class="featured__inner">
-      <figure class="featured__media reveal">
-        <img
-          src="https://images.unsplash.com/photo-1738034950582-271276c5af7d?w=1200&q=80&auto=format&fit=crop"
-          alt="Lange Tafel im Garten — Gemeinschaftsabendessen, sinnbildlich"
-          loading="lazy"
-        />
-        <figcaption class="featured__caption">Am Tempelhof · Hohenlohe</figcaption>
-      </figure>
-
-      <article class="featured__body reveal">
-        <span class="eyebrow featured__eyebrow">Im Profil — Ort 01</span>
-        <h2 class="featured__title">Am Tempelhof</h2>
-        <p class="featured__region">Hohenlohe, Baden-Württemberg</p>
-
-        <div class="featured__story">
-          <p>
-            Eine Gemeinschaft von rund 150 Menschen auf einem ehemaligen
-            Gutshof zwischen Crailsheim und Rothenburg. Tempelhof verbindet
-            ökologische Landwirtschaft, Konsensentscheidungen und eine eigene
-            Schule zu einem der bekanntesten zeitgenössischen Modelle
-            gemeinsamen Lebens in Deutschland.
-          </p>
-          <p>
-            Wer den Hof zum ersten Mal betritt, bemerkt die Dichte: Werkstatt,
-            Gärten, Küche, Yogaraum, Schule liegen Tür an Tür. Was nach
-            Idylle aussehen könnte, ist in Wahrheit ein dauerndes Aushandeln —
-            und gerade darin liegt die Lehre, die man hier mitnehmen kann.
-          </p>
-        </div>
-
-        <blockquote class="featured__pullquote">
-          „Wir sind nicht angekommen. Wir üben — jeden Tag aufs Neue."
-          <cite>— Bewohnerin, Sommer 2025</cite>
-        </blockquote>
-
-        <div class="tags">
-          <span class="tag">Gemeinschaft</span>
-          <span class="tag">Soziokratie</span>
-          <span class="tag">Bildung</span>
-          <span class="tag">Hohenlohe</span>
-        </div>
-
-        <a href="#stationen-tempelhof" class="featured__link">
-          Zum vollen Profil
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
      PLACES GRID
      ============================================================ -->
 <section class="places" id="stationen">
@@ -1720,7 +1680,26 @@
 
     <div class="places__grid">
 
-      <a href="#stationen-sieben-linden" class="place place--lg reveal">
+      <a href="#stationen-tempelhof" class="place place--featured reveal">
+        <div class="place__media">
+          <img src="https://images.unsplash.com/photo-1738034950582-271276c5af7d?w=1600&q=80&auto=format&fit=crop" alt="Lange Tafel im Garten — Gemeinschaftsabendessen, sinnbildlich" loading="lazy" />
+          <span class="place__num">01</span>
+        </div>
+        <h3 class="place__name">Am Tempelhof</h3>
+        <p class="place__region">Hohenlohe, Baden-Württemberg</p>
+        <p class="place__desc">
+          Eine Gemeinschaft von rund 150 Menschen auf einem ehemaligen
+          Gutshof. Ökologische Landwirtschaft, Konsens­entscheidungen und
+          eine eigene Schule unter einem Dach.
+        </p>
+        <div class="place__tags">
+          <span class="tag">Gemeinschaft</span>
+          <span class="tag">Soziokratie</span>
+          <span class="tag">Bildung</span>
+        </div>
+      </a>
+
+      <a href="#stationen-sieben-linden" class="place reveal">
         <div class="place__media">
           <img src="https://images.unsplash.com/photo-1515150144380-bca9f1650ed9?w=1200&q=80&auto=format&fit=crop" alt="Gießkanne über jungen Pflanzen — Selbstversorgung" loading="lazy" />
           <span class="place__num">02</span>
@@ -1728,18 +1707,16 @@
         <h3 class="place__name">Sieben Linden</h3>
         <p class="place__region">Altmark, Sachsen-Anhalt</p>
         <p class="place__desc">
-          Eines der ältesten Ökodörfer im deutschsprachigen Raum, gegründet
-          1997. Strohballen-Architektur, Selbstversorgung und ein
-          konsequent reduzierter ökologischer Fußabdruck.
+          Eines der ältesten Ökodörfer im deutschsprachigen Raum.
+          Strohballen-Bau, Selbstversorgung, kleiner Fußabdruck.
         </p>
         <div class="place__tags">
           <span class="tag">Ökodorf</span>
           <span class="tag">Selbstversorgung</span>
-          <span class="tag">Strohbau</span>
         </div>
       </a>
 
-      <a href="#stationen-zegg" class="place place--md reveal">
+      <a href="#stationen-zegg" class="place reveal">
         <div class="place__media">
           <img src="https://images.unsplash.com/photo-1516197067152-381321bc78e1?w=1200&q=80&auto=format&fit=crop" alt="Menschen an einer großen Holztafel — Werkstatt-Atmosphäre" loading="lazy" />
           <span class="place__num">03</span>
@@ -1747,9 +1724,8 @@
         <h3 class="place__name">ZEGG</h3>
         <p class="place__region">Bad Belzig, Brandenburg</p>
         <p class="place__desc">
-          Zentrum für experimentelle Gesellschaftsgestaltung — seit 1991 auf
-          einem ehemaligen Stasi-Schulungsgelände. Forum-Praxis und offenes
-          Seminarprogramm.
+          Zentrum für experimentelle Gesellschaftsgestaltung — Forum-Praxis
+          und offenes Seminarprogramm seit 1991.
         </p>
         <div class="place__tags">
           <span class="tag">Forum</span>
@@ -1757,41 +1733,12 @@
         </div>
       </a>
 
-      <a href="#stationen-lebensgarten" class="place place--sm reveal">
-        <div class="place__media">
-          <img src="https://images.unsplash.com/photo-1659817675055-4923aeff6fca?w=1200&q=80&auto=format&fit=crop" alt="Permakultur-Bett mit Kapuzinerkresse" loading="lazy" />
-          <span class="place__num">04</span>
-        </div>
-        <h3 class="place__name">Lebensgarten</h3>
-        <p class="place__region">Steyerberg, Niedersachsen</p>
-        <p class="place__desc">
-          Ökospirituelle Siedlung seit 1985 — Permakultur, kontemplative
-          Praxis, ein meditatives Friedenslabyrinth.
-        </p>
-        <div class="place__tags">
-          <span class="tag">Ökospiritualität</span>
-        </div>
-      </a>
-
-      <a href="#stationen-glarisegg" class="place place--offset reveal">
-        <div class="place__media">
-          <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?w=1200&q=80&auto=format&fit=crop" alt="Hände an einem alten Baumstamm — geteilte Kontemplation" loading="lazy" />
-          <span class="place__num">05</span>
-        </div>
-        <h3 class="place__name">Schloss Glarisegg</h3>
-        <p class="place__region">Thurgau, Schweiz</p>
-        <p class="place__desc">
-          Gemeinschaft und Seminarbetrieb am Bodensee, in einem
-          klassizistischen Schloss. Bewusstseinsarbeit und integrale Praxis
-          unter einem Dach.
-        </p>
-        <div class="place__tags">
-          <span class="tag">Bewusstseinsarbeit</span>
-          <span class="tag">Bodensee</span>
-        </div>
-      </a>
-
     </div>
+
+    <a href="#" class="more-link">
+      Alle Stationen ansehen
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
   </div>
 </section>
 
@@ -1855,24 +1802,6 @@
       <li class="entry reveal">
         <span class="entry__bead" aria-hidden="true"></span>
         <div class="entry__date">
-          <span class="entry__day">05</span>
-          <span class="entry__month">März</span>
-          <span class="entry__year">2026</span>
-        </div>
-        <div class="entry__body">
-          <span class="entry__tag">Lesen</span>
-          <h3 class="entry__title">Steiner, neu gelesen</h3>
-          <p class="entry__text">
-            Die Dreigliederung ist keine Theorie, die man auswendig lernt.
-            Sie ist eine Frage, die man hält — wie eine Tasse Tee, deren
-            Wärme einem ankündigt, dass etwas Lebendiges drin ist.
-          </p>
-        </div>
-      </li>
-
-      <li class="entry reveal">
-        <span class="entry__bead" aria-hidden="true"></span>
-        <div class="entry__date">
           <span class="entry__day">18</span>
           <span class="entry__month">Februar</span>
           <span class="entry__year">2026</span>
@@ -1888,59 +1817,11 @@
         </div>
       </li>
     </ol>
-  </div>
-</section>
 
-<!-- ============================================================
-     VOICES
-     ============================================================ -->
-<section class="voices">
-  <div class="container">
-    <header class="voices__head">
-      <h2 class="voices__title">Stimmen aus den <em>Häusern</em></h2>
-      <p class="voices__sub">
-        Drei Sätze, die uns aus den Gesprächen der vergangenen Monate
-        nicht losgelassen haben.
-      </p>
-    </header>
-
-    <div class="voices__grid">
-      <figure class="voice reveal">
-        <span class="voice__quote-mark" aria-hidden="true">„</span>
-        <blockquote class="voice__text">
-          Das Schwere ist nicht, miteinander zu leben. Das Schwere ist,
-          miteinander einer Meinung zu sein — und es trotzdem zu tun.
-        </blockquote>
-        <figcaption class="voice__attr">
-          <strong>Mira, 47</strong>
-          Bewohnerin · Tempelhof
-        </figcaption>
-      </figure>
-
-      <figure class="voice reveal">
-        <span class="voice__quote-mark" aria-hidden="true">„</span>
-        <blockquote class="voice__text">
-          Ich kam für ein Wochenende. Geblieben bin ich wegen der Stille
-          zwischen den Worten beim Abendessen.
-        </blockquote>
-        <figcaption class="voice__attr">
-          <strong>Jonas, 34</strong>
-          Gast · Sieben Linden
-        </figcaption>
-      </figure>
-
-      <figure class="voice reveal">
-        <span class="voice__quote-mark" aria-hidden="true">„</span>
-        <blockquote class="voice__text">
-          Wir sind kein Modell. Wir sind ein Versuch. Wer das versteht,
-          ist hier richtig.
-        </blockquote>
-        <figcaption class="voice__attr">
-          <strong>Eva, 61</strong>
-          Mitgründerin · Lebensgarten
-        </figcaption>
-      </figure>
-    </div>
+    <a href="#" class="more-link">
+      Alle Notizen ansehen
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
   </div>
 </section>
 
@@ -1997,41 +1878,12 @@
         <a href="#" class="resource__link">Volltext <span aria-hidden="true">↗</span></a>
       </li>
 
-      <li class="resource reveal">
-        <span class="resource__type">Buch</span>
-        <h3 class="resource__title">Lasst uns einfach leben</h3>
-        <span class="resource__author">Friederike Habermann</span>
-        <p class="resource__note">
-          „Über das Solidarisch-Wirtschaften jenseits von Markt und Staat —
-          eine wache Stimme, die viele meiner Beobachtungen einordnet."
-        </p>
-        <a href="#" class="resource__link">Beim Verlag <span aria-hidden="true">↗</span></a>
-      </li>
-
-      <li class="resource reveal">
-        <span class="resource__type">Film</span>
-        <h3 class="resource__title">Eine andere Welt ist pflanzbar</h3>
-        <span class="resource__author">Ella von der Haide · 2008</span>
-        <p class="resource__note">
-          „Dokumentarfilm-Trilogie über urbane Gemeinschaftsgärten weltweit.
-          Sehe ich an Tagen, an denen die Schreibtisch-Lektüre zu schwer
-          wird."
-        </p>
-        <a href="#" class="resource__link">Mehr Info <span aria-hidden="true">↗</span></a>
-      </li>
-
-      <li class="resource reveal">
-        <span class="resource__type">Podcast</span>
-        <h3 class="resource__title">Wie heute Gemeinschaft</h3>
-        <span class="resource__author">Verschiedene · laufend</span>
-        <p class="resource__note">
-          „Lose Sammlung von Folgen aus deutschsprachigen Podcasts, die das
-          Thema klug streifen. Wird hier als kuratierte Liste wachsen."
-        </p>
-        <a href="#" class="resource__link">Zur Liste <span aria-hidden="true">↗</span></a>
-      </li>
-
     </ul>
+
+    <a href="#" class="more-link">
+      Alle Lesefrüchte ansehen
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
   </div>
 </section>
 
@@ -2101,53 +1953,32 @@
         <a href="#" class="termin__cta">Details</a>
       </article>
 
-      <article class="termin reveal">
-        <div class="termin__date">
-          <span class="termin__day">14</span>
-          <span class="termin__month">September</span>
-          <span class="termin__year">2026</span>
-        </div>
-        <div class="termin__body">
-          <h3 class="termin__title">Einführungswoche</h3>
-          <p class="termin__location">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            Sieben Linden, Beetzendorf
-          </p>
-          <p class="termin__desc">
-            Eine Woche im Rhythmus des Ökodorfs: Mitarbeit in Garten und Bau,
-            Begegnungen, Vorträge zu Strohbau, Permakultur und gemeinschaftlichen
-            Strukturen.
-          </p>
-        </div>
-        <a href="#" class="termin__cta">Anmelden</a>
-      </article>
     </div>
+
+    <a href="#" class="more-link">
+      Alle Termine ansehen
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
   </div>
 </section>
 
 <!-- ============================================================
-     PODCAST (geplant)
+     PODCAST BAR (geplant) — kompakt
      ============================================================ -->
-<section class="podcast" id="podcast">
+<aside class="podcast-bar" id="podcast">
   <div class="container">
-    <div class="podcast__inner">
-      <span class="eyebrow podcast__eyebrow">Geplant</span>
-      <h2 class="podcast__title">Ein <em>Podcast</em>.</h2>
-      <p class="podcast__lead">
-        Gespräche mit Menschen, die seit Jahren in Gemeinschaft leben — und mit
-        denen, die gerade zum ersten Mal an die Tür klopfen. <em>Stand offen.</em>
-        Wer eine Mail hinterlässt, hört von der ersten Folge.
-      </p>
-      <a href="mailto:kontakt@werkstatt-gemeinschaft.example?subject=Podcast%20%E2%80%94%20bitte%20Bescheid%20geben" class="btn btn--ghost podcast__cta">
-        Sag mir, wenn es losgeht
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M5 12h14"/>
-          <path d="m12 5 7 7-7 7"/>
-        </svg>
+    <p class="podcast-bar__line">
+      <span class="podcast-bar__label">Bald · Podcast.</span>
+      <span class="podcast-bar__text">
+        Gespräche mit Menschen, die in Gemeinschaft leben — und mit denen,
+        die gerade ankommen.
+      </span>
+      <a href="mailto:kontakt@werkstatt-gemeinschaft.example?subject=Podcast%20%E2%80%94%20bitte%20Bescheid%20geben" class="podcast-bar__cta">
+        Sag mir Bescheid <span aria-hidden="true">→</span>
       </a>
-    </div>
+    </p>
   </div>
-</section>
+</aside>
 
 <!-- ============================================================
      MITKOMMEN — drei Pfade zur Begegnung
