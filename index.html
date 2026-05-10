@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Oasen Finder — eine deutschsprachige Recherche zu Gemeinschaften, die anders leben. Ökodörfer, Cohousing, spirituelle Höfe im DACH-Raum." />
-<title>Oasen Finder — eine Recherche</title>
+<meta name="description" content="Werkstatt Gemeinschaft — Katharina Offenborn auf Reisen zu Ökodörfern, Cohousing-Projekten und alternativen Höfen. Notizen, Werkstätten, Bibliothek und Podcast einer fortlaufenden Recherche." />
+<title>Werkstatt Gemeinschaft — Katharina Offenborn</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -153,13 +153,15 @@
   }
   .brand {
     font-family: var(--font-display);
-    font-size: 26px;
+    font-size: clamp(20px, 1.8vw, 24px);
     letter-spacing: -0.012em;
     line-height: 1;
     color: var(--text-primary);
     display: inline-flex;
     align-items: baseline;
-    gap: 0.22em;
+    gap: 0.18em;
+    flex-shrink: 1;
+    min-width: 0;
   }
   .brand__noun {
     font-weight: 600;
@@ -336,8 +338,16 @@
     font-size: 1.05em;
     color: var(--text-primary);
   }
+  .hero__signature {
+    margin-top: 18px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
   .hero__cta-row {
-    margin-top: clamp(36px, 5vw, 56px);
+    margin-top: clamp(28px, 4vw, 44px);
     display: flex;
     align-items: center;
     gap: 28px;
@@ -474,6 +484,78 @@
 
   @media (max-width: 720px) {
     .manifest__grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  /* ---------- Wer ich bin ---------- */
+  .who {
+    padding: clamp(80px, 10vw, 130px) 0;
+    background: var(--bg-base);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .who__inner {
+    display: grid;
+    grid-template-columns: minmax(220px, 280px) 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .who__portrait {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-warm);
+    box-shadow: 0 24px 48px -24px rgba(31, 29, 26, 0.18);
+    margin: 0;
+  }
+  .who__portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 35%;
+    filter: saturate(0.95);
+  }
+  .who__body { max-width: 560px; }
+  .who__title {
+    font-size: clamp(2rem, 3.6vw, 2.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 18px 0 24px;
+  }
+  .who__title em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .who__lead {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-body);
+    margin-bottom: 24px;
+  }
+  .who__question {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2vw, 26px);
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--text-primary);
+    border-left: 2px solid var(--accent);
+    padding-left: 22px;
+    margin: 28px 0;
+  }
+  .who__text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-body);
+  }
+  .who__text em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  @media (max-width: 720px) {
+    .who__inner { grid-template-columns: 1fr; }
+    .who__portrait { max-width: 220px; }
   }
 
   /* ---------- Featured place ---------- */
@@ -719,6 +801,115 @@
     .places__grid { grid-template-columns: 1fr; }
   }
 
+  /* ---------- Chronicle (Notizen mit roter Schnur) ---------- */
+  .chronicle {
+    padding: clamp(80px, 10vw, 140px) 0;
+    background: var(--bg-base);
+  }
+  .chronicle__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    counter-reset: entries;
+  }
+  /* Die rote Schnur */
+  .chronicle__list::before {
+    content: '';
+    position: absolute;
+    top: 36px;
+    bottom: 36px;
+    left: 8px;
+    width: 1.5px;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      var(--accent) 6%,
+      var(--accent) 94%,
+      transparent 100%);
+    opacity: 0.4;
+  }
+  .entry {
+    position: relative;
+    padding: 28px 0 32px 56px;
+    border-bottom: 1px solid var(--border-subtle);
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: clamp(20px, 3vw, 40px);
+  }
+  .entry:last-child { border-bottom: 0; }
+  .entry__bead {
+    position: absolute;
+    left: 1px;
+    top: 38px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--bg-base);
+    border: 1.5px solid var(--accent);
+    box-shadow: 0 0 0 4px var(--bg-base);
+    z-index: 1;
+    transition: background var(--t-base) var(--ease);
+  }
+  .entry:hover .entry__bead {
+    background: var(--accent);
+  }
+  .entry__date {
+    font-family: var(--font-display);
+    line-height: 1.05;
+  }
+  .entry__day {
+    display: block;
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+  .entry__month {
+    display: block;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--accent);
+    margin-top: 2px;
+  }
+  .entry__year {
+    display: block;
+    font-family: var(--font-text);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+  .entry__body { padding-top: 4px; }
+  .entry__tag {
+    display: inline-block;
+    font-family: var(--font-text);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .entry__title {
+    font-size: clamp(20px, 1.8vw, 24px);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.015em;
+  }
+  .entry__text {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 580px;
+  }
+  @media (max-width: 720px) {
+    .entry { grid-template-columns: 1fr; gap: 12px; padding-left: 36px; }
+    .entry__day { font-size: 28px; }
+    .chronicle__list::before { left: 5px; }
+    .entry__bead { left: -2px; top: 32px; width: 14px; height: 14px; }
+  }
+
   /* ---------- Voices ---------- */
   .voices {
     background: var(--bg-deep);
@@ -801,6 +992,74 @@
     .voices__head { grid-template-columns: 1fr; }
   }
 
+  /* ---------- Bibliothek (Lesestoff) ---------- */
+  .library {
+    padding: clamp(80px, 10vw, 140px) 0;
+    background: var(--bg-warm);
+  }
+  .library__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(28px, 4vw, 56px) clamp(28px, 3vw, 48px);
+  }
+  .resource {
+    border-top: 1.5px solid var(--accent);
+    padding-top: 22px;
+    transition: transform var(--t-base) var(--ease);
+  }
+  .resource:hover { transform: translateY(-2px); }
+  .resource__type {
+    display: inline-block;
+    font-family: var(--font-text);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .resource__title {
+    font-size: clamp(20px, 1.9vw, 24px);
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    margin: 0 0 6px;
+  }
+  .resource__author {
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+  .resource__note {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text-body);
+    margin: 0 0 18px;
+    border-left: 2px solid var(--border-medium);
+    padding-left: 14px;
+  }
+  .resource__link {
+    font-family: var(--font-text);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    display: inline-block;
+    transition: color var(--t-fast) var(--ease);
+  }
+  .resource__link:hover { color: var(--accent-hover); }
+  @media (max-width: 720px) {
+    .library__list { grid-template-columns: 1fr; }
+  }
+
   /* ---------- Termine ---------- */
   .termine {
     padding: clamp(80px, 10vw, 140px) 0;
@@ -844,6 +1103,32 @@
     text-transform: uppercase;
   }
   .termin__body { padding-top: 8px; }
+  .termin__badge {
+    display: inline-block;
+    font-family: var(--font-text);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(168, 57, 43, 0.08);
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 14px;
+  }
+  .termin--mine {
+    position: relative;
+  }
+  .termin--mine::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 36px;
+    bottom: 36px;
+    width: 2px;
+    background: var(--accent);
+    opacity: 0.7;
+  }
   .termin__title {
     font-size: clamp(22px, 2vw, 28px);
     line-height: 1.2;
@@ -930,7 +1215,104 @@
   }
   .podcast__cta { margin-top: 4px; }
 
-  /* ---------- Purpose / About snippet ---------- */
+  /* ---------- Mitkommen — drei Pfade ---------- */
+  .invite {
+    padding: clamp(80px, 10vw, 140px) 0;
+    background: var(--bg-sage);
+  }
+  .invite__head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto clamp(48px, 6vw, 72px);
+  }
+  .invite__eyebrow {
+    margin-bottom: 24px;
+    justify-content: center;
+  }
+  .invite__eyebrow::before { display: none; }
+  .invite__title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+  .invite__title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .invite__sub {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 1.6vw, 22px);
+    font-style: italic;
+    color: var(--text-body);
+  }
+  .invite__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(24px, 3vw, 40px);
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .path {
+    display: block;
+    padding: clamp(24px, 3vw, 36px);
+    background: var(--bg-base);
+    border-radius: 6px;
+    border: 1px solid rgba(31, 29, 26, 0.06);
+    transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+    color: inherit;
+  }
+  .path:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 44px -22px rgba(31, 29, 26, 0.18);
+  }
+  .path__num {
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .path__title {
+    font-size: clamp(20px, 2vw, 24px);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.015em;
+  }
+  .path__title em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .path__text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-body);
+    margin-bottom: 20px;
+  }
+  .path__cta {
+    font-family: var(--font-text);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    transition: gap var(--t-base) var(--ease);
+  }
+  .invite__signature {
+    margin-top: clamp(56px, 7vw, 80px);
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-secondary);
+  }
+  @media (max-width: 800px) {
+    .invite__grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Purpose (legacy, fallback) ---------- */
   .purpose {
     padding: clamp(80px, 10vw, 140px) 0;
     background: var(--bg-sage);
@@ -1132,16 +1514,16 @@
      ============================================================ -->
 <header class="site-header">
   <div class="container site-header__inner">
-    <a href="/" class="brand" aria-label="Oasen Finder — Startseite">
-      <span class="brand__noun">Oasen</span><em class="brand__qualifier">Finder</em>
+    <a href="/" class="brand" aria-label="Werkstatt Gemeinschaft — Startseite">
+      <span class="brand__noun">Werkstatt</span><em class="brand__qualifier">Gemeinschaft</em>
     </a>
     <nav class="nav" id="primary-nav" aria-label="Hauptnavigation">
-      <a href="/orte" class="is-active">Orte</a>
-      <a href="/termine">Termine</a>
+      <a href="#notizen">Notizen</a>
+      <a href="#stationen">Stationen</a>
+      <a href="#werkstatt">Werkstatt</a>
+      <a href="#bibliothek">Bibliothek</a>
       <a href="#podcast">Podcast</a>
-      <a href="/ueber">Über</a>
-      <a href="/referenzen">Referenzen</a>
-      <a href="/kontakt">Kontakt</a>
+      <a href="#ueber">Über</a>
     </nav>
     <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="primary-nav" type="button">
       <span></span>
@@ -1159,23 +1541,27 @@
 <section class="hero">
   <div class="container hero__inner">
     <div class="hero__main">
-      <span class="eyebrow hero__eyebrow">Eine Recherche · 2026</span>
+      <span class="eyebrow hero__eyebrow">Eine Werkstatt · Frühjahr 2026</span>
       <h1 class="hero__title">
         <em>Gemeinschaft</em><br>
-        finden.
+        — wie heute.
       </h1>
       <p class="hero__lead">
-        Ein Atlas der Orte im deutschsprachigen Raum, an denen Menschen das
-        Zusammenleben neu erproben — Ökodörfer, Cohousing-Projekte,
-        spirituelle Höfe. <em>Kein Reiseführer.</em> Eine Karte für jene,
-        die suchen.
+        Ich reise zu Ökodörfern, Cohousing-Projekten und alternativen Höfen
+        und frage, was <em>gelebte Gemeinschaft</em> heute wirklich braucht.
+        Dazwischen lade ich zu Werkstätten ein — gemeinsames Tun, in dem
+        die Frage durchs Werken geklärt wird. Diese Seite sammelt, was
+        unterwegs ist: Notizen, Stationen, Stimmen, Lesestoff.
+      </p>
+      <p class="hero__signature">
+        — Katharina Offenborn · Ergotherapeutin, mit der Frage in der Hand
       </p>
       <div class="hero__cta-row">
-        <a href="/orte" class="btn btn--primary">
-          Orte erkunden
+        <a href="#notizen" class="btn btn--primary">
+          Aktuelles ansehen
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
-        <a href="/ueber" class="btn btn--ghost">Über das Projekt</a>
+        <a href="#mitkommen" class="btn btn--ghost">Mitkommen</a>
       </div>
     </div>
     <a href="#termine" class="hero__meta" aria-label="Nächste Begegnung: 21. Juni am Tempelhof">
@@ -1211,6 +1597,44 @@
         <p class="manifest__text">
           Eine Sammlung, die <em>langsam</em> wächst — bewusst klein,
           bewusst kuratiert.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WER ICH BIN
+     ============================================================ -->
+<section class="who" id="ueber">
+  <div class="container">
+    <div class="who__inner">
+      <figure class="who__portrait reveal">
+        <img
+          src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=600&q=80&auto=format&fit=crop"
+          alt="Katharina Offenborn — sinnbildliches Foto, ersetzbar"
+          loading="lazy"
+        />
+      </figure>
+      <div class="who__body reveal">
+        <span class="eyebrow">Wer ich bin</span>
+        <h2 class="who__title">Katharina <em>Offenborn</em></h2>
+        <p class="who__lead">
+          Ergotherapeutin, Reisende, seit über zwei Jahrzehnten neugierig
+          unterwegs zu Orten, an denen anders gelebt wird. Mit Ende sechzig
+          hat sich eine Frage geschärft — an ihr entlang gehe ich.
+        </p>
+        <blockquote class="who__question">
+          „Wie kann gemeinsames Leben heute aussehen — und was tragen die
+          Strukturen, die wir bauen?"
+        </blockquote>
+        <p class="who__text">
+          Ich verbinde, was ich gelernt habe — Ergotherapie, viele
+          Fortbildungen, eine anhaltende Auseinandersetzung mit der
+          <em>Dreigliederung</em> nach Steiner, gehalten als Frage, nicht
+          als Lehrgebäude — mit dem, was unterwegs entsteht: Reisen zu
+          Projekten, gemeinsames Werken in kleinen Kreisen. Diese Seite
+          ist mein Schreibtisch, an dem alles zusammenläuft.
         </p>
       </div>
     </div>
@@ -1265,7 +1689,7 @@
           <span class="tag">Hohenlohe</span>
         </div>
 
-        <a href="/orte/tempelhof" class="featured__link">
+        <a href="#stationen-tempelhof" class="featured__link">
           Zum vollen Profil
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
@@ -1277,26 +1701,26 @@
 <!-- ============================================================
      PLACES GRID
      ============================================================ -->
-<section class="places">
+<section class="places" id="stationen">
   <div class="container">
     <header class="section-head">
       <div>
-        <span class="eyebrow">Atlas — fünf von vielen</span>
-        <h2 class="section-head__title">Weitere <em>Orte</em></h2>
+        <span class="eyebrow">Stationen — fünf von vielen</span>
+        <h2 class="section-head__title">Wo ich <em>war</em></h2>
         <p class="section-head__sub">
-          Eine Auswahl aus dem deutschsprachigen Raum — verschieden in Form,
-          verbunden in Frage.
+          Eine wachsende Reise — verschieden in Form, verbunden in Frage.
+          Hinter jedem Ort steht eine Begegnung, an die ich zurückdenke.
         </p>
       </div>
-      <a href="/orte" class="section-head__link">
-        Alle Orte
+      <a href="#" class="section-head__link">
+        Alle Stationen
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </header>
 
     <div class="places__grid">
 
-      <a href="/orte/sieben-linden" class="place place--lg reveal">
+      <a href="#stationen-sieben-linden" class="place place--lg reveal">
         <div class="place__media">
           <img src="https://images.unsplash.com/photo-1515150144380-bca9f1650ed9?w=1200&q=80&auto=format&fit=crop" alt="Gießkanne über jungen Pflanzen — Selbstversorgung" loading="lazy" />
           <span class="place__num">02</span>
@@ -1315,7 +1739,7 @@
         </div>
       </a>
 
-      <a href="/orte/zegg" class="place place--md reveal">
+      <a href="#stationen-zegg" class="place place--md reveal">
         <div class="place__media">
           <img src="https://images.unsplash.com/photo-1516197067152-381321bc78e1?w=1200&q=80&auto=format&fit=crop" alt="Menschen an einer großen Holztafel — Werkstatt-Atmosphäre" loading="lazy" />
           <span class="place__num">03</span>
@@ -1333,7 +1757,7 @@
         </div>
       </a>
 
-      <a href="/orte/lebensgarten" class="place place--sm reveal">
+      <a href="#stationen-lebensgarten" class="place place--sm reveal">
         <div class="place__media">
           <img src="https://images.unsplash.com/photo-1659817675055-4923aeff6fca?w=1200&q=80&auto=format&fit=crop" alt="Permakultur-Bett mit Kapuzinerkresse" loading="lazy" />
           <span class="place__num">04</span>
@@ -1349,7 +1773,7 @@
         </div>
       </a>
 
-      <a href="/orte/glarisegg" class="place place--offset reveal">
+      <a href="#stationen-glarisegg" class="place place--offset reveal">
         <div class="place__media">
           <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?w=1200&q=80&auto=format&fit=crop" alt="Hände an einem alten Baumstamm — geteilte Kontemplation" loading="lazy" />
           <span class="place__num">05</span>
@@ -1368,6 +1792,102 @@
       </a>
 
     </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     AUS DEN NOTIZEN — Chronik mit roter Schnur
+     ============================================================ -->
+<section class="chronicle" id="notizen">
+  <div class="container">
+    <header class="section-head">
+      <div>
+        <span class="eyebrow">Aus den Notizen</span>
+        <h2 class="section-head__title">Die rote <em>Schnur</em></h2>
+        <p class="section-head__sub">
+          Stationen, Werkstätten, Lektüren — datiert, kurz aufgeschrieben.
+          Hier sammelt sich der Faden.
+        </p>
+      </div>
+      <a href="#" class="section-head__link">
+        Alle Notizen
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </header>
+
+    <ol class="chronicle__list">
+      <li class="entry reveal">
+        <span class="entry__bead" aria-hidden="true"></span>
+        <div class="entry__date">
+          <span class="entry__day">12</span>
+          <span class="entry__month">April</span>
+          <span class="entry__year">2026</span>
+        </div>
+        <div class="entry__body">
+          <span class="entry__tag">Reise</span>
+          <h3 class="entry__title">Drei Tage am Lebensgarten</h3>
+          <p class="entry__text">
+            Erste Eindrücke aus Steyerberg. Die Stille zwischen den Häusern
+            hat mich überrascht — und das Gewicht, das die Bewohner ihren
+            Ritualen geben. Mehr, wenn der Eindruck gesetzt ist.
+          </p>
+        </div>
+      </li>
+
+      <li class="entry reveal">
+        <span class="entry__bead" aria-hidden="true"></span>
+        <div class="entry__date">
+          <span class="entry__day">28</span>
+          <span class="entry__month">März</span>
+          <span class="entry__year">2026</span>
+        </div>
+        <div class="entry__body">
+          <span class="entry__tag">Werkstatt</span>
+          <h3 class="entry__title">Filzen, am Rande des Bodensees</h3>
+          <p class="entry__text">
+            Eine kleine Gruppe, ein paar Stunden Wolle. Die Frage „Was tragen
+            Strukturen?" antwortet sich unter den Händen anders als am Tisch.
+            Nächster Termin: 21. Juni am Tempelhof.
+          </p>
+        </div>
+      </li>
+
+      <li class="entry reveal">
+        <span class="entry__bead" aria-hidden="true"></span>
+        <div class="entry__date">
+          <span class="entry__day">05</span>
+          <span class="entry__month">März</span>
+          <span class="entry__year">2026</span>
+        </div>
+        <div class="entry__body">
+          <span class="entry__tag">Lesen</span>
+          <h3 class="entry__title">Steiner, neu gelesen</h3>
+          <p class="entry__text">
+            Die Dreigliederung ist keine Theorie, die man auswendig lernt.
+            Sie ist eine Frage, die man hält — wie eine Tasse Tee, deren
+            Wärme einem ankündigt, dass etwas Lebendiges drin ist.
+          </p>
+        </div>
+      </li>
+
+      <li class="entry reveal">
+        <span class="entry__bead" aria-hidden="true"></span>
+        <div class="entry__date">
+          <span class="entry__day">18</span>
+          <span class="entry__month">Februar</span>
+          <span class="entry__year">2026</span>
+        </div>
+        <div class="entry__body">
+          <span class="entry__tag">Stimme</span>
+          <h3 class="entry__title">Auf einen Tee mit Mira</h3>
+          <p class="entry__text">
+            Lange Gespräch im Küchenfenster am Tempelhof. „Wir sind nicht
+            angekommen. Wir üben — jeden Tag aufs Neue." Der Satz bleibt mit
+            mir, seit ich gegangen bin.
+          </p>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -1425,22 +1945,141 @@
 </section>
 
 <!-- ============================================================
-     TERMINE
+     AUS DER BIBLIOTHEK — Lesestoff, Filme, Webseiten
      ============================================================ -->
-<section class="termine" id="termine">
+<section class="library" id="bibliothek">
   <div class="container">
     <header class="section-head">
       <div>
-        <span class="eyebrow">Kommende Begegnungen</span>
-        <h2 class="section-head__title">Termine, die sich lohnen <em>könnten</em></h2>
+        <span class="eyebrow">Aus der Bibliothek</span>
+        <h2 class="section-head__title">Was mich <em>trägt</em></h2>
+        <p class="section-head__sub">
+          Bücher, Artikel, Filme, Webseiten — gesammelt mit kurzer Notiz,
+          warum sie hier stehen.
+        </p>
       </div>
-      <a href="/termine" class="section-head__link">
+    </header>
+
+    <ul class="library__list">
+
+      <li class="resource reveal">
+        <span class="resource__type">Buch</span>
+        <h3 class="resource__title">Intentional Community</h3>
+        <span class="resource__author">Cynthia Tina</span>
+        <p class="resource__note">
+          „Cynthia bringt die Perspektive einer Kennerin — über 150 besuchte
+          Gemeinschaften. Anker für mich, weil sie dieselbe Frage stellt,
+          mit anderem Akzent."
+        </p>
+        <a href="#" class="resource__link">Beim Verlag <span aria-hidden="true">↗</span></a>
+      </li>
+
+      <li class="resource reveal">
+        <span class="resource__type">Webseite</span>
+        <h3 class="resource__title">CommunityFinders</h3>
+        <span class="resource__author">Cynthia Tina · communityfinders.com</span>
+        <p class="resource__note">
+          „Praktische Roadmaps für die Suche, Quizze, Newsletter — sehr
+          amerikanisch im Ton, sehr nützlich in der Substanz."
+        </p>
+        <a href="https://communityfinders.com" target="_blank" rel="noopener" class="resource__link">Zur Seite <span aria-hidden="true">↗</span></a>
+      </li>
+
+      <li class="resource reveal">
+        <span class="resource__type">Aufsatz</span>
+        <h3 class="resource__title">Die Dreigliederung des sozialen Organismus</h3>
+        <span class="resource__author">Rudolf Steiner · 1919</span>
+        <p class="resource__note">
+          „Nicht als Lehrgebäude, sondern als Werkzeug, sich Strukturen
+          anzusehen. Geistesleben, Rechtsleben, Wirtschaftsleben — drei
+          Funktionen, die nicht durcheinandergeraten dürfen."
+        </p>
+        <a href="#" class="resource__link">Volltext <span aria-hidden="true">↗</span></a>
+      </li>
+
+      <li class="resource reveal">
+        <span class="resource__type">Buch</span>
+        <h3 class="resource__title">Lasst uns einfach leben</h3>
+        <span class="resource__author">Friederike Habermann</span>
+        <p class="resource__note">
+          „Über das Solidarisch-Wirtschaften jenseits von Markt und Staat —
+          eine wache Stimme, die viele meiner Beobachtungen einordnet."
+        </p>
+        <a href="#" class="resource__link">Beim Verlag <span aria-hidden="true">↗</span></a>
+      </li>
+
+      <li class="resource reveal">
+        <span class="resource__type">Film</span>
+        <h3 class="resource__title">Eine andere Welt ist pflanzbar</h3>
+        <span class="resource__author">Ella von der Haide · 2008</span>
+        <p class="resource__note">
+          „Dokumentarfilm-Trilogie über urbane Gemeinschaftsgärten weltweit.
+          Sehe ich an Tagen, an denen die Schreibtisch-Lektüre zu schwer
+          wird."
+        </p>
+        <a href="#" class="resource__link">Mehr Info <span aria-hidden="true">↗</span></a>
+      </li>
+
+      <li class="resource reveal">
+        <span class="resource__type">Podcast</span>
+        <h3 class="resource__title">Wie heute Gemeinschaft</h3>
+        <span class="resource__author">Verschiedene · laufend</span>
+        <p class="resource__note">
+          „Lose Sammlung von Folgen aus deutschsprachigen Podcasts, die das
+          Thema klug streifen. Wird hier als kuratierte Liste wachsen."
+        </p>
+        <a href="#" class="resource__link">Zur Liste <span aria-hidden="true">↗</span></a>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     TERMINE
+     ============================================================ -->
+<section class="termine" id="werkstatt">
+  <div class="container">
+    <header class="section-head">
+      <div>
+        <span class="eyebrow">Werkstatt &amp; Begegnungen</span>
+        <h2 class="section-head__title">Was kommt — <em>komm mit</em></h2>
+        <p class="section-head__sub">
+          Eigene Werkstätten und Termine bei befreundeten Häusern.
+          Niedrige Schwelle: mitbringen, was du hast — Lust auf gemeinsames Tun.
+        </p>
+      </div>
+      <a href="#" class="section-head__link">
         Alle Termine
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </header>
 
     <div class="termine__list">
+
+      <article class="termin termin--mine reveal">
+        <div class="termin__date">
+          <span class="termin__day">14</span>
+          <span class="termin__month">Juni</span>
+          <span class="termin__year">2026</span>
+        </div>
+        <div class="termin__body">
+          <span class="termin__badge">Meine Werkstatt</span>
+          <h3 class="termin__title">Filzen &amp; die Frage nach den Strukturen</h3>
+          <p class="termin__location">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Lebensgarten, Steyerberg · Wochenende
+          </p>
+          <p class="termin__desc">
+            Ein Werkstatt-Wochenende mit kleiner Gruppe. Wir filzen miteinander
+            und halten dabei eine Frage offen: <em>Was tragen Strukturen, die
+            wir bauen?</em> Die Dreigliederung als Werkzeug, nicht als
+            Vorlesung. Erfahrung kommt zuerst.
+          </p>
+        </div>
+        <a href="mailto:kontakt@werkstatt-gemeinschaft.example?subject=Werkstatt%20Filzen%20am%2014.%20Juni" class="termin__cta">Anmelden</a>
+      </article>
+
       <article class="termin reveal">
         <div class="termin__date">
           <span class="termin__day">21</span>
@@ -1499,7 +2138,7 @@
         denen, die gerade zum ersten Mal an die Tür klopfen. <em>Stand offen.</em>
         Wer eine Mail hinterlässt, hört von der ersten Folge.
       </p>
-      <a href="mailto:kontakt@oasenfinder.example?subject=Podcast%20%E2%80%94%20bitte%20Bescheid%20geben" class="btn btn--ghost podcast__cta">
+      <a href="mailto:kontakt@werkstatt-gemeinschaft.example?subject=Podcast%20%E2%80%94%20bitte%20Bescheid%20geben" class="btn btn--ghost podcast__cta">
         Sag mir, wenn es losgeht
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 12h14"/>
@@ -1511,49 +2150,53 @@
 </section>
 
 <!-- ============================================================
-     PURPOSE / ABOUT SNIPPET
+     MITKOMMEN — drei Pfade zur Begegnung
      ============================================================ -->
-<section class="purpose">
+<section class="invite" id="mitkommen">
   <div class="container">
-    <div class="purpose__inner">
-      <figure class="purpose__portrait">
-        <img
-          src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=480&q=80&auto=format&fit=crop"
-          alt="Stille Geste — sinnbildlich für die Haltung, in der dieses Projekt entsteht"
-          loading="lazy"
-        />
-      </figure>
-      <span class="eyebrow purpose__eyebrow">In welchem Geist</span>
-      <p class="purpose__text">
-        Eine zentrale Anlaufstelle für eine fortlaufende Recherche zum Thema
-        <em>Gemeinschaft</em> — was hier entsteht, ist die Bündelung dessen,
-        was kommt: Texte, Besuche, Begegnungen.
+    <header class="invite__head">
+      <span class="eyebrow invite__eyebrow">Begegnung</span>
+      <h2 class="invite__title">Mit<em>kommen</em>.</h2>
+      <p class="invite__sub">
+        Drei Wege, von hier aus weiter — wähl, was zu dir passt.
       </p>
+    </header>
 
-      <div class="strands">
-        <div class="strand">
-          <span class="strand__label">Theorie</span>
-          <p class="strand__text">
-            Lesen, Sammeln, Mitschreiben. Im Geist von Cynthia Tinas
-            <a href="https://communityfinders.com" target="_blank" rel="noopener">CommunityFinders</a>
-            und benachbarter Quellen.
-          </p>
-        </div>
-        <div class="strand">
-          <span class="strand__label">Praxis</span>
-          <p class="strand__text">
-            Besuche bei Projekten. Praktika. Wochen, die man im Hof verbringt
-            statt sie aus der Ferne zu beschreiben.
-          </p>
-        </div>
-      </div>
+    <div class="invite__grid">
 
-      <p class="purpose__signature">— Frühjahr 2026  ·  Podcast denkbar, Stand offen</p>
-      <a href="/ueber" class="btn btn--ghost purpose__cta">
-        Mehr über das Projekt
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      <a href="#werkstatt" class="path">
+        <span class="path__num">i.</span>
+        <h3 class="path__title">Bei einer <em>Werkstatt</em> dabei sein</h3>
+        <p class="path__text">
+          Kleine Gruppe, gemeinsames Tun, eine Frage in der Mitte.
+          Nächste am 14. Juni in Steyerberg.
+        </p>
+        <span class="path__cta">Termine ansehen →</span>
       </a>
+
+      <a href="mailto:kontakt@werkstatt-gemeinschaft.example?subject=Hallo%20Katharina" class="path">
+        <span class="path__num">ii.</span>
+        <h3 class="path__title"><em>Schreib</em> mir</h3>
+        <p class="path__text">
+          Eine Frage, eine Beobachtung, eine Empfehlung — oder einfach
+          einen Gruß. Ich antworte gern, wenn auch nicht immer schnell.
+        </p>
+        <span class="path__cta">E-Mail öffnen →</span>
+      </a>
+
+      <a href="mailto:kontakt@werkstatt-gemeinschaft.example?subject=Podcast%20%E2%80%94%20bitte%20Bescheid%20geben" class="path">
+        <span class="path__num">iii.</span>
+        <h3 class="path__title">Vom <em>Podcast</em> hören</h3>
+        <p class="path__text">
+          Wenn die erste Folge kommt, sag ich dir Bescheid. Kein Newsletter,
+          kein Abo — eine Mail an den Tag, an dem es losgeht.
+        </p>
+        <span class="path__cta">Vormerken →</span>
+      </a>
+
     </div>
+
+    <p class="invite__signature">— Katharina Offenborn, Frühjahr 2026</p>
   </div>
 </section>
 
@@ -1566,33 +2209,35 @@
   <div class="container">
     <div class="site-footer__grid">
       <div>
-        <p class="site-footer__brand"><span class="site-footer__brand-noun">Oasen</span> <em class="site-footer__brand-qualifier">Finder</em></p>
+        <p class="site-footer__brand"><span class="site-footer__brand-noun">Werkstatt</span> <em class="site-footer__brand-qualifier">Gemeinschaft</em></p>
         <p class="site-footer__intro">
-          Eine wachsende Sammlung von Gemeinschaftsorten im deutschsprachigen
-          Raum — kuratiert, nicht vollständig.
+          Eine fortlaufende Werkstatt von Reisen, Begegnungen und
+          Lesefrüchten — geführt von Katharina Offenborn. Wächst, wenn etwas
+          wachsen will.
         </p>
       </div>
       <div>
         <h4>Erkunden</h4>
         <nav class="site-footer__nav" aria-label="Footer-Navigation">
-          <a href="/orte">Orte</a>
-          <a href="/termine">Termine</a>
-          <a href="/ueber">Über</a>
-          <a href="/referenzen">Referenzen</a>
-          <a href="/kontakt">Kontakt</a>
+          <a href="#notizen">Notizen</a>
+          <a href="#stationen">Stationen</a>
+          <a href="#bibliothek">Bibliothek</a>
+          <a href="#werkstatt">Werkstatt</a>
+          <a href="#podcast">Podcast</a>
+          <a href="#mitkommen">Mitkommen</a>
         </nav>
       </div>
       <div>
         <h4>Kontakt</h4>
         <div class="site-footer__contact">
-          <a href="mailto:kontakt@oasenfinder.example">kontakt@oasenfinder.example</a>
+          <a href="mailto:kontakt@werkstatt-gemeinschaft.example">kontakt@werkstatt-gemeinschaft.example</a>
           <em>Impressum folgt mit Veröffentlichung.</em>
         </div>
       </div>
     </div>
 
     <div class="site-footer__bottom">
-      <span>© 2026 Oasen Finder</span>
+      <span>© 2026 Katharina Offenborn · Werkstatt Gemeinschaft</span>
       <span class="site-footer__badge">Prototyp · Frühjahr 2026</span>
     </div>
   </div>
