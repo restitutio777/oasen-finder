@@ -1040,8 +1040,43 @@
   .entry__title {
     font-size: clamp(20px, 1.8vw, 24px);
     line-height: 1.2;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     letter-spacing: -0.015em;
+  }
+  .entry__image {
+    margin: 0 0 18px;
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    position: relative;
+    background: var(--bg-warm);
+    box-shadow: 0 18px 36px -22px rgba(31, 29, 26, 0.18);
+  }
+  .entry__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.92) contrast(1.02);
+    transition: transform 0.6s var(--ease), filter 0.4s var(--ease);
+  }
+  .entry:hover .entry__image img {
+    transform: scale(1.02);
+    filter: saturate(1.03);
+  }
+  .entry__image figcaption {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    padding: 6px 12px;
+    background: rgba(246, 244, 238, 0.92);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-secondary);
+    border-radius: 2px;
+    max-width: calc(100% - 28px);
   }
   .entry__text {
     color: var(--text-body);
@@ -1782,8 +1817,12 @@
           <span class="entry__year">2026</span>
         </div>
         <div class="entry__body">
-          <span class="entry__tag">Reise</span>
+          <span class="entry__tag">Reise · Foto</span>
           <h3 class="entry__title">Drei Tage am Lebensgarten</h3>
+          <figure class="entry__image">
+            <img src="https://images.unsplash.com/photo-1659817675055-4923aeff6fca?w=1200&q=80&auto=format&fit=crop" alt="Permakultur-Bett mit Kapuzinerkresse" loading="lazy" />
+            <figcaption>Permakultur-Bett am Hof — Mittag, ohne Worte.</figcaption>
+          </figure>
           <p class="entry__text">
             Erste Eindrücke aus Steyerberg. Die Stille zwischen den Häusern
             hat mich überrascht — und das Gewicht, das die Bewohner ihren
