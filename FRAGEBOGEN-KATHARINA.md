@@ -2,12 +2,17 @@
 
 Liebe Katharina,
 
-du hast die erste Version der Seite gesehen — schön, dass dir die Richtung gefällt. Jetzt geht's darum, die Struktur und Ansprache abzustimmen, damit ich das Backend in Sanity passend für deine Arbeitsweise anlegen kann.
+du hast die erste Version der Seite gesehen — schön, dass dir die Richtung gefällt. Jetzt geht's darum, Struktur und Ansprache abzustimmen, damit ich den Hintergrund *(das Backend)* so anlege, dass du leicht damit arbeiten kannst.
+
+Stell dir die Website als **interaktives Schaufenster** vor:
+
+- **Vorne** sehen Besucher dein Werk — und können lesen, klicken, anfragen, sich anmelden.
+- **Hinten** *(im Backend)* legst du Einträge an, ordnest sie in die Bereiche, hängst Bilder oder PDFs an.
 
 Das Dokument hat **drei Abschnitte**:
 
 1. Struktur und Ansprache
-2. Was in jedem Bereich liegen wird *(für's Backend)*
+2. Was in jedem Bereich liegen wird *(wie ein Eintrag aufgebaut ist)*
 3. Du und dein Anliegen, Material, Anhang
 
 Antworte gerne in Stichpunkten. Schick mir alles auf einmal zurück — oder eine Mail pro Abschnitt, wie es dir leichter fällt.
@@ -16,7 +21,9 @@ Antworte gerne in Stichpunkten. Schick mir alles auf einmal zurück — oder ein
 
 # Abschnitt 1 — Struktur und Ansprache
 
-## 1.1 · Hauptbereiche (= Menüpunkte oben)
+## 1.1 · Hauptbereiche
+
+Die Hauptbereiche sind die **Kästen im Regal** — vorne die Menüpunkte, hinten die Schubladen, in denen du Einträge sammelst.
 
 Aktueller Vorschlag in dieser Reihenfolge:
 **Hero · Über · Notizen · Reisen · Werkstatt · Bibliothek · Podcast · Mitkommen**
@@ -55,89 +62,93 @@ c) Welche Sprache fühlt sich nach dir an? Welche stößt dich ab?
 
 ---
 
-# Abschnitt 2 — Was in jedem Bereich liegen wird
+# Abschnitt 2 — Wie die Einträge in den Bereichen aufgebaut sind
 
-Für das Backend lege ich dir pro Bereich ein Eingabeformular im Sanity-Studio an. Damit das zu deinen Inhalten passt, hier kurz für jeden Bereich: was ein typischer Eintrag enthält, welche Felder du dafür brauchst.
+Jeder Bereich ist ein Kasten im Regal. **Innerhalb** des Kastens sammelst du Einträge — und jeder Eintrag hat eine kleine, immer gleiche Aufteilung: ein Platz für den Titel, einer für den Text, eine Stelle für ein Bild, vielleicht ein Anhang.
 
-Wenn das Backend gut zu deiner Arbeitsweise passt, ist alles spätere Pflegen leicht.
+So bleibt die Struktur konsistent, und beim Eintragen musst du nichts neu erfinden. Hier pro Bereich ein Vorschlag — du sagst, ob das passt oder ergänzt werden soll.
 
 
 ## 2.1 · Notizen
 
-Beispiel-Einträge: eine Reisenotiz vom Lebensgarten, eine Stimme aus einem Gespräch, eine Lesefrucht aus einem Buch, ein Photo mit Caption.
+Hier sammelst du datierte Einträge — Reisenotizen, Stimmen aus Gesprächen, Lesefrüchte, Photos mit Caption.
 
-**Vorgeschlagene Felder** pro Eintrag:
+**Was zu einem Eintrag gehört:**
+
 - Datum *(automatisch)*
 - Titel
 - Tag / Kategorie *(Reise · Werkstatt · Lesen · Stimme · Foto)*
 - Haupttext
-- *Optional:* Bild *(eines oder mehrere)*
-- *Optional:* Audio- oder Video-Link *(YouTube, Spotify)*
-- *Optional:* PDF-Anhang
-- *Optional:* externer Link
+- Optional: Bild *(eines oder mehrere)*
+- Optional: Audio- oder Video-Link *(YouTube, Spotify)*
+- Optional: PDF-Anhang
+- Optional: externer Link
 
-a) Passt das? Brauchst du noch andere Felder?
+a) Passt das? Möchtest du etwas dazu oder rausnehmen?
 
 →
 
-b) Möchtest du zusätzliche Tag-Kategorien neben den fünf?
+b) Möchtest du andere oder zusätzliche Tag-Kategorien?
 
 →
 
 
 ## 2.2 · Reisen / Stationen
 
-Beispiel-Eintrag: dein Besuch im Tempelhof — Bild, Ort, deine Reflexion.
+Hier sammelst du die Orte, die du besucht hast — mit Bild, Eindruck, Reflexion.
 
-**Vorgeschlagene Felder** pro Eintrag:
+**Was zu einem Eintrag gehört:**
+
 - Name des Ortes
 - Region und Land
 - Datum besucht *(oder Zeitraum)*
 - Bild *(eines oder mehrere)*
 - Beschreibung / Reflexion
 - Tags *(z.B. Ökodorf · Cohousing · Spirituell)*
-- *Optional:* externer Link zur Gemeinschaft
-- *Optional:* PDF-Anhang *(z.B. Konzept-Papier des Ortes)*
+- Optional: externer Link zur Gemeinschaft
+- Optional: PDF-Anhang *(z.B. Konzept-Papier des Ortes)*
 
-a) Passt das? Brauchst du noch andere Felder?
+a) Passt das? Möchtest du etwas dazu oder rausnehmen?
 
 →
 
 
 ## 2.3 · Werkstatt-Termine
 
-Beispiel-Eintrag: dein Filz-Wochenende am 14. Juni.
+Hier sammelst du Werkstätten — eigene und solche, an denen du teilnimmst.
 
-**Vorgeschlagene Felder** pro Eintrag:
+**Was zu einem Eintrag gehört:**
+
 - Datum *(und Endzeit, falls mehrtägig)*
 - Titel
 - Ort
 - Beschreibung
 - Anmelde-Link oder Mail
 - Markierung „eigener Termin / fremder Termin"
-- *Optional:* Foto
-- *Optional:* PDF mit Detail-Programm
-- *Optional:* Honorar-/Kosten-Hinweis
+- Optional: Foto
+- Optional: PDF mit Detail-Programm
+- Optional: Honorar-/Kosten-Hinweis
 
-a) Passt das? Brauchst du noch andere Felder?
+a) Passt das? Möchtest du etwas dazu oder rausnehmen?
 
 →
 
 
 ## 2.4 · Bibliothek
 
-Beispiel-Eintrag: das Buch von Cynthia Tina, mit deiner Notiz dazu.
+Hier sammelst du Lesefrüchte — Bücher, Webseiten, Filme, Podcasts, mit deiner Notiz dazu.
 
-**Vorgeschlagene Felder** pro Eintrag:
+**Was zu einem Eintrag gehört:**
+
 - Typ *(Buch · Webseite · Aufsatz · Film · Podcast · Gespräch)*
 - Titel
 - Autor / Quelle
 - Deine Notiz *(was bringt es dir, warum hier)*
 - Link
-- *Optional:* Bild / Cover
-- *Optional:* PDF-Anhang
+- Optional: Bild / Cover
+- Optional: PDF-Anhang
 
-a) Passt das? Brauchst du noch andere Felder?
+a) Passt das? Möchtest du etwas dazu oder rausnehmen?
 
 →
 
@@ -206,17 +217,16 @@ c) Andere Plattformen, auf denen du aktiv bist — YouTube, Instagram, Substack,
 →
 
 
-## 3.4 · Bildsprache
+## 3.4 · Foto von dir
 
-a) Welche Bildsprache passt zu dir? *(z.B. dokumentarisch · poetisch · reduziert · nah · rau · hell · naturbezogen · urban)*
+Für den ersten Wurf nehme ich passende allgemeine Bilder ins Layout — die können wir später durch deine eigenen austauschen. Ein Element ist aber heute schon zu klären:
 
-→
+Möchtest du ein **Foto von dir** auf der Seite — und in welcher Art?
 
-b) Welche Bilder sollen auf keinen Fall entstehen? *(z.B. Stockfoto-Spiritualität, zu süß, zu glatt)*
-
-→
-
-c) Möchtest du ein **Foto von dir** auf der Seite? *(Porträt · Hände bei der Arbeit · draußen unterwegs · kein Foto)*
+- Porträt
+- Hände bei der Arbeit
+- Draußen unterwegs
+- Andere Idee: \_\_\_\_
 
 →
 
@@ -250,7 +260,7 @@ c) Möchtest du Rahmenbedingungen sichtbar machen *(Honorar, Reisekosten, Mindes
 
 Die Seite wird ab Start für **Deutsch, Französisch, Englisch** vorbereitet. Im Backend bekommst du pro Eintrag drei Sprach-Blöcke. Du füllst aus, was du möchtest — die deutschen Felder zuerst, die anderen wenn du soweit bist.
 
-Wenn du magst, kann ich eine **automatische Vor-Übersetzung** *(KI-gestützt)* einbauen, die dir einen ersten Entwurf in FR/EN liefert. Du kannst ihn dann korrigieren oder verwerfen — kein Muss.
+Wenn du magst, kann ich eine **automatische Vor-Übersetzung** *(KI-gestützt)* einbauen, die dir einen ersten Entwurf in FR/EN liefert. Du kannst ihn korrigieren oder verwerfen — kein Muss.
 
 a) Möchtest du eine automatische Vor-Übersetzung als Hilfe — oder schreibst du lieber alles selbst?
 
@@ -273,5 +283,8 @@ Hier ist Platz für alles, was nicht gefragt wurde, aber für dich wichtig ist �
 Danke. Schick mir deine Antworten zurück — alles auf einmal oder Abschnitt für Abschnitt, wie es dir passt.
 
 Die deutsche Version starten wir in den nächsten Wochen. Französisch und Englisch folgen, wenn du soweit bist.
+
+**P.S.** Eine kleine Hausaufgabe für später: überleg dir, welche **Web-Adresse** du gerne hättest. Wir klären das, sobald die Inhalte stehen.
+*Beispiele: werkstatt-gemeinschaft.de · werkstatt-gemeinschaft.org · katharina-offenborn.de · etwas Eigenes.*
 
 — Frühjahr 2026
