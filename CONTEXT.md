@@ -122,7 +122,7 @@ Kontext: vier Verbesserungen aus Session-Review
 - Inline CSS
 - Hosting: **Vercel** (`oasen-finder.vercel.app`)
 - Repo: **GitHub** `restitutio777/oasen-finder`
-- **Hero-Foto:** Unsplash-Platzhalter *(golden-hour communal dinner, `photo-1738034950582-271276c5af7d`)* — vor Public-Launch durch eigenes Material von Katharina ersetzen. Unsplash-Lizenz ist auch kommerziell ok, aber als zentrales Brand-Bild ist Eigen-Material besser.
+- **Hero-Foto:** Unsplash-Platzhalter *(`photo-1761092315416-ed229b18e3d6` — communal table mit Blumen, blurred 28px als atmosphärische Stimmung)*. Stützt die -BAR-Idee *(Treffpunkt + Werkstatt-Charakter)*. Vorher: `photo-1738034950582-271276c5af7d` *(golden-hour communal dinner)*. Vor Public-Launch durch eigenes Material von Katharina ersetzen — Unsplash-Lizenz ist auch kommerziell ok, aber als zentrales Brand-Bild ist Eigen-Material besser.
 
 ### Geplant *(ab Phase 1, sobald Antworten da)*
 - **Astro** *(Static-Generator)*
