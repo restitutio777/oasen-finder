@@ -344,7 +344,11 @@
     align-items: end;
   }
   .hero__main { max-width: 1000px; }
-  .hero__eyebrow { margin-bottom: 32px; }
+  .hero__eyebrow {
+    margin-bottom: 32px;
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
   .hero__title {
     font-size: clamp(2.5rem, 6.8vw, 5.5rem);
     line-height: 1.05;
@@ -356,7 +360,7 @@
   .hero__title em {
     font-style: italic;
     font-weight: 500;
-    color: var(--accent-green);    /* fern-grün — natural, lebensfroh */
+    color: var(--accent);    /* clay-rot — Wärme-Signatur, inkl. nachfolgendes ? */
   }
   .hero__lead {
     margin-top: clamp(28px, 4vw, 44px);
@@ -375,10 +379,10 @@
     margin-top: clamp(24px, 3.5vw, 36px);
     max-width: 560px;
     font-family: var(--font-display);
-    font-size: clamp(18px, 1.7vw, 22px);
+    font-size: clamp(19px, 1.8vw, 23px);
     font-style: normal;
     line-height: 1.5;
-    color: var(--text-secondary);
+    color: var(--text-body);
   }
   .hero__cta-row {
     margin-top: clamp(28px, 4vw, 44px);
@@ -393,15 +397,22 @@
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     line-height: 1.8;
     white-space: nowrap;
     text-decoration: none;
     transition: color var(--t-fast) var(--ease);
     display: block;
+    /* subtle cream wash so it stays readable when the photo shows through */
+    padding: 14px 18px;
+    border-radius: 4px;
+    background: rgba(246, 244, 238, 0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
   .hero__meta:hover {
-    color: var(--text-secondary);
+    color: var(--text-primary);
+    background: rgba(246, 244, 238, 0.85);
   }
   .hero__meta:hover .hero__meta-arrow {
     transform: translateX(4px);
@@ -465,21 +476,24 @@
     cursor: pointer;
   }
   .btn--primary {
-    background: var(--text-primary);
+    background: var(--accent);
     color: var(--text-inverse);
+    border-color: var(--accent);
   }
   .btn--primary:hover {
-    background: var(--accent);
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
     color: var(--bg-base);
   }
   .btn--ghost {
-    background: transparent;
+    background: rgba(246, 244, 238, 0.6);
     color: var(--text-primary);
-    border-color: var(--border-medium);
+    border-color: var(--accent);
   }
   .btn--ghost:hover {
+    background: var(--accent);
+    color: var(--bg-base);
     border-color: var(--accent);
-    color: var(--accent);
   }
   .btn svg { transition: transform var(--t-base) var(--ease); }
   .btn:hover svg { transform: translateX(4px); }
@@ -1793,14 +1807,14 @@
       <span class="eyebrow hero__eyebrow">WERK-statt allein unterwegs · 2026</span>
       <h1 class="hero__title">
         Auf der Suche —<br>
-        wie wird <em>Gemeinschaft</em>?
+        wie wird <em>Gemeinschaft?</em>
       </h1>
       <p class="hero__subtitle">
         Kleine Räume zum Mit-Suchen — von Katharina Offenborn.
       </p>
       <div class="hero__cta-row">
         <a href="#schreibbar" class="btn btn--primary">
-          Aktuelles ansehen
+          In die SchreibBAR
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
         <a href="#mitkommen" class="btn btn--ghost">Mitkommen</a>
