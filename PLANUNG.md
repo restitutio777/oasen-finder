@@ -246,6 +246,22 @@ Jede Fragebogen-Etappe schaltet eine Build-Etappe frei. Katharina antwortet, wir
 
 ---
 
+### Sieben strategische Themen — nicht vergessen
+
+Diese sind im Laufe der Gespräche identifiziert worden und müssen in den Phasen abgedeckt sein. Stand jetzt sind sie alle nicht im Fragebogen *(weil v4 zur Strukturklärung dient)*, aber sie liegen hier als verbindliche Roadmap-Items.
+
+| # | Thema | Wann zu klären |
+|---|---|---|
+| 1 | **Geschäftsmodell** — Werkstatt-Preise, Beratung, Buchungslogik, Anzahlung/Stornierung. Beeinflusst Backend-Felder für `event`-Schema *(Preis-Feld, Anmelde-Modus)* | Mit Katharina direkt klären, sobald Antworten zu Abschnitt 3.5 da sind |
+| 2 | **Newsletter** — ihr einziges plattform-unabhängiges Asset. Tool entscheiden *(Buttondown · Substack · MailerLite · …)*, Doppel-Opt-In, in `mitkommen`-Section einbauen | Phase 2 oder 3, vor Public-Launch |
+| 3 | **DSGVO/Impressum/Datenschutz** — Pflicht bei deutscher Domain. Generator-Lösung *(eRecht24)* für Start akzeptabel. Cookie-Hinweis falls Analytics genutzt | Vor Soft-Launch |
+| 4 | **Hub-Logik beidseitig** — alle ihre Plattformen *(YouTube, Instagram, Substack, …)* müssen in ihren Bio-Links auf die Website zurückverlinken. Sonst bleibt die „zentrale Anlaufstelle" eine Insel. | Beim Launch — Checkliste für Katharina |
+| 5 | **Mindest-Content vor Soft-Launch** — Faustregel: 3-5 Notizen, 2-3 Stationen, 1-2 Bibliothek-Einträge. Sonst wirkt die Site „unfertig". | Bedingung für Soft-Launch |
+| 6 | **Eigentum und Zugang** — Domain, Vercel-Account, Sanity-Account, ggf. GitHub-Repo in **Katharinas Namen**. Backup-Strategie falls Auftraggeber wegfällt. | Phase 1 — bei Account-Setup gleich richtig anlegen |
+| 7 | **Mobile-Editing** — Sanity-Studio auf Tablet/Phone testen. Falls schwierig: Fallback-Workflow *(z.B. Mail-Eingang, der automatisch zu Drafts wird)* | Phase 1 — beim Sanity-Setup testen |
+
+---
+
 ### Warum diese Stufung sinnvoll ist
 
 | Für Katharina | Für den Build |
