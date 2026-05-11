@@ -228,7 +228,7 @@
     transform: translateY(-6.5px) rotate(-45deg);
   }
 
-  @media (max-width: 720px) {
+  @media (max-width: 920px) {
     .nav-toggle { display: block; }
     .nav {
       display: flex;
@@ -312,6 +312,30 @@
         rgba(168, 122, 114, 0.4) 65%,
         rgba(44, 37, 48, 0.62) 100%);
     z-index: -1;
+  }
+  /* Desktop: let the right side of the image breathe — less blur, cream-wash
+     concentrated on the left text column, the image stays readable on the right */
+  @media (min-width: 1024px) {
+    .hero::before {
+      filter: blur(6px) saturate(1.1) brightness(1.03);
+      opacity: 1;
+    }
+    .hero::after {
+      background:
+        /* Cream wash anchored on the left, fades cleanly into the image on the right */
+        radial-gradient(ellipse 58% 130% at 14% 50%,
+          rgba(246, 244, 238, 0.98) 0%,
+          rgba(246, 244, 238, 0.92) 28%,
+          rgba(246, 244, 238, 0.6) 52%,
+          rgba(246, 244, 238, 0.18) 75%,
+          transparent 90%),
+        /* Vertical sweep, gently softened so the photo stays visible right */
+        linear-gradient(180deg,
+          rgba(246, 244, 238, 0.32) 0%,
+          rgba(232, 185, 135, 0.18) 35%,
+          rgba(168, 122, 114, 0.24) 65%,
+          rgba(44, 37, 48, 0.42) 100%);
+    }
   }
   .hero__inner {
     display: grid;
