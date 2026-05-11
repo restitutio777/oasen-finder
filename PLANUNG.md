@@ -1,183 +1,260 @@
 # Werkstatt Gemeinschaft — Planung
 
 *Eine Landkarte für Katharina Offenborn.*
-*Frühjahr 2026.*
+*Stand: 11. Mai 2026 (überarbeitet nach Katharinas Antworten zu Fragebogen v4).*
 
 ---
 
 ## Das Bild
 
-Stell dir die Website als ein **Haus mit Türen** oder ein **kunstvolles Regal** vor.
+Stell dir die Website als ein **Haus mit Türen** oder ein **kunstvolles Regal** vor. Du stehst **dahinter** — sortierst, ordnest, stellst Dinge auf den richtigen Platz. Vorn kommen Besucher hin, lesen die Türen-Schilder, klicken die Tür, die sie zieht.
 
-Du stehst **dahinter**. Du sortierst, ordnest, stellst Dinge auf den richtigen Platz — Reisefotos in den einen Raum, Werkstatt-Termine in den anderen, Lesefrüchte ins dritte Fach.
+Mit Katharinas Antworten ist eine zweite Ebene dazugekommen: jeder Raum ist auch eine **„BAR"** — ein Ort, an dem man kurz haltmacht, einen Blick teilt, mitnimmt. Doppelter Sinn:
 
-Vorn kommen Besucher hin. Sie sehen das Haus, lesen die Türen-Schilder:
-*„Hier sind ihre Notizen. Hier die Reisen. Hier die Werkstatt. Hier die Bibliothek."*
+- **„-bar"** als deutsches Suffix → *machbar · denkbar · sichtbar · hörbar*
+- **„Bar"** als Treffpunkt → ein Platz, eine Theke, ein Stuhl. Nicht laut, nicht voll. Warm.
 
-Sie klicken die Tür, die sie zieht. Sie laufen **nicht durch fünf Räume gleichzeitig**.
+Das verändert nichts am Haus-Bild, aber es verändert den **Charakter** der Räume: keine sterilen Regalfächer mehr, sondern lebendige BARs mit eigener Atmosphäre. Aus dem Schaufenster wird ein kleines Quartier mit mehreren Türen.
 
-Damit das funktioniert, brauchen wir zwei Dinge:
+Damit das funktioniert, brauchen wir:
 
-1. **Eine klare Architektur** — welche Räume gibt es, in welcher Reihenfolge, welche sind groß, welche klein
-2. **Klare Inhalte je Raum** — was liegt darin, wie sieht es aus, wie oft kommt etwas dazu
-
-Im Folgenden:
-- ein **Vorschlag** für die Architektur (kann sich verändern)
-- **Fragen an dich** — damit du Klarheit gewinnst und wir die Räume mit deinem Material füllen
-- ein **Phasenplan**, der niemanden überfordert
+1. **Eine klare Architektur** — welche -BARs gibt es, in welcher Reihenfolge, welche sind Top-Level, welche Sub
+2. **Klare Inhalte je Raum** — Schemas im Backend, einheitliche Eintrags-Struktur
+3. **Ein Visual-Konzept** — die -BAR-Stimmung sparsam, nicht überladen
 
 ---
 
-## Architektur-Vorschlag
+## Architektur — Stand nach Katharinas Antworten
 
-### Sechs Räume — in dieser Reihenfolge
+### Neun -BAR-Räume
 
 ```
-HAUS  ·  Werkstatt Gemeinschaft
+HAUS  ·  (Brand-Name offen — siehe unten)
 
-   ┌────────┐
-   │ HERO   │   ← „Wer? Was? Worum geht's?" (5 Sekunden)
-   └────────┘
+   ┌──────────────────────┐
+   │ VereinBAR/WunderBAR  │  ← Eingang · Wer? Was? Aktuelle Termine
+   │   (Rückfrage offen)  │     Sofort sichtbar
+   └──────────────────────┘
 
-   ┌────────┐
-   │ ÜBER   │   ← Wer ich bin (Foto, Bio, Leitfrage)
-   └────────┘
+   ┌──────────────────────┐
+   │ erkennBAR            │  ← Wer Katharina ist · Bio · Prägung
+   └──────────────────────┘
 
-   ┌─────────┐
-   │ NOTIZEN │   ← Hauptraum · Aktuelles · die rote Schnur
-   └─────────┘
+   ┌──────────────────────┐
+   │ SchreibBAR           │  ← Texte · Gedichte · Notizen
+   │   +DenkBAR (Sub)     │     Sub: Ideen · Visionen · Umfragen
+   └──────────────────────┘
 
-   ┌────────┐  ┌─────────┐  ┌──────────┐
-   │ REISEN │  │WERKSTATT│  │BIBLIOTHEK│   ← drei Seiten-Türen
-   └────────┘  └─────────┘  └──────────┘
+   ┌────────────┐ ┌────────────┐ ┌──────────────────┐
+   │ BewegBAR   │ │ MachBAR    │ │ LesBAR           │
+   │ Karte +    │ │ Werkstatt- │ │ Bibliothek       │
+   │ Reisen     │ │ Termine    │ │ +BrauchBAR (Sub) │
+   └────────────┘ └────────────┘ └──────────────────┘
+                                    Sub: Konzepte · Werkzeuge
 
-   ┌─────────┐
-   │ PODCAST │   ← schmaler Streifen, geplant
-   └─────────┘
+   ┌──────────────────────┐
+   │ HörBAR               │  ← Reflexionen · Gedichte · Lieder
+   └──────────────────────┘
 
-   ┌────────────┐
-   │ MITKOMMEN  │   ← Schluss-Einladung: drei Wege dich zu erreichen
-   └────────────┘
+   ┌──────────────────────┐
+   │ Mitkommen            │  ← Online-Formular · Einladungs-Kategorien
+   └──────────────────────┘
 ```
 
-### Was in jedem Raum liegt
+**Begründung Sub-Bereiche** *(Vorschlag zur Diskussion)*:
 
-| Raum | Inhalt | Wer kommt rein? |
+- **DenkBAR als Sub von SchreibBAR** — beide „in geschriebener Form", aber DenkBAR zukunftsorientiert *(Visionen)*, SchreibBAR vergangenheits-/gegenwartsorientiert *(Notizen, Gedichte)*. Innerhalb von SchreibBAR als Filter/Tab.
+- **BrauchBAR als Sub von LesBAR** — beide „Material zum Mitnehmen", aber BrauchBAR anwendbar *(Konzepte, Werkzeuge)*, LesBAR rezeptiv *(Lese-/Hör-Material)*. Tab im LesBAR-Raum.
+
+Alternative: alle 9 Räume als Top-Level. UX-mäßig zu viel — 9 Punkte überlasten die Mobile-Navigation. Sub-Modell ist besser, aber **mit Katharina zu klären**.
+
+### Was in jeder -BAR liegt
+
+| -BAR | Hauptinhalt | Was Besucher tun |
 |---|---|---|
-| **Hero** | Dein Bild + ein Satz Frage | jeder Erstbesucher |
-| **Über** | Foto, kurze Bio, Leitfrage, dein Hintergrund | wer wissen will, wer du bist |
-| **Notizen** | datierter Strom: Reisen · Werkstätten · Lesen · Stimmen · Fotos | wer wissen will, was gerade ist |
-| **Reisen / Stationen** | besuchte Gemeinschaftsorte mit Reflexion | wer Orte finden möchte |
-| **Werkstatt** | eigene Termine + Mit-Termine bei Anderen | wer mitmachen will |
-| **Bibliothek** | Bücher · Artikel · Filme · Webseiten · Podcasts | wer weiterlesen will |
-| **Podcast** | (geplant — Anmeldung für Bescheid) | wer hören will |
-| **Mitkommen** | drei Wege: Werkstatt · Mail · Podcast-Vormerkung | wer dabei sein will |
+| **VereinBAR** | Herzensanliegen + nächste Werkstatt-Termine + Jahres-Rhythmus *(Winter Pause · F/H Kreta · Sommer reisend)*. Später: Rückmeldungen/Kurzvideos | Verstehen worum es geht · Mitkommen |
+| **erkennBAR** | Bio, Fotos, Prägungs-Liste, Anliegen-Satz, Don't-Liste *(„Coach, Referent, Experte" — nein)* | Person kennen lernen |
+| **SchreibBAR** *(+DenkBAR)* | Gedichte, Gedanken, Notizen *(Sub: Ideen, Visionen, Umfragen)*. Cross-Posting zu Substack | Lesen · weiterklicken zu Substack |
+| **BewegBAR** | **Interaktive Karte** mit Reiserouten + Foto-Pins der besuchten Gemeinschaftsorte | Karte erkunden · Orte entdecken |
+| **MachBAR** | Werkstatt-Termine *(eigen + fremd)*, saisonal sortiert, mit Hundefreundlich-Filter *(Carla)*. Honorar individuell besprechen | Sich anmelden via Online-Formular |
+| **LesBAR** *(+BrauchBAR)* | Bücher · Webseiten · Filme · Podcasts · Gespräche mit Notiz. Verlinkung zu `wortgetreu.com`. *(Sub: Konzepte, Werkzeuge)* | Weiterlesen · Werkzeug anwenden |
+| **HörBAR** | Eingesprochene Reflexionen, Gedichte, Lieder. YouTube/Spotify/Apple-Music-Embeds | Hören |
+| **Mitkommen** | Online-Formular mit 7 Einladungs-Kategorien *(Werkstatt-Teilnahme, Gemeinschafts-Einladung, Vortrag, Beratung, Interview-später, Gespräch, Vernetzungs-Hilfe)* | Kontakt aufnehmen |
 
 ### Hierarchie für Besucher
 
-- **5 Sekunden:** Hero — *„Aha, hier wird Gemeinschaft gesucht von Katharina."*
-- **2 Minuten:** Notizen-Stream — *„Was ist gerade?"*
-- **5 Minuten:** Eine Tür auf (Reisen ODER Werkstatt ODER Bibliothek)
+- **5 Sekunden:** VereinBAR — *„Aha, das ist Katharina, sie öffnet Räume für Miteinander-Fragen."*
+- **2 Minuten:** SchreibBAR oder HörBAR — *„Was schreibt/spricht sie gerade?"* *(ihre Hauptbereiche)*
+- **5 Minuten:** Eine andere -BAR auf *(BewegBAR-Karte, MachBAR-Termin, LesBAR-Notiz)*
 - **Längst dabei:** Mitkommen — *„Ich nehme Kontakt auf."*
 
 ---
 
-## Fragen an dich, Katharina
+## Backend-Schemas pro -BAR
 
-Antworte ruhig stichpunktartig. Keine Sorge um Form. Aus deinen Antworten bauen wir das Haus so, dass es zu dir passt — nicht umgekehrt.
+Alle Textfelder als **i18n-Felder** *(DE/FR/EN)* ab Tag 1. KI-Vor-Übersetzung als Hilfe in Sanity Studio aktivieren.
 
-### A · Räume — passt das?
+```
+schreibBARNote  (SchreibBAR + DenkBAR via kind-Filter)
+  publishedAt     date (Default: heute, automatisch)
+  title           i18nString
+  kind            select  [notiz · poesie · idee · vision · umfrage]
+  body            i18nText (rich)
+  tags            array of strings
+  hero            image (optional)
+  mediaLink       url (optional — z.B. YT/Spotify)
+  pdfAttachment   file (optional)
+  externalLink    url (optional)
+  substackUrl     url (optional, separates Feld — Hub-Logik)
 
-1. **Welche der sechs Räume passen für dich?**
-   Notizen · Reisen · Werkstatt · Bibliothek · Podcast · Mitkommen · Über
-2. **Fehlt ein Raum?** (z. B. „Gespräche", „Briefe", „Bilder-only", „Newsletter"?)
-3. **Ist die Reihenfolge richtig?** Falls nicht: wie würdest du sie verändern?
-4. **Wo verbringst du am meisten Zeit?** = Hauptraum, soll prominent sein.
+bewegBARStation  (BewegBAR)
+  name            string
+  region          string
+  country         string
+  visitedAt       date OR daterange
+  coordinates     geopoint              ← für die Karte
+  images          array of images
+  reflection      i18nText
+  tags            array of strings      [Ökodorf · Cohousing · Spirituell · …]
+  communityLink   url (optional)
+  conceptPdf      file (optional)
 
-### B · Was liegt in jedem Raum?
+machBAREvent     (MachBAR)
+  startDate       datetime
+  endDate         datetime (optional, falls mehrtägig)
+  title           i18nString
+  location        string
+  locationCoords  geopoint (optional, für spätere Karten-Verschneidung)
+  description     i18nText
+  registration    object { mode: [mail/link/formular], target: string }
+  ownership       select [eigener · fremder]
+  season          select [winter · fruehjahr · sommer · herbst]
+  dogFriendly     boolean               ← Carla-Filter
+  photo           image (optional)
+  programPdf      file (optional)
+  fees            i18nText (Default: „individuell besprechen")
 
-#### Notizen (Hauptraum)
-- Wie oft fügst du etwas hinzu? *(täglich · wöchentlich · unregelmäßig)*
-- Welche Formate planst du? *(Text · Foto + Caption · Audio · Video · Link)*
-- Welche Tags / Kategorien sollen vorkommen? *(Reise · Werkstatt · Lesen · Stimme · Foto · …?)*
+lesBARResource   (LesBAR + BrauchBAR via kind-Filter)
+  kind            select [buch · webseite · aufsatz · film · podcast · gespraech · konzept · werkzeug]
+  title           i18nString
+  authorOrSource  string
+  note            i18nText
+  link            url
+  coverImage      image (optional)
+  pdfAttachment   file (optional)
 
-#### Reisen / Stationen
-- Pro besuchtem Ort: Was möchtest du zeigen? *(Reflexionstext · 1 Foto · mehrere · Audio von Gesprächen?)*
-- Eine Liste reicht? Oder eine **Karte** mit allen Orten (geographisch)?
-- Wie viele Orte realistisch im ersten Jahr? *(grobe Schätzung)*
+hoerBAREpisode   (HörBAR)
+  episodeNumber   number
+  title           i18nString
+  platform        select [youtube · spotify · applemusic · sonstige]
+  url             url
+  publishedAt     date
+  summary         i18nText
+  cover           image (optional)
+  transcriptPdf   file (optional)
 
-#### Werkstatt
-- Welche Termine biete **du selbst** an? *(Beispiel: Filzen + Dreigliederung-Werkstatt am 14. Juni)*
-- Möchtest du auch **fremde** Termine zeigen *(Tag der offenen Tür am Tempelhof)*?
-- Anmeldung: per Mail an dich · Formular · Verlinkung extern?
+erkennBARAbout   (erkennBAR) — Singleton
+  shortBio        i18nText
+  longBio         i18nText
+  portraits       array of images
+  influences      array of i18nText     [Prägungs-Liste — Waldorf, Wien, Frankreich, …]
+  mantra          i18nString            (Anliegen-Satz)
+  notDescribedAs  array of strings      [„Coach", „Referent", „Experte"]
 
-#### Bibliothek
-- Welche Quellen sind dir am wichtigsten? *(Bücher · Webseiten · Filme · Audio · Gespräche)*
-- Wie viele insgesamt? *(zur Schätzung der Pflegezeit)*
-- Brauchst du **Filter** (z. B. „nur Bücher" / „nur Webseiten")?
+mitkommenForm    (Mitkommen) — Singleton/Konfiguration
+  inviteCategories  array of objects [
+                      { label: i18nString,
+                        kind: select [werkstatt · einladung · vortrag · beratung
+                                     · interview · gespraech · vernetzung] }
+                    ]
+  emailRecipient  string
+  intro           i18nText
+```
 
-#### Podcast
-- Klar geplant, vage Idee, doch nicht?
-- Falls ja: Gäste? Rhythmus? Erste Folge wann?
+**Eigentum:** Sanity-Studio wird **in Katharinas Namen** angelegt *(siehe strategisches Item 6)*.
 
-#### Über
-- Wie viel von dir persönlich?
-  - Eine kurze Bio (3–4 Sätze)
-  - Eine längere Lebensgeschichte (1–2 Absätze)
-  - Foto (Porträt? Hände bei der Arbeit? Beides? Keins?)
-  - Liste deiner Fortbildungen / Praxis-Schwerpunkte
+---
 
-### C · Wer kommt zu Besuch?
+## Karten-Komponente für BewegBAR
 
-1. **Wer ist dein Hauptpublikum?**
-   - Suchende, die selbst Gemeinschaft finden wollen
-   - Praktiker:innen (Therapie, Pädagogik, Steiner-Kreis)
-   - Eingeladene (Bekannte, Familie)
-   - Allgemein interessierte Lesende
-2. **Was sollen sie nach dem Besuch tun?**
-   - Zur Werkstatt anmelden
-   - Dir schreiben
-   - Wiederkommen zum Lesen
-   - Etwas teilen
+Katharinas Wunsch: *„interaktive Karte als Frontend möglich, hinter der ich Routen und Orte ablegen kann? Ein wenig wie im Wertekreis…"*
 
-### D · Stimme und Anrede
+| Lösung | Vorteile | Nachteile |
+|---|---|---|
+| **Leaflet + OSM-Tiles** | Open Source, kostenlos, sehr gut dokumentiert, Standard | Klassischer Karten-Look, begrenzt designbar |
+| **MapLibre + MapTiler** | Vector-Tiles, in Brand-Farben designbar, moderner Look | Mehr Setup, externer Tile-Provider *(MapTiler-Free-Tier reicht meist)* |
+| **Mapbox** | Sehr schön, viele Features | Vendor-Lock-in, kostenpflichtig ab ~50k Loads/Monat |
+| **Statisches SVG mit Pins** | Voll im Brand-Look, kein JS-Maplib | Nicht zoombar, jede Änderung = neues SVG |
 
-1. **Du oder Sie?**
-2. **Ich oder Wir?** *(eher persönlich „ich besuche, ich werke" oder neutraler „diese Seite sammelt")*
-3. **Foto von dir auf der Seite?** Ja / Nein / wie viel?
-4. **Drei Worte für deinen Ton?**
-   *Beispiele:* „warm, suchend, klar" · „neugierig, konkret, leise" · „liebevoll, fragend, geerdet"
+**Empfehlung:** **Leaflet** für Phase 1 — pragmatisch, schnell live. Bei Bedarf später auf **MapLibre + MapTiler** wechseln *(Datenmodell bleibt gleich, nur die Render-Schicht ändert sich)*.
 
-### E · Praktisches
+**Vorgehen:**
+1. `bewegBARStation`-Dokumente in Sanity haben `coordinates: geopoint`
+2. Astro-Page lädt alle Stationen, rendert Pins auf Leaflet-Karte
+3. Klick auf Pin → Popup mit Bild + Titel + Link zum vollen Eintrag
+4. *(zweite Iteration)*: Reise-Routen als Polylines zwischen Stationen einer Tour
 
-1. **Was hast du schon vorbereitet?**
-   - Reisetagebücher / Texte
-   - Photos *(wie viele, wo gespeichert?)*
-   - Buchlisten / Quellenlisten
-   - Steiner-Zitate / Lektüre-Notizen
-   - Werkstatt-Konzepte / Ablaufpläne
-2. **Was möchtest du selbst pflegen — wo brauchst du Unterstützung?**
-3. **Wer schaut drüber, bevor etwas live geht?** *(du allein · jemand fragt mit?)*
+---
 
-### F · Mehrsprachigkeit
+## Visual-Konzept — die -BAR-Idee stützen
 
-Die Site wird von Anfang an für **drei Sprachen** aufgebaut: Deutsch · Französisch · Englisch.
-Das heißt: das technische Gerüst weiß ab Tag 1, dass jeder Inhalt drei Sprachfassungen haben kann. Du musst nicht alles sofort übersetzen — du kannst Deutsch starten und Stück für Stück die anderen Sprachen ergänzen.
+Die -BAR-Doppelbedeutung *(Treffpunkt + machbar-Suffix)* soll visuell **mitschwingen, ohne zu überladen**. Sparsame Bild-Setzung — ein Bild pro Raum maximal, plus zentrales Hero in VereinBAR.
 
-1. **Welche Inhalte willst du sofort dreisprachig?**
-   - **Über** *(damit internationale Besucher dich finden)*
-   - **Werkstatt** *(wenn du international ausschreibst)*
-   - **Notizen** *(meist erst Deutsch, FR/EN später)*
-2. **Wer übersetzt?**
-   - Du selbst *(bist du mehrsprachig?)*
-   - KI-Übersetzung mit Korrekturlesen
-   - Bezahlte Übersetzer:in
+**Bildsprache-Stichworte für Unsplash-Suche** *(in der Reihenfolge der Räume)*:
 
-### G · Zeit und Phasen
+| -BAR | Suchbegriffe | Stimmung |
+|---|---|---|
+| **VereinBAR / Hero** | *„communal table candlelight"* · *„long wooden table evening"* · *„rustic gathering golden hour"* | Menschen am langen Tisch, warmes Licht, abendlich. **Aktuelles Hero-Foto passt schon** *(golden-hour communal dinner)* — bleibt zunächst. |
+| **erkennBAR** | Katharinas eigenes Porträt *(vorhanden)* | Persönlich, nicht inszeniert |
+| **SchreibBAR** | *„handwriting notebook morning light"* · *„open journal pen"* | Ruhig, schreibend, Tagebuch-Charakter |
+| **BewegBAR** | *(Karte ist Hauptelement)* + 1 sekundäres Bild: *„walking path landscape"* · *„rural road bicycle"* | Unterwegs, eigenes Tempo |
+| **MachBAR** | *„wooden workbench tools daylight"* · *„hands working clay"* | Werkstatt-Charakter, Holz, Hände-bei-der-Arbeit |
+| **LesBAR** | *„old books wooden table reading"* · *„open book afternoon light"* | Lesen, Sammeln, Stille |
+| **HörBAR** | *„microphone candlelight intimate"* · *„single chair listening"* | Stimme, Innerlichkeit |
+| **Mitkommen** | Kein Bild nötig *(Formular-Sektion, schlicht)* | — |
 
-1. **Wann soll die deutsche Version online sein?**
-2. **Wann kommen Französisch und Englisch dran?**
-3. **Wann ist gut genug, um „Familie und Freunden zu zeigen"?**
+**Was zu vermeiden ist:**
+- Stockfoto-spirituell *(Sonnenaufgang mit ausgebreiteten Armen)*
+- Generisch-warm *(zu glatt, zu Marketing)*
+- **Cocktailbar-Klischee** *(das wäre die falsche „Bar")* — also keine Theken mit Flaschen, keine Bar-Hocker, keine Drinks
+- Menschenmassen *(„Werkstatt" ist klein, intim)*
+
+**Konkrete Bild-Auswahl** erfolgt in Track B *(Visual-Sketch im Prototyp)*.
+
+---
+
+## Brand-Name — Optionen
+
+| Option | Stärke | Schwäche |
+|---|---|---|
+| **Werkstatt Gemeinschaft** *(Arbeitstitel)* | Bekannt, klar | Generisch, ohne -BAR-Bezug |
+| **WERK-statt allein unterwegs** *(aus ihrer 3.1a-Antwort)* | Stark, persönlich, eigenes Wortspiel | Lang, mobile-unhandlich, eher Untertitel |
+| **„WERK-statt" + Untertitel „allein unterwegs"** | Brand kurz, Claim trägt das Wortspiel | Untertitel muss überall mitlaufen |
+| **„MitBAR" / „GemeinschaftsBAR"** *(Neuwortbildung)* | Konsequent im System | Klingt konstruiert, Cocktailbar-Risiko |
+| **„Katharina Offenborn — VereinBAR"** | Persönlich, klar | Macht Person zentral statt Anliegen |
+| **„Die BARs"** *(Plural als Name)* | Konzeptionell stark, kurz | Gastronomie-Assoziation |
+
+**Vorschlag zur Diskussion:** **„WERK-statt"** als Brand-Name *(eigenständig + Wortspiel)*, **„allein unterwegs"** als Untertitel, die **-BAR-Räume** als Architektur. Damit trägt der Name Katharinas eigene Formulierung, und das -BAR-System lebt darunter ohne ins Markennamens-Spektrum zu drängen.
+
+Aber: ihre Entscheidung. Diese Tabelle als Mail-Anhang oder bei einem Telefonat besprechen.
+
+---
+
+## Offene Klärungen mit Katharina
+
+*Sortiert nach Priorität:*
+
+| # | Frage | Wo geklärt |
+|---|---|---|
+| 1 | **VereinBAR oder WunderBAR?** | Rückfragen-Mail draußen |
+| 2 | **Drei Worte für ihren Ton?** | Rückfragen-Mail draußen *(Frage 1.2c umformuliert)* |
+| 3 | **Sub-Bereiche oder alle Top-Level?** *(DenkBAR/BrauchBAR)* | Per Mail nach den ersten zwei Antworten |
+| 4 | **Brand-Name?** | Telefonat oder Treffen — zu viel für Mail |
+| 5 | **wortgetreu.com:** bleibt eigenständig oder einmal-importieren? | Per Mail, sobald Phase 1 beginnt |
+| 6 | **`anthroposophie-lebensnah`** — aktiv? Verlinken oder einstellen? | Per Mail |
+| 7 | **„Wir" statt „ich"** — wer ist „wir"? | Beobachten beim Texten, ggf. Rückfrage |
+
+**Was ohne Klärung beginnen kann:** Architektur-Gerüst, Schemas in Sanity, erkennBAR-Sektion *(unabhängig)*, Karten-Komponente technisch. Brand-Name und Namensgebung der Eingangs-BAR sind später anwendbar — Klassen-Namen im Code abstrakt halten *(`HeroBAR` als Code-Name, Display-Text aus Sanity)*.
 
 ---
 
@@ -297,4 +374,4 @@ Wenn du **diese fünf Antworten** schreibst, können wir Phase 1 beginnen:
 
 Der Rest klärt sich Stück für Stück. Dieses Dokument ist kein Examen. Es ist eine **Karte, an der wir gemeinsam zeichnen**.
 
-— Frühjahr 2026
+— Letzte Aktualisierung: 11. Mai 2026
