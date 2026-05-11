@@ -7,3 +7,5 @@ dist
 !.env.example
 .claude/worktrees/
 .fragebogen-style.html
+FRAGEBOGEN-KATHARINA.pdf
+FRAGEBOGEN-KATHARINA.html
