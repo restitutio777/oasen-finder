@@ -187,43 +187,62 @@ Jede Fragebogen-Etappe schaltet eine Build-Etappe frei. Katharina antwortet, wir
 
 ### 🏠 Etappe 1 · Das Gerüst — *1–2 Wochen*
 
-**Voraussetzung:** Katharinas Antworten zu Fragebogen-Etappe 1 *(6 Themen, ~10 Min Aufwand für sie)*
+**Voraussetzung:** Katharinas Antworten zu Fragebogen Etappe 1 *(8 Themen, ~15 Min — siehe `FRAGEBOGEN-KATHARINA.md`)*
+
+**Fokus:** Struktur, Navigation, Ton — keine Look-, Domain- oder Deploy-Fragen.
 
 **Was wir bauen:**
 - Migration von der statischen Prototyp-Seite zu **Astro + Sanity-CMS**
-- Alle Räume werden als Sanity-Schemas angelegt — **dreisprachig vorbereitet ab Tag 1**
-- Plattform-Einbettungen vorbereitet (YouTube-Embed, Verlinkungs-Module)
-- Katharina bekommt ein **Studio-Login** und kann Inhalte selbst eintragen *(kein Code, kein Terminal)*
-- Deutsche Version geht live unter ihrer Wunsch-Domain *(oder Test-URL)*
+- Sanity-Schemas für alle Hauptbereiche, **dreisprachig vorbereitet ab Tag 1**
+- Plattform-Einbettungen vorbereitet (YouTube, Substack, Instagram — falls vorhanden)
+- Katharina bekommt einen **Studio-Login** und kann Inhalte selbst eintragen
+- Test-URL geht live
 
-**Was sie sieht am Ende:** Das leere Haus, mit allen Räumen, durch die sie laufen kann.
+**Was sie sieht am Ende:** Die leere Struktur, alle Bereiche, navigierbar.
 
-### 🛋️ Etappe 2 · Räume möblieren — *2–4 Wochen*
+### 🛋️ Etappe 2 · Bereiche möblieren — *2–4 Wochen*
 
-**Voraussetzung:** Katharinas Antworten zu Fragebogen-Etappe 2 *(5 Themen, ~20 Min — die Antworten kommen leichter, weil sie das Haus vor sich hat)*
-
-**Was wir bauen + sie füllt:**
-- **Über-Sektion** wird mit ihrer value-first-Bio gefüllt
-- **Mitkommen-Sektion** bekommt die konkreten Einladungs-Pfade
-- Katharina gibt Inhalte ein: Notizen · Stationen · Werkstatt · erste Bibliothek-Einträge
-- Foto wird platziert, Untertitel gesetzt
-- Tonalität, Bilder, Worte werden in der Praxis geschärft
+**Fragen, die wir dann stellen** *(grob skizziert)*:
+- **Über dich**
+  - Drei konkrete Dinge, die du Besuchern anbietest
+  - Welche Erfahrungen haben dich glaubwürdig gemacht? Was hat dich geprägt?
+  - Ein Satz, der dich beschreibt
+  - Wie willst du nicht beschrieben werden?
+- **Einladungen**
+  - Welche Anfragen nimmst du an? *(Werkstatt-Teilnahme · Einladung zu euch · Vortrag · Beratung · Interview · Gespräch)*
+  - Kontakt-Wege (Mail · Formular · Telefon)
+  - Rahmenbedingungen sichtbar oder individuell
+- **Notizen-Strom**
+  - Posting-Frequenz, Tag-Kategorien
+- **Werkstatt-Termine**
+  - Eigene Termine, fremde Termine zeigen, Anmeldung
+- **Bilder & Foto**
+  - **Anti-Liste**: welche Bildsprache soll *nicht* entstehen *(generisch-spirituell, Stockfoto-warm, …)*
+  - Stil-Richtung: *dokumentarisch · poetisch · reduziert · nah · rau · hell · naturbezogen*
+  - Foto von dir: Porträt · Hände bei Arbeit · keins
+- **Untertitel / Claim** unter dem Namen *(optional)*
+- **Brand-Name-Check** — bleibt „Werkstatt Gemeinschaft" oder anders?
 
 **Was sie sieht am Ende:** Das bewohnte Haus mit ihrer Stimme darin.
 
 ### 🌱 Etappe 3 · Wachsen + Launchen — *nach Bedarf*
 
-**Voraussetzung:** Katharinas Antworten zu Fragebogen-Etappe 3 *(wenn der Bedarf konkret wird)*
+**Fragen, die wir dann stellen** *(grob skizziert)*:
+- **Bibliothek-Inhalte** — welche Quellen-Arten
+- **Podcast / YouTube** — geplant ja/nein, Plattform, Embed-Modus
+- **Sprachen aktivieren** — welche Inhalte zuerst FR/EN, wer übersetzt
+- **Technische Realität**
+  - Wer pflegt die Site später? *(Katharina selbst, jemand mit?)*
+  - Newsletter geplant?
+  - Kalender-Anbindung?
+  - DSGVO · Impressum · Datenschutz vorhanden?
+- **Domain & Hosting** — endgültige URL, vorhanden oder neu zu registrieren
+- **Look-Feintuning** *(optional, da Look schon gefällt)*
+  - Farb-Shift gewünscht?
+  - Andere Schrift?
+- **Launch-Termine** — Soft (Familie) und Public
 
-**Was wir bauen:**
-- **Bibliothek-Sektion** wird voll ausgebaut, ggf. mit Filtern
-- **Podcast / Video-Embed** wird aktiv *(YouTube direkt im Haus)*
-- **Französisch + Englisch** Übersetzungen werden eingepflegt, Language-Switcher aktiviert
-- Mobile, Performance, Barrierefreiheit checken
-- Domain umziehen, Newsletter einrichten *(falls gewünscht)*
-- Soft-Launch im Bekanntenkreis → Public-Launch nach Feedback-Schleife
-
-**Was sie sieht am Ende:** Das wachsende, lebendige Zuhause mit der Welt eingeladen.
+**Was sie sieht am Ende:** Das wachsende, lebendige Haus, mit der Welt eingeladen.
 
 ---
 
