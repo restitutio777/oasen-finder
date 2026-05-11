@@ -199,6 +199,85 @@
   .nav a.is-active::after { right: 0; }
   .nav a.is-active { color: var(--text-primary); }
 
+  /* ---------- Nav-Group dropdown (Desktop) ---------- */
+  .nav-group {
+    position: relative;
+    display: inline-flex;
+  }
+  .nav-group__trigger {
+    font-family: var(--font-text);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-body);
+    padding: 6px 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color var(--t-fast) var(--ease);
+  }
+  .nav-group__trigger:hover,
+  .nav-group:hover .nav-group__trigger,
+  .nav-group:focus-within .nav-group__trigger {
+    color: var(--text-primary);
+  }
+  .nav-group__caret {
+    font-size: 11px;
+    transition: transform var(--t-fast) var(--ease);
+    color: var(--accent);
+  }
+  .nav-group:hover .nav-group__caret,
+  .nav-group:focus-within .nav-group__caret {
+    transform: translateY(2px);
+  }
+  .nav-group__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 190px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    padding: 8px 0;
+    margin-top: 14px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity var(--t-fast) var(--ease),
+                transform var(--t-fast) var(--ease),
+                visibility var(--t-fast);
+    box-shadow: 0 14px 36px -18px rgba(31, 29, 26, 0.18);
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .nav-group:hover .nav-group__menu,
+  .nav-group:focus-within .nav-group__menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .nav-group__menu a {
+    padding: 10px 22px;
+    font-family: var(--font-text);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-body);
+    transition: color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+  }
+  .nav-group__menu a::after { display: none; }
+  .nav-group__menu a:hover {
+    color: var(--accent);
+    background: var(--bg-muted);
+  }
+
   /* ---------- Mobile hamburger ---------- */
   .nav-toggle {
     display: none;
@@ -272,6 +351,46 @@
     .nav a.is-active {
       color: var(--accent);
     }
+    /* Nav-Group: auf Mobile alles expanded, Trigger als Kategorie-Label */
+    .nav-group { width: 100%; flex-direction: column; }
+    .nav-group__trigger {
+      width: 100%;
+      text-align: left;
+      pointer-events: none;
+      color: var(--text-muted);
+      font-family: var(--font-text);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 28px 0 10px;
+      cursor: default;
+    }
+    .nav-group__caret { display: none; }
+    .nav-group__menu {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      margin: 0;
+      box-shadow: none;
+      gap: 0;
+    }
+    .nav-group__menu a {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      padding: 18px 0;
+      width: 100%;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+    }
+    .nav-group__menu a:hover { background: transparent; }
     body.nav-open { overflow: hidden; }
   }
 
@@ -1784,8 +1903,16 @@
       <a href="#schreibbar">SchreibBAR</a>
       <a href="#bewegbar">BewegBAR</a>
       <a href="#machbar">MachBAR</a>
-      <a href="#lesbar">LesBAR</a>
-      <a href="#hoerbar">HörBAR</a>
+      <div class="nav-group">
+        <button class="nav-group__trigger" type="button" aria-haspopup="true" aria-expanded="false">
+          Räume <span class="nav-group__caret" aria-hidden="true">↓</span>
+        </button>
+        <div class="nav-group__menu" role="menu">
+          <a href="#lesbar" role="menuitem">LesBAR</a>
+          <a href="#hoerbar" role="menuitem">HörBAR</a>
+          <a href="#erkennbar" role="menuitem">erkennBAR</a>
+        </div>
+      </div>
       <a href="#mitkommen">Mitkommen</a>
     </nav>
     <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="primary-nav" type="button">
