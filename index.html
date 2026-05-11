@@ -1428,6 +1428,17 @@
     transition: color var(--t-fast) var(--ease);
   }
   .podcast-bar__cta:hover { color: var(--accent-hover); }
+  /* Newsletter-Variante: sitzt direkt unter der HörBAR und wirkt
+     leichter — neutraler Hintergrund, keine doppelte Linie dazwischen */
+  .podcast-bar--brief {
+    background: var(--bg-base);
+    border-top: 0;
+  }
+  .podcast-bar--brief .podcast-bar__label {
+    color: var(--text-primary);
+    font-style: normal;
+    font-weight: 500;
+  }
 
   /* ---------- Mitkommen — drei Pfade ---------- */
   .invite {
@@ -1985,6 +1996,25 @@
       </span>
       <a href="mailto:kontakt@werkstatt-gemeinschaft.example?subject=Podcast%20%E2%80%94%20bitte%20Bescheid%20geben" class="podcast-bar__cta">
         Sag mir Bescheid <span aria-hidden="true">→</span>
+      </a>
+    </p>
+  </div>
+</aside>
+
+<!-- ============================================================
+     BRIEF VON UNTERWEGS — Newsletter-Placeholder (dezent)
+     Echtes Tool kommt in Phase 2/3 (Buttondown/MailerLite/Substack)
+     ============================================================ -->
+<aside class="podcast-bar podcast-bar--brief" id="brief">
+  <div class="container">
+    <p class="podcast-bar__line">
+      <span class="podcast-bar__label">Brief von unterwegs.</span>
+      <span class="podcast-bar__text">
+        Eine Mail, wenn etwas reif ist — selten, kein Newsletter, eher
+        ein Lebenszeichen.
+      </span>
+      <a href="mailto:kontakt@werkstatt-gemeinschaft.example?subject=Brief%20von%20unterwegs%20%E2%80%94%20bitte%20eintragen" class="podcast-bar__cta">
+        Eintragen <span aria-hidden="true">→</span>
       </a>
     </p>
   </div>
