@@ -6,7 +6,9 @@
 
 *Stell dir die Site als **Haus mit Türen** vor — du stehst dahinter und füllst die Räume, vorne kommen Besucher und wählen, durch welche Tür sie eintreten. Mit deinen Antworten richten wir die Räume so ein, dass es zu dir passt.*
 
-*Antworten ruhig stichpunktartig. ~30 Minuten Zeit. Mail, Sprachnachricht oder direkt in dieses Dokument schreiben — alles geht.*
+*Sie soll für dich auch der **zentrale Ort** werden: ein Platz, an dem deine Werkstätten, Reisen, Lesefrüchte, Videos, Stimme — alles, was du machst — geordnet zusammenkommen. Damit Leute dich nicht über fünf Plattformen suchen müssen.*
+
+*Antworten ruhig stichpunktartig. ~45 Minuten Zeit. Mail, Sprachnachricht oder direkt in dieses Dokument schreiben — alles geht.*
 
 ---
 
@@ -77,23 +79,75 @@ d) Foto von dir auf der Seite?
 
 ---
 
-## 4 · Wer kommt zu Besuch?
+## 4 · Bio & Wertversprechen
 
-a) Wer ist dein **Hauptpublikum**?
-*Suchende · Praktiker:innen · Bekannte/Familie · Allgemein Interessierte*
+Wir schreiben deine Bio so, dass Besucher zuerst sehen *„aha, das ist für mich"*, und **dann erst** *„aha, das kann sie"*.
+**Keine abstrakte Selbstdarstellung.** Lieber konkret: was bekommen sie, wodurch erden wir das.
+
+a) **Wer ist dein Hauptpublikum?** *(mehreres möglich)*
+*Suchende, die selbst Gemeinschaft finden wollen · Praktiker:innen (Therapie, Pädagogik, Steiner-Kreis) · Bekannte/Familie · Allgemein Interessierte*
 **→ Antwort:**
 
 
-b) Was sollen Besucher nach dem Besuch **tun**?
-*zur Werkstatt anmelden · dir schreiben · wiederkommen · etwas teilen*
+b) **Was bekommt ein Besucher von dir?** Drei konkrete Dinge, die du anbietest *(in Werkstätten, Beratung, Vorträgen, Gesprächen, durch die Website)*.
+*Beispiele:*
+*— „Eine Werkstatt in eurer Gemeinschaft leiten"*
+*— „Hilfe beim Sortieren der eigenen Such-Erfahrungen"*
+*— „Ein Impuls darüber, wie Dreigliederung im Alltag wird"*
+**→ Antwort:**
+
+
+c) **Welche Erfahrungen / Qualifikationen** sollen erwähnt werden, um deine Worte zu *erden* (nicht zu beweisen)?
+*Beispiele:*
+*— „30 Jahre Ergotherapie-Praxis"*
+*— „Steiner-Heilpädagogische Ausbildung"*
+*— „Besuche in 50+ Gemeinschaften"*
+*— „Lehrtätigkeit / Mitgliedschaft in X"*
+**→ Antwort:**
+
+
+d) **Ein Satz, der dich beschreibt** — als Antwort auf „Was machst du?"
+*Beispiel: „Ich helfe Menschen, von der Sehnsucht nach Gemeinschaft zu konkreten Schritten zu kommen."*
+**→ Antwort:**
+
+
+e) **Wie willst du NICHT beschrieben werden?**
+*Damit wir abstrakte Selbst-Floskeln vermeiden, die nicht zu dir gehören.*
 **→ Antwort:**
 
 
 ---
 
-## 5 · Was hast du schon?
+## 5 · Einladungen & Erreichbarkeit
 
-Bitte grob auflisten, was du an Material schon hast — auch wenn unsortiert.
+Die Website ist deine **zentrale Anlaufstelle**. Statt dass Leute dich über YouTube, Mail, Werkstätten und Empfehlungen zusammensuchen, finden sie hier alles geordnet — und können dich gezielt einladen oder ansprechen.
+
+a) **Welche Anfragen möchtest du annehmen?** *(mehreres möglich, ergänze frei)*
+   - [ ] **Werkstatt-Teilnahme** — Leute kommen zu deinen Werkstätten
+   - [ ] **Einladung in eine Gemeinschaft** — du kommst zu denen für ein Wochenende oder länger
+   - [ ] **Vortrag / Impuls** bei einer Veranstaltung
+   - [ ] **Beratung / Begleitung** beim Aufbau einer eigenen Gemeinschaft
+   - [ ] **Interview** für andere Medien (Podcast, Magazin, Doku)
+   - [ ] **Persönliches Gespräch** ohne festen Anlass
+   - [ ] Andere: __________________
+**→ Antwort:**
+
+
+b) **Welche Kontakt-Wege sollen sichtbar sein?**
+*Mail-Adresse · Online-Formular · Telefon-Rückruf · etwas anderes*
+**→ Antwort:**
+
+
+c) **Möchtest du Rahmenbedingungen sichtbar machen?**
+*Bsp.: Honorar-Hinweise für Workshops, Reisekostenregelung, Mindestgruppengröße — oder lieber individuell besprechen?*
+**→ Antwort:**
+
+
+---
+
+## 6 · Was hast du schon?
+
+Bitte grob auflisten, was du an Material und an digitaler Präsenz schon hast — auch wenn unsortiert. **Damit nichts doppelt entsteht und alles zentral verlinkbar wird.**
 
 a) **Reise-Tagebücher / Texte / Notizen:**
 **→ Antwort:**
@@ -115,9 +169,15 @@ e) Anderes (Audio, Video, Briefe, Zitate-Sammlung …):
 **→ Antwort:**
 
 
+f) **Andere Plattformen, auf denen du bereits aktiv bist?**
+*YouTube-Kanal · Instagram · Substack · Blog · Facebook · LinkedIn · Mailing-Liste · Vimeo · andere*
+*Diese können wir verlinken oder einbinden, damit Besucher hier zentral alles finden.*
+**→ Antwort:**
+
+
 ---
 
-## 6 · Notizen — der Hauptraum
+## 7 · Notizen — der Hauptraum
 
 a) Wie oft willst du posten?
 *täglich · 2–3× pro Woche · 1× pro Woche · unregelmäßig*
@@ -131,7 +191,7 @@ b) Welche **Kategorien** sollen vorkommen?
 
 ---
 
-## 7 · Werkstatt
+## 8 · Werkstatt
 
 a) Welche eigenen Termine planst du?
 *Bsp: „Filzen + Dreigliederung als Wochenende"*
@@ -153,7 +213,7 @@ d) Wie sollen sich Leute anmelden?
 
 ---
 
-## 8 · Bibliothek
+## 9 · Bibliothek
 
 a) Welche **Quellen-Arten** willst du zeigen?
 *Bücher · Webseiten · Aufsätze · Filme · Podcasts · Gespräche*
@@ -167,19 +227,26 @@ b) Wie viele Einträge insgesamt geplant?
 
 ---
 
-## 9 · Podcast
+## 10 · Podcast / Video
+
+Wenn du einen **YouTube-Kanal** hast (oder bekommst), können wir Folgen und Videos **direkt hier einbetten** — Besucher müssen nicht auf YouTube wechseln, sondern bleiben in deinem Haus.
 
 a) Klar geplant, vage Idee, oder eher nicht?
 **→ Antwort:**
 
 
-b) Falls ja: Format, Rhythmus, mögliche Gäste?
+b) **Falls ja: über welche Plattform?**
+*YouTube · Spotify · Vimeo · eigener Audio-Hoster · gemischt*
+**→ Antwort:**
+
+
+c) Format, Rhythmus, mögliche Gäste?
 **→ Antwort:**
 
 
 ---
 
-## 10 · Sprachen
+## 11 · Sprachen
 
 Die Site wird ab Tag 1 für drei Sprachen vorbereitet — Deutsch, Französisch, Englisch. Du musst nicht alles sofort übersetzen.
 
@@ -195,7 +262,7 @@ b) Wer übersetzt?
 
 ---
 
-## 11 · Zeitplan
+## 12 · Zeitplan
 
 a) Wann soll die deutsche Version **gut genug für Familie/Freunde** sein?
 **→ Antwort:**
@@ -211,7 +278,7 @@ c) Wann kommen Französisch und Englisch dran?
 
 ---
 
-## 12 · Sonstiges
+## 13 · Sonstiges
 
 a) Gibt es **Webseiten oder Magazine**, die dir gut gefallen — als visuelles Vorbild?
 *Links, Namen oder „so etwas wie X" reichen*
@@ -234,6 +301,6 @@ d) Gibt es etwas, das wir noch fragen sollten?
 
 *Danke. Schick deine Antworten in einer Mail, einer Sprachnachricht oder geschrieben in dieses Dokument zurück.*
 
-*Wir schauen sie gemeinsam durch und gehen dann in Phase 1: Aufbau des Gerüsts mit deinen Räumen.*
+*Wir schauen sie gemeinsam durch und gehen dann in Phase 1: Aufbau des Gerüsts mit deinen Räumen — und allem, was deine zentrale Anlaufstelle sein soll.*
 
 — Frühjahr 2026
