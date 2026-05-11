@@ -147,8 +147,12 @@ Diese sieben Themen sind identifiziert und werden in den kommenden Phasen angega
 2. **Newsletter** — ihr einziges plattform-unabhängiges Asset. Tool entscheiden *(Buttondown · Substack · MailerLite · …)* und einbauen.
 3. **DSGVO/Impressum/Datenschutz** — vor Launch zwingend. Generator-Lösung *(eRecht24, Datenschutz-Generator)* für den Start akzeptabel.
 4. **Hub-Logik beidseitig** — sicherstellen, dass alle ihre Plattformen *(YouTube, Instagram, etc.)* in ihren Bio-Links auf die Website zurückverlinken. Sonst bleibt die „zentrale Anlaufstelle" eine Insel.
-5. **Mindest-Content vor Soft-Launch** — Faustregel: 3-5 Notizen, 2-3 Stationen, 1-2 Bibliothek-Einträge. Damit die Site nicht „unfertig" wirkt.
-6. **Eigentum und Zugang** — Domain, Vercel-Account, Sanity-Account, GitHub-Repo *(falls möglich)* in **Katharinas Namen**. Backup-Plan falls jemand ausfällt.
+5. **Mindest-Content vor Soft-Launch + A11y-Check.** Mindest-Content: 3-5 Notizen, 2-3 Stationen, 1-2 Bibliothek-Einträge. Plus Quick-Lighthouse-Audit + Test mit Katharina selbst am Tablet *(Kontrast Aubergine-auf-Linen, Italic-Cormorant-Lesbarkeit in 14-16 px, Hamburger-Touch-Größe ≥ 44 px)*. Zielgruppe ist u.a. Ende-60 — Lesbarkeit nicht annehmen, prüfen.
+6. **Eigentum und Zugang** — Domain, Vercel-Account, Sanity-Account, GitHub-Repo *(falls möglich)* in **Katharinas Namen**. Bus-Faktor operationalisieren:
+   - **Logins griffbereit:** Zugangsdaten *(Mail + Passwort, 2FA-Backup-Codes)* zu Vercel, Sanity, Domain-Registrar, GitHub bei Katharina als Papierkopie + verschlüsselt im Mail-Archiv
+   - **Backup-Mail-Adresse für 2FA-Recovery** *(z.B. die eines Familienmitglieds, das im Notfall einspringen würde)*
+   - **Mini-Anleitung „Eine Notiz einpflegen"** — PDF im Repo + bei Katharina zu Hause ausgedruckt, ~5 Schritte mit Screenshots
+   - **Notfall-Kontakt:** wer ist der zweite Mensch, falls Auftraggeber nicht erreichbar ist? *(in CONTEXT.md festhalten, sobald geklärt)*
 7. **Mobile-Editing** — Sanity-Studio auf Tablet/Phone testen. Ggf. Fallback: sie schickt Mail an Auftraggeber, der trägt es ein.
 
 ---
@@ -167,6 +171,27 @@ Diese sieben Themen sind identifiziert und werden in den kommenden Phasen angega
 
 ---
 
+## Was tun, wenn Antworten ausbleiben — Stille-Protokoll
+
+Katharina ist Ende 60, reist viel, ist vielfältig eingespannt. Eine Pause ist normal — aber das Projekt sollte nicht latent einfrieren.
+
+**Faustregel-Eskalation:**
+
+| Tag | Aktion |
+|---|---|
+| **7** | **Freundlicher Mail-Check-in.** Inhalt: „Wollte nur kurz hören, ob du den Fragebogen offen vor dir hast — oder ob etwas unklar ist." Kein Druck. |
+| **14** | **Telefon-Anruf** *(falls vereinbart)*. Persönlicher Medien-Wechsel ist oft hilfreich — schriftlich kommt manchmal nicht durch. |
+| **21** | **Persönliches Treffen, Video-Call oder Kaffee-Termin** ansetzen. An diesem Punkt ist klar: schriftlich allein reicht nicht — gemeinsam durchgehen. |
+
+**Wichtig:**
+- Nie ungeduldig wirken. Sie hat ein Leben, das nicht nur dieses Projekt ist.
+- Nicht über das Projekt eskalieren — über *Begleitung* anbieten.
+- Nach 21 Tagen Stille trotz Treffen-Versuch: Pause akzeptieren. Auftraggeber entscheidet, ob das Projekt pausiert oder mit Annahmen weiterläuft.
+
+**Für neue Claude-Sessions:** Nicht alleine Nudge-Mails schicken — das ist Auftraggeber-Aufgabe. Du dokumentierst nur den Stand und wartest. Wenn das Datum dieser Datei älter als 14 Tage ist und nichts ankam, vermerk in deiner Antwort: *„Stand ist 14+ Tage alt, lohnt sich ein Stups?"*
+
+---
+
 ## Was tun bei neuer Session — Checkliste
 
 Wenn du als frischer Claude oder Mensch hier reinkommst:
@@ -175,8 +200,9 @@ Wenn du als frischer Claude oder Mensch hier reinkommst:
 - [ ] Lies `PLANUNG.md` — für Build-Phasen und Architektur
 - [ ] Schau auf [oasen-finder.vercel.app](https://oasen-finder.vercel.app) — der visuelle Stand
 - [ ] Check ob es `KATHARINA-ANTWORTEN.md` *(oder ähnlich)* gibt — dann sind Antworten da
-- [ ] Falls nicht: wir warten noch. Wenn Auftraggeber neue Anforderungen hat: erst klären, dann handeln.
-- [ ] Stilregeln aus „Kommunikations-Konventionen" oben einhalten
+- [ ] Falls nicht: wir warten noch. Wenn das Datum oben älter als 14 Tage ist, im Reply einen Hinweis aufs Stille-Protokoll geben — selbst keine Mails schicken.
+- [ ] Wenn Auftraggeber neue Anforderungen hat: erst klären, dann handeln.
+- [ ] Stilregeln aus „Kommunikations-Konventionen" und „Commit-Message-Konvention" oben einhalten
 
 ---
 
