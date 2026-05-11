@@ -13,15 +13,18 @@ Persönliche Website für **Katharina Offenborn** *(Ergotherapeutin, Ende 60, me
 ## Wo wir gerade stehen
 
 - ✅ Visueller Prototyp live unter **[oasen-finder.vercel.app](https://oasen-finder.vercel.app)**
-- ✅ Fragebogen v4 (`FRAGEBOGEN-KATHARINA.docx`) wurde an Katharina geschickt
-- ⏳ **Warten auf ihre Antworten** — entweder einmalig alle drei Abschnitte, oder Mail pro Abschnitt
-- ⏳ **Phase 1 (Astro + Sanity-Gerüst) startet, sobald Antworten da sind**
+- ✅ Fragebogen v4 (`FRAGEBOGEN-KATHARINA.docx`) an Katharina geschickt
+- ✅ **Antworten am 11. Mai 2026 zurück** — siehe `KATHARINA-ANTWORTEN.md`
+- 🆕 **Großer Befund:** Katharina hat ein durchgängiges **-BAR-Naming-System** vorgeschlagen *(VereinBAR · BewegBAR · MachBAR · SchreibBAR · LesBAR · HörBAR · DenkBAR · BrauchBAR · erkennBAR)* plus die Anliegen-Formel *„WERK-statt allein unterwegs"*. **Marken-Diskussion offen, Architektur muss überarbeitet werden** — 6 Räume werden zu 8 -BAR-Räumen + erkennBAR + Mitkommen.
+- ⏳ Zwei kleine Rückfragen an Katharina draußen *(VereinBAR vs. WunderBAR, drei Worte für ihren Ton)*
+- ⏳ **Phase 1 (Astro + Sanity-Gerüst)** startet, sobald Architektur-Diskussion + Rückfragen abgeschlossen
 
 ---
 
 ## Wer macht was
 
 - **Katharina Offenborn** — Auftraggeberin & spätere Inhaltspflegerin. Ergotherapeutin, vielfältig interessiert, vertraut mit Steiner-Dreigliederung, neigt zu Fragmenten in der Kommunikation. Nicht tech-native. Spricht Deutsch/Französisch/Englisch.
+- **Carla** — Katharinas Hund. Muss bei Werkstatt-Terminen mitkommen können — relevant für die MachBAR-Logik *(hundefreundlicher Veranstaltungsort als Filter/Hinweis)* und für die Standortwahl bei Einladungen.
 - **Auftraggeber/User** *(in diesem Repo der GitHub-Account `restitutio777`)* — orchestriert das Projekt, kennt Katharina persönlich. **Du-Form zwischen ihm und Katharina** (also nicht „uns" sondern „mir/dir" im Fragebogen).
 - **Claude (ich)** — baut, schreibt, iteriert. Wird per Session über diesen Kontext informiert.
 
@@ -59,6 +62,32 @@ Kontext: vier Verbesserungen aus Session-Review
 ```
 
 **Nicht** das englische conventional-commits-Format `feat: add user signup` o.ä. — der Repo-Stil ist deutsch und thematisch.
+
+---
+
+## Commit-Workflow *(Best Practice 2026)*
+
+**Atomare Commits bei Meilensteinen, Sauberkeit immer.**
+
+**Automatisch committen** *(ohne Rückfrage)*, wenn:
+- Eine klar abgegrenzte logische Einheit fertig ist *(z.B. „Architektur-Dokument überarbeitet", „neue Quelldatei integriert", „Phase X abgeschlossen")*
+- Ein Feature funktioniert und ist verifiziert *(Karte rendert, Schema steht, Form funktioniert)*
+- Ein Bug ist gefixt und der Fix ist getestet
+
+**Aktiv nachfragen vor Commit**, wenn:
+- Edits über mehrere Themen verteilt sind und nicht klar ist, wie atomar zu zerlegen
+- Halbfertige Arbeit vorliegt *(WIP — entweder mit `WIP:`-Präfix committen oder warten)*
+- Edits außerhalb des Repos nötig wären *(Sanity-Doc, Vercel-Config, externe Services)*
+- Größere Strukturänderungen ohne explizite Anweisung *(Dateien verschieben, Tech-Stack wechseln, Dependencies upgraden)*
+
+**Hygiene-Regeln:**
+- `git status` vor jedem Commit lesen — **nie blind** `git add -A` *(verhindert versehentliche `.env`- oder Secret-Commits)*
+- Pre-Commit-Hooks **nie** mit `--no-verify` umgehen — wenn ein Hook scheitert: Ursache fixen, dann **neuer** Commit
+- **Atomare Commits**: ein Commit = ein logischer Schritt, für sich allein konsistent und rückgängig machbar ohne Folgeschäden
+- Commit-Message folgt der Konvention oben *(Deutsch, knapp, mit Präfix)*; Co-Author-Footer bei Claude-Commits
+- **Bei Hook-Failure: neuer Commit, nicht `--amend`** *(verhindert Verlust vorheriger Arbeit, wenn der vorherige Commit nicht zustande kam)*
+- **Nie** `git push --force` auf `main` — wenn nötig, in Rücksprache mit Auftraggeber
+- Push erst, wenn Auftraggeber explizit zustimmt oder ein klares Vorgehen vereinbart ist *(in diesem Repo: Vercel auto-deployt → jeder Push auf `main` geht live)*
 
 ---
 
@@ -128,6 +157,7 @@ oasen-finder/
 ├── CONTEXT.md                    Dies hier — Wiedereinstiegspunkt
 ├── FRAGEBOGEN-KATHARINA.md       Quelle des Fragebogens (an Katharina geschickt)
 ├── FRAGEBOGEN-KATHARINA.docx     Word-Version (Katharina hat diese)
+├── KATHARINA-ANTWORTEN.md        Ihre Antworten + offene Punkte für später
 └── .claude/launch.json           Lokaler Preview-Server
 ```
 
@@ -139,7 +169,16 @@ Lokale Hilfsdateien *(gitignored)*:
 
 ## Strategische Punkte — nicht vergessen
 
-**Bekannte Plattformen von Katharina:** *noch unbekannt — kommt mit Antwort zu Abschnitt 3.3c im Fragebogen zurück. Erwartet werden YouTube *(für Podcast/Video-Embed)*, evtl. Instagram, evtl. Substack, evtl. Blog. Erst nach Antwort prüfen, wo Bio-Links auf die Site zeigen müssen (siehe Punkt 4 unten).*
+**Bekannte Plattformen von Katharina** *(Stand: Antworten zu 3.3c eingegangen)*:
+
+- **`wortgetreu.com`** — Gedicht-Sammlung, **TYPO3-basiert**. Soll von **LesBAR** *(und ggf. SchreibBAR)* aus angesteuert werden. Pragmatischer Start: nur verlinken. Optional später: einmaliger Markdown-Scrape *(z.B. via Firecrawl)* + Import in Sanity. TYPO3-Headless-API aufzusetzen lohnt nicht für eine kleine Gedicht-Sammlung.
+- **`anthroposophie-lebensnah`** — eigene Site ab 2010, älter. Verlinkungs-Status offen *(zu klären: ist die aktiv, oder soll sie auch eingestellt werden?)*.
+- **Substack** — geplant, parallel zu SchreibBAR *(noch nicht aktiv)*. Cross-Posting-Logik beim Aufbau berücksichtigen.
+- **YouTube / Spotify / Apple Music** — für **HörBAR**-Embeds *(eigene Lieder + eingesprochene Reflexionen)*, noch nicht aktiv. Plattform-Wahl bei Bedarf entscheiden.
+- **Inaktive Sites** *(letztens deaktiviert)*: `kinderkrippe-frohsinn`, `lern-und-spielwerkstatt-sonnenschein` — nicht zu verlinken.
+- **Bewusst keine Social-Media-Präsenz** — *„habe mich bisher bedeckt gehalten, starte erst jetzt öffentlich durch"*.
+
+Hub-Logik *(Punkt 4 unten)* damit pragmatisch: für die aktiven Bestands-Sites Backlinks auf die neue Site einrichten, Substack & Co. beim Start gleich verlinken.
 
 Diese sieben Themen sind identifiziert und werden in den kommenden Phasen angegangen:
 
