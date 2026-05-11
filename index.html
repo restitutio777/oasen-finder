@@ -761,6 +761,30 @@
     box-shadow: 0 24px 48px -28px rgba(31, 29, 26, 0.18);
     border-color: var(--accent);
   }
+  /* Image / map header inside the pillar card — sits flush with the
+     card edges and the top-radius, padding-bleed via negative margins */
+  .pillar__image {
+    aspect-ratio: 16 / 10;
+    margin: calc(-1 * clamp(28px, 3vw, 36px)) calc(-1 * clamp(28px, 3vw, 36px)) clamp(20px, 2vw, 28px);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    overflow: hidden;
+    background: var(--bg-warm);
+    position: relative;
+  }
+  .pillar__image img,
+  .pillar__image svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .pillar:hover .pillar__image img {
+    transform: scale(1.02);
+  }
+  .pillar__image img {
+    transition: transform var(--t-base) var(--ease);
+  }
   .pillar__count {
     font-family: var(--font-text);
     font-size: 11px;
@@ -1936,6 +1960,37 @@
     <div class="pillars__grid">
 
       <a href="#" class="pillar reveal" id="bewegbar">
+        <figure class="pillar__image" aria-hidden="true">
+          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bewegMapBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f0eddf" />
+                <stop offset="100%" stop-color="#d4dfd0" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="250" fill="url(#bewegMapBg)" />
+            <g stroke="#a87a72" stroke-width="0.6" fill="none" opacity="0.28">
+              <path d="M0 70 Q100 60 200 72 T400 65" />
+              <path d="M0 130 Q120 140 240 128 T400 135" />
+              <path d="M0 195 Q140 205 260 192 T400 198" />
+            </g>
+            <path d="M70 95 Q130 80 180 110 T260 90 T335 145 L290 200"
+                  stroke="#a8392b" stroke-width="1.8"
+                  fill="none" stroke-dasharray="5 6" stroke-linecap="round" opacity="0.85" />
+            <g>
+              <circle cx="70" cy="95" r="7" fill="#a8392b" />
+              <circle cx="70" cy="95" r="3" fill="#f6f4ee" />
+              <circle cx="180" cy="110" r="7" fill="#a8392b" />
+              <circle cx="180" cy="110" r="3" fill="#f6f4ee" />
+              <circle cx="260" cy="90" r="7" fill="#a8392b" />
+              <circle cx="260" cy="90" r="3" fill="#f6f4ee" />
+              <circle cx="335" cy="145" r="7" fill="#a8392b" />
+              <circle cx="335" cy="145" r="3" fill="#f6f4ee" />
+              <circle cx="290" cy="200" r="7" fill="#a8392b" />
+              <circle cx="290" cy="200" r="3" fill="#f6f4ee" />
+            </g>
+          </svg>
+        </figure>
         <span class="pillar__count">BewegBAR · 5 Stationen</span>
         <h3 class="pillar__title">Reisen</h3>
         <p class="pillar__desc">
@@ -1951,6 +2006,11 @@
       </a>
 
       <a href="mailto:kontakt@werkstatt-gemeinschaft.example?subject=Werkstatt-Anfrage" class="pillar reveal" id="machbar">
+        <figure class="pillar__image">
+          <img src="https://images.unsplash.com/photo-1752752977778-b1953698af5a?w=800&q=80&auto=format&fit=crop"
+               alt="Haende beim Filzen mit bunter Wolle"
+               loading="lazy" />
+        </figure>
         <span class="pillar__count">MachBAR · 3 Termine</span>
         <h3 class="pillar__title">Werkstatt</h3>
         <p class="pillar__desc">
@@ -1966,6 +2026,11 @@
       </a>
 
       <a href="#" class="pillar reveal" id="lesbar">
+        <figure class="pillar__image">
+          <img src="https://images.unsplash.com/photo-1760900359024-29079b4e9459?w=800&q=80&auto=format&fit=crop"
+               alt="Offenes Buch auf einem rustikalen Holztisch"
+               loading="lazy" />
+        </figure>
         <span class="pillar__count">LesBAR · 12 Quellen</span>
         <h3 class="pillar__title">Bibliothek</h3>
         <p class="pillar__desc">
