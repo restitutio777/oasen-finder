@@ -556,25 +556,52 @@
 
   @media (max-width: 720px) {
     .hero__inner { grid-template-columns: 1fr; }
-    .hero__meta {
-      text-align: left;
-      color: var(--text-secondary);
-      margin-top: 8px;
-    }
+    /* Meta-Capsule (Naechste Begegnung) auf Mobile weg — Info kommt
+       prominent in der MachBAR, im Hero war sie ein Anhaengsel */
+    .hero__meta { display: none; }
     /* Calm the background image on mobile so text stays legible */
     .hero::before {
-      opacity: 0.5;
-      filter: blur(8px) saturate(1.1) brightness(1.05);
+      opacity: 0.35;
+      filter: blur(14px) saturate(1.05) brightness(1.08);
     }
-    /* Three-stop colour flow on mobile: cream → sage → mauve */
+    /* Sanfter, einheitlicher Cream-Wash — weniger trueb */
     .hero::after {
       background:
-        linear-gradient(168deg,
-          rgba(246, 244, 238, 0.93) 0%,
-          rgba(246, 244, 238, 0.74) 30%,
-          rgba(212, 223, 208, 0.42) 56%,
-          rgba(232, 185, 135, 0.38) 80%,
-          rgba(168, 122, 114, 0.5) 100%);
+        linear-gradient(170deg,
+          rgba(246, 244, 238, 0.96) 0%,
+          rgba(246, 244, 238, 0.88) 35%,
+          rgba(232, 185, 135, 0.22) 75%,
+          rgba(168, 122, 114, 0.32) 100%);
+    }
+    /* CTAs: weicher, sanfter, sekundaerer als Text-Link.
+       Höhere Specificity (.hero__cta-row .btn...) damit das Mobile-Override
+       gewinnt gegen die globalen .btn-Rules, die spaeter im Quellcode kommen */
+    .hero__cta-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .hero__cta-row .btn {
+      border-radius: 8px;
+      padding: 15px 24px;
+    }
+    /* "Mitkommen" wird auf Mobile zum Text-Link statt Ghost-Button */
+    .hero__cta-row .btn--ghost {
+      background: transparent;
+      border: 0;
+      padding: 6px 0;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 13px;
+    }
+    .hero__cta-row .btn--ghost::after {
+      content: " →";
+    }
+    .hero__cta-row .btn--ghost:hover {
+      background: transparent;
+      color: var(--accent-hover);
     }
   }
 
