@@ -406,14 +406,13 @@
     content: '';
     position: absolute;
     inset: -60px;
-    background-image: url('https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=2400&q=80&auto=format&fit=crop');
+    background-image: url('https://images.unsplash.com/photo-1464207687429-7505649dae38?w=2400&q=80&auto=format&fit=crop');
     background-size: cover;
     background-position: center 60%;
-    /* Bonfire-Foto: dunkel-warmes Nachtbild. Stark aufgehellt + leicht
-       entsaettigt, sodass das Feuerlicht als warme Stimmung durchschimmert
-       ohne den Hero abzudunkeln */
-    filter: blur(24px) saturate(0.8) brightness(1.4) sepia(0.1);
-    opacity: 0.6;
+    /* Sunset-Gathering-Foto: hell-warm, golden hour. Sanftes Treatment —
+       das Bild bringt eigene Waerme mit, braucht nur leichten Blur */
+    filter: blur(24px) saturate(0.75) brightness(1.05) sepia(0.08);
+    opacity: 0.82;
     z-index: -2;
   }
   /* Wouuchh — vertical sweep: light top, grounded bottom */
@@ -440,8 +439,8 @@
      concentrated on the left text column, the image stays readable on the right */
   @media (min-width: 1024px) {
     .hero::before {
-      filter: blur(4px) saturate(0.75) brightness(1.35) sepia(0.12);
-      opacity: 0.78;
+      filter: blur(4px) saturate(0.7) brightness(1.05) sepia(0.1);
+      opacity: 0.88;
     }
     .hero::after {
       background:
@@ -569,11 +568,11 @@
     /* Meta-Capsule (Naechste Begegnung) auf Mobile weg — Info kommt
        prominent in der MachBAR, im Hero war sie ein Anhaengsel */
     .hero__meta { display: none; }
-    /* Mobile: Bonfire bleibt als warme nachtatmosphaere im Hintergrund,
-       stark aufgehellt damit Text klar lesbar bleibt */
+    /* Mobile: sunset-Foto als warme Stimmung im Hintergrund, sanft
+       entsaettigt damit Text gut lesbar bleibt */
     .hero::before {
-      opacity: 0.32;
-      filter: blur(16px) saturate(0.7) brightness(1.4) sepia(0.15);
+      opacity: 0.42;
+      filter: blur(16px) saturate(0.6) brightness(1.05) sepia(0.12);
     }
     /* Sanfter, einheitlicher Cream-Wash — warmer Sepia-Ton drueber */
     .hero::after {
