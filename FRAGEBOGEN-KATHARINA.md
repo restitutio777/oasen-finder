@@ -10,7 +10,32 @@
 
 ---
 
-## 1 · Die Räume
+## 1 · Name & Erscheinung
+
+Der Site-Name (und alles, was damit dranhängt) kann jederzeit geändert werden. Wichtig ist nur: womit starten wir?
+
+a) Soll die Website **„Werkstatt Gemeinschaft"** heißen — oder lieber anders?
+*Im Gespräch hatten wir auch „Katharinas Reisen" als Idee. Beides ist möglich.*
+**→ Antwort:**
+
+
+b) Falls neu: schlage **2–3 mögliche Namen** vor — oder beschreibe, in welche Richtung der Name klingen soll *(geerdet · poetisch · konkret · …)*.
+**→ Antwort:**
+
+
+c) Soll es einen kurzen **Untertitel** unter dem Namen geben?
+*Beispiel: „Reisen, Notizen, Begegnungen" — kann auch leer bleiben*
+**→ Antwort:**
+
+
+d) Hast du eine **Wunsch-Domain** (URL)? Wir können prüfen, was frei ist.
+*z.B. werkstatt-gemeinschaft.de · werkstatt-gemeinschaft.org · katharina-offenborn.de · etwas Eigenes*
+**→ Antwort:**
+
+
+---
+
+## 2 · Die Räume
 
 Vorschlag (in dieser Reihenfolge):
 **Hero · Über · Notizen · Reisen · Werkstatt · Bibliothek · Podcast · Mitkommen**
@@ -29,7 +54,7 @@ c) Fehlt ein Raum (z.B. Gespräche, Briefe, Bilder-only, Newsletter)?
 
 ---
 
-## 2 · Stimme & Anrede
+## 3 · Stimme & Anrede
 
 a) Drei Worte für deinen Ton.
 *Beispiele: „warm · suchend · klar" — „neugierig · konkret · leise" — „liebevoll · fragend · geerdet"*
@@ -52,7 +77,7 @@ d) Foto von dir auf der Seite?
 
 ---
 
-## 3 · Wer kommt zu Besuch?
+## 4 · Wer kommt zu Besuch?
 
 a) Wer ist dein **Hauptpublikum**?
 *Suchende · Praktiker:innen · Bekannte/Familie · Allgemein Interessierte*
@@ -66,7 +91,7 @@ b) Was sollen Besucher nach dem Besuch **tun**?
 
 ---
 
-## 4 · Was hast du schon?
+## 5 · Was hast du schon?
 
 Bitte grob auflisten, was du an Material schon hast — auch wenn unsortiert.
 
@@ -92,7 +117,7 @@ e) Anderes (Audio, Video, Briefe, Zitate-Sammlung …):
 
 ---
 
-## 5 · Notizen — der Hauptraum
+## 6 · Notizen — der Hauptraum
 
 a) Wie oft willst du posten?
 *täglich · 2–3× pro Woche · 1× pro Woche · unregelmäßig*
@@ -106,7 +131,7 @@ b) Welche **Kategorien** sollen vorkommen?
 
 ---
 
-## 6 · Werkstatt
+## 7 · Werkstatt
 
 a) Welche eigenen Termine planst du?
 *Bsp: „Filzen + Dreigliederung als Wochenende"*
@@ -128,7 +153,7 @@ d) Wie sollen sich Leute anmelden?
 
 ---
 
-## 7 · Bibliothek
+## 8 · Bibliothek
 
 a) Welche **Quellen-Arten** willst du zeigen?
 *Bücher · Webseiten · Aufsätze · Filme · Podcasts · Gespräche*
@@ -142,7 +167,7 @@ b) Wie viele Einträge insgesamt geplant?
 
 ---
 
-## 8 · Podcast
+## 9 · Podcast
 
 a) Klar geplant, vage Idee, oder eher nicht?
 **→ Antwort:**
@@ -154,7 +179,7 @@ b) Falls ja: Format, Rhythmus, mögliche Gäste?
 
 ---
 
-## 9 · Sprachen
+## 10 · Sprachen
 
 Die Site wird ab Tag 1 für drei Sprachen vorbereitet — Deutsch, Französisch, Englisch. Du musst nicht alles sofort übersetzen.
 
@@ -170,7 +195,7 @@ b) Wer übersetzt?
 
 ---
 
-## 10 · Zeitplan
+## 11 · Zeitplan
 
 a) Wann soll die deutsche Version **gut genug für Familie/Freunde** sein?
 **→ Antwort:**
@@ -186,7 +211,7 @@ c) Wann kommen Französisch und Englisch dran?
 
 ---
 
-## 11 · Sonstiges
+## 12 · Sonstiges
 
 a) Gibt es **Webseiten oder Magazine**, die dir gut gefallen — als visuelles Vorbild?
 *Links, Namen oder „so etwas wie X" reichen*
