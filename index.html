@@ -406,13 +406,13 @@
     content: '';
     position: absolute;
     inset: -60px;
-    background-image: url('https://images.unsplash.com/photo-1761092315416-ed229b18e3d6?w=2400&q=80&auto=format&fit=crop');
+    background-image: url('https://images.unsplash.com/photo-1777195167973-3df6f48d2924?w=2400&q=80&auto=format&fit=crop');
     background-size: cover;
     background-position: center 60%;
-    /* Foto wird zur Atmosphaere: stark entsaettigt, leicht sepia-warm,
-       heller — keine bunte Komposition mehr, sondern Stimmung */
-    filter: blur(28px) saturate(0.45) brightness(1.12) sepia(0.18);
-    opacity: 0.78;
+    /* Ruhiges Forest-Path-Foto: leichtes Treatment reicht, weil das Bild
+       schon harmonisch und warm ist (kein bunter Detail-Overload) */
+    filter: blur(24px) saturate(0.7) brightness(1.05) sepia(0.08);
+    opacity: 0.85;
     z-index: -2;
   }
   /* Wouuchh — vertical sweep: light top, grounded bottom */
@@ -439,8 +439,8 @@
      concentrated on the left text column, the image stays readable on the right */
   @media (min-width: 1024px) {
     .hero::before {
-      filter: blur(5px) saturate(0.42) brightness(1.12) sepia(0.22);
-      opacity: 0.85;
+      filter: blur(3px) saturate(0.65) brightness(1.05) sepia(0.1);
+      opacity: 0.9;
     }
     .hero::after {
       background:
@@ -485,10 +485,10 @@
   }
   .hero__title em {
     font-style: italic;
-    font-weight: 600;
-    /* Wie der "Gemeinschaft"-Akzent im Footer-Brand: Warm-Peach,
-       waermer und freundlicher als das harte Clay-Rot */
-    color: var(--accent-warm);  /* honig-bronze — wie Footer "Gemeinschaft", lesbar auf Cream */
+    font-weight: 500;
+    /* Hero-Headline in EINER Farbe — em-Italic traegt allein die
+       Betonung, ohne Farbwechsel. Ruhiger, klarer Eindruck. */
+    color: inherit;
   }
   .hero__lead {
     margin-top: clamp(28px, 4vw, 44px);
@@ -568,10 +568,11 @@
     /* Meta-Capsule (Naechste Begegnung) auf Mobile weg — Info kommt
        prominent in der MachBAR, im Hero war sie ein Anhaengsel */
     .hero__meta { display: none; }
-    /* Calm the background image on mobile so text stays legible */
+    /* Mobile: das ruhige Forest-Path-Foto bleibt als sanfte Atmosphaere
+       erkennbar, weniger entsaettigt als das vorherige Treatment */
     .hero::before {
-      opacity: 0.28;
-      filter: blur(20px) saturate(0.35) brightness(1.12) sepia(0.25);
+      opacity: 0.42;
+      filter: blur(14px) saturate(0.6) brightness(1.05) sepia(0.12);
     }
     /* Sanfter, einheitlicher Cream-Wash — warmer Sepia-Ton drueber */
     .hero::after {
