@@ -1,6 +1,6 @@
 # Werkstatt Gemeinschaft — Projekt-Kontext
 
-*Stand: Mai 2026. Wiedereinstiegspunkt für jede neue Session — wenn du als Claude (oder als Mensch) frisch in dieses Projekt einsteigst, lies dies zuerst.*
+*Stand: 11. Mai 2026. Wiedereinstiegspunkt für jede neue Session — wenn du als Claude (oder als Mensch) frisch in dieses Projekt einsteigst, lies dies zuerst.*
 
 ---
 
@@ -46,6 +46,22 @@ Wenn du als neuer Claude in dies einsteigst, hier die wichtigsten Stilregeln aus
 
 ---
 
+## Commit-Message-Konvention
+
+**Deutsch, knapp, mit thematischem Präfix.** Versionierung bei iterierten Dokumenten.
+
+Beispiele aus diesem Repo:
+```
+Fragebogen v4: Schaufenster/Regal-Bild durchziehen, Domain als P.S.
+Hero: visual-led, less text, softer dark
+Planung: sieben strategische Themen ergänzt
+Kontext: vier Verbesserungen aus Session-Review
+```
+
+**Nicht** das englische conventional-commits-Format `feat: add user signup` o.ä. — der Repo-Stil ist deutsch und thematisch.
+
+---
+
 ## Architektur-Entscheidungen (gesetzt)
 
 ### Sektionen der Landing *(in dieser Reihenfolge)*
@@ -77,6 +93,7 @@ Wenn du als neuer Claude in dies einsteigst, hier die wichtigsten Stilregeln aus
 - Inline CSS
 - Hosting: **Vercel** (`oasen-finder.vercel.app`)
 - Repo: **GitHub** `restitutio777/oasen-finder`
+- **Hero-Foto:** Unsplash-Platzhalter *(golden-hour communal dinner, `photo-1738034950582-271276c5af7d`)* — vor Public-Launch durch eigenes Material von Katharina ersetzen. Unsplash-Lizenz ist auch kommerziell ok, aber als zentrales Brand-Bild ist Eigen-Material besser.
 
 ### Geplant *(ab Phase 1, sobald Antworten da)*
 - **Astro** *(Static-Generator)*
@@ -121,6 +138,8 @@ Lokale Hilfsdateien *(gitignored)*:
 ---
 
 ## Strategische Punkte — nicht vergessen
+
+**Bekannte Plattformen von Katharina:** *noch unbekannt — kommt mit Antwort zu Abschnitt 3.3c im Fragebogen zurück. Erwartet werden YouTube *(für Podcast/Video-Embed)*, evtl. Instagram, evtl. Substack, evtl. Blog. Erst nach Antwort prüfen, wo Bio-Links auf die Site zeigen müssen (siehe Punkt 4 unten).*
 
 Diese sieben Themen sind identifiziert und werden in den kommenden Phasen angegangen:
 
@@ -185,6 +204,7 @@ Damit du nicht überrascht bist von Sachen, die schon erwogen und verworfen sind
 5. **Kein „Sanity"** im Fragebogen oder in Texten an Katharina — „Backend" oder „Hintergrund".
 6. **Keine Posting-Frequenz-Fragen** — das entscheidet sie im Backend selbst, nicht relevant zur Strukturklärung.
 7. **Keine Domain-Fragen jetzt** — gehört zur Deploy-Phase, ist als P.S. im Fragebogen vermerkt.
+8. **Nicht reflexartig vereinfachen oder „verbessern", was schon iteriert wurde.** Headlines, Farben, Wortwahl in `index.html` sind das Ergebnis vieler Runden Feedback *(z.B. Hero ging durch ~6 Versionen, Akzentfarbe Aubergine statt Schwarz, Italic-Wechsel rot→grün, etc.)*. Bei Änderungswunsch: **vor** dem Ändern fragen, nicht **nach**. Wenn etwas „seltsam" wirkt, ist die Wahrscheinlichkeit hoch, dass es bewusst so gewählt wurde.
 
 ---
 
@@ -207,4 +227,4 @@ Bei Unsicherheit, **bevor** du etwas Neues vorschlägst:
 3. Bezieh dich konkret auf das, was schon da ist — nicht von Null neu denken
 4. Frag den Auftraggeber, wenn die Anforderung nicht klar ist
 
-— Letzte Aktualisierung: Frühjahr 2026
+— Letzte Aktualisierung: 11. Mai 2026
