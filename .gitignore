@@ -9,3 +9,5 @@ dist
 .fragebogen-style.html
 FRAGEBOGEN-KATHARINA.pdf
 FRAGEBOGEN-KATHARINA.html
+.make-reference.py
+reference.docx
