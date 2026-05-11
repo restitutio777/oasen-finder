@@ -183,33 +183,58 @@ Das heißt: das technische Gerüst weiß ab Tag 1, dass jeder Inhalt drei Sprach
 
 ## Vorgeschlagene Phasen
 
-### Phase 0 · Klärung — *jetzt, ~1 Woche*
-- Du beantwortest diesen Fragebogen *(stichpunkthaft reicht)*
-- Wir besprechen die Antworten *(eine Stunde reicht oft)*
-- Architektur wird final festgezurrt
+Jede Fragebogen-Etappe schaltet eine Build-Etappe frei. Katharina antwortet, wir bauen, sie sieht, sie antwortet mehr. Kein „alles auf einmal".
 
-### Phase 1 · Das Gerüst — *1–2 Wochen*
+### 🏠 Etappe 1 · Das Gerüst — *1–2 Wochen*
+
+**Voraussetzung:** Katharinas Antworten zu Fragebogen-Etappe 1 *(6 Themen, ~10 Min Aufwand für sie)*
+
+**Was wir bauen:**
 - Migration von der statischen Prototyp-Seite zu **Astro + Sanity-CMS**
 - Alle Räume werden als Sanity-Schemas angelegt — **dreisprachig vorbereitet ab Tag 1**
-- Du bekommst ein **Studio-Login** und kannst Inhalte selbst eintragen *(kein Code, kein Terminal)*
-- Deutsche Version geht live unter `werkstatt-gemeinschaft.de` (oder einer Test-URL)
+- Plattform-Einbettungen vorbereitet (YouTube-Embed, Verlinkungs-Module)
+- Katharina bekommt ein **Studio-Login** und kann Inhalte selbst eintragen *(kein Code, kein Terminal)*
+- Deutsche Version geht live unter ihrer Wunsch-Domain *(oder Test-URL)*
 
-### Phase 2 · Du füllst die Räume — *2–4 Wochen*
-- Du gibst Inhalte ein: Notizen · Stationen · Werkstatt · Bibliothek
-- Wir helfen mit Formatierung, Bildgrößen, Layout-Fragen
+**Was sie sieht am Ende:** Das leere Haus, mit allen Räumen, durch die sie laufen kann.
+
+### 🛋️ Etappe 2 · Räume möblieren — *2–4 Wochen*
+
+**Voraussetzung:** Katharinas Antworten zu Fragebogen-Etappe 2 *(5 Themen, ~20 Min — die Antworten kommen leichter, weil sie das Haus vor sich hat)*
+
+**Was wir bauen + sie füllt:**
+- **Über-Sektion** wird mit ihrer value-first-Bio gefüllt
+- **Mitkommen-Sektion** bekommt die konkreten Einladungs-Pfade
+- Katharina gibt Inhalte ein: Notizen · Stationen · Werkstatt · erste Bibliothek-Einträge
+- Foto wird platziert, Untertitel gesetzt
 - Tonalität, Bilder, Worte werden in der Praxis geschärft
 
-### Phase 3 · Französisch + Englisch — *nach Phase 2*
-- Kerninhalte werden übersetzt *(Über, Werkstatt, ausgewählte Notizen)*
-- **Language-Switcher** im Header wird aktiviert
-- SEO sauber für drei Sprachen
+**Was sie sieht am Ende:** Das bewohnte Haus mit ihrer Stimme darin.
 
-### Phase 4 · Schliff und Launch — *1 Woche*
+### 🌱 Etappe 3 · Wachsen + Launchen — *nach Bedarf*
+
+**Voraussetzung:** Katharinas Antworten zu Fragebogen-Etappe 3 *(wenn der Bedarf konkret wird)*
+
+**Was wir bauen:**
+- **Bibliothek-Sektion** wird voll ausgebaut, ggf. mit Filtern
+- **Podcast / Video-Embed** wird aktiv *(YouTube direkt im Haus)*
+- **Französisch + Englisch** Übersetzungen werden eingepflegt, Language-Switcher aktiviert
 - Mobile, Performance, Barrierefreiheit checken
-- Newsletter einrichten *(falls gewünscht)*
-- Domain umziehen
-- Soft-Launch im Bekanntenkreis
-- Public-Launch nach Feedback-Schleife
+- Domain umziehen, Newsletter einrichten *(falls gewünscht)*
+- Soft-Launch im Bekanntenkreis → Public-Launch nach Feedback-Schleife
+
+**Was sie sieht am Ende:** Das wachsende, lebendige Zuhause mit der Welt eingeladen.
+
+---
+
+### Warum diese Stufung sinnvoll ist
+
+| Für Katharina | Für den Build |
+|---|---|
+| Kein Overwhelm — sie liest 10 Min, beantwortet 10 Min, fertig für jetzt | Wir bauen mit echten Antworten, nicht mit Vermutungen |
+| Sie sieht nach Etappe 1 schon ihr Gerüst — Vertrauen wächst | Etappe 2 kann auf dem Echtbild aufsetzen, kein Re-Work |
+| Konkrete Fragen werden mit konkretem Bild leichter beantwortet | Spätere Etappen entstehen organisch aus der Nutzung |
+| Sie kann jederzeit abbrechen oder pausieren ohne Bauruine | Wir launchen sauber, wenn das Haus wirklich bewohnbar ist |
 
 ---
 

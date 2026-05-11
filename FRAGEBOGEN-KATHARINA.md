@@ -2,63 +2,47 @@
 
 *Liebe Katharina,*
 
-*damit deine Website auf dich zugeschnitten wird, ein paar Fragen.*
+*damit deine Website auf dich zugeschnitten wird, ein paar Fragen — aber **nicht alles auf einmal**.*
 
-*Stell dir die Site als **Haus mit Türen** vor — du stehst dahinter und füllst die Räume, vorne kommen Besucher und wählen, durch welche Tür sie eintreten. Mit deinen Antworten richten wir die Räume so ein, dass es zu dir passt.*
+*Stell dir die Website als **Haus mit Türen** vor: du stehst dahinter und füllst die Räume, vorne kommen Besucher und wählen, durch welche Tür sie eintreten. Es soll für dich auch der **zentrale Ort** werden: ein Platz, an dem deine Werkstätten, Reisen, Lesefrüchte, Videos, Stimme — alles, was du machst — geordnet zusammenkommen. Damit Leute dich nicht über fünf Plattformen suchen müssen.*
 
-*Sie soll für dich auch der **zentrale Ort** werden: ein Platz, an dem deine Werkstätten, Reisen, Lesefrüchte, Videos, Stimme — alles, was du machst — geordnet zusammenkommen. Damit Leute dich nicht über fünf Plattformen suchen müssen.*
+*Wir machen das in **drei Etappen**:*
 
-*Antworten ruhig stichpunktartig. ~45 Minuten Zeit. Mail, Sprachnachricht oder direkt in dieses Dokument schreiben — alles geht.*
+> 🏠 **Etappe 1 — Damit wir das Haus aufstellen können** *(etwa 10 Minuten · jetzt)*
+> 🛋️ **Etappe 2 — Wenn du das leere Haus siehst** *(etwa 20 Minuten · später)*
+> 🌱 **Etappe 3 — Wenn du soweit bist** *(locker · bei Bedarf)*
+
+*Du musst **jetzt nur Etappe 1** beantworten. Sobald wir die Antworten haben, baue ich das Gerüst auf. Du siehst dein leeres Haus, läufst durch die Räume — und antwortest Etappe 2 viel leichter, weil du sehen kannst, was du füllen willst.*
+
+*Antworten ruhig stichpunktartig. Mail, Sprachnachricht oder direkt in dieses Dokument schreiben — alles geht.*
 
 ---
 
-## 1 · Name & Erscheinung
+# 🏠 Etappe 1 — Damit wir das Haus aufstellen können
 
-Der Site-Name (und alles, was damit dranhängt) kann jederzeit geändert werden. Wichtig ist nur: womit starten wir?
+*Etwa 10 Minuten · 6 kurze Themen · mehr brauchen wir nicht, um loszulegen.*
 
-a) Soll die Website **„Werkstatt Gemeinschaft"** heißen — oder lieber anders?
-*Im Gespräch hatten wir auch „Katharinas Reisen" als Idee. Beides ist möglich.*
+---
+
+## 1.1 · Wie heißt das Haus?
+
+Der Name kann jederzeit geändert werden — also keine Sorge.
+
+a) Soll die Website **„Werkstatt Gemeinschaft"** heißen — oder etwas anderes?
+*Im Gespräch hatten wir auch „Katharinas Reisen" als Idee.*
 **→ Antwort:**
 
 
-b) Falls neu: schlage **2–3 mögliche Namen** vor — oder beschreibe, in welche Richtung der Name klingen soll *(geerdet · poetisch · konkret · …)*.
-**→ Antwort:**
-
-
-c) Soll es einen kurzen **Untertitel** unter dem Namen geben?
-*Beispiel: „Reisen, Notizen, Begegnungen" — kann auch leer bleiben*
-**→ Antwort:**
-
-
-d) Hast du eine **Wunsch-Domain** (URL)? Wir können prüfen, was frei ist.
+b) Welche **Web-Adresse** (URL) hättest du gern?
 *z.B. werkstatt-gemeinschaft.de · werkstatt-gemeinschaft.org · katharina-offenborn.de · etwas Eigenes*
 **→ Antwort:**
 
 
 ---
 
-## 2 · Die Räume
+## 1.2 · Wie soll es klingen?
 
-Vorschlag (in dieser Reihenfolge):
-**Hero · Über · Notizen · Reisen · Werkstatt · Bibliothek · Podcast · Mitkommen**
-
-a) Welche passen, welche nicht?
-**→ Antwort:**
-
-
-b) Welcher Raum ist dein **Hauptraum** — wo du am meisten zu finden bist?
-**→ Antwort:**
-
-
-c) Fehlt ein Raum (z.B. Gespräche, Briefe, Bilder-only, Newsletter)?
-**→ Antwort:**
-
-
----
-
-## 3 · Stimme & Anrede
-
-a) Drei Worte für deinen Ton.
+a) **Drei Worte** für deinen Ton.
 *Beispiele: „warm · suchend · klar" — „neugierig · konkret · leise" — „liebevoll · fragend · geerdet"*
 **→ Antwort:**
 
@@ -67,29 +51,80 @@ b) Besucher mit **Du** oder **Sie**?
 **→ Antwort:**
 
 
-c) **Ich** oder **Wir**?
+c) **„Ich"** oder **„Wir"** in den Texten?
 *„Ich besuche, ich werke" — oder neutraler „Diese Seite sammelt"*
-**→ Antwort:**
-
-
-d) Foto von dir auf der Seite?
-*Porträt / Hände bei der Arbeit / draußen unterwegs / kein Foto*
 **→ Antwort:**
 
 
 ---
 
-## 4 · Bio & Wertversprechen
+## 1.3 · Welche Räume hat das Haus?
 
-Wir schreiben deine Bio so, dass Besucher zuerst sehen *„aha, das ist für mich"*, und **dann erst** *„aha, das kann sie"*.
-**Keine abstrakte Selbstdarstellung.** Lieber konkret: was bekommen sie, wodurch erden wir das.
+Vorschlag (in dieser Reihenfolge):
+**Hero · Über · Notizen · Reisen · Werkstatt · Bibliothek · Podcast · Mitkommen**
+
+a) Passt das? Falls nein: was fehlt, was sollte anders heißen oder raus?
+**→ Antwort:**
+
+
+b) **Welcher Raum ist dein Hauptraum** — wo du am meisten zu finden bist?
+**→ Antwort:**
+
+
+---
+
+## 1.4 · Was hast du schon liegen?
+
+Eine **grobe** Liste reicht. Wir wollen nur wissen, was wir zentralisieren können — nichts geht verloren.
+
+a) **Texte, Reise-Tagebücher, Notizen** *(wo, ungefähr wie viel)*:
+**→ Antwort:**
+
+
+b) **Photos** *(wo, ungefähre Anzahl)*:
+**→ Antwort:**
+
+
+c) **Andere Plattformen, auf denen du aktiv bist**:
+*YouTube-Kanal · Instagram · Substack · Blog · andere — diese können wir einbinden, damit du nicht doppelt posten musst.*
+**→ Antwort:**
+
+
+---
+
+## 1.5 · Wann soll das Haus stehen?
+
+a) Wann soll die deutsche Version **gut genug für Familie und Freunde** sein?
+*Eine grobe Ahnung reicht — wir sortieren den Rest gemeinsam.*
+**→ Antwort:**
+
+
+---
+
+*Das war Etappe 1. Schick mir deine Antworten zurück, dann baue ich das Gerüst auf. Du bekommst eine Live-URL und kannst durch die leeren Räume gehen. Erst danach schauen wir Etappe 2.*
+
+---
+
+# 🛋️ Etappe 2 — Wenn du das leere Haus siehst
+
+*Etwa 20 Minuten · 5 Themen · kommt erst, wenn das Gerüst steht und du es vor dir hast.*
+
+*Diese Fragen werden viel leichter, wenn du das gebaute Haus konkret siehst — du weißt dann, was in welchen Raum gehört, wie oft du etwas eintragen willst, welches Foto wo gut sitzt.*
+
+*Bitte erst nach Etappe 1 beantworten. Ich melde mich, wenn es so weit ist.*
+
+---
+
+## 2.1 · Über dich — als Brücke zum Besucher
+
+Wir schreiben deine Bio so, dass Besucher zuerst sehen *„aha, das ist für mich"*, und **dann erst** *„aha, das kann sie"*. Keine abstrakte Selbstvorstellung.
 
 a) **Wer ist dein Hauptpublikum?** *(mehreres möglich)*
 *Suchende, die selbst Gemeinschaft finden wollen · Praktiker:innen (Therapie, Pädagogik, Steiner-Kreis) · Bekannte/Familie · Allgemein Interessierte*
 **→ Antwort:**
 
 
-b) **Was bekommt ein Besucher von dir?** Drei konkrete Dinge, die du anbietest *(in Werkstätten, Beratung, Vorträgen, Gesprächen, durch die Website)*.
+b) **Was bekommt ein Besucher konkret von dir?** Drei Dinge, die du anbietest.
 *Beispiele:*
 *— „Eine Werkstatt in eurer Gemeinschaft leiten"*
 *— „Hilfe beim Sortieren der eigenen Such-Erfahrungen"*
@@ -97,12 +132,11 @@ b) **Was bekommt ein Besucher von dir?** Drei konkrete Dinge, die du anbietest *
 **→ Antwort:**
 
 
-c) **Welche Erfahrungen / Qualifikationen** sollen erwähnt werden, um deine Worte zu *erden* (nicht zu beweisen)?
+c) **Welche Erfahrungen und Qualifikationen** erden das *(nicht beweisen)*?
 *Beispiele:*
 *— „30 Jahre Ergotherapie-Praxis"*
 *— „Steiner-Heilpädagogische Ausbildung"*
 *— „Besuche in 50+ Gemeinschaften"*
-*— „Lehrtätigkeit / Mitgliedschaft in X"*
 **→ Antwort:**
 
 
@@ -118,66 +152,34 @@ e) **Wie willst du NICHT beschrieben werden?**
 
 ---
 
-## 5 · Einladungen & Erreichbarkeit
+## 2.2 · Wie sollen Leute dich einladen?
 
-Die Website ist deine **zentrale Anlaufstelle**. Statt dass Leute dich über YouTube, Mail, Werkstätten und Empfehlungen zusammensuchen, finden sie hier alles geordnet — und können dich gezielt einladen oder ansprechen.
+Die Website ist deine zentrale Anlaufstelle — Leute können dich hier gezielt ansprechen.
 
 a) **Welche Anfragen möchtest du annehmen?** *(mehreres möglich, ergänze frei)*
-   - [ ] **Werkstatt-Teilnahme** — Leute kommen zu deinen Werkstätten
-   - [ ] **Einladung in eine Gemeinschaft** — du kommst zu denen für ein Wochenende oder länger
-   - [ ] **Vortrag / Impuls** bei einer Veranstaltung
-   - [ ] **Beratung / Begleitung** beim Aufbau einer eigenen Gemeinschaft
-   - [ ] **Interview** für andere Medien (Podcast, Magazin, Doku)
-   - [ ] **Persönliches Gespräch** ohne festen Anlass
-   - [ ] Andere: __________________
+   - [ ] Werkstatt-Teilnahme — Leute kommen zu deinen Werkstätten
+   - [ ] Einladung in eine Gemeinschaft — du kommst zu denen
+   - [ ] Vortrag / Impuls bei einer Veranstaltung
+   - [ ] Beratung / Begleitung beim Aufbau einer eigenen Gemeinschaft
+   - [ ] Interview für andere Medien
+   - [ ] Persönliches Gespräch ohne festen Anlass
+   - [ ] Andere: ______
 **→ Antwort:**
 
 
 b) **Welche Kontakt-Wege sollen sichtbar sein?**
-*Mail-Adresse · Online-Formular · Telefon-Rückruf · etwas anderes*
+*Mail · Online-Formular · Telefon-Rückruf*
 **→ Antwort:**
 
 
 c) **Möchtest du Rahmenbedingungen sichtbar machen?**
-*Bsp.: Honorar-Hinweise für Workshops, Reisekostenregelung, Mindestgruppengröße — oder lieber individuell besprechen?*
+*Honorar-Hinweise · Reisekostenregelung · Mindestgruppengröße — oder lieber individuell besprechen?*
 **→ Antwort:**
 
 
 ---
 
-## 6 · Was hast du schon?
-
-Bitte grob auflisten, was du an Material und an digitaler Präsenz schon hast — auch wenn unsortiert. **Damit nichts doppelt entsteht und alles zentral verlinkbar wird.**
-
-a) **Reise-Tagebücher / Texte / Notizen:**
-**→ Antwort:**
-
-
-b) **Photos** (ungefähre Anzahl, wo sie liegen — Festplatte, Cloud, Handy):
-**→ Antwort:**
-
-
-c) **Buch- und Quellen-Listen** für die Bibliothek:
-**→ Antwort:**
-
-
-d) **Werkstatt-Konzepte oder Ablaufpläne:**
-**→ Antwort:**
-
-
-e) Anderes (Audio, Video, Briefe, Zitate-Sammlung …):
-**→ Antwort:**
-
-
-f) **Andere Plattformen, auf denen du bereits aktiv bist?**
-*YouTube-Kanal · Instagram · Substack · Blog · Facebook · LinkedIn · Mailing-Liste · Vimeo · andere*
-*Diese können wir verlinken oder einbinden, damit Besucher hier zentral alles finden.*
-**→ Antwort:**
-
-
----
-
-## 7 · Notizen — der Hauptraum
+## 2.3 · Notizen — der Hauptraum
 
 a) Wie oft willst du posten?
 *täglich · 2–3× pro Woche · 1× pro Woche · unregelmäßig*
@@ -191,10 +193,9 @@ b) Welche **Kategorien** sollen vorkommen?
 
 ---
 
-## 8 · Werkstatt
+## 2.4 · Werkstatt-Details
 
-a) Welche eigenen Termine planst du?
-*Bsp: „Filzen + Dreigliederung als Wochenende"*
+a) Welche eigenen Termine planst du? *(Bsp.: „Filzen + Dreigliederung als Wochenende")*
 **→ Antwort:**
 
 
@@ -206,14 +207,33 @@ c) Möchtest du auch fremde Termine zeigen (z.B. Tag der offenen Tür am Tempelh
 **→ Antwort:**
 
 
-d) Wie sollen sich Leute anmelden?
-*Mail an dich · Online-Formular · externer Link*
+d) Anmeldung über Mail · Online-Formular · externer Link?
 **→ Antwort:**
 
 
 ---
 
-## 9 · Bibliothek
+## 2.5 · Foto & Untertitel
+
+a) Foto von dir auf der Seite?
+*Porträt / Hände bei der Arbeit / draußen unterwegs / kein Foto*
+**→ Antwort:**
+
+
+b) Soll es einen **Untertitel** unter dem Site-Namen geben?
+*Bsp.: „Reisen, Notizen, Begegnungen" — kann auch leer bleiben*
+**→ Antwort:**
+
+
+---
+
+# 🌱 Etappe 3 — Wenn du soweit bist
+
+*Locker · bei Bedarf · diese Fragen werden konkret, sobald die ersten Räume gefüllt sind und du merkst, was wirklich wachsen soll.*
+
+---
+
+## 3.1 · Bibliothek im Detail
 
 a) Welche **Quellen-Arten** willst du zeigen?
 *Bücher · Webseiten · Aufsätze · Filme · Podcasts · Gespräche*
@@ -227,9 +247,9 @@ b) Wie viele Einträge insgesamt geplant?
 
 ---
 
-## 10 · Podcast / Video
+## 3.2 · Podcast und Video
 
-Wenn du einen **YouTube-Kanal** hast (oder bekommst), können wir Folgen und Videos **direkt hier einbetten** — Besucher müssen nicht auf YouTube wechseln, sondern bleiben in deinem Haus.
+Wenn du einen **YouTube-Kanal** hast (oder bekommst), können wir Folgen und Videos direkt in deinem Haus einbetten — Besucher müssen nicht auf YouTube wechseln.
 
 a) Klar geplant, vage Idee, oder eher nicht?
 **→ Antwort:**
@@ -246,11 +266,11 @@ c) Format, Rhythmus, mögliche Gäste?
 
 ---
 
-## 11 · Sprachen
+## 3.3 · Sprachen aktivieren
 
-Die Site wird ab Tag 1 für drei Sprachen vorbereitet — Deutsch, Französisch, Englisch. Du musst nicht alles sofort übersetzen.
+Das Gerüst ist ab Tag 1 dreisprachig vorbereitet — Deutsch / Französisch / Englisch. Wann starten wir mit den Übersetzungen?
 
-a) Welche Inhalte sollen sofort dreisprachig sein?
+a) Welche Inhalte sollen zuerst dreisprachig sein?
 *Über · Werkstatt · Notizen · alles?*
 **→ Antwort:**
 
@@ -262,23 +282,19 @@ b) Wer übersetzt?
 
 ---
 
-## 12 · Zeitplan
+## 3.4 · Launch + danach
 
-a) Wann soll die deutsche Version **gut genug für Familie/Freunde** sein?
+a) Wann soll der **öffentliche Launch** erfolgen?
 **→ Antwort:**
 
 
-b) Wann soll der **öffentliche Launch** erfolgen?
-**→ Antwort:**
-
-
-c) Wann kommen Französisch und Englisch dran?
+b) Wann kommen Französisch und Englisch dran?
 **→ Antwort:**
 
 
 ---
 
-## 13 · Sonstiges
+## 3.5 · Inspiration und Sorgen
 
 a) Gibt es **Webseiten oder Magazine**, die dir gut gefallen — als visuelles Vorbild?
 *Links, Namen oder „so etwas wie X" reichen*
@@ -299,8 +315,8 @@ d) Gibt es etwas, das wir noch fragen sollten?
 
 ---
 
-*Danke. Schick deine Antworten in einer Mail, einer Sprachnachricht oder geschrieben in dieses Dokument zurück.*
+*Danke. Schick deine Antworten zu **Etappe 1** zurück, sobald du eine Stunde Zeit findest.*
 
-*Wir schauen sie gemeinsam durch und gehen dann in Phase 1: Aufbau des Gerüsts mit deinen Räumen — und allem, was deine zentrale Anlaufstelle sein soll.*
+*Sobald wir die haben, baue ich das Gerüst. Du bekommst eine Live-URL, läufst durch dein Haus, und wir gehen weiter in Etappe 2.*
 
 — Frühjahr 2026
