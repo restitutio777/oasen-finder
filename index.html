@@ -111,7 +111,7 @@
     letter-spacing: -0.015em;
     line-height: 1.08;
   }
-  h1 em, h2 em { font-weight: 500; font-style: italic; color: var(--accent); }
+  h1 em, h2 em { font-weight: 500; font-style: italic; color: var(--accent-warm); }
 
   p { margin: 0; }
 
@@ -409,8 +409,10 @@
     background-image: url('https://images.unsplash.com/photo-1761092315416-ed229b18e3d6?w=2400&q=80&auto=format&fit=crop');
     background-size: cover;
     background-position: center 60%;
-    filter: blur(28px) saturate(1.15) brightness(1.05);
-    opacity: 0.9;
+    /* Foto wird zur Atmosphaere: stark entsaettigt, leicht sepia-warm,
+       heller — keine bunte Komposition mehr, sondern Stimmung */
+    filter: blur(28px) saturate(0.45) brightness(1.12) sepia(0.18);
+    opacity: 0.78;
     z-index: -2;
   }
   /* Wouuchh — vertical sweep: light top, grounded bottom */
@@ -437,8 +439,8 @@
      concentrated on the left text column, the image stays readable on the right */
   @media (min-width: 1024px) {
     .hero::before {
-      filter: blur(6px) saturate(1.1) brightness(1.03);
-      opacity: 1;
+      filter: blur(5px) saturate(0.42) brightness(1.12) sepia(0.22);
+      opacity: 0.85;
     }
     .hero::after {
       background:
@@ -446,15 +448,19 @@
         radial-gradient(ellipse 58% 130% at 14% 50%,
           rgba(246, 244, 238, 0.98) 0%,
           rgba(246, 244, 238, 0.92) 28%,
-          rgba(246, 244, 238, 0.6) 52%,
-          rgba(246, 244, 238, 0.18) 75%,
-          transparent 90%),
-        /* Vertical sweep, gently softened so the photo stays visible right */
+          rgba(246, 244, 238, 0.62) 52%,
+          rgba(246, 244, 238, 0.28) 75%,
+          rgba(246, 244, 238, 0.08) 90%),
+        /* Warm peach overlay for unity */
+        linear-gradient(110deg,
+          rgba(232, 185, 135, 0.06) 0%,
+          rgba(232, 185, 135, 0.16) 100%),
+        /* Vertical sweep, much softer for harmony */
         linear-gradient(180deg,
-          rgba(246, 244, 238, 0.32) 0%,
-          rgba(232, 185, 135, 0.18) 35%,
-          rgba(168, 122, 114, 0.24) 65%,
-          rgba(44, 37, 48, 0.42) 100%);
+          rgba(246, 244, 238, 0.35) 0%,
+          rgba(232, 185, 135, 0.14) 35%,
+          rgba(168, 122, 114, 0.18) 65%,
+          rgba(44, 37, 48, 0.32) 100%);
     }
   }
   .hero__inner {
@@ -564,17 +570,17 @@
     .hero__meta { display: none; }
     /* Calm the background image on mobile so text stays legible */
     .hero::before {
-      opacity: 0.35;
-      filter: blur(14px) saturate(1.05) brightness(1.08);
+      opacity: 0.28;
+      filter: blur(20px) saturate(0.35) brightness(1.12) sepia(0.25);
     }
-    /* Sanfter, einheitlicher Cream-Wash — weniger trueb */
+    /* Sanfter, einheitlicher Cream-Wash — warmer Sepia-Ton drueber */
     .hero::after {
       background:
         linear-gradient(170deg,
-          rgba(246, 244, 238, 0.96) 0%,
-          rgba(246, 244, 238, 0.88) 35%,
-          rgba(232, 185, 135, 0.22) 75%,
-          rgba(168, 122, 114, 0.32) 100%);
+          rgba(246, 244, 238, 0.94) 0%,
+          rgba(246, 244, 238, 0.82) 35%,
+          rgba(232, 185, 135, 0.24) 75%,
+          rgba(168, 122, 114, 0.28) 100%);
     }
     /* CTAs: weicher, sanfter, sekundaerer als Text-Link.
        Höhere Specificity (.hero__cta-row .btn...) damit das Mobile-Override
@@ -669,7 +675,7 @@
   }
   .manifest__line em {
     font-style: italic;
-    color: var(--accent);
+    color: var(--accent-warm);
   }
   .manifest__line span[aria-hidden] {
     color: var(--accent-rose);
@@ -893,7 +899,7 @@
     letter-spacing: -0.02em;
     margin: 18px 0 14px;
   }
-  .pillars__title em { font-style: italic; color: var(--accent); }
+  .pillars__title em { font-style: italic; color: var(--accent-warm); }
   .pillars__sub {
     font-family: var(--font-display);
     font-size: clamp(17px, 1.4vw, 20px);
@@ -954,7 +960,7 @@
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--accent-warm);
     margin-bottom: 14px;
   }
   .pillar__title {
@@ -1026,7 +1032,7 @@
     line-height: 1.05;
     letter-spacing: -0.02em;
   }
-  .section-head__title em { font-style: italic; color: var(--accent); }
+  .section-head__title em { font-style: italic; color: var(--accent-warm); }
   .section-head__sub {
     font-family: var(--font-display);
     font-style: italic;
@@ -1250,9 +1256,12 @@
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--accent-warm);
     margin-bottom: 12px;
   }
+  /* Tag-Differenzierung nach Sektion — bringt subtle Lebendigkeit ohne Chaos */
+  .entry__tag[data-tag="werkstatt"] { color: var(--accent-green); }
+  .entry__tag[data-tag="poesie"] { color: var(--accent-rose); }
   .entry__title {
     font-size: clamp(20px, 1.8vw, 24px);
     line-height: 1.2;
@@ -1594,7 +1603,7 @@
   }
   .podcast-bar__label {
     font-style: italic;
-    color: var(--accent);
+    color: var(--accent-warm);
     font-weight: 500;
     white-space: nowrap;
   }
@@ -1650,7 +1659,7 @@
   }
   .invite__title em {
     font-style: italic;
-    color: var(--accent);
+    color: var(--accent-warm);
   }
   .invite__sub {
     font-family: var(--font-display);
@@ -1683,7 +1692,7 @@
     font-family: var(--font-display);
     font-style: italic;
     font-size: 18px;
-    color: var(--accent);
+    color: var(--accent-warm);
     margin-bottom: 14px;
   }
   .path__title {
@@ -1694,7 +1703,7 @@
   }
   .path__title em {
     font-style: italic;
-    color: var(--accent);
+    color: var(--accent-warm);
     font-weight: 400;
   }
   .path__text {
@@ -2079,7 +2088,7 @@
           <span class="entry__year">2026</span>
         </div>
         <div class="entry__body">
-          <span class="entry__tag">Werkstatt</span>
+          <span class="entry__tag" data-tag="werkstatt">Werkstatt</span>
           <h3 class="entry__title">Filzen im Tempelhof</h3>
           <p class="entry__text">
             Eine kleine Gruppe, ein paar Stunden Wolle. Die Frage „Was tragen
@@ -2097,7 +2106,7 @@
           <span class="entry__year">2026</span>
         </div>
         <div class="entry__body">
-          <span class="entry__tag">Poesie</span>
+          <span class="entry__tag" data-tag="poesie">Poesie</span>
           <h3 class="entry__title">Notiz vor Sonnenaufgang</h3>
           <p class="entry__text">
             Eine kleine Notiz, bevor das Licht kam.<br>
