@@ -93,7 +93,7 @@ if (isSanityConfigured) {
                 {note.kind && ` · ${note.kind === 'denkbar' ? 'DenkBAR' : 'SchreibBAR'}`}
               </span>
               <h3 style="font-family: var(--font-display); font-size: 1.4rem; line-height: 1.3; margin: 0.6rem 0 0; color: var(--text-primary);">
-                {note.title}
+                {localized(note.title)}
               </h3>
             </a>
           ))}
@@ -146,7 +146,7 @@ if (isSanityConfigured) {
             Termine zum Mitmachen — von Sommer-Werkstatt bis Vortrag.
             {upcomingEvents[0]?.title && (
               <>
-                <br/><strong style="color: var(--accent-warm); font-weight: 500;">Nächster: {upcomingEvents[0].title}</strong>
+                <br/><strong style="color: var(--accent-warm); font-weight: 500;">Nächster: {localized(upcomingEvents[0].title)}</strong>
               </>
             )}
           </p>
