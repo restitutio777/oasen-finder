@@ -89,6 +89,23 @@ export const contact = defineType({
       },
     }),
     defineField({
+      name: 'telegramUrl',
+      title: 'Telegram-Channel oder -Gruppe',
+      description:
+        'Optional. Format: https://t.me/<name>. Wird im Footer mit Telegram-Icon angezeigt — leer lassen blendet den Link aus.',
+      type: 'url',
+      validation: (Rule) =>
+        Rule.uri({
+          scheme: ['http', 'https'],
+        }).custom((value: any) => {
+          if (!value) return true;
+          if (typeof value !== 'string') return true;
+          return value.includes('t.me/') || value.includes('telegram.me/')
+            ? true
+            : 'Bitte eine Telegram-URL angeben (https://t.me/...)';
+        }),
+    }),
+    defineField({
       name: 'newsletter',
       title: 'Newsletter-Block („Brief von unterwegs")',
       type: 'object',

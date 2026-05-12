@@ -60,7 +60,13 @@ Sanity macht die Optimierung selbstständig:
 
 Frage: brauchst du **andere Formate** *(z.B. Audio-Dateien zum Direkt-Hochladen statt YouTube-Link, Video, etc.)*? Aktuell sind Audio/Video als externe Plattform-Links *(hörBAR-Eintrag mit YouTube/Spotify/Apple-URL)* eingerichtet — solltest du das anders wollen, sag bescheid.
 
-## 6. Domain — wie soll die Adresse heißen?
+## 6. Telegram-Channel oder -Gruppe?
+
+Wenn du einen Telegram-Channel hast *(oder anlegen willst)*, kann ich den dezent im Footer mit Telegram-Icon verlinken. Plus: in jedem Beitrag *(Notiz, Quelle, etc.)*, wenn du einen Telegram-Link einträgst, wird er als hübsche Card mit dem Telegram-Logo gerendert — nicht als nackter Link.
+
+Bitte gib die volle URL: `https://t.me/<dein-name>` *(oder leer lassen wenn nicht gewünscht — Telegram-Anzeige bleibt dann ausgeblendet)*.
+
+## 7. Domain — wie soll die Adresse heißen?
 
 Beispiele aus dem Fragebogen:
 - `werkstatt-gemeinschaft.de` *(oder .org)*

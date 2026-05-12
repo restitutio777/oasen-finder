@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
+import MediaLink from '../../components/MediaLink.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
@@ -37,13 +38,8 @@ const { episode } = Astro.props;
         <img src={episode.coverUrl} alt="" style="max-width: 400px; margin: 2rem 0; border-radius: 6px;" />
       )}
 
-      {/* TODO: Embed je nach Plattform (YouTube iframe, Spotify embed, Apple Music embed).
-           Für jetzt: einfacher Link. */}
-      <p style="margin-top: 2rem;">
-        <a href={episode.url} target="_blank" rel="noopener" class="btn btn--primary">
-          Auf {episode.platform} hören →
-        </a>
-      </p>
+      {/* Automatisches Embed je nach Plattform (YouTube/Spotify/Apple/etc.) */}
+      <MediaLink url={episode.url} label={`Auf ${episode.platform} öffnen`} />
 
       <div style="margin-top: 2rem;">
         <PortableText value={episode.summary} />

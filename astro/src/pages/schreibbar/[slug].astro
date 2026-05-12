@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import SanityImage from '../../components/SanityImage.astro';
+import MediaLink from '../../components/MediaLink.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
@@ -64,8 +65,12 @@ const kindLabels: Record<string, string> = {
 
       <PortableText value={note.body} />
 
+      {/* Medien-Link: YouTube/Spotify/Apple Music werden direkt
+          eingebettet, Telegram bekommt eine eigene Card,
+          alles andere klassischer Link. */}
+      {note.mediaLink && <MediaLink url={note.mediaLink} />}
 
-      {(note.externalLink || note.mediaLink || note.substackUrl || note.pdfUrl) && (
+      {(note.externalLink || note.substackUrl || note.pdfUrl) && (
         <aside style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle);">
           <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-muted); margin-bottom: 1rem;">
             Weiterlesen
@@ -74,14 +79,11 @@ const kindLabels: Record<string, string> = {
             {note.externalLink && (
               <li><a href={note.externalLink} target="_blank" rel="noopener">Externer Link →</a></li>
             )}
-            {note.mediaLink && (
-              <li><a href={note.mediaLink} target="_blank" rel="noopener">Medien-Link →</a></li>
-            )}
             {note.substackUrl && (
               <li><a href={note.substackUrl} target="_blank" rel="noopener">Auf Substack →</a></li>
             )}
             {note.pdfUrl && (
-              <li><a href={note.pdfUrl} target="_blank" rel="noopener">PDF herunterladen →</a></li>
+              <li><a href={note.pdfUrl} target="_blank" rel="noopener">Dokument herunterladen →</a></li>
             )}
           </ul>
         </aside>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
+import MediaLink from '../../components/MediaLink.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
@@ -47,10 +48,15 @@ const kindLabels: Record<string, string> = {
 
       <PortableText value={resource.note} />
 
-      <p style="margin-top: 2rem;">
-        {resource.link && <a href={resource.link} target="_blank" rel="noopener">Zur Quelle →</a>}
-        {resource.pdfUrl && <a href={resource.pdfUrl} target="_blank" rel="noopener" style="margin-left: 1rem;">PDF →</a>}
-      </p>
+      {/* Quellen-Link: YouTube/Spotify werden direkt eingebettet,
+          Telegram bekommt eine Card, alles andere klassischer Link. */}
+      {resource.link && <MediaLink url={resource.link} label="Zur Quelle" />}
+
+      {resource.pdfUrl && (
+        <p style="margin-top: 1rem;">
+          <a href={resource.pdfUrl} target="_blank" rel="noopener">Dokument herunterladen →</a>
+        </p>
+      )}
     </div>
   </article>
 </BaseLayout>
