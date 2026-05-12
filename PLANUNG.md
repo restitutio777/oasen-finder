@@ -223,38 +223,103 @@ Die -BAR-Doppelbedeutung *(Treffpunkt + machbar-Suffix)* soll visuell **mitschwi
 
 ---
 
-## Brand-Name — Optionen
+## Brand — entschieden
 
-| Option | Stärke | Schwäche |
-|---|---|---|
-| **Werkstatt Gemeinschaft** *(Arbeitstitel)* | Bekannt, klar | Generisch, ohne -BAR-Bezug |
-| **WERK-statt allein unterwegs** *(aus ihrer 3.1a-Antwort)* | Stark, persönlich, eigenes Wortspiel | Lang, mobile-unhandlich, eher Untertitel |
-| **„WERK-statt" + Untertitel „allein unterwegs"** | Brand kurz, Claim trägt das Wortspiel | Untertitel muss überall mitlaufen |
-| **„MitBAR" / „GemeinschaftsBAR"** *(Neuwortbildung)* | Konsequent im System | Klingt konstruiert, Cocktailbar-Risiko |
-| **„Katharina Offenborn — VereinBAR"** | Persönlich, klar | Macht Person zentral statt Anliegen |
-| **„Die BARs"** *(Plural als Name)* | Konzeptionell stark, kurz | Gastronomie-Assoziation |
+**Brand-Name:** **WERKstatt Gemeinschaft** *(ohne Bindestrich)*
 
-**Vorschlag zur Diskussion:** **„WERK-statt"** als Brand-Name *(eigenständig + Wortspiel)*, **„allein unterwegs"** als Untertitel, die **-BAR-Räume** als Architektur. Damit trägt der Name Katharinas eigene Formulierung, und das -BAR-System lebt darunter ohne ins Markennamens-Spektrum zu drängen.
+**Claim:** *„Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs"*
 
-Aber: ihre Entscheidung. Diese Tabelle als Mail-Anhang oder bei einem Telefonat besprechen.
+**Visuelle Hervorhebung:** die Silbe **WERK** überall in Honig-Gold *(`var(--accent-gold)`, `#c08538`)*. Im Brand-Schriftzug, im Claim, im Hero-Eyebrow — gleiche Farbe wie das leuchtende „Gemeinschaft?" im Hero-Title und die CTAs.
+
+**Hintergrund Entscheidung:** Katharinas Antwort vom 12. Mai 2026 — *„wir nehmen VereinBAR, weil WunderBAR von einer bar bereits genutzt wird. Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs. WERKstatt in einer gemeinsamen hervorstehenden Farbe."*
+
+**Im Code umgesetzt:** Header-Brand, Footer-Brand, Copyright-Zeile, HTML-Title, Meta-Description, Hero-Eyebrow alle synchron *(Commits 99ad73c + 5742a34)*.
+
+### Verworfene Alternativen *(Historie)*
+
+| Option | Warum verworfen |
+|---|---|
+| ~~Werkstatt Gemeinschaft~~ *(reiner Arbeitstitel)* | Ohne Wortspiel, generisch |
+| ~~WERK-statt~~ *(mit Bindestrich)* | Bindestrich machte das Wortspiel sichtbar — mit Goldakzent auf der WERK-Silbe ist es lesbarer ohne |
+| ~~MitBAR / GemeinschaftsBAR~~ | Cocktailbar-Klischee-Risiko |
+| ~~Katharina Offenborn — VereinBAR~~ | Person statt Anliegen zentral |
+| ~~Die BARs~~ | Zu Gastro-haft |
+
+---
+
+## URL-Architektur (Phase 1)
+
+**Entschieden 12. Mai 2026:** Multi-Page-Struktur mit deutschen BAR-Pfaden, Deutsch ohne Sprach-Präfix.
+
+```
+/                          Landing — Übersicht aller BARs
+                           (Hero, erkennBAR-Vorschau, Notizen-Vorschau,
+                           drei Türen, HörBAR-Streifen, Mitkommen)
+
+/erkennbar/                Vollständige Bio + Foto-Galerie
+/schreibbar/               Notizen-Liste (alle Einträge, filterbar)
+/schreibbar/[slug]/        Einzelne Notiz (Datum, Titel, Bild, Text, Anhänge)
+/bewegbar/                 Karte + alle Stationen
+/bewegbar/[slug]/          Eine Station (Bild-Galerie, Reflexion, Tags)
+/machbar/                  Alle Werkstatt-Termine, saisonal sortiert
+/machbar/[slug]/           Einzelner Termin (Datum, Ort, Anmeldung)
+/lesbar/                   Bibliothek mit Filter (Buch · Webseite · Film · …)
+/lesbar/[slug]/            Einzelner Eintrag (Notiz, Link, Cover)
+/hoerbar/                  HörBAR — Episoden-Liste + Player
+/hoerbar/[slug]/           Einzelne Episode
+/mitkommen/                Kontakt-Formular mit den 7 Einladungs-Kategorien
+/danke/                    Bestätigungs-Seite nach Formular-Abschicken
+
+/impressum/                Pflicht-Legal
+/datenschutz/              Pflicht-Legal
+/agb/                      bei Werkstatt-Anmeldungen mit Honorar
+```
+
+### i18n-Strategie
+
+**Deutsch ohne Präfix, Französisch und Englisch als Sub-Pfade:**
+
+```
+/                          deutsche Hauptversion (Default)
+/fr/                       französische Version
+/en/                       englische Version
+```
+
+Slugs in Sanity sind sprachspezifisch *(z.B. `bewegbar` (DE) · `bouger` (FR) · `move` (EN))* — oder einheitlich deutsch, dann Routing via Astro-i18n-Mapping. Entscheidung beim Aufsetzen.
+
+**SEO-Vorteil:** Default-Deutsch ohne Präfix → kürzere URLs für den Hauptmarkt, kein redundantes `/de/`.
+
+### Was sich gegenüber dem Prototyp ändert
+
+| Aktuell | Phase 1 |
+|---|---|
+| Pillar „Reisen" → `href="#"` | → `href="/bewegbar/"` |
+| „Alle Notizen ansehen" → `href="#"` | → `/schreibbar/` |
+| Notizen-Eintrag → kein Klick | → `/schreibbar/[slug]/` als eigene Seite |
+| Mitkommen → 3 mailto-Links | → `/mitkommen/` mit echtem Formular |
+| Brand-Link `<a href="/">` | bleibt — führt zur Landing |
+
+### Sanity-Slugs
+
+Pro Schema ein `slug`-Feld *(Slug-Type)* — wird automatisch aus dem Titel generiert. Astro nutzt den Slug für die URL.
 
 ---
 
 ## Offene Klärungen mit Katharina
 
-*Sortiert nach Priorität:*
+*Update 12. Mai 2026 — drei von sieben Items geklärt:*
 
-| # | Frage | Wo geklärt |
+| # | Frage | Status |
 |---|---|---|
-| 1 | **VereinBAR oder WunderBAR?** | Rückfragen-Mail draußen |
-| 2 | **Drei Worte für ihren Ton?** | Rückfragen-Mail draußen *(Frage 1.2c umformuliert)* |
-| 3 | **Sub-Bereiche oder alle Top-Level?** *(DenkBAR/BrauchBAR)* | Per Mail nach den ersten zwei Antworten |
-| 4 | **Brand-Name?** | Telefonat oder Treffen — zu viel für Mail |
-| 5 | **wortgetreu.com:** bleibt eigenständig oder einmal-importieren? | Per Mail, sobald Phase 1 beginnt |
-| 6 | **`anthroposophie-lebensnah`** — aktiv? Verlinken oder einstellen? | Per Mail |
-| 7 | **„Wir" statt „ich"** — wer ist „wir"? | Beobachten beim Texten, ggf. Rückfrage |
+| 1 | ~~VereinBAR oder WunderBAR?~~ | ✅ **VereinBAR** *(WunderBAR ist von einer Bar belegt)* |
+| 2 | **Drei Worte für ihren Ton?** | ⏳ offen, Rückfragen-Mail draußen |
+| 3 | **Sub-Bereiche oder alle Top-Level?** *(DenkBAR/BrauchBAR)* | ⏳ offen — aktuell Sub-Modell im Code |
+| 4 | ~~Brand-Name?~~ | ✅ **WERKstatt Gemeinschaft** + Claim „Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs" |
+| 5 | **wortgetreu.com:** verlinken oder importieren? | ⏳ offen |
+| 6 | **anthroposophie-lebensnah** — aktiv? | ⏳ offen |
+| 7 | **„Wir" statt „ich"** — wer ist „wir"? | ⏳ offen |
 
-**Was ohne Klärung beginnen kann:** Architektur-Gerüst, Schemas in Sanity, erkennBAR-Sektion *(unabhängig)*, Karten-Komponente technisch. Brand-Name und Namensgebung der Eingangs-BAR sind später anwendbar — Klassen-Namen im Code abstrakt halten *(`HeroBAR` als Code-Name, Display-Text aus Sanity)*.
+**Was ohne weitere Klärung beginnen kann:** Phase 1 (Astro + Sanity-Gerüst, Schemas, i18n-Setup, URL-Struktur aus oben), erkennBAR-Sektion. Die offenen Punkte (2, 3, 5, 6, 7) klären sich beim Texten oder per Mail.
 
 ---
 

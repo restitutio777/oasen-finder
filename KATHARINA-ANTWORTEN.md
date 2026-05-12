@@ -178,14 +178,30 @@ Alle drei Varianten **vorhanden** — keine explizite Präferenz:
 
 ## Offene Punkte aus dieser Runde
 
-*Was nicht oder unklar beantwortet wurde — bei Gelegenheit nachfragen oder selbst entscheiden:*
+*Update 12. Mai 2026 — drei von sieben Items geklärt:*
 
-1. **1.1a** — VereinBAR oder WunderBAR? *(sie hat die Wahl an dich zurückgegeben)*
-2. **1.2c** — Tonalität/Sprache: Frage wurde nicht verstanden. Umformulieren *(z.B. „drei Worte für deinen Ton" mit Beispielen)*.
+1. ~~**1.1a** — VereinBAR oder WunderBAR?~~ → ✅ **VereinBAR** *(Antwort 12. Mai: „WunderBAR von einer bar bereits genutzt")*
+2. **1.2c** — Tonalität/Sprache: Frage wurde nicht verstanden. Umformulieren *(z.B. „drei Worte für deinen Ton" mit Beispielen)*. ⏳ offen
 3. **2.4 LesBAR** — keine direkte Bestätigung der Eintrag-Felder *(vermutlich ok)*.
 4. **3.4 Foto** — keine Präferenz, alle Varianten vorhanden. Entscheidung beim Layout-Bauen.
 5. **3.5a Einladungs-Kategorien** — alle markiert, neue Kategorie „Vernetzung helfen" hinzu. Reihenfolge bei der Anzeige zu klären.
-6. **Brand-Name** — „Werkstatt Gemeinschaft" als Arbeitstitel jetzt potenziell überholt durch ihr „**WERK-statt allein unterwegs**"-Wortspiel + das -BAR-Konzept. Diskussion fällig.
+6. ~~**Brand-Name**~~ → ✅ **WERKstatt Gemeinschaft** *(Antwort 12. Mai: „Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs. WERKstatt in einer gemeinsamen hervorstehenden Farbe.")*
 7. **„Wir" statt „ich"** — sie hat sich entschieden, aber wer ist „wir"? *(Sie + Suchende? Sie + Carla? Sie + Philippe?)* — Beobachten beim Texten.
+
+---
+
+## Antwort vom 12. Mai 2026 *(zweite Runde)*
+
+> wir nehmen VereinBAR, weil WunderBAR von einer bar bereits genutzt wird.
+>
+> Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs
+>
+> WERKstatt in einer gemeinsamen hervorstehenden Farbe.
+
+**Daraus abgeleitet:**
+- **Brand-Name:** WERKstatt Gemeinschaft *(ohne Bindestrich, „WERK" hervorgehoben)*
+- **Claim:** „Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs"
+- **Farb-Akzent:** Honig-Gold *(`#c08538` — `--accent-gold`)* für die WERK-Silbe überall *(Header, Footer, Claim, plus „Gemeinschaft?" im Hero und CTAs gleichfarbig für Konsistenz)*
+- **VereinBAR** als Name des Hero-Bereichs bestätigt
 
 — Frühjahr 2026

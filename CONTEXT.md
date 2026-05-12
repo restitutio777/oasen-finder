@@ -6,18 +6,20 @@
 
 ## In einem Satz
 
-Persönliche Website für **Katharina Offenborn** *(Ergotherapeutin, Ende 60, mehrsprachig)* — eine zentrale Anlaufstelle für ihre Reisen zu Gemeinschaftsorten im DACH-Raum, ihre Werkstätten, Notizen, Lesefrüchte und ggf. einen Podcast. Vorläufiger Brand-Name: **„Werkstatt Gemeinschaft"** *(kann sich noch ändern)*.
+Persönliche Website für **Katharina Offenborn** *(Ergotherapeutin, Ende 60, mehrsprachig)* — eine zentrale Anlaufstelle für ihre Reisen zu Gemeinschaftsorten im DACH-Raum, ihre Werkstätten, Notizen, Lesefrüchte und ggf. einen Podcast. **Brand:** „**WERK**statt Gemeinschaft" mit Claim „Miteinander vereinBAR — Gemeinschafts**WERK** statt allein unterwegs".
 
 ---
 
-## Wo wir gerade stehen
+## Wo wir gerade stehen *(Stand 12. Mai 2026)*
 
-- ✅ Visueller Prototyp live unter **[oasen-finder.vercel.app](https://oasen-finder.vercel.app)**
-- ✅ Fragebogen v4 (`FRAGEBOGEN-KATHARINA.docx`) an Katharina geschickt
-- ✅ **Antworten am 11. Mai 2026 zurück** — siehe `KATHARINA-ANTWORTEN.md`
-- 🆕 **Großer Befund:** Katharina hat ein durchgängiges **-BAR-Naming-System** vorgeschlagen *(VereinBAR · BewegBAR · MachBAR · SchreibBAR · LesBAR · HörBAR · DenkBAR · BrauchBAR · erkennBAR)* plus die Anliegen-Formel *„WERK-statt allein unterwegs"*. **Marken-Diskussion offen, Architektur muss überarbeitet werden** — 6 Räume werden zu 8 -BAR-Räumen + erkennBAR + Mitkommen.
-- ⏳ Zwei kleine Rückfragen an Katharina draußen *(VereinBAR vs. WunderBAR, drei Worte für ihren Ton)*
-- ⏳ **Phase 1 (Astro + Sanity-Gerüst)** startet, sobald Architektur-Diskussion + Rückfragen abgeschlossen
+- ✅ Visueller Prototyp live unter **[oasen-finder.vercel.app](https://oasen-finder.vercel.app)** — sehr weit poliert, Multi-Page-Migration steht noch aus
+- ✅ Fragebogen v4 beantwortet, Katharinas Stimme in den Inhalten
+- ✅ **-BAR-Architektur entschieden:** 9 Räume *(VereinBAR · erkennBAR · SchreibBAR · BewegBAR · MachBAR · LesBAR · HörBAR · DenkBAR · BrauchBAR)* + Mitkommen
+- ✅ **Brand entschieden:** WERKstatt Gemeinschaft + Claim; „WERK"-Silbe in Honig-Gold als Brand-Akzent durchgezogen
+- ✅ **VereinBAR** als Hero-Bereich-Name gewählt *(WunderBAR fiel raus weil belegt)*
+- ✅ **URL-Architektur entschieden:** deutsche Pfade *(`/bewegbar/`, `/machbar/` usw.)*, Deutsch ohne Sprach-Präfix, FR/EN als Sub *(siehe PLANUNG.md)*
+- ⏳ **5 offene Klärungen** mit Katharina *(siehe „Offene Klärungen" in PLANUNG.md)*: 3 Worte für ihren Ton · Sub-Bereiche · wortgetreu.com · anthroposophie-lebensnah · „Wir"
+- ⏳ **Phase 1 (Astro + Sanity-Gerüst)** ist der nächste große Schritt — die offenen Klärungen blockieren das nicht
 
 ---
 
