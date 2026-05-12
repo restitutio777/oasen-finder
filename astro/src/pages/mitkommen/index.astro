@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
+import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 let config: any = null;
@@ -21,6 +22,10 @@ const categories = config?.inviteCategories || [
 ---
 
 <BaseLayout title="Mitkommen — WERKstatt Gemeinschaft" description="Drei Wege zu Katharina">
+  <PageBanner
+    photo="photo-1517842645767-c639042777db"
+    alt="Hände schreiben mit Stift in ein offenes Notizbuch"
+  />
   <section class="invite" id="mitkommen">
     <div class="container">
       <header class="invite__head">

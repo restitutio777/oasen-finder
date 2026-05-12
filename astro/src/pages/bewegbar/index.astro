@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MapBewegBAR from '../../components/MapBewegBAR.astro';
+import PageBanner from '../../components/PageBanner.astro';
 import { sanity, isSanityConfigured } from '../../lib/sanity';
 
 /**
@@ -23,6 +24,10 @@ if (isSanityConfigured) {
 ---
 
 <BaseLayout title="BewegBAR — Stationen" description="Reisen zu Ökodörfern, Cohousing-Projekten und gemeinsamen Lebensorten">
+  <PageBanner
+    photo="photo-1469474968028-56623f02e42e"
+    alt="Geschwungene Straße durch eine weite, hügelige Landschaft"
+  />
   <section style="padding: 4rem 0;">
     <div class="container">
       <span class="eyebrow">BewegBAR · Karte</span>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 /**
@@ -25,6 +26,10 @@ if (isSanityConfigured) {
   title="SchreibBAR — WERKstatt Gemeinschaft"
   description="Notizen, Gedichte und Gedanken aus der WERKstatt Gemeinschaft."
 >
+  <PageBanner
+    photo="photo-1455390582262-044cdead277a"
+    alt="Aufgeschlagenes Notizbuch mit Stift im Tageslicht"
+  />
   <section class="chronicle" id="schreibbar">
     <div class="container">
       <header class="section-head">

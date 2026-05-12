@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 let episodes: any[] = [];
@@ -15,6 +16,10 @@ if (isSanityConfigured) {
 ---
 
 <BaseLayout title="HörBAR — Episoden" description="Eingesprochene Reflexionen, Gedichte und Lieder">
+  <PageBanner
+    photo="photo-1493225457124-a3eb161ffa5f"
+    alt="Nahaufnahme einer Schallplatte auf einem Plattenspieler"
+  />
   <section style="padding: 4rem 0;">
     <div class="container">
       <span class="eyebrow">HörBAR · Episoden</span>

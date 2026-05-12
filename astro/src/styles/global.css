@@ -495,6 +495,25 @@
     .hero__eyebrow-line { display: block; }
     .hero__eyebrow { line-height: 1.45; }
   }
+
+  /* Mood-Banner oben auf jeder Hauptseite. Aspect-Ratio fix gegen
+     Layout-Shift. Auf Mobile etwas höher, weil weniger Breite. */
+  .page-banner {
+    width: 100%;
+    aspect-ratio: 8 / 3;
+    overflow: hidden;
+    background: var(--bg-warm);
+    margin: 0;
+  }
+  .page-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  @media (max-width: 640px) {
+    .page-banner { aspect-ratio: 4 / 3; }
+  }
   .hero__title {
     font-size: clamp(2.5rem, 6.8vw, 5.5rem);
     line-height: 1.05;

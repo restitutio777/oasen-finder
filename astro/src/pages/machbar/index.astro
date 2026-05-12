@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 let events: any[] = [];
@@ -18,6 +19,10 @@ const past = events.filter((e) => new Date(e.startDate) < new Date());
 ---
 
 <BaseLayout title="MachBAR — Werkstatt-Termine" description="Werkstatt-Treffen zu Miteinander-Leben, -Arbeiten, -Reden">
+  <PageBanner
+    photo="photo-1503676260728-1c00da094a0b"
+    alt="Hände formen Ton an einer Töpferscheibe"
+  />
   <section style="padding: 4rem 0;">
     <div class="container">
       <span class="eyebrow">MachBAR · Termine</span>

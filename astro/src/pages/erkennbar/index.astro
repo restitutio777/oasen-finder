@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import SanityImage from '../../components/SanityImage.astro';
+import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 let about: any = null;
@@ -14,6 +15,10 @@ if (isSanityConfigured) {
 ---
 
 <BaseLayout title="erkennBAR — Katharina Offenborn" description="Wer Katharina ist, was sie macht, was sie nicht ist">
+  <PageBanner
+    photo="photo-1518709268805-4e9042af2176"
+    alt="Sonnenlicht durch ein Fenster auf Zimmerpflanzen — ruhige Innenraum-Stimmung"
+  />
   <section class="who" id="erkennbar">
     <div class="container">
       <div class="who__inner">
