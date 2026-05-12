@@ -1,117 +1,77 @@
 # Nächste Session — Wiedereinstieg
 
-*Hand-off vom 12. Mai 2026, Session-Ende.*
+*Hand-off vom 12. Mai 2026, Abend. Cutover live + Mitkommen-Backend angelegt.*
 
 ## In 30 Sekunden: was zu tun ist
 
-1. **Vercel-Cutover wieder anstoßen, aber diesmal mit Node-Version-Fix** *(siehe „Cutover-Plan" unten)*
-2. **Falls Cutover läuft:** Smoke-Test der Live-Site, dann sind wir live
-3. **Plus parallel:** strategische Items 1-3 unten, je nach Priorität
+1. **Resend aktivieren** — Account anlegen, API-Key in Vercel-Env, dann Mitkommen-Mails gehen wirklich raus *(siehe Schritt 1 unten)*
+2. **Mail an Katharina** mit den 5 offenen inhaltlichen Fragen + Domain-Wunsch *(parallel, asynchron, siehe Schritt 2)*
+3. **Strategische Items 3-7** je nach Priorität *(DSGVO, Hub-Logik, Ownership-Transfer, A11y, Bus-Faktor)*
 
 ## Wo wir stehen *(Kurzfassung)*
 
-- **Live:** statisches `index.html` auf [oasen-finder.vercel.app](https://oasen-finder.vercel.app)
-- **In `/astro/` vorbereitet, NICHT live:** Astro 5 + Sanity 3, alle Pages, alle Schemas, Demo-Content, lokal 100% gebaut
+- **Live auf [oasen-finder.vercel.app](https://oasen-finder.vercel.app):** komplette Astro-Multi-Page-Site mit 21 Routen, Sanity-Content im Build, Leaflet-Karte, Mitkommen-Form mit echtem Server-Submit
 - **Sanity-Studio live:** <https://werkstatt-gemeinschaft.sanity.studio/> *(Project z6eclgt8)*
-- **Letzter Commit auf main:** `6df0315` *(Live-Cutover-Versuch — vercel.json war zu pnpm/Astro umgestellt, dann zurückgerollt auf statisches Setup)*
+- **Stack auf Vercel:** Astro 5 + npm + Node 22+, `package-lock.json` eingecheckt → reproducible
+- **Letzter Commit:** `1bd9891` *(Vercel-Cutover: pnpm → npm Wechsel + package-lock.json eingecheckt)* — plus die folgenden Doku-Updates
 
-Siehe `CONTEXT.md` für vollständigen Stand. Siehe `astro/README.md` für Astro-Details.
-
----
-
-## 1. Vercel-Cutover wieder anstoßen *(Top-Priorität)*
-
-### Was schiefging beim letzten Versuch
-
-Vercel-Build crashed mit:
-```
-ERR_PNPM_META_FETCH_FAIL  GET https://registry.npmjs.org/...: 
-Value of "this" must be of type URLSearchParams
-```
-
-Ursache: Vercel's Build-Image hat als Default-Node vermutlich Node 18 oder 20. Plus pnpm 10. Diese Kombination hat in der pnpm-meta-fetch-Logik einen `URLSearchParams`-Bug.
-
-### Fix-Optionen *(eine wählen, dann pushen)*
-
-**Option A — Node-Version in `package.json` festsetzen** *(saubere Lösung)*
-
-In `astro/package.json` einfügen:
-```json
-{
-  "engines": {
-    "node": ">=22"
-  },
-  "packageManager": "pnpm@10.15.1"
-}
-```
-
-Plus `.nvmrc` im Repo-Root:
-```
-22
-```
-
-**Option B — Vercel-Project-Settings** *(Browser, ohne Code-Änderung)*
-
-Im Vercel-Dashboard → Project Settings → Environment Variables:
-- `NODE_VERSION = 22`
-
-Oder: General → Node.js Version → 22.x.
-
-**Option C — Auf npm umstellen** *(Last Resort, falls A+B fehlschlagen)*
-
-`vercel.json` buildCommand auf:
-```json
-"buildCommand": "cd astro && npm install --legacy-peer-deps && npm run build"
-```
-
-Plus die `pnpm-lock.yaml` ist eh gitignored, also npm baut frisch.
-
-### Cutover-Plan *(Schritt für Schritt)*
-
-```bash
-# 1. Fix anwenden (Option A empfohlen)
-# astro/package.json um "engines" und "packageManager" ergänzen
-# .nvmrc im Root schreiben
-
-# 2. vercel.json wieder auf Astro-Cutover umstellen
-# (war im Commit 6df0315 — kopiere zurück)
-# Wichtig: trailingSlash: true, buildCommand, outputDirectory
-
-# 3. Lokal nochmal testen
-cd astro && pnpm install && pnpm build
-# → muss 21 Pages bauen ohne Fehler
-
-# 4. Push
-cd ..
-git add vercel.json astro/package.json .nvmrc
-git commit -m "Vercel-Cutover Retry: Node 22 + Astro-Build aktivieren"
-git push origin claude/epic-bhaskara-3b2c19:main
-
-# 5. Vercel-Build beobachten — wenn READY: smoke test
-#    Wenn ERROR: Build-Logs prüfen via Vercel-MCP (get_deployment_build_logs)
-```
-
-### Was der erfolgreiche Cutover bringt
-
-- Live-Site zeigt 21 Astro-Pages statt statisches `index.html`
-- Sanity-Inhalte werden zur Build-Zeit gepullt → echte Detail-Pages
-- Leaflet-Karte auf BewegBAR, PortableText-Body in allen Notizen
-- Mitkommen-Formular mit 6 Einladungs-Kategorien
-- Multi-Page-URLs *(`/schreibbar/fruehjahr-auf-kreta/` usw.)*
+Vollständiger Stand siehe `CONTEXT.md`. Astro-Details in `astro/README.md`.
 
 ---
 
-## 2. Inhalts-Klärungen mit Katharina *(parallel, keine Code-Arbeit)*
+## 1. Resend aktivieren — Mitkommen-Mails wirklich versenden
 
-Eine Mail an sie mit den 5 verbleibenden Fragen:
+### Status jetzt
 
-1. **Drei Worte für ihren Ton?** *(z.B. „warm, suchend, klar")*
-2. **DenkBAR und BrauchBAR — als Sub-Bereich oder eigene Seite?** *(aktuell Sub via `kind`-Filter)*
-3. **`wortgetreu.com`:** weiter parallel pflegen oder einmal nach LesBAR importieren?
-4. **`anthroposophie-lebensnah`:** noch aktiv? Verlinken oder einstellen?
-5. **„Wir" statt „ich"** — wer ist „wir"? *(spielt in alle Texte rein)*
+Die Vercel-Function `/api/mitkommen.ts` ist live. Sie:
 
-Plus: **Domain-Wunsch** *(P.S. im Fragebogen — antwort noch ausstehend)*. Beispiele aus der Fragebogen-Vorschlagsliste:
+- nimmt POST-Requests vom Formular entgegen,
+- validiert Pflichtfelder (Name, Mail, Nachricht) und Mail-Format,
+- filtert Bots via Honeypot-Feld `_hp`,
+- baut die Mail (Subject + Plain-Text-Body mit allen Anliegen-Kategorien).
+
+**Solange `RESEND_API_KEY` nicht gesetzt ist:** Function läuft im **Log-Modus** — schreibt die Anfrage nur in die Vercel-Function-Logs und gibt dem User trotzdem ein „Danke" zurück. Heißt: das Formular *funktioniert sichtbar*, aber bei dir kommt noch keine Mail an.
+
+### Schritte zur Aktivierung
+
+1. **Resend-Account anlegen** — <https://resend.com> *(free 3000 Mails/Monat, 100/Tag)*
+2. **API-Key generieren** im Dashboard → Settings → API Keys → „Create API Key" → Name: `werkstatt-gemeinschaft-prod` → Permission: „Sending access" → Domains: alle
+3. **Domain bei Resend verifizieren** *(optional aber empfohlen)* — wenn `werkstatt-gemeinschaft.de` (oder welche Domain Katharina entscheidet) feststeht: Resend → Domains → Add → DNS-Einträge bei Domain-Registrar setzen *(SPF, DKIM, MX)*. Bis dahin: `onboarding@resend.dev` als Absender — Resend lässt das für Tests zu.
+4. **In Vercel-Project-Settings → Environment Variables** *(Production scope)*:
+   - `RESEND_API_KEY` = `re_xxxxx...` *(der Key aus Schritt 2)*
+   - `MITKOMMEN_TO` = `kontakt@werkstatt-gemeinschaft.de` *(oder bevorzugte Mail von Katharina — wird Empfänger)*
+   - `MITKOMMEN_FROM` = `mitkommen@werkstatt-gemeinschaft.de` *(verifizierter Absender, ggf. erst `onboarding@resend.dev` bis Domain steht)*
+5. **Re-deploy auslösen** — entweder Push eines kleinen Commits, oder im Vercel-Dashboard „Redeploy" beim aktuellen Build.
+6. **Test:** auf <https://oasen-finder.vercel.app/mitkommen/> ein Testformular absenden → Mail muss bei `MITKOMMEN_TO` ankommen.
+
+### Anti-Spam — was schon eingebaut ist
+
+- **Honeypot-Feld** `_hp` (versteckt für Menschen, Bots füllen es aus → Anfrage wird silently verworfen)
+- **Mail-Format-Check** via Regex
+- **Pflichtfeld-Validation** server-seitig
+- Reply-To wird auf Katharinas Mail-Adresse gesetzt → einfacher zurückschreiben
+
+### Spätere Verbesserungen *(nicht jetzt)*
+
+- Rate-Limiting per IP *(z.B. via Vercel KV oder Upstash Redis)*
+- Captcha-Alternative *(hCaptcha) falls Spam überhand nimmt*
+- Auto-Reply an den Absender *(zweite Resend-Mail an `reply_to`)*
+
+---
+
+## 2. Mail an Katharina — die 5 offenen Inhalts-Fragen + Domain
+
+Sie antwortet asynchron, kein Druck — aber wir können nicht weiter sauber befüllen, bis das geklärt ist.
+
+**Fragen für die Mail:**
+
+1. **Drei Worte für deinen Ton?** *(z.B. „warm, suchend, klar" — die landen in CSS-Kommentaren, Meta-Description, später vielleicht im erkennBAR-Header)*
+2. **DenkBAR und BrauchBAR** — als Sub-Bereich *(aktuell via `kind`-Filter in SchreibBAR/LesBAR)* oder als eigene Seiten?
+3. **`wortgetreu.com`** *(deine Gedicht-Sammlung, TYPO3)*: weiter parallel pflegen oder einmal alles nach LesBAR importieren? *(Pragmatischer Start ist: nur verlinken.)*
+4. **`anthroposophie-lebensnah`** *(deine Site ab 2010)*: noch aktiv? Verlinken oder einstellen?
+5. **„Wir" statt „ich"** — wer ist „wir"? *(in der Bio steht „wir reisen" — wer reist mit? Carla, Familie, eine Gemeinschaft? Das beeinflusst alle Texte.)*
+
+**Plus: Domain-Wunsch** *(P.S. im Fragebogen, Antwort steht noch aus)*. Beispiele:
 - `werkstatt-gemeinschaft.de`
 - `werkstatt-gemeinschaft.org`
 - `katharina-offenborn.de`
@@ -119,39 +79,51 @@ Plus: **Domain-Wunsch** *(P.S. im Fragebogen — antwort noch ausstehend)*. Beis
 
 ---
 
-## 3. Echtes Backend für Mitkommen-Formular
+## 3. Strategische Items *(je nach Priorität)*
 
-Aktuell: `action="mailto:..."` — öffnet den Mail-Client des Users.
-Besser: Server-side Submit.
+### DSGVO + Impressum *(vor Public-Launch zwingend)*
 
-**Realistische Optionen:**
+- **Generator-Lösung** für den Start: eRecht24, Datenschutz-Generator
+- Impressum: Name, Anschrift, Mail, ggf. USt-IdNr.
+- Datenschutz: standard *(Vercel = US-Host, Resend = US, Sanity = EU)* — Generator deckt das ab
+- Beide Seiten existieren als Astro-Pages *(`/impressum/`, `/datenschutz/`)*, aktuell leer — Inhalte rein, fertig
 
-| Tool | Pro | Con |
-|---|---|---|
-| **Vercel-Function + Resend** | Volle Kontrolle, 100 Mails/Tag free | Mehr Setup, API-Key in env |
-| **Web3Forms** | Drop-in, kein Setup, free 250/Monat | Drittanbieter, Privacy |
-| **Formspark** | Schön, einfach | Kostet ab gewissem Volumen |
-| **Buttondown** | Wenn auch Newsletter dazu | Eigener Account nötig |
+### Sanity-Ownership-Transfer auf Katharina
 
-**Strategisches Item 2 in CONTEXT.md** ist Newsletter — wenn wir Buttondown/Substack wählen, kann das Mitkommen-Formular dort mit rein.
+1. Katharina legt sich Sanity-Account an *(eigener Gmail/Posteo etc.)*
+2. Sanity-Dashboard → Project `z6eclgt8` → Members → Add Member → ihre Mail
+3. Sobald sie hinzugefügt ist: ihr „Owner" geben *(Dropdown bei ihrem Eintrag)*
+4. **Vorher** noch: `info@intuitive-fotografie.de` als zweiten Admin hinzufügen → Bus-Faktor abgesichert
 
----
+### A11y-Audit + Mobile-Test
 
-## 4. Weitere offene strategische Items *(siehe PLANUNG.md)*
+- **Lighthouse-Run** auf alle 21 Pages *(via Vercel: PR-Lighthouse-Reports aktivieren, oder lokal `npx unlighthouse`)*
+- **Kontrast-Check** Aubergine-auf-Linen + Honig-Gold-CTAs
+- **Italic-Cormorant** in 14-16px lesbar? Bei Ende-60-Zielgruppe nicht annehmen, prüfen
+- **Touch-Targets** ≥ 44 px *(Nav, CTAs, Form-Checkboxen)*
+- **Mit Katharina am Tablet testen** — sie ist die echte Zielgruppe
 
-- **DSGVO/Impressum** — Generator-Lösung *(eRecht24, Datenschutz-Generator)*, vor Soft-Launch zwingend
-- **Mindest-Content vor Soft-Launch:** Demo-Records sind drin, aber Katharinas eigene Inhalte sollten ergänzt werden
-- **Hub-Logik:** Backlinks von wortgetreu.com, ihren YouTube/Spotify/Apple Music-Profilen auf die neue Site setzen
-- **Sanity-Ownership-Transfer auf Katharina** *(sie braucht einen eigenen Account, dann Member-Add + Owner-Transfer)*
-- **A11y-Audit + Mobile-Test mit Katharina am Tablet** vor Public-Launch
-- **info@-Account als Backup-Admin** im Sanity-Projekt *(Bus-Faktor)*
+### Hub-Logik *(Backlinks setzen)*
+
+- Bestehende Sites *(wortgetreu.com, anthroposophie-lebensnah)*: Link in Sidebar/Footer auf neue Site
+- YouTube/Spotify/Apple-Music-Profile *(sobald aktiv)*: Bio-Link → neue Site
+- Substack *(wenn Newsletter darüber läuft)*: Profil-Link
+
+### Newsletter *(strategisches Item 2)*
+
+Tool-Entscheidung steht noch aus:
+- **Buttondown** *(klein, fein, DSGVO-freundlich)*
+- **Substack** *(Reichweite, Discovery)*
+- **MailerLite** *(volle Kontrolle)*
+
+Wenn Newsletter klar ist, kann das Mitkommen-Formular eine optionale „Auch in den Newsletter eintragen"-Checkbox bekommen.
 
 ---
 
 ## Wichtige Konventionen *(siehe CONTEXT.md im Detail)*
 
 - **Du-Form** zwischen Auftraggeber und Katharina
-- **Deutsche Commit-Messages** mit thematischem Präfix *(„Hero:", „SchreibBAR:", „Brand:")*
+- **Deutsche Commit-Messages** mit thematischem Präfix *(„Mitkommen:", „Doku:", „A11y:")*
 - **Atomare Commits bei klaren Meilensteinen** *(siehe „Commit-Workflow" in CONTEXT.md)*
 - **Brand-Farben:**
   - `--accent-gold: #c08538` *(Hero-Frage, CTAs, WERK-Silbe)*
@@ -169,15 +141,19 @@ Besser: Server-side Submit.
 | Vercel-Dashboard | <https://vercel.com/bolteds-projects/oasen-finder> |
 | Sanity-Studio | <https://werkstatt-gemeinschaft.sanity.studio/> |
 | Sanity-Dashboard | <https://www.sanity.io/manage/project/z6eclgt8> |
+| Resend *(zu erstellen)* | <https://resend.com> |
 
 ## Lokale Entwicklung
 
 ```bash
 # Astro-Frontend
-cd astro && pnpm install && pnpm dev    # http://localhost:4321
+cd astro && npm install && npm run dev    # http://localhost:4321
 
 # Sanity-Studio
 cd astro/sanity && pnpm install && pnpm dev   # http://localhost:3333
+
+# Funktions-Test (Mitkommen lokal mit echtem POST)
+npx vercel dev   # im Repo-Root, simuliert /api/mitkommen
 
 # Demo-Content neu importieren
 cd astro/sanity && pnpm dlx sanity@latest dataset import seed/demo.ndjson --dataset production --replace
@@ -188,6 +164,6 @@ cd astro/sanity && pnpm dlx sanity@latest dataset import seed/demo.ndjson --data
 ## Was du der neuen Session sagen kannst
 
 > Lies `CONTEXT.md`, `PLANUNG.md`, `NEXT-SESSION.md` und `KATHARINA-ANTWORTEN.md`.
-> Wir machen weiter mit dem Vercel-Cutover-Fix (Node-Version), siehe `NEXT-SESSION.md` Schritt 1.
+> Die Site ist live; nächster Top-Schritt ist Resend aktivieren *(`NEXT-SESSION.md` Schritt 1)*.
 
 Damit ist sie/er innerhalb von ~3 Minuten orientiert.

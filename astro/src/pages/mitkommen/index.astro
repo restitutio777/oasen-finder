@@ -18,8 +18,6 @@ const categories = config?.inviteCategories || [
   { kind: 'gespraech', label: { de: 'Persönliches Gespräch' } },
   { kind: 'vernetzung', label: { de: 'Bei der Vernetzung helfen' } },
 ];
-
-const mailTo = config?.emailRecipient || 'kontakt@werkstatt-gemeinschaft.example';
 ---
 
 <BaseLayout title="Mitkommen — WERKstatt Gemeinschaft" description="Drei Wege zu Katharina">
@@ -34,22 +32,21 @@ const mailTo = config?.emailRecipient || 'kontakt@werkstatt-gemeinschaft.example
         }
       </header>
 
-      {/* Echtes Formular — wird in Phase 1 mit Netlify-Forms / Formspree / Vercel
-           Function für Server-Submit ausgestattet. Hier vorerst: mailto-Fallback. */}
       <form
-        action={`mailto:${mailTo}`}
+        id="mitkommen-form"
         method="post"
-        enctype="text/plain"
+        action="/api/mitkommen"
+        novalidate
         style="max-width: 640px; margin: 3rem auto; display: grid; gap: 1.25rem;"
       >
         <label style="display: grid; gap: 0.4rem;">
           <span class="eyebrow">Dein Name</span>
-          <input type="text" name="name" required style="padding: 0.75rem; border: 1px solid var(--border-medium); border-radius: 4px; font-family: var(--font-text); font-size: 16px;" />
+          <input type="text" name="name" required minlength="2" maxlength="200" autocomplete="name" style="padding: 0.75rem; border: 1px solid var(--border-medium); border-radius: 4px; font-family: var(--font-text); font-size: 16px;" />
         </label>
 
         <label style="display: grid; gap: 0.4rem;">
           <span class="eyebrow">Deine Mail-Adresse</span>
-          <input type="email" name="email" required style="padding: 0.75rem; border: 1px solid var(--border-medium); border-radius: 4px; font-family: var(--font-text); font-size: 16px;" />
+          <input type="email" name="email" required autocomplete="email" style="padding: 0.75rem; border: 1px solid var(--border-medium); border-radius: 4px; font-family: var(--font-text); font-size: 16px;" />
         </label>
 
         <fieldset style="display: grid; gap: 0.75rem; border: 1px solid var(--border-subtle); padding: 1.5rem; border-radius: 4px;">
@@ -71,17 +68,128 @@ const mailTo = config?.emailRecipient || 'kontakt@werkstatt-gemeinschaft.example
 
         <label style="display: grid; gap: 0.4rem;">
           <span class="eyebrow">Deine Nachricht</span>
-          <textarea name="message" rows="6" required style="padding: 0.75rem; border: 1px solid var(--border-medium); border-radius: 4px; font-family: var(--font-text); font-size: 16px;"></textarea>
+          <textarea name="message" rows="6" required minlength="5" maxlength="8000" style="padding: 0.75rem; border: 1px solid var(--border-medium); border-radius: 4px; font-family: var(--font-text); font-size: 16px;"></textarea>
         </label>
 
-        <button type="submit" class="btn btn--primary">Absenden →</button>
+        {/* Honeypot — versteckt vor Menschen, Bots füllen es. tabindex=-1 + autocomplete=off als zusätzliche Hinweise. */}
+        <div aria-hidden="true" style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;">
+          <label>
+            Bitte leer lassen
+            <input type="text" name="_hp" tabindex="-1" autocomplete="off" />
+          </label>
+        </div>
 
-        <p style="font-size: 13px; color: var(--text-secondary);">
+        <button type="submit" class="btn btn--primary" id="mitkommen-submit">Absenden →</button>
+
+        <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
           Rahmenbedingungen (Honorar, Reisekosten, Mindestgruppe) besprechen wir individuell.
         </p>
+
+        {/* Status-Boxen — initial versteckt, werden vom Script eingeblendet */}
+        <div
+          id="mitkommen-success"
+          role="status"
+          hidden
+          style="margin-top: 1.5rem; padding: 1.25rem 1.5rem; border-radius: 4px; background: var(--accent-warm); color: var(--bg-primary); font-family: var(--font-display); font-size: 18px; line-height: 1.5;"
+        >
+          <strong style="display: block; font-size: 22px; margin-bottom: 0.4rem;">Danke!</strong>
+          Deine Nachricht ist angekommen. Ich melde mich, sobald ich Ruhe finde.
+        </div>
+
+        <div
+          id="mitkommen-error"
+          role="alert"
+          hidden
+          style="margin-top: 1.5rem; padding: 1.25rem 1.5rem; border-radius: 4px; background: var(--accent); color: var(--bg-primary); font-family: var(--font-text); font-size: 15px; line-height: 1.5;"
+        >
+          <strong style="display: block; font-size: 16px; margin-bottom: 0.4rem;">Da ist etwas schiefgelaufen.</strong>
+          <span id="mitkommen-error-text">Bitte versuche es nochmal, oder schreib direkt an <a href="mailto:kontakt@werkstatt-gemeinschaft.example" style="color: var(--bg-primary); text-decoration: underline;">kontakt@werkstatt-gemeinschaft</a>.</span>
+        </div>
       </form>
 
       <p class="invite__signature">— Katharina Offenborn</p>
     </div>
   </section>
+
+  <script is:inline>
+  (function () {
+    const form = document.getElementById('mitkommen-form');
+    if (!form) return;
+    const submit = document.getElementById('mitkommen-submit');
+    const successBox = document.getElementById('mitkommen-success');
+    const errorBox = document.getElementById('mitkommen-error');
+    const errorText = document.getElementById('mitkommen-error-text');
+    const originalLabel = submit ? submit.textContent : 'Absenden →';
+
+    function showSuccess() {
+      if (errorBox) errorBox.hidden = true;
+      if (successBox) {
+        successBox.hidden = false;
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      form.reset();
+    }
+
+    function showError(msg) {
+      if (successBox) successBox.hidden = true;
+      if (errorBox && errorText) {
+        if (msg) errorText.textContent = msg;
+        errorBox.hidden = false;
+        errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (successBox) successBox.hidden = true;
+      if (errorBox) errorBox.hidden = true;
+
+      // Native required-Check
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (submit) {
+        submit.disabled = true;
+        submit.textContent = 'Wird gesendet …';
+      }
+
+      // Form-Daten sammeln, anliegen[] als Array
+      const fd = new FormData(form);
+      const anliegen = fd.getAll('anliegen');
+      const payload = {
+        name: String(fd.get('name') || ''),
+        email: String(fd.get('email') || ''),
+        message: String(fd.get('message') || ''),
+        anliegen: anliegen,
+        _hp: String(fd.get('_hp') || ''),
+      };
+
+      try {
+        const res = await fetch('/api/mitkommen', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        let data = {};
+        try { data = await res.json(); } catch (_) {}
+
+        if (res.ok && data && data.ok) {
+          showSuccess();
+        } else {
+          showError(data && data.error ? data.error : null);
+        }
+      } catch (err) {
+        showError('Verbindung zum Server fehlgeschlagen. Bist du offline?');
+      } finally {
+        if (submit) {
+          submit.disabled = false;
+          submit.textContent = originalLabel;
+        }
+      }
+    });
+  })();
+  </script>
 </BaseLayout>

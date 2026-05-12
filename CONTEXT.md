@@ -1,6 +1,6 @@
 # Werkstatt Gemeinschaft — Projekt-Kontext
 
-*Stand: 11. Mai 2026. Wiedereinstiegspunkt für jede neue Session — wenn du als Claude (oder als Mensch) frisch in dieses Projekt einsteigst, lies dies zuerst.*
+*Stand: 12. Mai 2026, Abend. Wiedereinstiegspunkt für jede neue Session — wenn du als Claude (oder als Mensch) frisch in dieses Projekt einsteigst, lies dies zuerst.*
 
 ---
 
@@ -10,38 +10,50 @@ Persönliche Website für **Katharina Offenborn** *(Ergotherapeutin, Ende 60, me
 
 ---
 
-## Wo wir gerade stehen *(Stand 12. Mai 2026, Abend)*
+## Wo wir gerade stehen *(Stand 12. Mai 2026, Abend — Cutover live)*
 
 ### Was live ist auf [oasen-finder.vercel.app](https://oasen-finder.vercel.app)
 
-- ✅ **Statisches `index.html`** im Root *(noch aktuell — Astro-Cutover gescheitert, siehe unten)*
+- ✅ **Astro 5 Multi-Page-Site** — 21 Pages, alle BAR-Räume mit Index + Detail-Routen
+- ✅ **Sanity-Content live im Build** — Bio, Notizen, Stationen (mit Karte), Werkstatt-Termin, Quellen, Mitkommen-Config
+- ✅ **PortableText-Renderer** für alle Rich-Text-Felder *(Italic, Bold, Headings, Quotes, Links)*
+- ✅ **Leaflet-Karte** mit OSM-Tiles + Brand-Pins auf `/bewegbar/`
+- ✅ **SanityImage** — srcset + auto-WebP/AVIF, lazy by default
+- ✅ **i18n-Routing** — `/` deutsch, `/fr/` + `/en/` als Sub-Stubs, hreflang gesetzt
+- ✅ **Mitkommen-Formular** mit echtem Server-Submit *(Vercel-Function `/api/mitkommen`, Resend-ready — siehe unten)*
+- ✅ **Sitemap** `sitemap-index.xml` automatisch generiert via `@astrojs/sitemap`
+- ✅ **Brand-Markers** im HTML: Title, Description, Cormorant Garamond + Inter, WERK-Gold-Accent
 - ✅ Brand „WERKstatt Gemeinschaft" + Claim „Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs"
-- ✅ Hero-Foto Werkbank, BAR-Naming, Honig-Gold-Akzente, Sub-Nav mit Räume-Dropdown
-- ✅ Inhalte mit Katharinas Stimme *(Bio, Notizen mit Kreta-Hafen, etc.)*
 
-### Was im `/astro/`-Folder vorbereitet liegt *(noch nicht live)*
+### Sanity-Studio
 
-- ✅ **Astro 5 + Sanity-Setup komplett** — Schemas, Pages, Layout, Components
-- ✅ **Sanity-Projekt** `z6eclgt8` *(WERKstatt Gemeinschaft, Org: Intuitivmedia, Plan: Growth Trial)*
 - ✅ **Studio deployt:** <https://werkstatt-gemeinschaft.sanity.studio/>
-- ✅ **10 Demo-Records im production-Dataset** *(Bio, 3 Notizen, 2 Stationen mit Koordinaten, 1 Termin, 2 Quellen, Mitkommen-Config)*
-- ✅ **PortableText-Renderer** für alle Rich-Text-Felder
-- ✅ **Leaflet-Karte** mit OSM-Tiles + Brand-Pins für BewegBAR
-- ✅ **SanityImage-Komponente** mit srcset + auto-format
-- ✅ **i18n-Routing** *(de default, /fr/ und /en/ als Sub)*
-- ✅ **Lokaler Build** erfolgreich: 21 Pages, alle Sanity-Detail-Routen gerendert
+- ✅ **Projekt** `z6eclgt8` *(WERKstatt Gemeinschaft, Org: Intuitivmedia, Plan: Growth Trial)*
+- ✅ **10 Demo-Records im production-Dataset** *(Bio, 3 Notizen, 2 Stationen, 1 Werkstatt, 2 Quellen, Mitkommen-Config)*
 
-### Was BLOCKIERT *(muss vor Cutover gefixt sein)*
+### Build & Deploy
 
-- ❌ **Vercel-Cutover** *(Commit `6df0315`)* schlug fehl — `ERR_PNPM_META_FETCH_FAIL` weil Vercel's Default-Node-Version *(vermutlich 18 oder 20)* mit `pnpm@10` inkompatibel ist. Wir haben auf den alten `vercel.json` zurückgerollt → Live bleibt der statische Prototyp.
+- ✅ **Vercel-Cutover am 12.05.2026 live geschaltet** — Commit `1bd9891`
+- ✅ **Stack:** Astro 5 + npm + Node 22+ → Vercel Static Build
+- ✅ **`package-lock.json` eingecheckt** für reproducible builds
+- ✅ **`pnpm-lock.yaml` bleibt gitignored** — lokal kann beides genutzt werden, Vercel nutzt npm
 
-### Was offen ist *(blockiert Cutover NICHT, kann später)*
+### Cutover-Historie *(damit zukünftige Sessions die Story kennen)*
 
+- ❌ **Versuch 1** (`6df0315`): pnpm 10 → `ERR_PNPM_META_FETCH_FAIL` *(URLSearchParams-Bug)*
+- ❌ **Versuch 2** (`1d2b285`): pnpm 10 + Node 22 fixiert → selber Fehler. Node-Version war **nicht** die Ursache.
+- ✅ **Versuch 3** (`1bd9891`): Auf npm gewechselt + `package-lock.json` eingecheckt → **READY** in 16 s.
+
+### Was noch offen ist *(nicht-blockierend)*
+
+- ⏳ **Resend-Setup für Mitkommen-Formular:** API-Key in Vercel-Env eintragen *(siehe `NEXT-SESSION.md` → „Resend aktivieren")*. Aktuell läuft die Function im „Log-Modus" — Validation + Honeypot funktionieren, Mails werden nur in Vercel-Logs geschrieben.
 - ⏳ **5 inhaltliche Klärungen mit Katharina:** 3 Worte für Ton · Sub-Bereiche DenkBAR/BrauchBAR · wortgetreu.com Verlinkung · anthroposophie-lebensnah Status · „Wir" statt „ich" — Bedeutung
-- ⏳ **Mitkommen-Formular-Backend** *(aktuell mailto-Fallback)*
 - ⏳ **info@-Account** als zweiter Sanity-Member *(Backup für Bus-Faktor)*
 - ⏳ **Domain** *(P.S. im Fragebogen — Antwort noch ausstehend)*
-- ⏳ **DSGVO/Impressum** vor Public-Launch
+- ⏳ **DSGVO/Impressum** vor Public-Launch *(Generator-Lösung, z.B. eRecht24)*
+- ⏳ **A11y-Audit + Mobile-Test mit Katharina am Tablet**
+- ⏳ **Sanity-Ownership-Transfer** auf Katharina, sobald sie eigenen Account hat
+- ⏳ **HörBAR-Demo-Records** *(noch keine Episoden, Index leer)* — kommt mit Katharinas eigenen Inhalten
 
 ---
 
@@ -309,9 +321,9 @@ Damit du nicht überrascht bist von Sachen, die schon erwogen und verworfen sind
   - Dataset `production`: 10 Demo-Records importiert *(Bio, 3 Notizen, 2 Stationen, 1 Werkstatt, 2 Quellen, Mitkommen-Config)*
   - Aktuell unter Auftraggeber-Account *(Gmail-Account, der das Projekt anlegte)*, Ownership-Transfer auf Katharina später
   - **Backup-Member-Strategie:** info@intuitive-fotografie.de soll als zweiter Admin hinzugefügt werden für Bus-Faktor
-- **Lokaler Preview-Server:** `python3 -m http.server 4321` oder via `.claude/launch.json`
-- **Lokaler Astro-Dev:** `cd astro && pnpm install && pnpm dev` *(Port 4321)*
+- **Lokaler Astro-Dev:** `cd astro && npm install && npm run dev` *(Port 4321)* — Vercel nutzt npm, lokal funktioniert auch pnpm parallel
 - **Lokales Sanity-Studio:** `cd astro/sanity && pnpm install && pnpm dev` *(Port 3333)*
+- **Lokaler Function-Test:** `npx vercel dev` *(im Repo-Root, simuliert `/api/mitkommen`)*
 
 ---
 
@@ -324,4 +336,4 @@ Bei Unsicherheit, **bevor** du etwas Neues vorschlägst:
 3. Bezieh dich konkret auf das, was schon da ist — nicht von Null neu denken
 4. Frag den Auftraggeber, wenn die Anforderung nicht klar ist
 
-— Letzte Aktualisierung: 11. Mai 2026
+— Letzte Aktualisierung: 12. Mai 2026 (Cutover live + Mitkommen-Backend ready)
