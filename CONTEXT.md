@@ -10,16 +10,38 @@ Persönliche Website für **Katharina Offenborn** *(Ergotherapeutin, Ende 60, me
 
 ---
 
-## Wo wir gerade stehen *(Stand 12. Mai 2026)*
+## Wo wir gerade stehen *(Stand 12. Mai 2026, Abend)*
 
-- ✅ Visueller Prototyp live unter **[oasen-finder.vercel.app](https://oasen-finder.vercel.app)** — sehr weit poliert, Multi-Page-Migration steht noch aus
-- ✅ Fragebogen v4 beantwortet, Katharinas Stimme in den Inhalten
-- ✅ **-BAR-Architektur entschieden:** 9 Räume *(VereinBAR · erkennBAR · SchreibBAR · BewegBAR · MachBAR · LesBAR · HörBAR · DenkBAR · BrauchBAR)* + Mitkommen
-- ✅ **Brand entschieden:** WERKstatt Gemeinschaft + Claim; „WERK"-Silbe in Honig-Gold als Brand-Akzent durchgezogen
-- ✅ **VereinBAR** als Hero-Bereich-Name gewählt *(WunderBAR fiel raus weil belegt)*
-- ✅ **URL-Architektur entschieden:** deutsche Pfade *(`/bewegbar/`, `/machbar/` usw.)*, Deutsch ohne Sprach-Präfix, FR/EN als Sub *(siehe PLANUNG.md)*
-- ⏳ **5 offene Klärungen** mit Katharina *(siehe „Offene Klärungen" in PLANUNG.md)*: 3 Worte für ihren Ton · Sub-Bereiche · wortgetreu.com · anthroposophie-lebensnah · „Wir"
-- ⏳ **Phase 1 (Astro + Sanity-Gerüst)** ist der nächste große Schritt — die offenen Klärungen blockieren das nicht
+### Was live ist auf [oasen-finder.vercel.app](https://oasen-finder.vercel.app)
+
+- ✅ **Statisches `index.html`** im Root *(noch aktuell — Astro-Cutover gescheitert, siehe unten)*
+- ✅ Brand „WERKstatt Gemeinschaft" + Claim „Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs"
+- ✅ Hero-Foto Werkbank, BAR-Naming, Honig-Gold-Akzente, Sub-Nav mit Räume-Dropdown
+- ✅ Inhalte mit Katharinas Stimme *(Bio, Notizen mit Kreta-Hafen, etc.)*
+
+### Was im `/astro/`-Folder vorbereitet liegt *(noch nicht live)*
+
+- ✅ **Astro 5 + Sanity-Setup komplett** — Schemas, Pages, Layout, Components
+- ✅ **Sanity-Projekt** `z6eclgt8` *(WERKstatt Gemeinschaft, Org: Intuitivmedia, Plan: Growth Trial)*
+- ✅ **Studio deployt:** <https://werkstatt-gemeinschaft.sanity.studio/>
+- ✅ **10 Demo-Records im production-Dataset** *(Bio, 3 Notizen, 2 Stationen mit Koordinaten, 1 Termin, 2 Quellen, Mitkommen-Config)*
+- ✅ **PortableText-Renderer** für alle Rich-Text-Felder
+- ✅ **Leaflet-Karte** mit OSM-Tiles + Brand-Pins für BewegBAR
+- ✅ **SanityImage-Komponente** mit srcset + auto-format
+- ✅ **i18n-Routing** *(de default, /fr/ und /en/ als Sub)*
+- ✅ **Lokaler Build** erfolgreich: 21 Pages, alle Sanity-Detail-Routen gerendert
+
+### Was BLOCKIERT *(muss vor Cutover gefixt sein)*
+
+- ❌ **Vercel-Cutover** *(Commit `6df0315`)* schlug fehl — `ERR_PNPM_META_FETCH_FAIL` weil Vercel's Default-Node-Version *(vermutlich 18 oder 20)* mit `pnpm@10` inkompatibel ist. Wir haben auf den alten `vercel.json` zurückgerollt → Live bleibt der statische Prototyp.
+
+### Was offen ist *(blockiert Cutover NICHT, kann später)*
+
+- ⏳ **5 inhaltliche Klärungen mit Katharina:** 3 Worte für Ton · Sub-Bereiche DenkBAR/BrauchBAR · wortgetreu.com Verlinkung · anthroposophie-lebensnah Status · „Wir" statt „ich" — Bedeutung
+- ⏳ **Mitkommen-Formular-Backend** *(aktuell mailto-Fallback)*
+- ⏳ **info@-Account** als zweiter Sanity-Member *(Backup für Bus-Faktor)*
+- ⏳ **Domain** *(P.S. im Fragebogen — Antwort noch ausstehend)*
+- ⏳ **DSGVO/Impressum** vor Public-Launch
 
 ---
 
