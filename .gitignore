@@ -6,6 +6,8 @@ dist
 .env.*
 !.env.example
 .claude/worktrees/
+.claude/scheduled_tasks.lock
+.claude/*.lock
 .fragebogen-style.html
 FRAGEBOGEN-KATHARINA.pdf
 FRAGEBOGEN-KATHARINA.html
