@@ -475,26 +475,32 @@
     margin-bottom: 32px;
     color: var(--text-secondary);
     font-weight: 500;
-    /* Eyebrow wird zum Claim — mixed-case, etwas groesser, ruhig */
+    /* Eyebrow wird zum Claim — mixed-case, italic Cormorant fuer Ruhe */
     text-transform: none;
     letter-spacing: 0;
-    font-size: 14px;
+    font-size: clamp(15px, 1.4vw, 18px);
     font-family: var(--font-display);
     font-style: italic;
+    line-height: 1.5;
+    max-width: 640px;
   }
   .hero__eyebrow::before {
     /* Strich verkuerzen, weil Eyebrow jetzt langer Text ist */
     width: 18px;
   }
   /* WERK-Silbe in Honig-Gold — gleiche Familie wie "Gemeinschaft?" und CTAs.
-     Generische Klasse, ueberall einsetzbar (Header-Brand, Eyebrow, Footer) */
+     Generische Klasse, ueberall einsetzbar (Header-Brand, Eyebrow, Footer).
+     KEIN letter-spacing — sonst entsteht eine Luecke zum Nachbar-Text. */
   .werk-accent,
   .hero__eyebrow-werk {
     font-style: normal;
     font-weight: 700;
     color: var(--accent-gold);
-    letter-spacing: 0.02em;
+    letter-spacing: 0;
   }
+  /* Nowrap-Wrapper verhindert dass "GemeinschaftsWERK" ueber Zeilenumbruch
+     getrennt wird */
+  .hero__eyebrow-nowrap { white-space: nowrap; }
   .hero__title {
     font-size: clamp(2.5rem, 6.8vw, 5.5rem);
     line-height: 1.05;
@@ -1995,7 +2001,7 @@
 <section class="hero">
   <div class="container hero__inner">
     <div class="hero__main">
-      <span class="eyebrow hero__eyebrow">Miteinander vereinBAR — Gemeinschafts<em class="hero__eyebrow-werk">WERK</em> statt allein unterwegs</span>
+      <span class="eyebrow hero__eyebrow">Miteinander vereinBAR — <span class="hero__eyebrow-nowrap">Gemeinschafts<em class="hero__eyebrow-werk">WERK</em></span> statt allein unterwegs</span>
       <h1 class="hero__title">
         <span class="hero__title-a">Auf der Suche —</span><br>
         <span class="hero__title-b">wie wird <em>Gemeinschaft?</em></span>
