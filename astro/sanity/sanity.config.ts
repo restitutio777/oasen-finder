@@ -17,8 +17,12 @@ export default defineConfig({
   name: 'werkstatt-gemeinschaft',
   title: 'WERKstatt Gemeinschaft',
 
-  // TODO: ergänzen sobald Sanity-Projekt in Katharinas Namen angelegt ist
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'PROJECT_ID_PLACEHOLDER',
+  // Project: WERKstatt Gemeinschaft
+  // Organization: Intuitivmedia (ow7ACwTD3)
+  // Plan: Growth Trial — aktuell auf Auftraggeber-Account, Transfer auf
+  // Katharina später via Project Settings > Members + Ownership-Transfer
+  // (siehe README.md > "Setup-Strategie für späteren Transfer")
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'z6eclgt8',
   dataset: process.env.SANITY_STUDIO_DATASET || 'production',
 
   plugins: [

@@ -281,7 +281,13 @@ Damit du nicht überrascht bist von Sachen, die schon erwogen und verworfen sind
 - **GitHub-Repo:** https://github.com/restitutio777/oasen-finder
 - **GitHub-Account:** `restitutio777` *(User ist eingeloggt)*
 - **Vercel:** Account `bolteds-projects`, Projekt `oasen-finder`
+- **Sanity-Projekt:** `WERKstatt Gemeinschaft` *(Project ID: `z6eclgt8`, Org: Intuitivmedia `ow7ACwTD3`, Plan: Growth Trial)*
+  - Dashboard: <https://www.sanity.io/organizations/ow7ACwTD3/project/z6eclgt8>
+  - Aktuell unter Auftraggeber-Account, Ownership-Transfer auf Katharina später *(siehe `astro/README.md` „Setup-Strategie")*
+  - Demo-Seeds vorbereitet in `astro/sanity/seed/demo.ndjson` *(10 Records)*
 - **Lokaler Preview-Server:** `python3 -m http.server 4321` oder via `.claude/launch.json`
+- **Lokaler Astro-Dev:** `cd astro && pnpm install && pnpm dev` *(Port 4321)*
+- **Lokales Sanity-Studio:** `cd astro/sanity && pnpm install && pnpm dev` *(Port 3333)*
 
 ---
 

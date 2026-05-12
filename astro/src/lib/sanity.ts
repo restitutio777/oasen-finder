@@ -12,12 +12,13 @@ import { createClient, type ClientConfig } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
-const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID;
+// Defaults aus dem produktiven Setup — können via .env überschrieben werden
+const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID || 'z6eclgt8';
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'production';
 const apiVersion = import.meta.env.PUBLIC_SANITY_API_VERSION || '2024-03-01';
 
 const config: ClientConfig = {
-  projectId: projectId || 'PROJECT_ID_PLACEHOLDER',
+  projectId,
   dataset,
   apiVersion,
   // Lese-Zugriff via CDN — schnell + kostenfrei für public datasets
@@ -51,7 +52,10 @@ export function localized<T>(
 }
 
 /**
- * Flag, ob Sanity tatsächlich konfiguriert ist (für graceful degradation
- * solange das Projekt noch nicht aufgesetzt ist).
+ * Projekt ist konfiguriert (z6eclgt8). Lädt seit dem ersten Eintrag
+ * im Studio echte Daten. Bevor Inhalte da sind, geben die GROQ-Queries
+ * leere Arrays/null zurück und die Pages zeigen ihre Fallback-Hinweise.
  */
-export const isSanityConfigured = projectId && projectId !== 'PROJECT_ID_PLACEHOLDER';
+export const isSanityConfigured = true;
+export const sanityProjectId = projectId;
+export const sanityDataset = dataset;

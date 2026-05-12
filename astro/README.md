@@ -14,8 +14,9 @@ ist Vorbereitung für den späteren Cutover.
 | **Sanity-Client** | ✅ Setup im Code, wartet auf `.env`-Werte |
 | **Pages** | ✅ Skelette für alle BARs (Listen + Detail) + Legal + i18n-Stubs |
 | **CSS-Migration** | ✅ `global.css` aus `index.html` extrahiert |
-| **Sanity-Account** | ⏳ noch nicht angelegt *(in Katharinas Namen)* |
-| **Content** | ⏳ Sanity-Datasatz noch leer |
+| **Sanity-Projekt** | ✅ `z6eclgt8` *(Org: Intuitivmedia, Plan: Growth Trial)* — Ownership-Transfer auf Katharina später |
+| **Schemas im Studio** | ⏳ noch nicht deployt *(siehe „Sanity-Setup" unten)* |
+| **Content** | ⏳ Demo-Seeds vorbereitet in `sanity/seed/demo.ndjson` (10 Records) |
 | **PortableText-Renderer** | ⏳ Folge-Commit *(aktuell Platzhalter)* |
 | **Leaflet-Karte** *(BewegBAR)* | ⏳ Folge-Commit |
 | **Formular-Submit** *(Mitkommen)* | ⏳ noch mailto-Fallback |
@@ -47,34 +48,68 @@ ist Vorbereitung für den späteren Cutover.
 **i18n:** Deutsch ist Default ohne Sprach-Präfix, `/fr/...` und `/en/...`
 als Sub-Pfade. Astro-Config: `prefixDefaultLocale: false`.
 
-## Sanity-Setup *(nächster Schritt)*
+## Sanity-Setup
 
-1. **Account anlegen** auf [sanity.io](https://www.sanity.io/) —
-   **in Katharinas Namen**, ihre Mail als Owner *(Bus-Faktor, siehe
-   CONTEXT.md Item 6)*. Auftraggeber als zweiter Admin.
+**Projekt schon angelegt:**
+- Project ID: `z6eclgt8`
+- Organization: Intuitivmedia (`ow7ACwTD3`)
+- Plan: Growth Trial
+- Dashboard: <https://www.sanity.io/organizations/ow7ACwTD3/project/z6eclgt8>
 
-2. **Projekt erstellen**, Projekt-ID notieren.
+Diese Werte sind als Defaults im Code (`astro/src/lib/sanity.ts` und
+`astro/sanity/sanity.config.ts`) hardcoded — kein `.env` für den
+Anfang nötig.
 
-3. **Schemas deployen:** im `sanity/`-Folder
-   ```bash
-   cd sanity
-   pnpm install
-   pnpm dev      # lokales Studio auf http://localhost:3333
-   pnpm deploy   # ins Sanity-Cloud-Hosting
-   ```
-   Studio läuft unter `https://werkstatt-gemeinschaft.sanity.studio`
-   o.ä. — Katharina kann sich einloggen und Inhalte pflegen.
+### Setup-Strategie für späteren Transfer
 
-4. **Astro mit Sanity verbinden:** `.env.example` → `.env`, Projekt-ID
-   und Dataset eintragen.
+**Phase A *(jetzt, Auftraggeber-Account)*:**
+Konto unter deiner Mail, Projekt liegt unter Intuitivmedia-Org.
+Schemas + Studio + Inhalte hier setzen.
 
-5. **Erste Inhalte einpflegen:** als Katharina oder gemeinsam mit ihr.
-   Mindest-Content für Soft-Launch *(strategisches Item 5 in CONTEXT.md)*:
-   - erkennBAR: Bio, Mantra, mind. 1 Porträt
-   - 3-5 SchreibBAR-Notizen
-   - 2-3 BewegBAR-Stationen mit Koordinaten
-   - 1-2 LesBAR-Einträge
-   - Mitkommen-Konfiguration mit Empfänger-Mail
+**Phase B *(wenn Katharina soweit ist)*:**
+1. Katharina registriert sich auf [sanity.io](https://www.sanity.io/) mit ihrer Mail
+2. Im Project Settings → Members → Add Member → Katharinas Mail mit Rolle "Administrator"
+3. Project Settings → Transfer ownership → Katharinas Account auswählen
+4. Resultat: **Sie = Owner**, du = Admin (Backup) — idealer Bus-Faktor
+
+### Schemas deployen
+
+```bash
+cd astro/sanity
+pnpm install
+pnpm dev          # lokales Studio auf http://localhost:3333
+                  # → einmal einloggen, dann ist der CLI-Cache da
+
+pnpm deploy       # ins Sanity-Cloud-Hosting
+                  # → werkstatt-gemeinschaft.sanity.studio (oder ähnlich)
+```
+
+### Demo-Content importieren
+
+10 Records (Bio, 3 Notizen, 2 Stationen, 1 Termin, 2 Quellen, Formular-Config)
+liegen in `astro/sanity/seed/demo.ndjson` bereit:
+
+```bash
+cd astro/sanity
+pnpm dlx sanity@latest dataset import seed/demo.ndjson production --replace
+```
+
+Damit ist der Dataset sofort befüllt, das Astro-Frontend hat etwas zu zeigen.
+Siehe `astro/sanity/seed/README.md` für Details zu jedem Record.
+
+### Inhalts-Pflege durch Katharina
+
+Sobald Studio deployt ist, kann sie sich einloggen und Inhalte ergänzen:
+- **Fotos** in die Records ziehen (Drag & Drop)
+- **FR/EN-Übersetzungen** schrittweise ergänzen
+- **Mehr Stationen, Notizen, Termine** anlegen
+
+Mindest-Content für Soft-Launch *(strategisches Item 5 in CONTEXT.md)*:
+- erkennBAR: ✅ Bio drin, Foto fehlt
+- 3-5 SchreibBAR-Notizen: ✅ 3 drin
+- 2-3 BewegBAR-Stationen: ✅ 2 drin
+- 1-2 LesBAR-Einträge: ✅ 2 drin
+- Mitkommen-Mail-Adresse: ⚠️ aktuell `example.com` — vor Public-Launch echte Adresse
 
 ## Lokale Entwicklung
 
