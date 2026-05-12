@@ -62,22 +62,30 @@ const { event } = Astro.props;
         </div>
       )}
 
-      <aside style="margin-top: 3rem; padding: 1.5rem; background: var(--bg-warm); border-radius: 6px;">
-        <h3 class="eyebrow">Anmeldung</h3>
-        <p style="margin-top: 0.75rem;">
-          {event.registration?.mode === 'mail' && event.registration?.target && (
-            <a href={`mailto:${event.registration.target}?subject=Werkstatt-Anmeldung: ${localized(event.title)}`}>
-              Per Mail anmelden →
-            </a>
-          )}
-          {event.registration?.mode === 'link' && event.registration?.target && (
-            <a href={event.registration.target} target="_blank" rel="noopener">Externe Anmeldung →</a>
-          )}
-          {event.registration?.mode === 'formular' && (
-            <a href="/mitkommen/">Per Formular →</a>
-          )}
-        </p>
-      </aside>
+      {/* Anmeldung-Block nur rendern wenn ein konkreter Weg konfiguriert ist —
+          sonst wirkt eine leere "Anmeldung"-Box wie ein Bug. */}
+      {(
+        (event.registration?.mode === 'mail' && event.registration?.target) ||
+        (event.registration?.mode === 'link' && event.registration?.target) ||
+        event.registration?.mode === 'formular'
+      ) && (
+        <aside style="margin-top: 3rem; padding: 1.5rem; background: var(--bg-warm); border-radius: 6px;">
+          <h3 class="eyebrow">Anmeldung</h3>
+          <p style="margin-top: 0.75rem;">
+            {event.registration?.mode === 'mail' && event.registration?.target && (
+              <a href={`mailto:${event.registration.target}?subject=Werkstatt-Anmeldung: ${localized(event.title)}`}>
+                Per Mail anmelden →
+              </a>
+            )}
+            {event.registration?.mode === 'link' && event.registration?.target && (
+              <a href={event.registration.target} target="_blank" rel="noopener">Externe Anmeldung →</a>
+            )}
+            {event.registration?.mode === 'formular' && (
+              <a href="/mitkommen/">Per Formular →</a>
+            )}
+          </p>
+        </aside>
+      )}
 
       {event.programPdfUrl && (
         <p style="margin-top: 2rem;">

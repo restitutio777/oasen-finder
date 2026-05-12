@@ -91,9 +91,19 @@ export const resource = defineType({
       media: 'coverImage',
     },
     prepare({ title, kind, authorOrSource, media }) {
+      const kindLabel: Record<string, string> = {
+        buch: 'Buch',
+        webseite: 'Webseite',
+        aufsatz: 'Aufsatz',
+        film: 'Film',
+        podcast: 'Podcast',
+        gespraech: 'Gespräch',
+        konzept: 'Konzept (brauchBAR)',
+        werkzeug: 'Werkzeug (brauchBAR)',
+      };
       return {
         title: title || '(ohne Titel)',
-        subtitle: [kind, authorOrSource].filter(Boolean).join(' · '),
+        subtitle: [kindLabel[kind] || kind, authorOrSource].filter(Boolean).join(' · '),
         media,
       };
     },

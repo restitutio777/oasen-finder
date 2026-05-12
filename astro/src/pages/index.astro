@@ -57,7 +57,11 @@ if (isSanityConfigured) {
           <a href="/mitkommen/" class="btn btn--ghost">Wohin jetzt?</a>
         </div>
       </div>
-      <a href="/machbar/" class="hero__meta" aria-label="Nächste Begegnung">
+      <a
+        href={upcomingEvents[0]?.slug ? `/machbar/${upcomingEvents[0].slug}/` : '/machbar/'}
+        class="hero__meta"
+        aria-label="Nächste Begegnung"
+      >
         Nächste Begegnung
         <strong>{upcomingEvents[0]?.startDate ? new Date(upcomingEvents[0].startDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long' }) : '21. Juni'}</strong>
         {upcomingEvents[0]?.location || 'Tempelhof'}
@@ -90,7 +94,7 @@ if (isSanityConfigured) {
                 {note.publishedAt
                   ? new Date(note.publishedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })
                   : ''}
-                {note.kind && ` · ${note.kind === 'denkbar' ? 'DenkBAR' : 'schreibBAR'}`}
+                {note.kind && ` · ${['idee', 'vision', 'umfrage'].includes(note.kind) ? 'denkBAR' : 'schreibBAR'}`}
               </span>
               <h3 style="font-family: var(--font-display); font-size: 1.4rem; line-height: 1.3; margin: 0.6rem 0 0; color: var(--text-primary);">
                 {localized(note.title)}
@@ -124,7 +128,7 @@ if (isSanityConfigured) {
         >
           <span class="eyebrow" style="color: var(--accent-warm);">Reisen</span>
           <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin: 0; color: var(--text-primary);">
-            Beweg<em>BAR</em>
+            beweg<em>BAR</em>
           </h3>
           <p style="color: var(--text-secondary); margin: 0; font-size: 15px; line-height: 1.55;">
             Stationen unterwegs zu Gemeinschaftsorten — mit Karte, Fotos und Notizen.
@@ -140,7 +144,7 @@ if (isSanityConfigured) {
         >
           <span class="eyebrow" style="color: var(--accent-warm);">Werkstätten</span>
           <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin: 0; color: var(--text-primary);">
-            Mach<em>BAR</em>
+            mach<em>BAR</em>
           </h3>
           <p style="color: var(--text-secondary); margin: 0; font-size: 15px; line-height: 1.55;">
             Termine zum Mitmachen — von Sommer-Werkstatt bis Vortrag.
@@ -161,7 +165,7 @@ if (isSanityConfigured) {
         >
           <span class="eyebrow" style="color: var(--accent-warm);">Bibliothek</span>
           <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin: 0; color: var(--text-primary);">
-            Les<em>BAR</em>
+            les<em>BAR</em>
           </h3>
           <p style="color: var(--text-secondary); margin: 0; font-size: 15px; line-height: 1.55;">
             Bücher, Texte und Quellen, die mich tragen und begleiten.
@@ -176,13 +180,13 @@ if (isSanityConfigured) {
     <div class="container" style="max-width: 640px;">
       <span class="eyebrow">Begegnung</span>
       <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 1rem; color: var(--text-primary);">
-        Mit<em>kommen</em>.
+        Mitkommen
       </h2>
       <p style="color: var(--text-secondary); margin: 0 0 2rem; font-size: 17px; line-height: 1.6;">
         Werkstatt, Einladung, Beratung, Gespräch — schreib mir, was du brauchst.
         Ich antworte gern, wenn auch nicht immer schnell.
       </p>
-      <a href="/mitkommen/" class="btn btn--primary">Zum Formular →</a>
+      <a href="/mitkommen/" class="btn btn--primary">Wohin jetzt? →</a>
     </div>
   </section>
 </BaseLayout>
