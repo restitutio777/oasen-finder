@@ -155,22 +155,24 @@
   .brand__noun {
     font-weight: 600;
   }
-  /* "werk" — semantisch verwandt mit "Gemeinschaft" (beides aktive
-     Begriffe), darum gleiche Farbe + Stil. STATT bleibt der
-     gold-Anker dazwischen. */
+  /* "werk" und "Gemeinschaft" — semantisch verwandt, beide in der
+     ruhigen Site-Text-Farbe (Aubergine) und italic Cormorant.
+     STATT ist der einzige Akzent (gold). So gibt's eine klare
+     Hierarchie statt zwei konkurrierender Akzentfarben. */
   .brand__verb {
-    font-weight: 600;
+    font-weight: 500;
     font-style: italic;
-    color: var(--accent-green);
+    color: var(--text-primary);
   }
   .brand__qualifier {
-    font-weight: 600;
+    font-weight: 500;
     font-style: italic;
-    color: var(--accent-green);
+    color: var(--text-primary);
   }
-  /* Footer hat dunklen Hintergrund — helleres Sage statt Fern-Gruen */
+  /* Footer hat dunklen Hintergrund — werk + Gemeinschaft als
+     gedaempfte cream-Farbe, STATT bleibt gold (uebersieht keiner). */
   .site-footer .brand__verb {
-    color: var(--accent-green-soft);
+    color: rgba(246, 244, 238, 0.88);
   }
   .nav {
     display: flex;
@@ -1961,9 +1963,9 @@
   }
   .site-footer__brand-noun { font-weight: 600; }
   .site-footer__brand-qualifier {
-    font-weight: 400;
+    font-weight: 500;
     font-style: italic;
-    color: var(--accent-green-soft);
+    color: rgba(246, 244, 238, 0.88);
   }
   .site-footer__intro {
     font-family: var(--font-display);
