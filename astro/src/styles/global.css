@@ -155,10 +155,22 @@
   .brand__noun {
     font-weight: 600;
   }
+  /* "werk" — semantisch verwandt mit "Gemeinschaft" (beides aktive
+     Begriffe), darum gleiche Farbe + Stil. STATT bleibt der
+     gold-Anker dazwischen. */
+  .brand__verb {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--accent-green);
+  }
   .brand__qualifier {
     font-weight: 400;
     font-style: italic;
-    color: var(--accent-warm);
+    color: var(--accent-green);
+  }
+  /* Footer hat dunklen Hintergrund — helleres Sage statt Fern-Gruen */
+  .site-footer .brand__verb {
+    color: var(--accent-green-soft);
   }
   .nav {
     display: flex;
@@ -1906,7 +1918,7 @@
   .site-footer__brand-qualifier {
     font-weight: 400;
     font-style: italic;
-    color: var(--accent-soft);
+    color: var(--accent-green-soft);
   }
   .site-footer__intro {
     font-family: var(--font-display);
