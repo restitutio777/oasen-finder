@@ -4,6 +4,10 @@
   "version": "0.1.0",
   "description": "WERKstatt Gemeinschaft — Astro-Frontend für Katharina Offenborn. Brand: Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs.",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@10.15.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
