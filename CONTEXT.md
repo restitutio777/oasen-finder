@@ -1,35 +1,50 @@
-# Werkstatt Gemeinschaft — Projekt-Kontext
+# werkSTATT Gemeinschaft — Projekt-Kontext
 
-*Stand: 12. Mai 2026, Abend. Wiedereinstiegspunkt für jede neue Session — wenn du als Claude (oder als Mensch) frisch in dieses Projekt einsteigst, lies dies zuerst.*
+*Stand: 12. Mai 2026, spät. Wiedereinstiegspunkt für jede neue Session — wenn du als Claude (oder als Mensch) frisch in dieses Projekt einsteigst, lies dies zuerst.*
 
 ---
 
 ## In einem Satz
 
-Persönliche Website für **Katharina Offenborn** *(Ergotherapeutin, Ende 60, mehrsprachig)* — eine zentrale Anlaufstelle für ihre Reisen zu Gemeinschaftsorten im DACH-Raum, ihre Werkstätten, Notizen, Lesefrüchte und ggf. einen Podcast. **Brand:** „**WERK**statt Gemeinschaft" mit Claim „Miteinander vereinBAR — Gemeinschafts**WERK** statt allein unterwegs".
+Persönliche Website für **Katharina Offenborn** *(Ergotherapeutin, Ende 60, mehrsprachig)* — eine zentrale Anlaufstelle für ihre Reisen zu Gemeinschaftsorten im DACH-Raum, ihre Werkstätten, Notizen, Lesefrüchte und Audio-Reflexionen. **Brand:** „werk**STATT** Gemeinschaft" *(Akzent auf STATT in Honig-Gold; werk + Gemeinschaft in italic Aubergine)*. **Hero-Claim:** „Gemeinschafts**WERK** statt allein unterwegs".
 
 ---
 
-## Wo wir gerade stehen *(Stand 12. Mai 2026, Abend — Cutover live)*
+## Wo wir gerade stehen *(Stand 12. Mai 2026, spät — komplett ausiteriert)*
 
 ### Was live ist auf [oasen-finder.vercel.app](https://oasen-finder.vercel.app)
 
-- ✅ **Astro 5 Multi-Page-Site** — 21 Pages, alle BAR-Räume mit Index + Detail-Routen
-- ✅ **Sanity-Content live im Build** — Bio, Notizen, Stationen (mit Karte), Werkstatt-Termin, Quellen, Mitkommen-Config
-- ✅ **PortableText-Renderer** für alle Rich-Text-Felder *(Italic, Bold, Headings, Quotes, Links)*
-- ✅ **Leaflet-Karte** mit OSM-Tiles + Brand-Pins auf `/bewegbar/`
-- ✅ **SanityImage** — srcset + auto-WebP/AVIF, lazy by default
-- ✅ **i18n-Routing** — `/` deutsch, `/fr/` + `/en/` als Sub-Stubs, hreflang gesetzt
-- ✅ **Mitkommen-Formular** mit echtem Server-Submit *(Vercel-Function `/api/mitkommen`, Resend-ready — siehe unten)*
-- ✅ **Sitemap** `sitemap-index.xml` automatisch generiert via `@astrojs/sitemap`
-- ✅ **Brand-Markers** im HTML: Title, Description, Cormorant Garamond + Inter, WERK-Gold-Accent
-- ✅ Brand „WERKstatt Gemeinschaft" + Claim „Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs"
+- ✅ **Astro 5 Multi-Page-Site** — 23 Routes, alle BAR-Räume mit Index + Detail-Pages, plus Legals + FR/EN-Stubs
+- ✅ **Brand werkSTATT Gemeinschaft** — Akzent auf STATT, werk + Gemeinschaft italic Aubergine *(eine Akzentfarbe statt zwei)*
+- ✅ **BAR-Namen klein-Anfang überall** — schreibBAR · bewegBAR · machBAR · lesBAR · hörBAR · erkennBAR
+- ✅ **Hero** — „Auf der Suche — wie wird Gemeinschaft?", Subline „Reisen · Werkstätten · Notizen · Fotos", CTAs „In die schreibBAR" + „Wohin jetzt?"
+- ✅ **Page-Banner** auf jeder Hauptseite *(Unsplash-Fotos, sanft desaturated, einheitlicher Look)*
+- ✅ **Mood-Sektionen auf Landing:** „Aus den Notizen" *(3 Karten aus Sanity)*, „Drei Türen" *(BAR-Pfeiler)*, „Mitkommen" *(CTA)*, „Brief von unterwegs" *(Newsletter)*
+- ✅ **Sanity-Content live im Build** — Bio, Notizen, Stationen (mit Leaflet-Karte), Werkstatt-Termin, Quellen, Episoden, Mitkommen-Config, Newsletter-Config
+- ✅ **PortableText-Renderer** mit Standard inline-Links (kein Mention-System — bewusst einfach gehalten)
+- ✅ **SanityImage** — srcset 800/1200/1600/2400, auto WebP/AVIF, lazy
+- ✅ **MediaLink-Component** mit Auto-Embed — YouTube/Vimeo/Spotify/Apple/SoundCloud werden Player, Telegram wird Card
+- ✅ **i18n-Routing** — `/` deutsch, `/fr/` + `/en/` als Stubs, `hreflang` im HTML
+- ✅ **Mitkommen-Formular** mit echtem Server-Submit *(Vercel-Function `/api/mitkommen`, Resend-ready — siehe „Was offen" unten)*
+- ✅ **Newsletter-Block** *(Substack)* auf Landing + erkennBAR, eingebettetes Custom-Widget in Brand-Farben
+- ✅ **Footer** — Brand · Erkunden-Nav · Kontakt-Formular-Link · Telegram-Link *(wenn in Sanity gesetzt)* · Scroll-to-Top · Webdesign-Credit
+- ✅ **Legal-Pages volltext** — Impressum + Datenschutz mit echten Daten + Volltext aller genutzten Dienste *(Vercel, Sanity, Resend, OSM, Unsplash, Google Fonts, Vercel Analytics)*
+- ✅ **Vercel Analytics** im Layout eingebettet *(Aktivierung im Dashboard ausstehend)*
+- ✅ **Sitemap** automatisch via `@astrojs/sitemap`
 
 ### Sanity-Studio
 
-- ✅ **Studio deployt:** <https://werkstatt-gemeinschaft.sanity.studio/>
-- ✅ **Projekt** `z6eclgt8` *(WERKstatt Gemeinschaft, Org: Intuitivmedia, Plan: Growth Trial)*
-- ✅ **10 Demo-Records im production-Dataset** *(Bio, 3 Notizen, 2 Stationen, 1 Werkstatt, 2 Quellen, Mitkommen-Config)*
+- ✅ **Studio live:** <https://werkstatt-gemeinschaft.sanity.studio/>
+- ✅ **Projekt** `z6eclgt8` *(werkSTATT Gemeinschaft, Org: Intuitivmedia `ow7ACwTD3`, Plan: Growth Trial)*
+- ✅ **Live-Vorschau-Tab** *(Presentation Tool)* — zweiter Top-Level-Tab „Vorschau", iframe der Site mit Doc-Resolvern pro Type
+- ✅ **Tabs pro Eintrag:** Inhalt · Bilder & Anhänge · Mehr *(MachBAR zusätzlich „Anmeldung & Kosten")*
+- ✅ **Mehrsprachigkeit-Toggle** — DE prominent, FR + EN in zugeklappten Übersetzungs-Fieldsets *(„Leer lassen ist okay")*
+- ✅ **Icons pro Bereich** — UserIcon/ComposeIcon/PinIcon/CalendarIcon/BookIcon/PlayIcon/EnvelopeIcon
+- ✅ **Upload:** Bilder in jedem Format *(Sanity macht Optimierung)*, Dokumente als PDF/Word/ODT/TXT
+- ✅ **Demo-Content im production-Dataset:** Bio, 3 Notizen, 2 Stationen, 1 Werkstatt, 4 Quellen *(plus anthroposophie-lebensnah, wortgetreu)*, Mitkommen-Konfig mit Newsletter-Block
+- ✅ **emailRecipient** auf `katharina.offenborn@googlemail.com` gesetzt
+- ✅ **Newsletter-Konfig** auf Substack-Mode mit `katharinaoffenborn` als Annahme *(zu bestätigen)*
+- ✅ **Mitkommen-Beschreibungen** für Werkstatt/Beratung/Vortrag gesetzt *(„individuell besprochen / Energie-Austausch / Reisekosten + Honorar nach Absprache")*
 
 ### Build & Deploy
 
@@ -37,6 +52,7 @@ Persönliche Website für **Katharina Offenborn** *(Ergotherapeutin, Ende 60, me
 - ✅ **Stack:** Astro 5 + npm + Node 22+ → Vercel Static Build
 - ✅ **`package-lock.json` eingecheckt** für reproducible builds
 - ✅ **`pnpm-lock.yaml` bleibt gitignored** — lokal kann beides genutzt werden, Vercel nutzt npm
+- ✅ **Auto-Build-Hook** — Sanity-Publish → Vercel-Webhook → ~60-90 s bis live
 
 ### Cutover-Historie *(damit zukünftige Sessions die Story kennen)*
 
@@ -44,25 +60,34 @@ Persönliche Website für **Katharina Offenborn** *(Ergotherapeutin, Ende 60, me
 - ❌ **Versuch 2** (`1d2b285`): pnpm 10 + Node 22 fixiert → selber Fehler. Node-Version war **nicht** die Ursache.
 - ✅ **Versuch 3** (`1bd9891`): Auf npm gewechselt + `package-lock.json` eingecheckt → **READY** in 16 s.
 
-### Auto-Build bei Sanity-Publish *(eingerichtet 12.05.2026)*
+### Brand-Iterations-Historie *(damit Sessions wissen warum aktuelle Schreibweise so ist)*
 
-Vercel-Deploy-Hook + Sanity-Webhook sind verbunden:
+- WERKstatt → **werkSTATT** *(Akzent verschoben weil „Werk statt Gemeinschaft" falsch gelesen wurde)*
+- BAR-Namen Groß-Anfang → **klein-Anfang** *(passt zu werkSTATT-Stil)*
+- Hero-Eyebrow gekürzt, „Miteinander vereinBAR — " raus
+- Logo-Farben: erst grün-gold → dann **aubergine-gold** *(eine Akzentfarbe statt zwei)*
+- Logo-Schrift **bolder** *(weight 500 für werk + Gemeinschaft)*
+- Page-Titel der BAR-Pages: H1 = bar-Name, alter H1 als italic-Untertitel
 
-- **Vercel-Deploy-Hook** *(unter Project Settings → Git → Deploy Hooks)*, Name: `sanity-publish`, Branch: `main`
-- **Sanity-Webhook** *(unter Project → API → Webhooks)*, Name: `Vercel — Auto-Deploy`, Trigger: Create/Update/Delete, Dataset: `production`
+### Was noch offen ist *(siehe `NEXT-SESSION.md` für Details)*
 
-Folge: Katharina drückt im Studio „Publish" → Vercel baut die Site innerhalb von ~5 s neu → Änderung ist nach ~60-90 s live.
-
-### Was noch offen ist *(nicht-blockierend)*
-
-- ⏳ **Resend-Setup für Mitkommen-Formular:** API-Key in Vercel-Env eintragen *(siehe `NEXT-SESSION.md` → „Resend aktivieren")*. Aktuell läuft die Function im „Log-Modus" — Validation + Honeypot funktionieren, Mails werden nur in Vercel-Logs geschrieben.
-- ⏳ **5 inhaltliche Klärungen mit Katharina:** 3 Worte für Ton · Sub-Bereiche DenkBAR/BrauchBAR · wortgetreu.com Verlinkung · anthroposophie-lebensnah Status · „Wir" statt „ich" — Bedeutung
-- ⏳ **info@-Account** als zweiter Sanity-Member *(Backup für Bus-Faktor)*
-- ⏳ **Domain** *(P.S. im Fragebogen — Antwort noch ausstehend)*
-- ⏳ **DSGVO/Impressum** vor Public-Launch *(Generator-Lösung, z.B. eRecht24)*
+- ⏳ **Vercel-Analytics im Dashboard aktivieren** *(1 Klick)*
+- ⏳ **Resend-Setup:** Account + `RESEND_API_KEY` + `MITKOMMEN_TO` + `MITKOMMEN_FROM` in Vercel-Env *(aktuell läuft Function im Log-Modus)*
+- ⏳ **7 Klärungen mit Katharina** (siehe `KATHARINA-FRAGEN.md`): Substack-URL · denkBAR/brauchBAR-Architektur · Eigene Inhalte · „Wir"-Bedeutung · Upload-Wünsche · Telegram-URL · Domain
+- ⏳ **Domain** entscheiden + bei Vercel + Resend einrichten
+- ⏳ **info@-Account** als zweiter Sanity-Admin *(Bus-Faktor)*
+- ⏳ **DSGVO-Generator-Run** vor Public-Launch *(Legals sind volltext-vorhanden, Generator-Gegenprüfung empfohlen)*
 - ⏳ **A11y-Audit + Mobile-Test mit Katharina am Tablet**
-- ⏳ **Sanity-Ownership-Transfer** auf Katharina, sobald sie eigenen Account hat
 - ⏳ **HörBAR-Demo-Records** *(noch keine Episoden, Index leer)* — kommt mit Katharinas eigenen Inhalten
+
+### Was bewusst NICHT eingebaut ist *(Don't-reflexartig-machen-Liste)*
+
+- **Sprach-Selector im Header** — erst wenn Katharina Inhalte übersetzt, Selector wäre Klick-Falle ohne Inhalt
+- **Pre-Publish-Draft-Preview** *(echte SSR)* — würde Astro-Hybrid + Token brauchen, Live-iframe via Presentation Tool reicht aktuell
+- **Personen-Erwähnung-System mit Picker** *(Mention-Annotation)* — overengineered, Standard inline-Link reicht
+- **Speed Insights** — Hobby-Plan auf 1 Projekt limitiert, wird woanders verbraucht
+- **Cookie-Banner** — Vercel-Analytics ohne Cookies, kein Banner-Pflicht (steht so im Datenschutz)
+- **Detail-Page Mood-Banner** — Index-Pages haben Banner, Detail-Pages fokussieren auf Inhalt
 
 ---
 
