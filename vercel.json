@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd astro && pnpm install --no-frozen-lockfile && pnpm build",
+  "buildCommand": "cd astro && npm install --legacy-peer-deps && npm run build",
   "outputDirectory": "astro/dist",
   "framework": "astro",
   "cleanUrls": true,
