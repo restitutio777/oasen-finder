@@ -36,6 +36,8 @@
     --accent-hover: #8a2c1e;
     --accent-soft: #e8b987;         /* warm peach — auf dunklem Grund */
     --accent-warm: #c98a4a;         /* honig-bronze — Warm-Peach Variante fuer hellen Grund (Hero, Brand) */
+    --accent-gold: #c08538;         /* leuchtendes Honig-Gold — Hero-Frage + CTAs */
+    --accent-gold-hover: #9d6a26;   /* dunklere Variante fuer Hover-States */
     --accent-rose: #a87a72;         /* gedämpftes Mauve-Rosé — refiniert */
     --accent-green: #3d6b54;        /* fern — modern */
     --accent-green-soft: #a3b89e;   /* sage — auf dunklem Grund */
@@ -486,7 +488,7 @@
   .hero__title-a { color: #4d4555; }
   /* "wie wird Gemeinschaft?" in leuchtendem Honig-Gold mit weichem Glow */
   .hero__title-b {
-    color: #c08538;
+    color: var(--accent-gold);
     text-shadow: 0 0 32px rgba(232, 185, 135, 0.45);
   }
   .hero__title em {
@@ -605,7 +607,7 @@
       background: transparent;
       border: 0;
       padding: 6px 0;
-      color: var(--accent);
+      color: var(--accent-gold);
       text-transform: none;
       letter-spacing: 0;
       font-size: 14px;
@@ -615,7 +617,7 @@
     }
     .hero__cta-row .btn--ghost:hover {
       background: transparent;
-      color: var(--accent-hover);
+      color: var(--accent-gold-hover);
     }
   }
 
@@ -636,24 +638,24 @@
     cursor: pointer;
   }
   .btn--primary {
-    background: var(--accent);
+    background: var(--accent-gold);
     color: var(--text-inverse);
-    border-color: var(--accent);
+    border-color: var(--accent-gold);
   }
   .btn--primary:hover {
-    background: var(--accent-hover);
-    border-color: var(--accent-hover);
+    background: var(--accent-gold-hover);
+    border-color: var(--accent-gold-hover);
     color: var(--bg-base);
   }
   .btn--ghost {
     background: rgba(246, 244, 238, 0.6);
     color: var(--text-primary);
-    border-color: var(--accent);
+    border-color: var(--accent-gold);
   }
   .btn--ghost:hover {
-    background: var(--accent);
+    background: var(--accent-gold);
     color: var(--bg-base);
-    border-color: var(--accent);
+    border-color: var(--accent-gold);
   }
   .btn svg { transition: transform var(--t-base) var(--ease); }
   .btn:hover svg { transform: translateX(4px); }
