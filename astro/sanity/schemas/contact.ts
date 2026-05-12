@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { EnvelopeIcon } from '@sanity/icons';
 
 /**
  * Mitkommen-Konfiguration. Singleton.
@@ -8,6 +9,7 @@ export const contact = defineType({
   name: 'contact',
   title: 'Mitkommen — Formular-Konfiguration',
   type: 'document',
+  icon: EnvelopeIcon,
   fields: [
     defineField({
       name: 'intro',

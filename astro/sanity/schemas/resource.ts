@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { BookIcon } from '@sanity/icons';
 import { docGroups, accentColorField } from './_shared';
 
 /**
@@ -9,6 +10,7 @@ export const resource = defineType({
   name: 'resource',
   title: 'LesBAR — Quelle / Werkzeug',
   type: 'document',
+  icon: BookIcon,
   groups: [...docGroups],
   fields: [
     defineField({

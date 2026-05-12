@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { PinIcon } from '@sanity/icons';
 import { docGroups, accentColorField } from './_shared';
 
 /**
@@ -9,6 +10,7 @@ export const station = defineType({
   name: 'station',
   title: 'BewegBAR — Station',
   type: 'document',
+  icon: PinIcon,
   groups: [...docGroups],
   fields: [
     defineField({
@@ -22,7 +24,7 @@ export const station = defineType({
       name: 'region',
       title: 'Region',
       type: 'string',
-      description: 'z.B. Hohenlohe, Kreta, Provence',
+      options: { placeholder: 'Hohenlohe, Kreta, Provence …' } as any,
       group: 'inhalt',
     }),
     defineField({
@@ -67,11 +69,11 @@ export const station = defineType({
     }),
     defineField({
       name: 'tags',
-      title: 'Tags',
+      title: 'Schlagworte',
       type: 'array',
       of: [{ type: 'string' }],
       options: { layout: 'tags' },
-      description: 'z.B. Ökodorf, Cohousing, Spirituell, Pikler, Steiner',
+      description: 'Tippe ein Wort und drücke Enter. Beispiele: Ökodorf, Cohousing, Spirituell, Steiner.',
       group: 'inhalt',
     }),
     defineField({

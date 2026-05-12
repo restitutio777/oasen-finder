@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { ComposeIcon } from '@sanity/icons';
 import { docGroups, accentColorField } from './_shared';
 
 /**
@@ -9,6 +10,7 @@ export const note = defineType({
   name: 'note',
   title: 'SchreibBAR — Notiz / Gedicht / Idee',
   type: 'document',
+  icon: ComposeIcon,
   groups: [...docGroups],
   fields: [
     defineField({
@@ -52,11 +54,11 @@ export const note = defineType({
     }),
     defineField({
       name: 'tags',
-      title: 'Tags',
+      title: 'Schlagworte',
       type: 'array',
       of: [{ type: 'string' }],
       options: { layout: 'tags' },
-      description: 'Optional — z.B. „Kreta", „Werkstatt", „Pikler"',
+      description: 'Tippe ein Wort und drücke Enter. Optional. Beispiele: Kreta, Werkstatt, Pikler.',
       group: 'inhalt',
     }),
     defineField({

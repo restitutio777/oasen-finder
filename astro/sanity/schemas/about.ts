@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { UserIcon } from '@sanity/icons';
 
 /**
  * erkennBAR — Über Katharina. Singleton (nur ein Dokument).
@@ -8,6 +9,7 @@ export const about = defineType({
   name: 'about',
   title: 'erkennBAR — Über Katharina',
   type: 'document',
+  icon: UserIcon,
   // Singleton-Pattern wird über Structure-Config im Studio enforced
   fields: [
     defineField({

@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { CalendarIcon } from '@sanity/icons';
 import { accentColorField } from './_shared';
 
 /**
@@ -9,6 +10,7 @@ export const event = defineType({
   name: 'event',
   title: 'MachBAR — Werkstatt-Termin',
   type: 'document',
+  icon: CalendarIcon,
   groups: [
     { name: 'inhalt', title: 'Inhalt', default: true },
     { name: 'anmeldung', title: 'Anmeldung & Kosten' },
@@ -70,7 +72,7 @@ export const event = defineType({
       name: 'location',
       title: 'Ort',
       type: 'string',
-      description: 'z.B. Tempelhof, Hohenlohe',
+      options: { placeholder: 'Tempelhof, Hohenlohe …' } as any,
       group: 'inhalt',
     }),
     defineField({

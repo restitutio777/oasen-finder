@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { PlayIcon } from '@sanity/icons';
 
 /**
  * HörBAR-Episode — eingesprochene Reflexion, Gedicht, Lied, oder Gespräch.
@@ -8,6 +9,7 @@ export const episode = defineType({
   name: 'episode',
   title: 'HörBAR — Episode',
   type: 'document',
+  icon: PlayIcon,
   fields: [
     defineField({
       name: 'episodeNumber',
