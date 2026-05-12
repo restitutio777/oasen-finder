@@ -411,9 +411,8 @@
     background-image: url('https://images.unsplash.com/photo-1590880795696-20c7dfadacde?w=2400&q=80&auto=format&fit=crop');
     background-size: cover;
     background-position: center 60%;
-    /* Sunset-Gathering-Foto: hell-warm, golden hour. Sanftes Treatment —
-       das Bild bringt eigene Waerme mit, braucht nur leichten Blur */
-    filter: blur(24px) saturate(0.75) brightness(1.05) sepia(0.08);
+    /* Foto-Treatment: weicher Blur, leicht entsaettigt, atmosphaerisch */
+    filter: blur(12px) saturate(0.78) brightness(1.05) sepia(0.08);
     opacity: 0.82;
     z-index: -2;
   }
@@ -441,18 +440,18 @@
      concentrated on the left text column, the image stays readable on the right */
   @media (min-width: 1024px) {
     .hero::before {
-      filter: blur(4px) saturate(0.7) brightness(1.05) sepia(0.1);
-      opacity: 0.88;
+      filter: blur(2px) saturate(0.78) brightness(1.05) sepia(0.08);
+      opacity: 0.9;
     }
     .hero::after {
       background:
-        /* Cream wash anchored on the left, fades cleanly into the image on the right */
-        radial-gradient(ellipse 58% 130% at 14% 50%,
+        /* Cream wash breiter angesetzt — deckt mehr ab, fadet sanfter */
+        radial-gradient(ellipse 72% 135% at 18% 50%,
           rgba(246, 244, 238, 0.98) 0%,
-          rgba(246, 244, 238, 0.92) 28%,
-          rgba(246, 244, 238, 0.62) 52%,
-          rgba(246, 244, 238, 0.28) 75%,
-          rgba(246, 244, 238, 0.08) 90%),
+          rgba(246, 244, 238, 0.94) 32%,
+          rgba(246, 244, 238, 0.7) 58%,
+          rgba(246, 244, 238, 0.34) 78%,
+          rgba(246, 244, 238, 0.1) 92%),
         /* Warm peach overlay for unity */
         linear-gradient(110deg,
           rgba(232, 185, 135, 0.06) 0%,
@@ -574,20 +573,20 @@
     /* Meta-Capsule (Naechste Begegnung) auf Mobile weg — Info kommt
        prominent in der MachBAR, im Hero war sie ein Anhaengsel */
     .hero__meta { display: none; }
-    /* Mobile: sunset-Foto als warme Stimmung im Hintergrund, sanft
-       entsaettigt damit Text gut lesbar bleibt */
+    /* Mobile: Foto als sanfte Stimmung, weniger Blur, helle Zone weiter */
     .hero::before {
       opacity: 0.42;
-      filter: blur(16px) saturate(0.6) brightness(1.05) sepia(0.12);
+      filter: blur(10px) saturate(0.65) brightness(1.05) sepia(0.1);
     }
-    /* Sanfter, einheitlicher Cream-Wash — warmer Sepia-Ton drueber */
+    /* Cream-Wash auf Mobile breiter — helle Zone bis ca. 60% statt 35% */
     .hero::after {
       background:
         linear-gradient(170deg,
-          rgba(246, 244, 238, 0.94) 0%,
-          rgba(246, 244, 238, 0.82) 35%,
-          rgba(232, 185, 135, 0.24) 75%,
-          rgba(168, 122, 114, 0.28) 100%);
+          rgba(246, 244, 238, 0.96) 0%,
+          rgba(246, 244, 238, 0.92) 30%,
+          rgba(246, 244, 238, 0.7) 55%,
+          rgba(232, 185, 135, 0.22) 82%,
+          rgba(168, 122, 114, 0.26) 100%);
     }
     /* CTAs: weicher, sanfter, sekundaerer als Text-Link.
        Höhere Specificity (.hero__cta-row .btn...) damit das Mobile-Override
