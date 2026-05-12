@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PortableText from '../../components/PortableText.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
@@ -33,9 +34,7 @@ const { resource } = Astro.props;
         <img src={resource.coverUrl} alt="" style="max-width: 300px; margin: 1rem 0 2rem; border-radius: 4px;" />
       )}
 
-      <div style="font-family: var(--font-display); font-size: 18px; line-height: 1.7;">
-        <p><em>(PortableText-Renderer für Katharinas Notiz kommt im Folge-Commit.)</em></p>
-      </div>
+      <PortableText value={resource.note} />
 
       <p style="margin-top: 2rem;">
         {resource.link && <a href={resource.link} target="_blank" rel="noopener">Zur Quelle →</a>}

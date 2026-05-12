@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PortableText from '../../components/PortableText.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
@@ -59,13 +60,8 @@ const { note } = Astro.props;
         </figure>
       )}
 
-      {/* TODO: PortableText-Renderer für note.body einbauen.
-           Für jetzt: einfache Block-Renderung als Platzhalter. */}
-      <div style="font-family: var(--font-display); font-size: 18px; line-height: 1.7;">
-        <p>
-          <em>(PortableText-Renderer kommt im Folge-Commit — aktuell wird der Block-Inhalt aus Sanity hier ausgegeben.)</em>
-        </p>
-      </div>
+      <PortableText value={note.body} />
+
 
       {(note.externalLink || note.mediaLink || note.substackUrl || note.pdfUrl) && (
         <aside style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle);">

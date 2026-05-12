@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PortableText from '../../components/PortableText.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
 
 let about: any = null;
@@ -30,6 +31,17 @@ if (isSanityConfigured) {
           {about?.mantra && (
             <blockquote class="who__question">„{localized(about.mantra)}"</blockquote>
           )}
+          {about?.shortBio && <PortableText value={about.shortBio} />}
+          {about?.longBio && (
+            <details style="margin-top: 1.5rem;">
+              <summary style="cursor: pointer; color: var(--accent-warm); font-family: var(--font-text); font-size: 14px;">
+                Mehr lesen
+              </summary>
+              <div style="margin-top: 1rem;">
+                <PortableText value={about.longBio} />
+              </div>
+            </details>
+          )}
           {!about && (
             <p style="color: var(--text-secondary);">
               Vollständige Bio kommt aus Sanity — sobald das Studio aufgesetzt ist und
@@ -51,7 +63,7 @@ if (isSanityConfigured) {
       {about?.seasonality && (
         <aside style="max-width: 560px; margin-top: 2rem;">
           <h3 class="eyebrow">Jahres-Rhythmus</h3>
-          {/* TODO: PortableText-Renderer */}
+          <PortableText value={about.seasonality} />
         </aside>
       )}
     </div>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PortableText from '../../components/PortableText.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
@@ -53,9 +54,7 @@ const { station } = Astro.props;
         </div>
       )}
 
-      <div style="font-family: var(--font-display); font-size: 18px; line-height: 1.7;">
-        <p><em>(PortableText-Renderer für die Reflexion kommt im Folge-Commit.)</em></p>
-      </div>
+      <PortableText value={station.reflection} />
 
       {(station.communityLink || station.conceptPdfUrl) && (
         <aside style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle);">

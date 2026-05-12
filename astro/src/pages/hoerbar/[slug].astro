@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PortableText from '../../components/PortableText.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
@@ -44,8 +45,8 @@ const { episode } = Astro.props;
         </a>
       </p>
 
-      <div style="margin-top: 2rem; font-family: var(--font-display); font-size: 18px; line-height: 1.7;">
-        <p><em>(PortableText-Renderer für die Summary kommt im Folge-Commit.)</em></p>
+      <div style="margin-top: 2rem;">
+        <PortableText value={episode.summary} />
       </div>
 
       {episode.transcriptUrl && (

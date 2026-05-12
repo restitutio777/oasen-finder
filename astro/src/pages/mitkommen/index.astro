@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PortableText from '../../components/PortableText.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 let config: any = null;
@@ -27,9 +28,10 @@ const mailTo = config?.emailRecipient || 'kontakt@werkstatt-gemeinschaft.example
       <header class="invite__head">
         <span class="eyebrow invite__eyebrow">Begegnung</span>
         <h1 class="invite__title">Mit<em>kommen</em>.</h1>
-        <p class="invite__sub">
-          {config?.intro ? localized(config.intro) : 'Schreib mir, was du brauchst — ich antworte gern, wenn auch nicht immer schnell.'}
-        </p>
+        {config?.intro
+          ? <div class="invite__sub"><PortableText value={config.intro} /></div>
+          : <p class="invite__sub">Schreib mir, was du brauchst — ich antworte gern, wenn auch nicht immer schnell.</p>
+        }
       </header>
 
       {/* Echtes Formular — wird in Phase 1 mit Netlify-Forms / Formspree / Vercel

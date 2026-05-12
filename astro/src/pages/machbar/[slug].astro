@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PortableText from '../../components/PortableText.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
@@ -42,9 +43,14 @@ const { event } = Astro.props;
         </p>
       )}
 
-      <div style="font-family: var(--font-display); font-size: 18px; line-height: 1.7;">
-        <p><em>(PortableText-Renderer für die Beschreibung kommt im Folge-Commit.)</em></p>
-      </div>
+      <PortableText value={event.description} />
+
+      {event.fees && (
+        <div style="margin-top: 2rem;">
+          <h3 class="eyebrow">Rahmenbedingungen</h3>
+          <PortableText value={event.fees} />
+        </div>
+      )}
 
       <aside style="margin-top: 3rem; padding: 1.5rem; background: var(--bg-warm); border-radius: 6px;">
         <h3 class="eyebrow">Anmeldung</h3>
@@ -61,11 +67,6 @@ const { event } = Astro.props;
             <a href="/mitkommen/">Per Formular →</a>
           )}
         </p>
-        {event.fees && (
-          <p style="margin-top: 1rem; font-size: 14px; color: var(--text-secondary);">
-            <em>(Honorar-Hinweis aus Sanity)</em>
-          </p>
-        )}
       </aside>
 
       {event.programPdfUrl && (

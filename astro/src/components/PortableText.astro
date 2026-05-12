@@ -1,0 +1,141 @@
+---
+/**
+ * PortableText-Renderer für Sanity-Block-Inhalte.
+ *
+ * Wandelt das Portable-Text-Block-Array (was Sanity zurückgibt für
+ * Rich-Text-Felder wie body, reflection, description, note, summary)
+ * in semantisches HTML um — mit Brand-Klassen, sodass das globale
+ * CSS greift.
+ *
+ * Nutzt @portabletext/to-html (Standard-Tool von Sanity).
+ *
+ * Verwendung:
+ *   <PortableText blocks={note.body?.de} />
+ */
+import { toHTML, type PortableTextOptions } from '@portabletext/to-html';
+import { localized, type Locale } from '../lib/sanity';
+
+export interface Props {
+  /** Lokalisiertes PortableText-Feld (i18nText) oder direkt ein Block-Array */
+  value?: any;
+  /** Sprache — Default Deutsch */
+  locale?: Locale;
+  /** Zusätzliche CSS-Klasse für den Wrapper */
+  className?: string;
+}
+
+const { value, locale = 'de', className = 'rich' } = Astro.props;
+
+/**
+ * Wenn value ein i18nText-Objekt ist ({de, fr, en}), holen wir die richtige
+ * Sprache. Wenn es schon ein Block-Array ist, nutzen wir es direkt.
+ */
+const blocks = Array.isArray(value)
+  ? value
+  : value && typeof value === 'object'
+    ? localized(value, locale)
+    : null;
+
+const components: PortableTextOptions['components'] = {
+  block: {
+    // Standard-Absatz
+    normal: ({ children }) => `<p>${children}</p>`,
+    // Überschriften
+    h1: ({ children }) => `<h2 class="rich__h1">${children}</h2>`,
+    h2: ({ children }) => `<h2 class="rich__h2">${children}</h2>`,
+    h3: ({ children }) => `<h3 class="rich__h3">${children}</h3>`,
+    h4: ({ children }) => `<h4 class="rich__h4">${children}</h4>`,
+    blockquote: ({ children }) => `<blockquote class="rich__quote">${children}</blockquote>`,
+  },
+  marks: {
+    // Inline-Formatierungen
+    em: ({ children }) => `<em>${children}</em>`,
+    strong: ({ children }) => `<strong>${children}</strong>`,
+    code: ({ children }) => `<code>${children}</code>`,
+    underline: ({ children }) => `<u>${children}</u>`,
+    'strike-through': ({ children }) => `<s>${children}</s>`,
+    // Link-Mark (wenn jemand einen Link in Sanity setzt)
+    link: ({ children, value }) => {
+      const href = (value as any)?.href || '#';
+      const external = /^https?:\/\//.test(href);
+      const attrs = external ? ' target="_blank" rel="noopener"' : '';
+      return `<a href="${href}"${attrs}>${children}</a>`;
+    },
+  },
+  list: {
+    bullet: ({ children }) => `<ul class="rich__list">${children}</ul>`,
+    number: ({ children }) => `<ol class="rich__list rich__list--ordered">${children}</ol>`,
+  },
+  listItem: {
+    bullet: ({ children }) => `<li>${children}</li>`,
+    number: ({ children }) => `<li>${children}</li>`,
+  },
+};
+
+const html = blocks ? toHTML(blocks, { components }) : '';
+---
+
+{html && <div class={className} set:html={html} />}
+
+<style is:global>
+  /* Rich-Text-Styling — Block-Renderer aus PortableText.astro.
+     Greift auf das globale Font/Color-Set, fügt nur Spacing dazu. */
+  .rich > * + * {
+    margin-top: 1.2em;
+  }
+  .rich p {
+    font-family: var(--font-display, 'Cormorant Garamond', serif);
+    font-size: clamp(17px, 1.4vw, 19px);
+    line-height: 1.7;
+    color: var(--text-body, #3a3a3a);
+  }
+  .rich em {
+    font-style: italic;
+    color: var(--text-primary, #2c2530);
+  }
+  .rich strong {
+    font-weight: 600;
+    color: var(--text-primary, #2c2530);
+  }
+  .rich a {
+    color: var(--accent-gold, #c08538);
+    border-bottom: 1px solid currentColor;
+    transition: color 200ms ease;
+  }
+  .rich a:hover {
+    color: var(--accent-gold-hover, #9d6a26);
+  }
+  .rich__h2 {
+    font-family: var(--font-display, 'Cormorant Garamond', serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--text-primary, #2c2530);
+    margin-top: 2em;
+  }
+  .rich__h3 {
+    font-family: var(--font-display, 'Cormorant Garamond', serif);
+    font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+    font-weight: 500;
+    color: var(--text-primary, #2c2530);
+    margin-top: 1.6em;
+  }
+  .rich__quote {
+    border-left: 3px solid var(--accent-gold, #c08538);
+    padding-left: 1.2em;
+    font-family: var(--font-display, 'Cormorant Garamond', serif);
+    font-style: italic;
+    font-size: clamp(18px, 1.6vw, 22px);
+    color: var(--text-primary, #2c2530);
+  }
+  .rich__list {
+    padding-left: 1.5em;
+  }
+  .rich__list li {
+    font-family: var(--font-display, 'Cormorant Garamond', serif);
+    font-size: clamp(17px, 1.4vw, 19px);
+    line-height: 1.6;
+    color: var(--text-body, #3a3a3a);
+    margin-top: 0.5em;
+  }
+</style>
