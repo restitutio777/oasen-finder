@@ -1,0 +1,88 @@
+---
+/**
+ * NewsletterBlock — Substack-Anmelde-Widget mit Brand-Anpassung.
+ *
+ * Lädt das Substack-Custom-Widget client-side via Script-Tag.
+ * Farben werden an die Site-Palette angepasst, sodass das Formular
+ * wie ein nativer Block wirkt (kein iframe-Look).
+ *
+ * Konfiguration kommt aus Sanity contact.newsletter, mit Fallback
+ * auf hardcoded Default falls Sanity nicht erreichbar.
+ */
+import { sanity, localized, isSanityConfigured } from '../lib/sanity';
+
+interface Props {
+  /** Optionale Variante für unterschiedliche Page-Kontexte. */
+  variant?: 'landing' | 'page';
+}
+const { variant = 'landing' } = Astro.props;
+
+let config: any = null;
+if (isSanityConfigured) {
+  config = await sanity.fetch(`*[_type == "contact" && _id == "contact"][0]{
+    newsletter
+  }`);
+}
+
+const substackHandle = config?.newsletter?.target || 'katharinaoffenborn';
+const label = localized(config?.newsletter?.label) || 'Brief von unterwegs';
+const text = localized(config?.newsletter?.text) || 'Eine leise Notiz, wenn etwas Neues entsteht — Reise, Werkstatt, Lesefrucht. Kein Plan, kein Rhythmus.';
+
+// Eindeutige ID, falls die Komponente mehrfach auf der Seite ist
+const widgetId = `substack-embed-${variant}`;
+
+const bgColor = variant === 'landing' ? 'var(--bg-warm)' : 'var(--bg-primary)';
+---
+
+<section style={`padding: 5rem 0; background: ${bgColor};`}>
+  <div class="container" style="max-width: 640px; text-align: center;">
+    <span class="eyebrow">Newsletter</span>
+    <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 1rem; color: var(--text-primary);">
+      {label}
+    </h2>
+    <p style="color: var(--text-secondary); margin: 0 auto 2rem; font-size: 17px; line-height: 1.6; max-width: 520px;">
+      {text}
+    </p>
+
+    {/* Substack custom widget mount-point */}
+    <div id={widgetId} class="substack-embed"></div>
+
+    <p style="margin-top: 1rem; font-size: 13px; color: var(--text-muted);">
+      Versand über Substack. Du kannst dich jederzeit abmelden.
+    </p>
+  </div>
+</section>
+
+<script is:inline define:vars={{ substackHandle, widgetId }}>
+  // Globale Widget-Config — Substack liest das beim Load
+  window.CustomSubstackWidget = {
+    substackUrl: `${substackHandle}.substack.com`,
+    placeholder: 'deine@mail.de',
+    buttonText: 'Abonnieren',
+    theme: 'custom',
+    colors: {
+      primary: '#c08538',     // accent-gold
+      input: '#ffffff',
+      email: '#2c2530',       // text-primary
+      text: '#f6f4ee',         // text-inverse (Button-Text)
+    },
+    // Wo soll das Widget eingehängt werden
+    target: `#${widgetId}`,
+  };
+
+  // Script nur einmal pro Page laden, auch wenn der Block doppelt vorkommt
+  if (!document.querySelector('script[data-substack-widget]')) {
+    const s = document.createElement('script');
+    s.src = 'https://substackapi.com/widget.js';
+    s.async = true;
+    s.dataset.substackWidget = 'true';
+    document.body.appendChild(s);
+  }
+</script>
+
+<style>
+  .substack-embed {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+</style>

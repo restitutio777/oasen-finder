@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import SanityImage from '../../components/SanityImage.astro';
 import PageBanner from '../../components/PageBanner.astro';
+import NewsletterBlock from '../../components/NewsletterBlock.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 let about: any = null;
@@ -74,4 +75,6 @@ if (isSanityConfigured) {
       )}
     </div>
   </section>
+
+  <NewsletterBlock variant="page" />
 </BaseLayout>

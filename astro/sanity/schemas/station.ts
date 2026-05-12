@@ -94,9 +94,10 @@ export const station = defineType({
     }),
     defineField({
       name: 'conceptPdf',
-      title: 'Konzept-PDF des Ortes',
+      title: 'Konzept-Dokument des Ortes',
+      description: 'PDF, Word (.doc/.docx), OpenDocument (.odt) oder reiner Text (.txt)',
       type: 'file',
-      options: { accept: 'application/pdf' },
+      options: { accept: 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,text/plain' },
       group: 'medien',
     }),
     defineField({

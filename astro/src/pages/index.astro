@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterBlock from '../components/NewsletterBlock.astro';
 import { sanity, localized, isSanityConfigured } from '../lib/sanity';
 
 // Landing — Übersicht aller BARs.
@@ -189,4 +190,6 @@ if (isSanityConfigured) {
       <a href="/mitkommen/" class="btn btn--primary">Wohin jetzt? →</a>
     </div>
   </section>
+
+  <NewsletterBlock variant="landing" />
 </BaseLayout>

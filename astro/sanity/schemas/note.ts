@@ -81,9 +81,10 @@ export const note = defineType({
     }),
     defineField({
       name: 'pdfAttachment',
-      title: 'PDF-Anhang',
+      title: 'Dokument-Anhang',
+      description: 'PDF, Word (.doc/.docx), OpenDocument (.odt) oder reiner Text (.txt)',
       type: 'file',
-      options: { accept: 'application/pdf' },
+      options: { accept: 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,text/plain' },
       group: 'medien',
     }),
     defineField({
