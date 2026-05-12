@@ -37,19 +37,18 @@ if (isSanityConfigured) {
     <div class="container hero__inner">
       <div class="hero__main">
         <span class="eyebrow hero__eyebrow">
-          <span class="hero__eyebrow-line">Miteinander vereinBAR —</span>{' '}
-          <span class="hero__eyebrow-line"><span class="hero__eyebrow-nowrap">Gemeinschafts<em class="hero__eyebrow-werk">WERK</em></span> statt allein unterwegs</span>
+          <span class="hero__eyebrow-nowrap">Gemeinschafts<em class="hero__eyebrow-werk">WERK</em></span> statt allein unterwegs
         </span>
         <h1 class="hero__title">
           <span class="hero__title-a">Auf der Suche —</span><br />
           <span class="hero__title-b">wie wird <em>Gemeinschaft?</em></span>
         </h1>
         <p class="hero__subtitle">
-          Reisen · Werkstätten · Notizen · Fotos.
+          Reisen · Werkstätten · Notizen · Fotos
         </p>
         <div class="hero__cta-row">
           <a href="/schreibbar/" class="btn btn--primary">
-            In die SchreibBAR
+            In die schreibBAR
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M5 12h14"></path>
               <path d="m12 5 7 7-7 7"></path>
@@ -91,7 +90,7 @@ if (isSanityConfigured) {
                 {note.publishedAt
                   ? new Date(note.publishedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })
                   : ''}
-                {note.kind && ` · ${note.kind === 'denkbar' ? 'DenkBAR' : 'SchreibBAR'}`}
+                {note.kind && ` · ${note.kind === 'denkbar' ? 'DenkBAR' : 'schreibBAR'}`}
               </span>
               <h3 style="font-family: var(--font-display); font-size: 1.4rem; line-height: 1.3; margin: 0.6rem 0 0; color: var(--text-primary);">
                 {localized(note.title)}

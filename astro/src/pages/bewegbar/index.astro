@@ -5,7 +5,7 @@ import PageBanner from '../../components/PageBanner.astro';
 import { sanity, isSanityConfigured } from '../../lib/sanity';
 
 /**
- * BewegBAR — Stationen-Übersicht mit Karte.
+ * bewegBAR — Stationen-Übersicht mit Karte.
  *
  * Leaflet-Karte wird in der Client-Komponente eingebunden (separater
  * Folge-Commit). Für jetzt: Listen-Ansicht aller Stationen.
@@ -23,14 +23,14 @@ if (isSanityConfigured) {
 }
 ---
 
-<BaseLayout title="BewegBAR — Stationen" description="Reisen zu Ökodörfern, Cohousing-Projekten und gemeinsamen Lebensorten">
+<BaseLayout title="bewegBAR — Stationen" description="Reisen zu Ökodörfern, Cohousing-Projekten und gemeinsamen Lebensorten">
   <PageBanner
     photo="photo-1469474968028-56623f02e42e"
     alt="Geschwungene Straße durch eine weite, hügelige Landschaft"
   />
   <section style="padding: 4rem 0;">
     <div class="container">
-      <span class="eyebrow">BewegBAR · Karte</span>
+      <span class="eyebrow">bewegBAR · Karte</span>
       <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin: 1rem 0;">
         Stationen <em>unterwegs</em>
       </h1>

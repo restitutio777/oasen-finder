@@ -19,12 +19,12 @@ export async function getStaticPaths() {
 const { episode } = Astro.props;
 ---
 
-<BaseLayout title={`${localized(episode.title) || 'Episode'} — HörBAR`}>
+<BaseLayout title={`${localized(episode.title) || 'Episode'} — hörBAR`}>
   <article style="padding: 4rem 0;">
     <div class="container" style="max-width: 720px;">
-      <a href="/hoerbar/" style="color: var(--accent-warm); font-size: 14px;">← Zurück zur HörBAR</a>
+      <a href="/hoerbar/" style="color: var(--accent-warm); font-size: 14px;">← Zurück zur hörBAR</a>
       <span class="eyebrow" style="display: inline-block; margin-top: 1.5rem;">
-        HörBAR {episode.episodeNumber && `· #${episode.episodeNumber}`} · {episode.platform}
+        hörBAR {episode.episodeNumber && `· #${episode.episodeNumber}`} · {episode.platform}
       </span>
       <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); margin: 0.5rem 0 1rem;">
         {localized(episode.title)}

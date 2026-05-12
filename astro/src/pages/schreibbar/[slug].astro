@@ -27,13 +27,13 @@ const { note } = Astro.props;
 ---
 
 <BaseLayout
-  title={`${localized(note.title) || 'Notiz'} — SchreibBAR`}
-  description={`SchreibBAR-Eintrag vom ${new Date(note.publishedAt).toLocaleDateString('de-DE')}`}
+  title={`${localized(note.title) || 'Notiz'} — schreibBAR`}
+  description={`schreibBAR-Eintrag vom ${new Date(note.publishedAt).toLocaleDateString('de-DE')}`}
 >
   <article style="padding: 4rem 0; max-width: 720px; margin: 0 auto;">
     <div class="container">
       <a href="/schreibbar/" style="color: var(--accent-warm); text-decoration: none; font-size: 14px;">
-        ← Zurück zur SchreibBAR
+        ← Zurück zur schreibBAR
       </a>
       <span class="entry__tag" data-tag={note.kind} style="display: inline-block; margin-top: 1.5rem;">
         {note.kind}

@@ -18,11 +18,11 @@ export async function getStaticPaths() {
 const { resource } = Astro.props;
 ---
 
-<BaseLayout title={`${localized(resource.title) || 'Eintrag'} — LesBAR`}>
+<BaseLayout title={`${localized(resource.title) || 'Eintrag'} — lesBAR`}>
   <article style="padding: 4rem 0;">
     <div class="container" style="max-width: 720px;">
       <a href="/lesbar/" style="color: var(--accent-warm); font-size: 14px;">← Zurück zur Bibliothek</a>
-      <span class="eyebrow" style="display: inline-block; margin-top: 1.5rem;">LesBAR · {resource.kind}</span>
+      <span class="eyebrow" style="display: inline-block; margin-top: 1.5rem;">lesBAR · {resource.kind}</span>
       <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); margin: 0.5rem 0 0.5rem;">
         {localized(resource.title)}
       </h1>

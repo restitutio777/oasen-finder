@@ -609,7 +609,7 @@
   @media (max-width: 720px) {
     .hero__inner { grid-template-columns: 1fr; }
     /* Meta-Capsule (Naechste Begegnung) auf Mobile weg — Info kommt
-       prominent in der MachBAR, im Hero war sie ein Anhaengsel */
+       prominent in der machBAR, im Hero war sie ein Anhaengsel */
     .hero__meta { display: none; }
     /* Mobile: Foto als sanfte Stimmung, weniger Blur, helle Zone weiter */
     .hero::before {
@@ -1668,7 +1668,7 @@
     transition: color var(--t-fast) var(--ease);
   }
   .podcast-bar__cta:hover { color: var(--accent-hover); }
-  /* Newsletter-Variante: sitzt direkt unter der HörBAR und wirkt
+  /* Newsletter-Variante: sitzt direkt unter der hörBAR und wirkt
      leichter — neutraler Hintergrund, keine doppelte Linie dazwischen */
   .podcast-bar--brief {
     background: var(--bg-base);

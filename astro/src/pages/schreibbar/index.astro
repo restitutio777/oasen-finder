@@ -4,7 +4,7 @@ import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 /**
- * SchreibBAR — Notizen-Liste.
+ * schreibBAR — Notizen-Liste.
  * Lädt alle Notizen aus Sanity, nach Datum absteigend sortiert.
  * Filter nach `kind` (Notiz/Poesie/Idee/Vision/Umfrage) kann
  * client-seitig dazukommen.
@@ -23,7 +23,7 @@ if (isSanityConfigured) {
 ---
 
 <BaseLayout
-  title="SchreibBAR — werkSTATT Gemeinschaft"
+  title="schreibBAR — werkSTATT Gemeinschaft"
   description="Notizen, Gedichte und Gedanken aus der werkSTATT Gemeinschaft."
 >
   <PageBanner
@@ -34,7 +34,7 @@ if (isSanityConfigured) {
     <div class="container">
       <header class="section-head">
         <div>
-          <span class="eyebrow">SchreibBAR · die rote Schnur</span>
+          <span class="eyebrow">schreibBAR · die rote Schnur</span>
           <h2 class="section-head__title">Notizen, Gedichte, <em>Gedanken</em></h2>
           <p class="section-head__sub">
             Stationen, Werkstätten, Lektüren — datiert, kurz aufgeschrieben.
@@ -45,7 +45,7 @@ if (isSanityConfigured) {
 
       {notes.length === 0 && (
         <div style="padding: 3rem 0; text-align: center; color: var(--text-secondary);">
-          <p>Noch keine Einträge — die SchreibBAR füllt sich, sobald Sanity verbunden ist.</p>
+          <p>Noch keine Einträge — die schreibBAR füllt sich, sobald Sanity verbunden ist.</p>
         </div>
       )}
 
