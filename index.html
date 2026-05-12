@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="WERK-statt Gemeinschaft — Katharina Offenborn auf Reisen zu Ökodörfern, Cohousing-Projekten und alternativen Höfen. Notizen, Werkstätten, Bibliothek und Podcast einer fortlaufenden Recherche." />
-<title>WERK-statt Gemeinschaft — Katharina Offenborn</title>
+<meta name="description" content="WERKstatt Gemeinschaft — Miteinander vereinBAR, GemeinschaftsWERK statt allein unterwegs. Katharina Offenborn auf Reisen zu Ökodörfern, Cohousing-Projekten und gemeinsamen Lebensorten." />
+<title>WERKstatt Gemeinschaft — Katharina Offenborn</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -474,7 +474,26 @@
   .hero__eyebrow {
     margin-bottom: 32px;
     color: var(--text-secondary);
-    font-weight: 600;
+    font-weight: 500;
+    /* Eyebrow wird zum Claim — mixed-case, etwas groesser, ruhig */
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 14px;
+    font-family: var(--font-display);
+    font-style: italic;
+  }
+  .hero__eyebrow::before {
+    /* Strich verkuerzen, weil Eyebrow jetzt langer Text ist */
+    width: 18px;
+  }
+  /* WERK-Silbe in Honig-Gold — gleiche Familie wie "Gemeinschaft?" und CTAs.
+     Generische Klasse, ueberall einsetzbar (Header-Brand, Eyebrow, Footer) */
+  .werk-accent,
+  .hero__eyebrow-werk {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--accent-gold);
+    letter-spacing: 0.02em;
   }
   .hero__title {
     font-size: clamp(2.5rem, 6.8vw, 5.5rem);
@@ -1941,8 +1960,8 @@
      ============================================================ -->
 <header class="site-header">
   <div class="container site-header__inner">
-    <a href="/" class="brand" aria-label="WERK-statt Gemeinschaft — Startseite">
-      <span class="brand__noun">WERK-statt</span><em class="brand__qualifier">Gemeinschaft</em>
+    <a href="/" class="brand" aria-label="WERKstatt Gemeinschaft — Startseite">
+      <span class="brand__noun"><span class="werk-accent">WERK</span>statt</span><em class="brand__qualifier">Gemeinschaft</em>
     </a>
     <nav class="nav" id="primary-nav" aria-label="Hauptnavigation">
       <a href="#schreibbar">SchreibBAR</a>
@@ -1976,7 +1995,7 @@
 <section class="hero">
   <div class="container hero__inner">
     <div class="hero__main">
-      <span class="eyebrow hero__eyebrow">WERK-statt allein unterwegs · 2026</span>
+      <span class="eyebrow hero__eyebrow">Miteinander vereinBAR — Gemeinschafts<em class="hero__eyebrow-werk">WERK</em> statt allein unterwegs</span>
       <h1 class="hero__title">
         <span class="hero__title-a">Auf der Suche —</span><br>
         <span class="hero__title-b">wie wird <em>Gemeinschaft?</em></span>
@@ -2331,7 +2350,7 @@
   <div class="container">
     <div class="site-footer__grid">
       <div>
-        <p class="site-footer__brand"><span class="site-footer__brand-noun">WERK-statt</span> <em class="site-footer__brand-qualifier">Gemeinschaft</em></p>
+        <p class="site-footer__brand"><span class="site-footer__brand-noun"><span class="werk-accent">WERK</span>statt</span> <em class="site-footer__brand-qualifier">Gemeinschaft</em></p>
         <p class="site-footer__intro">
           Eine fortlaufende Werkstatt von Reisen, Begegnungen und
           Lesefrüchten — geführt von Katharina Offenborn. Wächst, wenn etwas
@@ -2360,7 +2379,7 @@
     </div>
 
     <div class="site-footer__bottom">
-      <span>© 2026 Katharina Offenborn · WERK-statt Gemeinschaft</span>
+      <span>© 2026 Katharina Offenborn · WERKstatt Gemeinschaft</span>
       <span class="site-footer__badge">Prototyp · Frühjahr 2026</span>
     </div>
   </div>
