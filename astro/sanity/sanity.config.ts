@@ -4,7 +4,6 @@ import { presentationTool, defineLocations } from 'sanity/presentation';
 import { visionTool } from '@sanity/vision';
 import {
   UserIcon,
-  UsersIcon,
   EnvelopeIcon,
   ComposeIcon,
   PinIcon,
@@ -74,12 +73,6 @@ export default defineConfig({
             S.documentTypeListItem('episode')
               .title('hörBAR — Episoden')
               .icon(PlayIcon),
-
-            S.divider(),
-
-            S.documentTypeListItem('person')
-              .title('Menschen — wen du in Texten erwähnst')
-              .icon(UsersIcon),
           ]),
     }),
 
@@ -147,14 +140,6 @@ export default defineConfig({
             select: {},
             resolve: () => ({
               locations: [{ title: 'Mitkommen — Kontakt-Formular', href: '/mitkommen/' }],
-            }),
-          }),
-          person: defineLocations({
-            select: { name: 'name', primaryUrl: 'primaryUrl' },
-            resolve: (doc) => ({
-              locations: doc?.primaryUrl
-                ? [{ title: doc?.name || 'Mensch', href: doc.primaryUrl }]
-                : [],
             }),
           }),
         },

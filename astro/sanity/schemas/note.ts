@@ -74,8 +74,9 @@ export const note = defineType({
     }),
     defineField({
       name: 'mediaLink',
-      title: 'Medien-Link',
-      description: 'YouTube, Spotify, Apple Music — wird unter dem Text angezeigt',
+      title: 'Medien-Link (YouTube / Vimeo / Spotify / Apple Music)',
+      description:
+        'Einfach die URL einfügen — wird automatisch als Player eingebettet (Video / Musik / Podcast). Telegram-Links werden als Klick-Card angezeigt. Bei anderen URLs erscheint ein klassischer Link.',
       type: 'url',
       group: 'medien',
     }),

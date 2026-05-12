@@ -22,7 +22,6 @@ import { resource } from './resource';
 import { episode } from './episode';
 import { about } from './about';
 import { contact } from './contact';
-import { person } from './person';
 
 export const schemaTypes = [
   // i18n-Helfer zuerst (werden von Document-Schemas referenziert)
@@ -36,5 +35,4 @@ export const schemaTypes = [
   episode,
   about,
   contact,
-  person,
 ];

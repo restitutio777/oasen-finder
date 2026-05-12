@@ -60,17 +60,22 @@ Sanity macht die Optimierung selbstständig:
 
 Frage: brauchst du **andere Formate** *(z.B. Audio-Dateien zum Direkt-Hochladen statt YouTube-Link, Video, etc.)*? Aktuell sind Audio/Video als externe Plattform-Links *(hörBAR-Eintrag mit YouTube/Spotify/Apple-URL)* eingerichtet — solltest du das anders wollen, sag bescheid.
 
-## ✨ Neu: Menschen einfach erwähnen + verlinken
+## ✨ Wie du in Beiträgen verlinkst
 
-Im Sanity-Studio gibt's jetzt einen neuen Bereich **„Menschen — wen du in Texten erwähnst"**. Das macht dein Verlinken einfacher:
+Es gibt zwei einfache Wege:
 
-1. **Einmal anlegen:** Sidebar → „Menschen" → „Create". Trägst Name + Foto + Haupt-Webseite ein *(z.B. Anna mit Link zu Tempelhof oder ihre Substack-Seite)*. Dauert 30 Sek.
-2. **In jedem Beitrag verwenden:** Im Text-Feld markierst du das Wort *(„Anna")*, klickst den Annotation-Button → „Mensch erwähnen" → wählst Anna aus deiner Liste.
-3. **Im Frontend:** Erscheint als dezenter Link in warmer Akzent-Farbe. Klick → führt zu Annas Hauptseite.
+**1. Inline im Text** — wenn du jemanden / etwas im Fließtext erwähnst:
+- Wort markieren *(z.B. „Anna" oder „Tempelhof")*
+- Im Text-Editor oben auf das Link-Symbol klicken *(Kette/Globus-Icon)*
+- URL eintippen → fertig
 
-**Vorteil:** Wenn Anna ihre URL ändert *(z.B. neue Webseite)*, passt du das **einmal** bei „Menschen" an — alle Beiträge, in denen du sie erwähnst, sind automatisch aktualisiert. Kein Suchen-und-Ersetzen.
+**2. Medien-Embed pro Beitrag** — wenn du ein Video, Lied oder Podcast einbetten willst:
+- Im Beitrag-Editor unter „Bilder & Anhänge" findest du das Feld **„Medien-Link"**
+- URL einfügen *(YouTube, Vimeo, Spotify, Apple Music, SoundCloud)*
+- Erscheint auf der Site automatisch als spielbarer Player
+- Telegram-Link funktioniert auch — wird als hübsche Card angezeigt
 
-Wenn du nur einen einmaligen externen Link einfügen willst *(ohne Person-Eintrag)*: weiterhin der normale Link-Button im Text-Editor.
+Mehr brauchst du nicht. Du musst niemanden vorher als Eintrag anlegen.
 
 ---
 
