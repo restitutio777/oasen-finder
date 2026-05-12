@@ -15,8 +15,9 @@ ist Vorbereitung für den späteren Cutover.
 | **Pages** | ✅ Skelette für alle BARs (Listen + Detail) + Legal + i18n-Stubs |
 | **CSS-Migration** | ✅ `global.css` aus `index.html` extrahiert |
 | **Sanity-Projekt** | ✅ `z6eclgt8` *(Org: Intuitivmedia, Plan: Growth Trial)* — Ownership-Transfer auf Katharina später |
-| **Schemas im Studio** | ⏳ noch nicht deployt *(siehe „Sanity-Setup" unten)* |
-| **Content** | ⏳ Demo-Seeds vorbereitet in `sanity/seed/demo.ndjson` (10 Records) |
+| **Studio deployt** | ✅ <https://werkstatt-gemeinschaft.sanity.studio/> |
+| **Content** | ✅ 10 Demo-Records importiert ins `production`-Dataset |
+| **Astro-Build** | ✅ Test-Build durch (21 Pages, alle Detail-Routen aus Sanity gerendert) |
 | **PortableText-Renderer** | ⏳ Folge-Commit *(aktuell Platzhalter)* |
 | **Leaflet-Karte** *(BewegBAR)* | ⏳ Folge-Commit |
 | **Formular-Submit** *(Mitkommen)* | ⏳ noch mailto-Fallback |

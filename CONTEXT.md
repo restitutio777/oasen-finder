@@ -283,8 +283,10 @@ Damit du nicht überrascht bist von Sachen, die schon erwogen und verworfen sind
 - **Vercel:** Account `bolteds-projects`, Projekt `oasen-finder`
 - **Sanity-Projekt:** `WERKstatt Gemeinschaft` *(Project ID: `z6eclgt8`, Org: Intuitivmedia `ow7ACwTD3`, Plan: Growth Trial)*
   - Dashboard: <https://www.sanity.io/organizations/ow7ACwTD3/project/z6eclgt8>
-  - Aktuell unter Auftraggeber-Account, Ownership-Transfer auf Katharina später *(siehe `astro/README.md` „Setup-Strategie")*
-  - Demo-Seeds vorbereitet in `astro/sanity/seed/demo.ndjson` *(10 Records)*
+  - **Studio live:** <https://werkstatt-gemeinschaft.sanity.studio/>
+  - Dataset `production`: 10 Demo-Records importiert *(Bio, 3 Notizen, 2 Stationen, 1 Werkstatt, 2 Quellen, Mitkommen-Config)*
+  - Aktuell unter Auftraggeber-Account *(Gmail-Account, der das Projekt anlegte)*, Ownership-Transfer auf Katharina später
+  - **Backup-Member-Strategie:** info@intuitive-fotografie.de soll als zweiter Admin hinzugefügt werden für Bus-Faktor
 - **Lokaler Preview-Server:** `python3 -m http.server 4321` oder via `.claude/launch.json`
 - **Lokaler Astro-Dev:** `cd astro && pnpm install && pnpm dev` *(Port 4321)*
 - **Lokales Sanity-Studio:** `cd astro/sanity && pnpm install && pnpm dev` *(Port 3333)*
