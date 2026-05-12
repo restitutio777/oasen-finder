@@ -159,12 +159,12 @@
      Begriffe), darum gleiche Farbe + Stil. STATT bleibt der
      gold-Anker dazwischen. */
   .brand__verb {
-    font-weight: 400;
+    font-weight: 600;
     font-style: italic;
     color: var(--accent-green);
   }
   .brand__qualifier {
-    font-weight: 400;
+    font-weight: 600;
     font-style: italic;
     color: var(--accent-green);
   }
@@ -522,6 +522,51 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    /* Sanfter Filter — gleicht unterschiedliche Unsplash-Fotos
+       auf einheitliche, ruhige Stimmung an. */
+    filter: saturate(0.78) brightness(0.96) contrast(0.96);
+  }
+  .page-banner {
+    position: relative;
+  }
+  /* Subtiler warmer Verlauf darüber — Brand-Anbindung */
+  .page-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(246, 244, 238, 0) 0%,
+      rgba(44, 37, 48, 0.10) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* ---------- Scroll-to-Top im Footer ---------- */
+  .scroll-to-top {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid rgba(246, 244, 238, 0.20);
+    color: var(--text-inverse);
+    cursor: pointer;
+    transition: background var(--t-fast) var(--ease),
+                border-color var(--t-fast) var(--ease),
+                transform var(--t-fast) var(--ease);
+    font-family: var(--font-text);
+  }
+  .scroll-to-top:hover {
+    background: rgba(246, 244, 238, 0.08);
+    border-color: rgba(246, 244, 238, 0.40);
+    transform: translateY(-2px);
+  }
+  .scroll-to-top svg {
+    width: 16px;
+    height: 16px;
   }
   @media (max-width: 640px) {
     .page-banner { aspect-ratio: 4 / 3; }
