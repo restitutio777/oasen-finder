@@ -44,6 +44,15 @@ Persönliche Website für **Katharina Offenborn** *(Ergotherapeutin, Ende 60, me
 - ❌ **Versuch 2** (`1d2b285`): pnpm 10 + Node 22 fixiert → selber Fehler. Node-Version war **nicht** die Ursache.
 - ✅ **Versuch 3** (`1bd9891`): Auf npm gewechselt + `package-lock.json` eingecheckt → **READY** in 16 s.
 
+### Auto-Build bei Sanity-Publish *(eingerichtet 12.05.2026)*
+
+Vercel-Deploy-Hook + Sanity-Webhook sind verbunden:
+
+- **Vercel-Deploy-Hook** *(unter Project Settings → Git → Deploy Hooks)*, Name: `sanity-publish`, Branch: `main`
+- **Sanity-Webhook** *(unter Project → API → Webhooks)*, Name: `Vercel — Auto-Deploy`, Trigger: Create/Update/Delete, Dataset: `production`
+
+Folge: Katharina drückt im Studio „Publish" → Vercel baut die Site innerhalb von ~5 s neu → Änderung ist nach ~60-90 s live.
+
 ### Was noch offen ist *(nicht-blockierend)*
 
 - ⏳ **Resend-Setup für Mitkommen-Formular:** API-Key in Vercel-Env eintragen *(siehe `NEXT-SESSION.md` → „Resend aktivieren")*. Aktuell läuft die Function im „Log-Modus" — Validation + Honeypot funktionieren, Mails werden nur in Vercel-Logs geschrieben.
