@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import MapBewegBAR from '../../components/MapBewegBAR.astro';
 import { sanity, isSanityConfigured } from '../../lib/sanity';
 
 /**
@@ -33,10 +34,7 @@ if (isSanityConfigured) {
         Kreta, Frankreich und dem deutschsprachigen Raum.
       </p>
 
-      {/* TODO: Leaflet-Karte mit Pins aus stations[].coordinates */}
-      <div id="bewegbar-map" style="margin: 3rem 0; height: 480px; background: var(--bg-warm); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
-        <p>Interaktive Karte folgt in Phase 1</p>
-      </div>
+      <MapBewegBAR stations={stations} />
 
       {stations.length === 0 && (
         <p style="color: var(--text-secondary);">Noch keine Stationen — sobald Sanity verbunden ist.</p>

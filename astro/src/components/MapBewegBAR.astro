@@ -1,0 +1,162 @@
+---
+/**
+ * Leaflet-Karte für BewegBAR — zeigt alle Stationen als Pins auf
+ * OpenStreetMap-Tiles. Klick auf Pin öffnet Popup mit Name + Link.
+ *
+ * Pure CSS-Import + Vanilla-Leaflet (kein React-Wrapper) — bleibt
+ * leichtgewichtig und Astro-Pattern-konform.
+ */
+
+export interface MapStation {
+  _id: string;
+  slug: string;
+  name: string;
+  region?: string;
+  country?: string;
+  coordinates?: { lat: number; lng: number };
+  visitedAt?: string;
+}
+
+export interface Props {
+  stations: MapStation[];
+}
+
+const { stations } = Astro.props;
+
+// Nur Stationen mit Koordinaten werden auf der Karte gezeigt
+const points = stations
+  .filter((s) => s.coordinates?.lat && s.coordinates?.lng)
+  .map((s) => ({
+    lat: s.coordinates!.lat,
+    lng: s.coordinates!.lng,
+    name: s.name,
+    region: s.region,
+    visitedAt: s.visitedAt,
+    url: `/bewegbar/${s.slug}/`,
+  }));
+---
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+/>
+
+<div
+  id="bewegbar-map"
+  data-points={JSON.stringify(points)}
+  aria-label={`Karte mit ${points.length} Reisestationen`}
+></div>
+
+<script>
+  import L from 'leaflet';
+
+  const el = document.getElementById('bewegbar-map');
+  if (el) {
+    const raw = el.dataset.points || '[]';
+    const points: Array<{
+      lat: number;
+      lng: number;
+      name: string;
+      region?: string;
+      visitedAt?: string;
+      url: string;
+    }> = JSON.parse(raw);
+
+    if (points.length === 0) {
+      el.innerHTML =
+        '<p style="text-align:center;padding:3rem;color:var(--text-muted);">Noch keine Stationen mit Koordinaten — füge in Sanity geopoint-Werte hinzu.</p>';
+    } else {
+      // Custom Pin im Brand-Stil — kleiner Kreis in Clay-Rot
+      const accentColor = '#a8392b';
+      const pinIcon = L.divIcon({
+        className: 'bewegbar-pin',
+        html: `<svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="14" r="8" fill="${accentColor}" stroke="#f6f4ee" stroke-width="3"/>
+          <circle cx="14" cy="14" r="3" fill="#f6f4ee"/>
+        </svg>`,
+        iconSize: [28, 28],
+        iconAnchor: [14, 14],
+      });
+
+      // Bounds aus den Punkten ableiten — Karte zoomt automatisch
+      const bounds = L.latLngBounds(points.map((p) => [p.lat, p.lng]));
+
+      const map = L.map(el, {
+        scrollWheelZoom: false, // Verhindert versehentliches Zoomen beim Page-Scroll
+        zoomControl: true,
+      }).fitBounds(bounds, { padding: [40, 40], maxZoom: 6 });
+
+      // Hinweis-Overlay bis User die Karte aktiviert
+      let activated = false;
+      const activate = () => {
+        if (activated) return;
+        map.scrollWheelZoom.enable();
+        activated = true;
+      };
+      el.addEventListener('click', activate);
+
+      // OpenStreetMap-Tiles (kostenlos, kein API-Key)
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18,
+      }).addTo(map);
+
+      // Pins setzen
+      points.forEach((p) => {
+        const popupContent = `
+          <strong>${escapeHtml(p.name)}</strong><br/>
+          ${p.region ? `<span style="color:#686b62;font-size:13px">${escapeHtml(p.region)}</span><br/>` : ''}
+          ${p.visitedAt ? `<span style="color:#9a9d92;font-size:12px">${new Date(p.visitedAt).toLocaleDateString('de-DE')}</span><br/>` : ''}
+          <a href="${p.url}" style="color:#c08538;font-size:13px;margin-top:6px;display:inline-block">Zur Station →</a>
+        `;
+        L.marker([p.lat, p.lng], { icon: pinIcon })
+          .addTo(map)
+          .bindPopup(popupContent);
+      });
+    }
+  }
+
+  function escapeHtml(str: string): string {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+</script>
+
+<style>
+  #bewegbar-map {
+    height: 480px;
+    width: 100%;
+    border-radius: 6px;
+    margin: 2rem 0;
+    background: var(--bg-warm);
+    /* Leaflet kann manchmal mit hoher z-index Overlay-Probleme machen;
+       hier sicherheitshalber unter dem Site-Header (z-index 50). */
+    z-index: 1;
+    position: relative;
+  }
+
+  /* Leaflet-Popup an Brand anpassen */
+  :global(.leaflet-popup-content-wrapper) {
+    background: var(--bg-elevated, #ffffff);
+    border-radius: 6px;
+    box-shadow: 0 12px 32px -12px rgba(31, 29, 26, 0.18);
+    font-family: var(--font-display, 'Cormorant Garamond', serif);
+  }
+  :global(.leaflet-popup-content) {
+    margin: 16px 18px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  :global(.leaflet-popup-tip) {
+    background: var(--bg-elevated, #ffffff);
+  }
+  /* Attribution dezenter */
+  :global(.leaflet-control-attribution) {
+    font-size: 10px !important;
+    background: rgba(246, 244, 238, 0.85) !important;
+  }
+</style>
