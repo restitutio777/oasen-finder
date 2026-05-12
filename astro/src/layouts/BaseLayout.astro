@@ -55,14 +55,12 @@ const {
     </main>
     <Footer />
 
-    {/* Vercel Analytics + Speed Insights — beide ohne Cookies,
-        anonymisiert. Werden client-side geladen, kein Privacy-Impact
-        gegenüber dem Standard-Setup. */}
+    {/* Vercel Analytics — ohne Cookies, anonymisiert.
+        (Speed Insights ist im Hobby-Plan auf ein Projekt limitiert,
+        nutzen wir hier nicht.) */}
     <script>
       import { inject } from '@vercel/analytics';
-      import { injectSpeedInsights } from '@vercel/speed-insights';
       inject();
-      injectSpeedInsights();
     </script>
   </body>
 </html>
