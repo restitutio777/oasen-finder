@@ -2005,6 +2005,21 @@
     letter-spacing: -0.005em;
     color: var(--accent-soft);
   }
+  /* Dezenter Webdesign-Credit am Footer-Ende */
+  .site-footer__credit {
+    opacity: 0.7;
+  }
+  .site-footer__credit a {
+    text-decoration: underline;
+    text-decoration-color: rgba(246, 244, 238, 0.25);
+    text-underline-offset: 2px;
+    transition: text-decoration-color var(--t-fast) var(--ease),
+                color var(--t-fast) var(--ease);
+  }
+  .site-footer__credit a:hover {
+    color: rgba(246, 244, 238, 0.85);
+    text-decoration-color: rgba(246, 244, 238, 0.55);
+  }
 
   @media (max-width: 800px) {
     .site-footer__grid { grid-template-columns: 1fr; }
