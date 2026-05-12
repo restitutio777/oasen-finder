@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { docGroups, accentColorField } from './_shared';
 
 /**
  * LesBAR-Eintrag (+ BrauchBAR via kind-Filter).
@@ -8,19 +9,14 @@ export const resource = defineType({
   name: 'resource',
   title: 'LesBAR — Quelle / Werkzeug',
   type: 'document',
+  groups: [...docGroups],
   fields: [
     defineField({
       name: 'title',
       title: 'Titel',
       type: 'i18nString',
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'slug',
-      title: 'URL-Slug',
-      type: 'slug',
-      options: { source: 'title.de', maxLength: 96 },
-      validation: (Rule) => Rule.required(),
+      group: 'inhalt',
     }),
     defineField({
       name: 'kind',
@@ -39,35 +35,51 @@ export const resource = defineType({
         ],
       },
       validation: (Rule) => Rule.required(),
+      group: 'inhalt',
     }),
     defineField({
       name: 'authorOrSource',
       title: 'Autor / Quelle',
       type: 'string',
+      group: 'inhalt',
     }),
     defineField({
       name: 'note',
       title: 'Deine Notiz — warum hier?',
       type: 'i18nText',
       description: 'Was bringt es dir, was bringt es Besuchern',
+      group: 'inhalt',
     }),
     defineField({
       name: 'link',
       title: 'Link',
       type: 'url',
+      group: 'inhalt',
     }),
     defineField({
       name: 'coverImage',
       title: 'Cover / Bild',
       type: 'image',
       options: { hotspot: true },
+      group: 'medien',
     }),
     defineField({
       name: 'pdfAttachment',
       title: 'PDF-Anhang',
       type: 'file',
       options: { accept: 'application/pdf' },
+      group: 'medien',
     }),
+    defineField({
+      name: 'slug',
+      title: 'URL-Adresse',
+      description: 'Wird automatisch aus dem Titel erzeugt — kannst du ändern',
+      type: 'slug',
+      options: { source: 'title.de', maxLength: 96 },
+      validation: (Rule) => Rule.required(),
+      group: 'mehr',
+    }),
+    accentColorField,
   ],
   preview: {
     select: {

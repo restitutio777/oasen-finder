@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { accentColorField } from './_shared';
 
 /**
  * MachBAR-Event — Werkstatt-Termin.
@@ -8,30 +9,32 @@ export const event = defineType({
   name: 'event',
   title: 'MachBAR — Werkstatt-Termin',
   type: 'document',
+  groups: [
+    { name: 'inhalt', title: 'Inhalt', default: true },
+    { name: 'anmeldung', title: 'Anmeldung & Kosten' },
+    { name: 'medien', title: 'Bilder & Anhänge' },
+    { name: 'mehr', title: 'Mehr' },
+  ],
   fields: [
     defineField({
       name: 'title',
       title: 'Titel',
       type: 'i18nString',
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'slug',
-      title: 'URL-Slug',
-      type: 'slug',
-      options: { source: 'title.de', maxLength: 96 },
-      validation: (Rule) => Rule.required(),
+      group: 'inhalt',
     }),
     defineField({
       name: 'startDate',
       title: 'Datum / Beginn',
       type: 'datetime',
       validation: (Rule) => Rule.required(),
+      group: 'inhalt',
     }),
     defineField({
       name: 'endDate',
       title: 'Ende (falls mehrtägig)',
       type: 'datetime',
+      group: 'inhalt',
     }),
     defineField({
       name: 'ownership',
@@ -46,6 +49,7 @@ export const event = defineType({
       },
       initialValue: 'eigener',
       validation: (Rule) => Rule.required(),
+      group: 'inhalt',
     }),
     defineField({
       name: 'season',
@@ -60,26 +64,24 @@ export const event = defineType({
         ],
       },
       description: 'Katharinas Jahres-Rhythmus',
+      group: 'inhalt',
     }),
     defineField({
       name: 'location',
       title: 'Ort',
       type: 'string',
       description: 'z.B. Tempelhof, Hohenlohe',
-    }),
-    defineField({
-      name: 'locationCoords',
-      title: 'Koordinaten (für Karten-Verschneidung)',
-      type: 'geopoint',
+      group: 'inhalt',
     }),
     defineField({
       name: 'description',
       title: 'Beschreibung',
       type: 'i18nText',
+      group: 'inhalt',
     }),
     defineField({
       name: 'registration',
-      title: 'Anmeldung',
+      title: 'Wie melden sich Leute an?',
       type: 'object',
       fields: [
         defineField({
@@ -101,32 +103,53 @@ export const event = defineType({
           type: 'string',
         }),
       ],
+      group: 'anmeldung',
+    }),
+    defineField({
+      name: 'fees',
+      title: 'Honorar / Kosten',
+      type: 'i18nText',
+      description: 'Default: „individuell besprechen"',
+      group: 'anmeldung',
     }),
     defineField({
       name: 'dogFriendly',
       title: 'Hundefreundlich? (Carla kann mitkommen)',
       type: 'boolean',
       initialValue: true,
-      description: 'Katharinas Hund Carla muss bei eigenen Terminen dabei sein können',
+      description: 'Wichtig für eigene Termine — Carla muss dabei sein können',
+      group: 'anmeldung',
     }),
     defineField({
       name: 'photo',
       title: 'Foto',
       type: 'image',
       options: { hotspot: true },
+      group: 'medien',
     }),
     defineField({
       name: 'programPdf',
       title: 'Programm-PDF',
       type: 'file',
       options: { accept: 'application/pdf' },
+      group: 'medien',
     }),
     defineField({
-      name: 'fees',
-      title: 'Honorar / Kosten',
-      type: 'i18nText',
-      description: 'Default: „individuell besprechen" — Katharinas Wahl aus Antwort 3.5c',
+      name: 'slug',
+      title: 'URL-Adresse',
+      description: 'Wird automatisch aus dem Titel erzeugt — kannst du ändern',
+      type: 'slug',
+      options: { source: 'title.de', maxLength: 96 },
+      validation: (Rule) => Rule.required(),
+      group: 'mehr',
     }),
+    defineField({
+      name: 'locationCoords',
+      title: 'Koordinaten (für Karten-Verschneidung)',
+      type: 'geopoint',
+      group: 'mehr',
+    }),
+    accentColorField,
   ],
   orderings: [
     {

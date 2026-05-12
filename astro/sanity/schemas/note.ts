@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { docGroups, accentColorField } from './_shared';
 
 /**
  * SchreibBAR-Eintrag (+ DenkBAR via kind-Filter).
@@ -8,26 +9,22 @@ export const note = defineType({
   name: 'note',
   title: 'SchreibBAR — Notiz / Gedicht / Idee',
   type: 'document',
+  groups: [...docGroups],
   fields: [
+    defineField({
+      name: 'title',
+      title: 'Titel',
+      type: 'i18nString',
+      validation: (Rule) => Rule.required(),
+      group: 'inhalt',
+    }),
     defineField({
       name: 'publishedAt',
       title: 'Datum',
       type: 'date',
       initialValue: () => new Date().toISOString().slice(0, 10),
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'slug',
-      title: 'URL-Slug',
-      type: 'slug',
-      options: { source: 'title.de', maxLength: 96 },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'title',
-      title: 'Titel',
-      type: 'i18nString',
-      validation: (Rule) => Rule.required(),
+      group: 'inhalt',
     }),
     defineField({
       name: 'kind',
@@ -45,11 +42,13 @@ export const note = defineType({
       },
       initialValue: 'notiz',
       validation: (Rule) => Rule.required(),
+      group: 'inhalt',
     }),
     defineField({
       name: 'body',
       title: 'Haupttext',
       type: 'i18nText',
+      group: 'inhalt',
     }),
     defineField({
       name: 'tags',
@@ -57,39 +56,57 @@ export const note = defineType({
       type: 'array',
       of: [{ type: 'string' }],
       options: { layout: 'tags' },
+      description: 'Optional — z.B. „Kreta", „Werkstatt", „Pikler"',
+      group: 'inhalt',
     }),
     defineField({
       name: 'hero',
-      title: 'Bild',
+      title: 'Hauptbild',
       type: 'image',
       options: { hotspot: true },
       fields: [
         defineField({ name: 'caption', title: 'Bildunterschrift', type: 'i18nString' }),
         defineField({ name: 'alt', title: 'Alt-Text (für Barrierefreiheit)', type: 'i18nString' }),
       ],
+      group: 'medien',
     }),
     defineField({
       name: 'mediaLink',
-      title: 'Medien-Link (YouTube, Spotify, Apple Music)',
+      title: 'Medien-Link',
+      description: 'YouTube, Spotify, Apple Music — wird unter dem Text angezeigt',
       type: 'url',
+      group: 'medien',
     }),
     defineField({
       name: 'pdfAttachment',
       title: 'PDF-Anhang',
       type: 'file',
       options: { accept: 'application/pdf' },
+      group: 'medien',
+    }),
+    defineField({
+      name: 'slug',
+      title: 'URL-Adresse',
+      description: 'Wird automatisch aus dem Titel erzeugt — kannst du ändern',
+      type: 'slug',
+      options: { source: 'title.de', maxLength: 96 },
+      validation: (Rule) => Rule.required(),
+      group: 'mehr',
     }),
     defineField({
       name: 'externalLink',
       title: 'Externer Link',
       type: 'url',
+      group: 'mehr',
     }),
     defineField({
       name: 'substackUrl',
       title: 'Substack-Cross-Posting',
       type: 'url',
-      description: 'Falls dieser Eintrag auch auf Substack erscheint — Hub-Logik beidseitig',
+      description: 'Falls dieser Eintrag auch auf Substack erscheint',
+      group: 'mehr',
     }),
+    accentColorField,
   ],
   orderings: [
     {
@@ -106,9 +123,16 @@ export const note = defineType({
       media: 'hero',
     },
     prepare({ title, kind, publishedAt, media }) {
+      const kindLabel: Record<string, string> = {
+        notiz: 'Notiz',
+        poesie: 'Poesie',
+        idee: 'Idee',
+        vision: 'Vision',
+        umfrage: 'Umfrage',
+      };
       return {
         title: title || '(ohne Titel)',
-        subtitle: `${kind || 'notiz'} · ${publishedAt || ''}`,
+        subtitle: `${kindLabel[kind] || 'Notiz'} · ${publishedAt || ''}`,
         media,
       };
     },

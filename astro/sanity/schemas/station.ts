@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { docGroups, accentColorField } from './_shared';
 
 /**
  * BewegBAR-Station — ein besuchter Gemeinschaftsort.
@@ -8,25 +9,21 @@ export const station = defineType({
   name: 'station',
   title: 'BewegBAR — Station',
   type: 'document',
+  groups: [...docGroups],
   fields: [
     defineField({
       name: 'name',
       title: 'Name des Ortes',
       type: 'string',
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'slug',
-      title: 'URL-Slug',
-      type: 'slug',
-      options: { source: 'name', maxLength: 96 },
-      validation: (Rule) => Rule.required(),
+      group: 'inhalt',
     }),
     defineField({
       name: 'region',
       title: 'Region',
       type: 'string',
       description: 'z.B. Hohenlohe, Kreta, Provence',
+      group: 'inhalt',
     }),
     defineField({
       name: 'country',
@@ -43,11 +40,13 @@ export const station = defineType({
           { title: 'Andere', value: 'other' },
         ],
       },
+      group: 'inhalt',
     }),
     defineField({
       name: 'visitedAt',
       title: 'Besucht am',
       type: 'date',
+      group: 'inhalt',
     }),
     defineField({
       name: 'visitedRange',
@@ -58,11 +57,22 @@ export const station = defineType({
         defineField({ name: 'to', title: 'Bis', type: 'date' }),
       ],
       description: 'Falls mehrtägig — sonst leer lassen',
+      group: 'inhalt',
     }),
     defineField({
-      name: 'coordinates',
-      title: 'Koordinaten (für Karte)',
-      type: 'geopoint',
+      name: 'reflection',
+      title: 'Reflexion / Beschreibung',
+      type: 'i18nText',
+      group: 'inhalt',
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+      description: 'z.B. Ökodorf, Cohousing, Spirituell, Pikler, Steiner',
+      group: 'inhalt',
     }),
     defineField({
       name: 'images',
@@ -78,31 +88,38 @@ export const station = defineType({
           ],
         },
       ],
-    }),
-    defineField({
-      name: 'reflection',
-      title: 'Reflexion / Beschreibung',
-      type: 'i18nText',
-    }),
-    defineField({
-      name: 'tags',
-      title: 'Tags',
-      type: 'array',
-      of: [{ type: 'string' }],
-      options: { layout: 'tags' },
-      description: 'z.B. Ökodorf, Cohousing, Spirituell, Pikler, Steiner',
-    }),
-    defineField({
-      name: 'communityLink',
-      title: 'Link zur Gemeinschaft',
-      type: 'url',
+      group: 'medien',
     }),
     defineField({
       name: 'conceptPdf',
       title: 'Konzept-PDF des Ortes',
       type: 'file',
       options: { accept: 'application/pdf' },
+      group: 'medien',
     }),
+    defineField({
+      name: 'slug',
+      title: 'URL-Adresse',
+      description: 'Wird automatisch aus dem Namen erzeugt — kannst du ändern',
+      type: 'slug',
+      options: { source: 'name', maxLength: 96 },
+      validation: (Rule) => Rule.required(),
+      group: 'mehr',
+    }),
+    defineField({
+      name: 'coordinates',
+      title: 'Koordinaten (für Karte)',
+      type: 'geopoint',
+      description: 'Klick auf der Karte setzt den Punkt',
+      group: 'mehr',
+    }),
+    defineField({
+      name: 'communityLink',
+      title: 'Link zur Gemeinschaft',
+      type: 'url',
+      group: 'mehr',
+    }),
+    accentColorField,
   ],
   preview: {
     select: {
