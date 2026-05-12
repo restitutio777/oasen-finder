@@ -35,7 +35,7 @@ const categories = config?.inviteCategories || [
       <form
         id="mitkommen-form"
         method="post"
-        action="/api/mitkommen"
+        action="/api/mitkommen/"
         novalidate
         style="max-width: 640px; margin: 3rem auto; display: grid; gap: 1.25rem;"
       >
@@ -167,7 +167,7 @@ const categories = config?.inviteCategories || [
       };
 
       try {
-        const res = await fetch('/api/mitkommen', {
+        const res = await fetch('/api/mitkommen/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify(payload),
