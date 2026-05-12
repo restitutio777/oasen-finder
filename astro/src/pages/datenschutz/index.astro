@@ -10,29 +10,140 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         Datenschutzerklärung
       </h1>
 
+      <p style="margin-bottom: 1.5rem;">
+        Diese Datenschutzerklärung informiert Sie über Art, Umfang und Zweck der Verarbeitung
+        personenbezogener Daten auf dieser Website. Verantwortliche Stelle im Sinne der DSGVO
+        und des Bundesdatenschutzgesetzes (BDSG) ist:
+      </p>
+
       <h2 style="font-family: var(--font-display); margin-top: 2rem;">Verantwortliche Stelle</h2>
       <p>
         Katharina Offenborn<br />
         Am Tunnel 2<br />
         36391 Sinntal-Sterbfritz<br />
+        Deutschland<br />
         E-Mail: <a href="mailto:katharina.offenborn@googlemail.com">katharina.offenborn@googlemail.com</a>
       </p>
 
-      <p style="font-style: italic; color: var(--text-secondary); margin-top: 2rem;">
-        Volltext wird vor dem öffentlichen Launch durch einen DSGVO-konformen
-        Generator finalisiert (z.B. eRecht24 oder Datenschutz-Generator.de).
-        Inhaltsschwerpunkte werden:
+      <h2 style="font-family: var(--font-display); margin-top: 2rem;">Erfassung beim Aufruf der Website</h2>
+      <p>
+        Beim Aufruf dieser Website werden durch den Hosting-Anbieter automatisch Informationen
+        in sogenannten Server-Log-Dateien erfasst (z.&nbsp;B. anonymisierte IP-Adresse, Datum
+        und Uhrzeit, aufgerufene Seite, Browsertyp). Diese Daten lassen keinen unmittelbaren
+        Rückschluss auf Ihre Person zu, sind technisch erforderlich für die Auslieferung der
+        Seite und werden nach kurzer Zeit gelöscht.
       </p>
 
-      <ul style="margin-top: 1.5rem; line-height: 2;">
-        <li>Hosting bei Vercel (US-Server, DPA / Standardvertragsklauseln)</li>
-        <li>Inhalte aus Sanity (EU-Hosting möglich)</li>
-        <li>Kontaktformular: erhobene Daten, Zweck, Speicherdauer</li>
-        <li>Newsletter („Brief von unterwegs"): Doppel-Opt-In, Widerrufsrecht</li>
-        <li>Externe Inhalte: YouTube, Spotify, Apple Music nur auf Klick</li>
-        <li>Karten (Leaflet + OpenStreetMap): Tiles werden vom OSM-Server geladen</li>
-        <li>Cookies: nur, falls Analytics ergänzt wird (aktuell keine)</li>
+      <h2 style="font-family: var(--font-display); margin-top: 2rem;">Hosting bei Vercel</h2>
+      <p>
+        Die Website wird gehostet bei Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA.
+        Vercel kann technisch notwendige Daten (Log-Dateien, IP-Adressen) zur Auslieferung der
+        Seite verarbeiten. Mit Vercel besteht ein Auftragsverarbeitungsvertrag nach Art.&nbsp;28
+        DSGVO; der Datenverkehr in die USA ist über die Standardvertragsklauseln der EU-Kommission
+        abgesichert. Weitere Informationen:
+        <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">vercel.com/legal/privacy-policy</a>.
+      </p>
+
+      <h2 style="font-family: var(--font-display); margin-top: 2rem;">Vercel Analytics &amp; Speed Insights</h2>
+      <p>
+        Zur Auswertung von Seitenaufrufen und Ladegeschwindigkeit wird Vercel Analytics und
+        Vercel Speed Insights eingesetzt. Diese Dienste arbeiten <strong>ohne Cookies</strong>
+        und ohne Identifikatoren, die einen Rückschluss auf einzelne Personen zulassen würden.
+        Erfasst werden ausschließlich aggregierte Daten wie Seitenaufrufe, Verweildauer und
+        technische Performance-Werte. Ein Opt-Out ist deshalb nicht erforderlich.
+      </p>
+
+      <h2 style="font-family: var(--font-display); margin-top: 2rem;">Content-Management-System Sanity</h2>
+      <p>
+        Die Inhalte dieser Website werden in Sanity (Sanity.io, Inc., 268 Bush St, San Francisco,
+        CA 94104, USA) verwaltet. Beim normalen Besuch der Website werden keine personenbezogenen
+        Daten an Sanity übermittelt — die Inhalte werden zur Build-Zeit auf den Server geladen
+        und dann statisch ausgeliefert.
+      </p>
+
+      <h2 style="font-family: var(--font-display); margin-top: 2rem;">Kontaktformular &amp; E-Mail-Versand</h2>
+      <p>
+        Bei Nutzung des Kontaktformulars werden Name, E-Mail-Adresse, Ihre Nachricht und die
+        gewählten Anliegen-Kategorien verarbeitet. Die Daten werden per E-Mail über den Dienst
+        Resend Inc., 2261 Market Street #5039, San Francisco, CA 94114, USA an die Anbieterin
+        weitergeleitet. Mit Resend besteht ein Auftragsverarbeitungsvertrag; der Transfer in
+        die USA ist über die Standardvertragsklauseln abgesichert.
+        Rechtsgrundlage ist Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;b und f DSGVO (Vertragsanbahnung
+        bzw. berechtigtes Interesse an der Beantwortung von Anfragen). Die Daten werden gelöscht,
+        sobald sie für den ursprünglichen Zweck nicht mehr erforderlich sind — in der Regel nach
+        Abschluss der jeweiligen Konversation.
+      </p>
+
+      <h2 style="font-family: var(--font-display); margin-top: 2rem;">Karten (bewegBAR)</h2>
+      <p>
+        Die Karte auf der Seite <em>bewegBAR</em> nutzt OpenStreetMap (OSM Foundation, St John's
+        Innovation Centre, Cowley Road, Cambridge CB4 0WS, Vereinigtes Königreich). Beim Laden
+        der Karte werden Kartenkacheln vom OpenStreetMap-Server geladen — dabei wird Ihre
+        IP-Adresse an OSM übermittelt. Weitere Informationen:
+        <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">OSM-Datenschutzerklärung</a>.
+      </p>
+
+      <h2 style="font-family: var(--font-display); margin-top: 2rem;">Externe Inhalte (YouTube, Spotify, Apple Music)</h2>
+      <p>
+        Inhalte der <em>hörBAR</em> (Audio-Episoden, Lieder, Reflexionen) werden als externe
+        Links angeboten — also <strong>nicht eingebettet</strong>. Erst wenn Sie einen Link
+        anklicken, gelangen Sie zu der jeweiligen Plattform (YouTube, Spotify, Apple Music)
+        und dort gelten deren eigene Datenschutzbestimmungen. So lange Sie nicht klicken,
+        wird keine Verbindung zu diesen Anbietern aufgebaut.
+      </p>
+
+      <h2 style="font-family: var(--font-display); margin-top: 2rem;">Bilder von Unsplash</h2>
+      <p>
+        Mood-Bilder auf einigen Seiten werden vom CDN unsplash.com geladen (Unsplash, Inc.,
+        524 Yonge Street, Toronto, ON M4Y 1Y4, Kanada). Beim Laden der Bilder wird Ihre
+        IP-Adresse an Unsplash übermittelt. Unsplash verwendet diese ausschließlich für die
+        technische Bildauslieferung und ergänzende anonyme Statistiken.
+      </p>
+
+      <h2 style="font-family: var(--font-display); margin-top: 2rem;">Schriften (Google Fonts)</h2>
+      <p>
+        Diese Website lädt die Schriftarten <em>Cormorant Garamond</em> und <em>Inter</em> über
+        die Google-Fonts-CDN (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4,
+        Irland). Beim Aufruf der Seite wird Ihre IP-Adresse an Google übermittelt. Eine lokale
+        Auslieferung der Schriften ist als Optimierung vorgesehen — wir werden auf diese
+        umstellen, sobald praktikabel.
+      </p>
+
+      <h2 style="font-family: var(--font-display); margin-top: 2rem;">Cookies</h2>
+      <p>
+        Diese Website verwendet aktuell <strong>keine Cookies</strong>. Sollten zu einem
+        späteren Zeitpunkt Cookies eingesetzt werden, werden Sie über einen Hinweis-Banner
+        um Ihre Einwilligung gebeten und können diese jederzeit widerrufen.
+      </p>
+
+      <h2 style="font-family: var(--font-display); margin-top: 2rem;">Ihre Rechte nach DSGVO</h2>
+      <p>Ihnen stehen folgende Rechte zu, soweit die Voraussetzungen nach DSGVO erfüllt sind:</p>
+      <ul style="margin-top: 1rem; line-height: 1.9;">
+        <li>Recht auf Auskunft über die zu Ihnen gespeicherten Daten (Art.&nbsp;15)</li>
+        <li>Recht auf Berichtigung unrichtiger Daten (Art.&nbsp;16)</li>
+        <li>Recht auf Löschung („Recht auf Vergessenwerden", Art.&nbsp;17)</li>
+        <li>Recht auf Einschränkung der Verarbeitung (Art.&nbsp;18)</li>
+        <li>Recht auf Datenübertragbarkeit (Art.&nbsp;20)</li>
+        <li>Recht auf Widerspruch gegen die Verarbeitung (Art.&nbsp;21)</li>
+        <li>Recht auf Widerruf einer erteilten Einwilligung (Art.&nbsp;7 Abs.&nbsp;3)</li>
       </ul>
+      <p style="margin-top: 1rem;">
+        Bitte richten Sie Anfragen zu Ihren Rechten formlos an die oben genannte
+        E-Mail-Adresse.
+      </p>
+
+      <h2 style="font-family: var(--font-display); margin-top: 2rem;">Beschwerderecht</h2>
+      <p>
+        Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.
+        Für die verantwortliche Stelle ist das der <em>Hessische Beauftragte für Datenschutz
+        und Informationsfreiheit</em>, Postfach 3163, 65021 Wiesbaden,
+        <a href="https://datenschutz.hessen.de" target="_blank" rel="noopener">datenschutz.hessen.de</a>.
+      </p>
+
+      <p style="margin-top: 3rem; font-size: 13px; color: var(--text-secondary); font-style: italic;">
+        Stand: Mai 2026. Diese Erklärung wird angepasst, sobald sich die genutzten Dienste
+        ändern.
+      </p>
     </div>
   </section>
 </BaseLayout>
