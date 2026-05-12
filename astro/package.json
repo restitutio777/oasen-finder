@@ -1,0 +1,26 @@
+{
+  "name": "werkstatt-gemeinschaft",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "WERKstatt Gemeinschaft — Astro-Frontend für Katharina Offenborn. Brand: Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs.",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "sanity:dev": "cd sanity && sanity dev",
+    "sanity:deploy": "cd sanity && sanity deploy"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@sanity/client": "^6.22.5",
+    "@sanity/image-url": "^1.1.0",
+    "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  }
+}

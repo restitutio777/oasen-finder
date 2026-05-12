@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+
+/**
+ * SchreibBAR — Notizen-Liste.
+ * Lädt alle Notizen aus Sanity, nach Datum absteigend sortiert.
+ * Filter nach `kind` (Notiz/Poesie/Idee/Vision/Umfrage) kann
+ * client-seitig dazukommen.
+ */
+
+let notes: any[] = [];
+
+if (isSanityConfigured) {
+  notes = await sanity.fetch(`
+    *[_type == "note"] | order(publishedAt desc) {
+      _id, title, kind, publishedAt, "slug": slug.current,
+      tags, "hero": hero { asset->{ url, metadata { dimensions } }, alt, caption }
+    }
+  `);
+}
+---
+
+<BaseLayout
+  title="SchreibBAR — WERKstatt Gemeinschaft"
+  description="Notizen, Gedichte und Gedanken aus der WERKstatt Gemeinschaft."
+>
+  <section class="chronicle" id="schreibbar">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <span class="eyebrow">SchreibBAR · die rote Schnur</span>
+          <h2 class="section-head__title">Notizen, Gedichte, <em>Gedanken</em></h2>
+          <p class="section-head__sub">
+            Stationen, Werkstätten, Lektüren — datiert, kurz aufgeschrieben.
+            Hier sammelt sich der Faden.
+          </p>
+        </div>
+      </header>
+
+      {notes.length === 0 && (
+        <div style="padding: 3rem 0; text-align: center; color: var(--text-secondary);">
+          <p>Noch keine Einträge — die SchreibBAR füllt sich, sobald Sanity verbunden ist.</p>
+        </div>
+      )}
+
+      {notes.length > 0 && (
+        <ol class="chronicle__list">
+          {notes.map((note) => (
+            <li class="entry">
+              <span class="entry__bead" aria-hidden="true"></span>
+              <div class="entry__date">
+                <span class="entry__day">{new Date(note.publishedAt).getDate()}</span>
+                <span class="entry__month">
+                  {new Date(note.publishedAt).toLocaleDateString('de-DE', { month: 'long' })}
+                </span>
+                <span class="entry__year">{new Date(note.publishedAt).getFullYear()}</span>
+              </div>
+              <div class="entry__body">
+                <span class="entry__tag" data-tag={note.kind}>
+                  {note.kind === 'poesie' && 'Poesie'}
+                  {note.kind === 'notiz' && 'Notiz'}
+                  {note.kind === 'idee' && 'DenkBAR · Idee'}
+                  {note.kind === 'vision' && 'DenkBAR · Vision'}
+                  {note.kind === 'umfrage' && 'DenkBAR · Umfrage'}
+                </span>
+                <h3 class="entry__title">
+                  <a href={`/schreibbar/${note.slug}/`}>{localized(note.title)}</a>
+                </h3>
+              </div>
+            </li>
+          ))}
+        </ol>
+      )}
+    </div>
+  </section>
+</BaseLayout>

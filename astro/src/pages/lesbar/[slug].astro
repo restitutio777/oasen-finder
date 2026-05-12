@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+
+export async function getStaticPaths() {
+  if (!isSanityConfigured) return [];
+  const resources = await sanity.fetch(`
+    *[_type == "resource" && defined(slug.current)] {
+      "slug": slug.current, _id, title, kind, authorOrSource, note, link,
+      "coverUrl": coverImage.asset->url,
+      "pdfUrl": pdfAttachment.asset->url
+    }
+  `);
+  return resources.map((r: any) => ({ params: { slug: r.slug }, props: { resource: r } }));
+}
+
+const { resource } = Astro.props;
+---
+
+<BaseLayout title={`${localized(resource.title) || 'Eintrag'} — LesBAR`}>
+  <article style="padding: 4rem 0;">
+    <div class="container" style="max-width: 720px;">
+      <a href="/lesbar/" style="color: var(--accent-warm); font-size: 14px;">← Zurück zur Bibliothek</a>
+      <span class="eyebrow" style="display: inline-block; margin-top: 1.5rem;">LesBAR · {resource.kind}</span>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); margin: 0.5rem 0 0.5rem;">
+        {localized(resource.title)}
+      </h1>
+      {resource.authorOrSource && (
+        <p style="color: var(--text-secondary); font-style: italic; margin-bottom: 2rem;">{resource.authorOrSource}</p>
+      )}
+
+      {resource.coverUrl && (
+        <img src={resource.coverUrl} alt="" style="max-width: 300px; margin: 1rem 0 2rem; border-radius: 4px;" />
+      )}
+
+      <div style="font-family: var(--font-display); font-size: 18px; line-height: 1.7;">
+        <p><em>(PortableText-Renderer für Katharinas Notiz kommt im Folge-Commit.)</em></p>
+      </div>
+
+      <p style="margin-top: 2rem;">
+        {resource.link && <a href={resource.link} target="_blank" rel="noopener">Zur Quelle →</a>}
+        {resource.pdfUrl && <a href={resource.pdfUrl} target="_blank" rel="noopener" style="margin-left: 1rem;">PDF →</a>}
+      </p>
+    </div>
+  </article>
+</BaseLayout>

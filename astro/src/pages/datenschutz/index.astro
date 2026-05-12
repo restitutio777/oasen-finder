@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Datenschutz — WERKstatt Gemeinschaft" description="Datenschutzerklärung">
+  <section style="padding: 4rem 0; max-width: 720px; margin: 0 auto;">
+    <div class="container">
+      <span class="eyebrow">Datenschutz</span>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin: 1rem 0 2rem;">
+        Datenschutzerklärung
+      </h1>
+
+      <p style="font-style: italic; color: var(--text-secondary);">
+        Volltext wird vor dem öffentlichen Launch durch einen DSGVO-konformen
+        Generator finalisiert (z.B. eRecht24 oder Datenschutz-Generator.de).
+        Inhaltsschwerpunkte:
+      </p>
+
+      <ul style="margin-top: 1.5rem; line-height: 2;">
+        <li>Verantwortliche Stelle (Katharina Offenborn)</li>
+        <li>Hosting bei Vercel (US-Server, DPA / Standardvertragsklauseln)</li>
+        <li>Inhalte aus Sanity (EU-Hosting möglich)</li>
+        <li>Kontaktformular: erhobene Daten, Zweck, Speicherdauer</li>
+        <li>Newsletter („Brief von unterwegs"): Doppel-Opt-In, Widerrufsrecht</li>
+        <li>Externe Inhalte: YouTube, Spotify, Apple Music nur auf Klick</li>
+        <li>Karten (Leaflet + OpenStreetMap): Tiles werden vom OSM-Server geladen</li>
+        <li>Cookies: nur, falls Analytics ergänzt wird (aktuell keine)</li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+
+let events: any[] = [];
+if (isSanityConfigured) {
+  events = await sanity.fetch(`
+    *[_type == "event"] | order(startDate asc) {
+      _id, title, "slug": slug.current, startDate, endDate, ownership,
+      season, location, dogFriendly,
+      "thumb": photo { asset->{ url } }
+    }
+  `);
+}
+
+const upcoming = events.filter((e) => new Date(e.startDate) >= new Date());
+const past = events.filter((e) => new Date(e.startDate) < new Date());
+---
+
+<BaseLayout title="MachBAR — Werkstatt-Termine" description="Werkstatt-Treffen zu Miteinander-Leben, -Arbeiten, -Reden">
+  <section style="padding: 4rem 0;">
+    <div class="container">
+      <span class="eyebrow">MachBAR · Termine</span>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin: 1rem 0;">
+        Werkstatt-<em>Treffen</em>
+      </h1>
+      <p style="max-width: 640px; color: var(--text-body); margin-bottom: 2rem;">
+        Drei Themen: <em>Miteinander-Leben</em>, <em>Miteinander-Arbeiten</em>,
+        <em>Miteinander-Reden</em>. Jahres-Rhythmus: Winter zum Verdauen,
+        Frühjahr und Herbst auf Kreta, Sommer reisend.
+      </p>
+
+      {upcoming.length > 0 && (
+        <>
+          <h2 class="eyebrow" style="margin-top: 2rem;">Nächste Termine</h2>
+          <ul style="list-style: none; padding: 0; display: grid; gap: 1.5rem; margin: 1rem 0 3rem;">
+            {upcoming.map((e) => (
+              <li>
+                <a href={`/machbar/${e.slug}/`} style="display: block; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border-subtle); text-decoration: none; color: inherit;">
+                  <p class="eyebrow">{new Date(e.startDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })} · {e.location}</p>
+                  <h3 style="font-family: var(--font-display); margin: 0.5rem 0;">{localized(e.title)}</h3>
+                  {e.dogFriendly && <span style="font-size: 12px; color: var(--accent-warm);">🐕 Carla willkommen</span>}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {events.length === 0 && (
+        <p style="color: var(--text-secondary);">Termine folgen — sobald Sanity verbunden ist.</p>
+      )}
+
+      {past.length > 0 && (
+        <details style="margin-top: 3rem;">
+          <summary style="cursor: pointer; color: var(--text-secondary);">Vergangene Termine ({past.length})</summary>
+          <ul style="list-style: none; padding: 1rem 0; display: grid; gap: 0.75rem;">
+            {past.map((e) => (
+              <li>
+                <a href={`/machbar/${e.slug}/`} style="text-decoration: none; color: var(--text-secondary);">
+                  {new Date(e.startDate).toLocaleDateString('de-DE')} — {localized(e.title)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
+    </div>
+  </section>
+</BaseLayout>

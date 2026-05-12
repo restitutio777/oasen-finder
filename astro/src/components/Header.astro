@@ -1,0 +1,76 @@
+---
+/**
+ * Site-Header mit Brand und Top-Navigation.
+ * Mirror der aktuellen index.html-Header-Struktur — funktioniert mit
+ * dem migrierten global.css.
+ */
+const locale = 'de'; // TODO: aus Astro.params.locale ableiten wenn FR/EN aktiv
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="brand" aria-label="WERKstatt Gemeinschaft — Startseite">
+      <span class="brand__noun">
+        <span class="werk-accent">WERK</span>statt
+      </span>
+      <em class="brand__qualifier">Gemeinschaft</em>
+    </a>
+    <nav class="nav" id="primary-nav" aria-label="Hauptnavigation">
+      <a href="/schreibbar/">SchreibBAR</a>
+      <a href="/bewegbar/">BewegBAR</a>
+      <a href="/machbar/">MachBAR</a>
+      <div class="nav-group">
+        <button
+          class="nav-group__trigger"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Räume <span class="nav-group__caret" aria-hidden="true">↓</span>
+        </button>
+        <div class="nav-group__menu" role="menu">
+          <a href="/lesbar/" role="menuitem">LesBAR</a>
+          <a href="/hoerbar/" role="menuitem">HörBAR</a>
+          <a href="/erkennbar/" role="menuitem">erkennBAR</a>
+        </div>
+      </div>
+      <a href="/mitkommen/">Mitkommen</a>
+    </nav>
+    <button
+      class="nav-toggle"
+      aria-label="Menü öffnen"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+      type="button"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  // Mobile hamburger
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = document.getElementById('primary-nav');
+  if (toggle && nav) {
+    const close = () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Menü öffnen');
+      nav.classList.remove('is-open');
+      document.body.classList.remove('nav-open');
+    };
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') !== 'true';
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+      nav.classList.toggle('is-open', open);
+      document.body.classList.toggle('nav-open', open);
+    });
+    nav.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  }
+</script>

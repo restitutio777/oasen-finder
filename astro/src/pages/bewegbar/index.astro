@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sanity, isSanityConfigured } from '../../lib/sanity';
+
+/**
+ * BewegBAR — Stationen-Übersicht mit Karte.
+ *
+ * Leaflet-Karte wird in der Client-Komponente eingebunden (separater
+ * Folge-Commit). Für jetzt: Listen-Ansicht aller Stationen.
+ */
+
+let stations: any[] = [];
+if (isSanityConfigured) {
+  stations = await sanity.fetch(`
+    *[_type == "station" && defined(slug.current)] | order(coalesce(visitedAt, visitedRange.from) desc) {
+      _id, name, region, country, visitedAt, "slug": slug.current,
+      coordinates, tags,
+      "thumb": images[0] { asset->{ url } }
+    }
+  `);
+}
+---
+
+<BaseLayout title="BewegBAR — Stationen" description="Reisen zu Ökodörfern, Cohousing-Projekten und gemeinsamen Lebensorten">
+  <section style="padding: 4rem 0;">
+    <div class="container">
+      <span class="eyebrow">BewegBAR · Karte</span>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin: 1rem 0;">
+        Stationen <em>unterwegs</em>
+      </h1>
+      <p style="max-width: 600px; color: var(--text-body);">
+        Ökodörfer, Cohousing-Projekte und gemeinsame Lebensorte — besucht zwischen
+        Kreta, Frankreich und dem deutschsprachigen Raum.
+      </p>
+
+      {/* TODO: Leaflet-Karte mit Pins aus stations[].coordinates */}
+      <div id="bewegbar-map" style="margin: 3rem 0; height: 480px; background: var(--bg-warm); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+        <p>Interaktive Karte folgt in Phase 1</p>
+      </div>
+
+      {stations.length === 0 && (
+        <p style="color: var(--text-secondary);">Noch keine Stationen — sobald Sanity verbunden ist.</p>
+      )}
+
+      {stations.length > 0 && (
+        <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;">
+          {stations.map((s) => (
+            <li>
+              <a href={`/bewegbar/${s.slug}/`} style="display: block; text-decoration: none; color: inherit; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border-subtle);">
+                <p class="eyebrow">{s.region || s.country?.toUpperCase()}</p>
+                <h3 style="font-family: var(--font-display); margin: 0.5rem 0;">{s.name}</h3>
+                {s.visitedAt && (
+                  <p style="font-size: 13px; color: var(--text-muted);">
+                    {new Date(s.visitedAt).toLocaleDateString('de-DE')}
+                  </p>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+
+let episodes: any[] = [];
+if (isSanityConfigured) {
+  episodes = await sanity.fetch(`
+    *[_type == "episode"] | order(publishedAt desc) {
+      _id, episodeNumber, title, platform, url, publishedAt,
+      "slug": slug.current,
+      "thumb": cover { asset->{ url } }
+    }
+  `);
+}
+---
+
+<BaseLayout title="HörBAR — Episoden" description="Eingesprochene Reflexionen, Gedichte und Lieder">
+  <section style="padding: 4rem 0;">
+    <div class="container">
+      <span class="eyebrow">HörBAR · Episoden</span>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin: 1rem 0;">
+        Reflexionen, Gedichte, <em>Lieder</em>
+      </h1>
+      <p style="max-width: 600px; color: var(--text-body);">
+        Eingesprochene Gedanken. Plus Gespräche mit Menschen, die in
+        Gemeinschaft leben.
+      </p>
+
+      {episodes.length === 0 && (
+        <p style="margin-top: 2rem; color: var(--text-secondary);">
+          HörBAR · bald — sobald Sanity verbunden ist und die erste Folge da ist.
+        </p>
+      )}
+
+      <ul style="list-style: none; padding: 0; display: grid; gap: 1.5rem; margin-top: 2rem;">
+        {episodes.map((ep) => (
+          <li>
+            <a href={`/hoerbar/${ep.slug}/`} style="display: block; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; text-decoration: none; color: inherit;">
+              <p class="eyebrow">
+                {ep.episodeNumber && `#${ep.episodeNumber} · `}
+                {ep.platform} · {new Date(ep.publishedAt).toLocaleDateString('de-DE')}
+              </p>
+              <h3 style="font-family: var(--font-display); margin: 0.5rem 0;">{localized(ep.title)}</h3>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

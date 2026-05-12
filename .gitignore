@@ -11,3 +11,10 @@ FRAGEBOGEN-KATHARINA.pdf
 FRAGEBOGEN-KATHARINA.html
 .make-reference.py
 reference.docx
+
+# Astro / Sanity (in astro/ subfolder)
+.astro/
+astro/.astro/
+astro/dist/
+astro/sanity/dist/
+astro/sanity/.sanity/

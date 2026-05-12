@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+
+export async function getStaticPaths() {
+  if (!isSanityConfigured) return [];
+
+  const notes = await sanity.fetch(`
+    *[_type == "note" && defined(slug.current)] {
+      "slug": slug.current,
+      _id, title, kind, publishedAt,
+      body, tags,
+      "hero": hero { asset->{ url }, alt, caption },
+      mediaLink, externalLink, substackUrl,
+      "pdfUrl": pdfAttachment.asset->url
+    }
+  `);
+
+  return notes.map((note: any) => ({
+    params: { slug: note.slug },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props;
+---
+
+<BaseLayout
+  title={`${localized(note.title) || 'Notiz'} — SchreibBAR`}
+  description={`SchreibBAR-Eintrag vom ${new Date(note.publishedAt).toLocaleDateString('de-DE')}`}
+>
+  <article style="padding: 4rem 0; max-width: 720px; margin: 0 auto;">
+    <div class="container">
+      <a href="/schreibbar/" style="color: var(--accent-warm); text-decoration: none; font-size: 14px;">
+        ← Zurück zur SchreibBAR
+      </a>
+      <span class="entry__tag" data-tag={note.kind} style="display: inline-block; margin-top: 1.5rem;">
+        {note.kind}
+      </span>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin: 0.5rem 0 1rem;">
+        {localized(note.title)}
+      </h1>
+      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 2rem;">
+        {new Date(note.publishedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}
+      </p>
+
+      {note.hero?.asset && (
+        <figure style="margin: 2rem 0;">
+          <img
+            src={urlFor(note.hero).width(1200).quality(80).auto('format').url()}
+            alt={localized(note.hero.alt) || ''}
+            style="width: 100%; height: auto; border-radius: 6px;"
+          />
+          {note.hero.caption && (
+            <figcaption style="margin-top: 0.5rem; font-style: italic; color: var(--text-secondary); font-size: 14px;">
+              {localized(note.hero.caption)}
+            </figcaption>
+          )}
+        </figure>
+      )}
+
+      {/* TODO: PortableText-Renderer für note.body einbauen.
+           Für jetzt: einfache Block-Renderung als Platzhalter. */}
+      <div style="font-family: var(--font-display); font-size: 18px; line-height: 1.7;">
+        <p>
+          <em>(PortableText-Renderer kommt im Folge-Commit — aktuell wird der Block-Inhalt aus Sanity hier ausgegeben.)</em>
+        </p>
+      </div>
+
+      {(note.externalLink || note.mediaLink || note.substackUrl || note.pdfUrl) && (
+        <aside style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle);">
+          <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-muted); margin-bottom: 1rem;">
+            Weiterlesen
+          </h3>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+            {note.externalLink && (
+              <li><a href={note.externalLink} target="_blank" rel="noopener">Externer Link →</a></li>
+            )}
+            {note.mediaLink && (
+              <li><a href={note.mediaLink} target="_blank" rel="noopener">Medien-Link →</a></li>
+            )}
+            {note.substackUrl && (
+              <li><a href={note.substackUrl} target="_blank" rel="noopener">Auf Substack →</a></li>
+            )}
+            {note.pdfUrl && (
+              <li><a href={note.pdfUrl} target="_blank" rel="noopener">PDF herunterladen →</a></li>
+            )}
+          </ul>
+        </aside>
+      )}
+    </div>
+  </article>
+</BaseLayout>

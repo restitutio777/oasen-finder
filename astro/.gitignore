@@ -1,0 +1,24 @@
+# Astro
+.astro/
+dist/
+node_modules/
+pnpm-lock.yaml
+
+# Env
+.env
+.env.production
+.env.local
+
+# Sanity Studio build
+sanity/dist/
+sanity/.sanity/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+
+let about: any = null;
+if (isSanityConfigured) {
+  about = await sanity.fetch(`*[_type == "about" && _id == "about"][0]{
+    shortBio, longBio, mantra, influences, notDescribedAs, seasonality,
+    portraits, invitations
+  }`);
+}
+---
+
+<BaseLayout title="erkennBAR — Katharina Offenborn" description="Wer Katharina ist, was sie macht, was sie nicht ist">
+  <section class="who" id="erkennbar">
+    <div class="container">
+      <div class="who__inner">
+        {about?.portraits?.[0] && (
+          <figure class="who__portrait">
+            <img
+              src={urlFor(about.portraits[0]).width(600).quality(80).auto('format').url()}
+              alt={localized(about.portraits[0].alt) || 'Katharina Offenborn'}
+              loading="lazy"
+            />
+          </figure>
+        )}
+        <div class="who__body">
+          <span class="eyebrow">erkennBAR</span>
+          <h2 class="who__title">Katharina <em>Offenborn</em></h2>
+          {about?.mantra && (
+            <blockquote class="who__question">„{localized(about.mantra)}"</blockquote>
+          )}
+          {!about && (
+            <p style="color: var(--text-secondary);">
+              Vollständige Bio kommt aus Sanity — sobald das Studio aufgesetzt ist und
+              Katharina die erkennBAR-Felder gefüllt hat.
+            </p>
+          )}
+        </div>
+      </div>
+
+      {about?.notDescribedAs && about.notDescribedAs.length > 0 && (
+        <aside style="max-width: 560px; margin: 3rem 0; padding: 1.5rem; background: var(--bg-warm); border-radius: 6px;">
+          <h3 class="eyebrow">Bitte nicht so</h3>
+          <p style="margin-top: 0.75rem; font-family: var(--font-display); font-style: italic;">
+            Kein {about.notDescribedAs.join(', kein ')}.
+          </p>
+        </aside>
+      )}
+
+      {about?.seasonality && (
+        <aside style="max-width: 560px; margin-top: 2rem;">
+          <h3 class="eyebrow">Jahres-Rhythmus</h3>
+          {/* TODO: PortableText-Renderer */}
+        </aside>
+      )}
+    </div>
+  </section>
+</BaseLayout>

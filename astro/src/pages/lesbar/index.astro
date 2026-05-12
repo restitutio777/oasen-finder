@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+
+let resources: any[] = [];
+if (isSanityConfigured) {
+  resources = await sanity.fetch(`
+    *[_type == "resource"] | order(_createdAt desc) {
+      _id, title, kind, authorOrSource, "slug": slug.current,
+      "thumb": coverImage { asset->{ url } }
+    }
+  `);
+}
+
+// Gruppierung nach kind
+const byKind = resources.reduce((acc: Record<string, any[]>, r) => {
+  const k = r.kind || 'andere';
+  acc[k] = acc[k] || [];
+  acc[k].push(r);
+  return acc;
+}, {});
+
+const kindLabels: Record<string, string> = {
+  buch: 'Bücher',
+  webseite: 'Webseiten',
+  aufsatz: 'Aufsätze',
+  film: 'Filme',
+  podcast: 'Podcasts',
+  gespraech: 'Gespräche',
+  konzept: 'BrauchBAR · Konzepte',
+  werkzeug: 'BrauchBAR · Werkzeuge',
+};
+---
+
+<BaseLayout title="LesBAR — Bibliothek" description="Bücher, Webseiten, Filme, Podcasts und Werkzeuge zu Fragen des Miteinander">
+  <section style="padding: 4rem 0;">
+    <div class="container">
+      <span class="eyebrow">LesBAR · Bibliothek</span>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin: 1rem 0;">
+        Quellen, Werkzeuge, <em>Stimmen</em>
+      </h1>
+      <p style="max-width: 640px; color: var(--text-body); margin-bottom: 2rem;">
+        Bücher, Artikel, Filme, Webseiten und Gedichte zu Fragen des Miteinander —
+        mit kurzer Notiz, warum sie hier stehen.
+      </p>
+
+      {resources.length === 0 && (
+        <p style="color: var(--text-secondary);">Noch keine Einträge — die LesBAR füllt sich, sobald Sanity verbunden ist.</p>
+      )}
+
+      {Object.entries(byKind).map(([kind, items]) => (
+        <section style="margin-bottom: 3rem;">
+          <h2 class="eyebrow">{kindLabels[kind] || kind}</h2>
+          <ul style="list-style: none; padding: 0; margin-top: 1rem; display: grid; gap: 1rem;">
+            {items.map((r) => (
+              <li>
+                <a href={`/lesbar/${r.slug}/`} style="display: block; padding: 1rem 1.5rem; background: var(--bg-elevated); border-radius: 6px; text-decoration: none; color: inherit;">
+                  <h3 style="font-family: var(--font-display); margin: 0;">{localized(r.title)}</h3>
+                  {r.authorOrSource && (
+                    <p style="font-size: 14px; color: var(--text-muted); margin-top: 0.25rem;">{r.authorOrSource}</p>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

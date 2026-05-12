@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sanity, localized, isSanityConfigured } from '../lib/sanity';
+
+// Landing — Übersicht aller BARs.
+//
+// In Phase 1 lädt diese Seite Vorschau-Daten aus Sanity (neueste 3 Notizen,
+// aktuelle Werkstatt-Termine, Foto für erkennBAR). Solange Sanity noch
+// nicht konfiguriert ist, zeigt die Seite Demo-Inhalte aus dem aktuellen
+// Prototyp (siehe index.html im Root).
+
+let recentNotes: any[] = [];
+let upcomingEvents: any[] = [];
+
+if (isSanityConfigured) {
+  // Neueste Notizen
+  recentNotes = await sanity.fetch(`
+    *[_type == "note"] | order(publishedAt desc) [0...3] {
+      _id, title, kind, publishedAt, "slug": slug.current,
+      "hero": hero { asset->{ url }, alt }
+    }
+  `);
+  // Nächste Werkstatt-Termine
+  upcomingEvents = await sanity.fetch(`
+    *[_type == "event" && startDate >= now()] | order(startDate asc) [0...3] {
+      _id, title, "slug": slug.current, startDate, location
+    }
+  `);
+}
+---
+
+<BaseLayout
+  title="WERKstatt Gemeinschaft — Katharina Offenborn"
+  description="Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs. Katharina Offenborn auf Reisen zu Gemeinschaftsorten."
+>
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__main">
+        <span class="eyebrow hero__eyebrow">
+          Miteinander vereinBAR — <span class="hero__eyebrow-nowrap">Gemeinschafts<em class="hero__eyebrow-werk">WERK</em></span> statt allein unterwegs
+        </span>
+        <h1 class="hero__title">
+          <span class="hero__title-a">Auf der Suche —</span><br />
+          <span class="hero__title-b">wie wird <em>Gemeinschaft?</em></span>
+        </h1>
+        <p class="hero__subtitle">
+          Kleine Räume zum Mit-Suchen — von Katharina Offenborn.
+        </p>
+        <div class="hero__cta-row">
+          <a href="/schreibbar/" class="btn btn--primary">
+            In die SchreibBAR
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </a>
+          <a href="/mitkommen/" class="btn btn--ghost">Mitkommen</a>
+        </div>
+      </div>
+      <a href="/machbar/" class="hero__meta" aria-label="Nächste Begegnung">
+        Nächste Begegnung
+        <strong>{upcomingEvents[0]?.startDate ? new Date(upcomingEvents[0].startDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long' }) : '21. Juni'}</strong>
+        {upcomingEvents[0]?.location || 'Tempelhof'}
+        <span class="hero__meta-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  {/* TODO: erkennBAR-Vorschau, SchreibBAR-Stream, Drei Türen, HörBAR-Streifen,
+       Brief von unterwegs, Mitkommen — werden als eigene Astro-Komponenten
+       aus index.html migriert. Aktuell noch im statischen index.html im Root. */}
+
+  <section style="padding: 4rem 0; text-align: center; background: var(--bg-warm);">
+    <div class="container">
+      <p class="eyebrow">Phase 1 · in Aufbau</p>
+      <h2 style="font-family: var(--font-display); font-size: 1.8rem; margin: 1rem 0;">
+        Die volle Landing-Seite wird hier integriert
+      </h2>
+      <p style="max-width: 540px; margin: 0 auto; color: var(--text-secondary);">
+        Aktuell lebt der visuelle Stand in <code>index.html</code> im Root.
+        In Phase 1 wird der Inhalt schrittweise als Astro-Komponenten migriert
+        und aus Sanity gespeist.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
