@@ -204,4 +204,50 @@ Alle drei Varianten **vorhanden** — keine explizite Präferenz:
 - **Farb-Akzent:** Honig-Gold *(`#c08538` — `--accent-gold`)* für die WERK-Silbe überall *(Header, Footer, Claim, plus „Gemeinschaft?" im Hero und CTAs gleichfarbig für Konsistenz)*
 - **VereinBAR** als Name des Hero-Bereichs bestätigt
 
-— Frühjahr 2026
+---
+
+## Antwort vom 12. Mai 2026 *(dritte Runde, Brand-Korrektur + Inhalts-Klärungen)*
+
+Katharina-Feedback nach Live-Sicht:
+
+> Dieses Werk statt Gemeinschaft, so habe ich es die ganze Zeit gelesen, dabei meinst du Werk statt Gemeinschaft, finde ich irreführend.
+>
+> Magst du das ersetzen durch dieses Gemeinschaftswerk statt allein unterwegs? Und dabei das Werk wieder groß geschrieben und das Werk und Stadt in einer gleichen Farbe.
+
+**Daraus abgeleitet:**
+
+- **Logo umgekehrt:** WERKstatt → **werkSTATT** *(Akzent jetzt am Ende auf STATT, in Honig-Gold)*
+- **werk** + **Gemeinschaft** als verwandte Begriffe in derselben Farbe *(zurückhaltendes Aubergine, italic Cormorant, weight 500)* — eine Stimm-Familie, kein Farb-Wettkampf mit STATT
+- **Claim** im Hero gekürzt: „Miteinander vereinBAR — " raus, übrig: „Gemeinschaftswerk statt allein unterwegs"
+- **BAR-Namen** überall klein-Anfang + großes BAR-Ende: schreibBAR, bewegBAR, machBAR, lesBAR, hörBAR, erkennBAR
+
+### Inhalts-Klärungen *(weitere Antworten am 12. Mai 2026)*:
+
+- **anthroposophie-lebensnah** → verlinken *(als lesBAR-Eintrag angelegt)*
+- **wortgetreu.com** → nur verlinken *(als lesBAR-Eintrag angelegt)*
+- **Werkstatt-Teilnahme** → „Individuell besprochen — kein Festpreis."
+- **Vortrag / Impuls** → „Reisekosten und Honorar nach Absprache."
+- **Beratung beim Aufbau** → „Energie-Austausch nach Absprache."
+- **Sanity-Account** → bleibt bei Auftraggeber, Katharina hat Editor-Rechte *(reicht)*
+- **Eigener Sanity-Account-Transfer** → nicht erwünscht, Status quo OK
+
+### „Wir reisen" — Bedeutung *(offen aber gerichtet)*:
+
+> Also Katharina mit Hund (Carla) aber ggf. Philippe oder andere noch offen
+>
+> insgesamt will sie das Vorhaben, die Suche, Approach erfahrbar machen und kommunizieren, es geht nicht um eine Ego-Sache, aber sie trägt das Projekt.
+
+- **„Wir"** = Katharina + Carla *(Standard)*; mögliche Erweiterung um Philippe oder andere im Verlauf
+- Das **Projekt selbst** ist der Schwerpunkt, nicht ihre Person — sie ist die zentrale Trägerin, aber das Suchen + Erforschen + Fragen ist die Hauptbotschaft
+
+### Ton der Texte *(verbindliche Direktive für künftige Texte)*:
+
+> warme klare sprache die nicht zu „ich bin der berater"-mäßig klingt, weil katharina sucht erforscht, fragt nach neuen formen der gemeinschaft aber sie hat auch viele skills und erfahrung.
+
+- **Warm + klar** ist die Grundtemperatur
+- **Nicht im Berater-Modus** — keine Selbst-Inszenierung als Expertin, keine Marketing-Phrasen
+- **Suchend, fragend, einladend** — Katharinas Position ist: Mit-Forscherin, nicht Lehrerin
+- Plus: ihre **Skills + Erfahrung** dürfen sichtbar sein *(ohne Pose)*
+- Das **Projekt** trägt die Bedeutung, nicht die Person
+
+— Mai 2026
