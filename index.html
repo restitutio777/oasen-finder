@@ -479,16 +479,17 @@
     font-size: clamp(2.5rem, 6.8vw, 5.5rem);
     line-height: 1.05;
     letter-spacing: -0.02em;
-    color: #8a6a3a;            /* goldbraun — einheitlich, warm, passt zum Holz-Foto */
     font-weight: 500;
     font-style: normal;
   }
+  /* "Auf der Suche —" in dunkler Aubergine (gedaempft, geerdet) */
+  .hero__title-a { color: #4d4555; }
+  /* "wie wird Gemeinschaft?" in warmem Goldbraun (Holz-Familie) */
+  .hero__title-b { color: #8a6a3a; }
   .hero__title em {
     font-style: italic;
     font-weight: 500;
-    /* Gleiche Farbe wie der Rest — em traegt die Betonung allein durch
-       Italic, ohne Farbwechsel. Hero-Headline in EINEM Goldbraun. */
-    color: inherit;
+    color: inherit;  /* erbt von .hero__title-b (Goldbraun) */
   }
   .hero__lead {
     margin-top: clamp(28px, 4vw, 44px);
@@ -1973,8 +1974,8 @@
     <div class="hero__main">
       <span class="eyebrow hero__eyebrow">WERK-statt allein unterwegs · 2026</span>
       <h1 class="hero__title">
-        Auf der Suche —<br>
-        wie wird <em>Gemeinschaft?</em>
+        <span class="hero__title-a">Auf der Suche —</span><br>
+        <span class="hero__title-b">wie wird <em>Gemeinschaft?</em></span>
       </h1>
       <p class="hero__subtitle">
         Kleine Räume zum Mit-Suchen — von Katharina Offenborn.
