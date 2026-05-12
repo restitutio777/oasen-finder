@@ -2,14 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import MediaLink from '../../components/MediaLink.astro';
-import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+import { sanity, localized, isSanityConfigured, RICH_TEXT_QUERY } from '../../lib/sanity';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
   const eps = await sanity.fetch(`
     *[_type == "episode" && defined(slug.current)] {
       "slug": slug.current, _id, episodeNumber, title, platform, url,
-      publishedAt, summary,
+      publishedAt,
+      summary ${RICH_TEXT_QUERY},
       "coverUrl": cover.asset->url,
       "transcriptUrl": transcriptPdf.asset->url
     }

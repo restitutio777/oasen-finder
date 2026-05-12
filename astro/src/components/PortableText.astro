@@ -57,9 +57,27 @@ const components: PortableTextOptions['components'] = {
     // Link-Mark (wenn jemand einen Link in Sanity setzt)
     link: ({ children, value }) => {
       const href = (value as any)?.href || '#';
+      const newTab = (value as any)?.openInNewTab !== false; // default true
       const external = /^https?:\/\//.test(href);
-      const attrs = external ? ' target="_blank" rel="noopener"' : '';
+      const attrs = external && newTab ? ' target="_blank" rel="noopener"' : '';
       return `<a href="${href}"${attrs}>${children}</a>`;
+    },
+    /**
+     * Mention-Mark — wenn Katharina "Anna" markiert und Person Anna wählt.
+     * Der GROQ-Query erweitert value.target zu einem aufgelösten Person-Doc
+     * (mit primaryUrl). Wenn primaryUrl gesetzt: Link zur externen Seite.
+     * Sonst: dezente Markierung ohne href.
+     */
+    mention: ({ children, value }) => {
+      const target = (value as any)?.target;
+      const href = target?.primaryUrl;
+      if (href) {
+        const external = /^https?:\/\//.test(href);
+        const attrs = external ? ' target="_blank" rel="noopener"' : '';
+        return `<a href="${href}" class="rich__mention"${attrs}>${children}</a>`;
+      }
+      // Person ohne Link: trotzdem dezent markieren als Eigenname
+      return `<span class="rich__mention rich__mention--no-link">${children}</span>`;
     },
   },
   list: {
@@ -137,5 +155,22 @@ const html = blocks ? toHTML(blocks, { components }) : '';
     line-height: 1.6;
     color: var(--text-body, #3a3a3a);
     margin-top: 0.5em;
+  }
+  /* Mention-Markierung — Eigenname, leicht hervorgehoben */
+  .rich__mention {
+    color: var(--accent-warm, #c98a4a);
+    border-bottom: 1px solid currentColor;
+    font-style: normal;
+    transition: color 180ms ease;
+  }
+  .rich__mention:hover {
+    color: var(--accent-gold-hover, #9d6a26);
+  }
+  /* Person erwähnt, aber ohne hinterlegten Link → keine Underline,
+     nur dezente Farb-Hervorhebung */
+  .rich__mention--no-link {
+    border-bottom: none;
+    color: var(--text-primary, #2c2530);
+    font-weight: 500;
   }
 </style>

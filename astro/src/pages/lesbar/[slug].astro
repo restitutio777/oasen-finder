@@ -2,13 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import MediaLink from '../../components/MediaLink.astro';
-import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+import { sanity, urlFor, localized, isSanityConfigured, RICH_TEXT_QUERY } from '../../lib/sanity';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
   const resources = await sanity.fetch(`
     *[_type == "resource" && defined(slug.current)] {
-      "slug": slug.current, _id, title, kind, authorOrSource, note, link,
+      "slug": slug.current, _id, title, kind, authorOrSource,
+      note ${RICH_TEXT_QUERY},
+      link,
       "coverUrl": coverImage.asset->url,
       "pdfUrl": pdfAttachment.asset->url
     }

@@ -2,15 +2,17 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import SanityImage from '../../components/SanityImage.astro';
-import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+import { sanity, localized, isSanityConfigured, RICH_TEXT_QUERY } from '../../lib/sanity';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
   const events = await sanity.fetch(`
     *[_type == "event" && defined(slug.current)] {
       "slug": slug.current, _id, title, startDate, endDate, ownership,
-      season, location, locationCoords, description,
-      registration, dogFriendly, fees,
+      season, location, locationCoords,
+      description ${RICH_TEXT_QUERY},
+      registration, dogFriendly,
+      fees ${RICH_TEXT_QUERY},
       photo,
       "programPdfUrl": programPdf.asset->url
     }

@@ -2,12 +2,13 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import PageBanner from '../../components/PageBanner.astro';
-import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+import { sanity, localized, isSanityConfigured, RICH_TEXT_QUERY } from '../../lib/sanity';
 
 let config: any = null;
 if (isSanityConfigured) {
   config = await sanity.fetch(`*[_type == "contact" && _id == "contact"][0]{
-    intro, emailRecipient, inviteCategories[active == true], feesNote
+    intro ${RICH_TEXT_QUERY},
+    emailRecipient, inviteCategories[active == true], feesNote
   }`);
 }
 
