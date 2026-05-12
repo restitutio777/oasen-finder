@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
-import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+import SanityImage from '../../components/SanityImage.astro';
+import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
@@ -10,8 +11,7 @@ export async function getStaticPaths() {
     *[_type == "note" && defined(slug.current)] {
       "slug": slug.current,
       _id, title, kind, publishedAt,
-      body, tags,
-      "hero": hero { asset->{ url }, alt, caption },
+      body, tags, hero,
       mediaLink, externalLink, substackUrl,
       "pdfUrl": pdfAttachment.asset->url
     }
@@ -45,20 +45,14 @@ const { note } = Astro.props;
         {new Date(note.publishedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}
       </p>
 
-      {note.hero?.asset && (
-        <figure style="margin: 2rem 0;">
-          <img
-            src={urlFor(note.hero).width(1200).quality(80).auto('format').url()}
-            alt={localized(note.hero.alt) || ''}
-            style="width: 100%; height: auto; border-radius: 6px;"
-          />
-          {note.hero.caption && (
-            <figcaption style="margin-top: 0.5rem; font-style: italic; color: var(--text-secondary); font-size: 14px;">
-              {localized(note.hero.caption)}
-            </figcaption>
-          )}
-        </figure>
-      )}
+      <SanityImage
+        image={note.hero}
+        width={1200}
+        aspect={16 / 9}
+        eager
+        showCaption
+        className="schreibbar-hero"
+      />
 
       <PortableText value={note.body} />
 

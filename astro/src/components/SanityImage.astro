@@ -1,0 +1,116 @@
+---
+/**
+ * Optimiertes Sanity-Bild — generiert srcset für verschiedene Breiten,
+ * lädt automatisch im besten Format (WebP/AVIF wo möglich), lazy by
+ * default.
+ *
+ * Verwendung:
+ *   <SanityImage image={note.hero} alt="..." width={1200} aspect={16/9} />
+ *
+ * Wenn `image` keinen `asset` hat (leeres Feld), wird gar nichts gerendert.
+ */
+import { urlFor, localized } from '../lib/sanity';
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+
+export interface Props {
+  /** Sanity-Image-Object (mit .asset und optional .alt, .caption) */
+  image?: any;
+  /** Alt-Text — überschreibt image.alt falls gesetzt */
+  alt?: string;
+  /** Max-Breite in px (für srcset oben) */
+  width?: number;
+  /** Seitenverhältnis (z.B. 16/9 = 1.78) */
+  aspect?: number;
+  /** Sizes-Attribut für responsive Auswahl */
+  sizes?: string;
+  /** Eager-Loading für Above-the-fold Bilder */
+  eager?: boolean;
+  /** Quality (Default 80) */
+  quality?: number;
+  /** CSS-Klasse für das <figure>-Element */
+  className?: string;
+  /** Caption sichtbar machen? (image.caption.de) */
+  showCaption?: boolean;
+}
+
+const {
+  image,
+  alt,
+  width = 1200,
+  aspect,
+  sizes = '(max-width: 720px) 100vw, (max-width: 1100px) 80vw, 1200px',
+  eager = false,
+  quality = 80,
+  className = '',
+  showCaption = false,
+} = Astro.props;
+
+const hasImage = image?.asset;
+
+/**
+ * Bild-URL für eine bestimmte Breite generieren.
+ * Sanity macht den Rest (CDN, Format-Erkennung, Kompression).
+ */
+function srcAt(w: number): string {
+  let builder = urlFor(image as SanityImageSource)
+    .width(w)
+    .quality(quality)
+    .auto('format')
+    .fit('max');
+  if (aspect) {
+    builder = builder.height(Math.round(w / aspect)).fit('crop');
+  }
+  return builder.url();
+}
+
+// Responsive srcset: 400 / 800 / 1200 / 1600px
+const widths = [400, 800, 1200, 1600].filter((w) => w <= width * 1.5);
+const srcset = hasImage
+  ? widths.map((w) => `${srcAt(w)} ${w}w`).join(', ')
+  : '';
+
+const altText =
+  alt ??
+  localized(image?.alt) ??
+  localized(image?.caption) ??
+  '';
+
+const caption = showCaption ? localized(image?.caption) : null;
+---
+
+{
+  hasImage && (
+    <figure class={`sanity-image ${className}`.trim()}>
+      <img
+        src={srcAt(width)}
+        srcset={srcset}
+        sizes={sizes}
+        alt={altText}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        width={width}
+        height={aspect ? Math.round(width / aspect) : undefined}
+      />
+      {caption && <figcaption class="sanity-image__caption">{caption}</figcaption>}
+    </figure>
+  )
+}
+
+<style>
+  .sanity-image {
+    margin: 0;
+  }
+  .sanity-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+  .sanity-image__caption {
+    margin-top: 0.5rem;
+    font-family: var(--font-display, 'Cormorant Garamond', serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-secondary, #686b62);
+  }
+</style>

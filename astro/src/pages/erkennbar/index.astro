@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
-import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+import SanityImage from '../../components/SanityImage.astro';
+import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 let about: any = null;
 if (isSanityConfigured) {
@@ -17,13 +18,13 @@ if (isSanityConfigured) {
     <div class="container">
       <div class="who__inner">
         {about?.portraits?.[0] && (
-          <figure class="who__portrait">
-            <img
-              src={urlFor(about.portraits[0]).width(600).quality(80).auto('format').url()}
-              alt={localized(about.portraits[0].alt) || 'Katharina Offenborn'}
-              loading="lazy"
-            />
-          </figure>
+          <SanityImage
+            image={about.portraits[0]}
+            alt={localized(about.portraits[0].alt) || 'Katharina Offenborn'}
+            width={600}
+            eager
+            className="who__portrait"
+          />
         )}
         <div class="who__body">
           <span class="eyebrow">erkennBAR</span>

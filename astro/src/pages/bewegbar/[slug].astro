@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
-import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+import SanityImage from '../../components/SanityImage.astro';
+import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
@@ -13,6 +14,8 @@ export async function getStaticPaths() {
       "conceptPdfUrl": conceptPdf.asset->url
     }
   `);
+  // images bleibt als volles Image-Array — Sanity-Image-Object mit
+  // asset._ref + alt + caption, kompatibel mit @sanity/image-url
   return stations.map((s: any) => ({ params: { slug: s.slug }, props: { station: s } }));
 }
 
@@ -38,18 +41,7 @@ const { station } = Astro.props;
       {station.images && station.images.length > 0 && (
         <div style="margin: 2rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
           {station.images.map((img: any) => (
-            <figure style="margin: 0;">
-              <img
-                src={urlFor(img).width(800).quality(80).auto('format').url()}
-                alt={localized(img.alt) || ''}
-                style="width: 100%; height: auto; border-radius: 6px;"
-              />
-              {img.caption && (
-                <figcaption style="margin-top: 0.4rem; font-style: italic; color: var(--text-secondary); font-size: 13px;">
-                  {localized(img.caption)}
-                </figcaption>
-              )}
-            </figure>
+            <SanityImage image={img} width={800} showCaption />
           ))}
         </div>
       )}

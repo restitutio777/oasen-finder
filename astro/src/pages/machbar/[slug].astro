@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
-import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+import SanityImage from '../../components/SanityImage.astro';
+import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
@@ -10,7 +11,7 @@ export async function getStaticPaths() {
       "slug": slug.current, _id, title, startDate, endDate, ownership,
       season, location, locationCoords, description,
       registration, dogFriendly, fees,
-      "photo": photo { asset->{ url }, alt },
+      photo,
       "programPdfUrl": programPdf.asset->url
     }
   `);
@@ -41,6 +42,15 @@ const { event } = Astro.props;
         <p style="font-size: 14px; color: var(--accent-warm); margin-bottom: 1.5rem;">
           🐕 Hundefreundlich — Carla ist dabei
         </p>
+      )}
+
+      {event.photo && (
+        <SanityImage
+          image={event.photo}
+          width={1200}
+          aspect={16 / 9}
+          className="machbar-photo"
+        />
       )}
 
       <PortableText value={event.description} />
