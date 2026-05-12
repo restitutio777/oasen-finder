@@ -487,6 +487,14 @@
   /* Nowrap-Wrapper verhindert dass "GemeinschaftsWERK" ueber Zeilenumbruch
      getrennt wird */
   .hero__eyebrow-nowrap { white-space: nowrap; }
+  /* Eyebrow-Lines: auf Desktop inline (eine Zeile, " " als Verbinder),
+     auf Mobile zwei kontrollierte Zeilen statt 3-zeiliger Bruch.
+     Mobile-Breakpoint: 640px — typische Phone-Portrait-Breite. */
+  .hero__eyebrow-line { display: inline; }
+  @media (max-width: 640px) {
+    .hero__eyebrow-line { display: block; }
+    .hero__eyebrow { line-height: 1.45; }
+  }
   .hero__title {
     font-size: clamp(2.5rem, 6.8vw, 5.5rem);
     line-height: 1.05;
