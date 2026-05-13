@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap (wird automatisch von @astrojs/sitemap generiert)
+Sitemap: https://oasen-finder.vercel.app/sitemap-index.xml
