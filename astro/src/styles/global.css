@@ -152,27 +152,22 @@
     flex-shrink: 1;
     min-width: 0;
   }
+  /* „WERKSTATT" als geschlossene Wortmarke in Gold (uppercase,
+     bold, kein Italic) — „Gemeinschaft" daneben in Fern-Grün
+     (kursiv Cormorant). Zwei klare Töne, klare Hierarchie. */
   .brand__noun {
-    font-weight: 600;
-  }
-  /* "werk" in ruhiger Site-Text-Farbe (Aubergine), STATT in Gold
-     als erster Akzent, "Gemeinschaft" in Fern-Grün als zweiter
-     Brand-Ton — drei klare Töne nebeneinander, keine Doppelung. */
-  .brand__verb {
-    font-weight: 500;
-    font-style: italic;
-    color: var(--text-primary);
+    font-weight: 700;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
   .brand__qualifier {
     font-weight: 500;
     font-style: italic;
     color: var(--accent-green);
   }
-  /* Footer hat dunklen Hintergrund — werk + Gemeinschaft als
-     gedaempfte cream-Farbe, STATT bleibt gold (uebersieht keiner). */
-  .site-footer .brand__verb {
-    color: rgba(246, 244, 238, 0.88);
-  }
+  /* Footer-Brand-Override wird nicht mehr gebraucht, seit der Header
+     ein einheitliches Markup nutzt — bleibt als Leer-Selektor entfernt. */
   .nav {
     display: flex;
     align-items: center;
@@ -2004,11 +1999,17 @@
     margin-bottom: 12px;
     letter-spacing: -0.012em;
   }
-  .site-footer__brand-noun { font-weight: 600; }
+  .site-footer__brand-noun {
+    font-weight: 700;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
   .site-footer__brand-qualifier {
     font-weight: 500;
     font-style: italic;
-    color: rgba(246, 244, 238, 0.88);
+    /* Im Footer auf dunklem Grund: sage-grün, hellere Variante */
+    color: var(--accent-green-soft);
   }
   .site-footer__intro {
     font-family: var(--font-display);
