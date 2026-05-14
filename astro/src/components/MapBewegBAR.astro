@@ -13,6 +13,7 @@ export interface MapStation {
   name: string;
   region?: string;
   country?: string;
+  address?: string;
   coordinates?: { lat: number; lng: number };
   visitedAt?: string;
 }
@@ -30,6 +31,7 @@ const points = stations
     lat: s.coordinates!.lat,
     lng: s.coordinates!.lng,
     name: s.name,
+    address: s.address,
     region: s.region,
     visitedAt: s.visitedAt,
     url: `/bewegbar/${s.slug}/`,
@@ -59,6 +61,7 @@ const points = stations
       lat: number;
       lng: number;
       name: string;
+      address?: string;
       region?: string;
       visitedAt?: string;
       url: string;
@@ -66,7 +69,7 @@ const points = stations
 
     if (points.length === 0) {
       el.innerHTML =
-        '<p style="text-align:center;padding:3rem;color:var(--text-muted);">Noch keine Stationen mit Koordinaten — füge in Sanity geopoint-Werte hinzu.</p>';
+        '<p style="text-align:center;padding:3rem;color:var(--text-muted);">Noch keine Stationen mit Koordinaten — sobald du in Sanity eine Adresse einträgst und veröffentlichst, erscheint hier der Pin.</p>';
     } else {
       // Custom Pin im Brand-Stil — kleiner Kreis in Clay-Rot
       const accentColor = '#a8392b';
@@ -104,11 +107,14 @@ const points = stations
         maxZoom: 18,
       }).addTo(map);
 
-      // Pins setzen
+      // Pins setzen — Popup zeigt Name, Adresse, ggf. Besuchsdatum,
+      // und einen Link zur Stations-Detail-Seite. Adresse hat
+      // Vorrang vor Region (genauer, wird auch fürs Geocoding genutzt).
       points.forEach((p) => {
+        const subline = p.address || p.region;
         const popupContent = `
           <strong>${escapeHtml(p.name)}</strong><br/>
-          ${p.region ? `<span style="color:#686b62;font-size:13px">${escapeHtml(p.region)}</span><br/>` : ''}
+          ${subline ? `<span style="color:#686b62;font-size:13px">${escapeHtml(subline)}</span><br/>` : ''}
           ${p.visitedAt ? `<span style="color:#9a9d92;font-size:12px">${new Date(p.visitedAt).toLocaleDateString('de-DE')}</span><br/>` : ''}
           <a href="${p.url}" style="color:#c08538;font-size:13px;margin-top:6px;display:inline-block">Zur Station →</a>
         `;

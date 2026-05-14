@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
   const stations = await sanity.fetch(`
     *[_type == "station" && defined(slug.current)] {
-      "slug": slug.current, _id, name, region, country,
+      "slug": slug.current, _id, name, region, country, address,
       visitedAt, visitedRange, coordinates,
       images,
       reflection,
@@ -24,18 +24,23 @@ export async function getStaticPaths() {
 const { station } = Astro.props;
 ---
 
-<BaseLayout title={`${station.name} — bewegBAR`} description={`Station: ${station.name}, ${station.region || station.country}`}>
+<BaseLayout title={`${station.name} — bewegBAR`} description={`Station: ${station.name}${station.address ? `, ${station.address}` : station.region ? `, ${station.region}` : ''}`}>
   <article style="padding: 4rem 0;">
     <div class="container" style="max-width: 880px;">
       <a href="/bewegbar/" style="color: var(--accent-warm); text-decoration: none; font-size: 14px;">← Zurück zur Karte</a>
       <span class="eyebrow" style="display: inline-block; margin-top: 1.5rem;">
-        bewegBAR · {station.region || station.country?.toUpperCase()}
+        bewegBAR{(station.region || station.country) ? ` · ${station.region || station.country?.toUpperCase()}` : ''}
       </span>
-      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); margin: 0.5rem 0 1rem;">
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); margin: 0.5rem 0 0.75rem;">
         {station.name}
       </h1>
+      {station.address && (
+        <p style="font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--text-secondary); margin: 0 0 0.5rem;">
+          {station.address}
+        </p>
+      )}
       {station.visitedAt && (
-        <p style="color: var(--text-secondary); font-size: 14px;">
+        <p style="color: var(--text-muted); font-size: 14px; margin: 0;">
           Besucht: {new Date(station.visitedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}
         </p>
       )}

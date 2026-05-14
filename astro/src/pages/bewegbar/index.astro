@@ -15,7 +15,7 @@ let stations: any[] = [];
 if (isSanityConfigured) {
   stations = await sanity.fetch(`
     *[_type == "station" && defined(slug.current)] | order(coalesce(visitedAt, visitedRange.from) desc) {
-      _id, name, region, country, visitedAt, "slug": slug.current,
+      _id, name, region, country, address, visitedAt, "slug": slug.current,
       coordinates, tags,
       "thumb": images[0] { asset->{ url } }
     }
@@ -54,10 +54,17 @@ if (isSanityConfigured) {
           {stations.map((s) => (
             <li>
               <a href={`/bewegbar/${s.slug}/`} style="display: block; text-decoration: none; color: inherit; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border-subtle);">
-                <p class="eyebrow">{s.region || s.country?.toUpperCase()}</p>
+                {(s.region || s.country) && (
+                  <p class="eyebrow">{s.region || s.country?.toUpperCase()}</p>
+                )}
                 <h3 style="font-family: var(--font-display); margin: 0.5rem 0;">{s.name}</h3>
+                {s.address && (
+                  <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+                    {s.address}
+                  </p>
+                )}
                 {s.visitedAt && (
-                  <p style="font-size: 13px; color: var(--text-muted);">
+                  <p style="font-size: 13px; color: var(--text-muted); margin: 0.4rem 0 0;">
                     {new Date(s.visitedAt).toLocaleDateString('de-DE')}
                   </p>
                 )}
