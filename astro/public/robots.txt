@@ -1,4 +1,38 @@
+# Standardregel — alle Crawler dürfen alles
 User-agent: *
+Allow: /
+
+# Social-Media-Preview-Crawler explizit auflisten.
+# Manche Plattformen (insb. Facebook) verlangen das, obwohl "*" sie
+# eigentlich abdecken sollte — und manche Hoster/CDNs prüfen das
+# wörtlich. Hier alles freischalten, damit Vorschau-Cards in
+# Facebook, WhatsApp, Messenger, Instagram, LinkedIn und Co.
+# zuverlässig funktionieren.
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Facebot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: SkypeUriPreview
+Allow: /
+
+User-agent: Discordbot
 Allow: /
 
 # Sitemap (wird automatisch von @astrojs/sitemap generiert)
