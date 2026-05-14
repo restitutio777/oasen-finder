@@ -99,14 +99,9 @@ const roomEntries: Array<{ room: string; description?: any; ctaLabel?: any }> =
           )}
           {about?.shortBio && <PortableText value={about.shortBio} />}
           {about?.longBio && (
-            <details style="margin-top: 1.5rem;">
-              <summary style="cursor: pointer; color: var(--accent-warm); font-family: var(--font-text); font-size: 14px;">
-                Mehr lesen
-              </summary>
-              <div style="margin-top: 1rem;">
-                <PortableText value={about.longBio} />
-              </div>
-            </details>
+            <div style="margin-top: 1.5rem;">
+              <PortableText value={about.longBio} />
+            </div>
           )}
           {!about && (
             <p style="color: var(--text-secondary);">
