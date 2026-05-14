@@ -55,7 +55,7 @@ if (isSanityConfigured) {
               <path d="m12 5 7 7-7 7"></path>
             </svg>
           </a>
-          <a href="/mitkommen/" class="btn btn--ghost btn--fresh">Wohin jetzt?</a>
+          <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
         </div>
       </div>
       <a
@@ -139,8 +139,11 @@ if (isSanityConfigured) {
       Die Farb-Trias der ersten Drei-Türen-Version wird auf alle sechs
       Räume erweitert: clay-rot · fern-grün · honig-bronze · mauve-rose
       · deep forest · honig-gold. Dieselben Farben tauchen in der
-      Top-Nav als raumspezifischer Active-Underline wieder auf. */}
-  <section style="padding: 5rem 0; background: var(--bg-warm);">
+      Top-Nav als raumspezifischer Active-Underline wieder auf.
+      `id="raeume"` ist Scroll-Anchor für den Hero-CTA „Wohin dann?".
+      `scroll-margin-top` sorgt dafür, dass die Section nicht unter
+      dem sticky Site-Header landet. */}
+  <section id="raeume" style="padding: 5rem 0; background: var(--bg-warm); scroll-margin-top: 80px;">
     <div class="container">
       <header style="max-width: 720px; margin: 0 auto 3rem; text-align: center;">
         <span class="eyebrow">Räume</span>
