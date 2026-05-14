@@ -116,7 +116,7 @@ const mantra: string | undefined = localized(about?.mantra);
       `id="raeume"` ist Scroll-Anchor für den Hero-CTA „Wohin dann?".
       `scroll-margin-top` sorgt dafür, dass die Section nicht unter
       dem sticky Site-Header landet. */}
-  <section id="raeume" style="padding: 5rem 0; background: var(--bg-warm); scroll-margin-top: 80px;">
+  <section id="raeume" style="padding: 5rem 0; background: #e8e6e3; scroll-margin-top: 80px;">
     <div class="container">
       <header style="max-width: 720px; margin: 0 auto 3rem; text-align: center;">
         <span class="eyebrow">Räume</span>
@@ -185,7 +185,11 @@ const mantra: string | undefined = localized(about?.mantra);
       color: var(--text-primary);
     }
     .room-card__title em {
-      color: var(--card-accent);
+      /* „BAR" einheitlich in Brand-Gold — visueller Wiedererkennungs-
+         Anker über alle Räume. Die raumspezifische Akzentfarbe lebt
+         weiter im Eyebrow oben („Notizen", „Reisen", …) und im CTA-
+         Link unten („Zur schreibBAR →"). */
+      color: var(--accent-gold);
       font-style: italic;
     }
     .room-card__desc {
@@ -301,7 +305,7 @@ const mantra: string | undefined = localized(about?.mantra);
         Werkstatt, Einladung, Beratung, Gespräch — schreib mir, was du brauchst.
         Ich antworte gern, wenn auch nicht immer schnell.
       </p>
-      <a href="/mitkommen/" class="btn btn--primary">Wohin jetzt? →</a>
+      <a href="/mitkommen/" class="btn btn--primary">Kontakt →</a>
     </div>
   </section>
 
