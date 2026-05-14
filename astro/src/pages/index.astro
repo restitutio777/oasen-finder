@@ -84,34 +84,35 @@ if (isSanityConfigured) {
           </p>
         </header>
 
-        <ol class="thread" style="list-style: none; padding: 0 0 0 2.25rem; margin: 0; position: relative;">
-          {/* Der Faden: dünne Linie in Clay-Rot, durchläuft alle Einträge */}
-          <span
-            aria-hidden="true"
-            style="position: absolute; left: 0.45rem; top: 0.6rem; bottom: 0.6rem; width: 1px; background: var(--accent); opacity: 0.55;"
-          ></span>
-
-          {recentNotes.map((note: any) => (
-            <li style="position: relative; padding: 1.5rem 0;">
-              {/* Perle am Faden */}
-              <span
-                aria-hidden="true"
-                style="position: absolute; left: -2rem; top: 2rem; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px var(--bg-base);"
-              ></span>
+        <ol style="list-style: none; padding: 0; margin: 0; text-align: center;">
+          {recentNotes.map((note: any, i: number) => (
+            <li>
+              {/* Trenner als zarter horizontaler Faden mit Perle —
+                  nur zwischen Einträgen, nicht vor dem ersten */}
+              {i > 0 && (
+                <div
+                  aria-hidden="true"
+                  style="display: flex; align-items: center; justify-content: center; gap: 0.9rem; margin: 2.75rem auto;"
+                >
+                  <span style="display: inline-block; width: 64px; height: 1px; background: var(--accent); opacity: 0.45;"></span>
+                  <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); opacity: 0.75;"></span>
+                  <span style="display: inline-block; width: 64px; height: 1px; background: var(--accent); opacity: 0.45;"></span>
+                </div>
+              )}
 
               <a
                 href={`/schreibbar/${note.slug}/`}
-                style="display: block; text-decoration: none; color: inherit; transition: color 0.2s ease;"
+                style="display: block; text-decoration: none; color: inherit;"
                 onmouseover="this.querySelector('h3').style.color='var(--accent-warm)';"
                 onmouseout="this.querySelector('h3').style.color='var(--text-primary)';"
               >
-                <p class="eyebrow" style="color: var(--accent-warm); margin: 0;">
+                <p style="font-family: var(--font-text); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-warm); margin: 0;">
                   {note.publishedAt
                     ? new Date(note.publishedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })
                     : ''}
                   {note.kind && ` · ${['idee', 'vision', 'umfrage'].includes(note.kind) ? 'denkBAR' : 'schreibBAR'}`}
                 </p>
-                <h3 style="font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 500; line-height: 1.2; margin: 0.5rem 0 0; color: var(--text-primary); transition: color 0.2s ease;">
+                <h3 style="font-family: var(--font-display); font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 500; font-style: italic; line-height: 1.15; margin: 0.65rem 0 0; color: var(--text-primary); transition: color 0.2s ease; letter-spacing: -0.005em;">
                   {localized(note.title)}
                 </h3>
               </a>
