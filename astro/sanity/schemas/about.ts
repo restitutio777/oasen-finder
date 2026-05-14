@@ -111,6 +111,67 @@ export const about = defineType({
       type: 'i18nText',
       description: 'Winter Verdauen · F/H Kreta · Sommer reisend',
     }),
+    defineField({
+      name: 'roomInvitations',
+      title: 'Einladungen in die Räume',
+      description:
+        'Erscheint auf der erkennBAR-Seite als „Schau mal weiter"-Bereich. Pro Eintrag: einen Raum auswählen + ein-zwei Sätze, was Besucher dort finden. Reihenfolge im Array = Reihenfolge auf der Seite. Wenn ganz leer: zeige Default-Vorstellungen aller Räume.',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'roomInvitation',
+          fields: [
+            defineField({
+              name: 'room',
+              title: 'Raum',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'schreibBAR — Notizen, Gedichte, Ideen', value: 'schreibbar' },
+                  { title: 'bewegBAR — Stationen', value: 'bewegbar' },
+                  { title: 'machBAR — Werkstatt-Termine', value: 'machbar' },
+                  { title: 'lesBAR — Quellen & Werkzeuge', value: 'lesbar' },
+                  { title: 'hörBAR — Episoden', value: 'hoerbar' },
+                  { title: 'wunderBAR — Kreatives & Off-Topic', value: 'wunderbar' },
+                ],
+                layout: 'radio',
+              },
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'description',
+              title: 'Einladungs-Text',
+              type: 'i18nText',
+              description: 'Ein-zwei Sätze in deiner Stimme. Wenn leer, wird der Default-Text gezeigt.',
+            }),
+            defineField({
+              name: 'ctaLabel',
+              title: 'Button-Text (optional)',
+              type: 'i18nString',
+              description: 'Default: „Zum Raum →". Hier kannst du etwas Eigenes setzen, z.B. „Lies meine Notizen →".',
+            }),
+          ],
+          preview: {
+            select: { room: 'room', desc: 'description.de' },
+            prepare({ room, desc }) {
+              const roomLabels: Record<string, string> = {
+                schreibbar: 'schreibBAR',
+                bewegbar: 'bewegBAR',
+                machbar: 'machBAR',
+                lesbar: 'lesBAR',
+                hoerbar: 'hörBAR',
+                wunderbar: 'wunderBAR',
+              };
+              return {
+                title: room ? roomLabels[room] : '(noch kein Raum)',
+                subtitle: desc && Array.isArray(desc) && desc.length > 0 ? '✓ eigene Beschreibung' : 'Default-Text',
+              };
+            },
+          },
+        },
+      ],
+    }),
   ],
   preview: {
     select: { mantra: 'mantra.de', portrait: 'portraits.0' },
