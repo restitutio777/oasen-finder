@@ -55,17 +55,15 @@ const categories = config?.inviteCategories || [
           <input type="email" name="email" required autocomplete="email" style="padding: 0.75rem; border: 1px solid var(--border-medium); border-radius: 4px; font-family: var(--font-text); font-size: 16px;" />
         </label>
 
-        <fieldset style="display: grid; gap: 0.75rem; border: 1px solid var(--border-subtle); padding: 1.5rem; border-radius: 4px;">
+        <fieldset class="invite-options">
           <legend class="eyebrow">Worum geht es?</legend>
           {categories.map((cat: any) => (
-            <label style="display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer;">
-              <input type="checkbox" name="anliegen" value={cat.kind} style="margin-top: 4px;" />
-              <span>
-                <strong style="font-family: var(--font-display);">{localized(cat.label)}</strong>
+            <label class="invite-option">
+              <input type="checkbox" name="anliegen" value={cat.kind} class="invite-option__input" />
+              <span class="invite-option__body">
+                <strong class="invite-option__title">{localized(cat.label)}</strong>
                 {cat.description && (
-                  <small style="display: block; color: var(--text-secondary); margin-top: 0.2rem;">
-                    {localized(cat.description)}
-                  </small>
+                  <small class="invite-option__desc">{localized(cat.description)}</small>
                 )}
               </span>
             </label>
