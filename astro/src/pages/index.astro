@@ -10,25 +10,18 @@ import { sanity, localized, isSanityConfigured } from '../lib/sanity';
 // nicht konfiguriert ist, zeigt die Seite Demo-Inhalte aus dem aktuellen
 // Prototyp (siehe index.html im Root).
 
-let recentNotes: any[] = [];
 let upcomingEvents: any[] = [];
 let about: any = null;
 
 if (isSanityConfigured) {
-  // Neueste Notizen
-  recentNotes = await sanity.fetch(`
-    *[_type == "note"] | order(publishedAt desc) [0...3] {
-      _id, title, kind, publishedAt, "slug": slug.current,
-      "hero": hero { asset->{ url }, alt }
-    }
-  `);
-  // Nächste Werkstatt-Termine
+  // Nächste Werkstatt-Termine — zeigen sich im Hero („Nächste Begegnung")
+  // und in der machBAR-Karte der Räume-Übersicht
   upcomingEvents = await sanity.fetch(`
     *[_type == "event" && startDate >= now()] | order(startDate asc) [0...3] {
       _id, title, "slug": slug.current, startDate, location
     }
   `);
-  // Mantra/Leitfrage aus dem About-Singleton
+  // Mantra/Leitfrage aus dem About-Singleton — Pull-Quote unter dem Fold
   about = await sanity.fetch(`*[_type == "about" && _id == "about"][0]{ mantra }`);
 }
 
@@ -88,69 +81,10 @@ const mantra: string | undefined = localized(about?.mantra);
     </section>
   )}
 
-  {recentNotes.length > 0 && (
-    <section style="padding: 6rem 0;">
-      <div class="container" style="max-width: 720px;">
-        <header style="text-align: center; margin-bottom: 4rem;">
-          <span class="eyebrow">Notizen</span>
-          <h2 style="font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3rem); margin: 0.6rem 0 0; color: var(--text-primary); letter-spacing: -0.01em;">
-            Der rote <em style="font-style: italic; color: var(--accent); font-weight: 400;">Faden</em>
-          </h2>
-          <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 16px;">
-            Datierte Einträge aus Reisen, Werkstätten, Lesen, Stimme.
-          </p>
-        </header>
-
-        <ol style="list-style: none; padding: 0; margin: 0; text-align: center;">
-          {recentNotes.map((note: any, i: number) => (
-            <li>
-              {/* Bridge nur zwischen Einträgen, nicht durch sie.
-                  Zwei rote Gradient-Linien flankieren einen roten Punkt —
-                  der „rote Faden" soll auch sichtbar rot sein. Linien
-                  faden via rgba (statt transparent), damit der Farbton
-                  durchgehend rot bleibt und nicht ins Graue kippt. */}
-              {i > 0 && (
-                <div
-                  aria-hidden="true"
-                  style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.55rem; padding: 1.75rem 0;"
-                >
-                  <span style="display: block; width: 1.5px; height: 30px; background: linear-gradient(to bottom, rgba(168, 57, 43, 0.15), rgba(168, 57, 43, 1));"></span>
-                  <span style="display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent);"></span>
-                  <span style="display: block; width: 1.5px; height: 30px; background: linear-gradient(to top, rgba(168, 57, 43, 0.15), rgba(168, 57, 43, 1));"></span>
-                </div>
-              )}
-
-              <a
-                href={`/schreibbar/${note.slug}/`}
-                style="display: block; text-decoration: none; color: inherit; padding: 1rem 0;"
-                onmouseover="this.querySelector('h3').style.color='var(--accent-warm)';"
-                onmouseout="this.querySelector('h3').style.color='var(--text-primary)';"
-              >
-                <p style="font-family: var(--font-text); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-warm); margin: 0;">
-                  {note.publishedAt
-                    ? new Date(note.publishedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })
-                    : ''}
-                  {note.kind && ` · ${['idee', 'vision', 'umfrage'].includes(note.kind) ? 'denkBAR' : 'schreibBAR'}`}
-                </p>
-                <h3 style="font-family: var(--font-display); font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 500; font-style: italic; line-height: 1.15; margin: 0.65rem 0 0; color: var(--text-primary); transition: color 0.2s ease; letter-spacing: -0.005em;">
-                  {localized(note.title)}
-                </h3>
-              </a>
-            </li>
-          ))}
-        </ol>
-
-        <div style="text-align: center; margin-top: 4rem;">
-          <a
-            href="/schreibbar/"
-            style="font-family: var(--font-display); font-style: italic; font-size: 19px; color: var(--accent-warm); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px;"
-          >
-            Alle Notizen lesen →
-          </a>
-        </div>
-      </div>
-    </section>
-  )}
+  {/* „Der rote Faden" mit Notizen-Vorschau wurde von der Landing
+      entfernt — Mantra + Räume-Übersicht tragen den Einstieg jetzt
+      allein, die Notizen leben unter /schreibbar/ und im Footer-
+      Erkunden-Link. */}
 
   {/* Sechs Räume — jeder mit eigener Akzentfarbe.
       Die Farb-Trias der ersten Drei-Türen-Version wird auf alle sechs
