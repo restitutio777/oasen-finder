@@ -94,9 +94,9 @@ const roomEntries: Array<{ room: string; description?: any; ctaLabel?: any }> =
         <div class="who__body">
           <span class="eyebrow">erkennBAR</span>
           <h2 class="who__title">Katharina <em>Offenborn</em></h2>
-          {about?.mantra && (
-            <blockquote class="who__question">„{localized(about.mantra)}"</blockquote>
-          )}
+          {/* Das Mantra wird seit jüngerem auf der Landing direkt unter
+              dem Fold gerendert — hier auf der erkennBAR-Seite wäre es
+              Doppelung. Feld bleibt im Sanity-Schema bestehen. */}
           {about?.shortBio && <PortableText value={about.shortBio} />}
           {about?.longBio && (
             <div style="margin-top: 1.5rem;">

@@ -12,6 +12,7 @@ import { sanity, localized, isSanityConfigured } from '../lib/sanity';
 
 let recentNotes: any[] = [];
 let upcomingEvents: any[] = [];
+let about: any = null;
 
 if (isSanityConfigured) {
   // Neueste Notizen
@@ -27,7 +28,11 @@ if (isSanityConfigured) {
       _id, title, "slug": slug.current, startDate, location
     }
   `);
+  // Mantra/Leitfrage aus dem About-Singleton
+  about = await sanity.fetch(`*[_type == "about" && _id == "about"][0]{ mantra }`);
 }
+
+const mantra: string | undefined = localized(about?.mantra);
 ---
 
 <BaseLayout
@@ -70,6 +75,18 @@ if (isSanityConfigured) {
       </a>
     </div>
   </section>
+
+  {/* Leitfrage / Mantra direkt unter dem Fold — bestimmt den Ton der
+      ganzen Seite. Text kommt aus Sanity (about.mantra), gleiches Feld
+      wie früher auf der erkennBAR-Seite, jetzt aber prominent in die
+      Landing-Erzählung gehoben. */}
+  {mantra && (
+    <section class="mantra">
+      <div class="container">
+        <blockquote class="mantra__text">„{mantra}"</blockquote>
+      </div>
+    </section>
+  )}
 
   {recentNotes.length > 0 && (
     <section style="padding: 6rem 0;">
@@ -229,6 +246,41 @@ if (isSanityConfigured) {
       margin-top: auto;
       color: var(--card-accent);
       font-size: 14px;
+    }
+
+    /* Mantra direkt unter dem Fold — leiser Pull-Quote-Block.
+       Cream-Hintergrund (heller als der „Räume"-Bereich), italic
+       Cormorant, zentriert, mit dezenter Linie obendrüber als
+       optisches Atemzeichen statt eines lauten border-left. */
+    .mantra {
+      padding: 5rem 0 4rem;
+      background: var(--bg-primary);
+    }
+    .mantra .container {
+      max-width: 760px;
+    }
+    .mantra__text {
+      margin: 0;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+      line-height: 1.55;
+      color: var(--text-primary);
+      text-align: center;
+      letter-spacing: -0.005em;
+      position: relative;
+      padding-top: 2.5rem;
+    }
+    .mantra__text::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 1.5px;
+      background: var(--accent);
     }
   </style>
 
