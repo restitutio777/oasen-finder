@@ -45,6 +45,14 @@ export const station = defineType({
       group: 'inhalt',
     }),
     defineField({
+      name: 'address',
+      title: 'Adresse',
+      type: 'string',
+      description:
+        'Ort oder Adresse — z.B. „Schloss Tempelhof, Kreßberg" oder „Auroville, Indien". Beim Veröffentlichen werden die Karten-Koordinaten automatisch aus dieser Angabe ermittelt — du brauchst Longitude/Latitude nicht selbst zu setzen.',
+      group: 'inhalt',
+    }),
+    defineField({
       name: 'visitedAt',
       title: 'Besucht am',
       type: 'date',
@@ -110,9 +118,10 @@ export const station = defineType({
     }),
     defineField({
       name: 'coordinates',
-      title: 'Koordinaten (für Karte)',
+      title: 'Karten-Koordinaten (automatisch)',
       type: 'geopoint',
-      description: 'Klick auf der Karte setzt den Punkt',
+      description:
+        'Werden beim Veröffentlichen automatisch aus dem Adress-Feld ermittelt. Falls der Punkt auf der Karte daneben liegt, kannst du ihn hier manuell anpassen — klick einfach auf der Karte.',
       group: 'mehr',
     }),
     defineField({
