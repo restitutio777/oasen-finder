@@ -193,13 +193,17 @@
     left: 0; right: 100%;
     bottom: 2px;
     height: 1.5px;
-    background: var(--accent);
+    /* --nav-accent wird inline auf dem aktiven Eintrag gesetzt
+       (raumspezifisch). Default bleibt clay-rot für Hover. */
+    background: var(--nav-accent, var(--accent));
     transition: right var(--t-base) var(--ease);
   }
   .nav a:hover { color: var(--text-primary); }
   .nav a:hover::after { right: 0; }
-  .nav a.is-active::after { right: 0; }
-  .nav a.is-active { color: var(--text-primary); }
+  .nav a.is-active::after,
+  .nav a[aria-current="page"]::after { right: 0; }
+  .nav a.is-active,
+  .nav a[aria-current="page"] { color: var(--text-primary); }
 
   /* ---------- Nav-Group dropdown (Desktop) ---------- */
   .nav-group {
@@ -220,7 +224,26 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    position: relative;
     transition: color var(--t-fast) var(--ease);
+  }
+  .nav-group__trigger::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 100%;
+    /* Underline visuell auf Höhe der direkten Nav-Links — etwas unterhalb
+       der Schrift, vor dem Caret. */
+    bottom: 2px;
+    height: 1.5px;
+    background: var(--nav-accent, var(--accent));
+    transition: right var(--t-base) var(--ease);
+  }
+  .nav-group__trigger[aria-current="page"]::after {
+    /* Caret nicht überstreichen — Underline endet vor dem Pfeil. */
+    right: 18px;
+  }
+  .nav-group__trigger[aria-current="page"] {
+    color: var(--text-primary);
   }
   .nav-group__trigger:hover,
   .nav-group:hover .nav-group__trigger,

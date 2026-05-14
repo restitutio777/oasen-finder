@@ -3,8 +3,38 @@
  * Site-Header mit Brand und Top-Navigation.
  * Mirror der aktuellen index.html-Header-Struktur — funktioniert mit
  * dem migrierten global.css.
+ *
+ * Active-State: jeder Raum hat eine eigene Akzentfarbe, die als
+ * dezenter Underline auf dem aktiven Nav-Eintrag erscheint.
+ * Konsistent mit den Karten in der Landing-Übersicht.
  */
 const locale = 'de'; // TODO: aus Astro.params.locale ableiten wenn FR/EN aktiv
+const path = Astro.url.pathname;
+
+const roomAccent: Record<string, string> = {
+  '/schreibbar': 'var(--accent)',
+  '/bewegbar': 'var(--accent-green)',
+  '/machbar': 'var(--accent-warm)',
+  '/lesbar': 'var(--accent-rose)',
+  '/hoerbar': 'var(--accent-deep)',
+  '/wunderbar': 'var(--accent-gold)',
+  '/erkennbar': 'var(--text-primary)',
+  '/mitkommen': 'var(--accent)',
+};
+
+const isActive = (prefix: string): boolean => path === prefix || path.startsWith(prefix + '/');
+const accentFor = (prefix: string): string => roomAccent[prefix] ?? 'var(--accent)';
+const navProps = (prefix: string) => ({
+  'aria-current': isActive(prefix) ? 'page' as const : undefined,
+  style: isActive(prefix) ? `--nav-accent: ${accentFor(prefix)};` : undefined,
+});
+
+const dropdownPaths = ['/lesbar', '/hoerbar', '/wunderbar', '/erkennbar'];
+const dropdownActive = dropdownPaths.find((p) => isActive(p));
+const dropdownProps = {
+  'aria-current': dropdownActive ? 'page' as const : undefined,
+  style: dropdownActive ? `--nav-accent: ${accentFor(dropdownActive)};` : undefined,
+};
 ---
 
 <header class="site-header">
@@ -16,26 +46,27 @@ const locale = 'de'; // TODO: aus Astro.params.locale ableiten wenn FR/EN aktiv
       <em class="brand__qualifier">Gemeinschaft</em>
     </a>
     <nav class="nav" id="primary-nav" aria-label="Hauptnavigation">
-      <a href="/schreibbar/">schreibBAR</a>
-      <a href="/bewegbar/">bewegBAR</a>
-      <a href="/machbar/">machBAR</a>
+      <a href="/schreibbar/" {...navProps('/schreibbar')}>schreibBAR</a>
+      <a href="/bewegbar/" {...navProps('/bewegbar')}>bewegBAR</a>
+      <a href="/machbar/" {...navProps('/machbar')}>machBAR</a>
       <div class="nav-group">
         <button
           class="nav-group__trigger"
           type="button"
           aria-haspopup="true"
           aria-expanded="false"
+          {...dropdownProps}
         >
           Räume <span class="nav-group__caret" aria-hidden="true">↓</span>
         </button>
         <div class="nav-group__menu" role="menu">
-          <a href="/lesbar/" role="menuitem">lesBAR</a>
-          <a href="/hoerbar/" role="menuitem">hörBAR</a>
-          <a href="/wunderbar/" role="menuitem">wunderBAR</a>
-          <a href="/erkennbar/" role="menuitem">erkennBAR</a>
+          <a href="/lesbar/" role="menuitem" {...navProps('/lesbar')}>lesBAR</a>
+          <a href="/hoerbar/" role="menuitem" {...navProps('/hoerbar')}>hörBAR</a>
+          <a href="/wunderbar/" role="menuitem" {...navProps('/wunderbar')}>wunderBAR</a>
+          <a href="/erkennbar/" role="menuitem" {...navProps('/erkennbar')}>erkennBAR</a>
         </div>
       </div>
-      <a href="/mitkommen/">Mitkommen</a>
+      <a href="/mitkommen/" {...navProps('/mitkommen')}>Mitkommen</a>
     </nav>
     <button
       class="nav-toggle"
