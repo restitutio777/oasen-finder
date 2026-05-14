@@ -3,7 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import SanityImage from '../../components/SanityImage.astro';
 import MediaLink from '../../components/MediaLink.astro';
-import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+import ShareButton from '../../components/ShareButton.astro';
+import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
@@ -25,11 +26,20 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
+
+const entryTitle = localized(entry.title) || 'Eintrag';
+const fallbackOgPhoto =
+  'https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?w=1200&h=630&fit=crop&q=85';
+const ogImage = entry.hero?.asset
+  ? urlFor(entry.hero).width(1200).height(630).fit('crop').auto('format').quality(85).url()
+  : fallbackOgPhoto;
 ---
 
 <BaseLayout
-  title={`${localized(entry.title) || 'Eintrag'} — wunderBAR`}
+  title={`${entryTitle} — wunderBAR`}
   description={`wunderBAR-Eintrag vom ${new Date(entry.publishedAt).toLocaleDateString('de-DE')}`}
+  image={ogImage}
+  ogType="article"
 >
   <article style="padding: 4rem 0; max-width: 720px; margin: 0 auto;">
     <div class="container">
@@ -73,6 +83,10 @@ const { entry } = Astro.props;
           </ul>
         </aside>
       )}
+
+      <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+        <ShareButton title={entryTitle} />
+      </div>
     </div>
   </article>
 </BaseLayout>

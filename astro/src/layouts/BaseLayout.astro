@@ -14,14 +14,34 @@ export interface Props {
   locale?: 'de' | 'fr' | 'en';
   /** Pfad ohne Locale-Präfix für hreflang (z.B. "/bewegbar/") */
   path?: string;
+  /**
+   * Bild für Open Graph / Twitter Card.
+   * Akzeptiert volle URL oder relative URL — bei Unsplash-Photo-IDs
+   * einfach `https://images.unsplash.com/photo-…?w=1200&h=630&fit=crop`
+   * oder bei Sanity-Asset-URLs die `url`-Property mit `?w=1200&h=630`.
+   * Wenn nicht gesetzt: Brand-Default (Schreibhände auf Papier).
+   */
+  image?: string;
+  /** Open Graph type — z.B. „article" für Detail-Seiten */
+  ogType?: 'website' | 'article';
 }
+
+const siteUrl = 'https://oasen-finder.vercel.app';
+const defaultOgImage =
+  'https://images.unsplash.com/photo-1733819109723-92a56f6872a5?w=1200&h=630&fit=crop&q=85';
 
 const {
   title = 'werkSTATT Gemeinschaft — Katharina Offenborn',
   description = 'werkSTATT Gemeinschaft — Miteinander vereinBAR, GemeinschaftsWERK statt allein unterwegs. Katharina Offenborn auf Reisen zu Ökodörfern, Cohousing-Projekten und gemeinsamen Lebensorten.',
   locale = 'de',
   path = Astro.url.pathname,
+  image = defaultOgImage,
+  ogType = 'website',
 } = Astro.props;
+
+const canonicalUrl = `${siteUrl}${path}`;
+const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+const ogLocale = locale === 'de' ? 'de_DE' : locale === 'fr' ? 'fr_FR' : 'en_US';
 ---
 
 <!doctype html>
@@ -33,6 +53,7 @@ const {
     <title>{title}</title>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
 
     {/* Fonts — preconnect + load */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,10 +64,29 @@ const {
     />
 
     {/* hreflang-Alternativen für i18n */}
-    <link rel="alternate" hreflang="de" href={`https://oasen-finder.vercel.app${path}`} />
-    <link rel="alternate" hreflang="fr" href={`https://oasen-finder.vercel.app/fr${path}`} />
-    <link rel="alternate" hreflang="en" href={`https://oasen-finder.vercel.app/en${path}`} />
-    <link rel="alternate" hreflang="x-default" href={`https://oasen-finder.vercel.app${path}`} />
+    <link rel="alternate" hreflang="de" href={`${siteUrl}${path}`} />
+    <link rel="alternate" hreflang="fr" href={`${siteUrl}/fr${path}`} />
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/en${path}`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}${path}`} />
+
+    {/* Open Graph — für Vorschau-Cards in WhatsApp, Signal, Mail,
+        Mastodon, Slack, iMessage, LinkedIn, … */}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="werkSTATT Gemeinschaft" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+
+    {/* Twitter Card — größere Vorschau */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
   </head>
   <body>
     <Header />

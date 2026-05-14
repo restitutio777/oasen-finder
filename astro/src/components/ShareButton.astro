@@ -1,0 +1,135 @@
+---
+/**
+ * Teilen-Button für Detail-Seiten.
+ *
+ * Verhalten:
+ *  - Mobile (mit Web Share API): öffnet das System-Share-Sheet,
+ *    der Nutzer wählt WhatsApp, Mail, Signal, Telegram, AirDrop, …
+ *  - Desktop (ohne Web Share API): kopiert den Link in die
+ *    Zwischenablage und zeigt kurz „Link kopiert ✓".
+ *  - Falls beides nicht geht (uralter Browser): prompt() als
+ *    letzter Fallback.
+ *
+ * Kein Tracking, keine Third-Party-Widgets, keine Cookies.
+ */
+
+export interface Props {
+  /** Titel des Beitrags — wird im Share-Dialog vorgeschlagen */
+  title: string;
+  /** Optionaler Begleittext für den Share */
+  text?: string;
+  /** Pfad oder URL — Default: aktuelle Seite */
+  url?: string;
+}
+
+const siteUrl = 'https://oasen-finder.vercel.app';
+const { title, text, url } = Astro.props;
+const resolvedUrl = url
+  ? url.startsWith('http')
+    ? url
+    : `${siteUrl}${url}`
+  : `${siteUrl}${Astro.url.pathname}`;
+---
+
+<button
+  class="share-button"
+  type="button"
+  data-share-url={resolvedUrl}
+  data-share-title={title}
+  data-share-text={text ?? ''}
+  aria-label={`„${title}" teilen`}
+>
+  <svg
+    class="share-button__icon"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="18" cy="5" r="3"></circle>
+    <circle cx="6" cy="12" r="3"></circle>
+    <circle cx="18" cy="19" r="3"></circle>
+    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+  </svg>
+  <span class="share-button__label">Teilen</span>
+</button>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.share-button');
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.shareUrl ?? window.location.href;
+      const title = btn.dataset.shareTitle ?? document.title;
+      const text = btn.dataset.shareText || undefined;
+      const label = btn.querySelector<HTMLElement>('.share-button__label');
+
+      // 1) Web Share API — Mobile, neuere Desktop-Browser
+      if (typeof navigator.share === 'function') {
+        try {
+          await navigator.share({ title, text, url });
+          return;
+        } catch (err) {
+          // Nutzer hat abgebrochen — kein Fehler, einfach Ruhe geben
+          if ((err as DOMException)?.name === 'AbortError') return;
+          // andere Fehler: fall through zum Clipboard-Fallback
+        }
+      }
+
+      // 2) Clipboard — kopiere die URL und gib Feedback
+      try {
+        await navigator.clipboard.writeText(url);
+        if (label) {
+          const original = label.textContent;
+          label.textContent = 'Link kopiert ✓';
+          btn.classList.add('is-copied');
+          setTimeout(() => {
+            label.textContent = original;
+            btn.classList.remove('is-copied');
+          }, 2200);
+        }
+        return;
+      } catch (err) {
+        // 3) Letzter Notnagel
+        window.prompt('Link kopieren:', url);
+      }
+    });
+  });
+</script>
+
+<style>
+  .share-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    font-family: var(--font-text);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease,
+      background 0.15s ease;
+  }
+  .share-button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .share-button.is-copied {
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+  }
+  .share-button__icon {
+    flex-shrink: 0;
+  }
+</style>

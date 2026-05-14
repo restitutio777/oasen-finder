@@ -3,7 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import SanityImage from '../../components/SanityImage.astro';
 import MediaLink from '../../components/MediaLink.astro';
-import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+import ShareButton from '../../components/ShareButton.astro';
+import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
@@ -34,11 +35,22 @@ const kindLabels: Record<string, string> = {
   vision: 'Vision · denkBAR',
   umfrage: 'Umfrage · denkBAR',
 };
+
+// OG-Image: hero-Bild der Notiz, wenn vorhanden — sonst Fallback
+// auf das schreibBAR-Mood-Banner. 1200×630 ist die Standard-OG-Größe.
+const fallbackOgPhoto =
+  'https://images.unsplash.com/photo-1733819109723-92a56f6872a5?w=1200&h=630&fit=crop&q=85';
+const ogImage = note.hero?.asset
+  ? urlFor(note.hero).width(1200).height(630).fit('crop').auto('format').quality(85).url()
+  : fallbackOgPhoto;
+const noteTitle = localized(note.title) || 'Notiz';
 ---
 
 <BaseLayout
-  title={`${localized(note.title) || 'Notiz'} — schreibBAR`}
+  title={`${noteTitle} — schreibBAR`}
   description={`schreibBAR-Eintrag vom ${new Date(note.publishedAt).toLocaleDateString('de-DE')}`}
+  image={ogImage}
+  ogType="article"
 >
   <article style="padding: 4rem 0; max-width: 720px; margin: 0 auto;">
     <div class="container">
@@ -89,6 +101,10 @@ const kindLabels: Record<string, string> = {
           </ul>
         </aside>
       )}
+
+      <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+        <ShareButton title={noteTitle} />
+      </div>
     </div>
   </article>
 </BaseLayout>

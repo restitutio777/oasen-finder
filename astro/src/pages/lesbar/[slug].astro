@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import MediaLink from '../../components/MediaLink.astro';
+import ShareButton from '../../components/ShareButton.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
@@ -30,9 +31,22 @@ const kindLabels: Record<string, string> = {
   konzept: 'Konzept · brauchBAR',
   werkzeug: 'Werkzeug · brauchBAR',
 };
+
+const resourceTitle = localized(resource.title) || 'Eintrag';
+const fallbackOgPhoto =
+  'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=630&fit=crop&q=85';
+// Sanity-CDN-URLs unterstützen URL-Parameter für OG-Crop direkt.
+const ogImage = resource.coverUrl
+  ? `${resource.coverUrl}?w=1200&h=630&fit=crop&auto=format&q=85`
+  : fallbackOgPhoto;
 ---
 
-<BaseLayout title={`${localized(resource.title) || 'Eintrag'} — lesBAR`}>
+<BaseLayout
+  title={`${resourceTitle} — lesBAR`}
+  description={`${kindLabels[resource.kind] || 'Quelle'}${resource.authorOrSource ? ` — ${resource.authorOrSource}` : ''}`}
+  image={ogImage}
+  ogType="article"
+>
   <article style="padding: 4rem 0;">
     <div class="container" style="max-width: 720px;">
       <a href="/lesbar/" style="color: var(--accent-warm); font-size: 14px;">← Zurück zur Bibliothek</a>
@@ -59,6 +73,10 @@ const kindLabels: Record<string, string> = {
           <a href={resource.pdfUrl} target="_blank" rel="noopener">Dokument herunterladen →</a>
         </p>
       )}
+
+      <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+        <ShareButton title={resourceTitle} />
+      </div>
     </div>
   </article>
 </BaseLayout>
