@@ -69,21 +69,10 @@ const mantra: string | undefined = localized(about?.mantra);
     </div>
   </section>
 
-  {/* Leitfrage / Mantra direkt unter dem Fold — bestimmt den Ton der
-      ganzen Seite. Text kommt aus Sanity (about.mantra), gleiches Feld
-      wie früher auf der erkennBAR-Seite, jetzt aber prominent in die
-      Landing-Erzählung gehoben. */}
-  {mantra && (
-    <section class="mantra">
-      <div class="container">
-        <blockquote class="mantra__text">„{mantra}"</blockquote>
-      </div>
-    </section>
-  )}
-
-  {/* Zweck der Seite — kurzer Lese-Text, der das Mantra einlöst:
-      was die Seite ist, was sie will. Verweise auf hörBAR und lesBAR
-      sind direkte Anker auf die zwei „Schätze-Räume". */}
+  {/* Zweck der Seite — kommt jetzt als erstes nach dem Hero, vor
+      dem Mantra. Was die Seite ist, was sie will. Verweise auf
+      hörBAR und lesBAR sind direkte Anker auf die zwei
+      „Schätze-Räume". */}
   <section class="purpose-intro">
     <div class="container">
       <p class="purpose-intro__lead">Diese Webseite dient zweierlei:</p>
@@ -100,6 +89,16 @@ const mantra: string | undefined = localized(about?.mantra);
       </p>
     </div>
   </section>
+
+  {/* Leitfrage / Mantra — folgt jetzt nach dem Zweck-Intro. Text
+      kommt aus Sanity (about.mantra). */}
+  {mantra && (
+    <section class="mantra">
+      <div class="container">
+        <blockquote class="mantra__text">„{mantra}"</blockquote>
+      </div>
+    </section>
+  )}
 
   {/* „Der rote Faden" mit Notizen-Vorschau wurde von der Landing
       entfernt — Mantra + Räume-Übersicht tragen den Einstieg jetzt
@@ -237,30 +236,29 @@ const mantra: string | undefined = localized(about?.mantra);
       background: var(--accent);
     }
 
-    /* Zweck-Intro — Lese-Text-Block direkt nach dem Mantra.
-       Linksbündig, gross, ruhiger Cormorant. Kein zweiter dramatischer
-       Pull-Quote-Effekt, sondern fortlaufender Text der das Mantra
-       einlöst. */
+    /* Zweck-Intro — Eingangs-Lese-Block direkt nach dem Hero.
+       Linksbündig, gross, ruhiger Cormorant — soll als ruhige Stimme
+       die Seite öffnen, bevor das Mantra folgt. */
     .purpose-intro {
-      padding: 1.5rem 0 5rem;
+      padding: 5rem 0 3rem;
       background: var(--bg-primary);
     }
     .purpose-intro .container {
-      max-width: 680px;
+      max-width: 760px;
     }
     .purpose-intro__lead {
       font-family: var(--font-display);
-      font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+      font-size: clamp(1.4rem, 2.2vw, 1.85rem);
       font-style: italic;
       color: var(--text-secondary);
-      margin: 0 0 1.2rem;
+      margin: 0 0 1.5rem;
     }
     .purpose-intro__body {
       font-family: var(--font-display);
-      font-size: clamp(1.15rem, 1.8vw, 1.4rem);
-      line-height: 1.6;
+      font-size: clamp(1.45rem, 2.4vw, 2rem);
+      line-height: 1.5;
       color: var(--text-primary);
-      margin: 0 0 1.2rem;
+      margin: 0 0 1.5rem;
     }
     .purpose-intro__body:last-child {
       margin-bottom: 0;

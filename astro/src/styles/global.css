@@ -1972,7 +1972,10 @@
 
   /* ---------- Footer ---------- */
   .site-footer {
-    background: var(--bg-deep);
+    /* Footer in warmem Mid-Grey statt aubergine-charcoal — wirkt
+       neutraler und weniger lastig. Cream-Text bleibt gut lesbar,
+       Gold und Sage-Grün haben weiter ihren Akzent-Effekt. */
+    background: #5a5550;
     color: var(--text-inverse);
     padding: clamp(64px, 8vw, 96px) 0 32px;
   }
