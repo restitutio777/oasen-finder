@@ -84,24 +84,26 @@ if (isSanityConfigured) {
           </p>
         </header>
 
-        <ol style="list-style: none; padding: 0; margin: 0; text-align: center; position: relative;">
-          {/* Vertikale Bridge — durchläuft alle Einträge in der Mitte */}
-          <span
-            aria-hidden="true"
-            style="position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--accent); opacity: 0.45; transform: translateX(-50%); z-index: 0;"
-          ></span>
-
-          {recentNotes.map((note: any) => (
-            <li style="position: relative; padding: 2rem 0; z-index: 1;">
-              {/* Perle am Faden — sitzt zentral am Eintrag-Anfang */}
-              <span
-                aria-hidden="true"
-                style="display: block; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px var(--bg-base); margin: 0 auto 1.5rem; position: relative; z-index: 2;"
-              ></span>
+        <ol style="list-style: none; padding: 0; margin: 0; text-align: center;">
+          {recentNotes.map((note: any, i: number) => (
+            <li>
+              {/* Bridge nur zwischen Einträgen, nicht durch sie.
+                  Zwei zarte Gradient-Linien flankieren einen kleinen Punkt —
+                  zarter Atem-Übergang statt durchstreichender Strich. */}
+              {i > 0 && (
+                <div
+                  aria-hidden="true"
+                  style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.55rem; padding: 1.75rem 0; opacity: 0.7;"
+                >
+                  <span style="display: block; width: 1px; height: 28px; background: linear-gradient(to bottom, transparent, var(--accent));"></span>
+                  <span style="display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.65;"></span>
+                  <span style="display: block; width: 1px; height: 28px; background: linear-gradient(to top, transparent, var(--accent));"></span>
+                </div>
+              )}
 
               <a
                 href={`/schreibbar/${note.slug}/`}
-                style="display: block; text-decoration: none; color: inherit;"
+                style="display: block; text-decoration: none; color: inherit; padding: 1rem 0;"
                 onmouseover="this.querySelector('h3').style.color='var(--accent-warm)';"
                 onmouseout="this.querySelector('h3').style.color='var(--text-primary)';"
               >
