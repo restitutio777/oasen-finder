@@ -135,73 +135,99 @@ if (isSanityConfigured) {
     </section>
   )}
 
+  {/* Sechs Räume — jeder mit eigener Akzentfarbe.
+      Die Farb-Trias der ersten Drei-Türen-Version wird auf alle sechs
+      Räume erweitert: clay-rot · fern-grün · honig-bronze · mauve-rose
+      · deep forest · honig-gold. Dieselben Farben tauchen in der
+      Top-Nav als raumspezifischer Active-Underline wieder auf. */}
   <section style="padding: 5rem 0; background: var(--bg-warm);">
     <div class="container">
       <header style="max-width: 720px; margin: 0 auto 3rem; text-align: center;">
-        <span class="eyebrow">Drei Türen</span>
+        <span class="eyebrow">Räume</span>
         <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 0; color: var(--text-primary);">
           Wohin als <em>nächstes</em>?
         </h2>
       </header>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 960px; margin: 0 auto;">
-        {/* bewegBAR — Reisen, draußen, Bewegung: Fern-Grün als frischer Akzent */}
-        <a
-          href="/bewegbar/"
-          style="display: flex; flex-direction: column; gap: 0.75rem; padding: 2rem; border: 1px solid var(--border-subtle); border-radius: 4px; background: var(--bg-primary); text-decoration: none; color: var(--text-primary); transition: transform 0.15s ease, border-color 0.15s ease;"
-          onmouseover="this.style.borderColor='var(--accent-green)'; this.style.transform='translateY(-2px)';"
-          onmouseout="this.style.borderColor='var(--border-subtle)'; this.style.transform='translateY(0)';"
-        >
-          <span class="eyebrow" style="color: var(--accent-green);">Reisen</span>
-          <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin: 0; color: var(--text-primary);">
-            beweg<em style="color: var(--accent-green);">BAR</em>
-          </h3>
-          <p style="color: var(--text-secondary); margin: 0; font-size: 15px; line-height: 1.55;">
-            Stationen unterwegs zu Gemeinschaftsorten — mit Karte, Fotos und Notizen.
-          </p>
-          <span style="margin-top: auto; color: var(--accent-green); font-size: 14px;">Zur Karte →</span>
-        </a>
-
-        {/* machBAR — Werkstatt, aktiv, warm: bleibt im Gold-Bereich */}
-        <a
-          href="/machbar/"
-          style="display: flex; flex-direction: column; gap: 0.75rem; padding: 2rem; border: 1px solid var(--border-subtle); border-radius: 4px; background: var(--bg-primary); text-decoration: none; color: var(--text-primary); transition: transform 0.15s ease, border-color 0.15s ease;"
-          onmouseover="this.style.borderColor='var(--accent-warm)'; this.style.transform='translateY(-2px)';"
-          onmouseout="this.style.borderColor='var(--border-subtle)'; this.style.transform='translateY(0)';"
-        >
-          <span class="eyebrow" style="color: var(--accent-warm);">Werkstätten</span>
-          <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin: 0; color: var(--text-primary);">
-            mach<em>BAR</em>
-          </h3>
-          <p style="color: var(--text-secondary); margin: 0; font-size: 15px; line-height: 1.55;">
-            Termine zum Mitmachen — von Sommer-Werkstatt bis Vortrag.
-            {upcomingEvents[0]?.title && (
-              <>
-                <br/><strong style="color: var(--accent-warm); font-weight: 500;">Nächster: {localized(upcomingEvents[0].title)}</strong>
-              </>
-            )}
-          </p>
-          <span style="margin-top: auto; color: var(--accent-warm); font-size: 14px;">Zu den Terminen →</span>
-        </a>
-
-        {/* lesBAR — Bibliothek, ruhig, reflektiv: Mauve-Rose als dritter Ton */}
-        <a
-          href="/lesbar/"
-          style="display: flex; flex-direction: column; gap: 0.75rem; padding: 2rem; border: 1px solid var(--border-subtle); border-radius: 4px; background: var(--bg-primary); text-decoration: none; color: var(--text-primary); transition: transform 0.15s ease, border-color 0.15s ease;"
-          onmouseover="this.style.borderColor='var(--accent-rose)'; this.style.transform='translateY(-2px)';"
-          onmouseout="this.style.borderColor='var(--border-subtle)'; this.style.transform='translateY(0)';"
-        >
-          <span class="eyebrow" style="color: var(--accent-rose);">Bibliothek</span>
-          <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin: 0; color: var(--text-primary);">
-            les<em style="color: var(--accent-rose);">BAR</em>
-          </h3>
-          <p style="color: var(--text-secondary); margin: 0; font-size: 15px; line-height: 1.55;">
-            Bücher, Texte und Quellen, die mich tragen und begleiten.
-          </p>
-          <span style="margin-top: auto; color: var(--accent-rose); font-size: 14px;">In die Bibliothek →</span>
-        </a>
+      <div class="rooms-grid">
+        {[
+          { slug: 'schreibbar', eyebrow: 'Notizen', stem: 'schreib', desc: 'Datierte Einträge — Notizen, Gedichte, Gedanken aus Reisen, Werkstätten und Lektüren.', accent: 'var(--accent)' },
+          { slug: 'bewegbar', eyebrow: 'Reisen', stem: 'beweg', desc: 'Orte, an denen ich war — Ökodörfer, Cohousing-Projekte und gemeinsame Lebensorte, auf einer Karte.', accent: 'var(--accent-green)' },
+          { slug: 'machbar', eyebrow: 'Werkstatt', stem: 'mach', desc: 'Werkstatt-Termine zum Mitmachen — drei Themen, im Jahres-Rhythmus.', accent: 'var(--accent-warm)' },
+          { slug: 'lesbar', eyebrow: 'Bibliothek', stem: 'les', desc: 'Bücher, Webseiten, Filme, Podcasts und Werkzeuge zu Fragen des Miteinander.', accent: 'var(--accent-rose)' },
+          { slug: 'hoerbar', eyebrow: 'Audio', stem: 'hör', desc: 'Eingesprochene Reflexionen, Gedichte, Lieder — plus Gespräche mit Menschen, die in Gemeinschaft leben.', accent: 'var(--accent-deep)' },
+          { slug: 'wunderbar', eyebrow: 'Kreatives', stem: 'wunder', desc: 'Was nicht in die anderen Räume passt — spielerisch, offen, ungeordnet.', accent: 'var(--accent-gold)' },
+        ].map((room) => (
+          <a class="room-card" href={`/${room.slug}/`} style={`--card-accent: ${room.accent};`}>
+            <span class="eyebrow room-card__eyebrow">{room.eyebrow}</span>
+            <h3 class="room-card__title">{room.stem}<em>BAR</em></h3>
+            <p class="room-card__desc">
+              {room.desc}
+              {room.slug === 'machbar' && upcomingEvents[0]?.title && (
+                <>
+                  <br/><strong class="room-card__next">Nächster: {localized(upcomingEvents[0].title)}</strong>
+                </>
+              )}
+            </p>
+            <span class="room-card__cta">Zur {room.stem}BAR →</span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
+
+  <style>
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .room-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 2rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      background: var(--bg-primary);
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .room-card:hover {
+      border-color: var(--card-accent);
+      transform: translateY(-2px);
+    }
+    .room-card__eyebrow {
+      color: var(--card-accent);
+    }
+    .room-card__title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      margin: 0;
+      color: var(--text-primary);
+    }
+    .room-card__title em {
+      color: var(--card-accent);
+      font-style: italic;
+    }
+    .room-card__desc {
+      color: var(--text-secondary);
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .room-card__next {
+      color: var(--card-accent);
+      font-weight: 500;
+    }
+    .room-card__cta {
+      margin-top: auto;
+      color: var(--card-accent);
+      font-size: 14px;
+    }
+  </style>
 
   <section style="padding: 5rem 0; background: var(--bg-primary); text-align: center;">
     <div class="container" style="max-width: 640px;">
