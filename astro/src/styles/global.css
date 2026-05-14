@@ -28,6 +28,7 @@
     --accent-green: #3d6b54;        /* fern — modern */
     --accent-green-soft: #a3b89e;   /* sage — auf dunklem Grund */
     --accent-deep: #1f3d2f;         /* deep forest */
+    --accent-blue: #36587a;         /* slate-blau — kühler Komplementär zum Gold, frisch */
 
     --border-subtle: rgba(31, 29, 26, 0.08);
     --border-medium: rgba(31, 29, 26, 0.16);
@@ -598,8 +599,9 @@
     font-weight: 500;
     font-style: normal;
   }
-  /* "Auf der Suche —" in dunkler Aubergine (gedaempft, geerdet) */
-  .hero__title-a { color: #4d4555; }
+  /* "Auf der Suche —" in Slate-Blau — kühler Komplementär, der
+     das warme Gold-Braun darunter visuell auffrischt. */
+  .hero__title-a { color: var(--accent-blue); }
   /* "wie wird Gemeinschaft?" in leuchtendem Honig-Gold mit weichem Glow */
   .hero__title-b {
     color: var(--accent-gold);
