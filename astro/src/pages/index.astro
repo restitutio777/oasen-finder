@@ -208,16 +208,18 @@ const mantra: string | undefined = localized(about?.mantra);
       font-size: 14px;
     }
 
-    /* Mantra direkt unter dem Fold — leiser Pull-Quote-Block.
-       Cream-Hintergrund (heller als der „Räume"-Bereich), italic
-       Cormorant, zentriert, mit dezenter Linie obendrüber als
-       optisches Atemzeichen statt eines lauten border-left. */
+    /* Mantra-Pull-Quote — Linksausrichtung wie der Hero darüber.
+       Cream-Hintergrund nahtlos zum Zweck-Intro, italic Cormorant,
+       dezente clay-rote Linie obendrüber als Atemzeichen. */
     .mantra {
-      padding: 5rem 0 4rem;
+      padding: 4rem 0 5rem;
       background: var(--bg-primary);
     }
     .mantra .container {
+      /* Links am Container statt zentriert — Block sitzt am gleichen
+         linken Rand wie der Hero-Content. */
       max-width: 760px;
+      margin-left: 0;
     }
     .mantra__text {
       margin: 0;
@@ -227,7 +229,7 @@ const mantra: string | undefined = localized(about?.mantra);
       font-size: clamp(1.35rem, 2.2vw, 1.8rem);
       line-height: 1.55;
       color: var(--text-primary);
-      text-align: center;
+      text-align: left;
       letter-spacing: -0.005em;
       position: relative;
       padding-top: 2.5rem;
@@ -236,22 +238,22 @@ const mantra: string | undefined = localized(about?.mantra);
       content: '';
       position: absolute;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
       width: 48px;
       height: 1.5px;
       background: var(--accent);
     }
 
     /* Zweck-Intro — Eingangs-Lese-Block direkt nach dem Hero.
-       Linksbündig, gross, ruhiger Cormorant — soll als ruhige Stimme
-       die Seite öffnen, bevor das Mantra folgt. */
+       Linksbündig wie der Hero, gross, ruhiger Cormorant — soll als
+       ruhige Stimme die Seite öffnen, bevor das Mantra folgt. */
     .purpose-intro {
       padding: 5rem 0 3rem;
       background: var(--bg-primary);
     }
     .purpose-intro .container {
       max-width: 760px;
+      margin-left: 0;
     }
     .purpose-intro__heading {
       font-family: var(--font-display);
