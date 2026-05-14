@@ -75,7 +75,10 @@ const mantra: string | undefined = localized(about?.mantra);
       „Schätze-Räume". */}
   <section class="purpose-intro">
     <div class="container">
-      <p class="purpose-intro__lead">Diese Webseite dient zweierlei:</p>
+      <h2 class="purpose-intro__heading">
+        <span class="purpose-intro__heading-bold">Diese Webseite</span>
+        <em>dient zweierlei:</em>
+      </h2>
       <p class="purpose-intro__body">
         Sie ist ein Versuch, die Schätze zu bergen und zu teilen, die
         ich bisher finden durfte: Willkommen dazu in der
@@ -246,12 +249,24 @@ const mantra: string | undefined = localized(about?.mantra);
     .purpose-intro .container {
       max-width: 760px;
     }
-    .purpose-intro__lead {
+    .purpose-intro__heading {
       font-family: var(--font-display);
-      font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+      font-size: clamp(2rem, 4.2vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin: 0 0 2rem;
+      color: var(--text-primary);
+    }
+    .purpose-intro__heading-bold {
+      /* „Diese Webseite" — Brand-Gold, bold, kein Italic. Zweiklang
+         mit dem italicen „dient zweierlei:" daneben. */
+      font-weight: 600;
+      color: var(--accent-gold);
+    }
+    .purpose-intro__heading em {
       font-style: italic;
-      color: var(--text-secondary);
-      margin: 0 0 1.5rem;
+      font-weight: 400;
     }
     .purpose-intro__body {
       font-family: var(--font-display);
