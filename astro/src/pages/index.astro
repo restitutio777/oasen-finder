@@ -88,16 +88,18 @@ if (isSanityConfigured) {
           {recentNotes.map((note: any, i: number) => (
             <li>
               {/* Bridge nur zwischen Einträgen, nicht durch sie.
-                  Zwei zarte Gradient-Linien flankieren einen kleinen Punkt —
-                  zarter Atem-Übergang statt durchstreichender Strich. */}
+                  Zwei rote Gradient-Linien flankieren einen roten Punkt —
+                  der „rote Faden" soll auch sichtbar rot sein. Linien
+                  faden via rgba (statt transparent), damit der Farbton
+                  durchgehend rot bleibt und nicht ins Graue kippt. */}
               {i > 0 && (
                 <div
                   aria-hidden="true"
-                  style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.55rem; padding: 1.75rem 0; opacity: 0.7;"
+                  style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.55rem; padding: 1.75rem 0;"
                 >
-                  <span style="display: block; width: 1px; height: 28px; background: linear-gradient(to bottom, transparent, var(--accent));"></span>
-                  <span style="display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.65;"></span>
-                  <span style="display: block; width: 1px; height: 28px; background: linear-gradient(to top, transparent, var(--accent));"></span>
+                  <span style="display: block; width: 1.5px; height: 30px; background: linear-gradient(to bottom, rgba(168, 57, 43, 0.15), rgba(168, 57, 43, 1));"></span>
+                  <span style="display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent);"></span>
+                  <span style="display: block; width: 1.5px; height: 30px; background: linear-gradient(to top, rgba(168, 57, 43, 0.15), rgba(168, 57, 43, 1));"></span>
                 </div>
               )}
 
