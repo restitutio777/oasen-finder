@@ -22,6 +22,7 @@ import { resource } from './resource';
 import { episode } from './episode';
 import { about } from './about';
 import { contact } from './contact';
+import { wonder } from './wonder';
 
 export const schemaTypes = [
   // i18n-Helfer zuerst (werden von Document-Schemas referenziert)
@@ -33,6 +34,7 @@ export const schemaTypes = [
   event,
   resource,
   episode,
+  wonder,
   about,
   contact,
 ];

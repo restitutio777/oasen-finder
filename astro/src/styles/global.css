@@ -808,6 +808,12 @@
     max-width: 1080px;
     margin: 0 auto;
   }
+  /* Wenn kein Portrait gesetzt ist: voller Container, einspaltiger Lesefluss */
+  .who__inner--solo {
+    grid-template-columns: 1fr;
+    max-width: 760px;
+  }
+  .who__inner--solo .who__body { max-width: none; }
   .who__portrait {
     width: 100%;
     aspect-ratio: 4 / 5;

@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PortableText from '../../components/PortableText.astro';
+import SanityImage from '../../components/SanityImage.astro';
+import MediaLink from '../../components/MediaLink.astro';
+import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+
+export async function getStaticPaths() {
+  if (!isSanityConfigured) return [];
+
+  const entries = await sanity.fetch(`
+    *[_type == "wonder" && defined(slug.current)] {
+      "slug": slug.current,
+      _id, title, publishedAt,
+      body, tags, hero,
+      mediaLink, externalLink,
+      "pdfUrl": pdfAttachment.asset->url
+    }
+  `);
+
+  return entries.map((entry: any) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+---
+
+<BaseLayout
+  title={`${localized(entry.title) || 'Eintrag'} — wunderBAR`}
+  description={`wunderBAR-Eintrag vom ${new Date(entry.publishedAt).toLocaleDateString('de-DE')}`}
+>
+  <article style="padding: 4rem 0; max-width: 720px; margin: 0 auto;">
+    <div class="container">
+      <a href="/wunderbar/" style="color: var(--accent-warm); text-decoration: none; font-size: 14px;">
+        ← Zurück zur wunderBAR
+      </a>
+      <span class="eyebrow" style="display: inline-block; margin-top: 1.5rem;">wunderBAR</span>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin: 0.5rem 0 1rem;">
+        {localized(entry.title)}
+      </h1>
+      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 2rem;">
+        {new Date(entry.publishedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}
+      </p>
+
+      {entry.hero && (
+        <SanityImage
+          image={entry.hero}
+          width={1200}
+          aspect={16 / 9}
+          eager
+          showCaption
+        />
+      )}
+
+      <PortableText value={entry.body} />
+
+      {entry.mediaLink && <MediaLink url={entry.mediaLink} />}
+
+      {(entry.externalLink || entry.pdfUrl) && (
+        <aside style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle);">
+          <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-muted); margin-bottom: 1rem;">
+            Weiterlesen
+          </h3>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+            {entry.externalLink && (
+              <li><a href={entry.externalLink} target="_blank" rel="noopener">Externer Link →</a></li>
+            )}
+            {entry.pdfUrl && (
+              <li><a href={entry.pdfUrl} target="_blank" rel="noopener">Dokument herunterladen →</a></li>
+            )}
+          </ul>
+        </aside>
+      )}
+    </div>
+  </article>
+</BaseLayout>

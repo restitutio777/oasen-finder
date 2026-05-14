@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageBanner from '../../components/PageBanner.astro';
+import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+
+/**
+ * wunderBAR — Kreatives, Off-Topic, Spielerisches.
+ * Eine bewusst lose Sammlung aller Einträge, die nicht in die
+ * anderen Räume passen.
+ */
+
+let entries: any[] = [];
+
+if (isSanityConfigured) {
+  entries = await sanity.fetch(`
+    *[_type == "wonder"] | order(publishedAt desc) {
+      _id, title, publishedAt, "slug": slug.current,
+      tags
+    }
+  `);
+}
+---
+
+<BaseLayout
+  title="wunderBAR — werkSTATT Gemeinschaft"
+  description="Kreatives, Spielerisches, Off-Topic — eine lose Sammlung von allem, was woanders nicht hinpasst."
+>
+  <PageBanner
+    photo="photo-1513475382585-d06e58bcb0e0"
+    alt="Bunte Aquarell-Farbtöne — kreative, spielerische Stimmung"
+  />
+  <section style="padding: 4rem 0;">
+    <div class="container">
+      <span class="eyebrow">Off-Topic · Kreatives</span>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin: 1rem 0;">
+        wunder<em>BAR</em>
+      </h1>
+      <p style="font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.4rem); font-style: italic; color: var(--text-secondary); margin-bottom: 1rem;">
+        Lose Sammlung
+      </p>
+      <p style="max-width: 640px; color: var(--text-body); margin-bottom: 2rem;">
+        Was nicht in die anderen Räume passt: Wortspiele, Skizzen, Beobachtungen,
+        Experimente, Witziges, Ungeordnetes. Keine feste Form, keine festen Themen —
+        eine offene Werkstatt nebenher.
+      </p>
+
+      {entries.length === 0 && (
+        <div style="padding: 3rem 0; text-align: center; color: var(--text-secondary);">
+          <p>Noch keine Einträge — die wunderBAR füllt sich, wenn etwas Wunderliches dazwischen kommt.</p>
+        </div>
+      )}
+
+      {entries.length > 0 && (
+        <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+          {entries.map((entry: any) => (
+            <li>
+              <a
+                href={`/wunderbar/${entry.slug}/`}
+                style="display: block; padding: 1.5rem 1.5rem 1.75rem; border: 1px solid var(--border-subtle); border-radius: 4px; background: var(--bg-warm); text-decoration: none; color: var(--text-primary); transition: transform 0.15s ease, border-color 0.15s ease;"
+                onmouseover="this.style.borderColor='var(--accent-warm)'; this.style.transform='translateY(-2px)';"
+                onmouseout="this.style.borderColor='var(--border-subtle)'; this.style.transform='translateY(0)';"
+              >
+                <span class="eyebrow" style="color: var(--accent-warm);">
+                  {entry.publishedAt
+                    ? new Date(entry.publishedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })
+                    : ''}
+                </span>
+                <h3 style="font-family: var(--font-display); font-size: 1.4rem; line-height: 1.3; margin: 0.6rem 0 0; color: var(--text-primary);">
+                  {localized(entry.title)}
+                </h3>
+                {entry.tags && entry.tags.length > 0 && (
+                  <p style="margin-top: 0.5rem; font-size: 13px; color: var(--text-secondary);">
+                    {entry.tags.slice(0, 3).map((t: string) => `· ${t}`).join(' ')}
+                  </p>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</BaseLayout>

@@ -10,6 +10,7 @@ import {
   CalendarIcon,
   BookIcon,
   PlayIcon,
+  SparkleIcon,
 } from '@sanity/icons';
 import { schemaTypes } from './schemas';
 
@@ -73,6 +74,9 @@ export default defineConfig({
             S.documentTypeListItem('episode')
               .title('hörBAR — Episoden')
               .icon(PlayIcon),
+            S.documentTypeListItem('wonder')
+              .title('wunderBAR — Kreatives & Off-Topic')
+              .icon(SparkleIcon),
           ]),
     }),
 
@@ -127,6 +131,15 @@ export default defineConfig({
               locations: [
                 { title: doc?.title || 'Episode', href: `/hoerbar/${doc?.slug || ''}/` },
                 { title: 'Alle Episoden', href: '/hoerbar/' },
+              ],
+            }),
+          }),
+          wonder: defineLocations({
+            select: { title: 'title.de', slug: 'slug.current' },
+            resolve: (doc) => ({
+              locations: [
+                { title: doc?.title || 'wunderBAR-Eintrag', href: `/wunderbar/${doc?.slug || ''}/` },
+                { title: 'Alle wunderBAR-Einträge', href: '/wunderbar/' },
               ],
             }),
           }),
