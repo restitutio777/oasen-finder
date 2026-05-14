@@ -654,7 +654,7 @@
     font-style: italic;
     font-size: 32px;
     font-weight: 400;
-    color: var(--accent-warm);
+    color: var(--accent-green);
     letter-spacing: -0.01em;
     text-transform: none;
     margin: 6px 0 4px;
@@ -662,7 +662,7 @@
   .hero__meta-arrow {
     display: inline-block;
     margin-left: 4px;
-    color: var(--accent-warm);
+    color: var(--accent-green);
     transition: transform var(--t-base) var(--ease);
   }
 
@@ -707,6 +707,10 @@
       color: var(--accent-gold);
       text-transform: none;
       letter-spacing: 0;
+    }
+    /* Mobile-Variante des frischen Ghost: gleiches Verhalten, andere Farbe */
+    .hero__cta-row .btn--ghost.btn--fresh {
+      color: var(--accent-green);
       font-size: 14px;
     }
     .hero__cta-row .btn--ghost::after {
@@ -753,6 +757,16 @@
     background: var(--accent-gold);
     color: var(--bg-base);
     border-color: var(--accent-gold);
+  }
+  /* Fern-grüne Ghost-Variante — frischer Akzent neben dem Gold-CTA */
+  .btn--ghost.btn--fresh {
+    color: var(--accent-green);
+    border-color: var(--accent-green);
+  }
+  .btn--ghost.btn--fresh:hover {
+    background: var(--accent-green);
+    color: var(--bg-base);
+    border-color: var(--accent-green);
   }
   .btn svg { transition: transform var(--t-base) var(--ease); }
   .btn:hover svg { transform: translateX(4px); }
