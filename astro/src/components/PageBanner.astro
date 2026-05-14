@@ -15,8 +15,13 @@ interface Props {
   photo: string;
   /** Beschreibender Alt-Text für Screenreader */
   alt: string;
-  /** Position des Bildausschnitts bei Crop. Default: center */
-  position?: 'center' | 'top' | 'bottom' | 'left' | 'right';
+  /**
+   * Position des Bildausschnitts bei Crop. Default: center.
+   * Akzeptiert Keywords ('center', 'top', 'bottom', …) oder beliebige
+   * CSS-`object-position`-Strings wie `'center 65%'`, um den Fokus
+   * gezielt nach oben/unten zu verschieben.
+   */
+  position?: string;
 }
 const { photo, alt, position = 'center' } = Astro.props;
 const base = `https://images.unsplash.com/${photo}`;
