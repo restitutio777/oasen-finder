@@ -84,21 +84,20 @@ if (isSanityConfigured) {
           </p>
         </header>
 
-        <ol style="list-style: none; padding: 0; margin: 0; text-align: center;">
-          {recentNotes.map((note: any, i: number) => (
-            <li>
-              {/* Trenner als zarter horizontaler Faden mit Perle —
-                  nur zwischen Einträgen, nicht vor dem ersten */}
-              {i > 0 && (
-                <div
-                  aria-hidden="true"
-                  style="display: flex; align-items: center; justify-content: center; gap: 0.9rem; margin: 2.75rem auto;"
-                >
-                  <span style="display: inline-block; width: 64px; height: 1px; background: var(--accent); opacity: 0.45;"></span>
-                  <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); opacity: 0.75;"></span>
-                  <span style="display: inline-block; width: 64px; height: 1px; background: var(--accent); opacity: 0.45;"></span>
-                </div>
-              )}
+        <ol style="list-style: none; padding: 0; margin: 0; text-align: center; position: relative;">
+          {/* Vertikale Bridge — durchläuft alle Einträge in der Mitte */}
+          <span
+            aria-hidden="true"
+            style="position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--accent); opacity: 0.45; transform: translateX(-50%); z-index: 0;"
+          ></span>
+
+          {recentNotes.map((note: any) => (
+            <li style="position: relative; padding: 2rem 0; z-index: 1;">
+              {/* Perle am Faden — sitzt zentral am Eintrag-Anfang */}
+              <span
+                aria-hidden="true"
+                style="display: block; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px var(--bg-base); margin: 0 auto 1.5rem; position: relative; z-index: 2;"
+              ></span>
 
               <a
                 href={`/schreibbar/${note.slug}/`}
