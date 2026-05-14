@@ -510,36 +510,37 @@
     .hero__eyebrow { line-height: 1.45; }
   }
 
-  /* Mood-Banner oben auf jeder Hauptseite. Aspect-Ratio fix gegen
-     Layout-Shift. Auf Mobile etwas höher, weil weniger Breite. */
+  /* Mood-Banner als flacher Stimmungs-Streifen oben auf jeder
+     Hauptseite. Aspect-Ratio fix gegen Layout-Shift. */
   .page-banner {
     width: 100%;
-    aspect-ratio: 8 / 3;
+    aspect-ratio: 12 / 3;
     overflow: hidden;
     background: var(--bg-warm);
     margin: 0;
+    position: relative;
   }
   .page-banner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    /* Sanfter Filter — gleicht unterschiedliche Unsplash-Fotos
-       auf einheitliche, ruhige Stimmung an. */
-    filter: saturate(0.78) brightness(0.96) contrast(0.96);
+    /* Stärker desaturiert + sanfter Sepia-Touch — alle Bilder wirken
+       wie aus derselben Familie, gehen ruhig in die warme Site-Palette
+       über. */
+    filter: saturate(0.5) brightness(0.98) contrast(0.93) sepia(0.1);
   }
-  .page-banner {
-    position: relative;
-  }
-  /* Subtiler warmer Verlauf darüber — Brand-Anbindung */
+  /* Cream-Wash oben + leichter Aubergine-Hauch unten — bindet die
+     Bilder optisch in die Site-Hintergrund-Töne ein. */
   .page-banner::after {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(246, 244, 238, 0) 0%,
-      rgba(44, 37, 48, 0.10) 100%
+      rgba(246, 244, 238, 0.20) 0%,
+      rgba(246, 244, 238, 0.04) 35%,
+      rgba(44, 37, 48, 0.14) 100%
     );
     pointer-events: none;
   }
@@ -571,7 +572,7 @@
     height: 16px;
   }
   @media (max-width: 640px) {
-    .page-banner { aspect-ratio: 4 / 3; }
+    .page-banner { aspect-ratio: 8 / 3; }
   }
   .hero__title {
     font-size: clamp(2.5rem, 6.8vw, 5.5rem);

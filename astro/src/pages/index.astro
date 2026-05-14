@@ -142,22 +142,24 @@ if (isSanityConfigured) {
         </h2>
       </header>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 960px; margin: 0 auto;">
+        {/* bewegBAR — Reisen, draußen, Bewegung: Fern-Grün als frischer Akzent */}
         <a
           href="/bewegbar/"
           style="display: flex; flex-direction: column; gap: 0.75rem; padding: 2rem; border: 1px solid var(--border-subtle); border-radius: 4px; background: var(--bg-primary); text-decoration: none; color: var(--text-primary); transition: transform 0.15s ease, border-color 0.15s ease;"
-          onmouseover="this.style.borderColor='var(--accent-warm)'; this.style.transform='translateY(-2px)';"
+          onmouseover="this.style.borderColor='var(--accent-green)'; this.style.transform='translateY(-2px)';"
           onmouseout="this.style.borderColor='var(--border-subtle)'; this.style.transform='translateY(0)';"
         >
-          <span class="eyebrow" style="color: var(--accent-warm);">Reisen</span>
+          <span class="eyebrow" style="color: var(--accent-green);">Reisen</span>
           <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin: 0; color: var(--text-primary);">
-            beweg<em>BAR</em>
+            beweg<em style="color: var(--accent-green);">BAR</em>
           </h3>
           <p style="color: var(--text-secondary); margin: 0; font-size: 15px; line-height: 1.55;">
             Stationen unterwegs zu Gemeinschaftsorten — mit Karte, Fotos und Notizen.
           </p>
-          <span style="margin-top: auto; color: var(--accent-warm); font-size: 14px;">Zur Karte →</span>
+          <span style="margin-top: auto; color: var(--accent-green); font-size: 14px;">Zur Karte →</span>
         </a>
 
+        {/* machBAR — Werkstatt, aktiv, warm: bleibt im Gold-Bereich */}
         <a
           href="/machbar/"
           style="display: flex; flex-direction: column; gap: 0.75rem; padding: 2rem; border: 1px solid var(--border-subtle); border-radius: 4px; background: var(--bg-primary); text-decoration: none; color: var(--text-primary); transition: transform 0.15s ease, border-color 0.15s ease;"
@@ -179,20 +181,21 @@ if (isSanityConfigured) {
           <span style="margin-top: auto; color: var(--accent-warm); font-size: 14px;">Zu den Terminen →</span>
         </a>
 
+        {/* lesBAR — Bibliothek, ruhig, reflektiv: Mauve-Rose als dritter Ton */}
         <a
           href="/lesbar/"
           style="display: flex; flex-direction: column; gap: 0.75rem; padding: 2rem; border: 1px solid var(--border-subtle); border-radius: 4px; background: var(--bg-primary); text-decoration: none; color: var(--text-primary); transition: transform 0.15s ease, border-color 0.15s ease;"
-          onmouseover="this.style.borderColor='var(--accent-warm)'; this.style.transform='translateY(-2px)';"
+          onmouseover="this.style.borderColor='var(--accent-rose)'; this.style.transform='translateY(-2px)';"
           onmouseout="this.style.borderColor='var(--border-subtle)'; this.style.transform='translateY(0)';"
         >
-          <span class="eyebrow" style="color: var(--accent-warm);">Bibliothek</span>
+          <span class="eyebrow" style="color: var(--accent-rose);">Bibliothek</span>
           <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin: 0; color: var(--text-primary);">
-            les<em>BAR</em>
+            les<em style="color: var(--accent-rose);">BAR</em>
           </h3>
           <p style="color: var(--text-secondary); margin: 0; font-size: 15px; line-height: 1.55;">
             Bücher, Texte und Quellen, die mich tragen und begleiten.
           </p>
-          <span style="margin-top: auto; color: var(--accent-warm); font-size: 14px;">In die Bibliothek →</span>
+          <span style="margin-top: auto; color: var(--accent-rose); font-size: 14px;">In die Bibliothek →</span>
         </a>
       </div>
     </div>
