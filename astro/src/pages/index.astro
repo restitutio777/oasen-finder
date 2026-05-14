@@ -129,9 +129,9 @@ const mantra: string | undefined = localized(about?.mantra);
           { slug: 'schreibbar', eyebrow: 'Notizen', stem: 'schreib', desc: 'Datierte Einträge — Notizen, Gedichte, Gedanken aus Reisen, Werkstätten und Lektüren.', accent: 'var(--accent)' },
           { slug: 'bewegbar', eyebrow: 'Reisen', stem: 'beweg', desc: 'Orte, an denen ich war — Ökodörfer, Cohousing-Projekte und gemeinsame Lebensorte, auf einer Karte.', accent: 'var(--accent-green)' },
           { slug: 'machbar', eyebrow: 'Werkstatt', stem: 'mach', desc: 'Werkstatt-Termine zum Mitmachen — drei Themen, im Jahres-Rhythmus.', accent: 'var(--accent-warm)' },
-          { slug: 'lesbar', eyebrow: 'Bibliothek', stem: 'les', desc: 'Bücher, Webseiten, Filme, Podcasts und Werkzeuge zu Fragen des Miteinander.', accent: 'var(--accent-rose)' },
-          { slug: 'hoerbar', eyebrow: 'Audio', stem: 'hör', desc: 'Eingesprochene Reflexionen, Gedichte, Lieder — plus Gespräche mit Menschen, die in Gemeinschaft leben.', accent: 'var(--accent-deep)' },
-          { slug: 'wunderbar', eyebrow: 'Kreatives', stem: 'wunder', desc: 'Was nicht in die anderen Räume passt — spielerisch, offen, ungeordnet.', accent: 'var(--accent-gold)' },
+          { slug: 'lesbar', eyebrow: 'Bibliothek', stem: 'les', desc: 'Bücher, Webseiten, Filme, Podcasts und Werkzeuge zu Fragen des Miteinander.', accent: 'var(--accent-blue)' },
+          { slug: 'hoerbar', eyebrow: 'Audio', stem: 'hör', desc: 'Eingesprochene Reflexionen, Gedichte, Lieder — plus Gespräche mit Menschen, die in Gemeinschaft leben.', accent: 'var(--accent-rose)' },
+          { slug: 'wunderbar', eyebrow: 'Kreatives', stem: 'wunder', desc: 'Was nicht in die anderen Räume passt — spielerisch, offen, ungeordnet.', accent: 'var(--accent-green-soft)' },
         ].map((room) => (
           <a class="room-card" href={`/${room.slug}/`} style={`--card-accent: ${room.accent};`}>
             <span class="eyebrow room-card__eyebrow">{room.eyebrow}</span>
@@ -188,11 +188,11 @@ const mantra: string | undefined = localized(about?.mantra);
       color: var(--text-primary);
     }
     .room-card__title em {
-      /* „BAR" einheitlich in Brand-Gold — visueller Wiedererkennungs-
-         Anker über alle Räume. Die raumspezifische Akzentfarbe lebt
-         weiter im Eyebrow oben („Notizen", „Reisen", …) und im CTA-
-         Link unten („Zur schreibBAR →"). */
-      color: var(--accent-gold);
+      /* „BAR" in der raumspezifischen Akzentfarbe — Eyebrow oben,
+         „BAR" mittig und CTA unten sprechen damit die selbe Farb-
+         sprache pro Karte. Gold bleibt der Brand-Wortmarke (Header/
+         Footer) und der zentralen Hero-Frage vorbehalten. */
+      color: var(--card-accent);
       font-style: italic;
     }
     .room-card__desc {
@@ -244,7 +244,9 @@ const mantra: string | undefined = localized(about?.mantra);
       left: 0;
       width: 48px;
       height: 1.5px;
-      background: var(--accent);
+      /* Slate-Blau statt Clay-Rot — die Mantra-Linie soll meditativ
+         wirken, nicht aktivieren. Echo zum Hero „Auf der Suche —". */
+      background: var(--accent-blue);
     }
 
     /* Zweck-Intro — Eingangs-Lese-Block direkt nach dem Hero.

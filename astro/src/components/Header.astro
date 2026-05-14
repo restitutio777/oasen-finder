@@ -11,13 +11,19 @@
 const locale = 'de'; // TODO: aus Astro.params.locale ableiten wenn FR/EN aktiv
 const path = Astro.url.pathname;
 
+// Farb-Trias der Räume, deckungsgleich mit den Karten auf der Landing.
+// Jede Farbe hat eine klare Rolle: Clay-Rot = Wärme/Aktion (schreibBAR
+// → roter Faden), Fern-Grün = Natur (bewegBAR), Bronze = Werkstatt
+// (machBAR), Slate-Blau = Reflexion (lesBAR), Mauve-Rose = Intimität
+// (hörBAR), Sage = leichtfüssig (wunderBAR). Gold bleibt der Brand-
+// Wortmarke und der zentralen Hero-Frage vorbehalten.
 const roomAccent: Record<string, string> = {
   '/schreibbar': 'var(--accent)',
   '/bewegbar': 'var(--accent-green)',
   '/machbar': 'var(--accent-warm)',
-  '/lesbar': 'var(--accent-rose)',
-  '/hoerbar': 'var(--accent-deep)',
-  '/wunderbar': 'var(--accent-gold)',
+  '/lesbar': 'var(--accent-blue)',
+  '/hoerbar': 'var(--accent-rose)',
+  '/wunderbar': 'var(--accent-green-soft)',
   '/erkennbar': 'var(--text-primary)',
   '/mitkommen': 'var(--accent)',
 };
