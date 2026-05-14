@@ -32,8 +32,16 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
   const [processing, setProcessing] = useState(false);
 
   // Es wird mit dem Draft gearbeitet (oder Published, falls keine
-  // ungespeicherten Änderungen existieren)
+  // ungespeicherten Änderungen existieren). Beim Re-Publish nach
+  // einer Adress-Änderung brauchen wir den Vergleich draft vs.
+  // published, um zu erkennen ob die Adresse sich verändert hat.
   const doc: any = draft || published;
+  const publishedAddress: string | undefined = (published as any)?.address;
+  const draftAddress: string | undefined = doc?.address;
+  const addressChanged =
+    !!draftAddress &&
+    typeof publishedAddress === 'string' &&
+    publishedAddress.trim() !== draftAddress.trim();
 
   const handle = useCallback(async () => {
     setProcessing(true);
@@ -56,16 +64,24 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
       }
 
       // ---- Step 2: Geocoding (nur Stationen) ----
-      // Wenn Adresse gefüllt aber coordinates noch nicht gesetzt:
-      // Adresse via Nominatim auflösen und coordinates schreiben.
-      // Schlägt die Geocoding fehl, geht trotzdem publish durch —
-      // Katharina kann dann den Pin manuell auf der Karte setzen.
-      if (
+      // Wenn die Adresse gefüllt ist und entweder noch keine
+      // Coordinates existieren ODER die Adresse sich gegenüber dem
+      // bereits publizierten Stand geändert hat, neu geocoden.
+      //
+      // So funktioniert sowohl:
+      //   (a) erstes Anlegen — Adresse rein, Pin folgt
+      //   (b) nachträgliches Umziehen — Adresse ändern, alte
+      //       Coordinates werden überschrieben
+      //
+      // Manuelle Pin-Korrekturen bleiben intakt, solange die
+      // Adresse nicht angetastet wird.
+      const needsGeocode =
         type === 'station' &&
-        doc?.address &&
-        (!doc?.coordinates?.lat || !doc?.coordinates?.lng)
-      ) {
-        const coords = await geocode(doc.address);
+        !!draftAddress &&
+        (!doc?.coordinates?.lat || !doc?.coordinates?.lng || addressChanged);
+
+      if (needsGeocode) {
+        const coords = await geocode(draftAddress!);
         if (coords) {
           await client
             .patch(id)
@@ -78,11 +94,12 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
             })
             .commit();
           console.log(
-            `[AutoSlugPublishAction] Geocoded "${doc.address}" → ${coords.lat.toFixed(4)}, ${coords.lng.toFixed(4)}`,
+            `[AutoSlugPublishAction] Geocoded "${draftAddress}" → ${coords.lat.toFixed(4)}, ${coords.lng.toFixed(4)}` +
+              (addressChanged ? ' (address changed, overwriting old pin)' : ''),
           );
         } else {
           console.warn(
-            `[AutoSlugPublishAction] No coordinates found for "${doc.address}". ` +
+            `[AutoSlugPublishAction] No coordinates found for "${draftAddress}". ` +
               `Set the pin manually under "Mehr → Karten-Koordinaten".`,
           );
         }
