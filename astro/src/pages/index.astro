@@ -166,7 +166,10 @@ const mantra: string | undefined = localized(about?.mantra);
       padding: 2rem;
       border: 1px solid var(--border-subtle);
       border-radius: 4px;
-      background: var(--bg-primary);
+      /* Weiße Karten heben sich klar vom hellgrauen Section-Hintergrund
+         ab — vorher griff `var(--bg-primary)` ins Leere und die Karten
+         wurden transparent. */
+      background: var(--bg-elevated);
       text-decoration: none;
       color: var(--text-primary);
       transition: transform 0.15s ease, border-color 0.15s ease;
