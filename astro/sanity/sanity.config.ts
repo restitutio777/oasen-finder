@@ -13,6 +13,7 @@ import {
   SparkleIcon,
 } from '@sanity/icons';
 import { schemaTypes } from './schemas';
+import { AutoSlugPublishAction } from './actions/AutoSlugPublishAction';
 
 /**
  * Sanity Studio-Konfiguration für werkSTATT Gemeinschaft.
@@ -171,11 +172,30 @@ export default defineConfig({
 
   document: {
     actions: (input, context) => {
+      // Singletons können nicht dupliziert oder gelöscht werden
       if (['about', 'contact'].includes(context.schemaType)) {
         return input.filter(
           ({ action }) => action && !['duplicate', 'delete'].includes(action),
         );
       }
+
+      // Für alle Doc-Types mit Slug: Standard-Publish durch
+      // AutoSlugPublishAction ersetzen — generiert den Slug aus dem
+      // Titel, falls Katharina ihn nicht selbst gesetzt hat.
+      const docTypesWithSlug = [
+        'note',
+        'station',
+        'event',
+        'resource',
+        'episode',
+        'wonder',
+      ];
+      if (docTypesWithSlug.includes(context.schemaType)) {
+        return input.map((action) =>
+          action.action === 'publish' ? AutoSlugPublishAction : action,
+        );
+      }
+
       return input;
     },
   },

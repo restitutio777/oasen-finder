@@ -24,10 +24,10 @@ export const episode = defineType({
     }),
     defineField({
       name: 'slug',
-      title: 'URL-Slug',
+      title: 'URL-Adresse',
+      description: 'Wird beim Veröffentlichen automatisch aus dem Titel generiert — du kannst sie hier auch eigenständig setzen, wenn du möchtest.',
       type: 'slug',
       options: { source: 'title.de', maxLength: 96 },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'platform',

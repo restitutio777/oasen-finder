@@ -80,10 +80,9 @@ export const wonder = defineType({
     defineField({
       name: 'slug',
       title: 'URL-Adresse',
-      description: 'Wird automatisch aus dem Titel erzeugt — kannst du ändern',
+      description: 'Wird beim Veröffentlichen automatisch aus dem Titel generiert — du kannst sie hier auch eigenständig setzen, wenn du möchtest.',
       type: 'slug',
       options: { source: 'title.de', maxLength: 96 },
-      validation: (Rule) => Rule.required(),
       group: 'mehr',
     }),
     defineField({

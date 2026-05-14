@@ -103,10 +103,9 @@ export const station = defineType({
     defineField({
       name: 'slug',
       title: 'URL-Adresse',
-      description: 'Wird automatisch aus dem Namen erzeugt — kannst du ändern',
+      description: 'Wird beim Veröffentlichen automatisch aus dem Namen generiert — du kannst sie hier auch eigenständig setzen, wenn du möchtest.',
       type: 'slug',
       options: { source: 'name', maxLength: 96 },
-      validation: (Rule) => Rule.required(),
       group: 'mehr',
     }),
     defineField({
