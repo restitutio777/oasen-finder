@@ -39,9 +39,12 @@ const roomAccent: Record<string, string> = {
 
 const isActive = (prefix: string): boolean => path === prefix || path.startsWith(prefix + '/');
 const accentFor = (prefix: string): string => roomAccent[prefix] ?? 'var(--accent)';
+// --nav-accent wird IMMER gesetzt (nicht nur bei active), damit jedes
+// Item permanent eine 14px Mini-Subline in seiner Raum-Farbe zeigt.
+// aria-current bleibt nur auf dem aktiven Eintrag.
 const navProps = (prefix: string) => ({
   'aria-current': isActive(prefix) ? 'page' as const : undefined,
-  style: isActive(prefix) ? `--nav-accent: ${accentFor(prefix)};` : undefined,
+  style: `--nav-accent: ${accentFor(prefix)};`,
 });
 
 const dropdownPaths = ['/lesbar', '/brauchbar', '/hoerbar', '/wunderbar', '/erkennbar'];

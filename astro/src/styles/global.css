@@ -164,9 +164,11 @@
     flex-shrink: 1;
     min-width: 0;
   }
-  /* „WERKSTATT" als geschlossene Wortmarke in Gold (uppercase,
-     bold, kein Italic) — „Gemeinschaft" daneben in Fern-Grün
-     (kursiv Cormorant). Zwei klare Töne, klare Hierarchie. */
+  /* „WERKSTATT" als geschlossene Wortmarke in Champagne (Brand-
+     Wortmarke), „Gemeinschaft" daneben in Coral-Rosa (Brand-Anker).
+     Zwei Brand-Töne — Champagne hält die Wortmarken-Trias mit
+     WEBSEITE und allen „BAR"-Endungen, Coral knüpft an die
+     primären CTAs und das schreibBAR. */
   .brand__noun {
     font-weight: 700;
     color: var(--accent-gold);
@@ -176,7 +178,7 @@
   .brand__qualifier {
     font-weight: 500;
     font-style: italic;
-    color: var(--accent-green);
+    color: var(--accent);
   }
   /* Footer-Brand-Override wird nicht mehr gebraucht, seit der Header
      ein einheitliches Markup nutzt — bleibt als Leer-Selektor entfernt. */
@@ -197,11 +199,14 @@
   .nav a::after {
     content: '';
     position: absolute;
-    left: 0; right: 100%;
+    left: 0;
+    /* Default: dezente 14px Mini-Subline (raumspezifische Farbe)
+       als permanenter Color-Code unter jedem Item. Hover/Active
+       animiert auf volle Breite. --nav-accent wird in Header.astro
+       inline auf jedem Item gesetzt (raumspezifisch). */
+    right: calc(100% - 14px);
     bottom: 2px;
     height: 1.5px;
-    /* --nav-accent wird inline auf dem aktiven Eintrag gesetzt
-       (raumspezifisch). Default bleibt clay-rot für Hover. */
     background: var(--nav-accent, var(--accent));
     transition: right var(--t-base) var(--ease);
   }
@@ -237,9 +242,11 @@
   .nav-group__trigger::after {
     content: '';
     position: absolute;
-    left: 0; right: 100%;
-    /* Underline visuell auf Höhe der direkten Nav-Links — etwas unterhalb
-       der Schrift, vor dem Caret. */
+    left: 0;
+    /* Default: 14px Mini-Subline analog zu direkten Nav-Items.
+       Räume-Dropdown bekommt Brand-Coral als Default (nicht raumspezifisch,
+       da sammelnd). Wenn ein Sub-Raum aktiv ist, übernimmt --nav-accent. */
+    right: calc(100% - 14px);
     bottom: 2px;
     height: 1.5px;
     background: var(--nav-accent, var(--accent));
