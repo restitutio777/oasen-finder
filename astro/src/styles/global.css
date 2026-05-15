@@ -631,11 +631,9 @@
   }
   /* „Auf der Suche —" in Plum — Tiefe, Reflexion, Bühnen-Stille
      hinter den hellen Tüchern. */
-  /* „Auf der Suche —" in Slate-Periwinkle (zwischen Plum und Bergsee) —
-     etwas blauer als der reine Plum, schafft sanften Bogen zur Bergsee-
-     Akzent-Familie (WEBSEITE, Räume-Heading) ohne den meditativen
-     Plum-Charakter ganz aufzugeben. */
-  .hero__title-a { color: #6e7eb0; }
+  /* „Auf der Suche —" in Plum — meditativ-warm, knüpft an das Mantra
+     und an die hörBAR-Karte. Plum hat genug Tiefe ohne kühl zu wirken. */
+  .hero__title-a { color: var(--accent-deep); }
   /* „wie wird Gemeinschaft?" in Coral-Rosa — wärmster Punkt im
      Hero, Anker der Site. Sanfter Glow in Coral statt Honey. */
   .hero__title-b {
