@@ -120,8 +120,8 @@ const mantra: string | undefined = localized(about?.mantra);
     <div class="container">
       <header style="max-width: 720px; margin: 0 auto 3rem; text-align: center;">
         <span class="eyebrow">Räume</span>
-        <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 0; color: var(--text-primary);">
-          Wohin als <em>nächstes</em>?
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 0; color: var(--accent-blue);">
+          Wohin als <em style="color: inherit;">nächstes</em>?
         </h2>
       </header>
       <div class="rooms-grid">
@@ -235,17 +235,13 @@ const mantra: string | undefined = localized(about?.mantra);
     }
     @media (min-width: 1024px) {
       .intro-pair__grid {
-        /* Purpose etwas breiter als Mantra — visuelles Gewicht
-           bleibt bei der Webseite-Statement, Mantra atmet als Anker
-           rechts. */
-        grid-template-columns: 1.25fr 1fr;
+        /* Mantra eine Spur breiter als Purpose — gibt dem Zitat
+           Atem. Vertikal zentriert (align-items: center) damit es
+           in der Höhe mittig neben dem Purpose-Block sitzt. */
+        grid-template-columns: 1fr 1.15fr;
         gap: 4rem;
+        align-items: center;
       }
-    }
-    .intro-pair__col--mantra {
-      /* Mantra hat die Plum-Linie oben (siehe .mantra__text::before),
-         braucht keinen weiteren Container-Style. Auf Desktop sitzt
-         es bündig mit dem Heading-Top der Purpose-Spalte. */
     }
     .mantra__text {
       margin: 0;
@@ -259,19 +255,6 @@ const mantra: string | undefined = localized(about?.mantra);
       color: var(--text-primary);
       text-align: left;
       letter-spacing: -0.005em;
-      position: relative;
-      padding-top: 2.5rem;
-    }
-    .mantra__text::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 48px;
-      height: 1.5px;
-      /* Plum-Linie — Echo zur Hero „Auf der Suche —" und zur
-         hörBAR-Karte. Meditativ statt aktivierend. */
-      background: var(--accent-deep);
     }
 
     .purpose-intro__heading {
