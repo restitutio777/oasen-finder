@@ -710,10 +710,12 @@
     /* Meta-Capsule (Naechste Begegnung) auf Mobile weg — Info kommt
        prominent in der machBAR, im Hero war sie ein Anhaengsel */
     .hero__meta { display: none; }
-    /* Mobile: Foto als sanfte Stimmung, weniger Blur, helle Zone weiter */
+    /* Mobile: Bild deutlich sichtbar — weniger Blur, höhere Opacity,
+       gleicher frischer Filter wie Desktop. Cream-Wash unten sorgt
+       weiter für Text-Lesbarkeit über dem Bild. */
     .hero::before {
-      opacity: 0.42;
-      filter: blur(10px) saturate(0.65) brightness(1.05) sepia(0.1);
+      opacity: 0.72;
+      filter: blur(5px) saturate(1.05) brightness(1.06) contrast(1.05);
     }
     /* Cream-Wash auf Mobile breiter — helle Zone bis ca. 60% statt 35% */
     .hero::after {
