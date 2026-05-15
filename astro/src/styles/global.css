@@ -17,8 +17,8 @@
     --bg-muted: #f5ebe5;             /* Newsletter angeglichen an Räume — eine Peach-Familie */
     --bg-warm: #f5ebe5;              /* Peach-Cream — Räume + Newsletter */
     --bg-sage: #dde9d3;              /* helles Frühlingsblatt — gelegentlich */
-    --bg-deep: #7d5f35;              /* Footer · Gold-Ocker (sattes warmes Bronze, Weiß-Text klar lesbar) */
-    --bg-deep-soft: #a8895a;         /* Gold-Ocker hell — Sub-Backgrounds */
+    --bg-deep: #6f5d40;              /* Footer · gedämpfter Gold-Ocker (entsättigt, nicht knallig, Weiß-Text klar lesbar) */
+    --bg-deep-soft: #8b7a5e;         /* Gold-Ocker hell — Sub-Backgrounds */
 
     /* Text */
     --text-primary: #2d2435;         /* Aubergine-Plum, etwas cleaner und tiefer */
@@ -445,11 +445,11 @@
     content: '';
     position: absolute;
     inset: -60px;
-    /* Hero: Katharinas eigene Keramik-Werkstatt — Frauen am Tisch
-       mit Lehm-Skulpturen, türkise Vorhänge/Schränke. Authentisches
-       Eigen-Foto statt Stock. Türkis im Bild antwortet aufs neue
-       Bergsee-Blau in den Räume-Karten. */
-    background-image: url('/hero/werkstatt-keramik.jpg');
+    /* Hero: Katharinas eigene Keramik-Werkstatt — engere Variante,
+       die Lehm-Skulpturen und Hände am Tisch sind prominent, weniger
+       Vorhänge/Schränke. Authentisches Eigen-Foto, fokussiert auf
+       das gemeinsame Werken. */
+    background-image: url('/hero/signal-2026-05-15-180501_003.jpeg');
     background-size: cover;
     background-position: center 40%;
     /* Frischer Filter: volle Sättigung damit Türkis und Lehm-Wärme
