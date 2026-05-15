@@ -71,8 +71,9 @@ const points = stations
       el.innerHTML =
         '<p style="text-align:center;padding:3rem;color:var(--text-muted);">Noch keine Stationen mit Koordinaten — sobald du in Sanity eine Adresse einträgst und veröffentlichst, erscheint hier der Pin.</p>';
     } else {
-      // Pin in Mint (bewegBAR-Akzent: Reisen/Bewegung) — klarer Mint-Ton
-      const accentColor = '#6fa6b5';
+      // Pin in Bergsee-Blau (bewegBAR-Akzent in Eurythmie v3) —
+      // matcht --accent-blue im Stylesheet, knüpft an Bergsee-Wasser.
+      const accentColor = '#5497b8';
       const pinIcon = L.divIcon({
         className: 'bewegbar-pin',
         html: `<svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
@@ -114,8 +115,8 @@ const points = stations
         const subline = p.address || p.region;
         const popupContent = `
           <strong>${escapeHtml(p.name)}</strong><br/>
-          ${subline ? `<span style="color:#686b62;font-size:13px">${escapeHtml(subline)}</span><br/>` : ''}
-          ${p.visitedAt ? `<span style="color:#9a9d92;font-size:12px">${new Date(p.visitedAt).toLocaleDateString('de-DE')}</span><br/>` : ''}
+          ${subline ? `<span style="color:#6a5a78;font-size:13px">${escapeHtml(subline)}</span><br/>` : ''}
+          ${p.visitedAt ? `<span style="color:#8a8290;font-size:12px">${new Date(p.visitedAt).toLocaleDateString('de-DE')}</span><br/>` : ''}
           <a href="${p.url}" style="color:#d08197;font-size:13px;margin-top:6px;display:inline-block">Zur Station →</a>
         `;
         L.marker([p.lat, p.lng], { icon: pinIcon })
@@ -149,7 +150,7 @@ const points = stations
   :global(.leaflet-popup-content-wrapper) {
     background: var(--bg-elevated, #ffffff);
     border-radius: 6px;
-    box-shadow: 0 12px 32px -12px rgba(31, 29, 26, 0.18);
+    box-shadow: 0 12px 32px -12px rgba(45, 36, 53, 0.18);
     font-family: var(--font-display, 'Cormorant Garamond', serif);
   }
   :global(.leaflet-popup-content) {
