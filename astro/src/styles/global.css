@@ -730,18 +730,24 @@
       opacity: 0.78;
       filter: blur(2px) saturate(1.05) brightness(1.06) contrast(1.05);
     }
-    /* Cream-Wash auf Mobile: dichter Cream-Bereich zieht weiter nach
-       unten, damit Eyebrow/Title/Subtitle/CTA komplett im hellen
-       Bereich liegen. Bild kommt nur rechts/unten frisch durch. */
+    /* Cream-Wash auf Mobile: zwei Schichten kombiniert.
+       1. Horizontaler Wash (95deg) — dicht links über Text/CTA,
+          transparent rechts. So bleibt der Text lesbar, aber das
+          Bild kommt rechts (besonders oben rechts) klar durch.
+       2. Vertikaler Coral-Drift unten — sanfter Übergang zum
+          nachfolgenden Cream-Section. */
     .hero::after {
       background:
-        linear-gradient(170deg,
-          rgba(251, 246, 243, 0.97) 0%,
-          rgba(251, 246, 243, 0.94) 40%,
-          rgba(251, 246, 243, 0.82) 62%,
-          rgba(251, 246, 243, 0.45) 78%,
-          rgba(200, 154, 120, 0.22) 92%,
-          rgba(208, 129, 151, 0.26) 100%);
+        linear-gradient(180deg,
+          transparent 65%,
+          rgba(200, 154, 120, 0.15) 88%,
+          rgba(208, 129, 151, 0.22) 100%),
+        linear-gradient(95deg,
+          rgba(251, 246, 243, 0.94) 0%,
+          rgba(251, 246, 243, 0.88) 38%,
+          rgba(251, 246, 243, 0.58) 58%,
+          rgba(251, 246, 243, 0.2) 80%,
+          transparent 95%);
     }
     /* Mobile CTAs: beide als richtige Buttons, aber intrinsic width
        (nicht full-width). Coral-Primary bekommt Transparenz, damit
