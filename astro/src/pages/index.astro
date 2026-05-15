@@ -189,11 +189,12 @@ const mantra: string | undefined = localized(about?.mantra);
       color: var(--text-primary);
     }
     .room-card__title em {
-      /* „BAR" in der raumspezifischen Akzentfarbe — Eyebrow oben,
-         „BAR" mittig und CTA unten sprechen damit die selbe Farb-
-         sprache pro Karte. Gold bleibt der Brand-Wortmarke (Header/
-         Footer) und der zentralen Hero-Frage vorbehalten. */
-      color: var(--card-accent);
+      /* „BAR" einheitlich in Brand-Gold — als wiederkehrende Wortmarke
+         über alle Karten, im Echo zum „WERKSTATT" im Logo und zum
+         „WEBSEITE" im Hero. Die raumspezifische Variation lebt im
+         Eyebrow oben („Notizen", „Reisen", …), im Hover-Border und
+         im CTA-Link unten („Zur schreibBAR →"). */
+      color: var(--accent-gold);
       font-style: italic;
     }
     .room-card__desc {
