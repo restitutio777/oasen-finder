@@ -283,8 +283,12 @@ const mantra: string | undefined = localized(about?.mantra);
       letter-spacing: 0.02em;
     }
     .purpose-intro__heading em {
+      /* Globales h2 em ist Champagne-Akzent — hier explizit auf
+         Text-Primary, „dient zweierlei:" soll nicht farbig sein.
+         Brand-Wortmarke ist WEBSEITE, das em ist nur Italic-Rhythmus. */
       font-style: italic;
       font-weight: 400;
+      color: var(--text-primary);
     }
     .purpose-intro__body {
       font-family: var(--font-display);
