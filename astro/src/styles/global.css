@@ -718,15 +718,18 @@
       opacity: 0.78;
       filter: blur(2px) saturate(1.05) brightness(1.06) contrast(1.05);
     }
-    /* Cream-Wash auf Mobile breiter — helle Zone bis ca. 60% statt 35% */
+    /* Cream-Wash auf Mobile: dichter Cream-Bereich zieht weiter nach
+       unten, damit Eyebrow/Title/Subtitle/CTA komplett im hellen
+       Bereich liegen. Bild kommt nur rechts/unten frisch durch. */
     .hero::after {
       background:
         linear-gradient(170deg,
-          rgba(251, 246, 243, 0.96) 0%,
-          rgba(251, 246, 243, 0.92) 30%,
-          rgba(251, 246, 243, 0.7) 55%,
-          rgba(200, 154, 120, 0.18) 82%,
-          rgba(208, 129, 151, 0.22) 100%);
+          rgba(251, 246, 243, 0.97) 0%,
+          rgba(251, 246, 243, 0.94) 40%,
+          rgba(251, 246, 243, 0.82) 62%,
+          rgba(251, 246, 243, 0.45) 78%,
+          rgba(200, 154, 120, 0.22) 92%,
+          rgba(208, 129, 151, 0.26) 100%);
     }
     /* CTAs: weicher, sanfter, sekundaerer als Text-Link.
        Höhere Specificity (.hero__cta-row .btn...) damit das Mobile-Override
