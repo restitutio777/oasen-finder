@@ -461,8 +461,10 @@
     background-position: center 40%;
     /* Frischer Filter: volle Sättigung damit Türkis und Lehm-Wärme
        leuchten, Brightness + Contrast leicht hoch für luftige Frische.
-       Cream-Overlay sorgt weiter für Text-Lesbarkeit. */
-    filter: blur(12px) saturate(1.05) brightness(1.06) contrast(1.05);
+       Cream-Overlay sorgt weiter für Text-Lesbarkeit. Mobile-Blur
+       auf 5px reduziert (war 12px) — beim Resize über den Breakpoint
+       springt das Foto sonst schlagartig unscharf. */
+    filter: blur(5px) saturate(1.05) brightness(1.06) contrast(1.05);
     opacity: 0.85;
     z-index: -2;
   }
@@ -487,9 +489,11 @@
         rgba(45, 36, 53, 0.62) 100%);
     z-index: -1;
   }
-  /* Desktop: minimaler Blur für scharfe Details, gleich frischer
-     Filter wie Mobile — Lehm + Türkis leuchten klarer. */
-  @media (min-width: 1024px) {
+  /* Tablet + Desktop: minimaler Blur für scharfe Details, gleich
+     frischer Filter wie Mobile — Lehm + Türkis leuchten klarer.
+     Breakpoint auf 900px runter, damit Split-View / kleinere Laptops
+     nicht in den Mobile-Heavy-Blur fallen. */
+  @media (min-width: 900px) {
     .hero::before {
       filter: blur(1.5px) saturate(1.05) brightness(1.06) contrast(1.05);
       opacity: 0.92;
