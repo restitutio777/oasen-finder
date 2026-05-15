@@ -429,8 +429,10 @@
     background-image: url('https://images.unsplash.com/photo-1590880795696-20c7dfadacde?w=2400&q=80&auto=format&fit=crop');
     background-size: cover;
     background-position: center 60%;
-    /* Foto-Treatment: weicher Blur, leicht entsaettigt, atmosphaerisch */
-    filter: blur(12px) saturate(0.78) brightness(1.05) sepia(0.08);
+    /* Foto-Treatment: weicher Blur, leicht entsaettigt, atmosphaerisch.
+       Mobile-Blur auf 5px reduziert (war 12px) — beim Resize über den
+       Breakpoint springt das Foto sonst schlagartig unscharf. */
+    filter: blur(5px) saturate(0.78) brightness(1.05) sepia(0.08);
     opacity: 0.82;
     z-index: -2;
   }
@@ -454,9 +456,10 @@
         rgba(44, 37, 48, 0.62) 100%);
     z-index: -1;
   }
-  /* Desktop: let the right side of the image breathe — less blur, cream-wash
-     concentrated on the left text column, the image stays readable on the right */
-  @media (min-width: 1024px) {
+  /* Tablet + Desktop: less blur, cream-wash concentrated on left text column.
+     Breakpoint auf 900px runter — Split-View / kleinere Laptops landen
+     so nicht im Mobile-Heavy-Blur. */
+  @media (min-width: 900px) {
     .hero::before {
       filter: blur(2px) saturate(0.78) brightness(1.05) sepia(0.08);
       opacity: 0.9;
