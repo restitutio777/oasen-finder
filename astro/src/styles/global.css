@@ -17,24 +17,25 @@
     --bg-muted: #f5ebe5;             /* Newsletter angeglichen an Räume — eine Peach-Familie */
     --bg-warm: #f5ebe5;              /* Peach-Cream — Räume + Newsletter */
     --bg-sage: #dde9d3;              /* helles Frühlingsblatt — gelegentlich */
-    --bg-deep: #6a5f64;              /* Footer · Warm-Grey mit Rose-Hauch — leicht statt schwer, Cream-Text bleibt lesbar */
-    --bg-deep-soft: #847781;         /* Warm-Grey hell — Sub-Backgrounds */
+    --bg-deep: #7d5f35;              /* Footer · Gold-Ocker (sattes warmes Bronze, Weiß-Text klar lesbar) */
+    --bg-deep-soft: #a8895a;         /* Gold-Ocker hell — Sub-Backgrounds */
 
     /* Text */
     --text-primary: #2d2435;         /* Aubergine-Plum, etwas cleaner und tiefer */
     --text-body: #4a3d5a;
     --text-secondary: #6a5a78;       /* gedämpftes Plum */
     --text-muted: #8a8290;
-    --text-inverse: #fbf6f3;         /* warm off-white auf dunklem Footer */
+    --text-inverse: #ffffff;         /* Reines Weiß — auf Gold-Ocker-Footer klar lesbar */
 
-    /* Akzent-Familie */
-    --accent: #d08197;               /* Coral-Rosa, eine Spur frischer */
-    --accent-hover: #b06078;
-    --accent-soft: #ecc4ce;          /* helles Coral — auf dunklem Grund */
-    --accent-warm: #c89a78;          /* Champagne-Rosé — moderner als Altgold-braun */
-    --accent-gold: #c89a78;          /* gleicher Champagne — WERKSTATT-Wortmarke */
+    /* Akzent-Familie — Eurythmie v4: Gold dominant, Türkis als Komplement.
+       Coral-Rosa raus (kollidierte mit Türkis), --accent ist jetzt Champagne. */
+    --accent: #c89a78;               /* Champagne-Gold — Brand-Anker, CTAs, Wortmarken */
+    --accent-hover: #a87e5e;         /* Champagne tiefer für Hover */
+    --accent-soft: #e8d2b5;          /* helles Champagne — auf dunklem Grund */
+    --accent-warm: #c89a78;          /* Alias auf accent */
+    --accent-gold: #c89a78;          /* Alias auf accent */
     --accent-gold-hover: #a87e5e;
-    --accent-rose: #d08197;          /* Alias auf accent */
+    --accent-rose: #c89a78;          /* Alias auf accent (war Coral, jetzt Gold) */
     --accent-green: #6fab5c;         /* Frühlingsblatt — lebendiges Naturgrün, wunderBAR */
     --accent-green-soft: #bcddb0;    /* Frühlingsblatt hell — auf dunklem Grund */
     --accent-deep: #8a6caa;          /* Plum — heller, frischer, weniger trüb */
@@ -164,11 +165,11 @@
     flex-shrink: 1;
     min-width: 0;
   }
-  /* „WERKSTATT" als geschlossene Wortmarke in Champagne (Brand-
-     Wortmarke), „Gemeinschaft" daneben in Coral-Rosa (Brand-Anker).
-     Zwei Brand-Töne — Champagne hält die Wortmarken-Trias mit
-     WEBSEITE und allen „BAR"-Endungen, Coral knüpft an die
-     primären CTAs und das schreibBAR. */
+  /* „WERKSTATT" als Wortmarke in Champagne-Gold, „Gemeinschaft"
+     daneben in Bergsee-Türkis. Klassische Komplementär-Kombi
+     (Gold-Orange ↔ Türkis), Katharinas Wahl. Champagne hält die
+     Wortmarken-Trias mit WEBSEITE/BAR, Türkis bringt frischen
+     kühlen Akzent als Brand-Komplement. */
   .brand__noun {
     font-weight: 700;
     color: var(--accent-gold);
@@ -178,7 +179,7 @@
   .brand__qualifier {
     font-weight: 500;
     font-style: italic;
-    color: var(--accent);
+    color: var(--accent-blue);
   }
   /* Footer-Brand-Override wird nicht mehr gebraucht, seit der Header
      ein einheitliches Markup nutzt — bleibt als Leer-Selektor entfernt. */
@@ -475,7 +476,7 @@
       linear-gradient(180deg,
         rgba(251, 246, 243, 0.5) 0%,
         rgba(200, 154, 120, 0.26) 35%,
-        rgba(208, 129, 151, 0.32) 65%,
+        rgba(200, 154, 120, 0.32) 65%,
         rgba(45, 36, 53, 0.62) 100%);
     z-index: -1;
   }
@@ -497,13 +498,13 @@
           rgba(251, 246, 243, 0.1) 92%),
         /* Coral-Wärme-Overlay quer */
         linear-gradient(110deg,
-          rgba(208, 129, 151, 0.04) 0%,
-          rgba(208, 129, 151, 0.14) 100%),
+          rgba(200, 154, 120, 0.04) 0%,
+          rgba(200, 154, 120, 0.14) 100%),
         /* Vertikaler Sweep · Cream → Altgold → Coral → tiefes Plum */
         linear-gradient(180deg,
           rgba(251, 246, 243, 0.35) 0%,
           rgba(200, 154, 120, 0.12) 35%,
-          rgba(208, 129, 151, 0.16) 65%,
+          rgba(200, 154, 120, 0.16) 65%,
           rgba(45, 36, 53, 0.32) 100%);
     }
   }
@@ -634,16 +635,17 @@
   /* „Auf der Suche —" in Plum — meditativ-warm, knüpft an das Mantra
      und an die hörBAR-Karte. Plum hat genug Tiefe ohne kühl zu wirken. */
   .hero__title-a { color: var(--accent-deep); }
-  /* „wie wird Gemeinschaft?" in Coral-Rosa — wärmster Punkt im
-     Hero, Anker der Site. Sanfter Glow in Coral statt Honey. */
+  /* „wie wird Gemeinschaft?" in Champagne-Gold — schliesst die
+     Wortmarken-Trias mit WERKSTATT/WEBSEITE/BAR. Sanfter Glow in
+     Champagne. */
   .hero__title-b {
     color: var(--accent);
-    text-shadow: 0 0 36px rgba(208, 129, 151, 0.35);
+    text-shadow: 0 0 36px rgba(200, 154, 120, 0.35);
   }
   .hero__title em {
     font-style: italic;
     font-weight: 500;
-    color: inherit;  /* erbt von .hero__title-b (Coral-Rosa) */
+    color: inherit;  /* erbt von .hero__title-b (Champagne-Gold) */
   }
   .hero__lead {
     margin-top: clamp(28px, 4vw, 44px);
@@ -743,7 +745,7 @@
         linear-gradient(180deg,
           transparent 65%,
           rgba(200, 154, 120, 0.15) 88%,
-          rgba(208, 129, 151, 0.22) 100%),
+          rgba(200, 154, 120, 0.22) 100%),
         linear-gradient(95deg,
           rgba(251, 246, 243, 0.94) 0%,
           rgba(251, 246, 243, 0.88) 38%,
@@ -769,8 +771,8 @@
     /* Primary-Coral mit leichter Transparenz: Foto schimmert durch,
        Text-Inverse bleibt klar lesbar (Coral hat genug Tiefe). */
     .hero__cta-row .btn--primary {
-      background: rgba(208, 129, 151, 0.85);
-      border-color: rgba(208, 129, 151, 0.7);
+      background: rgba(200, 154, 120, 0.85);
+      border-color: rgba(200, 154, 120, 0.7);
     }
     /* Ghost-Button auf Mobile: dichter Cream-bg + 1.5px Border. */
     .hero__cta-row .btn--ghost {
@@ -1699,7 +1701,7 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--accent);
-    background: rgba(208, 129, 151, 0.10);
+    background: rgba(200, 154, 120, 0.10);
     padding: 4px 12px;
     border-radius: 100px;
     margin-bottom: 14px;
@@ -1957,7 +1959,7 @@
   }
   .invite-option:has(.invite-option__input:checked) {
     border-color: var(--accent);
-    background: rgba(208, 129, 151, 0.10);
+    background: rgba(200, 154, 120, 0.10);
   }
   .invite-option:has(.invite-option__input:focus-visible) {
     outline: 2px solid var(--accent);
@@ -2099,13 +2101,16 @@
   .site-footer__grid--compact {
     grid-template-columns: 1.4fr 1fr;
   }
+  /* Footer auf Gold-Ocker — alle Texte in Weiß / Weiß-alpha.
+     Brand-Wortmarke (WERKSTATT + Gemeinschaft) komplett weiß für
+     einen klaren, eleganten Look. */
   .site-footer h4 {
     font-family: var(--font-text);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(251, 246, 243, 0.45);
+    color: rgba(255, 255, 255, 0.55);
     margin: 0 0 20px;
   }
   .site-footer__brand {
@@ -2117,43 +2122,37 @@
   }
   .site-footer__brand-noun {
     font-weight: 700;
-    /* Auf Warm-Grey Footer: hellere Champagne für genug Kontrast.
-       Auf dunklem Aubergine wäre var(--accent-gold) ausreichend
-       — Warm-Grey braucht den Lift. */
-    color: #e8c19a;
+    color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 0.02em;
   }
   .site-footer__brand-qualifier {
     font-weight: 500;
     font-style: italic;
-    /* Coral wie im Header-Logo — auf Warm-Grey braucht der Coral
-       eine hellere Variante (#e8a3b5 statt --accent #d08197) für
-       genug Kontrast, analog zum hellen Champagne der Wortmarke. */
-    color: #e8a3b5;
+    color: #ffffff;
   }
   .site-footer__intro {
     font-family: var(--font-display);
     font-style: italic;
     font-size: 17px;
     line-height: 1.5;
-    color: rgba(251, 246, 243, 0.7);
+    color: rgba(255, 255, 255, 0.85);
     max-width: 360px;
   }
   .site-footer__nav { display: flex; flex-direction: column; gap: 12px; }
   .site-footer__nav a,
   .site-footer__contact a {
-    color: rgba(251, 246, 243, 0.85);
+    color: rgba(255, 255, 255, 0.92);
     font-size: 14px;
     transition: color var(--t-fast) var(--ease);
   }
   .site-footer__nav a:hover,
-  .site-footer__contact a:hover { color: var(--accent-soft); }
+  .site-footer__contact a:hover { color: #ffffff; text-decoration: underline; }
   .site-footer__contact { display: flex; flex-direction: column; gap: 12px; font-size: 14px; }
   .site-footer__contact em {
     font-family: var(--font-display);
     font-style: italic;
-    color: rgba(251, 246, 243, 0.55);
+    color: rgba(255, 255, 255, 0.7);
   }
   .site-footer__bottom {
     padding-top: 24px;
@@ -2161,7 +2160,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 12px;
-    color: rgba(251, 246, 243, 0.45);
+    color: rgba(255, 255, 255, 0.7);
     letter-spacing: 0.06em;
   }
   .site-footer__badge {

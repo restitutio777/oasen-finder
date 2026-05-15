@@ -26,7 +26,7 @@ const path = Astro.url.pathname;
 //   Plum        hörBAR     · Intim
 //   Sage tiefer wunderBAR  · leicht
 const roomAccent: Record<string, string> = {
-  '/schreibbar': 'var(--accent)',
+  '/schreibbar': 'var(--accent-deep)',  // Plum — meditativ-warm, statt Coral (raus)
   '/bewegbar': 'var(--accent-blue)',
   '/machbar': 'var(--accent-warm)',
   '/lesbar': 'var(--neutral)',
@@ -34,7 +34,7 @@ const roomAccent: Record<string, string> = {
   '/hoerbar': 'var(--accent-deep)',
   '/wunderbar': 'var(--accent-green)',
   '/erkennbar': 'var(--text-primary)',
-  '/mitkommen': 'var(--accent)',
+  '/mitkommen': 'var(--accent-blue)',   // Türkis — Echo zum Logo-„Gemeinschaft"
 };
 
 const isActive = (prefix: string): boolean => path === prefix || path.startsWith(prefix + '/');
