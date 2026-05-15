@@ -743,25 +743,28 @@
           rgba(200, 154, 120, 0.22) 92%,
           rgba(208, 129, 151, 0.26) 100%);
     }
-    /* Mobile CTAs: beide als gleichgroße, stacked Buttons. Ghost bekommt
-       kräftigeren Border + dichteren Cream-bg für klare Lesbarkeit auf
-       dem Foto-Wash. Höhere Specificity (.hero__cta-row .btn...) damit
-       die Mobile-Rules gegen die globalen .btn-Rules gewinnen. */
+    /* Mobile CTAs: beide als richtige Buttons, aber intrinsic width
+       (nicht full-width). Coral-Primary bekommt Transparenz, damit
+       das Foto durchscheint und der Hero atmen kann. Ghost mit
+       dichtem Cream-bg + kräftigem Border für Lesbarkeit. */
     .hero__cta-row {
       flex-direction: column;
-      align-items: stretch;
+      align-items: flex-start;
       gap: 12px;
       margin-top: 32px;
     }
     .hero__cta-row .btn {
       border-radius: 8px;
-      padding: 14px 22px;
-      justify-content: center;
+      padding: 13px 22px;
       font-size: 15px;
     }
-    /* Ghost-Button auf Mobile: dichterer Cream-bg + 1.5px Border für
-       Lesbarkeit auf dem Foto. Bleibt sekundär (filled vs ghost), aber
-       visuell präsent als klarer CTA. */
+    /* Primary-Coral mit leichter Transparenz: Foto schimmert durch,
+       Text-Inverse bleibt klar lesbar (Coral hat genug Tiefe). */
+    .hero__cta-row .btn--primary {
+      background: rgba(208, 129, 151, 0.85);
+      border-color: rgba(208, 129, 151, 0.7);
+    }
+    /* Ghost-Button auf Mobile: dichter Cream-bg + 1.5px Border. */
     .hero__cta-row .btn--ghost {
       background: rgba(251, 246, 243, 0.88);
       border-width: 1.5px;
