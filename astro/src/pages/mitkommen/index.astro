@@ -57,17 +57,26 @@ const categories = config?.inviteCategories || [
 
         <fieldset class="invite-options">
           <legend class="eyebrow">Worum geht es?</legend>
-          {categories.map((cat: any) => (
-            <label class="invite-option">
-              <input type="checkbox" name="anliegen" value={cat.kind} class="invite-option__input" />
-              <span class="invite-option__body">
-                <strong class="invite-option__title">{localized(cat.label)}</strong>
-                {cat.description && (
-                  <small class="invite-option__desc">{localized(cat.description)}</small>
-                )}
-              </span>
-            </label>
-          ))}
+          {categories.map((cat: any) => {
+            // Description-Texte am Schluss-Punkt strippen — Stil-Regel
+            // für alle BAR-/Box-Aufzählungen auf der Site. Funktioniert
+            // egal was Katharina später in Sanity schreibt.
+            const descText = localized(cat.description);
+            const cleanDesc = typeof descText === 'string'
+              ? descText.replace(/\.\s*$/, '')
+              : descText;
+            return (
+              <label class="invite-option">
+                <input type="checkbox" name="anliegen" value={cat.kind} class="invite-option__input" />
+                <span class="invite-option__body">
+                  <strong class="invite-option__title">{localized(cat.label)}</strong>
+                  {cleanDesc && (
+                    <small class="invite-option__desc">{cleanDesc}</small>
+                  )}
+                </span>
+              </label>
+            );
+          })}
         </fieldset>
 
         <label style="display: grid; gap: 0.4rem;">

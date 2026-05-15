@@ -33,37 +33,43 @@ const roomMeta: Record<string, {
     eyebrow: 'Notizen',
     prefix: 'schreib',
     url: '/schreibbar/',
-    defaultDescription: 'Datierte Einträge — Notizen, Gedichte, Gedanken aus Reisen, Werkstätten und Lektüren.',
+    defaultDescription: 'Datierte Einträge — Notizen, Gedichte, Gedanken aus Reisen, Werkstätten und Lektüren',
   },
   bewegbar: {
     eyebrow: 'Reisen',
     prefix: 'beweg',
     url: '/bewegbar/',
-    defaultDescription: 'Orte, an denen ich war — Ökodörfer, Cohousing-Projekte und gemeinsame Lebensorte, auf einer Karte.',
+    defaultDescription: 'Orte, an denen ich war — Ökodörfer, Cohousing-Projekte und gemeinsame Lebensorte, auf einer Karte',
   },
   machbar: {
     eyebrow: 'Werkstatt',
     prefix: 'mach',
     url: '/machbar/',
-    defaultDescription: 'Werkstatt-Termine zum Mitmachen — drei Themen, im Jahres-Rhythmus.',
+    defaultDescription: 'Werkstatt-Termine zum Mitmachen — drei Themen, im Jahres-Rhythmus',
   },
   lesbar: {
     eyebrow: 'Bibliothek',
     prefix: 'les',
     url: '/lesbar/',
-    defaultDescription: 'Bücher, Webseiten, Filme, Podcasts und Werkzeuge zu Fragen des Miteinander.',
+    defaultDescription: 'Bücher, Webseiten, Filme, Podcasts und Quellen zu Fragen des Miteinander',
+  },
+  brauchbar: {
+    eyebrow: 'Werkzeuge',
+    prefix: 'brauch',
+    url: '/brauchbar/',
+    defaultDescription: 'Konzepte und Werkzeuge — was sich in der Praxis als hilfreich erweist',
   },
   hoerbar: {
     eyebrow: 'Audio',
     prefix: 'hör',
     url: '/hoerbar/',
-    defaultDescription: 'Eingesprochene Reflexionen, Gedichte, Lieder — plus Gespräche mit Menschen, die in Gemeinschaft leben.',
+    defaultDescription: 'Eingesprochene Reflexionen, Gedichte, Lieder — plus Gespräche mit Menschen, die in Gemeinschaft leben',
   },
   wunderbar: {
     eyebrow: 'Kreatives',
     prefix: 'wunder',
     url: '/wunderbar/',
-    defaultDescription: 'Was nicht in die anderen Räume passt — spielerisch, offen, ungeordnet.',
+    defaultDescription: 'Was nicht in die anderen Räume passt — spielerisch, offen, ungeordnet',
   },
 };
 
@@ -153,24 +159,24 @@ const roomEntries: Array<{ room: string; description?: any; ctaLabel?: any }> =
           return (
             <a
               href={meta.url}
-              style="display: flex; flex-direction: column; gap: 0.75rem; padding: 2rem; border: 1px solid var(--border-subtle); border-radius: 4px; background: var(--bg-primary); text-decoration: none; color: var(--text-primary); transition: transform 0.15s ease, border-color 0.15s ease;"
-              onmouseover="this.style.borderColor='var(--accent-warm)'; this.style.transform='translateY(-2px)';"
+              style="display: flex; flex-direction: column; gap: 0.75rem; padding: 2rem; border: 1px solid var(--border-subtle); border-radius: 4px; background: var(--bg-elevated); text-decoration: none; color: var(--text-primary); transition: transform 0.15s ease, border-color 0.15s ease;"
+              onmouseover="this.style.borderColor='var(--accent)'; this.style.transform='translateY(-2px)';"
               onmouseout="this.style.borderColor='var(--border-subtle)'; this.style.transform='translateY(0)';"
             >
-              <span class="eyebrow" style="color: var(--accent-warm);">{meta.eyebrow}</span>
-              <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin: 0; color: var(--text-primary);">
+              <span class="eyebrow" style="color: var(--accent);">{meta.eyebrow}</span>
+              <h3 style="font-family: var(--font-display); font-size: 1.7rem; margin: 0; color: var(--text-primary);">
                 {meta.prefix}<em>BAR</em>
               </h3>
               {customDesc ? (
-                <div style="color: var(--text-secondary); font-size: 15px; line-height: 1.55;">
+                <div style="color: var(--text-secondary); font-family: var(--font-display); font-size: 17px; line-height: 1.55;">
                   <PortableText value={customDesc} />
                 </div>
               ) : (
-                <p style="color: var(--text-secondary); margin: 0; font-size: 15px; line-height: 1.55;">
+                <p style="color: var(--text-secondary); margin: 0; font-family: var(--font-display); font-size: 17px; line-height: 1.55;">
                   {meta.defaultDescription}
                 </p>
               )}
-              <span style="margin-top: auto; color: var(--accent-warm); font-size: 14px;">
+              <span style="margin-top: auto; color: var(--accent); font-size: 14px;">
                 {customCta || `Zur ${meta.prefix}BAR →`}
               </span>
             </a>
