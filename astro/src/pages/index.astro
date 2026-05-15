@@ -165,19 +165,21 @@ const mantra: string | undefined = localized(about?.mantra);
       flex-direction: column;
       gap: 0.75rem;
       padding: 2rem;
-      border: 1px solid var(--border-subtle);
-      border-radius: 4px;
-      /* Weiße Karten heben sich klar vom hellgrauen Section-Hintergrund
-         ab — vorher griff `var(--bg-primary)` ins Leere und die Karten
-         wurden transparent. */
-      background: var(--bg-elevated);
+      border: 1px solid rgba(58, 45, 74, 0.10);
+      border-radius: 6px;
+      /* Reinweiß auf cream-Sand-Section — sonst „schwimmen" die Karten
+         im Eurythmie-Cream. Plus dezenter Plum-Schatten für klare
+         Tile-Abhebung, ohne Härte. */
+      background: #ffffff;
+      box-shadow: 0 8px 24px -14px rgba(58, 45, 74, 0.20);
       text-decoration: none;
       color: var(--text-primary);
-      transition: transform 0.15s ease, border-color 0.15s ease;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.2s ease;
     }
     .room-card:hover {
       border-color: var(--card-accent);
       transform: translateY(-2px);
+      box-shadow: 0 14px 32px -16px rgba(58, 45, 74, 0.28);
     }
     .room-card__eyebrow {
       color: var(--card-accent);
