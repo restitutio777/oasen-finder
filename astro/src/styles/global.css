@@ -436,9 +436,12 @@
     content: '';
     position: absolute;
     inset: -60px;
-    background-image: url('https://images.unsplash.com/photo-1590880795696-20c7dfadacde?w=2400&q=80&auto=format&fit=crop');
+    /* Eurythmie-Hero: Gruppe Frauen am Werkstatt-Tisch mit Pflanzen,
+       Eukalyptus-Zweige, gemeinsam werkend — passt zum Mitkommen-
+       Thema und zum Tüchern-Eurythmie-Bild der Palette. */
+    background-image: url('https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=2400&q=80&auto=format&fit=crop');
     background-size: cover;
-    background-position: center 60%;
+    background-position: center 40%;
     /* Eurythmie-Treatment: stärker entsättigt, hue-rotate Richtung
        Rosa/Plum — das Werkstatt-Foto taucht in die Cream-Coral-Welt
        ein, ohne sein „Ort"-Gefühl zu verlieren. */
