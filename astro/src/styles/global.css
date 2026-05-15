@@ -13,11 +13,11 @@
     /* Hintergrund / Foundation — warmes off-white statt Cream-Sand */
     --bg-base: #fbf6f3;             /* warm off-white mit Rose-Touch — frisch, clean */
     --bg-elevated: #ffffff;         /* Karten reines Weiss */
-    --bg-muted: #ede1da;             /* sanfter Peach — Newsletter-Übergang */
-    --bg-warm: #f5ebe5;              /* Peach-Cream — Räume-Section */
+    --bg-muted: #f5ebe5;             /* Newsletter angeglichen an Räume — eine Peach-Familie */
+    --bg-warm: #f5ebe5;              /* Peach-Cream — Räume + Newsletter */
     --bg-sage: #d8e2d3;              /* leichter Sage — gelegentlich */
-    --bg-deep: #2d2530;              /* Footer · cleaneres dunkles Plum-Aubergine */
-    --bg-deep-soft: #4a4150;         /* Plum-Grau für Sub-Backgrounds */
+    --bg-deep: #6a5f64;              /* Footer · Warm-Grey mit Rose-Hauch — leicht statt schwer, Cream-Text bleibt lesbar */
+    --bg-deep-soft: #847781;         /* Warm-Grey hell — Sub-Backgrounds */
 
     /* Text */
     --text-primary: #2d2435;         /* Aubergine-Plum, etwas cleaner und tiefer */
@@ -2097,15 +2097,18 @@
   }
   .site-footer__brand-noun {
     font-weight: 700;
-    color: var(--accent-gold);
+    /* Auf Warm-Grey Footer: hellere Champagne für genug Kontrast.
+       Auf dunklem Aubergine wäre var(--accent-gold) ausreichend
+       — Warm-Grey braucht den Lift. */
+    color: #e8c19a;
     text-transform: uppercase;
     letter-spacing: 0.02em;
   }
   .site-footer__brand-qualifier {
     font-weight: 500;
     font-style: italic;
-    /* Im Footer auf dunklem Grund: sage-grün, hellere Variante */
-    color: var(--accent-green-soft);
+    /* Cream — auf Warm-Grey klar lesbar, harmoniert mit dem Rest des Footer-Texts */
+    color: var(--text-inverse);
   }
   .site-footer__intro {
     font-family: var(--font-display);
