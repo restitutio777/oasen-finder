@@ -3,19 +3,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
+/**
+ * brauchBAR — Konzepte und Werkzeuge für die Praxis des Miteinander.
+ *
+ * Schwester-Raum zur lesBAR: lesBAR zeigt Quellen (Bücher, Artikel,
+ * Filme, Podcasts), brauchBAR zeigt Konzepte und Werkzeuge —
+ * dieselbe Sanity-Resource-Schema, andere kind-Filterung.
+ *
+ * Detail-Seiten teilen wir mit lesBAR (alle Resources sind unter
+ * /lesbar/[slug]/ erreichbar), damit es keine duplikaten Routen
+ * und doppelten Slugs gibt.
+ */
+
 let resources: any[] = [];
 if (isSanityConfigured) {
-  // konzept/werkzeug-Resources leben jetzt unter /brauchbar/
-  // — die lesBAR zeigt nur Bücher, Artikel, Filme, Podcasts, Gespräche.
   resources = await sanity.fetch(`
-    *[_type == "resource" && !(kind in ["konzept", "werkzeug"])] | order(_createdAt desc) {
-      _id, title, kind, authorOrSource, "slug": slug.current,
-      "thumb": coverImage { asset->{ url } }
+    *[_type == "resource" && kind in ["konzept", "werkzeug"]] | order(_createdAt desc) {
+      _id, title, kind, authorOrSource, note, "slug": slug.current
     }
   `);
 }
 
-// Gruppierung nach kind
 const byKind = resources.reduce((acc: Record<string, any[]>, r) => {
   const k = r.kind || 'andere';
   acc[k] = acc[k] || [];
@@ -24,37 +32,33 @@ const byKind = resources.reduce((acc: Record<string, any[]>, r) => {
 }, {});
 
 const kindLabels: Record<string, string> = {
-  buch: 'Bücher',
-  webseite: 'Webseiten',
-  aufsatz: 'Aufsätze',
-  film: 'Filme',
-  podcast: 'Podcasts',
-  gespraech: 'Gespräche',
+  konzept: 'Konzepte',
+  werkzeug: 'Werkzeuge',
 };
 ---
 
-<BaseLayout title="lesBAR — werkSTATT Gemeinschaft" description="Bücher, Webseiten, Filme, Podcasts und Werkzeuge zu Fragen des Miteinander">
+<BaseLayout title="brauchBAR — werkSTATT Gemeinschaft" description="Konzepte und Werkzeuge für die Praxis des Miteinander">
   <PageBanner
     photo="photo-1481627834876-b7833e8f5570"
-    alt="Stapel alter Bücher mit warmen Lederrücken"
+    alt="Werkzeuge auf einem warmen Holztisch"
   />
   <section style="padding: 4rem 0;">
     <div class="container">
-      <span class="eyebrow">Bibliothek</span>
+      <span class="eyebrow">Werkzeuge</span>
       <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin: 1rem 0;">
-        les<em>BAR</em>
+        brauch<em>BAR</em>
       </h1>
       <p style="font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.4rem); font-style: italic; color: var(--text-secondary); margin-bottom: 1rem;">
-        Quellen, Werkzeuge, Stimmen
+        Konzepte und Werkzeuge
       </p>
       <p style="max-width: 640px; color: var(--text-body); margin-bottom: 2rem;">
-        Bücher, Artikel, Filme, Webseiten und Gedichte zu Fragen des Miteinander —
-        mit kurzer Notiz, warum sie hier stehen. Für Konzepte und Werkzeuge
-        siehe die <a href="/brauchbar/">brauchBAR</a>
+        Was sich in der Praxis als hilfreich erweist — gesammelte Konzepte,
+        Methoden und kleine Werkzeuge für das Miteinander-Leben,
+        -Arbeiten und -Reden
       </p>
 
       {resources.length === 0 && (
-        <p style="color: var(--text-secondary);">Noch keine Einträge — die lesBAR füllt sich, sobald Sanity verbunden ist.</p>
+        <p style="color: var(--text-secondary);">Noch keine Einträge — die brauchBAR füllt sich, sobald die ersten Konzepte und Werkzeuge in Sanity stehen.</p>
       )}
 
       {Object.entries(byKind).map(([kind, items]) => (
