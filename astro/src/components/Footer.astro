@@ -2,6 +2,11 @@
 /**
  * Site-Footer mit Brand, Erkunden-Navigation, Kontakt-Mail.
  * Telegram-Link erscheint nur wenn in Sanity contact.telegramUrl gesetzt.
+ *
+ * Auf der Landing-Page wird die „Erkunden"-Spalte ausgeblendet —
+ * die Räume-Übersicht oben („Wohin als nächstes?") zeigt die selben
+ * Links, ein zweites Listing direkt darunter wäre redundant. Auf
+ * Sub-Pages bleibt sie als Site-weite Navigation erhalten.
  */
 import { sanity, isSanityConfigured } from '../lib/sanity';
 
@@ -12,11 +17,13 @@ if (isSanityConfigured) {
   }`);
 }
 const telegramUrl: string | null = contact?.telegramUrl || null;
+
+const isLanding = Astro.url.pathname === '/' || Astro.url.pathname === '';
 ---
 
 <footer class="site-footer">
   <div class="container">
-    <div class="site-footer__grid">
+    <div class={`site-footer__grid${isLanding ? ' site-footer__grid--compact' : ''}`}>
       <div>
         <p class="site-footer__brand">
           <span class="site-footer__brand-noun">WERKSTATT</span>
@@ -28,19 +35,22 @@ const telegramUrl: string | null = contact?.telegramUrl || null;
           geführt von Katharina Offenborn. Wächst, wenn etwas wachsen will.
         </p>
       </div>
-      <div>
-        <h4>Erkunden</h4>
-        <nav class="site-footer__nav" aria-label="Footer-Navigation">
-          <a href="/erkennbar/">erkennBAR</a>
-          <a href="/schreibbar/">schreibBAR</a>
-          <a href="/bewegbar/">bewegBAR</a>
-          <a href="/machbar/">machBAR</a>
-          <a href="/lesbar/">lesBAR</a>
-          <a href="/hoerbar/">hörBAR</a>
-          <a href="/wunderbar/">wunderBAR</a>
-          <a href="/mitkommen/">Mitkommen</a>
-        </nav>
-      </div>
+      {!isLanding && (
+        <div>
+          <h4>Erkunden</h4>
+          <nav class="site-footer__nav" aria-label="Footer-Navigation">
+            <a href="/schreibbar/">schreibBAR</a>
+            <a href="/bewegbar/">bewegBAR</a>
+            <a href="/machbar/">machBAR</a>
+            <a href="/lesbar/">lesBAR</a>
+            <a href="/brauchbar/">brauchBAR</a>
+            <a href="/hoerbar/">hörBAR</a>
+            <a href="/wunderbar/">wunderBAR</a>
+            <a href="/erkennbar/">Über mich</a>
+            <a href="/mitkommen/">Kontakt</a>
+          </nav>
+        </div>
+      )}
       <div>
         <h4>Kontakt</h4>
         <div class="site-footer__contact">

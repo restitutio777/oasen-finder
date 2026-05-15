@@ -2055,6 +2055,11 @@
     padding-bottom: 56px;
     border-bottom: 1px solid var(--border-on-dark);
   }
+  /* Landing: Erkunden-Spalte ausgeblendet (redundant zur Räume-Übersicht
+     darüber). Grid wird zu zwei Spalten — Brand links, Kontakt rechts. */
+  .site-footer__grid--compact {
+    grid-template-columns: 1.4fr 1fr;
+  }
   .site-footer h4 {
     font-family: var(--font-text);
     font-size: 11px;
