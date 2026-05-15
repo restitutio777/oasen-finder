@@ -1941,13 +1941,13 @@
     padding: 1rem 1.25rem;
     border: 1px solid var(--border-subtle);
     border-radius: 6px;
-    background: var(--bg-primary);
+    background: var(--bg-elevated);
     transition: border-color var(--t-fast) var(--ease),
                 background var(--t-fast) var(--ease);
     position: relative;
   }
   .invite-option:hover {
-    border-color: var(--accent-warm);
+    border-color: var(--accent);
   }
   /* Visuell-versteckte Checkbox — keyboard-erreichbar, screenreader-
      freundlich. :focus-visible-Ring schimmert durch die Card. */
