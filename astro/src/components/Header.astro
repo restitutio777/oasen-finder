@@ -22,6 +22,7 @@ const roomAccent: Record<string, string> = {
   '/bewegbar': 'var(--accent-green)',
   '/machbar': 'var(--accent-warm)',
   '/lesbar': 'var(--accent-blue)',
+  '/brauchbar': 'var(--text-primary)',
   '/hoerbar': 'var(--accent-rose)',
   '/wunderbar': 'var(--accent-green-soft)',
   '/erkennbar': 'var(--text-primary)',
@@ -35,7 +36,7 @@ const navProps = (prefix: string) => ({
   style: isActive(prefix) ? `--nav-accent: ${accentFor(prefix)};` : undefined,
 });
 
-const dropdownPaths = ['/lesbar', '/hoerbar', '/wunderbar', '/erkennbar'];
+const dropdownPaths = ['/lesbar', '/brauchbar', '/hoerbar', '/wunderbar', '/erkennbar'];
 const dropdownActive = dropdownPaths.find((p) => isActive(p));
 const dropdownProps = {
   'aria-current': dropdownActive ? 'page' as const : undefined,
@@ -65,9 +66,10 @@ const dropdownProps = {
         </button>
         <div class="nav-group__menu" role="menu">
           <a href="/lesbar/" role="menuitem" {...navProps('/lesbar')}>lesBAR</a>
+          <a href="/brauchbar/" role="menuitem" {...navProps('/brauchbar')}>brauchBAR</a>
           <a href="/hoerbar/" role="menuitem" {...navProps('/hoerbar')}>hörBAR</a>
           <a href="/wunderbar/" role="menuitem" {...navProps('/wunderbar')}>wunderBAR</a>
-          <a href="/erkennbar/" role="menuitem" {...navProps('/erkennbar')}>erkennBAR</a>
+          <a href="/erkennbar/" role="menuitem" {...navProps('/erkennbar')}>Über mich</a>
         </div>
       </div>
       <a href="/mitkommen/" {...navProps('/mitkommen')}>Mitkommen</a>
