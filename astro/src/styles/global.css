@@ -444,11 +444,11 @@
     background-image: url('/hero/werkstatt-keramik.jpg');
     background-size: cover;
     background-position: center 40%;
-    /* Dezenter Filter: Sepia/Hue-rotate raus (würden Türkis wegrotieren),
-       nur leichte Entsättigung damit das Foto nicht mit dem Text
-       konkurriert. Lehm-Wärme + Türkis-Akzent dürfen sprechen. */
-    filter: blur(12px) saturate(0.78) brightness(1);
-    opacity: 0.78;
+    /* Frischer Filter: volle Sättigung damit Türkis und Lehm-Wärme
+       leuchten, Brightness + Contrast leicht hoch für luftige Frische.
+       Cream-Overlay sorgt weiter für Text-Lesbarkeit. */
+    filter: blur(12px) saturate(1.05) brightness(1.06) contrast(1.05);
+    opacity: 0.85;
     z-index: -2;
   }
   /* Vertical sweep — Cream-Sand oben, durch Coral-Wärme, zu tiefem Plum.
@@ -472,12 +472,12 @@
         rgba(45, 36, 53, 0.62) 100%);
     z-index: -1;
   }
-  /* Desktop: weniger Blur (Foto bleibt rechts deutlich sichtbar),
-     gleicher dezenter Filter wie Mobile — Lehm + Türkis dürfen leuchten. */
+  /* Desktop: minimaler Blur für scharfe Details, gleich frischer
+     Filter wie Mobile — Lehm + Türkis leuchten klarer. */
   @media (min-width: 1024px) {
     .hero::before {
-      filter: blur(2px) saturate(0.78) brightness(1);
-      opacity: 0.85;
+      filter: blur(1.5px) saturate(1.05) brightness(1.06) contrast(1.05);
+      opacity: 0.92;
     }
     .hero::after {
       background:
