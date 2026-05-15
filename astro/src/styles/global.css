@@ -710,12 +710,13 @@
     /* Meta-Capsule (Naechste Begegnung) auf Mobile weg — Info kommt
        prominent in der machBAR, im Hero war sie ein Anhaengsel */
     .hero__meta { display: none; }
-    /* Mobile: Bild deutlich sichtbar — weniger Blur, höhere Opacity,
-       gleicher frischer Filter wie Desktop. Cream-Wash unten sorgt
-       weiter für Text-Lesbarkeit über dem Bild. */
+    /* Mobile: Bild rechts deutlich klar erkennbar. Blur ganz runter,
+       der Cream-Wash links/oben deckt den Text-Bereich ab und schützt
+       die Lesbarkeit — räumlicher Schärfe-Unterschied entsteht durch
+       den Wash, nicht durch den Filter (CSS-blur kann nicht regional). */
     .hero::before {
-      opacity: 0.72;
-      filter: blur(5px) saturate(1.05) brightness(1.06) contrast(1.05);
+      opacity: 0.78;
+      filter: blur(2px) saturate(1.05) brightness(1.06) contrast(1.05);
     }
     /* Cream-Wash auf Mobile breiter — helle Zone bis ca. 60% statt 35% */
     .hero::after {
