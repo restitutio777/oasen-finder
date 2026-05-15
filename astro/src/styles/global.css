@@ -14,10 +14,11 @@
     /* Hintergrund / Foundation — warmes off-white statt Cream-Sand */
     --bg-base: #fbf6f3;             /* warm off-white mit Rose-Touch — frisch, clean */
     --bg-elevated: #ffffff;         /* Karten reines Weiss */
-    --bg-muted: #f5ebe5;             /* Newsletter angeglichen an Räume — eine Peach-Familie */
-    --bg-warm: #f5ebe5;              /* Peach-Cream — Räume + Newsletter */
+    --bg-warm: #f5ebe5;              /* Peach-Cream — Mitkommen-Section */
+    --bg-warm-soft: #f1edec;         /* Peach-Cream heller — Räume-Section */
+    --bg-warm-deep: #ebe5e2;         /* Peach-Cream tiefer — Newsletter (Übergang zum Footer) */
     --bg-sage: #dde9d3;              /* helles Frühlingsblatt — gelegentlich */
-    --bg-deep: #8c6b3a;              /* Footer · warmer Gold-Ocker (weniger Grün, klar gold-warm, Weiß-Text klar lesbar) */
+    --bg-deep: #8c6b3a;              /* Footer · warmer Gold-Ocker (Weiß-Text klar lesbar) */
     --bg-deep-soft: #ad8954;         /* Gold-Ocker hell — Sub-Backgrounds */
 
     /* Text */
@@ -315,7 +316,7 @@
   .nav-group__menu a::after { display: none; }
   .nav-group__menu a:hover {
     color: var(--accent);
-    background: var(--bg-muted);
+    background: var(--bg-warm);
   }
 
   /* ---------- Mobile hamburger ---------- */
@@ -1046,7 +1047,7 @@
     padding: 4px 12px;
     font-size: 12px;
     letter-spacing: 0.04em;
-    background: var(--bg-muted);
+    background: var(--bg-warm);
     color: var(--text-secondary);
     border-radius: 100px;
   }
