@@ -120,7 +120,7 @@ const mantra: string | undefined = localized(about?.mantra);
     <div class="container">
       <header style="max-width: 720px; margin: 0 auto 3rem; text-align: center;">
         <span class="eyebrow">Räume</span>
-        <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 0; color: var(--accent-gold);">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 0; color: var(--accent);">
           Wohin als <em style="color: inherit;">nächstes</em>?
         </h2>
       </header>
@@ -128,7 +128,7 @@ const mantra: string | undefined = localized(about?.mantra);
         {[
           { slug: 'schreibbar', eyebrow: 'Notizen', stem: 'schreib', desc: 'Datierte Einträge — Notizen, Gedichte, Gedanken aus Reisen, Werkstätten und Lektüren', accent: 'var(--accent-deep)' },
           { slug: 'bewegbar', eyebrow: 'Reisen', stem: 'beweg', desc: 'Orte, an denen ich war — Ökodörfer, Cohousing-Projekte und gemeinsame Lebensorte, auf einer Karte', accent: 'var(--accent-blue)' },
-          { slug: 'machbar', eyebrow: 'Werkstatt', stem: 'mach', desc: 'Werkstatt-Termine zum Mitmachen — drei Themen, im Jahres-Rhythmus', accent: 'var(--accent-warm)' },
+          { slug: 'machbar', eyebrow: 'Werkstatt', stem: 'mach', desc: 'Werkstatt-Termine zum Mitmachen — drei Themen, im Jahres-Rhythmus', accent: 'var(--accent)' },
           { slug: 'lesbar', eyebrow: 'Bibliothek', stem: 'les', desc: 'Bücher, Webseiten, Filme, Podcasts und Quellen zu Fragen des Miteinander', accent: 'var(--neutral)' },
           { slug: 'brauchbar', eyebrow: 'Werkzeuge', stem: 'brauch', desc: 'Konzepte und Werkzeuge — was sich in der Praxis als hilfreich erweist', accent: 'var(--text-primary)' },
           { slug: 'hoerbar', eyebrow: 'Audio', stem: 'hör', desc: 'Eingesprochene Reflexionen, Gedichte, Lieder — plus Gespräche mit Menschen, die in Gemeinschaft leben', accent: 'var(--accent-deep)' },
@@ -196,7 +196,7 @@ const mantra: string | undefined = localized(about?.mantra);
          spezifische Variation lebt im Eyebrow oben („Notizen",
          „Reisen", …), im Hover-Border der Karte und im CTA-Link
          unten („Zur schreibBAR →"). */
-      color: var(--accent-gold);
+      color: var(--accent);
       font-style: italic;
     }
     .room-card__desc {
@@ -272,7 +272,7 @@ const mantra: string | undefined = localized(about?.mantra);
          allen „BAR"-Endungen der Räume-Karten. Goldener Brand-
          Anker, warmer Ton. */
       font-weight: 700;
-      color: var(--accent-gold);
+      color: var(--accent);
       letter-spacing: 0.02em;
     }
     .purpose-intro__heading em {

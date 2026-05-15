@@ -4,47 +4,53 @@
 
   :root {
     /* ============================================================
-       Palette: EURYTHMIE-TRAUM v3 — Naturfrische dazu
-       Mint und Sage waren beide gedeckt-mat. Ersetzt durch
-       Bergsee-Blau (Quellwasser) und Frühlingsblatt-Grün
-       (junges Laub) — gesättigter, lebendig, aber im warmen
-       Gesamttonraum bleibend. Coral, Plum, Champagne unverändert.
+       PALETTE — EURYTHMIE v4
+       ------------------------------------------------------------
+       Eine Farbe — ein Name. Aliase wurden konsolidiert (Coral-
+       Rosa raus, Gold + Türkis-Komplement dominieren).
+
+       Struktur:
+         1. Backgrounds   — Foundation + warme Peach-Familie + Footer
+         2. Text          — Plum-Hierarchie + Inverse für dunkle Flächen
+         3. Akzente       — Champagne-Gold als Anker, Raum-Farben drumherum
+         4. Borders       — alle aus Text-Primary abgeleitet
+         5. Scoped-Vars   — pro Komponente via inline style gesetzt
+                            (--card-accent in index.astro, --nav-accent in
+                            Header.astro), nicht hier definieren!
+
+       Neue Farben: in der passenden Gruppe ergänzen, kein Alias.
        ============================================================ */
 
-    /* Hintergrund / Foundation — warmes off-white statt Cream-Sand */
-    --bg-base: #fbf6f3;             /* warm off-white mit Rose-Touch — frisch, clean */
-    --bg-elevated: #ffffff;         /* Karten reines Weiss */
-    --bg-warm: #f5ebe5;              /* Peach-Cream — Mitkommen-Section */
-    --bg-warm-soft: #f1edec;         /* Peach-Cream heller — Räume-Section */
-    --bg-warm-deep: #ebe5e2;         /* Peach-Cream tiefer — Newsletter (Übergang zum Footer) */
-    --bg-sage: #dde9d3;              /* helles Frühlingsblatt — gelegentlich */
-    --bg-deep: #8c6b3a;              /* Footer · warmer Gold-Ocker (Weiß-Text klar lesbar) */
-    --bg-deep-soft: #ad8954;         /* Gold-Ocker hell — Sub-Backgrounds */
+    /* — 1. Backgrounds ——————————————————————————————— */
+    --bg-base:      #fbf6f3;  /* Page-Foundation · warm off-white */
+    --bg-elevated:  #ffffff;  /* Karten · reines Weiss */
+    --bg-warm:      #f5ebe5;  /* Peach · Mitkommen-Section */
+    --bg-warm-soft: #f1edec;  /* Peach heller · Räume-Section */
+    --bg-warm-deep: #ebe5e2;  /* Peach tiefer · Newsletter-Übergang zum Footer */
+    --bg-sage:      #dde9d3;  /* helles Frühlingsblatt · gelegentlich */
+    --bg-deep:      #8c6b3a;  /* Footer · warmer Gold-Ocker (Weiß-Text lesbar) */
+    --bg-deep-soft: #ad8954;  /* Gold-Ocker hell · Sub-Backgrounds */
 
-    /* Text */
-    --text-primary: #2d2435;         /* Aubergine-Plum, etwas cleaner und tiefer */
-    --text-body: #4a3d5a;
-    --text-secondary: #6a5a78;       /* gedämpftes Plum */
-    --text-muted: #8a8290;
-    --text-inverse: #ffffff;         /* Reines Weiß — auf Gold-Ocker-Footer klar lesbar */
+    /* — 2. Text ——————————————————————————————————————— */
+    --text-primary:   #2d2435;  /* Aubergine-Plum · Headlines, Body-Strong */
+    --text-body:      #4a3d5a;  /* gedämpftes Plum · Body */
+    --text-secondary: #6a5a78;  /* Sekundär · Subtitles, Captions */
+    --text-muted:     #8a8290;  /* Lowest hierarchy · Meta, Timestamps */
+    --text-inverse:   #ffffff;  /* auf dunklem Footer / Gold-Ocker */
 
-    /* Akzent-Familie — Eurythmie v4: Gold dominant, Türkis als Komplement.
-       Coral-Rosa raus (kollidierte mit Türkis), --accent ist jetzt Champagne. */
-    --accent: #c89a78;               /* Champagne-Gold — Brand-Anker, CTAs, Wortmarken */
-    --accent-hover: #a87e5e;         /* Champagne tiefer für Hover */
-    --accent-soft: #e8d2b5;          /* helles Champagne — auf dunklem Grund */
-    --accent-warm: #c89a78;          /* Alias auf accent */
-    --accent-gold: #c89a78;          /* Alias auf accent */
-    --accent-gold-hover: #a87e5e;
-    --accent-rose: #c89a78;          /* Alias auf accent (war Coral, jetzt Gold) */
-    --accent-green: #6fab5c;         /* Frühlingsblatt — lebendiges Naturgrün, wunderBAR */
-    --accent-green-soft: #bcddb0;    /* Frühlingsblatt hell — auf dunklem Grund */
-    --accent-deep: #8a6caa;          /* Plum — heller, frischer, weniger trüb */
-    --accent-blue: #5497b8;          /* Bergsee — frisches Quellwasser, bewegBAR */
-    --neutral: #9c8a96;              /* Warm-Grey mit Lavender-Hauch, weniger Lehm */
+    /* — 3. Akzente ——————————————————————————————————— */
+    --accent:            #c89a78;  /* CHAMPAGNE-GOLD · Brand-Anker, CTAs, BAR-Marken */
+    --accent-hover:      #a87e5e;  /* Champagne tiefer · Hover */
+    --accent-soft:       #e8d2b5;  /* Champagne hell · auf dunklem Grund */
+    --accent-blue:       #5497b8;  /* BERGSEE-TÜRKIS · bewegBAR, „Gemeinschaft"-Logo */
+    --accent-deep:       #8a6caa;  /* PLUM · schreibBAR, hörBAR, Hero-Headline */
+    --accent-green:      #6fab5c;  /* FRÜHLINGSBLATT · wunderBAR */
+    --accent-green-soft: #bcddb0;  /* Frühlingsblatt hell · auf dunklem Grund */
+    --neutral:           #9c8a96;  /* Warm-Grey-Lavender · lesBAR, dezente Linien */
 
-    --border-subtle: rgba(45, 36, 53, 0.08);
-    --border-medium: rgba(45, 36, 53, 0.16);
+    /* — 4. Borders (aus --text-primary abgeleitet) ——— */
+    --border-subtle:  rgba(45, 36, 53, 0.08);
+    --border-medium:  rgba(45, 36, 53, 0.16);
     --border-on-dark: rgba(251, 246, 243, 0.16);
 
     --font-display: 'Cormorant Garamond', 'Georgia', serif;
@@ -113,7 +119,7 @@
     letter-spacing: -0.015em;
     line-height: 1.08;
   }
-  h1 em, h2 em { font-weight: 500; font-style: italic; color: var(--accent-warm); }
+  h1 em, h2 em { font-weight: 500; font-style: italic; color: var(--accent); }
 
   p { margin: 0; }
 
@@ -173,7 +179,7 @@
      kühlen Akzent als Brand-Komplement. */
   .brand__noun {
     font-weight: 700;
-    color: var(--accent-gold);
+    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.02em;
   }
@@ -540,7 +546,7 @@
   .hero__eyebrow-werk {
     font-style: normal;
     font-weight: 700;
-    color: var(--accent-gold);
+    color: var(--accent);
     letter-spacing: 0;
   }
   /* Nowrap-Wrapper verhindert dass "GemeinschaftsWERK" ueber Zeilenumbruch
@@ -813,12 +819,12 @@
   .btn--ghost {
     background: rgba(251, 246, 243, 0.6);
     color: var(--text-primary);
-    border-color: var(--accent-gold);
+    border-color: var(--accent);
   }
   .btn--ghost:hover {
-    background: var(--accent-gold);
+    background: var(--accent);
     color: var(--bg-base);
-    border-color: var(--accent-gold);
+    border-color: var(--accent);
   }
   /* Mint-Ghost-Variante — kühler Gegenpol zum Coral-Anker */
   .btn--ghost.btn--fresh {
@@ -855,10 +861,10 @@
   }
   .manifest__line em {
     font-style: italic;
-    color: var(--accent-warm);
+    color: var(--accent);
   }
   .manifest__line span[aria-hidden] {
-    color: var(--accent-rose);
+    color: var(--accent);
     font-style: italic;
     opacity: 0.7;
   }
@@ -998,7 +1004,7 @@
     font-family: var(--font-display);
     font-style: italic;
     font-size: 18px;
-    color: var(--accent-rose);
+    color: var(--accent);
     margin-bottom: 28px;
   }
   .featured__story p {
@@ -1085,7 +1091,7 @@
     letter-spacing: -0.02em;
     margin: 18px 0 14px;
   }
-  .pillars__title em { font-style: italic; color: var(--accent-warm); }
+  .pillars__title em { font-style: italic; color: var(--accent); }
   .pillars__sub {
     font-family: var(--font-display);
     font-size: clamp(17px, 1.4vw, 20px);
@@ -1146,7 +1152,7 @@
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent-warm);
+    color: var(--accent);
     margin-bottom: 14px;
   }
   .pillar__title {
@@ -1218,7 +1224,7 @@
     line-height: 1.05;
     letter-spacing: -0.02em;
   }
-  .section-head__title em { font-style: italic; color: var(--accent-warm); }
+  .section-head__title em { font-style: italic; color: var(--accent); }
   .section-head__sub {
     font-family: var(--font-display);
     font-style: italic;
@@ -1442,12 +1448,12 @@
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent-warm);
+    color: var(--accent);
     margin-bottom: 12px;
   }
   /* Tag-Differenzierung nach Sektion — bringt subtle Lebendigkeit ohne Chaos */
   .entry__tag[data-tag="werkstatt"] { color: var(--accent-green); }
-  .entry__tag[data-tag="poesie"] { color: var(--accent-rose); }
+  .entry__tag[data-tag="poesie"] { color: var(--accent); }
   .entry__title {
     font-size: clamp(20px, 1.8vw, 24px);
     line-height: 1.2;
@@ -1789,7 +1795,7 @@
   }
   .podcast-bar__label {
     font-style: italic;
-    color: var(--accent-warm);
+    color: var(--accent);
     font-weight: 500;
     white-space: nowrap;
   }
@@ -1845,7 +1851,7 @@
   }
   .invite__title em {
     font-style: italic;
-    color: var(--accent-warm);
+    color: var(--accent);
   }
   .invite__sub {
     font-family: var(--font-display);
@@ -1878,7 +1884,7 @@
     font-family: var(--font-display);
     font-style: italic;
     font-size: 18px;
-    color: var(--accent-warm);
+    color: var(--accent);
     margin-bottom: 14px;
   }
   .path__title {
@@ -1889,7 +1895,7 @@
   }
   .path__title em {
     font-style: italic;
-    color: var(--accent-warm);
+    color: var(--accent);
     font-weight: 400;
   }
   .path__text {
