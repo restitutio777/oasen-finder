@@ -642,11 +642,9 @@
     font-weight: 500;
     font-style: normal;
   }
-  /* „Auf der Suche —" in Plum — Tiefe, Reflexion, Bühnen-Stille
-     hinter den hellen Tüchern. */
-  /* „Auf der Suche —" in Plum — meditativ-warm, knüpft an das Mantra
-     und an die hörBAR-Karte. Plum hat genug Tiefe ohne kühl zu wirken. */
-  .hero__title-a { color: var(--accent-deep); }
+  /* „Auf der Suche —" in Bergsee-Türkis — gleicher Ton wie
+     „Gemeinschaft" im Logo, so klingt der Brand-Anker im Hero an. */
+  .hero__title-a { color: var(--accent-blue); }
   /* „wie wird Gemeinschaft?" in Champagne-Gold — schliesst die
      Wortmarken-Trias mit WERKSTATT/WEBSEITE/BAR. Sanfter Glow in
      Champagne. */
