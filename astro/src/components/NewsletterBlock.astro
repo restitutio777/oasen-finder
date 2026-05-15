@@ -31,7 +31,10 @@ const text = localized(config?.newsletter?.text) || 'Eine leise Notiz, wenn etwa
 // Eindeutige ID, falls die Komponente mehrfach auf der Seite ist
 const widgetId = `substack-embed-${variant}`;
 
-const bgColor = variant === 'landing' ? 'var(--bg-warm)' : 'var(--bg-primary)';
+// Newsletter sitzt auf der Landing als letzte Section vor dem Footer
+// — bg-muted (eine Stufe dunkler Cream) trennt es visuell von der
+// Begegnung-Section darüber und führt zum dunklen Footer.
+const bgColor = variant === 'landing' ? 'var(--bg-muted)' : 'var(--bg-base)';
 ---
 
 <section style={`padding: 5rem 0; background: ${bgColor};`}>
