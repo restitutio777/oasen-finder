@@ -17,8 +17,8 @@
     --bg-muted: #f5ebe5;             /* Newsletter angeglichen an Räume — eine Peach-Familie */
     --bg-warm: #f5ebe5;              /* Peach-Cream — Räume + Newsletter */
     --bg-sage: #dde9d3;              /* helles Frühlingsblatt — gelegentlich */
-    --bg-deep: #6f5d40;              /* Footer · gedämpfter Gold-Ocker (entsättigt, nicht knallig, Weiß-Text klar lesbar) */
-    --bg-deep-soft: #8b7a5e;         /* Gold-Ocker hell — Sub-Backgrounds */
+    --bg-deep: #8c6b3a;              /* Footer · warmer Gold-Ocker (weniger Grün, klar gold-warm, Weiß-Text klar lesbar) */
+    --bg-deep-soft: #ad8954;         /* Gold-Ocker hell — Sub-Backgrounds */
 
     /* Text */
     --text-primary: #2d2435;         /* Aubergine-Plum, etwas cleaner und tiefer */
