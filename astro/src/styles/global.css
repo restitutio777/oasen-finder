@@ -574,22 +574,23 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    /* Stärker desaturiert + sanfter Sepia-Touch — alle Bilder wirken
-       wie aus derselben Familie, gehen ruhig in die warme Site-Palette
-       über. */
-    filter: saturate(0.5) brightness(0.98) contrast(0.93) sepia(0.1);
+    /* Foto bleibt natürlich — nur eine Spur Desättigung, damit die
+       Bilder im warmen Site-Klang ruhen statt zu schreien. */
+    filter: saturate(0.92);
   }
-  /* Cream-Wash oben + leichter Aubergine-Hauch unten — bindet die
-     Bilder optisch in die Site-Hintergrund-Töne ein. */
+  /* Sehr dezenter Cream-Fade nur an Ober- und Unterkante — bindet
+     den Banner weich in den Cream-Hintergrund ein, ohne das Foto
+     einzudunkeln. Kein Plum mehr unten. */
   .page-banner::after {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(251, 246, 243, 0.20) 0%,
-      rgba(251, 246, 243, 0.04) 35%,
-      rgba(45, 36, 53, 0.14) 100%
+      rgba(251, 246, 243, 0.08) 0%,
+      transparent 18%,
+      transparent 82%,
+      rgba(251, 246, 243, 0.12) 100%
     );
     pointer-events: none;
   }
