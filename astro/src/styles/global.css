@@ -4,10 +4,11 @@
 
   :root {
     /* ============================================================
-       Palette: EURYTHMIE-TRAUM v2 — frischer, moderner, femininer
-       Cream-Sand hatte einen klaren Gelb-Stich (nostalgisch-beige);
-       jetzt warm off-white mit dezentem Rose-Touch (kein Gelb).
-       Akzente bleiben: Coral-Rosa, Plum, Mint, Sage, Altgold.
+       Palette: EURYTHMIE-TRAUM v3 — Naturfrische dazu
+       Mint und Sage waren beide gedeckt-mat. Ersetzt durch
+       Bergsee-Blau (Quellwasser) und Frühlingsblatt-Grün
+       (junges Laub) — gesättigter, lebendig, aber im warmen
+       Gesamttonraum bleibend. Coral, Plum, Champagne unverändert.
        ============================================================ */
 
     /* Hintergrund / Foundation — warmes off-white statt Cream-Sand */
@@ -15,7 +16,7 @@
     --bg-elevated: #ffffff;         /* Karten reines Weiss */
     --bg-muted: #f5ebe5;             /* Newsletter angeglichen an Räume — eine Peach-Familie */
     --bg-warm: #f5ebe5;              /* Peach-Cream — Räume + Newsletter */
-    --bg-sage: #d8e2d3;              /* leichter Sage — gelegentlich */
+    --bg-sage: #dde9d3;              /* helles Frühlingsblatt — gelegentlich */
     --bg-deep: #6a5f64;              /* Footer · Warm-Grey mit Rose-Hauch — leicht statt schwer, Cream-Text bleibt lesbar */
     --bg-deep-soft: #847781;         /* Warm-Grey hell — Sub-Backgrounds */
 
@@ -34,10 +35,10 @@
     --accent-gold: #c89a78;          /* gleicher Champagne — WERKSTATT-Wortmarke */
     --accent-gold-hover: #a87e5e;
     --accent-rose: #d08197;          /* Alias auf accent */
-    --accent-green: #80a07d;         /* Sage — leicht angehoben, klarer */
-    --accent-green-soft: #b8ccb4;    /* Sage hell — auf dunklem Grund */
+    --accent-green: #6fab5c;         /* Frühlingsblatt — lebendiges Naturgrün, wunderBAR */
+    --accent-green-soft: #bcddb0;    /* Frühlingsblatt hell — auf dunklem Grund */
     --accent-deep: #8a6caa;          /* Plum — heller, frischer, weniger trüb */
-    --accent-blue: #6fa6b5;          /* Mint — klarer, ein Tick frischer */
+    --accent-blue: #5497b8;          /* Bergsee — frisches Quellwasser, bewegBAR */
     --neutral: #9c8a96;              /* Warm-Grey mit Lavender-Hauch, weniger Lehm */
 
     --border-subtle: rgba(45, 36, 53, 0.08);
