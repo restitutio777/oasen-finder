@@ -4,45 +4,45 @@
 
   :root {
     /* ============================================================
-       Palette: EURYTHMIE-TRAUM (experimentell auf palette-eurythmie)
-       — Sanfte Tücher-Farben vor Bühnenhintergrund. Coral-Rosa als
-         Anker, Mint als Bewegung, Plum als Tiefe, Sage als Frische,
-         Altgold als Wärme, Warm-Grey als ruhiger Pol.
+       Palette: EURYTHMIE-TRAUM v2 — frischer, moderner, femininer
+       Cream-Sand hatte einen klaren Gelb-Stich (nostalgisch-beige);
+       jetzt warm off-white mit dezentem Rose-Touch (kein Gelb).
+       Akzente bleiben: Coral-Rosa, Plum, Mint, Sage, Altgold.
        ============================================================ */
 
-    /* Hintergrund / Foundation */
-    --bg-base: #f4ecd9;             /* Cream-Sand — Bühnenboden, atmend */
-    --bg-elevated: #fbf5e6;         /* Karten — eine Spur wärmer */
-    --bg-muted: #ebe1ce;            /* sanfte Zwischen-Sektion */
-    --bg-warm: #f0e6cf;             /* Räume-Section-Bg */
-    --bg-sage: #c8d4c0;             /* Sage-Wash (gelegentlich) */
-    --bg-deep: #3d3441;             /* Footer · dunkles Plum-Grau */
-    --bg-deep-soft: #5a5258;        /* mittleres Warm-Grey */
+    /* Hintergrund / Foundation — warmes off-white statt Cream-Sand */
+    --bg-base: #fbf6f3;             /* warm off-white mit Rose-Touch — frisch, clean */
+    --bg-elevated: #ffffff;         /* Karten reines Weiss */
+    --bg-muted: #ede1da;             /* sanfter Peach — Newsletter-Übergang */
+    --bg-warm: #f5ebe5;              /* Peach-Cream — Räume-Section */
+    --bg-sage: #d8e2d3;              /* leichter Sage — gelegentlich */
+    --bg-deep: #2d2530;              /* Footer · cleaneres dunkles Plum-Aubergine */
+    --bg-deep-soft: #4a4150;         /* Plum-Grau für Sub-Backgrounds */
 
     /* Text */
-    --text-primary: #3a2d4a;        /* Aubergine-Plum — Bühnen-Hintergrund */
+    --text-primary: #2d2435;         /* Aubergine-Plum, etwas cleaner und tiefer */
     --text-body: #4a3d5a;
-    --text-secondary: #6a5a78;      /* gedämpftes Plum */
+    --text-secondary: #6a5a78;       /* gedämpftes Plum */
     --text-muted: #8a8290;
-    --text-inverse: #f4ecd9;        /* Cream auf dunklem Footer */
+    --text-inverse: #fbf6f3;         /* warm off-white auf dunklem Footer */
 
     /* Akzent-Familie */
-    --accent: #c87a8e;              /* Coral-Rosa — DER Anker. Wärme, Faden, Aktion. */
-    --accent-hover: #a85b6f;
-    --accent-soft: #e8c0c8;         /* helles Coral — auf dunklem Grund */
-    --accent-warm: #b48f5c;         /* Altgold — Werkstatt-Wärme, patiniert */
-    --accent-gold: #b48f5c;         /* Altgold — WERKSTATT-Wortmarke */
-    --accent-gold-hover: #946d3d;
-    --accent-rose: #c87a8e;         /* Alias auf accent (Coral-Rosa) */
-    --accent-green: #6e8568;        /* Sage tiefer — Bewegung, leicht */
-    --accent-green-soft: #a3b89e;   /* Sage hell — auf dunklem Grund */
-    --accent-deep: #6a5187;         /* Plum — Tiefe, hörBAR, Mantra-Linie */
-    --accent-blue: #5e8a96;         /* Mint tiefer — Reisen, Frische */
-    --neutral: #7a7078;             /* Warm-Grey — lesBAR, ruhiger Pol */
+    --accent: #d08197;               /* Coral-Rosa, eine Spur frischer */
+    --accent-hover: #b06078;
+    --accent-soft: #ecc4ce;          /* helles Coral — auf dunklem Grund */
+    --accent-warm: #c89a78;          /* Champagne-Rosé — moderner als Altgold-braun */
+    --accent-gold: #c89a78;          /* gleicher Champagne — WERKSTATT-Wortmarke */
+    --accent-gold-hover: #a87e5e;
+    --accent-rose: #d08197;          /* Alias auf accent */
+    --accent-green: #7a9577;         /* Sage frischer, weniger trüb */
+    --accent-green-soft: #b0c4ac;    /* Sage hell — auf dunklem Grund */
+    --accent-deep: #7a5e9a;           /* Plum, eine Spur frischer und heller */
+    --accent-blue: #6a96a3;          /* Mint frischer */
+    --neutral: #8a8088;              /* Warm-Grey, leicht heller und cleaner */
 
-    --border-subtle: rgba(58, 45, 74, 0.08);
-    --border-medium: rgba(58, 45, 74, 0.16);
-    --border-on-dark: rgba(244, 236, 217, 0.16);
+    --border-subtle: rgba(45, 36, 53, 0.08);
+    --border-medium: rgba(45, 36, 53, 0.16);
+    --border-on-dark: rgba(251, 246, 243, 0.16);
 
     --font-display: 'Cormorant Garamond', 'Georgia', serif;
     --font-text: 'Inter', system-ui, -apple-system, sans-serif;
@@ -140,7 +140,7 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(244, 236, 217, 0.92);
+    background: rgba(251, 246, 243, 0.92);
     backdrop-filter: saturate(140%) blur(10px);
     -webkit-backdrop-filter: saturate(140%) blur(10px);
     border-bottom: 1px solid var(--border-subtle);
@@ -458,16 +458,16 @@
     background:
       /* Cream-Sand wash über dem Text-Bereich */
       radial-gradient(ellipse 90% 95% at 22% 42%,
-        rgba(244, 236, 217, 0.96) 0%,
-        rgba(244, 236, 217, 0.7) 32%,
-        rgba(244, 236, 217, 0.32) 60%,
+        rgba(251, 246, 243, 0.96) 0%,
+        rgba(251, 246, 243, 0.7) 32%,
+        rgba(251, 246, 243, 0.32) 60%,
         transparent 82%),
       /* Vertical: Cream → Altgold → Coral-Rosa → tiefes Plum */
       linear-gradient(180deg,
-        rgba(244, 236, 217, 0.5) 0%,
-        rgba(180, 143, 92, 0.26) 35%,
-        rgba(200, 122, 142, 0.32) 65%,
-        rgba(58, 45, 74, 0.62) 100%);
+        rgba(251, 246, 243, 0.5) 0%,
+        rgba(200, 154, 120, 0.26) 35%,
+        rgba(208, 129, 151, 0.32) 65%,
+        rgba(45, 36, 53, 0.62) 100%);
     z-index: -1;
   }
   /* Desktop: weniger Blur (Foto bleibt rechts lesbar), gleiche
@@ -481,21 +481,21 @@
       background:
         /* Cream-Sand wash links */
         radial-gradient(ellipse 72% 135% at 18% 50%,
-          rgba(244, 236, 217, 0.98) 0%,
-          rgba(244, 236, 217, 0.94) 32%,
-          rgba(244, 236, 217, 0.7) 58%,
-          rgba(244, 236, 217, 0.34) 78%,
-          rgba(244, 236, 217, 0.1) 92%),
+          rgba(251, 246, 243, 0.98) 0%,
+          rgba(251, 246, 243, 0.94) 32%,
+          rgba(251, 246, 243, 0.7) 58%,
+          rgba(251, 246, 243, 0.34) 78%,
+          rgba(251, 246, 243, 0.1) 92%),
         /* Coral-Wärme-Overlay quer */
         linear-gradient(110deg,
-          rgba(200, 122, 142, 0.04) 0%,
-          rgba(200, 122, 142, 0.14) 100%),
+          rgba(208, 129, 151, 0.04) 0%,
+          rgba(208, 129, 151, 0.14) 100%),
         /* Vertikaler Sweep · Cream → Altgold → Coral → tiefes Plum */
         linear-gradient(180deg,
-          rgba(244, 236, 217, 0.35) 0%,
-          rgba(180, 143, 92, 0.12) 35%,
-          rgba(200, 122, 142, 0.16) 65%,
-          rgba(58, 45, 74, 0.32) 100%);
+          rgba(251, 246, 243, 0.35) 0%,
+          rgba(200, 154, 120, 0.12) 35%,
+          rgba(208, 129, 151, 0.16) 65%,
+          rgba(45, 36, 53, 0.32) 100%);
     }
   }
   .hero__inner {
@@ -572,9 +572,9 @@
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(244, 236, 217, 0.20) 0%,
-      rgba(244, 236, 217, 0.04) 35%,
-      rgba(58, 45, 74, 0.14) 100%
+      rgba(251, 246, 243, 0.20) 0%,
+      rgba(251, 246, 243, 0.04) 35%,
+      rgba(45, 36, 53, 0.14) 100%
     );
     pointer-events: none;
   }
@@ -588,7 +588,7 @@
     height: 36px;
     border-radius: 50%;
     background: transparent;
-    border: 1px solid rgba(244, 236, 217, 0.20);
+    border: 1px solid rgba(251, 246, 243, 0.20);
     color: var(--text-inverse);
     cursor: pointer;
     transition: background var(--t-fast) var(--ease),
@@ -597,8 +597,8 @@
     font-family: var(--font-text);
   }
   .scroll-to-top:hover {
-    background: rgba(244, 236, 217, 0.08);
-    border-color: rgba(244, 236, 217, 0.40);
+    background: rgba(251, 246, 243, 0.08);
+    border-color: rgba(251, 246, 243, 0.40);
     transform: translateY(-2px);
   }
   .scroll-to-top svg {
@@ -622,7 +622,7 @@
      Hero, Anker der Site. Sanfter Glow in Coral statt Honey. */
   .hero__title-b {
     color: var(--accent);
-    text-shadow: 0 0 36px rgba(200, 122, 142, 0.35);
+    text-shadow: 0 0 36px rgba(208, 129, 151, 0.35);
   }
   .hero__title em {
     font-style: italic;
@@ -673,13 +673,13 @@
     /* subtle cream wash so it stays readable when the photo shows through */
     padding: 14px 18px;
     border-radius: 4px;
-    background: rgba(244, 236, 217, 0.7);
+    background: rgba(251, 246, 243, 0.7);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
   }
   .hero__meta:hover {
     color: var(--text-primary);
-    background: rgba(244, 236, 217, 0.85);
+    background: rgba(251, 246, 243, 0.85);
   }
   .hero__meta:hover .hero__meta-arrow {
     transform: translateX(4px);
@@ -717,11 +717,11 @@
     .hero::after {
       background:
         linear-gradient(170deg,
-          rgba(244, 236, 217, 0.96) 0%,
-          rgba(244, 236, 217, 0.92) 30%,
-          rgba(244, 236, 217, 0.7) 55%,
-          rgba(180, 143, 92, 0.18) 82%,
-          rgba(200, 122, 142, 0.22) 100%);
+          rgba(251, 246, 243, 0.96) 0%,
+          rgba(251, 246, 243, 0.92) 30%,
+          rgba(251, 246, 243, 0.7) 55%,
+          rgba(200, 154, 120, 0.18) 82%,
+          rgba(208, 129, 151, 0.22) 100%);
     }
     /* CTAs: weicher, sanfter, sekundaerer als Text-Link.
        Höhere Specificity (.hero__cta-row .btn...) damit das Mobile-Override
@@ -787,7 +787,7 @@
     color: var(--text-inverse);
   }
   .btn--ghost {
-    background: rgba(244, 236, 217, 0.6);
+    background: rgba(251, 246, 243, 0.6);
     color: var(--text-primary);
     border-color: var(--accent-gold);
   }
@@ -953,7 +953,7 @@
     position: absolute;
     left: 16px; bottom: 16px;
     padding: 8px 14px;
-    background: rgba(244, 236, 217, 0.94);
+    background: rgba(251, 246, 243, 0.94);
     backdrop-filter: blur(6px);
     font-size: 11px;
     letter-spacing: 0.18em;
@@ -1291,7 +1291,7 @@
     position: absolute;
     top: 14px; right: 14px;
     padding: 6px 10px;
-    background: rgba(244, 236, 217, 0.92);
+    background: rgba(251, 246, 243, 0.92);
     backdrop-filter: blur(4px);
     font-family: var(--font-display);
     font-style: italic;
@@ -1455,7 +1455,7 @@
     left: 14px;
     bottom: 14px;
     padding: 6px 12px;
-    background: rgba(244, 236, 217, 0.92);
+    background: rgba(251, 246, 243, 0.92);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     font-family: var(--font-display);
@@ -1505,7 +1505,7 @@
   .voices__sub {
     font-family: var(--font-display);
     font-style: italic;
-    color: rgba(244, 236, 217, 0.6);
+    color: rgba(251, 246, 243, 0.6);
     font-size: 18px;
     max-width: 360px;
     line-height: 1.45;
@@ -1541,7 +1541,7 @@
     font-size: 12px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(244, 236, 217, 0.55);
+    color: rgba(251, 246, 243, 0.55);
   }
   .voice__attr strong {
     display: block;
@@ -1679,7 +1679,7 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--accent);
-    background: rgba(200, 122, 142, 0.10);
+    background: rgba(208, 129, 151, 0.10);
     padding: 4px 12px;
     border-radius: 100px;
     margin-bottom: 14px;
@@ -1937,7 +1937,7 @@
   }
   .invite-option:has(.invite-option__input:checked) {
     border-color: var(--accent);
-    background: rgba(200, 122, 142, 0.10);
+    background: rgba(208, 129, 151, 0.10);
   }
   .invite-option:has(.invite-option__input:focus-visible) {
     outline: 2px solid var(--accent);
@@ -2086,7 +2086,7 @@
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(244, 236, 217, 0.45);
+    color: rgba(251, 246, 243, 0.45);
     margin: 0 0 20px;
   }
   .site-footer__brand {
@@ -2113,13 +2113,13 @@
     font-style: italic;
     font-size: 17px;
     line-height: 1.5;
-    color: rgba(244, 236, 217, 0.7);
+    color: rgba(251, 246, 243, 0.7);
     max-width: 360px;
   }
   .site-footer__nav { display: flex; flex-direction: column; gap: 12px; }
   .site-footer__nav a,
   .site-footer__contact a {
-    color: rgba(244, 236, 217, 0.85);
+    color: rgba(251, 246, 243, 0.85);
     font-size: 14px;
     transition: color var(--t-fast) var(--ease);
   }
@@ -2129,7 +2129,7 @@
   .site-footer__contact em {
     font-family: var(--font-display);
     font-style: italic;
-    color: rgba(244, 236, 217, 0.55);
+    color: rgba(251, 246, 243, 0.55);
   }
   .site-footer__bottom {
     padding-top: 24px;
@@ -2137,7 +2137,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 12px;
-    color: rgba(244, 236, 217, 0.45);
+    color: rgba(251, 246, 243, 0.45);
     letter-spacing: 0.06em;
   }
   .site-footer__badge {
@@ -2152,14 +2152,14 @@
   }
   .site-footer__credit a {
     text-decoration: underline;
-    text-decoration-color: rgba(244, 236, 217, 0.25);
+    text-decoration-color: rgba(251, 246, 243, 0.25);
     text-underline-offset: 2px;
     transition: text-decoration-color var(--t-fast) var(--ease),
                 color var(--t-fast) var(--ease);
   }
   .site-footer__credit a:hover {
-    color: rgba(244, 236, 217, 0.85);
-    text-decoration-color: rgba(244, 236, 217, 0.55);
+    color: rgba(251, 246, 243, 0.85);
+    text-decoration-color: rgba(251, 246, 243, 0.55);
   }
 
   @media (max-width: 800px) {
