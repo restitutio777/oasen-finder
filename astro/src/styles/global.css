@@ -34,11 +34,11 @@
     --accent-gold: #c89a78;          /* gleicher Champagne — WERKSTATT-Wortmarke */
     --accent-gold-hover: #a87e5e;
     --accent-rose: #d08197;          /* Alias auf accent */
-    --accent-green: #7a9577;         /* Sage frischer, weniger trüb */
-    --accent-green-soft: #b0c4ac;    /* Sage hell — auf dunklem Grund */
-    --accent-deep: #7a5e9a;           /* Plum, eine Spur frischer und heller */
-    --accent-blue: #6a96a3;          /* Mint frischer */
-    --neutral: #8a8088;              /* Warm-Grey, leicht heller und cleaner */
+    --accent-green: #80a07d;         /* Sage — leicht angehoben, klarer */
+    --accent-green-soft: #b8ccb4;    /* Sage hell — auf dunklem Grund */
+    --accent-deep: #8a6caa;          /* Plum — heller, frischer, weniger trüb */
+    --accent-blue: #6fa6b5;          /* Mint — klarer, ein Tick frischer */
+    --neutral: #9c8a96;              /* Warm-Grey mit Lavender-Hauch, weniger Lehm */
 
     --border-subtle: rgba(45, 36, 53, 0.08);
     --border-medium: rgba(45, 36, 53, 0.16);
@@ -2060,11 +2060,10 @@
 
   /* ---------- Footer ---------- */
   .site-footer {
-    /* Footer in dunkel-kühlem Grey — etwas mehr Blau-Anteil als der
-       warme Mid-Grey vorher, dafür deutlich tiefer. Schafft einen
-       ruhigen Abschluss-Anker unter der warmen Cream-Seite. Cream-
-       Text bleibt gut lesbar, Gold/Sage-Grün-Akzente kommen klarer. */
-    background: #34373d;
+    /* Footer in warmem dunklem Plum-Aubergine — harmoniert mit dem
+       Cream-Peach der Landing oben (kein Kühl-Grau-Bruch mehr). Cream-
+       Text bleibt gut lesbar, Champagne/Sage-Akzente kommen klarer. */
+    background: var(--bg-deep);
     color: var(--text-inverse);
     padding: clamp(64px, 8vw, 96px) 0 32px;
   }
