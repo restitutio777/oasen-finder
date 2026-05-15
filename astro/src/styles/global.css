@@ -437,16 +437,17 @@
     content: '';
     position: absolute;
     inset: -60px;
-    /* Eurythmie-Hero: Gruppe Frauen am Werkstatt-Tisch mit Pflanzen,
-       Eukalyptus-Zweige, gemeinsam werkend — passt zum Mitkommen-
-       Thema und zum Tüchern-Eurythmie-Bild der Palette. */
-    background-image: url('https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=2400&q=80&auto=format&fit=crop');
+    /* Hero: Katharinas eigene Keramik-Werkstatt — Frauen am Tisch
+       mit Lehm-Skulpturen, türkise Vorhänge/Schränke. Authentisches
+       Eigen-Foto statt Stock. Türkis im Bild antwortet aufs neue
+       Bergsee-Blau in den Räume-Karten. */
+    background-image: url('/hero/werkstatt-keramik.jpg');
     background-size: cover;
     background-position: center 40%;
-    /* Eurythmie-Treatment: stärker entsättigt, hue-rotate Richtung
-       Rosa/Plum — das Werkstatt-Foto taucht in die Cream-Coral-Welt
-       ein, ohne sein „Ort"-Gefühl zu verlieren. */
-    filter: blur(12px) saturate(0.5) brightness(0.98) sepia(0.22) hue-rotate(335deg);
+    /* Dezenter Filter: Sepia/Hue-rotate raus (würden Türkis wegrotieren),
+       nur leichte Entsättigung damit das Foto nicht mit dem Text
+       konkurriert. Lehm-Wärme + Türkis-Akzent dürfen sprechen. */
+    filter: blur(12px) saturate(0.78) brightness(1);
     opacity: 0.78;
     z-index: -2;
   }
@@ -471,11 +472,11 @@
         rgba(45, 36, 53, 0.62) 100%);
     z-index: -1;
   }
-  /* Desktop: weniger Blur (Foto bleibt rechts lesbar), gleiche
-     Eurythmie-Einfärbung wie Mobile. */
+  /* Desktop: weniger Blur (Foto bleibt rechts deutlich sichtbar),
+     gleicher dezenter Filter wie Mobile — Lehm + Türkis dürfen leuchten. */
   @media (min-width: 1024px) {
     .hero::before {
-      filter: blur(2px) saturate(0.55) brightness(0.98) sepia(0.20) hue-rotate(335deg);
+      filter: blur(2px) saturate(0.78) brightness(1);
       opacity: 0.85;
     }
     .hero::after {
