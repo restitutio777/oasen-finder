@@ -32,10 +32,10 @@ const text = localized(config?.newsletter?.text) || 'Eine leise Notiz, wenn etwa
 const widgetId = `substack-embed-${variant}`;
 
 // Newsletter sitzt auf der Landing als letzte Section vor dem Footer.
-// bg-warm (Peach-Cream — gleicher Ton wie die Räume-Section) — schafft
-// einen ruhigen Schluss-Akkord vor dem Warm-Grey-Footer und vereinheitlicht
-// die zwei Peach-Tones der Landing zu einer Familie.
-const bgColor = variant === 'landing' ? 'var(--bg-warm)' : 'var(--bg-base)';
+// Leicht kühler Ton (#ebe5e2 — zwischen Peach und Warm-Grau, mit
+// minimalem Rose-Hauch). Schafft einen sanften Übergang zum Warm-Grey-
+// Footer darunter und ist gleichzeitig kühler als der reine Peach.
+const bgColor = variant === 'landing' ? '#ebe5e2' : 'var(--bg-base)';
 ---
 
 <section style={`padding: 5rem 0; background: ${bgColor};`}>

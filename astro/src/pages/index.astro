@@ -73,35 +73,35 @@ const mantra: string | undefined = localized(about?.mantra);
       dem Mantra. Was die Seite ist, was sie will. Verweise auf
       hörBAR und lesBAR sind direkte Anker auf die zwei
       „Schätze-Räume". */}
-  <section class="purpose-intro">
-    <div class="container">
-      <h2 class="purpose-intro__heading">
-        Diese <span class="purpose-intro__heading-bold">WEBSEITE</span>
-        <em>dient zweierlei:</em>
-      </h2>
-      <p class="purpose-intro__body">
-        Sie ist ein Versuch, die Schätze zu bergen und zu teilen, die
-        ich bisher finden durfte: Willkommen dazu in der
-        <a href="/hoerbar/" class="purpose-intro__link" style="color: var(--accent-deep);">hörBAR</a>
-        und
-        <a href="/lesbar/" class="purpose-intro__link" style="color: var(--neutral);">lesBAR</a>.
-      </p>
-      <p class="purpose-intro__body">
-        Sie ist aber auch eine Einladung mitzukommen auf diese Reise
-        zueinander, die uns alle betrifft.
-      </p>
+  {/* Purpose + Mantra als Pair: auf Desktop nebeneinander (Grid),
+      auf Mobile gestapelt. Mantra wirkt als Atemzeichen-Annotation
+      neben der Webseite-Statement. */}
+  <section class="intro-pair">
+    <div class="container intro-pair__grid">
+      <div class="intro-pair__col">
+        <h2 class="purpose-intro__heading">
+          Diese <span class="purpose-intro__heading-bold">WEBSEITE</span>
+          <em>dient zweierlei:</em>
+        </h2>
+        <p class="purpose-intro__body">
+          Sie ist ein Versuch, die Schätze zu bergen und zu teilen, die
+          ich bisher finden durfte: Willkommen dazu in der
+          <a href="/hoerbar/" class="purpose-intro__link" style="color: var(--accent-deep);">hörBAR</a>
+          und
+          <a href="/lesbar/" class="purpose-intro__link" style="color: var(--neutral);">lesBAR</a>.
+        </p>
+        <p class="purpose-intro__body">
+          Sie ist aber auch eine Einladung mitzukommen auf diese Reise
+          zueinander, die uns alle betrifft.
+        </p>
+      </div>
+      {mantra && (
+        <div class="intro-pair__col intro-pair__col--mantra">
+          <blockquote class="mantra__text">„{mantra}"</blockquote>
+        </div>
+      )}
     </div>
   </section>
-
-  {/* Leitfrage / Mantra — folgt jetzt nach dem Zweck-Intro. Text
-      kommt aus Sanity (about.mantra). */}
-  {mantra && (
-    <section class="mantra">
-      <div class="container">
-        <blockquote class="mantra__text">„{mantra}"</blockquote>
-      </div>
-    </section>
-  )}
 
   {/* „Der rote Faden" mit Notizen-Vorschau wurde von der Landing
       entfernt — Mantra + Räume-Übersicht tragen den Einstieg jetzt
@@ -116,7 +116,7 @@ const mantra: string | undefined = localized(about?.mantra);
       `id="raeume"` ist Scroll-Anchor für den Hero-CTA „Wohin dann?".
       `scroll-margin-top` sorgt dafür, dass die Section nicht unter
       dem sticky Site-Header landet. */}
-  <section id="raeume" style="padding: 5rem 0; background: #ece8e6; scroll-margin-top: 80px;">
+  <section id="raeume" style="padding: 5rem 0; background: #f1edec; scroll-margin-top: 80px;">
     <div class="container">
       <header style="max-width: 720px; margin: 0 auto 3rem; text-align: center;">
         <span class="eyebrow">Räume</span>
@@ -219,22 +219,42 @@ const mantra: string | undefined = localized(about?.mantra);
        Dezenter Plum-Wash gibt der Section einen eigenen Klang
        („Bühnen-Atmosphäre"), italic Cormorant, Plum-Linie als
        Atemzeichen. */
-    .mantra {
-      padding: 4rem 0 5rem;
-      background: rgba(138, 108, 170, 0.10);
+    /* Intro-Pair: Purpose-Statement und Mantra-Zitat. Auf Mobile
+       stacked (Mantra unter Purpose), auf Desktop nebeneinander
+       in zwei Spalten. Mantra ist die kleinere Atemzeichen-
+       Annotation rechts. */
+    .intro-pair {
+      padding: 5rem 0 4rem;
+      background: var(--bg-base);
     }
-    .mantra .container {
-      /* Links am Container statt zentriert — Block sitzt am gleichen
-         linken Rand wie der Hero-Content. */
-      max-width: 760px;
-      margin-left: 0;
+    .intro-pair__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (min-width: 1024px) {
+      .intro-pair__grid {
+        /* Purpose etwas breiter als Mantra — visuelles Gewicht
+           bleibt bei der Webseite-Statement, Mantra atmet als Anker
+           rechts. */
+        grid-template-columns: 1.25fr 1fr;
+        gap: 4rem;
+      }
+    }
+    .intro-pair__col--mantra {
+      /* Mantra hat die Plum-Linie oben (siehe .mantra__text::before),
+         braucht keinen weiteren Container-Style. Auf Desktop sitzt
+         es bündig mit dem Heading-Top der Purpose-Spalte. */
     }
     .mantra__text {
       margin: 0;
       font-family: var(--font-display);
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+      /* Kleiner als der Purpose-Body — Mantra ist Anker, nicht
+         Hauptinhalt. */
+      font-size: clamp(1.15rem, 1.8vw, 1.5rem);
       line-height: 1.55;
       color: var(--text-primary);
       text-align: left;
@@ -254,17 +274,6 @@ const mantra: string | undefined = localized(about?.mantra);
       background: var(--accent-deep);
     }
 
-    /* Zweck-Intro — Eingangs-Lese-Block direkt nach dem Hero.
-       Linksbündig wie der Hero, gross, ruhiger Cormorant — soll als
-       ruhige Stimme die Seite öffnen, bevor das Mantra folgt. */
-    .purpose-intro {
-      padding: 5rem 0 3rem;
-      background: var(--bg-base);
-    }
-    .purpose-intro .container {
-      max-width: 760px;
-      margin-left: 0;
-    }
     .purpose-intro__heading {
       font-family: var(--font-display);
       font-size: clamp(2rem, 4.2vw, 3rem);

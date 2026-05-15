@@ -2125,8 +2125,10 @@
   .site-footer__brand-qualifier {
     font-weight: 500;
     font-style: italic;
-    /* Cream — auf Warm-Grey klar lesbar, harmoniert mit dem Rest des Footer-Texts */
-    color: var(--text-inverse);
+    /* Coral wie im Header-Logo — auf Warm-Grey braucht der Coral
+       eine hellere Variante (#e8a3b5 statt --accent #d08197) für
+       genug Kontrast, analog zum hellen Champagne der Wortmarke. */
+    color: #e8a3b5;
   }
   .site-footer__intro {
     font-family: var(--font-display);
