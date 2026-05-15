@@ -17,14 +17,22 @@ const path = Astro.url.pathname;
 // (machBAR), Slate-Blau = Reflexion (lesBAR), Mauve-Rose = Intimität
 // (hörBAR), Sage = leichtfüssig (wunderBAR). Gold bleibt der Brand-
 // Wortmarke und der zentralen Hero-Frage vorbehalten.
+// Eurythmie-Räume-Farben (palette-eurythmie):
+//   Coral-Rosa  schreibBAR · Anker
+//   Mint        bewegBAR   · Bewegung
+//   Altgold     machBAR    · Werkstatt
+//   Warm-Grey   lesBAR     · ruhiger Pol
+//   Aubergine   brauchBAR  · Werkzeuge
+//   Plum        hörBAR     · Intim
+//   Sage tiefer wunderBAR  · leicht
 const roomAccent: Record<string, string> = {
   '/schreibbar': 'var(--accent)',
-  '/bewegbar': 'var(--accent-green)',
+  '/bewegbar': 'var(--accent-blue)',
   '/machbar': 'var(--accent-warm)',
-  '/lesbar': 'var(--accent-blue)',
+  '/lesbar': 'var(--neutral)',
   '/brauchbar': 'var(--text-primary)',
-  '/hoerbar': 'var(--accent-rose)',
-  '/wunderbar': 'var(--accent-green-soft)',
+  '/hoerbar': 'var(--accent-deep)',
+  '/wunderbar': 'var(--accent-green)',
   '/erkennbar': 'var(--text-primary)',
   '/mitkommen': 'var(--accent)',
 };

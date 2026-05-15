@@ -84,7 +84,7 @@ const mantra: string | undefined = localized(about?.mantra);
         ich bisher finden durfte: Willkommen dazu in der
         <a href="/hoerbar/" class="purpose-intro__link" style="color: var(--accent-deep);">hörBAR</a>
         und
-        <a href="/lesbar/" class="purpose-intro__link" style="color: var(--accent-rose);">lesBAR</a>.
+        <a href="/lesbar/" class="purpose-intro__link" style="color: var(--neutral);">lesBAR</a>.
       </p>
       <p class="purpose-intro__body">
         Sie ist aber auch eine Einladung mitzukommen auf diese Reise
@@ -116,7 +116,7 @@ const mantra: string | undefined = localized(about?.mantra);
       `id="raeume"` ist Scroll-Anchor für den Hero-CTA „Wohin dann?".
       `scroll-margin-top` sorgt dafür, dass die Section nicht unter
       dem sticky Site-Header landet. */}
-  <section id="raeume" style="padding: 5rem 0; background: #e8e6e3; scroll-margin-top: 80px;">
+  <section id="raeume" style="padding: 5rem 0; background: var(--bg-warm); scroll-margin-top: 80px;">
     <div class="container">
       <header style="max-width: 720px; margin: 0 auto 3rem; text-align: center;">
         <span class="eyebrow">Räume</span>
@@ -127,12 +127,12 @@ const mantra: string | undefined = localized(about?.mantra);
       <div class="rooms-grid">
         {[
           { slug: 'schreibbar', eyebrow: 'Notizen', stem: 'schreib', desc: 'Datierte Einträge — Notizen, Gedichte, Gedanken aus Reisen, Werkstätten und Lektüren', accent: 'var(--accent)' },
-          { slug: 'bewegbar', eyebrow: 'Reisen', stem: 'beweg', desc: 'Orte, an denen ich war — Ökodörfer, Cohousing-Projekte und gemeinsame Lebensorte, auf einer Karte', accent: 'var(--accent-green)' },
+          { slug: 'bewegbar', eyebrow: 'Reisen', stem: 'beweg', desc: 'Orte, an denen ich war — Ökodörfer, Cohousing-Projekte und gemeinsame Lebensorte, auf einer Karte', accent: 'var(--accent-blue)' },
           { slug: 'machbar', eyebrow: 'Werkstatt', stem: 'mach', desc: 'Werkstatt-Termine zum Mitmachen — drei Themen, im Jahres-Rhythmus', accent: 'var(--accent-warm)' },
-          { slug: 'lesbar', eyebrow: 'Bibliothek', stem: 'les', desc: 'Bücher, Webseiten, Filme, Podcasts und Quellen zu Fragen des Miteinander', accent: 'var(--accent-blue)' },
+          { slug: 'lesbar', eyebrow: 'Bibliothek', stem: 'les', desc: 'Bücher, Webseiten, Filme, Podcasts und Quellen zu Fragen des Miteinander', accent: 'var(--neutral)' },
           { slug: 'brauchbar', eyebrow: 'Werkzeuge', stem: 'brauch', desc: 'Konzepte und Werkzeuge — was sich in der Praxis als hilfreich erweist', accent: 'var(--text-primary)' },
-          { slug: 'hoerbar', eyebrow: 'Audio', stem: 'hör', desc: 'Eingesprochene Reflexionen, Gedichte, Lieder — plus Gespräche mit Menschen, die in Gemeinschaft leben', accent: 'var(--accent-rose)' },
-          { slug: 'wunderbar', eyebrow: 'Kreatives', stem: 'wunder', desc: 'Was nicht in die anderen Räume passt — spielerisch, offen, ungeordnet', accent: 'var(--accent-green-soft)' },
+          { slug: 'hoerbar', eyebrow: 'Audio', stem: 'hör', desc: 'Eingesprochene Reflexionen, Gedichte, Lieder — plus Gespräche mit Menschen, die in Gemeinschaft leben', accent: 'var(--accent-deep)' },
+          { slug: 'wunderbar', eyebrow: 'Kreatives', stem: 'wunder', desc: 'Was nicht in die anderen Räume passt — spielerisch, offen, ungeordnet', accent: 'var(--accent-green)' },
         ].map((room) => (
           <a class="room-card" href={`/${room.slug}/`} style={`--card-accent: ${room.accent};`}>
             <span class="eyebrow room-card__eyebrow">{room.eyebrow}</span>
@@ -217,7 +217,7 @@ const mantra: string | undefined = localized(about?.mantra);
        dezente clay-rote Linie obendrüber als Atemzeichen. */
     .mantra {
       padding: 4rem 0 5rem;
-      background: var(--bg-primary);
+      background: var(--bg-base);
     }
     .mantra .container {
       /* Links am Container statt zentriert — Block sitzt am gleichen
@@ -245,9 +245,9 @@ const mantra: string | undefined = localized(about?.mantra);
       left: 0;
       width: 48px;
       height: 1.5px;
-      /* Slate-Blau statt Clay-Rot — die Mantra-Linie soll meditativ
-         wirken, nicht aktivieren. Echo zum Hero „Auf der Suche —". */
-      background: var(--accent-blue);
+      /* Plum-Linie — Echo zur Hero „Auf der Suche —" und zur
+         hörBAR-Karte. Meditativ statt aktivierend. */
+      background: var(--accent-deep);
     }
 
     /* Zweck-Intro — Eingangs-Lese-Block direkt nach dem Hero.
@@ -255,7 +255,7 @@ const mantra: string | undefined = localized(about?.mantra);
        ruhige Stimme die Seite öffnen, bevor das Mantra folgt. */
     .purpose-intro {
       padding: 5rem 0 3rem;
-      background: var(--bg-primary);
+      background: var(--bg-base);
     }
     .purpose-intro .container {
       max-width: 760px;
@@ -305,7 +305,7 @@ const mantra: string | undefined = localized(about?.mantra);
     }
   </style>
 
-  <section style="padding: 5rem 0; background: var(--bg-primary); text-align: center;">
+  <section style="padding: 5rem 0; background: var(--bg-base); text-align: center;">
     <div class="container" style="max-width: 640px;">
       <span class="eyebrow">Begegnung</span>
       <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 1rem; color: var(--text-primary);">
