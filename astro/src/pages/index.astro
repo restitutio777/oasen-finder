@@ -273,18 +273,65 @@ const mantra: string | undefined = localized(about?.mantra);
         align-items: center;
       }
     }
+    /* Mantra-Spalte: das große Plum-Anführungszeichen als
+       Wasserzeichen oben-links gibt dem Zitat einen Anker und Atem.
+       Die rechte Spalte wirkte vorher wie ein verlorener Footnote-
+       Block — jetzt liest sich's als eigene Mantra-Insel, ohne
+       Box-Look (kein Background, keine Border-Wand). */
+    .intro-pair__col--mantra {
+      position: relative;
+      padding-left: clamp(1.25rem, 3vw, 2.75rem);
+      padding-top: clamp(0.5rem, 2vw, 1.75rem);
+    }
+    .intro-pair__col--mantra::before {
+      content: '„';
+      position: absolute;
+      top: clamp(-3rem, -4vw, -2rem);
+      left: clamp(-0.5rem, -0.5vw, -0.25rem);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(6rem, 11vw, 10rem);
+      line-height: 1;
+      color: var(--accent-deep);
+      opacity: 0.18;
+      pointer-events: none;
+      user-select: none;
+    }
+    /* Feiner Plum-Strich am Ende des Zitats — Atemzeichen, das den
+       Mantra-Block visuell abschließt. */
+    .intro-pair__col--mantra::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 1.5px;
+      background: var(--accent-deep);
+      opacity: 0.4;
+      margin: clamp(1rem, 1.6vw, 1.4rem) 0 0;
+    }
     .mantra__text {
       margin: 0;
       font-family: var(--font-display);
       font-style: italic;
       font-weight: 400;
-      /* Kleiner als der Purpose-Body — Mantra ist Anker, nicht
-         Hauptinhalt. */
-      font-size: clamp(1.15rem, 1.8vw, 1.5rem);
-      line-height: 1.55;
-      color: var(--text-primary);
+      /* Eine Spur größer und weicher: Mantra darf jetzt klingen,
+         nicht flüstern. Color auf --text-body (gedämpftes Plum)
+         statt hartem Text-Primary — passt zur meditativen Stimmung. */
+      font-size: clamp(1.3rem, 2.1vw, 1.7rem);
+      line-height: 1.5;
+      color: var(--text-body);
       text-align: left;
       letter-spacing: -0.005em;
+    }
+    /* Auf Mobile: Mantra steht unter dem Purpose-Text, die großen
+       Anführungszeichen sind dort eher Schmuck als Anker. Padding
+       kleiner halten, sonst wird's links unnötig breit. */
+    @media (max-width: 1023px) {
+      .intro-pair__col--mantra::before {
+        font-size: clamp(5rem, 18vw, 8rem);
+        top: -2rem;
+        opacity: 0.15;
+      }
     }
 
     .purpose-intro__heading {
