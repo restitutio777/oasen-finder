@@ -184,16 +184,21 @@
     flex-shrink: 1;
     min-width: 0;
   }
-  /* Brand-Mark — kreisförmige Sechs-Figuren-Illustration vor der
-     gestackten Wortmarke. Vertical geflipped via scaleY(-1) damit
-     die „offene" Seite des Kreises nach unten zeigt. Brightness-
-     Filter hebt das Logo etwas auf — wirkt frischer. */
+  /* Brand-Mark — kreisförmige Sechs-Figuren-Illustration. Vertikal
+     geflipped (scaleY(-1)) damit die „offene" Seite nach unten
+     zeigt, und in Champagne-Gold eingefärbt (--accent #c89a78) so
+     dass das Logo eine Einheit mit der Gold-Wortmarke „WERKSTATT"
+     bildet — bunte Original-Figuren werden auf einen Brand-Anker-
+     Ton reduziert.
+     Filter-Kette: brightness(0) macht das Bild komplett schwarz,
+     dann invert+sepia+hue-rotate+saturate tönt es zu Champagne-
+     Gold. */
   .brand__mark {
-    width: clamp(42px, 4.2vw, 54px);
-    height: clamp(42px, 4.2vw, 54px);
+    width: clamp(30px, 3vw, 38px);
+    height: clamp(30px, 3vw, 38px);
     flex-shrink: 0;
     display: block;
-    filter: brightness(1.12) saturate(0.95);
+    filter: brightness(0) saturate(100%) invert(64%) sepia(40%) saturate(580%) hue-rotate(355deg) brightness(95%);
     transform: scaleY(-1);
   }
   /* Wort-Stack: WERKSTATT oben, Gemeinschaft drunter — kompakt
@@ -221,10 +226,10 @@
     font-weight: 500;
     font-style: italic;
     color: var(--accent-blue);
-    /* Unter WERKSTATT etwas kleiner (Sub-Wortmarke) und mit Letter-
-       Spacing als Echo zum WERKSTATT-Tracking — wirkt wie ein
-       balancierter Untertitel statt einer separaten Zeile. */
-    font-size: 0.72em;
+    /* Unter WERKSTATT — größer als reine Sub-Beschriftung, fast
+       gleichwertig zur Hauptzeile. Cormorant Italic hat ohnehin
+       schmalere Anmutung als das bold-CAPS WERKSTATT. */
+    font-size: 0.92em;
     letter-spacing: 0.005em;
   }
   /* Footer-Brand-Override wird nicht mehr gebraucht, seit der Header
