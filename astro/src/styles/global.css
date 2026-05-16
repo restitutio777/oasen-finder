@@ -467,16 +467,14 @@
     content: '';
     position: absolute;
     inset: -60px;
-    /* Hero: Keramik-Werkstatt im Weitwinkel — das Bild von Katharinas
-       Atelier mit dem türkisblauen Vorhang in der Mitte, mehreren
-       werkenden Menschen am Tisch und den Lehm-Skulpturen im Vorder-
-       grund. Das Türkis im Vorhang und den Schrank-Türen echo't
-       eindeutig --accent-blue, die Lehm- und Holztöne harmonieren
-       mit Champagne-Gold (--accent) — die Eurythmie-v4-Palette
-       wird vom Bild selbst getragen, kein Filter-Trick nötig. */
-    background-image: url('/hero/werkstatt-keramik.jpg');
+    /* Hero: Sonnenblumenfeld im Gegenlicht — Katharinas Wunsch
+       vom 16.05.: „Sonnenblumenbild oder Ährenbild". Das warme
+       Sonnenuntergangs-Licht trägt die Eurythmie-Palette (Gold +
+       Sommer-Wärme), die Sonnenblumen-Mitte echo't den Champagne-
+       Anker, der weiche Himmel hinten gibt Atem. */
+    background-image: url('/hero/sonnenblumen.jpg');
     background-size: cover;
-    background-position: center 45%;
+    background-position: center 55%;
     /* Warm-gestimmt aber nicht entsättigt: Sättigung leicht zurück
        (0.82 war zu blass — Vorhang wirkte fast farblos), sepia
        reduziert (0.10 → 0.06) damit kein Gelb-Stich entsteht. Die
@@ -548,15 +546,26 @@
           rgba(110, 75, 50, 0.26) 100%);
     }
   }
+  /* Hero-Komposition mittig — Katharinas Wunsch 16.05.
+     Vorher Grid mit Main links + Meta-Block rechts. Jetzt vertikal
+     gestapelt, alles zentriert: Claim → Headline → Subtitle → CTAs
+     → Begegnungs-Block. Der Meta-Block bleibt als kleiner zentrier-
+     ter Block unter den CTAs, optisch wie ein Anker-Pin. */
   .hero__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: clamp(24px, 4vw, 64px);
-    align-items: end;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(20px, 3vw, 36px);
   }
-  .hero__main { max-width: 1000px; }
+  .hero__main {
+    max-width: 880px;
+    /* Auto-margins überflüssig wegen align-items: center am Parent,
+       aber sicherheitshalber. */
+    margin: 0 auto;
+  }
   .hero__eyebrow {
-    margin-bottom: 32px;
+    margin: 0 auto 28px;
     color: var(--text-secondary);
     font-weight: 500;
     /* Eyebrow wird zum Claim — mixed-case, italic Cormorant fuer Ruhe */
@@ -567,10 +576,23 @@
     font-style: italic;
     line-height: 1.5;
     max-width: 640px;
+    /* inline-flex bleibt — zentriert wird durch text-align: center
+       des Parents. */
   }
   .hero__eyebrow::before {
     /* Strich verkuerzen, weil Eyebrow jetzt langer Text ist */
     width: 18px;
+  }
+  /* Symmetrischer Strich auch hinten — Katharinas Wunsch
+     („langer Gedankenstrich vorn UND hinten"). Beide Striche
+     rahmen den Claim wie ein Atemzeichen. */
+  .hero__eyebrow::after {
+    content: '';
+    width: 18px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.6;
+    flex-shrink: 0;
   }
   /* WERK-Silbe in Honig-Gold — gleiche Familie wie "Gemeinschaft?" und CTAs.
      Generische Klasse, ueberall einsetzbar (Header-Brand, Eyebrow, Footer).
@@ -715,12 +737,15 @@
     margin-top: clamp(28px, 4vw, 44px);
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 28px;
     flex-wrap: wrap;
   }
   .hero__meta {
-    align-self: end;
-    text-align: right;
+    /* Begegnungs-Pin im mittigen Hero-Layout: kleiner zentrierter
+       Block unter den CTAs, nicht mehr rechts an der Seite. */
+    align-self: center;
+    text-align: center;
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -729,9 +754,9 @@
     white-space: nowrap;
     text-decoration: none;
     transition: color var(--t-fast) var(--ease);
-    display: block;
-    /* subtle cream wash so it stays readable when the photo shows through */
-    padding: 14px 18px;
+    display: inline-block;
+    /* Cream-Wash damit der Block lesbar bleibt wenn das Foto durchscheint */
+    padding: 14px 22px;
     border-radius: 4px;
     background: rgba(251, 246, 243, 0.7);
     backdrop-filter: blur(6px);
@@ -764,9 +789,8 @@
   }
 
   @media (max-width: 720px) {
-    .hero__inner { grid-template-columns: 1fr; }
-    /* Meta-Capsule (Naechste Begegnung) auf Mobile weg — Info kommt
-       prominent in der machBAR, im Hero war sie ein Anhaengsel */
+    /* Meta-Capsule (Nächste Begegnung) auf Mobile weg — Info kommt
+       prominent in der machBAR, im Hero war sie ein Anhängsel. */
     .hero__meta { display: none; }
     /* Mobile: Foto nach rechts geschoben, sodass das Hauptmotiv
        (Vorhang + werkende Menschen) im rechten Bildbereich sichtbar
@@ -799,13 +823,12 @@
           rgba(251, 246, 243, 0.45) 90%,
           rgba(251, 246, 243, 0.15) 100%);
     }
-    /* Mobile CTAs: beide als richtige Buttons, aber intrinsic width
-       (nicht full-width). Coral-Primary bekommt Transparenz, damit
-       das Foto durchscheint und der Hero atmen kann. Ghost mit
-       dichtem Cream-bg + kräftigem Border für Lesbarkeit. */
+    /* Mobile CTAs: vertikal gestapelt, zentriert (Hero ist seit
+       16.05. mittig — auch Mobile). Beide als richtige Buttons,
+       intrinsic width. */
     .hero__cta-row {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       gap: 12px;
       margin-top: 32px;
     }
