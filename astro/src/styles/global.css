@@ -2196,6 +2196,44 @@
   }
   .site-footer__nav a:hover,
   .site-footer__contact a:hover { color: #ffffff; text-decoration: underline; }
+
+  /* Aufklappbare „Mehr Räume"-Sektion im Footer — die ersten drei
+     BARs (schreib/beweg/mach) bleiben immer sichtbar als Quick-
+     Zugang, die restlichen sechs Links sind hinter einem Toggle
+     versteckt. Hält die Footer-Spalte kompakter, bei Bedarf voll. */
+  .site-footer__more {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .site-footer__more-toggle {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 14px;
+    user-select: none;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color var(--t-fast) var(--ease);
+    /* Safari-spezifischer Marker-Reset */
+  }
+  .site-footer__more-toggle::-webkit-details-marker {
+    display: none;
+  }
+  .site-footer__more-toggle::after {
+    content: '+';
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1;
+    transition: transform var(--t-fast) var(--ease);
+  }
+  .site-footer__more[open] .site-footer__more-toggle::after {
+    content: '−';
+  }
+  .site-footer__more-toggle:hover {
+    color: #ffffff;
+  }
   .site-footer__contact { display: flex; flex-direction: column; gap: 9px; font-size: 14px; }
   .site-footer__contact em {
     font-family: var(--font-display);
