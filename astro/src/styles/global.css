@@ -476,14 +476,13 @@
     background-image: url('/hero/werkstatt-keramik.jpg');
     background-size: cover;
     background-position: center 45%;
-    /* Warm-gestimmter Filter: Sättigung leicht runter damit der
-       Türkis-Vorhang im Bild nicht dominiert (war zu kühl), sepia
-       gibt einen sanften gold-warmen Schimmer drüber, ohne dass
-       das Bild gelb wirkt. Brightness/Contrast leicht hoch wie
-       vorher. Mobile-Blur niedrig — Resize über Breakpoint soll
-       nicht schlagartig unscharf werden. */
-    filter: blur(5px) saturate(0.82) sepia(0.10) brightness(1.06) contrast(1.04);
-    opacity: 0.82;
+    /* Warm-gestimmt aber nicht entsättigt: Sättigung leicht zurück
+       (0.82 war zu blass — Vorhang wirkte fast farblos), sepia
+       reduziert (0.10 → 0.06) damit kein Gelb-Stich entsteht. Die
+       eigentliche Wärme kommt aus dem Wash drüber, nicht aus dem
+       Bild-Filter. Mobile-Blur niedrig — Resize-Sprung vermeiden. */
+    filter: blur(5px) saturate(0.92) sepia(0.06) brightness(1.05) contrast(1.04);
+    opacity: 0.85;
     z-index: -2;
   }
   /* Vertical sweep — Cream-Sand oben, durch Coral-Wärme, zu tiefem Plum.
@@ -518,38 +517,34 @@
      nicht in den Mobile-Heavy-Blur fallen. */
   @media (min-width: 900px) {
     .hero::before {
-      /* Desktop: gleicher warm-Filter wie Mobile, nur weniger Blur
-         für scharfe Details. Türkis-Vorhang wird gedämpft, sepia
-         legt einen warm-goldenen Schleier drüber — Bild bleibt klar
-         erkennbar, aber dominiert nicht mehr mit Kühl-Tönen. */
-      filter: blur(1.5px) saturate(0.82) sepia(0.10) brightness(1.06) contrast(1.04);
-      opacity: 0.90;
+      /* Desktop: dezenter Warm-Filter, Bild bleibt klar erkennbar —
+         Vorhang behält etwas Türkis, Lehm + Holz leben. Der Wash
+         drüber trägt die Wärme. */
+      filter: blur(1.5px) saturate(0.92) sepia(0.06) brightness(1.05) contrast(1.04);
+      opacity: 0.92;
     }
     .hero::after {
       background:
-        /* Cream-Sand wash links — etwas breiter und dichter, damit
-           die Text-Spalte deutlich auf warmem Boden ruht. */
+        /* Cream-Sand wash links — die Text-Spalte ruht auf warmem
+           Boden, rechts läuft er sanft aus. */
         radial-gradient(ellipse 78% 140% at 18% 50%,
-          rgba(251, 246, 243, 0.98) 0%,
-          rgba(251, 246, 243, 0.95) 34%,
-          rgba(251, 246, 243, 0.74) 60%,
-          rgba(251, 246, 243, 0.38) 80%,
-          rgba(251, 246, 243, 0.14) 94%),
-        /* Champagne-Wärme quer über die ganze Sektion — kräftiger
-           als zuvor (0.04→0.10, 0.14→0.22) damit die rechte Bild-
-           hälfte mit dem Türkis einen warm-goldenen Schleier
-           bekommt statt freizustehen. */
+          rgba(251, 246, 243, 0.97) 0%,
+          rgba(251, 246, 243, 0.93) 34%,
+          rgba(251, 246, 243, 0.7) 60%,
+          rgba(251, 246, 243, 0.34) 80%,
+          rgba(251, 246, 243, 0.1) 94%),
+        /* Champagne-Wärme quer über die ganze Sektion. */
         linear-gradient(110deg,
           rgba(200, 154, 120, 0.10) 0%,
           rgba(200, 154, 120, 0.22) 100%),
-        /* Vertikaler Sweep · Cream → Altgold (stärker) → tiefes Plum.
-           Gold-Mid-Anteil hoch von 0.12/0.16 auf 0.18/0.24 — die
-           mittlere Bildzone bekommt einen klaren Gold-Wash. */
+        /* Vertikaler Sweep · Cream → Altgold → warm-Plum.
+           Plum-Endwert leicht reduziert (0.32 → 0.26) damit das
+           untere Bildviertel nicht zu kühl-blau-violett kippt. */
         linear-gradient(180deg,
-          rgba(251, 246, 243, 0.35) 0%,
+          rgba(251, 246, 243, 0.30) 0%,
           rgba(200, 154, 120, 0.18) 35%,
           rgba(200, 154, 120, 0.24) 65%,
-          rgba(45, 36, 53, 0.32) 100%);
+          rgba(110, 75, 50, 0.26) 100%);
     }
   }
   .hero__inner {
@@ -774,12 +769,11 @@
     .hero__meta { display: none; }
     /* Mobile: Foto nach rechts geschoben, sodass das Hauptmotiv
        (Vorhang + werkende Menschen) im rechten Bildbereich sichtbar
-       bleibt und der linke Bereich — wo die Schrift steht — eher
-       die ruhigen Wand- und Schrank-Bereiche zeigt. Warm-Filter wie
-       Desktop (saturate runter, sepia rein) gegen Türkis-Dominanz. */
+       bleibt. Warm-Filter wie Desktop, aber Bild bleibt erkennbar —
+       Sättigung knapp unter neutral, Sepia minimal. */
     .hero::before {
-      opacity: 0.70;
-      filter: blur(4px) saturate(0.82) sepia(0.10) brightness(1.06) contrast(1.04);
+      opacity: 0.74;
+      filter: blur(4px) saturate(0.92) sepia(0.06) brightness(1.05) contrast(1.04);
       background-position: 78% 50%;
     }
     /* Cream-Wash auf Mobile: dichter und weiter ausgedehnt, weil
