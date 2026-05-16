@@ -40,20 +40,24 @@ const widgetId = `substack-embed-${variant}`;
 const bgColor = variant === 'landing' ? 'var(--bg-warm-soft)' : 'var(--bg-base)';
 ---
 
-<section style={`padding: 5rem 0; background: ${bgColor};`}>
-  <div class="container" style="max-width: 640px; text-align: center;">
-    <span class="eyebrow">Newsletter</span>
-    <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 1rem; color: var(--text-primary);">
-      {label}
+<section class="newsletter-section" style={`background: ${bgColor};`}>
+  <div class="container newsletter-section__inner">
+    <span class="eyebrow eyebrow--balanced newsletter-section__eyebrow">Newsletter</span>
+    <h2 class="newsletter-section__title">
+      {label.split(' ').map((word: string, i: number, arr: string[]) =>
+        i === arr.length - 1
+          ? <em>{word}</em>
+          : <>{word}{' '}</>
+      )}
     </h2>
-    <p style="color: var(--text-secondary); margin: 0 auto 2rem; font-size: 17px; line-height: 1.6; max-width: 520px;">
+    <p class="newsletter-section__lead">
       {text}
     </p>
 
     {/* Substack custom widget mount-point */}
     <div id={widgetId} class="substack-embed"></div>
 
-    <p style="margin-top: 1rem; font-size: 13px; color: var(--text-muted);">
+    <p class="newsletter-section__fine">
       Versand über Substack. Du kannst dich jederzeit abmelden.
     </p>
   </div>
@@ -87,6 +91,46 @@ const bgColor = variant === 'landing' ? 'var(--bg-warm-soft)' : 'var(--bg-base)'
 </script>
 
 <style>
+  .newsletter-section {
+    padding: 3.5rem 0 5rem;
+  }
+  .newsletter-section__inner {
+    max-width: 640px;
+    text-align: center;
+  }
+  .newsletter-section__eyebrow {
+    color: var(--accent-deep);
+  }
+  .newsletter-section__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    margin: 0.8rem 0 1.25rem;
+  }
+  .newsletter-section__title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent-deep);
+    /* Letztes Wort der Headline italic + Plum — gibt der Zeile
+       eine geschwungene Schluss-Geste, ähnlich „Mitkommen". */
+  }
+  .newsletter-section__lead {
+    color: var(--text-body);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    line-height: 1.55;
+    margin: 0 auto 2rem;
+    max-width: 520px;
+  }
+  .newsletter-section__fine {
+    margin-top: 1rem;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
   .substack-embed {
     max-width: 480px;
     margin: 0 auto;

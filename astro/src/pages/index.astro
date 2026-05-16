@@ -399,24 +399,86 @@ const mantra: string | undefined = localized(about?.mantra);
   </style>
 
   {/* Mitkommen: zarter Peach-Cream-Wash, derselbe Ton wie die
-      Räume-Section (--bg-warm-soft). Hält die Section in der warmen
-      Familie, ohne mit dem Gold-CTA zu konkurrieren. Eyebrow in
-      Plum gibt einen kühlen Akzentpunkt — die Komplementärspannung
-      lebt jetzt zwischen Eyebrow (Plum) und Button (Gold), nicht
-      im flächigen Background. */}
-  <section style="padding: 5rem 0; background: var(--bg-warm-soft); text-align: center;">
-    <div class="container" style="max-width: 640px;">
-      <span class="eyebrow" style="color: var(--accent-deep);">Begegnung</span>
-      <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 1rem; color: var(--text-primary);">
-        Mitkommen
+      Räume-Section. Eyebrow mit beidseitigem Strich, Headline mit
+      Italic-Schwung, dezentes Ornament unten als Brücke zum
+      Newsletter darunter — sonst wirkten die zwei zentrierten
+      Sections wie eine leere Cream-Wüste. */}
+  <section class="meet-section">
+    <div class="container meet-section__inner">
+      <span class="eyebrow eyebrow--balanced meet-section__eyebrow">Begegnung</span>
+      <h2 class="meet-section__title">
+        <em>Mitkommen</em>
       </h2>
-      <p style="color: var(--text-secondary); margin: 0 0 2rem; font-size: 17px; line-height: 1.6;">
+      <p class="meet-section__lead">
         Werkstatt, Einladung, Beratung, Gespräch — schreib mir, was du brauchst.
         Ich antworte gern, wenn auch nicht immer schnell.
       </p>
       <a href="/mitkommen/" class="btn btn--primary">Kontakt →</a>
     </div>
+    {/* Atemzeichen-Ornament — drei dezente Plum-Punkte als visuelle
+        Brücke zur Newsletter-Section darunter. */}
+    <div class="meet-section__divider" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
   </section>
+  <style>
+    .meet-section {
+      padding: 5rem 0 3.5rem;
+      background: var(--bg-warm-soft);
+      text-align: center;
+    }
+    .meet-section__inner {
+      max-width: 640px;
+    }
+    .meet-section__eyebrow {
+      color: var(--accent-deep);
+    }
+    .meet-section__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+      margin: 0.8rem 0 1.25rem;
+    }
+    .meet-section__title em {
+      font-style: italic;
+      font-weight: 400;
+      /* „Mitkommen" als geschwungene Wortmarke — italic Cormorant
+         trägt die einladende Geste. */
+    }
+    .meet-section__lead {
+      color: var(--text-body);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+      line-height: 1.55;
+      margin: 0 auto 2.25rem;
+      max-width: 520px;
+    }
+    .meet-section__divider {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      padding: 3rem 0 0;
+      background: var(--bg-warm-soft);
+    }
+    .meet-section__divider span {
+      display: block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent-deep);
+      opacity: 0.35;
+    }
+    .meet-section__divider span:nth-child(2) {
+      width: 5px;
+      height: 5px;
+      opacity: 0.5;
+    }
+  </style>
 
   <NewsletterBlock variant="landing" />
 </BaseLayout>

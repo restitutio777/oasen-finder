@@ -142,6 +142,17 @@
     background: currentColor;
     opacity: 0.6;
   }
+  /* Modifier für zentrierte Eyebrows: zweiter Strich auf der
+     rechten Seite, sodass der Eyebrow symmetrisch eingerahmt ist.
+     Auf .eyebrow--balanced setzen wo der Eyebrow mittig steht. */
+  .eyebrow--balanced::after {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
 
   .container { width: 100%; max-width: var(--max-w); margin: 0 auto; padding-inline: var(--gutter); }
 
