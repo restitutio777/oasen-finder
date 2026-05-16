@@ -174,35 +174,37 @@
   }
   .brand {
     font-family: var(--font-display);
-    font-size: clamp(22px, 2.2vw, 28px);
+    font-size: clamp(19px, 1.9vw, 24px);
     letter-spacing: -0.012em;
     line-height: 1;
     color: var(--text-primary);
     display: inline-flex;
     align-items: center;
-    gap: 0.5em;
+    gap: 0.55em;
     flex-shrink: 1;
     min-width: 0;
   }
   /* Brand-Mark — kreisförmige Sechs-Figuren-Illustration vor der
-     gestackten Wortmarke. Etwas größer (clamp 42–54 px) da jetzt
-     vertikal mit zwei Zeilen daneben balanciert. Filter brightness
-     hebt das Logo etwas auf — wirkt frischer. */
+     gestackten Wortmarke. Vertical geflipped via scaleY(-1) damit
+     die „offene" Seite des Kreises nach unten zeigt. Brightness-
+     Filter hebt das Logo etwas auf — wirkt frischer. */
   .brand__mark {
     width: clamp(42px, 4.2vw, 54px);
     height: clamp(42px, 4.2vw, 54px);
     flex-shrink: 0;
     display: block;
     filter: brightness(1.12) saturate(0.95);
+    transform: scaleY(-1);
   }
-  /* Wort-Stack: WERKSTATT oben, Gemeinschaft drunter — bildet mit
-     dem Logo zusammen eine kompakte Einheit. */
+  /* Wort-Stack: WERKSTATT oben, Gemeinschaft drunter — kompakt
+     übereinander, fast bündig (gap leicht negativ damit die zwei
+     Zeilen sich visuell berühren). */
   .brand__words {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    line-height: 1;
-    gap: 0.08em;
+    line-height: 0.95;
+    gap: 0;
   }
   /* „WERKSTATT" als Wortmarke in Champagne-Gold, „Gemeinschaft"
      daneben in Bergsee-Türkis. Klassische Komplementär-Kombi
