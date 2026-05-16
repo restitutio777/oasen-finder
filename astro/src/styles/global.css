@@ -184,23 +184,14 @@
     flex-shrink: 1;
     min-width: 0;
   }
-  /* Brand-Mark — kreisförmige Sechs-Figuren-Illustration vor der
-     Wortmarke. Farbig (bunte Original-Figuren erhalten), aber
-     dezent blasser via saturate-Filter damit's nicht mit den
-     Brand-Akzenten konkurriert. object-fit: contain + aspect-ratio
-     stellt sicher dass die nicht-exakt-quadratische PNG nicht
-     vertikal gestaucht erscheint (echte Rundheit des Kreises).
-     Vertikal geflipped (scaleY(-1)) damit die „offene" Seite des
-     Kreises nach unten zeigt. */
+  /* Brand-Mark — Cormorant „W" mit Swash-Bogen (logo.svg), in
+     Champagne-Gold (--accent) bereits eingefärbt. Behält Natur-
+     Proportionen via height: auto. SVG ist 120×100 (1.2:1). */
   .brand__mark {
-    width: clamp(30px, 3vw, 38px);
-    aspect-ratio: 1;
+    width: clamp(46px, 4.6vw, 58px);
     height: auto;
     flex-shrink: 0;
     display: block;
-    object-fit: contain;
-    filter: brightness(1.1) saturate(0.55);
-    transform: scaleY(-1);
   }
   /* Wort-Stack: WERKSTATT oben, Gemeinschaft drunter — sehr kompakt
      übereinander (line-height 0.85 + negativer margin-top am
