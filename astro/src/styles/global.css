@@ -2129,14 +2129,16 @@
 
   /* ---------- Footer ---------- */
   .site-footer {
-    /* Footer in warmem dunklem Plum-Aubergine — harmoniert mit dem
-       Cream-Peach der Landing oben (kein Kühl-Grau-Bruch mehr). Cream-
-       Text bleibt gut lesbar, Champagne/Sage-Akzente kommen klarer.
-       Vertikale Polster bewusst knapp gehalten — der Footer soll
-       abrunden, nicht thronen. */
+    /* Footer in warmem dunklem Gold-Ocker — harmoniert mit dem
+       Cream-Peach der Landing oben. Vertikale Polster bewusst knapp
+       gehalten — der Footer soll abrunden, nicht thronen.
+       Feine Plum-Saumlinie oben (1 px, sehr niedrige Alpha) als
+       sauberer Abschluss zwischen Cream-Section und Gold-Ocker —
+       statt Gradient-Übergang ein präziser Saum. */
     background: var(--bg-deep);
     color: var(--text-inverse);
     padding: clamp(44px, 5.5vw, 64px) 0 24px;
+    border-top: 1px solid rgba(45, 36, 53, 0.10);
   }
   .site-footer__grid {
     display: grid;
