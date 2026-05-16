@@ -31,7 +31,13 @@ const text = localized(config?.newsletter?.text) || 'Eine leise Notiz, wenn etwa
 // Eindeutige ID, falls die Komponente mehrfach auf der Seite ist
 const widgetId = `substack-embed-${variant}`;
 
-const bgColor = variant === 'landing' ? 'var(--bg-warm)' : 'var(--bg-primary)';
+// Newsletter sitzt auf der Landing als letzte Section vor dem Footer.
+// Hintergrund identisch mit der Mitkommen-Section drüber
+// (--bg-warm-soft) — kein Sprung dazwischen, beide bilden eine
+// ruhige Cream-Zone. Der Footer setzt klar mit Gold-Ocker an, eine
+// feine Plum-Saumlinie (siehe global.css .site-footer) markiert
+// die Trennung sauber. Alle anderen Pages bleiben auf --bg-base.
+const bgColor = variant === 'landing' ? 'var(--bg-warm-soft)' : 'var(--bg-base)';
 ---
 
 <section style={`padding: 5rem 0; background: ${bgColor};`}>
@@ -61,10 +67,10 @@ const bgColor = variant === 'landing' ? 'var(--bg-warm)' : 'var(--bg-primary)';
     buttonText: 'Abonnieren',
     theme: 'custom',
     colors: {
-      primary: '#c08538',     // accent-gold
-      input: '#ffffff',
-      email: '#2c2530',       // text-primary
-      text: '#f6f4ee',         // text-inverse (Button-Text)
+      primary: '#c89a78',     // --accent · Champagne-Gold
+      input: '#ffffff',       // --bg-elevated · pure white
+      email: '#2d2435',       // --text-primary · Aubergine-Plum
+      text: '#fbf6f3',        // --bg-base · warm off-white (Button-Label)
     },
     // Wo soll das Widget eingehängt werden
     target: `#${widgetId}`,

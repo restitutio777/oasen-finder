@@ -17,23 +17,34 @@ const path = Astro.url.pathname;
 // (machBAR), Slate-Blau = Reflexion (lesBAR), Mauve-Rose = Intimität
 // (hörBAR), Sage = leichtfüssig (wunderBAR). Gold bleibt der Brand-
 // Wortmarke und der zentralen Hero-Frage vorbehalten.
+// Eurythmie-Räume-Farben (palette-eurythmie):
+//   Coral-Rosa  schreibBAR · Anker
+//   Mint        bewegBAR   · Bewegung
+//   Altgold     machBAR    · Werkstatt
+//   Warm-Grey   lesBAR     · ruhiger Pol
+//   Aubergine   brauchBAR  · Werkzeuge
+//   Plum        hörBAR     · Intim
+//   Sage tiefer wunderBAR  · leicht
 const roomAccent: Record<string, string> = {
-  '/schreibbar': 'var(--accent)',
-  '/bewegbar': 'var(--accent-green)',
-  '/machbar': 'var(--accent-warm)',
-  '/lesbar': 'var(--accent-blue)',
+  '/schreibbar': 'var(--accent-deep)',  // Plum — meditativ-warm, statt Coral (raus)
+  '/bewegbar': 'var(--accent-blue)',
+  '/machbar': 'var(--accent)',
+  '/lesbar': 'var(--neutral)',
   '/brauchbar': 'var(--text-primary)',
-  '/hoerbar': 'var(--accent-rose)',
-  '/wunderbar': 'var(--accent-green-soft)',
+  '/hoerbar': 'var(--accent-deep)',
+  '/wunderbar': 'var(--accent-green)',
   '/erkennbar': 'var(--text-primary)',
-  '/mitkommen': 'var(--accent)',
+  '/mitkommen': 'var(--accent-blue)',   // Türkis — Echo zum Logo-„Gemeinschaft"
 };
 
 const isActive = (prefix: string): boolean => path === prefix || path.startsWith(prefix + '/');
 const accentFor = (prefix: string): string => roomAccent[prefix] ?? 'var(--accent)';
+// --nav-accent wird IMMER gesetzt (nicht nur bei active), damit jedes
+// Item permanent eine 14px Mini-Subline in seiner Raum-Farbe zeigt.
+// aria-current bleibt nur auf dem aktiven Eintrag.
 const navProps = (prefix: string) => ({
   'aria-current': isActive(prefix) ? 'page' as const : undefined,
-  style: isActive(prefix) ? `--nav-accent: ${accentFor(prefix)};` : undefined,
+  style: `--nav-accent: ${accentFor(prefix)};`,
 });
 
 const dropdownPaths = ['/lesbar', '/brauchbar', '/hoerbar', '/wunderbar', '/erkennbar'];

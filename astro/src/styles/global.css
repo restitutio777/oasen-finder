@@ -3,36 +3,56 @@
      ============================================================ */
 
   :root {
-    /* Cleaner off-white base + clay/forest duality */
-    --bg-base: #f6f4ee;             /* clean warm off-white, weniger Sepia */
-    --bg-elevated: #ffffff;
-    --bg-muted: #ebe8df;
-    --bg-warm: #ebe3d0;             /* warmth in one section */
-    --bg-sage: #d4dfd0;             /* modern sage — confident green moment */
-    --bg-deep: #2c2530;             /* warm aubergine-charcoal */
-    --bg-deep-soft: #38303a;
+    /* ============================================================
+       PALETTE — EURYTHMIE v4
+       ------------------------------------------------------------
+       Eine Farbe — ein Name. Aliase wurden konsolidiert (Coral-
+       Rosa raus, Gold + Türkis-Komplement dominieren).
 
-    --text-primary: #2c2530;          /* warm aubergine, weicher als Schwarz */
-    --text-body: #3a3a3a;
-    --text-secondary: #686b62;
-    --text-muted: #9a9d92;
-    --text-inverse: #f6f4ee;
+       Struktur:
+         1. Backgrounds   — Foundation + warme Peach-Familie + Footer
+         2. Text          — Plum-Hierarchie + Inverse für dunkle Flächen
+         3. Akzente       — Champagne-Gold als Anker, Raum-Farben drumherum
+         4. Borders       — alle aus Text-Primary abgeleitet
+         5. Scoped-Vars   — pro Komponente via inline style gesetzt
+                            (--card-accent in index.astro, --nav-accent in
+                            Header.astro), nicht hier definieren!
 
-    --accent: #a8392b;              /* clay-rot — Wärme-Signatur, klar nach Rot */
-    --accent-hover: #8a2c1e;
-    --accent-soft: #e8b987;         /* warm peach — auf dunklem Grund */
-    --accent-warm: #c98a4a;         /* honig-bronze — Warm-Peach Variante fuer hellen Grund (Hero, Brand) */
-    --accent-gold: #c08538;         /* leuchtendes Honig-Gold — Hero-Frage + CTAs */
-    --accent-gold-hover: #9d6a26;   /* dunklere Variante fuer Hover-States */
-    --accent-rose: #a87a72;         /* gedämpftes Mauve-Rosé — refiniert */
-    --accent-green: #3d6b54;        /* fern — modern */
-    --accent-green-soft: #a3b89e;   /* sage — auf dunklem Grund */
-    --accent-deep: #1f3d2f;         /* deep forest */
-    --accent-blue: #36587a;         /* slate-blau — kühler Komplementär zum Gold, frisch */
+       Neue Farben: in der passenden Gruppe ergänzen, kein Alias.
+       ============================================================ */
 
-    --border-subtle: rgba(31, 29, 26, 0.08);
-    --border-medium: rgba(31, 29, 26, 0.16);
-    --border-on-dark: rgba(246, 244, 238, 0.12);
+    /* — 1. Backgrounds ——————————————————————————————— */
+    --bg-base:      #fbf6f3;  /* Page-Foundation · warm off-white */
+    --bg-elevated:  #ffffff;  /* Karten · reines Weiss */
+    --bg-warm:      #f5ebe5;  /* Peach · Mitkommen-Section */
+    --bg-warm-soft: #f1edec;  /* Peach heller · Räume-Section */
+    --bg-warm-deep: #ebe5e2;  /* Peach tiefer · Newsletter-Übergang zum Footer */
+    --bg-sage:      #dde9d3;  /* helles Frühlingsblatt · gelegentlich */
+    --bg-deep:      #8c6b3a;  /* Footer · warmer Gold-Ocker (Weiß-Text lesbar) */
+    --bg-deep-soft: #ad8954;  /* Gold-Ocker hell · Sub-Backgrounds */
+
+    /* — 2. Text ——————————————————————————————————————— */
+    --text-primary:   #2d2435;  /* Aubergine-Plum · Headlines, Body-Strong */
+    --text-body:      #4a3d5a;  /* gedämpftes Plum · Body */
+    --text-secondary: #6a5a78;  /* Sekundär · Subtitles, Captions */
+    --text-muted:     #8a8290;  /* Lowest hierarchy · Meta, Timestamps */
+    --text-inverse:   #ffffff;  /* auf dunklem Footer / Gold-Ocker */
+
+    /* — 3. Akzente ——————————————————————————————————— */
+    --accent:            #c89a78;  /* CHAMPAGNE-GOLD · Brand-Anker, CTAs, BAR-Marken */
+    --accent-hover:      #a87e5e;  /* Champagne tiefer · Hover */
+    --accent-soft:       #e8d2b5;  /* Champagne hell · auf dunklem Grund */
+    --accent-blue:       #5497b8;  /* BERGSEE-TÜRKIS · bewegBAR, „Gemeinschaft"-Logo */
+    --accent-deep:       #8a6caa;  /* PLUM · schreibBAR, Mantra */
+    --accent-mauve:      #6a4d8a;  /* BERRY-PLUM tiefer · hörBAR (war Plum doppelt mit schreibBAR) */
+    --accent-green:      #6fab5c;  /* FRÜHLINGSBLATT · wunderBAR */
+    --accent-green-soft: #bcddb0;  /* Frühlingsblatt hell · auf dunklem Grund */
+    --neutral:           #9c8a96;  /* Warm-Grey-Lavender · lesBAR, dezente Linien */
+
+    /* — 4. Borders (aus --text-primary abgeleitet) ——— */
+    --border-subtle:  rgba(45, 36, 53, 0.08);
+    --border-medium:  rgba(45, 36, 53, 0.16);
+    --border-on-dark: rgba(251, 246, 243, 0.16);
 
     --font-display: 'Cormorant Garamond', 'Georgia', serif;
     --font-text: 'Inter', system-ui, -apple-system, sans-serif;
@@ -100,7 +120,7 @@
     letter-spacing: -0.015em;
     line-height: 1.08;
   }
-  h1 em, h2 em { font-weight: 500; font-style: italic; color: var(--accent-warm); }
+  h1 em, h2 em { font-weight: 500; font-style: italic; color: var(--accent); }
 
   p { margin: 0; }
 
@@ -130,7 +150,7 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(246, 244, 238, 0.92);
+    background: rgba(251, 246, 243, 0.92);
     backdrop-filter: saturate(140%) blur(10px);
     -webkit-backdrop-filter: saturate(140%) blur(10px);
     border-bottom: 1px solid var(--border-subtle);
@@ -153,19 +173,21 @@
     flex-shrink: 1;
     min-width: 0;
   }
-  /* „WERKSTATT" als geschlossene Wortmarke in Gold (uppercase,
-     bold, kein Italic) — „Gemeinschaft" daneben in Fern-Grün
-     (kursiv Cormorant). Zwei klare Töne, klare Hierarchie. */
+  /* „WERKSTATT" als Wortmarke in Champagne-Gold, „Gemeinschaft"
+     daneben in Bergsee-Türkis. Klassische Komplementär-Kombi
+     (Gold-Orange ↔ Türkis), Katharinas Wahl. Champagne hält die
+     Wortmarken-Trias mit WEBSEITE/BAR, Türkis bringt frischen
+     kühlen Akzent als Brand-Komplement. */
   .brand__noun {
     font-weight: 700;
-    color: var(--accent-gold);
+    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.02em;
   }
   .brand__qualifier {
     font-weight: 500;
     font-style: italic;
-    color: var(--accent-green);
+    color: var(--accent-blue);
   }
   /* Footer-Brand-Override wird nicht mehr gebraucht, seit der Header
      ein einheitliches Markup nutzt — bleibt als Leer-Selektor entfernt. */
@@ -186,11 +208,14 @@
   .nav a::after {
     content: '';
     position: absolute;
-    left: 0; right: 100%;
+    left: 0;
+    /* Default: dezente 14px Mini-Subline (raumspezifische Farbe)
+       als permanenter Color-Code unter jedem Item. Hover/Active
+       animiert auf volle Breite. --nav-accent wird in Header.astro
+       inline auf jedem Item gesetzt (raumspezifisch). */
+    right: calc(100% - 14px);
     bottom: 2px;
     height: 1.5px;
-    /* --nav-accent wird inline auf dem aktiven Eintrag gesetzt
-       (raumspezifisch). Default bleibt clay-rot für Hover. */
     background: var(--nav-accent, var(--accent));
     transition: right var(--t-base) var(--ease);
   }
@@ -226,9 +251,11 @@
   .nav-group__trigger::after {
     content: '';
     position: absolute;
-    left: 0; right: 100%;
-    /* Underline visuell auf Höhe der direkten Nav-Links — etwas unterhalb
-       der Schrift, vor dem Caret. */
+    left: 0;
+    /* Default: 14px Mini-Subline analog zu direkten Nav-Items.
+       Räume-Dropdown bekommt Brand-Coral als Default (nicht raumspezifisch,
+       da sammelnd). Wenn ein Sub-Raum aktiv ist, übernimmt --nav-accent. */
+    right: calc(100% - 14px);
     bottom: 2px;
     height: 1.5px;
     background: var(--nav-accent, var(--accent));
@@ -296,7 +323,7 @@
   .nav-group__menu a::after { display: none; }
   .nav-group__menu a:hover {
     color: var(--accent);
-    background: var(--bg-muted);
+    background: var(--bg-warm);
   }
 
   /* ---------- Mobile hamburger ---------- */
@@ -349,7 +376,12 @@
       opacity: 0;
       visibility: hidden;
       transition: transform 0.3s var(--ease), opacity 0.3s var(--ease), visibility 0.3s;
-      z-index: 50;
+      /* Höher als der Site-Header (z-index 50): das Mobile-Overlay muss
+         eindeutig oberhalb der Header-Bar stacken, sonst kann der
+         backdrop-filter des Headers (eigener Stacking-Context) bei
+         identischem z-index die Touch-Targets der Nav-Items überlagern
+         — Katharinas „man gerät zu falschen Räumen" auf Mobile. */
+      z-index: 60;
       overflow-y: auto;
     }
     .nav.is-open {
@@ -363,10 +395,17 @@
       font-weight: 500;
       text-transform: none;
       letter-spacing: -0.01em;
-      padding: 18px 0;
+      /* Padding hoch von 18 auf 22 — Touch-Target ≥ 60 px (Apple HIG
+         empfiehlt 44 px Minimum, mit 30 px Schrift + 2× 22 px komfortabel
+         drüber). Plus touch-action: manipulation gegen iOS-300 ms-Delay
+         und Ghost-Clicks, die in dichten Listen Klicks auf das Nachbar-
+         Item rutschen lassen. */
+      padding: 22px 0;
       width: 100%;
       border-bottom: 1px solid var(--border-subtle);
       color: var(--text-primary);
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(45, 36, 53, 0.08);
     }
     .nav a::after { display: none; }
     .nav a.is-active {
@@ -406,10 +445,12 @@
       font-weight: 500;
       letter-spacing: -0.01em;
       text-transform: none;
-      padding: 18px 0;
+      padding: 22px 0;
       width: 100%;
       border-bottom: 1px solid var(--border-subtle);
       color: var(--text-primary);
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(45, 36, 53, 0.08);
     }
     .nav-group__menu a:hover { background: transparent; }
     body.nav-open { overflow: hidden; }
@@ -426,63 +467,85 @@
     content: '';
     position: absolute;
     inset: -60px;
-    background-image: url('https://images.unsplash.com/photo-1590880795696-20c7dfadacde?w=2400&q=80&auto=format&fit=crop');
+    /* Hero: Keramik-Werkstatt im Weitwinkel — das Bild von Katharinas
+       Atelier mit dem türkisblauen Vorhang in der Mitte, mehreren
+       werkenden Menschen am Tisch und den Lehm-Skulpturen im Vorder-
+       grund. Das Türkis im Vorhang und den Schrank-Türen echo't
+       eindeutig --accent-blue, die Lehm- und Holztöne harmonieren
+       mit Champagne-Gold (--accent) — die Eurythmie-v4-Palette
+       wird vom Bild selbst getragen, kein Filter-Trick nötig. */
+    background-image: url('/hero/werkstatt-keramik.jpg');
     background-size: cover;
-    background-position: center 60%;
-    /* Foto-Treatment: weicher Blur, leicht entsaettigt, atmosphaerisch.
-       Mobile-Blur auf 5px reduziert (war 12px) — beim Resize über den
-       Breakpoint springt das Foto sonst schlagartig unscharf. */
-    filter: blur(5px) saturate(0.78) brightness(1.05) sepia(0.08);
-    opacity: 0.82;
+    background-position: center 45%;
+    /* Warm-gestimmt aber nicht entsättigt: Sättigung leicht zurück
+       (0.82 war zu blass — Vorhang wirkte fast farblos), sepia
+       reduziert (0.10 → 0.06) damit kein Gelb-Stich entsteht. Die
+       eigentliche Wärme kommt aus dem Wash drüber, nicht aus dem
+       Bild-Filter. Mobile-Blur niedrig — Resize-Sprung vermeiden. */
+    filter: blur(5px) saturate(0.92) sepia(0.06) brightness(1.05) contrast(1.04);
+    opacity: 0.85;
     z-index: -2;
   }
-  /* Wouuchh — vertical sweep: light top, grounded bottom */
+  /* Vertical sweep — Cream-Sand oben, durch Coral-Wärme, zu tiefem Plum.
+     Bühnenlogik: heller Tag oben, Bühnenhintergrund unten. */
   .hero::after {
     content: '';
     position: absolute;
     inset: 0;
     background:
-      /* Cream wash centred on the text area */
-      radial-gradient(ellipse 90% 95% at 22% 42%,
-        rgba(246, 244, 238, 0.96) 0%,
-        rgba(246, 244, 238, 0.7) 32%,
-        rgba(246, 244, 238, 0.32) 60%,
-        transparent 82%),
-      /* Vertical: airy top → warm middle → grounded bottom */
+      /* Cream-Sand wash großzügig genug, dass beide Titel-Zeilen
+         aufgehellt sind — sonst landet „Gemeinschaft?" auf Mobile
+         über Lehm-Tönen und wird schwer lesbar. */
+      radial-gradient(ellipse 130% 115% at 35% 55%,
+        rgba(251, 246, 243, 0.94) 0%,
+        rgba(251, 246, 243, 0.82) 28%,
+        rgba(251, 246, 243, 0.55) 52%,
+        rgba(251, 246, 243, 0.22) 75%,
+        transparent 92%),
+      /* Vertical: Cream oben → Altgold → gedämpftes Plum.
+         Plum-Anteil bewusst reduziert (0.62 → 0.42), damit das
+         untere Titel-Drittel auf Mobile noch atmet. */
       linear-gradient(180deg,
-        rgba(246, 244, 238, 0.5) 0%,
-        rgba(232, 185, 135, 0.32) 35%,
-        rgba(168, 122, 114, 0.4) 65%,
-        rgba(44, 37, 48, 0.62) 100%);
+        rgba(251, 246, 243, 0.4) 0%,
+        rgba(200, 154, 120, 0.18) 35%,
+        rgba(200, 154, 120, 0.22) 65%,
+        rgba(45, 36, 53, 0.42) 100%);
     z-index: -1;
   }
-  /* Tablet + Desktop: less blur, cream-wash concentrated on left text column.
-     Breakpoint auf 900px runter — Split-View / kleinere Laptops landen
-     so nicht im Mobile-Heavy-Blur. */
+  /* Tablet + Desktop: minimaler Blur für scharfe Details, gleich
+     frischer Filter wie Mobile — Lehm + Türkis leuchten klarer.
+     Breakpoint auf 900px runter, damit Split-View / kleinere Laptops
+     nicht in den Mobile-Heavy-Blur fallen. */
   @media (min-width: 900px) {
     .hero::before {
-      filter: blur(2px) saturate(0.78) brightness(1.05) sepia(0.08);
-      opacity: 0.9;
+      /* Desktop: dezenter Warm-Filter, Bild bleibt klar erkennbar —
+         Vorhang behält etwas Türkis, Lehm + Holz leben. Der Wash
+         drüber trägt die Wärme. */
+      filter: blur(1.5px) saturate(0.92) sepia(0.06) brightness(1.05) contrast(1.04);
+      opacity: 0.92;
     }
     .hero::after {
       background:
-        /* Cream wash breiter angesetzt — deckt mehr ab, fadet sanfter */
-        radial-gradient(ellipse 72% 135% at 18% 50%,
-          rgba(246, 244, 238, 0.98) 0%,
-          rgba(246, 244, 238, 0.94) 32%,
-          rgba(246, 244, 238, 0.7) 58%,
-          rgba(246, 244, 238, 0.34) 78%,
-          rgba(246, 244, 238, 0.1) 92%),
-        /* Warm peach overlay for unity */
+        /* Cream-Sand wash links — die Text-Spalte ruht auf warmem
+           Boden, rechts läuft er sanft aus. */
+        radial-gradient(ellipse 78% 140% at 18% 50%,
+          rgba(251, 246, 243, 0.97) 0%,
+          rgba(251, 246, 243, 0.93) 34%,
+          rgba(251, 246, 243, 0.7) 60%,
+          rgba(251, 246, 243, 0.34) 80%,
+          rgba(251, 246, 243, 0.1) 94%),
+        /* Champagne-Wärme quer über die ganze Sektion. */
         linear-gradient(110deg,
-          rgba(232, 185, 135, 0.06) 0%,
-          rgba(232, 185, 135, 0.16) 100%),
-        /* Vertical sweep, much softer for harmony */
+          rgba(200, 154, 120, 0.10) 0%,
+          rgba(200, 154, 120, 0.22) 100%),
+        /* Vertikaler Sweep · Cream → Altgold → warm-Plum.
+           Plum-Endwert leicht reduziert (0.32 → 0.26) damit das
+           untere Bildviertel nicht zu kühl-blau-violett kippt. */
         linear-gradient(180deg,
-          rgba(246, 244, 238, 0.35) 0%,
-          rgba(232, 185, 135, 0.14) 35%,
-          rgba(168, 122, 114, 0.18) 65%,
-          rgba(44, 37, 48, 0.32) 100%);
+          rgba(251, 246, 243, 0.30) 0%,
+          rgba(200, 154, 120, 0.18) 35%,
+          rgba(200, 154, 120, 0.24) 65%,
+          rgba(110, 75, 50, 0.26) 100%);
     }
   }
   .hero__inner {
@@ -516,12 +579,17 @@
   .hero__eyebrow-werk {
     font-style: normal;
     font-weight: 700;
-    color: var(--accent-gold);
+    color: var(--accent);
     letter-spacing: 0;
   }
   /* Nowrap-Wrapper verhindert dass "GemeinschaftsWERK" ueber Zeilenumbruch
-     getrennt wird */
-  .hero__eyebrow-nowrap { white-space: nowrap; }
+     getrennt wird. Margin-right negativ zieht das nachfolgende „statt"
+     enger an WERK heran — sonst wirkt der Wort-Abstand optisch zu gross
+     wegen des bold-Champagne-Sprungs. */
+  .hero__eyebrow-nowrap {
+    white-space: nowrap;
+    margin-right: -0.18em;
+  }
   /* Eyebrow-Lines: auf Desktop inline (eine Zeile, " " als Verbinder),
      auf Mobile zwei kontrollierte Zeilen statt 3-zeiliger Bruch.
      Mobile-Breakpoint: 640px — typische Phone-Portrait-Breite. */
@@ -546,22 +614,23 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    /* Stärker desaturiert + sanfter Sepia-Touch — alle Bilder wirken
-       wie aus derselben Familie, gehen ruhig in die warme Site-Palette
-       über. */
-    filter: saturate(0.5) brightness(0.98) contrast(0.93) sepia(0.1);
+    /* Foto bleibt natürlich — nur eine Spur Desättigung, damit die
+       Bilder im warmen Site-Klang ruhen statt zu schreien. */
+    filter: saturate(0.92);
   }
-  /* Cream-Wash oben + leichter Aubergine-Hauch unten — bindet die
-     Bilder optisch in die Site-Hintergrund-Töne ein. */
+  /* Sehr dezenter Cream-Fade nur an Ober- und Unterkante — bindet
+     den Banner weich in den Cream-Hintergrund ein, ohne das Foto
+     einzudunkeln. Kein Plum mehr unten. */
   .page-banner::after {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(246, 244, 238, 0.20) 0%,
-      rgba(246, 244, 238, 0.04) 35%,
-      rgba(44, 37, 48, 0.14) 100%
+      rgba(251, 246, 243, 0.08) 0%,
+      transparent 18%,
+      transparent 82%,
+      rgba(251, 246, 243, 0.12) 100%
     );
     pointer-events: none;
   }
@@ -575,7 +644,7 @@
     height: 36px;
     border-radius: 50%;
     background: transparent;
-    border: 1px solid rgba(246, 244, 238, 0.20);
+    border: 1px solid rgba(251, 246, 243, 0.20);
     color: var(--text-inverse);
     cursor: pointer;
     transition: background var(--t-fast) var(--ease),
@@ -584,8 +653,8 @@
     font-family: var(--font-text);
   }
   .scroll-to-top:hover {
-    background: rgba(246, 244, 238, 0.08);
-    border-color: rgba(246, 244, 238, 0.40);
+    background: rgba(251, 246, 243, 0.08);
+    border-color: rgba(251, 246, 243, 0.40);
     transform: translateY(-2px);
   }
   .scroll-to-top svg {
@@ -602,18 +671,23 @@
     font-weight: 500;
     font-style: normal;
   }
-  /* "Auf der Suche —" in Slate-Blau — kühler Komplementär, der
-     das warme Gold-Braun darunter visuell auffrischt. */
+  /* „Auf der Suche —" in Bergsee-Türkis — gleicher Ton wie
+     „Gemeinschaft" im Logo, so klingt der Brand-Anker im Hero an. */
   .hero__title-a { color: var(--accent-blue); }
-  /* "wie wird Gemeinschaft?" in leuchtendem Honig-Gold mit weichem Glow */
+  /* „wie wird Gemeinschaft?" in Champagne-Gold — Katharinas
+     Brand-Logik: Gold trägt die Wortmarken-Trias mit WERKSTATT,
+     den BAR-Endungen und „Website". Mit dem Keramik-Atelier-Bild
+     (Türkis-Vorhang mittig statt durchgehend Lehm) hat der Cream-
+     Wash zentral genug Tonruhe, damit das Gold trägt. Sanfter
+     Champagne-Glow drumherum. */
   .hero__title-b {
-    color: var(--accent-gold);
-    text-shadow: 0 0 32px rgba(232, 185, 135, 0.45);
+    color: var(--accent);
+    text-shadow: 0 0 36px rgba(200, 154, 120, 0.35);
   }
   .hero__title em {
     font-style: italic;
     font-weight: 500;
-    color: inherit;  /* erbt von .hero__title-b (Goldbraun) */
+    color: inherit;  /* erbt von .hero__title-b (Champagne-Gold) */
   }
   .hero__lead {
     margin-top: clamp(28px, 4vw, 44px);
@@ -659,13 +733,13 @@
     /* subtle cream wash so it stays readable when the photo shows through */
     padding: 14px 18px;
     border-radius: 4px;
-    background: rgba(246, 244, 238, 0.7);
+    background: rgba(251, 246, 243, 0.7);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
   }
   .hero__meta:hover {
     color: var(--text-primary);
-    background: rgba(246, 244, 238, 0.85);
+    background: rgba(251, 246, 243, 0.85);
   }
   .hero__meta:hover .hero__meta-arrow {
     transform: translateX(4px);
@@ -676,7 +750,8 @@
     font-style: italic;
     font-size: 32px;
     font-weight: 400;
-    color: var(--accent-green);
+    /* „Nächste Begegnung"-Datum in Plum — passt zum Mantra-Strich. */
+    color: var(--accent-deep);
     letter-spacing: -0.01em;
     text-transform: none;
     margin: 6px 0 4px;
@@ -684,7 +759,7 @@
   .hero__meta-arrow {
     display: inline-block;
     margin-left: 4px;
-    color: var(--accent-green);
+    color: var(--accent-deep);
     transition: transform var(--t-base) var(--ease);
   }
 
@@ -693,54 +768,63 @@
     /* Meta-Capsule (Naechste Begegnung) auf Mobile weg — Info kommt
        prominent in der machBAR, im Hero war sie ein Anhaengsel */
     .hero__meta { display: none; }
-    /* Mobile: Foto als sanfte Stimmung, weniger Blur, helle Zone weiter */
+    /* Mobile: Foto nach rechts geschoben, sodass das Hauptmotiv
+       (Vorhang + werkende Menschen) im rechten Bildbereich sichtbar
+       bleibt. Warm-Filter wie Desktop, aber Bild bleibt erkennbar —
+       Sättigung knapp unter neutral, Sepia minimal. */
     .hero::before {
-      opacity: 0.42;
-      filter: blur(10px) saturate(0.65) brightness(1.05) sepia(0.1);
+      opacity: 0.74;
+      filter: blur(4px) saturate(0.92) sepia(0.06) brightness(1.05) contrast(1.04);
+      background-position: 78% 50%;
     }
-    /* Cream-Wash auf Mobile breiter — helle Zone bis ca. 60% statt 35% */
+    /* Cream-Wash auf Mobile: dichter und weiter ausgedehnt, weil
+       die Schrift (besonders „Gemeinschaft?" und der Subtitle-Punkt-
+       Reihe) bis ~88 % Breite reicht. Vorher fadete der Wash schon
+       ab 58 % stark — genau wo „Gemeinschaft?" steht. Jetzt deckt
+       er bis 75 % satt, dann sanftes Auslaufen.
+       1. Horizontaler Wash (95deg) — Text-Bereich klar bis fast
+          zum rechten Rand.
+       2. Vertikaler Gold-Drift unten — Übergang zum nächsten
+          Cream-Block. */
     .hero::after {
       background:
-        linear-gradient(170deg,
-          rgba(246, 244, 238, 0.96) 0%,
-          rgba(246, 244, 238, 0.92) 30%,
-          rgba(246, 244, 238, 0.7) 55%,
-          rgba(232, 185, 135, 0.22) 82%,
-          rgba(168, 122, 114, 0.26) 100%);
+        linear-gradient(180deg,
+          transparent 65%,
+          rgba(200, 154, 120, 0.15) 88%,
+          rgba(200, 154, 120, 0.22) 100%),
+        linear-gradient(95deg,
+          rgba(251, 246, 243, 0.97) 0%,
+          rgba(251, 246, 243, 0.93) 50%,
+          rgba(251, 246, 243, 0.82) 75%,
+          rgba(251, 246, 243, 0.45) 90%,
+          rgba(251, 246, 243, 0.15) 100%);
     }
-    /* CTAs: weicher, sanfter, sekundaerer als Text-Link.
-       Höhere Specificity (.hero__cta-row .btn...) damit das Mobile-Override
-       gewinnt gegen die globalen .btn-Rules, die spaeter im Quellcode kommen */
+    /* Mobile CTAs: beide als richtige Buttons, aber intrinsic width
+       (nicht full-width). Coral-Primary bekommt Transparenz, damit
+       das Foto durchscheint und der Hero atmen kann. Ghost mit
+       dichtem Cream-bg + kräftigem Border für Lesbarkeit. */
     .hero__cta-row {
       flex-direction: column;
       align-items: flex-start;
-      gap: 14px;
+      gap: 12px;
       margin-top: 32px;
     }
     .hero__cta-row .btn {
       border-radius: 8px;
-      padding: 15px 24px;
+      padding: 13px 22px;
+      font-size: 15px;
     }
-    /* "Mitkommen" wird auf Mobile zum Text-Link statt Ghost-Button */
+    /* Primary-Gold auf Mobile solide halten — Champagne ist zu hell,
+       um mit Transparenz auf Lehm-Foto noch genug Kontrast zum
+       weißen Label zu liefern. Lieber kompakter, klarer Button. */
+    .hero__cta-row .btn--primary {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    /* Ghost-Button auf Mobile: dichter Cream-bg + 1.5px Border. */
     .hero__cta-row .btn--ghost {
-      background: transparent;
-      border: 0;
-      padding: 6px 0;
-      color: var(--accent-gold);
-      text-transform: none;
-      letter-spacing: 0;
-    }
-    /* Mobile-Variante des frischen Ghost: gleiches Verhalten, andere Farbe */
-    .hero__cta-row .btn--ghost.btn--fresh {
-      color: var(--accent-green);
-      font-size: 14px;
-    }
-    .hero__cta-row .btn--ghost::after {
-      content: " →";
-    }
-    .hero__cta-row .btn--ghost:hover {
-      background: transparent;
-      color: var(--accent-gold-hover);
+      background: rgba(251, 246, 243, 0.88);
+      border-width: 1.5px;
     }
   }
 
@@ -761,34 +845,35 @@
     cursor: pointer;
   }
   .btn--primary {
-    background: var(--accent-gold);
+    /* Coral-Rosa als Brand-Anker — die warme Aktion der Site. */
+    background: var(--accent);
     color: var(--text-inverse);
-    border-color: var(--accent-gold);
+    border-color: var(--accent);
   }
   .btn--primary:hover {
-    background: var(--accent-gold-hover);
-    border-color: var(--accent-gold-hover);
-    color: var(--bg-base);
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: var(--text-inverse);
   }
   .btn--ghost {
-    background: rgba(246, 244, 238, 0.6);
+    background: rgba(251, 246, 243, 0.6);
     color: var(--text-primary);
-    border-color: var(--accent-gold);
+    border-color: var(--accent);
   }
   .btn--ghost:hover {
-    background: var(--accent-gold);
+    background: var(--accent);
     color: var(--bg-base);
-    border-color: var(--accent-gold);
+    border-color: var(--accent);
   }
-  /* Fern-grüne Ghost-Variante — frischer Akzent neben dem Gold-CTA */
+  /* Mint-Ghost-Variante — kühler Gegenpol zum Coral-Anker */
   .btn--ghost.btn--fresh {
-    color: var(--accent-green);
-    border-color: var(--accent-green);
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
   }
   .btn--ghost.btn--fresh:hover {
-    background: var(--accent-green);
+    background: var(--accent-blue);
     color: var(--bg-base);
-    border-color: var(--accent-green);
+    border-color: var(--accent-blue);
   }
   .btn svg { transition: transform var(--t-base) var(--ease); }
   .btn:hover svg { transform: translateX(4px); }
@@ -815,10 +900,10 @@
   }
   .manifest__line em {
     font-style: italic;
-    color: var(--accent-warm);
+    color: var(--accent);
   }
   .manifest__line span[aria-hidden] {
-    color: var(--accent-rose);
+    color: var(--accent);
     font-style: italic;
     opacity: 0.7;
   }
@@ -937,7 +1022,7 @@
     position: absolute;
     left: 16px; bottom: 16px;
     padding: 8px 14px;
-    background: rgba(246, 244, 238, 0.94);
+    background: rgba(251, 246, 243, 0.94);
     backdrop-filter: blur(6px);
     font-size: 11px;
     letter-spacing: 0.18em;
@@ -958,7 +1043,7 @@
     font-family: var(--font-display);
     font-style: italic;
     font-size: 18px;
-    color: var(--accent-rose);
+    color: var(--accent);
     margin-bottom: 28px;
   }
   .featured__story p {
@@ -1007,7 +1092,7 @@
     padding: 4px 12px;
     font-size: 12px;
     letter-spacing: 0.04em;
-    background: var(--bg-muted);
+    background: var(--bg-warm);
     color: var(--text-secondary);
     border-radius: 100px;
   }
@@ -1045,7 +1130,7 @@
     letter-spacing: -0.02em;
     margin: 18px 0 14px;
   }
-  .pillars__title em { font-style: italic; color: var(--accent-warm); }
+  .pillars__title em { font-style: italic; color: var(--accent); }
   .pillars__sub {
     font-family: var(--font-display);
     font-size: clamp(17px, 1.4vw, 20px);
@@ -1106,7 +1191,7 @@
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent-warm);
+    color: var(--accent);
     margin-bottom: 14px;
   }
   .pillar__title {
@@ -1178,7 +1263,7 @@
     line-height: 1.05;
     letter-spacing: -0.02em;
   }
-  .section-head__title em { font-style: italic; color: var(--accent-warm); }
+  .section-head__title em { font-style: italic; color: var(--accent); }
   .section-head__sub {
     font-family: var(--font-display);
     font-style: italic;
@@ -1275,7 +1360,7 @@
     position: absolute;
     top: 14px; right: 14px;
     padding: 6px 10px;
-    background: rgba(246, 244, 238, 0.92);
+    background: rgba(251, 246, 243, 0.92);
     backdrop-filter: blur(4px);
     font-family: var(--font-display);
     font-style: italic;
@@ -1402,12 +1487,12 @@
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent-warm);
+    color: var(--accent);
     margin-bottom: 12px;
   }
   /* Tag-Differenzierung nach Sektion — bringt subtle Lebendigkeit ohne Chaos */
   .entry__tag[data-tag="werkstatt"] { color: var(--accent-green); }
-  .entry__tag[data-tag="poesie"] { color: var(--accent-rose); }
+  .entry__tag[data-tag="poesie"] { color: var(--accent); }
   .entry__title {
     font-size: clamp(20px, 1.8vw, 24px);
     line-height: 1.2;
@@ -1439,7 +1524,7 @@
     left: 14px;
     bottom: 14px;
     padding: 6px 12px;
-    background: rgba(246, 244, 238, 0.92);
+    background: rgba(251, 246, 243, 0.92);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     font-family: var(--font-display);
@@ -1489,7 +1574,7 @@
   .voices__sub {
     font-family: var(--font-display);
     font-style: italic;
-    color: rgba(246, 244, 238, 0.6);
+    color: rgba(251, 246, 243, 0.6);
     font-size: 18px;
     max-width: 360px;
     line-height: 1.45;
@@ -1525,7 +1610,7 @@
     font-size: 12px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(246, 244, 238, 0.55);
+    color: rgba(251, 246, 243, 0.55);
   }
   .voice__attr strong {
     display: block;
@@ -1663,7 +1748,7 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--accent);
-    background: rgba(168, 57, 43, 0.08);
+    background: rgba(200, 154, 120, 0.10);
     padding: 4px 12px;
     border-radius: 100px;
     margin-bottom: 14px;
@@ -1749,7 +1834,7 @@
   }
   .podcast-bar__label {
     font-style: italic;
-    color: var(--accent-warm);
+    color: var(--accent);
     font-weight: 500;
     white-space: nowrap;
   }
@@ -1805,7 +1890,7 @@
   }
   .invite__title em {
     font-style: italic;
-    color: var(--accent-warm);
+    color: var(--accent);
   }
   .invite__sub {
     font-family: var(--font-display);
@@ -1838,7 +1923,7 @@
     font-family: var(--font-display);
     font-style: italic;
     font-size: 18px;
-    color: var(--accent-warm);
+    color: var(--accent);
     margin-bottom: 14px;
   }
   .path__title {
@@ -1849,7 +1934,7 @@
   }
   .path__title em {
     font-style: italic;
-    color: var(--accent-warm);
+    color: var(--accent);
     font-weight: 400;
   }
   .path__text {
@@ -1902,13 +1987,13 @@
     padding: 1rem 1.25rem;
     border: 1px solid var(--border-subtle);
     border-radius: 6px;
-    background: var(--bg-primary);
+    background: var(--bg-elevated);
     transition: border-color var(--t-fast) var(--ease),
                 background var(--t-fast) var(--ease);
     position: relative;
   }
   .invite-option:hover {
-    border-color: var(--accent-warm);
+    border-color: var(--accent);
   }
   /* Visuell-versteckte Checkbox — keyboard-erreichbar, screenreader-
      freundlich. :focus-visible-Ring schimmert durch die Card. */
@@ -1920,11 +2005,11 @@
     height: 0;
   }
   .invite-option:has(.invite-option__input:checked) {
-    border-color: var(--accent-warm);
-    background: rgba(201, 138, 74, 0.08);
+    border-color: var(--accent);
+    background: rgba(200, 154, 120, 0.10);
   }
   .invite-option:has(.invite-option__input:focus-visible) {
-    outline: 2px solid var(--accent-warm);
+    outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
   .invite-option__body {
@@ -2044,19 +2129,22 @@
 
   /* ---------- Footer ---------- */
   .site-footer {
-    /* Footer in dunkel-kühlem Grey — etwas mehr Blau-Anteil als der
-       warme Mid-Grey vorher, dafür deutlich tiefer. Schafft einen
-       ruhigen Abschluss-Anker unter der warmen Cream-Seite. Cream-
-       Text bleibt gut lesbar, Gold/Sage-Grün-Akzente kommen klarer. */
-    background: #34373d;
+    /* Footer in warmem dunklem Gold-Ocker — harmoniert mit dem
+       Cream-Peach der Landing oben. Vertikale Polster bewusst knapp
+       gehalten — der Footer soll abrunden, nicht thronen.
+       Feine Plum-Saumlinie oben (1 px, sehr niedrige Alpha) als
+       sauberer Abschluss zwischen Cream-Section und Gold-Ocker —
+       statt Gradient-Übergang ein präziser Saum. */
+    background: var(--bg-deep);
     color: var(--text-inverse);
-    padding: clamp(64px, 8vw, 96px) 0 32px;
+    padding: clamp(44px, 5.5vw, 64px) 0 24px;
+    border-top: 1px solid rgba(45, 36, 53, 0.10);
   }
   .site-footer__grid {
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr;
-    gap: clamp(32px, 4vw, 64px);
-    padding-bottom: 56px;
+    gap: clamp(28px, 3.5vw, 52px);
+    padding-bottom: 32px;
     border-bottom: 1px solid var(--border-on-dark);
   }
   /* Landing: Erkunden-Spalte ausgeblendet (redundant zur Räume-Übersicht
@@ -2064,64 +2152,67 @@
   .site-footer__grid--compact {
     grid-template-columns: 1.4fr 1fr;
   }
+  /* Footer auf Gold-Ocker — alle Texte in Weiß / Weiß-alpha.
+     Brand-Wortmarke (WERKSTATT + Gemeinschaft) komplett weiß für
+     einen klaren, eleganten Look. */
   .site-footer h4 {
     font-family: var(--font-text);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(246, 244, 238, 0.45);
-    margin: 0 0 20px;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0 0 14px;
   }
   .site-footer__brand {
     font-family: var(--font-display);
-    font-size: 26px;
+    font-size: 24px;
     color: var(--text-inverse);
-    margin-bottom: 12px;
+    margin: 0 0 8px;
     letter-spacing: -0.012em;
   }
   .site-footer__brand-noun {
     font-weight: 700;
-    color: var(--accent-gold);
+    color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 0.02em;
   }
   .site-footer__brand-qualifier {
     font-weight: 500;
     font-style: italic;
-    /* Im Footer auf dunklem Grund: sage-grün, hellere Variante */
-    color: var(--accent-green-soft);
+    color: #ffffff;
   }
   .site-footer__intro {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 17px;
-    line-height: 1.5;
-    color: rgba(246, 244, 238, 0.7);
+    font-size: 16px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.85);
     max-width: 360px;
+    margin: 0;
   }
-  .site-footer__nav { display: flex; flex-direction: column; gap: 12px; }
+  .site-footer__nav { display: flex; flex-direction: column; gap: 9px; }
   .site-footer__nav a,
   .site-footer__contact a {
-    color: rgba(246, 244, 238, 0.85);
+    color: rgba(255, 255, 255, 0.92);
     font-size: 14px;
     transition: color var(--t-fast) var(--ease);
   }
   .site-footer__nav a:hover,
-  .site-footer__contact a:hover { color: var(--accent-soft); }
-  .site-footer__contact { display: flex; flex-direction: column; gap: 12px; font-size: 14px; }
+  .site-footer__contact a:hover { color: #ffffff; text-decoration: underline; }
+  .site-footer__contact { display: flex; flex-direction: column; gap: 9px; font-size: 14px; }
   .site-footer__contact em {
     font-family: var(--font-display);
     font-style: italic;
-    color: rgba(246, 244, 238, 0.55);
+    color: rgba(255, 255, 255, 0.7);
   }
   .site-footer__bottom {
-    padding-top: 24px;
+    padding-top: 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 12px;
-    color: rgba(246, 244, 238, 0.45);
+    color: rgba(255, 255, 255, 0.7);
     letter-spacing: 0.06em;
   }
   .site-footer__badge {
@@ -2136,14 +2227,14 @@
   }
   .site-footer__credit a {
     text-decoration: underline;
-    text-decoration-color: rgba(246, 244, 238, 0.25);
+    text-decoration-color: rgba(251, 246, 243, 0.25);
     text-underline-offset: 2px;
     transition: text-decoration-color var(--t-fast) var(--ease),
                 color var(--t-fast) var(--ease);
   }
   .site-footer__credit a:hover {
-    color: rgba(246, 244, 238, 0.85);
-    text-decoration-color: rgba(246, 244, 238, 0.55);
+    color: rgba(251, 246, 243, 0.85);
+    text-decoration-color: rgba(251, 246, 243, 0.55);
   }
 
   @media (max-width: 800px) {

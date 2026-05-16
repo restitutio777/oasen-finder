@@ -71,13 +71,19 @@ const points = stations
       el.innerHTML =
         '<p style="text-align:center;padding:3rem;color:var(--text-muted);">Noch keine Stationen mit Koordinaten — sobald du in Sanity eine Adresse einträgst und veröffentlichst, erscheint hier der Pin.</p>';
     } else {
-      // Custom Pin im Brand-Stil — kleiner Kreis in Clay-Rot
-      const accentColor = '#a8392b';
+      // Pin-Farben aus CSS-Variablen lesen, damit Map und Stylesheet
+      // synchron bleiben. Fallbacks für SSR / fehlende Roots.
+      const rootStyles = getComputedStyle(document.documentElement);
+      const accentColor = rootStyles.getPropertyValue('--accent-blue').trim() || '#5497b8';
+      const pinBg = rootStyles.getPropertyValue('--bg-base').trim() || '#fbf6f3';
+      const popupSecondary = rootStyles.getPropertyValue('--text-secondary').trim() || '#6a5a78';
+      const popupMuted = rootStyles.getPropertyValue('--text-muted').trim() || '#8a8290';
+      const popupLink = rootStyles.getPropertyValue('--accent').trim() || '#c89a78';
       const pinIcon = L.divIcon({
         className: 'bewegbar-pin',
         html: `<svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="14" cy="14" r="8" fill="${accentColor}" stroke="#f6f4ee" stroke-width="3"/>
-          <circle cx="14" cy="14" r="3" fill="#f6f4ee"/>
+          <circle cx="14" cy="14" r="8" fill="${accentColor}" stroke="${pinBg}" stroke-width="3"/>
+          <circle cx="14" cy="14" r="3" fill="${pinBg}"/>
         </svg>`,
         iconSize: [28, 28],
         iconAnchor: [14, 14],
@@ -114,9 +120,9 @@ const points = stations
         const subline = p.address || p.region;
         const popupContent = `
           <strong>${escapeHtml(p.name)}</strong><br/>
-          ${subline ? `<span style="color:#686b62;font-size:13px">${escapeHtml(subline)}</span><br/>` : ''}
-          ${p.visitedAt ? `<span style="color:#9a9d92;font-size:12px">${new Date(p.visitedAt).toLocaleDateString('de-DE')}</span><br/>` : ''}
-          <a href="${p.url}" style="color:#c08538;font-size:13px;margin-top:6px;display:inline-block">Zur Station →</a>
+          ${subline ? `<span style="color:${popupSecondary};font-size:13px">${escapeHtml(subline)}</span><br/>` : ''}
+          ${p.visitedAt ? `<span style="color:${popupMuted};font-size:12px">${new Date(p.visitedAt).toLocaleDateString('de-DE')}</span><br/>` : ''}
+          <a href="${p.url}" style="color:${popupLink};font-size:13px;margin-top:6px;display:inline-block">Zur Station →</a>
         `;
         L.marker([p.lat, p.lng], { icon: pinIcon })
           .addTo(map)
@@ -149,7 +155,7 @@ const points = stations
   :global(.leaflet-popup-content-wrapper) {
     background: var(--bg-elevated, #ffffff);
     border-radius: 6px;
-    box-shadow: 0 12px 32px -12px rgba(31, 29, 26, 0.18);
+    box-shadow: 0 12px 32px -12px rgba(45, 36, 53, 0.18);
     font-family: var(--font-display, 'Cormorant Garamond', serif);
   }
   :global(.leaflet-popup-content) {

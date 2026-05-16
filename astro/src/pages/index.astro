@@ -73,35 +73,35 @@ const mantra: string | undefined = localized(about?.mantra);
       dem Mantra. Was die Seite ist, was sie will. Verweise auf
       hörBAR und lesBAR sind direkte Anker auf die zwei
       „Schätze-Räume". */}
-  <section class="purpose-intro">
-    <div class="container">
-      <h2 class="purpose-intro__heading">
-        Diese <span class="purpose-intro__heading-bold">Website</span>
-        <em>dient zweierlei:</em>
-      </h2>
-      <p class="purpose-intro__body">
-        Sie ist ein Versuch, die Schätze zu bergen und zu teilen, die
-        ich bisher finden durfte: Willkommen dazu in der
-        <a href="/hoerbar/" class="purpose-intro__link" style="color: var(--accent-deep);">hörBAR</a>
-        und
-        <a href="/lesbar/" class="purpose-intro__link" style="color: var(--accent-rose);">lesBAR</a>.
-      </p>
-      <p class="purpose-intro__body">
-        Sie ist aber auch eine Einladung mitzukommen auf diese Reise
-        zueinander, die uns alle betrifft.
-      </p>
+  {/* Purpose + Mantra als Pair: auf Desktop nebeneinander (Grid),
+      auf Mobile gestapelt. Mantra wirkt als Atemzeichen-Annotation
+      neben der Website-Statement. */}
+  <section class="intro-pair">
+    <div class="container intro-pair__grid">
+      <div class="intro-pair__col">
+        <h2 class="purpose-intro__heading">
+          Diese <span class="purpose-intro__heading-bold">Website</span>
+          <em>dient zweierlei:</em>
+        </h2>
+        <p class="purpose-intro__body">
+          Sie ist ein Versuch, die Schätze zu bergen und zu teilen, die
+          ich bisher finden durfte: Willkommen dazu in der
+          <a href="/hoerbar/" class="purpose-intro__link" style="color: var(--accent-deep);">hörBAR</a>
+          und
+          <a href="/lesbar/" class="purpose-intro__link" style="color: var(--text-secondary);">lesBAR</a>.
+        </p>
+        <p class="purpose-intro__body">
+          Sie ist aber auch eine Einladung mitzukommen auf diese Reise
+          zueinander, die uns alle betrifft.
+        </p>
+      </div>
+      {mantra && (
+        <div class="intro-pair__col intro-pair__col--mantra">
+          <blockquote class="mantra__text">„{mantra}"</blockquote>
+        </div>
+      )}
     </div>
   </section>
-
-  {/* Leitfrage / Mantra — folgt jetzt nach dem Zweck-Intro. Text
-      kommt aus Sanity (about.mantra). */}
-  {mantra && (
-    <section class="mantra">
-      <div class="container">
-        <blockquote class="mantra__text">„{mantra}"</blockquote>
-      </div>
-    </section>
-  )}
 
   {/* „Der rote Faden" mit Notizen-Vorschau wurde von der Landing
       entfernt — Mantra + Räume-Übersicht tragen den Einstieg jetzt
@@ -116,23 +116,35 @@ const mantra: string | undefined = localized(about?.mantra);
       `id="raeume"` ist Scroll-Anchor für den Hero-CTA „Wohin dann?".
       `scroll-margin-top` sorgt dafür, dass die Section nicht unter
       dem sticky Site-Header landet. */}
-  <section id="raeume" style="padding: 5rem 0; background: #e8e6e3; scroll-margin-top: 80px;">
+  <section id="raeume" style="padding: 5rem 0; background: var(--bg-warm-soft); scroll-margin-top: 80px;">
     <div class="container">
       <header style="max-width: 720px; margin: 0 auto 3rem; text-align: center;">
         <span class="eyebrow">Räume</span>
-        <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 0; color: var(--text-primary);">
-          Wohin als <em>nächstes</em>?
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 0; color: var(--accent-hover);">
+          Wohin als <em style="color: inherit;">nächstes</em>?
         </h2>
       </header>
+      {/* Reihenfolge bewusst gesetzt — pro Zeile drei Karten mit
+          klarer Farb-Logik:
+          Zeile 1 (Brand-Trio, lebhaft): schreibbar Plum +
+            machbar Gold + bewegbar Türkis = Komplementär-Tanz,
+            das Pulsschlag-Trio der Site
+          Zeile 2 (Schätze-Trio, ruhig): hörbar Berry-Plum +
+            lesbar Warm-Grey + brauchbar Aubergine = gedämpfte
+            Sammlungen, alle in der Plum-/Erd-Familie
+          Zeile 3 (Outlier): wunderbar Grün = frecher Schluss
+          hörBAR hat jetzt --accent-mauve (tieferes Berry-Plum)
+          statt --accent-deep — sonst wäre Plum doppelt mit
+          schreibBAR und die Abfolge wirkte chaotisch. */}
       <div class="rooms-grid">
         {[
-          { slug: 'schreibbar', eyebrow: 'Notizen', stem: 'schreib', desc: 'Datierte Einträge — Notizen, Gedichte, Gedanken aus Reisen, Werkstätten und Lektüren', accent: 'var(--accent)' },
-          { slug: 'bewegbar', eyebrow: 'Reisen', stem: 'beweg', desc: 'Orte, an denen ich war — Ökodörfer, Cohousing-Projekte und gemeinsame Lebensorte, auf einer Karte', accent: 'var(--accent-green)' },
-          { slug: 'machbar', eyebrow: 'Werkstatt', stem: 'mach', desc: 'Werkstatt-Termine zum Mitmachen — drei Themen, im Jahres-Rhythmus', accent: 'var(--accent-warm)' },
-          { slug: 'lesbar', eyebrow: 'Bibliothek', stem: 'les', desc: 'Bücher, Webseiten, Filme, Podcasts und Quellen zu Fragen des Miteinander', accent: 'var(--accent-blue)' },
+          { slug: 'schreibbar', eyebrow: 'Notizen', stem: 'schreib', desc: 'Datierte Einträge — Notizen, Gedichte, Gedanken aus Reisen, Werkstätten und Lektüren', accent: 'var(--accent-deep)' },
+          { slug: 'machbar', eyebrow: 'Werkstatt', stem: 'mach', desc: 'Werkstatt-Termine zum Mitmachen — drei Themen, im Jahres-Rhythmus', accent: 'var(--accent)' },
+          { slug: 'bewegbar', eyebrow: 'Reisen', stem: 'beweg', desc: 'Orte, an denen ich war — Ökodörfer, Cohousing-Projekte und gemeinsame Lebensorte, auf einer Karte', accent: 'var(--accent-blue)' },
+          { slug: 'hoerbar', eyebrow: 'Audio', stem: 'hör', desc: 'Eingesprochene Reflexionen, Gedichte, Lieder — plus Gespräche mit Menschen, die in Gemeinschaft leben', accent: 'var(--accent-mauve)' },
+          { slug: 'lesbar', eyebrow: 'Bibliothek', stem: 'les', desc: 'Bücher, Webseiten, Filme, Podcasts und Quellen zu Fragen des Miteinander', accent: 'var(--neutral)' },
           { slug: 'brauchbar', eyebrow: 'Werkzeuge', stem: 'brauch', desc: 'Konzepte und Werkzeuge — was sich in der Praxis als hilfreich erweist', accent: 'var(--text-primary)' },
-          { slug: 'hoerbar', eyebrow: 'Audio', stem: 'hör', desc: 'Eingesprochene Reflexionen, Gedichte, Lieder — plus Gespräche mit Menschen, die in Gemeinschaft leben', accent: 'var(--accent-rose)' },
-          { slug: 'wunderbar', eyebrow: 'Kreatives', stem: 'wunder', desc: 'Was nicht in die anderen Räume passt — spielerisch, offen, ungeordnet', accent: 'var(--accent-green-soft)' },
+          { slug: 'wunderbar', eyebrow: 'Kreatives', stem: 'wunder', desc: 'Was nicht in die anderen Räume passt — spielerisch, offen, ungeordnet', accent: 'var(--accent-green)' },
         ].map((room) => (
           <a class="room-card" href={`/${room.slug}/`} style={`--card-accent: ${room.accent};`}>
             <span class="eyebrow room-card__eyebrow">{room.eyebrow}</span>
@@ -161,23 +173,55 @@ const mantra: string | undefined = localized(about?.mantra);
       margin: 0 auto;
     }
     .room-card {
+      /* Tür-Andeutung: die linke Kante ist eine 3px-Leibung in der
+         Raum-Akzentfarbe, links scharfkantig wie ein Türscharnier,
+         rechts gerundet wie ein Türblatt. Ein kleiner Punkt
+         (::before) auf halber Höhe markiert den Türknauf. Beim
+         Hover „öffnet" sich der Knauf einen Hauch nach rechts. */
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-      padding: 2rem;
-      border: 1px solid var(--border-subtle);
-      border-radius: 4px;
-      /* Weiße Karten heben sich klar vom hellgrauen Section-Hintergrund
-         ab — vorher griff `var(--bg-primary)` ins Leere und die Karten
-         wurden transparent. */
-      background: var(--bg-elevated);
+      padding: 2rem 2rem 2rem 2.4rem;
+      border: 1px solid rgba(45, 36, 53, 0.10);
+      border-left: 3px solid var(--card-accent);
+      border-radius: 0 6px 6px 0;
+      /* Reinweiß auf cream-Sand-Section — sonst „schwimmen" die Karten
+         im Eurythmie-Cream. Plus dezenter Plum-Schatten für klare
+         Tile-Abhebung, ohne Härte. */
+      background: #ffffff;
+      box-shadow: 0 8px 24px -14px rgba(45, 36, 53, 0.20);
       text-decoration: none;
       color: var(--text-primary);
-      transition: transform 0.15s ease, border-color 0.15s ease;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.2s ease;
+    }
+    /* Türknauf — kleiner Kreis in der Raum-Akzentfarbe, mittig auf
+       der Türleibung sitzend. Bewusst klein und ruhig, damit die
+       Andeutung nicht zur Illustration wird. */
+    .room-card::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--card-accent);
+      opacity: 0.55;
+      transform: translateY(-50%);
+      transition: transform var(--t-base) var(--ease),
+                  opacity var(--t-base) var(--ease);
     }
     .room-card:hover {
       border-color: var(--card-accent);
       transform: translateY(-2px);
+      box-shadow: 0 14px 32px -16px rgba(45, 36, 53, 0.28);
+    }
+    /* Tür „öffnet" — Knauf rutscht ein Stück nach rechts und wird
+       satter, als wäre er gerade gedrückt worden. */
+    .room-card:hover::before {
+      transform: translate(3px, -50%);
+      opacity: 1;
     }
     .room-card__eyebrow {
       color: var(--card-accent);
@@ -189,12 +233,12 @@ const mantra: string | undefined = localized(about?.mantra);
       color: var(--text-primary);
     }
     .room-card__title em {
-      /* „BAR" einheitlich in Brand-Gold — als wiederkehrende Wortmarke
-         über alle Karten, im Echo zum „WERKSTATT" im Logo und zum
-         „WEBSEITE" im Hero. Die raumspezifische Variation lebt im
-         Eyebrow oben („Notizen", „Reisen", …), im Hover-Border und
-         im CTA-Link unten („Zur schreibBAR →"). */
-      color: var(--accent-gold);
+      /* „BAR" einheitlich in Altgold — als wiederkehrende Wortmarke
+         über alle Karten, im Echo zum „WERKSTATT" im Logo. Die raum-
+         spezifische Variation lebt im Eyebrow oben („Notizen",
+         „Reisen", …), im Hover-Border der Karte und im CTA-Link
+         unten („Zur schreibBAR →"). */
+      color: var(--accent);
       font-style: italic;
     }
     .room-card__desc {
@@ -214,54 +258,94 @@ const mantra: string | undefined = localized(about?.mantra);
     }
 
     /* Mantra-Pull-Quote — Linksausrichtung wie der Hero darüber.
-       Cream-Hintergrund nahtlos zum Zweck-Intro, italic Cormorant,
-       dezente clay-rote Linie obendrüber als Atemzeichen. */
-    .mantra {
-      padding: 4rem 0 5rem;
-      background: var(--bg-primary);
+       Dezenter Plum-Wash gibt der Section einen eigenen Klang
+       („Bühnen-Atmosphäre"), italic Cormorant, Plum-Linie als
+       Atemzeichen. */
+    /* Intro-Pair: Purpose-Statement und Mantra-Zitat. Auf Mobile
+       stacked (Mantra unter Purpose), auf Desktop nebeneinander
+       in zwei Spalten. Mantra ist die kleinere Atemzeichen-
+       Annotation rechts. */
+    .intro-pair {
+      padding: 5rem 0 4rem;
+      background: var(--bg-base);
     }
-    .mantra .container {
-      /* Links am Container statt zentriert — Block sitzt am gleichen
-         linken Rand wie der Hero-Content. */
-      max-width: 760px;
-      margin-left: 0;
+    .intro-pair__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (min-width: 1024px) {
+      .intro-pair__grid {
+        /* Mantra eine Spur breiter als Purpose — gibt dem Zitat
+           Atem. Vertikal zentriert (align-items: center) damit es
+           in der Höhe mittig neben dem Purpose-Block sitzt. */
+        grid-template-columns: 1fr 1.15fr;
+        gap: 4rem;
+        align-items: center;
+      }
+    }
+    /* Mantra-Spalte: das große Plum-Anführungszeichen als
+       Wasserzeichen oben-links gibt dem Zitat einen Anker und Atem.
+       Die rechte Spalte wirkte vorher wie ein verlorener Footnote-
+       Block — jetzt liest sich's als eigene Mantra-Insel, ohne
+       Box-Look (kein Background, keine Border-Wand). */
+    .intro-pair__col--mantra {
+      position: relative;
+      padding-left: clamp(1.25rem, 3vw, 2.75rem);
+      padding-top: clamp(0.5rem, 2vw, 1.75rem);
+    }
+    .intro-pair__col--mantra::before {
+      content: '„';
+      position: absolute;
+      top: clamp(-3rem, -4vw, -2rem);
+      left: clamp(-0.5rem, -0.5vw, -0.25rem);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(6rem, 11vw, 10rem);
+      line-height: 1;
+      color: var(--accent-deep);
+      opacity: 0.18;
+      pointer-events: none;
+      user-select: none;
+    }
+    /* Feiner Plum-Strich am Ende des Zitats — Atemzeichen, das den
+       Mantra-Block visuell abschließt. */
+    .intro-pair__col--mantra::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 1.5px;
+      background: var(--accent-deep);
+      opacity: 0.4;
+      margin: clamp(1rem, 1.6vw, 1.4rem) 0 0;
     }
     .mantra__text {
       margin: 0;
       font-family: var(--font-display);
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(1.35rem, 2.2vw, 1.8rem);
-      line-height: 1.55;
-      color: var(--text-primary);
+      /* Eine Spur größer und weicher: Mantra darf jetzt klingen,
+         nicht flüstern. Color auf --text-body (gedämpftes Plum)
+         statt hartem Text-Primary — passt zur meditativen Stimmung. */
+      font-size: clamp(1.3rem, 2.1vw, 1.7rem);
+      line-height: 1.5;
+      color: var(--text-body);
       text-align: left;
       letter-spacing: -0.005em;
-      position: relative;
-      padding-top: 2.5rem;
     }
-    .mantra__text::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 48px;
-      height: 1.5px;
-      /* Slate-Blau statt Clay-Rot — die Mantra-Linie soll meditativ
-         wirken, nicht aktivieren. Echo zum Hero „Auf der Suche —". */
-      background: var(--accent-blue);
+    /* Auf Mobile: Mantra steht unter dem Purpose-Text, die großen
+       Anführungszeichen sind dort eher Schmuck als Anker. Padding
+       kleiner halten, sonst wird's links unnötig breit. */
+    @media (max-width: 1023px) {
+      .intro-pair__col--mantra::before {
+        font-size: clamp(5rem, 18vw, 8rem);
+        top: -2rem;
+        opacity: 0.15;
+      }
     }
 
-    /* Zweck-Intro — Eingangs-Lese-Block direkt nach dem Hero.
-       Linksbündig wie der Hero, gross, ruhiger Cormorant — soll als
-       ruhige Stimme die Seite öffnen, bevor das Mantra folgt. */
-    .purpose-intro {
-      padding: 5rem 0 3rem;
-      background: var(--bg-primary);
-    }
-    .purpose-intro .container {
-      max-width: 760px;
-      margin-left: 0;
-    }
     .purpose-intro__heading {
       font-family: var(--font-display);
       font-size: clamp(2rem, 4.2vw, 3rem);
@@ -272,16 +356,23 @@ const mantra: string | undefined = localized(about?.mantra);
       color: var(--text-primary);
     }
     .purpose-intro__heading-bold {
-      /* „WEBSEITE" als Wortmarke in CAPS — Echo zum „WERKSTATT" im
-         Logo. Brand-Gold, bold, etwas Letter-Spacing für den
-         Wortmarken-Klang. */
+      /* „Website" als Wortmarke in tieferem Bronze-Gold — Brand-
+         Anker bleibt in der Gold-Familie (Echo zu WERKSTATT,
+         BAR-Endungen, CTAs), aber auf dem Cream-Background braucht
+         es den dunkleren Hover-Ton, damit das Wort trägt statt zu
+         flirren. Champagne (--accent) ist zu hell für so große
+         Display-Schrift auf Off-White. */
       font-weight: 700;
-      color: var(--accent-gold);
+      color: var(--accent-hover);
       letter-spacing: 0.02em;
     }
     .purpose-intro__heading em {
+      /* Globales h2 em ist Champagne-Akzent — hier explizit auf
+         Text-Primary, „dient zweierlei:" soll nicht farbig sein.
+         Brand-Wortmarke ist WEBSEITE, das em ist nur Italic-Rhythmus. */
       font-style: italic;
       font-weight: 400;
+      color: var(--text-primary);
     }
     .purpose-intro__body {
       font-family: var(--font-display);
@@ -306,9 +397,15 @@ const mantra: string | undefined = localized(about?.mantra);
     }
   </style>
 
-  <section style="padding: 5rem 0; background: var(--bg-primary); text-align: center;">
+  {/* Mitkommen: zarter Peach-Cream-Wash, derselbe Ton wie die
+      Räume-Section (--bg-warm-soft). Hält die Section in der warmen
+      Familie, ohne mit dem Gold-CTA zu konkurrieren. Eyebrow in
+      Plum gibt einen kühlen Akzentpunkt — die Komplementärspannung
+      lebt jetzt zwischen Eyebrow (Plum) und Button (Gold), nicht
+      im flächigen Background. */}
+  <section style="padding: 5rem 0; background: var(--bg-warm-soft); text-align: center;">
     <div class="container" style="max-width: 640px;">
-      <span class="eyebrow">Begegnung</span>
+      <span class="eyebrow" style="color: var(--accent-deep);">Begegnung</span>
       <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 1rem; color: var(--text-primary);">
         Mitkommen
       </h2>

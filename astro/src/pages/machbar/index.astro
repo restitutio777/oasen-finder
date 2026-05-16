@@ -20,8 +20,9 @@ const past = events.filter((e) => new Date(e.startDate) < new Date());
 
 <BaseLayout title="machBAR — werkSTATT Gemeinschaft" description="Werkstatt-Termine zu Miteinander-Leben, -Arbeiten, -Reden">
   <PageBanner
-    photo="photo-1654909345733-868817fd0f76"
-    alt="Frau streckt die Arme vor einer farbigen Mural-Wand im Sonnenlicht"
+    photo="/hero/signal-2026-05-15-180501_003.jpeg"
+    alt="Hände am Werkstatt-Tisch beim Modellieren von Lehm-Skulpturen — gemeinsames Werken"
+    position="center 45%"
   />
   <section style="padding: 4rem 0;">
     <div class="container">
@@ -50,7 +51,7 @@ const past = events.filter((e) => new Date(e.startDate) < new Date());
                 <a href={`/machbar/${e.slug}/`} style="display: block; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border-subtle); text-decoration: none; color: inherit;">
                   <p class="eyebrow">{new Date(e.startDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })} · {e.location}</p>
                   <h3 style="font-family: var(--font-display); margin: 0.5rem 0;">{localized(e.title)}</h3>
-                  {e.dogFriendly && <span style="font-size: 12px; color: var(--accent-warm);">🐕 Carla willkommen</span>}
+                  {e.dogFriendly && <span style="font-size: 12px; color: var(--accent);">🐕 Carla willkommen</span>}
                 </a>
               </li>
             ))}
