@@ -184,21 +184,22 @@
     flex-shrink: 1;
     min-width: 0;
   }
-  /* Brand-Mark — kreisförmige Sechs-Figuren-Illustration. Vertikal
-     geflipped (scaleY(-1)) damit die „offene" Seite nach unten
-     zeigt, und in Champagne-Gold eingefärbt (--accent #c89a78) so
-     dass das Logo eine Einheit mit der Gold-Wortmarke „WERKSTATT"
-     bildet — bunte Original-Figuren werden auf einen Brand-Anker-
-     Ton reduziert.
-     Filter-Kette: brightness(0) macht das Bild komplett schwarz,
-     dann invert+sepia+hue-rotate+saturate tönt es zu Champagne-
-     Gold. */
+  /* Brand-Mark — kreisförmige Sechs-Figuren-Illustration vor der
+     Wortmarke. Farbig (bunte Original-Figuren erhalten), aber
+     dezent blasser via saturate-Filter damit's nicht mit den
+     Brand-Akzenten konkurriert. object-fit: contain + aspect-ratio
+     stellt sicher dass die nicht-exakt-quadratische PNG nicht
+     vertikal gestaucht erscheint (echte Rundheit des Kreises).
+     Vertikal geflipped (scaleY(-1)) damit die „offene" Seite des
+     Kreises nach unten zeigt. */
   .brand__mark {
     width: clamp(30px, 3vw, 38px);
-    height: clamp(30px, 3vw, 38px);
+    aspect-ratio: 1;
+    height: auto;
     flex-shrink: 0;
     display: block;
-    filter: brightness(0) saturate(100%) invert(64%) sepia(40%) saturate(580%) hue-rotate(355deg) brightness(95%);
+    object-fit: contain;
+    filter: brightness(1.1) saturate(0.55);
     transform: scaleY(-1);
   }
   /* Wort-Stack: WERKSTATT oben, Gemeinschaft drunter — kompakt
