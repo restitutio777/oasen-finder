@@ -43,6 +43,15 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
     typeof publishedAddress === 'string' &&
     publishedAddress.trim() !== draftAddress.trim();
 
+  // Wenn das Dokument noch nie publiziert wurde, existiert nur der
+  // Draft (drafts.{id}). client.patch(id) schlägt dann mit
+  // „document not found" fehl — wir müssen die Draft-ID patchen.
+  // Wenn schon Published vorhanden ist und ein Draft existiert,
+  // arbeiten wir trotzdem am Draft (das ist der Stand, der gleich
+  // publiziert wird). Nur wenn kein Draft existiert (Re-Publish ohne
+  // Änderungen), patchen wir das Published-Dokument direkt.
+  const patchTargetId = draft ? `drafts.${id}` : id;
+
   const handle = useCallback(async () => {
     setProcessing(true);
     try {
@@ -57,7 +66,7 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
         const generated = slugify(titleSource);
         if (generated) {
           await client
-            .patch(id)
+            .patch(patchTargetId)
             .set({ slug: { _type: 'slug', current: generated } })
             .commit();
         }
@@ -84,7 +93,7 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
         const coords = await geocode(draftAddress!);
         if (coords) {
           await client
-            .patch(id)
+            .patch(patchTargetId)
             .set({
               coordinates: {
                 _type: 'geopoint',
@@ -110,7 +119,7 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
       setProcessing(false);
       onComplete();
     }
-  }, [client, doc, id, publish, onComplete, type]);
+  }, [client, doc, id, patchTargetId, publish, onComplete, type, draftAddress, addressChanged]);
 
   return {
     label: processing ? 'Wird veröffentlicht …' : 'Publish',
