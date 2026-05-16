@@ -2249,6 +2249,11 @@
     color: rgba(255, 255, 255, 0.7);
     letter-spacing: 0.06em;
   }
+  .site-footer__bottom-right {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+  }
   .site-footer__badge {
     font-family: var(--font-display);
     font-style: italic;
