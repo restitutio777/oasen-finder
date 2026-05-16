@@ -526,17 +526,17 @@
     }
     .hero::after {
       background:
-        /* Reines Cream-Wash links (kein rosa-Layer mehr — siehe
-           Katharinas Liste 4). Kompaktere Ellipse (70 % × 130 %)
-           und schnellerer Faden, damit die rechte Bildhälfte des
-           Lagerfeuers klarer durchscheint, der Text-Bereich links
-           aber satt auf Cream bleibt. */
-        radial-gradient(ellipse 70% 130% at 18% 50%,
-          rgba(251, 246, 243, 0.90) 0%,
-          rgba(251, 246, 243, 0.78) 28%,
-          rgba(251, 246, 243, 0.42) 50%,
-          rgba(251, 246, 243, 0.15) 72%,
-          rgba(251, 246, 243, 0.0) 92%);
+        /* Cream-Wash links: dichte Mitte (im Text-Bereich), sanft
+           auslaufend nach rechts. Ellipse leicht versetzt nach
+           rechts (20 % statt 18 %) damit der Wash-Kern unter
+           den Headlines sitzt und der Text auf Cream-Bett ruht,
+           während die Lagerfeuer-Szene rechts klar durchscheint. */
+        radial-gradient(ellipse 75% 135% at 20% 50%,
+          rgba(251, 246, 243, 0.95) 0%,
+          rgba(251, 246, 243, 0.88) 30%,
+          rgba(251, 246, 243, 0.62) 55%,
+          rgba(251, 246, 243, 0.25) 78%,
+          rgba(251, 246, 243, 0.0) 95%);
     }
   }
   /* Hero-Komposition: Main-Block links, Begegnungs-Pin rechts.
@@ -675,22 +675,24 @@
     font-weight: 500;
     font-style: normal;
   }
-  /* „Auf der Suche —" in Plum — bildet zusammen mit den Plum-
-     Strichen des Eyebrows und dem Plum-Datum im Begegnungs-Pin
-     eine konsistente Plum-Achse durch den Hero. Türkis hatte
-     gegen das warm-goldene Sonnenblumen-Hintergrundbild zu kalt
-     gewirkt. Brand-Türkis lebt im Logo-„Gemeinschaft" und im
-     Ghost-CTA-Button weiter, bleibt also präsent. */
-  .hero__title-a { color: var(--accent-deep); }
+  /* „Auf der Suche —" in Plum — konsistente Plum-Achse mit den
+     Eyebrow-Strichen und dem Begegnungs-Pin. Dezenter Cream-Lift-
+     Shadow gibt Konturen-Schärfe gegen dunkle Bildbereiche, ohne
+     dass die Headline „glüht". */
+  .hero__title-a {
+    color: var(--accent-deep);
+    text-shadow: 0 1px 3px rgba(251, 246, 243, 0.6);
+  }
   /* „wie wird Gemeinschaft?" in Champagne-Gold — Katharinas
      Brand-Logik: Gold trägt die Wortmarken-Trias mit WERKSTATT,
-     den BAR-Endungen und „Website". Mit dem Keramik-Atelier-Bild
-     (Türkis-Vorhang mittig statt durchgehend Lehm) hat der Cream-
-     Wash zentral genug Tonruhe, damit das Gold trägt. Sanfter
-     Champagne-Glow drumherum. */
+     den BAR-Endungen und „Website". Doppel-Shadow: Champagne-Glow
+     (Brand-Echo) + Cream-Lift (Konturen-Schärfe gegen dunkle
+     Bildbereiche im Lagerfeuer-Hero). */
   .hero__title-b {
     color: var(--accent);
-    text-shadow: 0 0 36px rgba(200, 154, 120, 0.35);
+    text-shadow:
+      0 0 36px rgba(200, 154, 120, 0.35),
+      0 1px 3px rgba(251, 246, 243, 0.55);
   }
   .hero__title em {
     font-style: italic;
