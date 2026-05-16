@@ -28,15 +28,15 @@
     --bg-warm-soft: #f1edec;  /* Peach heller · Räume-Section */
     --bg-warm-deep: #ebe5e2;  /* Peach tiefer · Newsletter-Übergang zum Footer */
     --bg-sage:      #dde9d3;  /* helles Frühlingsblatt · gelegentlich */
-    --bg-deep:      #6a4d8a;  /* Footer · Plum (Katharinas Wunsch: „das Lila von ‚Auf der Suche'") */
-    --bg-deep-soft: #8a6caa;  /* Plum heller · Sub-Backgrounds */
+    --bg-deep:      #6e5544;  /* Footer · gedimmtes Mocha-Bronze — gedämpfte Variante des „Gemeinschaft?"-Champagne-Gold (HSL 25°/24%/35%), behält Brand-Wiedererkennung, Plum war zu „krass" */
+    --bg-deep-soft: #8e7561;  /* Mocha-Bronze heller · Sub-Backgrounds */
 
     /* — 2. Text ——————————————————————————————————————— */
     --text-primary:   #2d2435;  /* Aubergine-Plum · Headlines, Body-Strong */
     --text-body:      #4a3d5a;  /* gedämpftes Plum · Body */
     --text-secondary: #6a5a78;  /* Sekundär · Subtitles, Captions */
     --text-muted:     #8a8290;  /* Lowest hierarchy · Meta, Timestamps */
-    --text-inverse:   #ffffff;  /* auf dunklem Footer (Plum) */
+    --text-inverse:   #ffffff;  /* auf dunklem Footer (Mocha-Bronze) */
 
     /* — 3. Akzente ——————————————————————————————————— */
     --accent:            #c89a78;  /* CHAMPAGNE-GOLD · Brand-Anker, CTAs, BAR-Marken */
@@ -2130,11 +2130,13 @@
 
   /* ---------- Footer ---------- */
   .site-footer {
-    /* Footer in Plum (--bg-deep) — Katharinas Wunsch „das Lila von
-       ‚Auf der Suche'". Vertikale Polster bewusst knapp gehalten —
-       der Footer soll abrunden, nicht thronen.
+    /* Footer in gedimmtem Mocha-Bronze (--bg-deep) — gedämpfte
+       Variante des „Gemeinschaft?"-Champagne-Gold im Hero. Brand-
+       Wiedererkennung über den Hue, aber genug abgedunkelt damit
+       weiße Schrift gut tragt (~7:1 WCAG-AAA). Vertikale Polster
+       bewusst knapp — der Footer soll abrunden, nicht thronen.
        Feine Saumlinie oben (1 px, sehr niedrige Alpha) als sauberer
-       Abschluss zwischen Cream-Section und Plum-Footer — statt
+       Abschluss zwischen Cream-Section und Mocha-Footer — statt
        Gradient-Übergang ein präziser Saum. */
     background: var(--bg-deep);
     color: var(--text-inverse);
@@ -2148,7 +2150,7 @@
     padding-bottom: 32px;
     border-bottom: 1px solid var(--border-on-dark);
   }
-  /* Footer-Texte auf Plum-Untergrund: alles in Weiß / Weiß-alpha,
+  /* Footer-Texte auf Mocha-Untergrund: alles in Weiß / Weiß-alpha,
      Brand-Wortmarke komplett weiß für einen klaren Look. */
   .site-footer h4 {
     font-family: var(--font-text);
