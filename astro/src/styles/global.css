@@ -202,15 +202,19 @@
     filter: brightness(1.1) saturate(0.55);
     transform: scaleY(-1);
   }
-  /* Wort-Stack: WERKSTATT oben, Gemeinschaft drunter — kompakt
-     übereinander, fast bündig (gap leicht negativ damit die zwei
-     Zeilen sich visuell berühren). */
+  /* Wort-Stack: WERKSTATT oben, Gemeinschaft drunter — sehr kompakt
+     übereinander (line-height 0.85 + negativer margin-top am
+     qualifier), sodass die zwei Zeilen praktisch nahtlos einen
+     typografischen Block bilden. */
   .brand__words {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    line-height: 0.95;
+    line-height: 0.85;
     gap: 0;
+  }
+  .brand__words .brand__qualifier {
+    margin-top: -0.1em;
   }
   /* „WERKSTATT" als Wortmarke in Champagne-Gold, „Gemeinschaft"
      daneben in Bergsee-Türkis. Klassische Komplementär-Kombi
