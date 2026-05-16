@@ -36,7 +36,7 @@
     --text-body:      #4a3d5a;  /* gedämpftes Plum · Body */
     --text-secondary: #6a5a78;  /* Sekundär · Subtitles, Captions */
     --text-muted:     #8a8290;  /* Lowest hierarchy · Meta, Timestamps */
-    --text-inverse:   #ffffff;  /* auf dunklem Footer / Gold-Ocker */
+    --text-inverse:   #ffffff;  /* auf dunklem Footer (Plum) */
 
     /* — 3. Akzente ——————————————————————————————————— */
     --accent:            #c89a78;  /* CHAMPAGNE-GOLD · Brand-Anker, CTAs, BAR-Marken */
@@ -264,8 +264,9 @@
     position: absolute;
     left: 0;
     /* Default: 14px Mini-Subline analog zu direkten Nav-Items.
-       Räume-Dropdown bekommt Brand-Coral als Default (nicht raumspezifisch,
-       da sammelnd). Wenn ein Sub-Raum aktiv ist, übernimmt --nav-accent. */
+       Räume-Dropdown bekommt Brand-Gold (--accent) als Default
+       (nicht raumspezifisch, da sammelnd). Wenn ein Sub-Raum aktiv
+       ist, übernimmt --nav-accent. */
     right: calc(100% - 14px);
     bottom: 2px;
     height: 1.5px;
@@ -844,7 +845,7 @@
     cursor: pointer;
   }
   .btn--primary {
-    /* Coral-Rosa als Brand-Anker — die warme Aktion der Site. */
+    /* Champagne-Gold als Brand-Anker — die warme Aktion der Site. */
     background: var(--accent);
     color: var(--text-inverse);
     border-color: var(--accent);
@@ -864,7 +865,7 @@
     color: var(--bg-base);
     border-color: var(--accent);
   }
-  /* Mint-Ghost-Variante — kühler Gegenpol zum Coral-Anker */
+  /* Türkis-Ghost-Variante — kühler Gegenpol zum Gold-Anker */
   .btn--ghost.btn--fresh {
     color: var(--accent-blue);
     border-color: var(--accent-blue);
@@ -2128,12 +2129,12 @@
 
   /* ---------- Footer ---------- */
   .site-footer {
-    /* Footer in warmem dunklem Gold-Ocker — harmoniert mit dem
-       Cream-Peach der Landing oben. Vertikale Polster bewusst knapp
-       gehalten — der Footer soll abrunden, nicht thronen.
-       Feine Plum-Saumlinie oben (1 px, sehr niedrige Alpha) als
-       sauberer Abschluss zwischen Cream-Section und Gold-Ocker —
-       statt Gradient-Übergang ein präziser Saum. */
+    /* Footer in Plum (--bg-deep) — Katharinas Wunsch „das Lila von
+       ‚Auf der Suche'". Vertikale Polster bewusst knapp gehalten —
+       der Footer soll abrunden, nicht thronen.
+       Feine Saumlinie oben (1 px, sehr niedrige Alpha) als sauberer
+       Abschluss zwischen Cream-Section und Plum-Footer — statt
+       Gradient-Übergang ein präziser Saum. */
     background: var(--bg-deep);
     color: var(--text-inverse);
     padding: clamp(44px, 5.5vw, 64px) 0 24px;
@@ -2146,14 +2147,8 @@
     padding-bottom: 32px;
     border-bottom: 1px solid var(--border-on-dark);
   }
-  /* Landing: Erkunden-Spalte ausgeblendet (redundant zur Räume-Übersicht
-     darüber). Grid wird zu zwei Spalten — Brand links, Kontakt rechts. */
-  .site-footer__grid--compact {
-    grid-template-columns: 1.4fr 1fr;
-  }
-  /* Footer auf Gold-Ocker — alle Texte in Weiß / Weiß-alpha.
-     Brand-Wortmarke (WERKSTATT + Gemeinschaft) komplett weiß für
-     einen klaren, eleganten Look. */
+  /* Footer-Texte auf Plum-Untergrund: alles in Weiß / Weiß-alpha,
+     Brand-Wortmarke komplett weiß für einen klaren Look. */
   .site-footer h4 {
     font-family: var(--font-text);
     font-size: 11px;
