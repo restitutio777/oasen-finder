@@ -667,19 +667,20 @@
   /* „Auf der Suche —" in Bergsee-Türkis — gleicher Ton wie
      „Gemeinschaft" im Logo, so klingt der Brand-Anker im Hero an. */
   .hero__title-a { color: var(--accent-blue); }
-  /* „wie wird Gemeinschaft?" in Plum — meditative Tiefe als
-     Komplement zum Türkis darüber. Gold scheitert hier am Lehm-Foto
-     (Hue zu nah am Hintergrund), Plum bricht klar durch und hält
-     die Türkis-Plum-Achse, die auch das Mantra trägt. Gold bleibt
-     den Wortmarken (WERKSTATT, BAR, „Website") + CTAs vorbehalten. */
+  /* „wie wird Gemeinschaft?" in Champagne-Gold — Katharinas
+     Brand-Logik: Gold trägt die Wortmarken-Trias mit WERKSTATT,
+     den BAR-Endungen und „Website". Mit dem Keramik-Atelier-Bild
+     (Türkis-Vorhang mittig statt durchgehend Lehm) hat der Cream-
+     Wash zentral genug Tonruhe, damit das Gold trägt. Sanfter
+     Champagne-Glow drumherum. */
   .hero__title-b {
-    color: var(--accent-deep);
-    text-shadow: 0 0 36px rgba(138, 108, 170, 0.28);
+    color: var(--accent);
+    text-shadow: 0 0 36px rgba(200, 154, 120, 0.35);
   }
   .hero__title em {
     font-style: italic;
     font-weight: 500;
-    color: inherit;  /* erbt von .hero__title-b (Plum) */
+    color: inherit;  /* erbt von .hero__title-b (Champagne-Gold) */
   }
   .hero__lead {
     margin-top: clamp(28px, 4vw, 44px);
