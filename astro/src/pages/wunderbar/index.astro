@@ -28,7 +28,7 @@ if (isSanityConfigured) {
   <PageBanner
     photo="/banner/wunderbar-regenbogen.jpg"
     alt="Doppelter Regenbogen über einer kretischen Berglandschaft, davor Olivenbäume und wilde Gräser"
-    position="center 30%"
+    position="center 50%"
   />
   <section style="padding: 4rem 0;">
     <div class="container">
@@ -81,4 +81,18 @@ if (isSanityConfigured) {
       )}
     </div>
   </section>
+
+  <style is:global>
+    /* Banner-Aspect-Override speziell für wunderBAR: das Regenbogen-
+       Bild ist 2.22:1 (Querformat), Standard-Banner-Aspect 4:1
+       würde 45 % vertikal abschneiden → Regenbogen oben + Boden
+       unten gleichzeitig nicht sichtbar. Mit 12/5 (2.4:1) liegt der
+       Container nah am Bild-Aspect, beide Enden sind im Crop. */
+    .page-banner {
+      aspect-ratio: 12 / 5;
+    }
+    @media (max-width: 640px) {
+      .page-banner { aspect-ratio: 2 / 1; }
+    }
+  </style>
 </BaseLayout>
