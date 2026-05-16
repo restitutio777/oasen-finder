@@ -28,8 +28,8 @@
     --bg-warm-soft: #f1edec;  /* Peach heller · Räume-Section */
     --bg-warm-deep: #ebe5e2;  /* Peach tiefer · Newsletter-Übergang zum Footer */
     --bg-sage:      #dde9d3;  /* helles Frühlingsblatt · gelegentlich */
-    --bg-deep:      #6a5847;  /* Footer · ruhiges Bronze-Grau (HSL 28°/19%/35%) — erinnert klar an das Champagne-Gold im Logo (--accent #c89a78), aber stark gedämpft. Sweet spot zwischen Stein-Grau (S=9%, zu neutral) und Mocha (S=24%, zu krass). */
-    --bg-deep-soft: #8a7665;  /* Bronze-Grau heller · Sub-Backgrounds */
+    --bg-deep:      #6d6154;  /* Footer · zartes Bronze-Grau (HSL 30°/13%/38%) — dezentes Gold-Echo zum Logo-Champagne, aber sehr sanft. Heller + weniger gesättigt als das vorherige #6a5847, wirkt zarter ohne den Gold-Hauch zu verlieren. */
+    --bg-deep-soft: #918679;  /* Bronze-Grau heller · Sub-Backgrounds */
 
     /* — 2. Text ——————————————————————————————————————— */
     --text-primary:   #2d2435;  /* Aubergine-Plum · Headlines, Body-Strong */
