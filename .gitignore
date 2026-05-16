@@ -10,6 +10,8 @@ dist
 .claude/*.lock
 .fragebogen-style.html
 .firecrawl/
+katharina/
+swisstransfer_*.zip
 FRAGEBOGEN-KATHARINA.pdf
 FRAGEBOGEN-KATHARINA.html
 .make-reference.py

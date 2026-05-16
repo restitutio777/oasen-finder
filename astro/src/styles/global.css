@@ -375,7 +375,12 @@
       opacity: 0;
       visibility: hidden;
       transition: transform 0.3s var(--ease), opacity 0.3s var(--ease), visibility 0.3s;
-      z-index: 50;
+      /* Höher als der Site-Header (z-index 50): das Mobile-Overlay muss
+         eindeutig oberhalb der Header-Bar stacken, sonst kann der
+         backdrop-filter des Headers (eigener Stacking-Context) bei
+         identischem z-index die Touch-Targets der Nav-Items überlagern
+         — Katharinas „man gerät zu falschen Räumen" auf Mobile. */
+      z-index: 60;
       overflow-y: auto;
     }
     .nav.is-open {
@@ -389,10 +394,17 @@
       font-weight: 500;
       text-transform: none;
       letter-spacing: -0.01em;
-      padding: 18px 0;
+      /* Padding hoch von 18 auf 22 — Touch-Target ≥ 60 px (Apple HIG
+         empfiehlt 44 px Minimum, mit 30 px Schrift + 2× 22 px komfortabel
+         drüber). Plus touch-action: manipulation gegen iOS-300 ms-Delay
+         und Ghost-Clicks, die in dichten Listen Klicks auf das Nachbar-
+         Item rutschen lassen. */
+      padding: 22px 0;
       width: 100%;
       border-bottom: 1px solid var(--border-subtle);
       color: var(--text-primary);
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(45, 36, 53, 0.08);
     }
     .nav a::after { display: none; }
     .nav a.is-active {
@@ -432,10 +444,12 @@
       font-weight: 500;
       letter-spacing: -0.01em;
       text-transform: none;
-      padding: 18px 0;
+      padding: 22px 0;
       width: 100%;
       border-bottom: 1px solid var(--border-subtle);
       color: var(--text-primary);
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(45, 36, 53, 0.08);
     }
     .nav-group__menu a:hover { background: transparent; }
     body.nav-open { overflow: hidden; }
