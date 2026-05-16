@@ -525,10 +525,11 @@
      nicht in den Mobile-Heavy-Blur fallen. */
   @media (min-width: 900px) {
     .hero::before {
-      /* Desktop: schärferes Bild, dezenter Filter — Feuer-Glow
-         darf leuchten, Gesichter müssen erkennbar bleiben. */
-      filter: blur(1.5px) saturate(1.05) brightness(1.08) contrast(1.05);
-      opacity: 0.90;
+      /* Desktop: minimaler Blur damit die Gesichter im Feuerlicht
+         erkennbar bleiben (Gruppen-Mood ist die ganze Geste des
+         Bildes). Feuer-Glow leuchten, Gesichter sichtbar. */
+      filter: blur(1px) saturate(1.08) brightness(1.10) contrast(1.05);
+      opacity: 0.92;
     }
     .hero::after {
       background:
@@ -792,13 +793,17 @@
     /* Meta-Capsule (Nächste Begegnung) auf Mobile weg — Info kommt
        prominent in der machBAR, im Hero war sie ein Anhängsel. */
     .hero__meta { display: none; }
-    /* Mobile: Foto leicht nach rechts geschoben, damit das Haupt-
-       motiv (Sonnenblumen + Sun) rechts vom Cream-Wash sichtbar
-       bleibt. Filter dezent. */
+    /* Mobile: Bild leicht nach rechts und unten geschoben, damit
+       das Hauptmotiv (Feuer-Glow + Gesichter im Feuerlicht) rechts
+       vom Cream-Wash sichtbar bleibt. Blur reduziert (4 → 2.5 px) —
+       das Lagerfeuer-Bild hat feine Detail-Strukturen (Personen,
+       Feuer-Flammen), zu viel Blur macht's zum Blob. Filter wie
+       Desktop: saturate hoch damit Feuer leuchtet, brightness damit
+       Gesichter erkennbar bleiben. */
     .hero::before {
-      opacity: 0.78;
-      filter: blur(4px) saturate(0.96) brightness(1.03) contrast(1.03);
-      background-position: 70% 50%;
+      opacity: 0.82;
+      filter: blur(2.5px) saturate(1.05) brightness(1.08) contrast(1.05);
+      background-position: 65% 60%;
     }
     /* Cream-Wash auf Mobile: links dicht für Text-Lesbarkeit,
        rechts auslaufend damit das Foto durchscheint. */
