@@ -526,16 +526,17 @@
     }
     .hero::after {
       background:
-        /* Reines Cream-Wash links, ohne Bronze-Plum-Boden und ohne
-           Champagne-Wärme-Schleier — die beiden Layer hatten über
-           dem dunklen Lagerfeuer-Bild eine rosa Tönung erzeugt
-           (Katharina: „kein rosa!"). Nur Cream, klar, sauber. */
-        radial-gradient(ellipse 85% 150% at 18% 50%,
-          rgba(251, 246, 243, 0.94) 0%,
-          rgba(251, 246, 243, 0.86) 30%,
-          rgba(251, 246, 243, 0.55) 55%,
-          rgba(251, 246, 243, 0.25) 78%,
-          rgba(251, 246, 243, 0.08) 95%);
+        /* Reines Cream-Wash links (kein rosa-Layer mehr — siehe
+           Katharinas Liste 4). Kompaktere Ellipse (70 % × 130 %)
+           und schnellerer Faden, damit die rechte Bildhälfte des
+           Lagerfeuers klarer durchscheint, der Text-Bereich links
+           aber satt auf Cream bleibt. */
+        radial-gradient(ellipse 70% 130% at 18% 50%,
+          rgba(251, 246, 243, 0.90) 0%,
+          rgba(251, 246, 243, 0.78) 28%,
+          rgba(251, 246, 243, 0.42) 50%,
+          rgba(251, 246, 243, 0.15) 72%,
+          rgba(251, 246, 243, 0.0) 92%);
     }
   }
   /* Hero-Komposition: Main-Block links, Begegnungs-Pin rechts.
