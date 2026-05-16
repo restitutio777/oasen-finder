@@ -28,15 +28,15 @@
     --bg-warm-soft: #f1edec;  /* Peach heller · Räume-Section */
     --bg-warm-deep: #ebe5e2;  /* Peach tiefer · Newsletter-Übergang zum Footer */
     --bg-sage:      #dde9d3;  /* helles Frühlingsblatt · gelegentlich */
-    --bg-deep:      #5d544d;  /* Footer · warmer Stein-Grau (HSL 25°/9%/33%) — Sättigung deutlich reduziert vs. Mocha-Bronze, ruhig und neutral mit ganz dezentem Gold-Hauch */
-    --bg-deep-soft: #7d7268;  /* Stein-Grau heller · Sub-Backgrounds */
+    --bg-deep:      #6a5847;  /* Footer · ruhiges Bronze-Grau (HSL 28°/19%/35%) — erinnert klar an das Champagne-Gold im Logo (--accent #c89a78), aber stark gedämpft. Sweet spot zwischen Stein-Grau (S=9%, zu neutral) und Mocha (S=24%, zu krass). */
+    --bg-deep-soft: #8a7665;  /* Bronze-Grau heller · Sub-Backgrounds */
 
     /* — 2. Text ——————————————————————————————————————— */
     --text-primary:   #2d2435;  /* Aubergine-Plum · Headlines, Body-Strong */
     --text-body:      #4a3d5a;  /* gedämpftes Plum · Body */
     --text-secondary: #6a5a78;  /* Sekundär · Subtitles, Captions */
     --text-muted:     #8a8290;  /* Lowest hierarchy · Meta, Timestamps */
-    --text-inverse:   #ffffff;  /* auf dunklem Footer (warmer Stein-Grau) */
+    --text-inverse:   #ffffff;  /* auf dunklem Footer (ruhiges Bronze-Grau) */
 
     /* — 3. Akzente ——————————————————————————————————— */
     --accent:            #c89a78;  /* CHAMPAGNE-GOLD · Brand-Anker, CTAs, BAR-Marken */
@@ -2130,14 +2130,13 @@
 
   /* ---------- Footer ---------- */
   .site-footer {
-    /* Footer in warmem Stein-Grau (--bg-deep) — dezenter Gold-Hauch
-       als Echo zum „Gemeinschaft?"-Champagne im Hero, aber stark
-       desaturiert (HSL 25°/9%/33%) damit der Footer ruhig wirkt
-       statt zu drängen. Weiße Schrift mit ~7:1 Kontrast (WCAG-AAA).
-       Vertikale Polster bewusst knapp — der Footer soll abrunden,
-       nicht thronen. Feine Saumlinie oben (1 px, sehr niedrige
-       Alpha) als sauberer Abschluss zwischen Cream-Section und
-       Stein-Grau-Footer. */
+    /* Footer in ruhigem Bronze-Grau (--bg-deep) — erinnert klar an
+       das Champagne-Gold der Logo-Wortmarke „WERKSTATT" im Header,
+       aber stark gedämpft (HSL 28°/19%/35% statt 25°/41%/63%), so
+       dass der Footer abrundet statt zu drängen. Weiße Schrift mit
+       ~6.5:1 Kontrast (WCAG-AA+). Vertikale Polster bewusst knapp.
+       Feine Saumlinie oben (1 px, sehr niedrige Alpha) als sauberer
+       Abschluss zwischen Cream-Section und Bronze-Footer. */
     background: var(--bg-deep);
     color: var(--text-inverse);
     padding: clamp(44px, 5.5vw, 64px) 0 24px;
@@ -2150,7 +2149,7 @@
     padding-bottom: 32px;
     border-bottom: 1px solid var(--border-on-dark);
   }
-  /* Footer-Texte auf Stein-Grau: alles in Weiß / Weiß-alpha,
+  /* Footer-Texte auf Bronze-Grau: alles in Weiß / Weiß-alpha,
      Brand-Wortmarke komplett weiß für einen klaren Look. */
   .site-footer h4 {
     font-family: var(--font-text);
