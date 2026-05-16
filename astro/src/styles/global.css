@@ -476,13 +476,14 @@
     background-image: url('/hero/werkstatt-keramik.jpg');
     background-size: cover;
     background-position: center 45%;
-    /* Frischer Filter: volle Sättigung damit Türkis und Lehm-Wärme
-       leuchten, Brightness + Contrast leicht hoch für luftige Frische.
-       Cream-Overlay sorgt weiter für Text-Lesbarkeit. Mobile-Blur
-       auf 5px reduziert (war 12px) — beim Resize über den Breakpoint
-       springt das Foto sonst schlagartig unscharf. */
-    filter: blur(5px) saturate(1.05) brightness(1.06) contrast(1.05);
-    opacity: 0.85;
+    /* Warm-gestimmter Filter: Sättigung leicht runter damit der
+       Türkis-Vorhang im Bild nicht dominiert (war zu kühl), sepia
+       gibt einen sanften gold-warmen Schimmer drüber, ohne dass
+       das Bild gelb wirkt. Brightness/Contrast leicht hoch wie
+       vorher. Mobile-Blur niedrig — Resize über Breakpoint soll
+       nicht schlagartig unscharf werden. */
+    filter: blur(5px) saturate(0.82) sepia(0.10) brightness(1.06) contrast(1.04);
+    opacity: 0.82;
     z-index: -2;
   }
   /* Vertical sweep — Cream-Sand oben, durch Coral-Wärme, zu tiefem Plum.
@@ -517,27 +518,37 @@
      nicht in den Mobile-Heavy-Blur fallen. */
   @media (min-width: 900px) {
     .hero::before {
-      filter: blur(1.5px) saturate(1.05) brightness(1.06) contrast(1.05);
-      opacity: 0.92;
+      /* Desktop: gleicher warm-Filter wie Mobile, nur weniger Blur
+         für scharfe Details. Türkis-Vorhang wird gedämpft, sepia
+         legt einen warm-goldenen Schleier drüber — Bild bleibt klar
+         erkennbar, aber dominiert nicht mehr mit Kühl-Tönen. */
+      filter: blur(1.5px) saturate(0.82) sepia(0.10) brightness(1.06) contrast(1.04);
+      opacity: 0.90;
     }
     .hero::after {
       background:
-        /* Cream-Sand wash links */
-        radial-gradient(ellipse 72% 135% at 18% 50%,
+        /* Cream-Sand wash links — etwas breiter und dichter, damit
+           die Text-Spalte deutlich auf warmem Boden ruht. */
+        radial-gradient(ellipse 78% 140% at 18% 50%,
           rgba(251, 246, 243, 0.98) 0%,
-          rgba(251, 246, 243, 0.94) 32%,
-          rgba(251, 246, 243, 0.7) 58%,
-          rgba(251, 246, 243, 0.34) 78%,
-          rgba(251, 246, 243, 0.1) 92%),
-        /* Coral-Wärme-Overlay quer */
+          rgba(251, 246, 243, 0.95) 34%,
+          rgba(251, 246, 243, 0.74) 60%,
+          rgba(251, 246, 243, 0.38) 80%,
+          rgba(251, 246, 243, 0.14) 94%),
+        /* Champagne-Wärme quer über die ganze Sektion — kräftiger
+           als zuvor (0.04→0.10, 0.14→0.22) damit die rechte Bild-
+           hälfte mit dem Türkis einen warm-goldenen Schleier
+           bekommt statt freizustehen. */
         linear-gradient(110deg,
-          rgba(200, 154, 120, 0.04) 0%,
-          rgba(200, 154, 120, 0.14) 100%),
-        /* Vertikaler Sweep · Cream → Altgold → Coral → tiefes Plum */
+          rgba(200, 154, 120, 0.10) 0%,
+          rgba(200, 154, 120, 0.22) 100%),
+        /* Vertikaler Sweep · Cream → Altgold (stärker) → tiefes Plum.
+           Gold-Mid-Anteil hoch von 0.12/0.16 auf 0.18/0.24 — die
+           mittlere Bildzone bekommt einen klaren Gold-Wash. */
         linear-gradient(180deg,
           rgba(251, 246, 243, 0.35) 0%,
-          rgba(200, 154, 120, 0.12) 35%,
-          rgba(200, 154, 120, 0.16) 65%,
+          rgba(200, 154, 120, 0.18) 35%,
+          rgba(200, 154, 120, 0.24) 65%,
           rgba(45, 36, 53, 0.32) 100%);
     }
   }
@@ -762,14 +773,13 @@
        prominent in der machBAR, im Hero war sie ein Anhaengsel */
     .hero__meta { display: none; }
     /* Mobile: Foto nach rechts geschoben, sodass das Hauptmotiv
-       (Türkis-Vorhang + werkende Menschen) im rechten Bildbereich
-       sichtbar bleibt und der linke Bereich — wo die Schrift steht —
-       eher die ruhigen Wand- und Schrank-Bereiche zeigt. Etwas
-       mehr Blur (4px) macht die Textur weicher, sodass der Wash
-       die Schrift trägt statt mit dem Foto zu kämpfen. */
+       (Vorhang + werkende Menschen) im rechten Bildbereich sichtbar
+       bleibt und der linke Bereich — wo die Schrift steht — eher
+       die ruhigen Wand- und Schrank-Bereiche zeigt. Warm-Filter wie
+       Desktop (saturate runter, sepia rein) gegen Türkis-Dominanz. */
     .hero::before {
-      opacity: 0.72;
-      filter: blur(4px) saturate(1.02) brightness(1.06) contrast(1.04);
+      opacity: 0.70;
+      filter: blur(4px) saturate(0.82) sepia(0.10) brightness(1.06) contrast(1.04);
       background-position: 78% 50%;
     }
     /* Cream-Wash auf Mobile: dichter und weiter ausgedehnt, weil

@@ -385,14 +385,15 @@ const mantra: string | undefined = localized(about?.mantra);
     }
   </style>
 
-  {/* Mitkommen: zarter Türkis-Wash statt Gold-Wash. Der Gold-CTA-
-      Button braucht einen kühlen Bühnen-Hintergrund, sonst
-      verschwimmen drei Goldtöne in derselben Section (Wash +
-      Eyebrow + Button). Türkis ist das Komplement zu Gold und
-      knüpft an „Auf der Suche" + bewegBAR an. */}
-  <section style="padding: 5rem 0; background: rgba(84, 151, 184, 0.10); text-align: center;">
+  {/* Mitkommen: zarter Peach-Cream-Wash, derselbe Ton wie die
+      Räume-Section (--bg-warm-soft). Hält die Section in der warmen
+      Familie, ohne mit dem Gold-CTA zu konkurrieren. Eyebrow in
+      Plum gibt einen kühlen Akzentpunkt — die Komplementärspannung
+      lebt jetzt zwischen Eyebrow (Plum) und Button (Gold), nicht
+      im flächigen Background. */}
+  <section style="padding: 5rem 0; background: var(--bg-warm-soft); text-align: center;">
     <div class="container" style="max-width: 640px;">
-      <span class="eyebrow" style="color: var(--accent-blue);">Begegnung</span>
+      <span class="eyebrow" style="color: var(--accent-deep);">Begegnung</span>
       <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 1rem; color: var(--text-primary);">
         Mitkommen
       </h2>
