@@ -623,13 +623,14 @@
     color: var(--accent);
     letter-spacing: 0;
   }
-  /* Nowrap-Wrapper verhindert dass "GemeinschaftsWERK" ueber Zeilenumbruch
-     getrennt wird. Margin-right negativ zieht das nachfolgende „statt"
-     enger an WERK heran — sonst wirkt der Wort-Abstand optisch zu gross
-     wegen des bold-Champagne-Sprungs. */
+  /* Nowrap-Wrapper verhindert dass „GemeinschaftsWERK" über Zeilen-
+     umbruch getrennt wird. Margin-right negativ zieht das nach-
+     folgende „statt" deutlich enger an WERK heran — sonst wirkt
+     der Abstand wegen Flex-gap (12 px aus .eyebrow) + Bold-
+     Champagne-Sprung optisch zu groß. */
   .hero__eyebrow-nowrap {
     white-space: nowrap;
-    margin-right: -0.18em;
+    margin-right: -0.55em;
   }
   /* Eyebrow-Lines: auf Desktop inline (eine Zeile, " " als Verbinder),
      auf Mobile zwei kontrollierte Zeilen statt 3-zeiliger Bruch.
