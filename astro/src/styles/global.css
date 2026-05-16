@@ -179,10 +179,19 @@
     line-height: 1;
     color: var(--text-primary);
     display: inline-flex;
-    align-items: baseline;
-    gap: 0.18em;
+    align-items: center;
+    gap: 0.55em;
     flex-shrink: 1;
     min-width: 0;
+  }
+  /* Brand-Mark — kreisförmige Sechs-Figuren-Illustration vor der
+     Wortmarke. Klein und ruhig (clamp 34–42 px), block damit
+     align-items:center sauber greift. */
+  .brand__mark {
+    width: clamp(34px, 3.4vw, 42px);
+    height: clamp(34px, 3.4vw, 42px);
+    flex-shrink: 0;
+    display: block;
   }
   /* „WERKSTATT" als Wortmarke in Champagne-Gold, „Gemeinschaft"
      daneben in Bergsee-Türkis. Klassische Komplementär-Kombi
