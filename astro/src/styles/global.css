@@ -28,8 +28,8 @@
     --bg-warm-soft: #f1edec;  /* Peach heller · Räume-Section */
     --bg-warm-deep: #ebe5e2;  /* Peach tiefer · Newsletter-Übergang zum Footer */
     --bg-sage:      #dde9d3;  /* helles Frühlingsblatt · gelegentlich */
-    --bg-deep:      #8c6b3a;  /* Footer · warmer Gold-Ocker (Weiß-Text lesbar) */
-    --bg-deep-soft: #ad8954;  /* Gold-Ocker hell · Sub-Backgrounds */
+    --bg-deep:      #6a4d8a;  /* Footer · Plum (Katharinas Wunsch: „das Lila von ‚Auf der Suche'") */
+    --bg-deep-soft: #8a6caa;  /* Plum heller · Sub-Backgrounds */
 
     /* — 2. Text ——————————————————————————————————————— */
     --text-primary:   #2d2435;  /* Aubergine-Plum · Headlines, Body-Strong */
@@ -493,30 +493,22 @@
     opacity: 0.85;
     z-index: -2;
   }
-  /* Vertical sweep — Cream-Sand oben, durch Coral-Wärme, zu tiefem Plum.
-     Bühnenlogik: heller Tag oben, Bühnenhintergrund unten. */
+  /* Hero-Wash: reines Cream, kein Bronze/Plum mehr (Katharinas
+     Liste 4: „kein rosa" — die alte Mischung aus Cream + Bronze +
+     dunkles-Plum-Boden hatte über dem Lagerfeuer-Bild eine rosa
+     Tönung erzeugt). Default-Variante (kleinere Viewports und
+     Fallback), Desktop und ≤720 px-Mobile überschreiben unten. */
   .hero::after {
     content: '';
     position: absolute;
     inset: 0;
     background:
-      /* Cream-Sand wash großzügig genug, dass beide Titel-Zeilen
-         aufgehellt sind — sonst landet „Gemeinschaft?" auf Mobile
-         über Lehm-Tönen und wird schwer lesbar. */
       radial-gradient(ellipse 130% 115% at 35% 55%,
         rgba(251, 246, 243, 0.94) 0%,
         rgba(251, 246, 243, 0.82) 28%,
         rgba(251, 246, 243, 0.55) 52%,
         rgba(251, 246, 243, 0.22) 75%,
-        transparent 92%),
-      /* Vertical: Cream oben → Altgold → gedämpftes Plum.
-         Plum-Anteil bewusst reduziert (0.62 → 0.42), damit das
-         untere Titel-Drittel auf Mobile noch atmet. */
-      linear-gradient(180deg,
-        rgba(251, 246, 243, 0.4) 0%,
-        rgba(200, 154, 120, 0.18) 35%,
-        rgba(200, 154, 120, 0.22) 65%,
-        rgba(45, 36, 53, 0.42) 100%);
+        transparent 92%);
     z-index: -1;
   }
   /* Tablet + Desktop: minimaler Blur für scharfe Details, gleich
@@ -533,27 +525,16 @@
     }
     .hero::after {
       background:
-        /* Cream-Sand wash links — sanfterer Auslauf nach rechts
-           (weiter ausgedehnt, niedrigere Mid-Werte), sodass der
-           Übergang Wash↔Bild nicht hart erscheint und die Sonnen-
-           blumen wie durch einen warmen Schleier blicken. */
+        /* Reines Cream-Wash links, ohne Bronze-Plum-Boden und ohne
+           Champagne-Wärme-Schleier — die beiden Layer hatten über
+           dem dunklen Lagerfeuer-Bild eine rosa Tönung erzeugt
+           (Katharina: „kein rosa!"). Nur Cream, klar, sauber. */
         radial-gradient(ellipse 85% 150% at 18% 50%,
           rgba(251, 246, 243, 0.94) 0%,
           rgba(251, 246, 243, 0.86) 30%,
           rgba(251, 246, 243, 0.55) 55%,
           rgba(251, 246, 243, 0.25) 78%,
-          rgba(251, 246, 243, 0.08) 95%),
-        /* Champagne-Wärme als sanfter Schleier — bindet das Bild
-           an die Palette. */
-        linear-gradient(110deg,
-          rgba(200, 154, 120, 0.06) 0%,
-          rgba(200, 154, 120, 0.16) 100%),
-        /* Sanfter Boden-Schatten als Abschluss zur Cream-Section
-           darunter — warmes Bronze-Plum. */
-        linear-gradient(180deg,
-          transparent 60%,
-          rgba(110, 75, 50, 0.10) 85%,
-          rgba(110, 75, 50, 0.22) 100%);
+          rgba(251, 246, 243, 0.08) 95%);
     }
   }
   /* Hero-Komposition: Main-Block links, Begegnungs-Pin rechts.
@@ -805,19 +786,17 @@
       filter: blur(2.5px) saturate(1.05) brightness(1.08) contrast(1.05);
       background-position: 65% 60%;
     }
-    /* Cream-Wash auf Mobile: links dicht für Text-Lesbarkeit,
-       rechts auslaufend damit das Foto durchscheint. */
+    /* Mobile-Wash: oben dicht für Text-Lesbarkeit, unten klarer
+       sodass das Lagerfeuer-Bild atmet. KEIN Bronze-Plum-Boden
+       mehr (Katharinas Liste 4: „kein rosa") — der Cream-Wash
+       allein trägt. */
     .hero::after {
       background:
         linear-gradient(180deg,
-          transparent 60%,
-          rgba(110, 75, 50, 0.12) 88%,
-          rgba(110, 75, 50, 0.22) 100%),
-        linear-gradient(95deg,
-          rgba(251, 246, 243, 0.96) 0%,
-          rgba(251, 246, 243, 0.92) 45%,
-          rgba(251, 246, 243, 0.72) 70%,
-          rgba(251, 246, 243, 0.35) 88%,
+          rgba(251, 246, 243, 0.95) 0%,
+          rgba(251, 246, 243, 0.88) 40%,
+          rgba(251, 246, 243, 0.55) 70%,
+          rgba(251, 246, 243, 0.25) 90%,
           rgba(251, 246, 243, 0.10) 100%);
     }
     /* Mobile CTAs: vertikal gestapelt, links angeordnet (Hero ist
