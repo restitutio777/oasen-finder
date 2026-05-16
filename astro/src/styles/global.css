@@ -518,50 +518,39 @@
     }
     .hero::after {
       background:
-        /* Mittig konzentrierter Cream-Wash — passt zum zentrierten
-           Hero-Layout. Der Text sitzt jetzt auf einer cremigen
-           Plattform in der Mitte, das Bild scheint an den Rändern
-           (Sonnenblumen links UND rechts) klar durch. */
-        radial-gradient(ellipse 70% 105% at 50% 50%,
-          rgba(251, 246, 243, 0.92) 0%,
-          rgba(251, 246, 243, 0.85) 28%,
-          rgba(251, 246, 243, 0.55) 55%,
-          rgba(251, 246, 243, 0.22) 78%,
-          rgba(251, 246, 243, 0.05) 95%),
-        /* Champagne-Wärme als sanfter Schleier über die ganze
-           Sektion — bindet das Bild an die Palette. */
-        linear-gradient(180deg,
+        /* Cream-Sand wash links — die Text-Spalte ruht auf warmem
+           Boden, rechts läuft er sanft aus damit die Sonnenblumen
+           durchscheinen. */
+        radial-gradient(ellipse 72% 135% at 18% 50%,
+          rgba(251, 246, 243, 0.96) 0%,
+          rgba(251, 246, 243, 0.92) 32%,
+          rgba(251, 246, 243, 0.66) 58%,
+          rgba(251, 246, 243, 0.30) 78%,
+          rgba(251, 246, 243, 0.08) 94%),
+        /* Champagne-Wärme als sanfter Schleier — bindet das Bild
+           an die Palette. */
+        linear-gradient(110deg,
           rgba(200, 154, 120, 0.06) 0%,
-          rgba(200, 154, 120, 0.10) 50%,
-          rgba(200, 154, 120, 0.14) 100%),
+          rgba(200, 154, 120, 0.16) 100%),
         /* Sanfter Boden-Schatten als Abschluss zur Cream-Section
-           darunter — warmes Bronze-Plum statt kühl-violett. */
+           darunter — warmes Bronze-Plum. */
         linear-gradient(180deg,
           transparent 60%,
           rgba(110, 75, 50, 0.10) 85%,
           rgba(110, 75, 50, 0.22) 100%);
     }
   }
-  /* Hero-Komposition mittig — Katharinas Wunsch 16.05.
-     Vorher Grid mit Main links + Meta-Block rechts. Jetzt vertikal
-     gestapelt, alles zentriert: Claim → Headline → Subtitle → CTAs
-     → Begegnungs-Block. Der Meta-Block bleibt als kleiner zentrier-
-     ter Block unter den CTAs, optisch wie ein Anker-Pin. */
+  /* Hero-Komposition: Main-Block links, Begegnungs-Pin rechts.
+     Grid mit zwei Spalten, Items am unteren Rand ausgerichtet. */
   .hero__inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: clamp(20px, 3vw, 36px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(24px, 4vw, 64px);
+    align-items: end;
   }
-  .hero__main {
-    max-width: 880px;
-    /* Auto-margins überflüssig wegen align-items: center am Parent,
-       aber sicherheitshalber. */
-    margin: 0 auto;
-  }
+  .hero__main { max-width: 1000px; }
   .hero__eyebrow {
-    margin: 0 auto 28px;
+    margin-bottom: 32px;
     color: var(--text-secondary);
     font-weight: 500;
     /* Eyebrow wird zum Claim — mixed-case, italic Cormorant fuer Ruhe */
@@ -572,8 +561,6 @@
     font-style: italic;
     line-height: 1.5;
     max-width: 640px;
-    /* inline-flex bleibt — zentriert wird durch text-align: center
-       des Parents. */
   }
   .hero__eyebrow::before {
     /* Strich verkuerzen, weil Eyebrow jetzt langer Text ist */
@@ -733,15 +720,12 @@
     margin-top: clamp(28px, 4vw, 44px);
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 28px;
     flex-wrap: wrap;
   }
   .hero__meta {
-    /* Begegnungs-Pin im mittigen Hero-Layout: kleiner zentrierter
-       Block unter den CTAs, nicht mehr rechts an der Seite. */
-    align-self: center;
-    text-align: center;
+    align-self: end;
+    text-align: right;
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -750,9 +734,9 @@
     white-space: nowrap;
     text-decoration: none;
     transition: color var(--t-fast) var(--ease);
-    display: inline-block;
-    /* Cream-Wash damit der Block lesbar bleibt wenn das Foto durchscheint */
-    padding: 14px 22px;
+    display: block;
+    /* subtle cream wash so it stays readable when the photo shows through */
+    padding: 14px 18px;
     border-radius: 4px;
     background: rgba(251, 246, 243, 0.7);
     backdrop-filter: blur(6px);
@@ -785,38 +769,39 @@
   }
 
   @media (max-width: 720px) {
+    .hero__inner { grid-template-columns: 1fr; }
     /* Meta-Capsule (Nächste Begegnung) auf Mobile weg — Info kommt
        prominent in der machBAR, im Hero war sie ein Anhängsel. */
     .hero__meta { display: none; }
-    /* Mobile: Bild zentriert (Sonnenblumen verteilt sichtbar), Filter
-       dezent — Sonnenblumen sollen leuchten. */
+    /* Mobile: Foto leicht nach rechts geschoben, damit das Haupt-
+       motiv (Sonnenblumen + Sun) rechts vom Cream-Wash sichtbar
+       bleibt. Filter dezent. */
     .hero::before {
       opacity: 0.78;
       filter: blur(4px) saturate(0.96) brightness(1.03) contrast(1.03);
-      background-position: center center;
+      background-position: 70% 50%;
     }
-    /* Cream-Wash auf Mobile: zentral konzentriert (passend zum
-       zentrierten Text-Layout). Mitte dicht für Text-Lesbarkeit,
-       Ränder lassen das Foto durchscheinen. */
+    /* Cream-Wash auf Mobile: links dicht für Text-Lesbarkeit,
+       rechts auslaufend damit das Foto durchscheint. */
     .hero::after {
       background:
         linear-gradient(180deg,
           transparent 60%,
           rgba(110, 75, 50, 0.12) 88%,
           rgba(110, 75, 50, 0.22) 100%),
-        radial-gradient(ellipse 110% 75% at 50% 50%,
-          rgba(251, 246, 243, 0.93) 0%,
-          rgba(251, 246, 243, 0.85) 35%,
-          rgba(251, 246, 243, 0.55) 65%,
-          rgba(251, 246, 243, 0.2) 88%,
-          rgba(251, 246, 243, 0.05) 100%);
+        linear-gradient(95deg,
+          rgba(251, 246, 243, 0.96) 0%,
+          rgba(251, 246, 243, 0.92) 45%,
+          rgba(251, 246, 243, 0.72) 70%,
+          rgba(251, 246, 243, 0.35) 88%,
+          rgba(251, 246, 243, 0.10) 100%);
     }
-    /* Mobile CTAs: vertikal gestapelt, zentriert (Hero ist seit
-       16.05. mittig — auch Mobile). Beide als richtige Buttons,
-       intrinsic width. */
+    /* Mobile CTAs: vertikal gestapelt, links angeordnet (Hero ist
+       wieder links-aligned). Beide als richtige Buttons, intrinsic
+       width. */
     .hero__cta-row {
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
       margin-top: 32px;
     }
