@@ -32,13 +32,17 @@ const text = localized(config?.newsletter?.text) || 'Eine leise Notiz, wenn etwa
 const widgetId = `substack-embed-${variant}`;
 
 // Newsletter sitzt auf der Landing als letzte Section vor dem Footer.
-// Auf der Landing nutzen wir den tieferen Peach-Ton (--bg-warm-deep)
-// als sanften Übergang zum Footer — alle anderen Pages bleiben auf
-// dem Page-Background.
-const bgColor = variant === 'landing' ? 'var(--bg-warm-deep)' : 'var(--bg-base)';
+// Auf der Landing nutzt er einen vertikalen Gradient: oben dieselbe
+// Peach-Cream wie die Mitkommen-Section drüber (kein Sprung), unten
+// schon der Gold-Ocker des Footers (kein Sprung). Sonnen-Untergang-
+// Effekt: warmer Verlauf statt drei harter Kanten Cream → Peach →
+// Gold-Ocker. Alle anderen Pages bleiben auf dem Page-Background.
+const bgStyle = variant === 'landing'
+  ? 'linear-gradient(180deg, var(--bg-warm-soft) 0%, var(--bg-warm-soft) 68%, rgba(176, 140, 86, 0.22) 88%, var(--bg-deep) 100%)'
+  : 'var(--bg-base)';
 ---
 
-<section style={`padding: 5rem 0; background: ${bgColor};`}>
+<section style={`padding: 5rem 0 7rem; background: ${bgStyle};`}>
   <div class="container" style="max-width: 640px; text-align: center;">
     <span class="eyebrow">Newsletter</span>
     <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 1rem; color: var(--text-primary);">
