@@ -478,16 +478,19 @@
     content: '';
     position: absolute;
     inset: -60px;
-    /* Hero: Sonnenblumenfeld im Gegenlicht — Katharinas Wunsch
-       vom 16.05. Das Bild trägt die warme Eurythmie-Palette
-       (Gold + Sommer), keine künstlichen Filter-Tricks nötig. */
-    background-image: url('/hero/sonnenblumen.jpg');
+    /* Hero: Gemeinschaft am Lagerfeuer in der Dämmerung — Gruppe
+       sitzt rund ums Feuer, intime Mood. Das Bild ist von Natur
+       aus warm (Feuer-Orange + Twilight-Blau) und passt eindeutig
+       zur „Gemeinschaft"-Idee der Site. */
+    background-image: url('/hero/gemeinschaft-am-feuer.jpg');
     background-size: cover;
     background-position: center center;
-    /* Dezenter Filter — Sonnenblumen sollen leuchten, kein Sepia
-       (würde Gelb ins Orange kippen), kaum Sättigungsverlust. */
-    filter: blur(4px) saturate(0.96) brightness(1.03) contrast(1.03);
-    opacity: 0.92;
+    /* Bild ist dunkel von Natur aus — Sättigung etwas hoch
+       damit Feuer-Glow leuchtet, brightness leicht hoch damit
+       die Gesichter erkennbar bleiben, kein Sepia (Bild ist
+       schon warm). */
+    filter: blur(4px) saturate(1.05) brightness(1.08) contrast(1.05);
+    opacity: 0.85;
     z-index: -2;
   }
   /* Vertical sweep — Cream-Sand oben, durch Coral-Wärme, zu tiefem Plum.
@@ -522,10 +525,10 @@
      nicht in den Mobile-Heavy-Blur fallen. */
   @media (min-width: 900px) {
     .hero::before {
-      /* Desktop: schärferes Bild, dezenter Filter — Sonnenblumen
-         dürfen klar leuchten. */
-      filter: blur(1.5px) saturate(0.96) brightness(1.03) contrast(1.03);
-      opacity: 0.94;
+      /* Desktop: schärferes Bild, dezenter Filter — Feuer-Glow
+         darf leuchten, Gesichter müssen erkennbar bleiben. */
+      filter: blur(1.5px) saturate(1.05) brightness(1.08) contrast(1.05);
+      opacity: 0.90;
     }
     .hero::after {
       background:
