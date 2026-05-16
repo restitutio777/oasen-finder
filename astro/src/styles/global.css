@@ -529,15 +529,16 @@
     }
     .hero::after {
       background:
-        /* Cream-Sand wash links — die Text-Spalte ruht auf warmem
-           Boden, rechts läuft er sanft aus damit die Sonnenblumen
-           durchscheinen. */
-        radial-gradient(ellipse 72% 135% at 18% 50%,
-          rgba(251, 246, 243, 0.96) 0%,
-          rgba(251, 246, 243, 0.92) 32%,
-          rgba(251, 246, 243, 0.66) 58%,
-          rgba(251, 246, 243, 0.30) 78%,
-          rgba(251, 246, 243, 0.08) 94%),
+        /* Cream-Sand wash links — sanfterer Auslauf nach rechts
+           (weiter ausgedehnt, niedrigere Mid-Werte), sodass der
+           Übergang Wash↔Bild nicht hart erscheint und die Sonnen-
+           blumen wie durch einen warmen Schleier blicken. */
+        radial-gradient(ellipse 85% 150% at 18% 50%,
+          rgba(251, 246, 243, 0.94) 0%,
+          rgba(251, 246, 243, 0.86) 30%,
+          rgba(251, 246, 243, 0.55) 55%,
+          rgba(251, 246, 243, 0.25) 78%,
+          rgba(251, 246, 243, 0.08) 95%),
         /* Champagne-Wärme als sanfter Schleier — bindet das Bild
            an die Palette. */
         linear-gradient(110deg,
@@ -687,9 +688,13 @@
     font-weight: 500;
     font-style: normal;
   }
-  /* „Auf der Suche —" in Bergsee-Türkis — gleicher Ton wie
-     „Gemeinschaft" im Logo, so klingt der Brand-Anker im Hero an. */
-  .hero__title-a { color: var(--accent-blue); }
+  /* „Auf der Suche —" in Plum — bildet zusammen mit den Plum-
+     Strichen des Eyebrows und dem Plum-Datum im Begegnungs-Pin
+     eine konsistente Plum-Achse durch den Hero. Türkis hatte
+     gegen das warm-goldene Sonnenblumen-Hintergrundbild zu kalt
+     gewirkt. Brand-Türkis lebt im Logo-„Gemeinschaft" und im
+     Ghost-CTA-Button weiter, bleibt also präsent. */
+  .hero__title-a { color: var(--accent-deep); }
   /* „wie wird Gemeinschaft?" in Champagne-Gold — Katharinas
      Brand-Logik: Gold trägt die Wortmarken-Trias mit WERKSTATT,
      den BAR-Endungen und „Website". Mit dem Keramik-Atelier-Bild
