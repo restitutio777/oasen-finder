@@ -831,42 +831,60 @@
     }
   }
 
-  /* Buttons */
+  /* Buttons — sanftere Rundung (6 px), mehr Präsenz durch Padding +
+     Letter-Spacing, leichte Schatten für Schwebe-Effekt. Hover hebt
+     den Button um 2 px und intensiviert den Schatten. */
   .btn {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 14px 26px;
+    padding: 15px 30px;
     font-family: var(--font-text);
     font-size: 14px;
     font-weight: 500;
-    letter-spacing: 0;
+    letter-spacing: 0.02em;
     text-transform: none;
-    border-radius: 2px;
+    border-radius: 6px;
     border: 1px solid transparent;
-    transition: all var(--t-base) var(--ease);
+    transition: transform var(--t-base) var(--ease),
+                background var(--t-base) var(--ease),
+                border-color var(--t-base) var(--ease),
+                box-shadow var(--t-base) var(--ease),
+                color var(--t-base) var(--ease);
     cursor: pointer;
+    will-change: transform;
   }
   .btn--primary {
-    /* Champagne-Gold als Brand-Anker — die warme Aktion der Site. */
+    /* Champagne-Gold als Brand-Anker. Sanfter warmer Schatten als
+       Schwebe, dezenter Inner-Highlight oben für 3D-Anmutung. */
     background: var(--accent);
     color: var(--text-inverse);
     border-color: var(--accent);
+    box-shadow:
+      0 6px 18px -6px rgba(200, 154, 120, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
   }
   .btn--primary:hover {
     background: var(--accent-hover);
     border-color: var(--accent-hover);
     color: var(--text-inverse);
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 28px -8px rgba(200, 154, 120, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
   }
   .btn--ghost {
-    background: rgba(251, 246, 243, 0.6);
+    background: rgba(251, 246, 243, 0.72);
     color: var(--text-primary);
     border-color: var(--accent);
+    box-shadow: 0 4px 14px -6px rgba(45, 36, 53, 0.15);
   }
   .btn--ghost:hover {
     background: var(--accent);
     color: var(--bg-base);
     border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -8px rgba(200, 154, 120, 0.45);
   }
   /* Türkis-Ghost-Variante — kühler Gegenpol zum Gold-Anker */
   .btn--ghost.btn--fresh {
@@ -877,6 +895,7 @@
     background: var(--accent-blue);
     color: var(--bg-base);
     border-color: var(--accent-blue);
+    box-shadow: 0 10px 24px -8px rgba(84, 151, 184, 0.45);
   }
   .btn svg { transition: transform var(--t-base) var(--ease); }
   .btn:hover svg { transform: translateX(4px); }
