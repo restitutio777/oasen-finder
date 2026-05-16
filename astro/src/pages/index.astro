@@ -88,7 +88,7 @@ const mantra: string | undefined = localized(about?.mantra);
           ich bisher finden durfte: Willkommen dazu in der
           <a href="/hoerbar/" class="purpose-intro__link" style="color: var(--accent-deep);">hörBAR</a>
           und
-          <a href="/lesbar/" class="purpose-intro__link" style="color: var(--neutral);">lesBAR</a>.
+          <a href="/lesbar/" class="purpose-intro__link" style="color: var(--text-secondary);">lesBAR</a>.
         </p>
         <p class="purpose-intro__body">
           Sie ist aber auch eine Einladung mitzukommen auf diese Reise
@@ -120,7 +120,7 @@ const mantra: string | undefined = localized(about?.mantra);
     <div class="container">
       <header style="max-width: 720px; margin: 0 auto 3rem; text-align: center;">
         <span class="eyebrow">Räume</span>
-        <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 0; color: var(--accent);">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 0; color: var(--accent-hover);">
           Wohin als <em style="color: inherit;">nächstes</em>?
         </h2>
       </header>
@@ -161,12 +161,19 @@ const mantra: string | undefined = localized(about?.mantra);
       margin: 0 auto;
     }
     .room-card {
+      /* Tür-Andeutung: die linke Kante ist eine 3px-Leibung in der
+         Raum-Akzentfarbe, links scharfkantig wie ein Türscharnier,
+         rechts gerundet wie ein Türblatt. Ein kleiner Punkt
+         (::before) auf halber Höhe markiert den Türknauf. Beim
+         Hover „öffnet" sich der Knauf einen Hauch nach rechts. */
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-      padding: 2rem;
+      padding: 2rem 2rem 2rem 2.4rem;
       border: 1px solid rgba(45, 36, 53, 0.10);
-      border-radius: 6px;
+      border-left: 3px solid var(--card-accent);
+      border-radius: 0 6px 6px 0;
       /* Reinweiß auf cream-Sand-Section — sonst „schwimmen" die Karten
          im Eurythmie-Cream. Plus dezenter Plum-Schatten für klare
          Tile-Abhebung, ohne Härte. */
@@ -176,10 +183,33 @@ const mantra: string | undefined = localized(about?.mantra);
       color: var(--text-primary);
       transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.2s ease;
     }
+    /* Türknauf — kleiner Kreis in der Raum-Akzentfarbe, mittig auf
+       der Türleibung sitzend. Bewusst klein und ruhig, damit die
+       Andeutung nicht zur Illustration wird. */
+    .room-card::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--card-accent);
+      opacity: 0.55;
+      transform: translateY(-50%);
+      transition: transform var(--t-base) var(--ease),
+                  opacity var(--t-base) var(--ease);
+    }
     .room-card:hover {
       border-color: var(--card-accent);
       transform: translateY(-2px);
       box-shadow: 0 14px 32px -16px rgba(45, 36, 53, 0.28);
+    }
+    /* Tür „öffnet" — Knauf rutscht ein Stück nach rechts und wird
+       satter, als wäre er gerade gedrückt worden. */
+    .room-card:hover::before {
+      transform: translate(3px, -50%);
+      opacity: 1;
     }
     .room-card__eyebrow {
       color: var(--card-accent);
@@ -267,12 +297,14 @@ const mantra: string | undefined = localized(about?.mantra);
       color: var(--text-primary);
     }
     .purpose-intro__heading-bold {
-      /* „WEBSEITE" als Wortmarke in CAPS, in Champagne-Gold —
-         schliesst die Wortmarken-Trias mit WERKSTATT (Logo) und
-         allen „BAR"-Endungen der Räume-Karten. Goldener Brand-
-         Anker, warmer Ton. */
+      /* „Website" als Wortmarke in tieferem Bronze-Gold — Brand-
+         Anker bleibt in der Gold-Familie (Echo zu WERKSTATT,
+         BAR-Endungen, CTAs), aber auf dem Cream-Background braucht
+         es den dunkleren Hover-Ton, damit das Wort trägt statt zu
+         flirren. Champagne (--accent) ist zu hell für so große
+         Display-Schrift auf Off-White. */
       font-weight: 700;
-      color: var(--accent);
+      color: var(--accent-hover);
       letter-spacing: 0.02em;
     }
     .purpose-intro__heading em {
@@ -306,9 +338,14 @@ const mantra: string | undefined = localized(about?.mantra);
     }
   </style>
 
-  <section style="padding: 5rem 0; background: rgba(200, 154, 120, 0.15); text-align: center;">
+  {/* Mitkommen: zarter Türkis-Wash statt Gold-Wash. Der Gold-CTA-
+      Button braucht einen kühlen Bühnen-Hintergrund, sonst
+      verschwimmen drei Goldtöne in derselben Section (Wash +
+      Eyebrow + Button). Türkis ist das Komplement zu Gold und
+      knüpft an „Auf der Suche" + bewegBAR an. */}
+  <section style="padding: 5rem 0; background: rgba(84, 151, 184, 0.10); text-align: center;">
     <div class="container" style="max-width: 640px;">
-      <span class="eyebrow" style="color: var(--accent);">Begegnung</span>
+      <span class="eyebrow" style="color: var(--accent-blue);">Begegnung</span>
       <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6rem 0 1rem; color: var(--text-primary);">
         Mitkommen
       </h2>

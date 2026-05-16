@@ -650,17 +650,19 @@
   /* „Auf der Suche —" in Bergsee-Türkis — gleicher Ton wie
      „Gemeinschaft" im Logo, so klingt der Brand-Anker im Hero an. */
   .hero__title-a { color: var(--accent-blue); }
-  /* „wie wird Gemeinschaft?" in Champagne-Gold — schliesst die
-     Wortmarken-Trias mit WERKSTATT/WEBSEITE/BAR. Sanfter Glow in
-     Champagne. */
+  /* „wie wird Gemeinschaft?" in Plum — meditative Tiefe als
+     Komplement zum Türkis darüber. Gold scheitert hier am Lehm-Foto
+     (Hue zu nah am Hintergrund), Plum bricht klar durch und hält
+     die Türkis-Plum-Achse, die auch das Mantra trägt. Gold bleibt
+     den Wortmarken (WERKSTATT, BAR, „Website") + CTAs vorbehalten. */
   .hero__title-b {
-    color: var(--accent);
-    text-shadow: 0 0 36px rgba(200, 154, 120, 0.35);
+    color: var(--accent-deep);
+    text-shadow: 0 0 36px rgba(138, 108, 170, 0.28);
   }
   .hero__title em {
     font-style: italic;
     font-weight: 500;
-    color: inherit;  /* erbt von .hero__title-b (Champagne-Gold) */
+    color: inherit;  /* erbt von .hero__title-b (Plum) */
   }
   .hero__lead {
     margin-top: clamp(28px, 4vw, 44px);
@@ -741,20 +743,26 @@
     /* Meta-Capsule (Naechste Begegnung) auf Mobile weg — Info kommt
        prominent in der machBAR, im Hero war sie ein Anhaengsel */
     .hero__meta { display: none; }
-    /* Mobile: Bild rechts deutlich klar erkennbar. Blur ganz runter,
-       der Cream-Wash links/oben deckt den Text-Bereich ab und schützt
-       die Lesbarkeit — räumlicher Schärfe-Unterschied entsteht durch
-       den Wash, nicht durch den Filter (CSS-blur kann nicht regional). */
+    /* Mobile: Foto leicht nach rechts geschoben, sodass das
+       Hauptmotiv (Lehm-Skulptur + Hände) im rechten Bilddrittel
+       sitzt und der linke Bereich — wo die Schrift steht — ruhiger
+       und gleichmäßiger Hintergrund ist. Etwas mehr Blur (4px)
+       macht die Textur weicher, sodass der Wash die Schrift trägt
+       statt mit dem Foto zu kämpfen. */
     .hero::before {
-      opacity: 0.78;
-      filter: blur(2px) saturate(1.05) brightness(1.06) contrast(1.05);
+      opacity: 0.72;
+      filter: blur(4px) saturate(1.02) brightness(1.06) contrast(1.04);
+      background-position: 72% 40%;
     }
-    /* Cream-Wash auf Mobile: zwei Schichten kombiniert.
-       1. Horizontaler Wash (95deg) — dicht links über Text/CTA,
-          transparent rechts. So bleibt der Text lesbar, aber das
-          Bild kommt rechts (besonders oben rechts) klar durch.
-       2. Vertikaler Coral-Drift unten — sanfter Übergang zum
-          nachfolgenden Cream-Section. */
+    /* Cream-Wash auf Mobile: dichter und weiter ausgedehnt, weil
+       die Schrift (besonders „Gemeinschaft?" und der Subtitle-Punkt-
+       Reihe) bis ~88 % Breite reicht. Vorher fadete der Wash schon
+       ab 58 % stark — genau wo „Gemeinschaft?" steht. Jetzt deckt
+       er bis 75 % satt, dann sanftes Auslaufen.
+       1. Horizontaler Wash (95deg) — Text-Bereich klar bis fast
+          zum rechten Rand.
+       2. Vertikaler Gold-Drift unten — Übergang zum nächsten
+          Cream-Block. */
     .hero::after {
       background:
         linear-gradient(180deg,
@@ -762,11 +770,11 @@
           rgba(200, 154, 120, 0.15) 88%,
           rgba(200, 154, 120, 0.22) 100%),
         linear-gradient(95deg,
-          rgba(251, 246, 243, 0.94) 0%,
-          rgba(251, 246, 243, 0.88) 38%,
-          rgba(251, 246, 243, 0.58) 58%,
-          rgba(251, 246, 243, 0.2) 80%,
-          transparent 95%);
+          rgba(251, 246, 243, 0.97) 0%,
+          rgba(251, 246, 243, 0.93) 50%,
+          rgba(251, 246, 243, 0.82) 75%,
+          rgba(251, 246, 243, 0.45) 90%,
+          rgba(251, 246, 243, 0.15) 100%);
     }
     /* Mobile CTAs: beide als richtige Buttons, aber intrinsic width
        (nicht full-width). Coral-Primary bekommt Transparenz, damit
@@ -783,11 +791,12 @@
       padding: 13px 22px;
       font-size: 15px;
     }
-    /* Primary-Coral mit leichter Transparenz: Foto schimmert durch,
-       Text-Inverse bleibt klar lesbar (Coral hat genug Tiefe). */
+    /* Primary-Gold auf Mobile solide halten — Champagne ist zu hell,
+       um mit Transparenz auf Lehm-Foto noch genug Kontrast zum
+       weißen Label zu liefern. Lieber kompakter, klarer Button. */
     .hero__cta-row .btn--primary {
-      background: rgba(200, 154, 120, 0.85);
-      border-color: rgba(200, 154, 120, 0.7);
+      background: var(--accent);
+      border-color: var(--accent);
     }
     /* Ghost-Button auf Mobile: dichter Cream-bg + 1.5px Border. */
     .hero__cta-row .btn--ghost {
@@ -2099,16 +2108,18 @@
   .site-footer {
     /* Footer in warmem dunklem Plum-Aubergine — harmoniert mit dem
        Cream-Peach der Landing oben (kein Kühl-Grau-Bruch mehr). Cream-
-       Text bleibt gut lesbar, Champagne/Sage-Akzente kommen klarer. */
+       Text bleibt gut lesbar, Champagne/Sage-Akzente kommen klarer.
+       Vertikale Polster bewusst knapp gehalten — der Footer soll
+       abrunden, nicht thronen. */
     background: var(--bg-deep);
     color: var(--text-inverse);
-    padding: clamp(64px, 8vw, 96px) 0 32px;
+    padding: clamp(44px, 5.5vw, 64px) 0 24px;
   }
   .site-footer__grid {
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr;
-    gap: clamp(32px, 4vw, 64px);
-    padding-bottom: 56px;
+    gap: clamp(28px, 3.5vw, 52px);
+    padding-bottom: 32px;
     border-bottom: 1px solid var(--border-on-dark);
   }
   /* Landing: Erkunden-Spalte ausgeblendet (redundant zur Räume-Übersicht
@@ -2126,13 +2137,13 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.55);
-    margin: 0 0 20px;
+    margin: 0 0 14px;
   }
   .site-footer__brand {
     font-family: var(--font-display);
-    font-size: 26px;
+    font-size: 24px;
     color: var(--text-inverse);
-    margin-bottom: 12px;
+    margin: 0 0 8px;
     letter-spacing: -0.012em;
   }
   .site-footer__brand-noun {
@@ -2149,12 +2160,13 @@
   .site-footer__intro {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 17px;
-    line-height: 1.5;
+    font-size: 16px;
+    line-height: 1.45;
     color: rgba(255, 255, 255, 0.85);
     max-width: 360px;
+    margin: 0;
   }
-  .site-footer__nav { display: flex; flex-direction: column; gap: 12px; }
+  .site-footer__nav { display: flex; flex-direction: column; gap: 9px; }
   .site-footer__nav a,
   .site-footer__contact a {
     color: rgba(255, 255, 255, 0.92);
@@ -2163,14 +2175,14 @@
   }
   .site-footer__nav a:hover,
   .site-footer__contact a:hover { color: #ffffff; text-decoration: underline; }
-  .site-footer__contact { display: flex; flex-direction: column; gap: 12px; font-size: 14px; }
+  .site-footer__contact { display: flex; flex-direction: column; gap: 9px; font-size: 14px; }
   .site-footer__contact em {
     font-family: var(--font-display);
     font-style: italic;
     color: rgba(255, 255, 255, 0.7);
   }
   .site-footer__bottom {
-    padding-top: 24px;
+    padding-top: 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;

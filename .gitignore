@@ -9,6 +9,7 @@ dist
 .claude/scheduled_tasks.lock
 .claude/*.lock
 .fragebogen-style.html
+.firecrawl/
 FRAGEBOGEN-KATHARINA.pdf
 FRAGEBOGEN-KATHARINA.html
 .make-reference.py
