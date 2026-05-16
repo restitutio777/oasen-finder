@@ -54,8 +54,16 @@ const bgColor = variant === 'landing' ? 'var(--bg-warm-soft)' : 'var(--bg-base)'
       {text}
     </p>
 
-    {/* Substack custom widget mount-point */}
-    <div id={widgetId} class="substack-embed"></div>
+    {/* Substack custom widget mount-point — substackHandle via
+        data-Attribut, nicht via define:vars im Script (GHSA-j687-
+        52p2-xcff: define:vars XSS bei nicht-vertrauenswürdigen
+        Werten). Browser HTML-encodes Data-Attributes automatisch,
+        macht den Wert unanfechtbar gegen Script-Injection. */}
+    <div
+      id={widgetId}
+      class="substack-embed"
+      data-substack-handle={substackHandle}
+    ></div>
 
     <p class="newsletter-section__fine">
       Versand über Substack. Du kannst dich jederzeit abmelden.
@@ -63,31 +71,40 @@ const bgColor = variant === 'landing' ? 'var(--bg-warm-soft)' : 'var(--bg-base)'
   </div>
 </section>
 
-<script is:inline define:vars={{ substackHandle, widgetId }}>
-  // Globale Widget-Config — Substack liest das beim Load
-  window.CustomSubstackWidget = {
-    substackUrl: `${substackHandle}.substack.com`,
-    placeholder: 'deine@mail.de',
-    buttonText: 'Abonnieren',
-    theme: 'custom',
-    colors: {
-      primary: '#c89a78',     // --accent · Champagne-Gold
-      input: '#ffffff',       // --bg-elevated · pure white
-      email: '#2d2435',       // --text-primary · Aubergine-Plum
-      text: '#fbf6f3',        // --bg-base · warm off-white (Button-Label)
-    },
-    // Wo soll das Widget eingehängt werden
-    target: `#${widgetId}`,
-  };
+<script is:inline>
+  // Werte aus dem data-Attribut des Mount-Points lesen, NICHT via
+  // define:vars (siehe GHSA-j687-52p2-xcff). Browser entitäten-
+  // encodet data-Attributes automatisch, daher ist der Wert hier
+  // sicher gegen Script-Injection.
+  (function () {
+    const mount = document.querySelector('.substack-embed[data-substack-handle]');
+    if (!mount) return;
+    const handle = mount.getAttribute('data-substack-handle');
+    if (!handle) return;
 
-  // Script nur einmal pro Page laden, auch wenn der Block doppelt vorkommt
-  if (!document.querySelector('script[data-substack-widget]')) {
-    const s = document.createElement('script');
-    s.src = 'https://substackapi.com/widget.js';
-    s.async = true;
-    s.dataset.substackWidget = 'true';
-    document.body.appendChild(s);
-  }
+    window.CustomSubstackWidget = {
+      substackUrl: handle + '.substack.com',
+      placeholder: 'deine@mail.de',
+      buttonText: 'Abonnieren',
+      theme: 'custom',
+      colors: {
+        primary: '#c89a78',     // --accent · Champagne-Gold
+        input: '#ffffff',       // --bg-elevated · pure white
+        email: '#2d2435',       // --text-primary · Aubergine-Plum
+        text: '#fbf6f3',        // --bg-base · warm off-white (Button-Label)
+      },
+      target: '#' + mount.id,
+    };
+
+    // Script nur einmal pro Page laden
+    if (!document.querySelector('script[data-substack-widget]')) {
+      const s = document.createElement('script');
+      s.src = 'https://substackapi.com/widget.js';
+      s.async = true;
+      s.dataset.substackWidget = 'true';
+      document.body.appendChild(s);
+    }
+  })();
 </script>
 
 <style>
