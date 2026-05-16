@@ -180,18 +180,29 @@
     color: var(--text-primary);
     display: inline-flex;
     align-items: center;
-    gap: 0.55em;
+    gap: 0.5em;
     flex-shrink: 1;
     min-width: 0;
   }
   /* Brand-Mark — kreisförmige Sechs-Figuren-Illustration vor der
-     Wortmarke. Klein und ruhig (clamp 34–42 px), block damit
-     align-items:center sauber greift. */
+     gestackten Wortmarke. Etwas größer (clamp 42–54 px) da jetzt
+     vertikal mit zwei Zeilen daneben balanciert. Filter brightness
+     hebt das Logo etwas auf — wirkt frischer. */
   .brand__mark {
-    width: clamp(34px, 3.4vw, 42px);
-    height: clamp(34px, 3.4vw, 42px);
+    width: clamp(42px, 4.2vw, 54px);
+    height: clamp(42px, 4.2vw, 54px);
     flex-shrink: 0;
     display: block;
+    filter: brightness(1.12) saturate(0.95);
+  }
+  /* Wort-Stack: WERKSTATT oben, Gemeinschaft drunter — bildet mit
+     dem Logo zusammen eine kompakte Einheit. */
+  .brand__words {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
+    gap: 0.08em;
   }
   /* „WERKSTATT" als Wortmarke in Champagne-Gold, „Gemeinschaft"
      daneben in Bergsee-Türkis. Klassische Komplementär-Kombi
@@ -208,6 +219,11 @@
     font-weight: 500;
     font-style: italic;
     color: var(--accent-blue);
+    /* Unter WERKSTATT etwas kleiner (Sub-Wortmarke) und mit Letter-
+       Spacing als Echo zum WERKSTATT-Tracking — wirkt wie ein
+       balancierter Untertitel statt einer separaten Zeile. */
+    font-size: 0.72em;
+    letter-spacing: 0.005em;
   }
   /* Footer-Brand-Override wird nicht mehr gebraucht, seit der Header
      ein einheitliches Markup nutzt — bleibt als Leer-Selektor entfernt. */
