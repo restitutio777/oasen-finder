@@ -28,7 +28,7 @@
     --bg-warm-soft: #f1edec;  /* Peach heller · Räume-Section */
     --bg-warm-deep: #ebe5e2;  /* Peach tiefer · Newsletter-Übergang zum Footer */
     --bg-sage:      #dde9d3;  /* helles Frühlingsblatt · gelegentlich */
-    --bg-deep:      #7c6a55;  /* Footer · warmer Bronze-Gold (HSL 32°/19%/41%) — etwas heller + orangener + dezent goldener als die vorherige zarte Stein-Bronze-Variante. Klarer Gold-Hauch im Echo zum Logo-Champagne, aber Sättigung unter 20% damit's dezent bleibt. Weiße Schrift ~5.1:1 Kontrast (WCAG-AA). */
+    --bg-deep:      #8e6c4a;  /* Footer · sattes Bronze-Gold (HSL 28°/31%/42%) — deutliches Echo zum CTA-Champagne-Gold (#c89a78), eine Spur dunkler damit weiße Schrift trägt. Katharinas Wunsch (Liste 4 · 16.05.): „Goldton vom Kontakt-Button (oder eine Spur dunkler) statt Ocker". Weißer Text ~4.7:1 Kontrast (WCAG-AA). */
     --bg-deep-soft: #9d8b75;  /* Bronze-Gold heller · Sub-Backgrounds */
 
     /* — 2. Text ——————————————————————————————————————— */
@@ -509,34 +509,37 @@
     inset: -60px;
     /* Hero: Gemeinschaft am Lagerfeuer in der Dämmerung — Gruppe
        sitzt rund ums Feuer, intime Mood. Das Bild ist von Natur
-       aus warm (Feuer-Orange + Twilight-Blau) und passt eindeutig
-       zur „Gemeinschaft"-Idee der Site. */
+       aus warm (Feuer-Orange + Twilight-Blau). Bg-Position auf
+       65 % vertikal, damit der mauve-violette Himmelsstreifen oben
+       reduziert wird und Feuer + Personen den Vordergrund tragen. */
     background-image: url('/hero/gemeinschaft-am-feuer.jpg');
     background-size: cover;
-    background-position: center center;
-    /* Bild ist dunkel von Natur aus — Sättigung etwas hoch
-       damit Feuer-Glow leuchtet, brightness leicht hoch damit
-       die Gesichter erkennbar bleiben, kein Sepia (Bild ist
-       schon warm). */
-    filter: blur(4px) saturate(1.05) brightness(1.08) contrast(1.05);
-    opacity: 0.85;
+    background-position: center 65%;
+    /* Katharinas Liste 4 · 16.05.: „kein rosa". Die rosa-violette
+       Tönung im linken Bereich entstand durch Cream-Wash über den
+       Twilight-Mauve-Bildbereichen. Gegenmaßnahmen: saturate < 1
+       neutralisiert die Mauve-Töne (Rosa wird zu Grau), sepia(0.12)
+       zieht den Rest in Warm-Braun (gelb-orange statt rosa-violett),
+       contrast hoch damit die Feuer-Personen klar bleiben, blur
+       reduziert sodass das Bild als Bild wirkt, nicht als Schleier. */
+    filter: blur(2px) saturate(0.82) brightness(1.02) contrast(1.12) sepia(0.12);
+    opacity: 0.92;
     z-index: -2;
   }
-  /* Hero-Wash: reines Cream, kein Bronze/Plum mehr (Katharinas
-     Liste 4: „kein rosa" — die alte Mischung aus Cream + Bronze +
-     dunkles-Plum-Boden hatte über dem Lagerfeuer-Bild eine rosa
-     Tönung erzeugt). Default-Variante (kleinere Viewports und
-     Fallback), Desktop und ≤720 px-Mobile überschreiben unten. */
+  /* Hero-Wash: reines Cream. Default-Variante (mittlere Viewports
+     und Fallback), Desktop und ≤720 px-Mobile überschreiben unten.
+     Wash konzentriert auf den Text-Bereich, sodass das Bild rechts
+     klar atmet. */
   .hero::after {
     content: '';
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 130% 115% at 35% 55%,
+      radial-gradient(ellipse 95% 110% at 28% 50%,
         rgba(251, 246, 243, 0.94) 0%,
-        rgba(251, 246, 243, 0.82) 28%,
-        rgba(251, 246, 243, 0.55) 52%,
-        rgba(251, 246, 243, 0.22) 75%,
+        rgba(251, 246, 243, 0.78) 30%,
+        rgba(251, 246, 243, 0.40) 55%,
+        rgba(251, 246, 243, 0.12) 78%,
         transparent 92%);
     z-index: -1;
   }
@@ -546,25 +549,27 @@
      nicht in den Mobile-Heavy-Blur fallen. */
   @media (min-width: 900px) {
     .hero::before {
-      /* Desktop: minimaler Blur damit die Gesichter im Feuerlicht
-         erkennbar bleiben (Gruppen-Mood ist die ganze Geste des
-         Bildes). Feuer-Glow leuchten, Gesichter sichtbar. */
-      filter: blur(1px) saturate(1.08) brightness(1.10) contrast(1.05);
-      opacity: 0.92;
+      /* Desktop: minimaler Blur, Bild fast scharf. Filter wie oben
+         (saturate <1, sepia leicht) — entfernt den rosa-violetten
+         Stich, den der Cream-Wash über den Twilight-Bildbereichen
+         erzeugte. brightness leicht unter 1 hält das Feuer warm
+         ohne die Plum-Headlines zu überstrahlen. */
+      filter: blur(0.6px) saturate(0.82) brightness(0.98) contrast(1.12) sepia(0.10);
+      opacity: 0.96;
     }
     .hero::after {
       background:
-        /* Cream-Wash links: dichte Mitte (im Text-Bereich), sanft
-           auslaufend nach rechts. Ellipse leicht versetzt nach
-           rechts (20 % statt 18 %) damit der Wash-Kern unter
-           den Headlines sitzt und der Text auf Cream-Bett ruht,
-           während die Lagerfeuer-Szene rechts klar durchscheint. */
-        radial-gradient(ellipse 75% 135% at 20% 50%,
-          rgba(251, 246, 243, 0.95) 0%,
-          rgba(251, 246, 243, 0.88) 30%,
-          rgba(251, 246, 243, 0.62) 55%,
-          rgba(251, 246, 243, 0.25) 78%,
-          rgba(251, 246, 243, 0.0) 95%);
+        /* Cream-Wash deckt die Text-Spalte (links bis ~Mitte) zuverlässig,
+           dann zügig klar — das Bild rechts atmet, der Mauve-
+           Twilight-Bereich oben wird vom Wash gedämpft. Etwas breiter
+           als die schmale 60-%-Variante davor, damit auch die zweite
+           Headline-Zeile sauber auf Cream-Bett liegt. */
+        radial-gradient(ellipse 72% 130% at 22% 50%,
+          rgba(251, 246, 243, 0.96) 0%,
+          rgba(251, 246, 243, 0.88) 32%,
+          rgba(251, 246, 243, 0.58) 55%,
+          rgba(251, 246, 243, 0.20) 76%,
+          rgba(251, 246, 243, 0.0) 92%);
     }
   }
   /* Hero-Komposition: Main-Block links, Begegnungs-Pin rechts.
@@ -807,30 +812,31 @@
     /* Meta-Capsule (Nächste Begegnung) auf Mobile weg — Info kommt
        prominent in der machBAR, im Hero war sie ein Anhängsel. */
     .hero__meta { display: none; }
-    /* Mobile: Bild leicht nach rechts und unten geschoben, damit
-       das Hauptmotiv (Feuer-Glow + Gesichter im Feuerlicht) rechts
-       vom Cream-Wash sichtbar bleibt. Blur reduziert (4 → 2.5 px) —
-       das Lagerfeuer-Bild hat feine Detail-Strukturen (Personen,
-       Feuer-Flammen), zu viel Blur macht's zum Blob. Filter wie
-       Desktop: saturate hoch damit Feuer leuchtet, brightness damit
-       Gesichter erkennbar bleiben. */
+    /* Mobile: Bild-Position so dass Feuer und Personen den Vorder-
+       grund tragen, der mauve-violette Himmelsstreifen oben weit-
+       gehend rauscht. brightness <1 dunkelt das Feuer dezent ab,
+       sodass die Plum-Headlines sich klar abheben („BITTE klare
+       Schrift" – Katharina Liste 4 · 16.05.). saturate <1 + sepia
+       entfernen den rosa Schleier. */
     .hero::before {
-      opacity: 0.82;
-      filter: blur(2.5px) saturate(1.05) brightness(1.08) contrast(1.05);
-      background-position: 65% 60%;
+      opacity: 0.92;
+      filter: blur(1.5px) saturate(0.80) brightness(0.94) contrast(1.14) sepia(0.14);
+      background-position: 60% 70%;
     }
-    /* Mobile-Wash: oben dicht für Text-Lesbarkeit, unten klarer
-       sodass das Lagerfeuer-Bild atmet. KEIN Bronze-Plum-Boden
-       mehr (Katharinas Liste 4: „kein rosa") — der Cream-Wash
-       allein trägt. */
+    /* Mobile-Wash: Cream-Schicht trägt durch den ganzen Headline-
+       Bereich (bis ~62 %), dann zügig klar — das Lagerfeuer-Bild
+       atmet im unteren Drittel, keine großflächige Mauve-Cream-
+       Mischzone mehr (Katharinas Liste 4: „auf dem Handy sieht man
+       nur das"). Lesbarkeit hat Priorität auf Mobile. */
     .hero::after {
       background:
         linear-gradient(180deg,
           rgba(251, 246, 243, 0.95) 0%,
-          rgba(251, 246, 243, 0.88) 40%,
-          rgba(251, 246, 243, 0.55) 70%,
-          rgba(251, 246, 243, 0.25) 90%,
-          rgba(251, 246, 243, 0.10) 100%);
+          rgba(251, 246, 243, 0.88) 32%,
+          rgba(251, 246, 243, 0.62) 50%,
+          rgba(251, 246, 243, 0.25) 72%,
+          rgba(251, 246, 243, 0.05) 90%,
+          transparent 100%);
     }
     /* Mobile CTAs: vertikal gestapelt, links angeordnet (Hero ist
        wieder links-aligned). Beide als richtige Buttons, intrinsic
