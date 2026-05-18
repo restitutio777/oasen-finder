@@ -172,6 +172,52 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       color: var(--accent-blue);
     }
 
+    /* Mobile-Fix für Variant A (Katharina · 18.05.: „mobile unbrauchbar,
+       Kasten verschoben, Lesbarkeit nicht gegeben").
+       Ursache: `background-size: contain` macht aus der Sonnenblume auf
+       Hochkant-Displays einen winzigen Quer-Streifen — die Cream-Glas-Box
+       schwebt damit auf reinem Cream (Backdrop-Blur greift nicht), und
+       Eyebrow + Subtitle standen als helle Cream-Schrift auf Cream-Grund.
+       Auf Mobile daher: Bild wieder `cover` (Glas-Box-Effekt funktioniert
+       wieder), Eyebrow + Subtitle als Cream mit Schatten auf Bild, Glas-
+       Box voll-breit und etwas dichter. */
+    @media (max-width: 720px) {
+      .hero--a::before {
+        background-size: cover;
+        background-position: center 42%;
+        opacity: 0.95;
+        filter: blur(1.5px) saturate(0.95) brightness(1.0) contrast(1.0);
+      }
+      .hero--a .hero__eyebrow {
+        color: rgba(251, 246, 243, 0.96);
+        text-shadow:
+          0 1px 6px rgba(45, 36, 53, 0.55),
+          0 0 14px rgba(45, 36, 53, 0.35);
+      }
+      .hero--a .hero__subtitle {
+        color: rgba(251, 246, 243, 0.96);
+        text-shadow:
+          0 1px 6px rgba(45, 36, 53, 0.55),
+          0 0 14px rgba(45, 36, 53, 0.35);
+      }
+      /* Subtitle-Trenner auf Mobile in helleres Türkis — leuchtet
+         besser auf dem Bild. */
+      .hero--a .hero__subtitle-dot {
+        color: #8fc4dc;
+        text-shadow: 0 1px 6px rgba(45, 36, 53, 0.55);
+      }
+      /* Glas-Box voll-breit: weg vom „schwebender-Tile"-Look, etwas
+         dichter (88 %) damit die zweifarbige Headline klar trägt. */
+      .hero--a .hero__title {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        background: rgba(252, 248, 244, 0.88);
+        padding: clamp(22px, 5vw, 32px) clamp(20px, 5vw, 28px);
+        border-radius: 18px;
+      }
+    }
+
     /* ============================================================
        VARIANT B — Editorial mit dezentem Bild-Hauch
        Cream-Hintergrund, dazu ein zarter Sonnenblumen-Wash rechts
