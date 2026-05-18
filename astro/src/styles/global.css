@@ -516,15 +516,17 @@
        aus warm (Feuer-Orange + Twilight-Blau). Bg-Position auf
        65 % vertikal, damit der mauve-violette Himmelsstreifen oben
        reduziert wird und Feuer + Personen den Vordergrund tragen. */
-    background-image: url('/hero/gemeinschaft-am-feuer.jpg');
+    /* Hero-Bild: Sonnenblume mit Biene (Kreta, Mai 2026) — von
+       Katharina geliefert (18.05.). Bild ist von Natur warm,
+       gelb-grün-dominant; ohne den Twilight-Mauve-Stich des alten
+       Lagerfeuers, deshalb keine Sepia-Korrektur mehr nötig. Wird
+       nur noch auf der /hero-test/-Seite Variant A genutzt; die
+       Landing ist auf .hero--editorial umgestellt und deaktiviert
+       das ::before. */
+    background-image: url('/hero/sonnenblume.jpg');
     background-size: cover;
-    background-position: center 65%;
-    /* Filter-Stack (Katharina · 18.05.: „bild licht unscharf machen
-       und kontraste etwas mildern"). Stärkerer Blur macht das Bild
-       träumerisch-weich, contrast knapp unter 1 lässt die warm-
-       kalten Übergänge sanfter fließen, saturate/sepia kontern den
-       Mauve-Stich des Twilight-Himmels. */
-    filter: blur(4px) saturate(0.78) brightness(1.0) contrast(0.96) sepia(0.10);
+    background-position: center 50%;
+    filter: blur(3px) saturate(0.92) brightness(1.0) contrast(0.98);
     opacity: 0.92;
     z-index: -2;
   }
@@ -541,15 +543,11 @@
      nicht in den Mobile-Heavy-Blur fallen. */
   @media (min-width: 900px) {
     .hero::before {
-      /* Desktop: deutlicher Blur (träumerisch-weich), Kontrast knapp
-         unter 1 mildert die Twilight↔Feuer-Übergänge — das Hero
-         wirkt wie ein gemalter Bildträger statt ein scharfes Foto.
-         saturate/sepia kontern weiterhin den Mauve-Stich. */
-      filter: blur(2.5px) saturate(0.78) brightness(0.98) contrast(0.96) sepia(0.10);
-      opacity: 0.96;
+      /* Desktop: leichter Blur, Sonnenblume weich-atmosphärisch
+         hinter der Cream-Glas-Box (in /hero-test/ Variant A). */
+      filter: blur(1.5px) saturate(0.92) brightness(1.0) contrast(0.98);
+      opacity: 0.95;
     }
-    /* ::after-Wash auf Desktop bewusst leer — keine Überlagerung
-       mehr, die Cream-Box am hero__main übernimmt die Lesbarkeit. */
   }
   /* Hero-Komposition: Main-Block trägt allein, links angeordnet
      (Begegnungs-Pin rechts wurde entfernt — Katharina · 18.05.). */
@@ -919,17 +917,13 @@
     /* Meta-Capsule (Nächste Begegnung) auf Mobile weg — Info kommt
        prominent in der machBAR, im Hero war sie ein Anhängsel. */
     .hero__meta { display: none; }
-    /* Mobile: kräftigerer Blur (Bild wirkt malerisch-weich), Kontrast
-       milde gegen die starke Hell-Dunkel-Spreizung von Twilight↔Feuer.
-       saturate <1 + sepia entfernen restlichen rosa Stich. */
+    /* Mobile: kräftigerer Blur, Sonnenblume malerisch-weich
+       hinter der Cream-Glas-Box (in /hero-test/ Variant A). */
     .hero::before {
       opacity: 0.92;
-      filter: blur(3px) saturate(0.76) brightness(0.94) contrast(0.96) sepia(0.12);
-      background-position: 60% 70%;
+      filter: blur(2.5px) saturate(0.92) brightness(1.0) contrast(0.98);
+      background-position: center 50%;
     }
-    /* Mobile-Wash bewusst leer — die Cream-Box am hero__main trägt
-       die Lesbarkeit allein (Katharina · 18.05.: „entferne weißen
-       Schleier vom Hero-Bild"). */
     /* Mobile CTAs: vertikal gestapelt, links angeordnet (Hero ist
        wieder links-aligned). Beide als richtige Buttons, intrinsic
        width. */
