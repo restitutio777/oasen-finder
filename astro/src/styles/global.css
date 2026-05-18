@@ -415,12 +415,20 @@
       transform: translateY(-8px);
       opacity: 0;
       visibility: hidden;
+      /* pointer-events: none ist KRITISCH — sonst fangen die Nav-Items
+         (Räume-Links im Drawer) auch im geschlossenen Zustand Touches
+         ab. Das passiert weil .nav-group__menu auf Mobile explizit
+         opacity:1 + visibility:visible setzt und damit das Parent-
+         visibility:hidden für die Kinder neutralisiert. Resultat ohne
+         diesen Fix: ein Tap auf einen Listing-Eintrag (z.B. schreibBAR-
+         Notiz) landet auf dem unsichtbaren /hoerbar/-Link aus dem
+         Drawer — genau Katharinas Report „man gerät zu falschen Räumen". */
+      pointer-events: none;
       transition: transform 0.3s var(--ease), opacity 0.3s var(--ease), visibility 0.3s;
       /* Höher als der Site-Header (z-index 50): das Mobile-Overlay muss
          eindeutig oberhalb der Header-Bar stacken, sonst kann der
          backdrop-filter des Headers (eigener Stacking-Context) bei
-         identischem z-index die Touch-Targets der Nav-Items überlagern
-         — Katharinas „man gerät zu falschen Räumen" auf Mobile. */
+         identischem z-index die Touch-Targets der Nav-Items überlagern. */
       z-index: 60;
       overflow-y: auto;
     }
@@ -428,6 +436,7 @@
       transform: translateY(0);
       opacity: 1;
       visibility: visible;
+      pointer-events: auto;
     }
     .nav a {
       font-family: var(--font-display);
@@ -761,8 +770,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    /* 44×44 ist die WCAG-empfohlene Mindest-Touch-Target-Größe. */
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: transparent;
     border: 1px solid rgba(251, 246, 243, 0.20);
@@ -1676,6 +1686,15 @@
     margin-bottom: 14px;
     letter-spacing: -0.015em;
   }
+  /* Den Title-Anchor als Block + padding-block für ≥40 px Touch-Höhe
+     (vorher nur 24 px Text). margin-block kompensiert das padding
+     visuell — die Karte sieht unverändert aus, aber der Tap-Bereich
+     wird vertikal größer und Finger-Drift trifft den richtigen Link. */
+  .entry__title a {
+    display: block;
+    padding-block: 8px;
+    margin-block: -8px;
+  }
   .entry__image {
     margin: 0 0 18px;
     border-radius: 4px;
@@ -2365,12 +2384,20 @@
   }
   .site-footer__nav { display: flex; flex-direction: column; gap: 9px; }
   .site-footer__nav a,
+  .site-footer__more a,
   .site-footer__contact a {
+    /* display: block ist KRITISCH für .site-footer__more a — anchors
+       innerhalb von <details> werden vom Browser nicht durch die
+       Flex-Eltern blockified und bleiben sonst default „display: inline",
+       was alle Mehr-Räume-Links zu einem fließenden Textblock macht
+       (kein einzelner Link mehr unterscheidbar). */
+    display: block;
     color: rgba(255, 255, 255, 0.92);
     font-size: 14px;
     transition: color var(--t-fast) var(--ease);
   }
   .site-footer__nav a:hover,
+  .site-footer__more a:hover,
   .site-footer__contact a:hover { color: #ffffff; text-decoration: underline; }
 
   /* Aufklappbare „Mehr Räume"-Sektion im Footer — die ersten drei
@@ -2441,6 +2468,12 @@
     opacity: 0.7;
   }
   .site-footer__credit a {
+    /* inline-block + padding-block gibt eine größere Tap-Area auf
+       Mobile (sonst nur 15px Text-Höhe), ohne visuell zusätzliche
+       Lücke einzuführen — padding wächst nach oben/unten in den
+       leeren Footer-Raum. */
+    display: inline-block;
+    padding-block: 8px;
     text-decoration: underline;
     text-decoration-color: rgba(251, 246, 243, 0.25);
     text-underline-offset: 2px;
@@ -2455,6 +2488,17 @@
   @media (max-width: 800px) {
     .site-footer__grid { grid-template-columns: 1fr; }
     .site-footer__bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
+    /* Mobile-Touch-Targets: padding-block 8px → Hitbox ~38px statt 22px.
+       Visual-Lücke kommt jetzt aus padding (nicht gap), deshalb gap auf 0,
+       damit es nicht doppelte Abstände gibt. */
+    .site-footer__nav,
+    .site-footer__more,
+    .site-footer__contact { gap: 0; }
+    .site-footer__nav a,
+    .site-footer__more a,
+    .site-footer__contact a { padding-block: 8px; }
+    /* Mehr-Räume-Toggle bekommt auch das padding, damit Tap-Area passt. */
+    .site-footer__more-toggle { padding-block: 8px; }
   }
 
   /* ---------- Reveal on scroll (subtle) ---------- */
