@@ -26,6 +26,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
      ============================================================ */}
   <div class="variant-label"><div class="container"><span>Entwurf A · Cream-Glas-Box auf Sonnenblume</span></div></div>
   <section class="hero hero--a">
+    <div class="hero-a__photo-band" aria-hidden="true"></div>
     <div class="container hero__inner">
       <div class="hero__main">
         <span class="eyebrow hero__eyebrow">
@@ -172,44 +173,48 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       color: var(--accent-blue);
     }
 
-    /* Mobile-Komposition für Variant A (Katharina · 18.05.: erster
-       Versuch sah „verschoben" aus — Glas-Box halb auf Cream, halb auf
-       Bild, Subtitle dunkel auf Sonnenblume).
-       Neuer Ansatz: STACK statt Overlay. Die Glas-Box hatte ihre Logik
-       darin, Schrift auf Foto lesbar zu machen — auf Mobile lösen wir
-       Foto und Text sauber auseinander:
-         1. Foto-Band oben (full-bleed, Aspect 5:4) — Sonnenblume groß
-            und ruhig, eigene Komposition statt halb-verdeckt.
+    /* Foto-Band-Element: nur auf Mobile sichtbar. Auf Desktop trägt
+       das globale .hero::before den Sonnenblumen-Background im
+       Cream-Passepartout — auf Mobile übernimmt dieses echte DOM-
+       Element die Bild-Funktion (zuverlässiger als ein ::before-
+       Reset, der mit Astro scoped CSS unscharf greift). */
+    .hero-a__photo-band { display: none; }
+
+    /* Mobile-Komposition für Variant A: STACK statt Overlay.
+       Katharina · 18.05.: Glas-Box auf Mobile war „verschoben" und
+       unbrauchbar — sie hatte ihre Logik im Tragen von Schrift auf
+       Foto. Auf Mobile lösen wir Foto und Text sauber auseinander:
+         1. Foto-Band oben (full-bleed, Aspect 5:4) — eigene Komposition
+            statt halb-verdeckt.
          2. Cream-Bereich darunter: Eyebrow, zweifarbige Headline OHNE
-            Glas-Box (auf reinem Cream nicht nötig), Subtitle, CTAs.
-       Damit verschwinden „verschoben", Lesbarkeits- und Schwebe-Probleme. */
+            Glas-Box (auf Cream nicht nötig), Subtitle, CTAs. */
     @media (max-width: 720px) {
       .hero--a {
         padding: 0 0 clamp(48px, 9vw, 80px);
         min-height: auto;
         overflow: visible;
       }
-      /* ::before vom full-bleed background-Pseudo zum Foto-Band oben
-         umfunktionieren — aus dem Hintergrund wird ein eigenständiger
-         Block-Inhalt. */
+      /* Globales ::before-Hintergrundbild auf Mobile komplett aus —
+         das Foto-Band-Element übernimmt. */
       .hero--a::before {
-        position: relative;
-        inset: auto;
+        display: none;
+        content: none;
+      }
+      .hero-a__photo-band {
         display: block;
         width: 100%;
         aspect-ratio: 5 / 4;
         background-image: url('/hero/sonnenblume.jpg');
         background-size: cover;
         background-position: center 45%;
-        background-color: transparent;
+        background-repeat: no-repeat;
         filter: saturate(0.95);
-        opacity: 1;
         margin: 0 0 clamp(32px, 6vw, 48px);
-        z-index: 0;
       }
-      /* Headline-Glas-Box auflösen — Cream-Trägerflächen-Effekt war für
-         Foto-Hintergrund gedacht; auf Cream nicht nötig. Headline trägt
-         sich selbst, zweifarbig. */
+      /* Headline-Glas-Box auflösen — Cream-Trägerflächen-Effekt war
+         für Foto-Hintergrund gedacht, auf reinem Cream nicht nötig.
+         Headline trägt sich selbst, zweifarbig (Logo-Champagne +
+         Türkis). */
       .hero--a .hero__title {
         display: block;
         width: 100%;
@@ -221,9 +226,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         padding: 0;
         border-radius: 0;
       }
-      /* Eyebrow + Subtitle bleiben dunkel auf Cream (Default-Variant-A-
-         Verhalten — kein Bild mehr im Hintergrund). Eyebrow etwas
-         enger an die Headline gerückt. */
+      /* Eyebrow + Subtitle dunkel auf Cream (kein Bild mehr im
+         Hintergrund). Eyebrow etwas enger an die Headline gerückt. */
       .hero--a .hero__eyebrow {
         color: var(--text-body);
         text-shadow: none;
