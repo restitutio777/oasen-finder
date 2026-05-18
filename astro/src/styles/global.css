@@ -499,7 +499,11 @@
   /* ---------- Hero ---------- */
   .hero {
     position: relative;
-    padding: clamp(80px, 12vw, 160px) 0 clamp(60px, 10vw, 120px);
+    /* Polish · 18.05.: etwas mehr Atmung oben + unten, das Hero wirkt
+       ruhiger und großzügiger; min-height verhindert dass das Bild
+       auf großen Screens zu schmal wird. */
+    padding: clamp(96px, 13vw, 180px) 0 clamp(80px, 11vw, 140px);
+    min-height: clamp(560px, 78vh, 820px);
     overflow: hidden;
     isolation: isolate;
   }
@@ -515,33 +519,21 @@
     background-image: url('/hero/gemeinschaft-am-feuer.jpg');
     background-size: cover;
     background-position: center 65%;
-    /* Katharinas Liste 4 · 16.05.: „kein rosa". Die rosa-violette
-       Tönung im linken Bereich entstand durch Cream-Wash über den
-       Twilight-Mauve-Bildbereichen. Gegenmaßnahmen: saturate < 1
-       neutralisiert die Mauve-Töne (Rosa wird zu Grau), sepia(0.12)
-       zieht den Rest in Warm-Braun (gelb-orange statt rosa-violett),
-       contrast hoch damit die Feuer-Personen klar bleiben, blur
-       reduziert sodass das Bild als Bild wirkt, nicht als Schleier. */
-    filter: blur(2px) saturate(0.82) brightness(1.02) contrast(1.12) sepia(0.12);
+    /* Filter-Stack (Katharina · 18.05.: „bild licht unscharf machen
+       und kontraste etwas mildern"). Stärkerer Blur macht das Bild
+       träumerisch-weich, contrast knapp unter 1 lässt die warm-
+       kalten Übergänge sanfter fließen, saturate/sepia kontern den
+       Mauve-Stich des Twilight-Himmels. */
+    filter: blur(4px) saturate(0.78) brightness(1.0) contrast(0.96) sepia(0.10);
     opacity: 0.92;
     z-index: -2;
   }
-  /* Hero-Wash: reines Cream. Default-Variante (mittlere Viewports
-     und Fallback), Desktop und ≤720 px-Mobile überschreiben unten.
-     Wash konzentriert auf den Text-Bereich, sodass das Bild rechts
-     klar atmet. */
+  /* Hero-Wash entfernt (Katharina · 18.05.: „entferne weißen Schleier
+     vom Hero-Bild"). Die Lesbarkeit der Headlines wird stattdessen
+     durch eine eigene Cream-Lesbarkeits-Box am hero__main getragen
+     — Bild bleibt unverstellt sichtbar. */
   .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 95% 110% at 28% 50%,
-        rgba(251, 246, 243, 0.94) 0%,
-        rgba(251, 246, 243, 0.78) 30%,
-        rgba(251, 246, 243, 0.40) 55%,
-        rgba(251, 246, 243, 0.12) 78%,
-        transparent 92%);
-    z-index: -1;
+    content: none;
   }
   /* Tablet + Desktop: minimaler Blur für scharfe Details, gleich
      frischer Filter wie Mobile — Lehm + Türkis leuchten klarer.
@@ -549,65 +541,54 @@
      nicht in den Mobile-Heavy-Blur fallen. */
   @media (min-width: 900px) {
     .hero::before {
-      /* Desktop: minimaler Blur, Bild fast scharf. Filter wie oben
-         (saturate <1, sepia leicht) — entfernt den rosa-violetten
-         Stich, den der Cream-Wash über den Twilight-Bildbereichen
-         erzeugte. brightness leicht unter 1 hält das Feuer warm
-         ohne die Plum-Headlines zu überstrahlen. */
-      filter: blur(0.6px) saturate(0.82) brightness(0.98) contrast(1.12) sepia(0.10);
+      /* Desktop: deutlicher Blur (träumerisch-weich), Kontrast knapp
+         unter 1 mildert die Twilight↔Feuer-Übergänge — das Hero
+         wirkt wie ein gemalter Bildträger statt ein scharfes Foto.
+         saturate/sepia kontern weiterhin den Mauve-Stich. */
+      filter: blur(2.5px) saturate(0.78) brightness(0.98) contrast(0.96) sepia(0.10);
       opacity: 0.96;
     }
-    .hero::after {
-      background:
-        /* Cream-Wash deckt die Text-Spalte (links bis ~Mitte) zuverlässig,
-           dann zügig klar — das Bild rechts atmet, der Mauve-
-           Twilight-Bereich oben wird vom Wash gedämpft. Etwas breiter
-           als die schmale 60-%-Variante davor, damit auch die zweite
-           Headline-Zeile sauber auf Cream-Bett liegt. */
-        radial-gradient(ellipse 72% 130% at 22% 50%,
-          rgba(251, 246, 243, 0.96) 0%,
-          rgba(251, 246, 243, 0.88) 32%,
-          rgba(251, 246, 243, 0.58) 55%,
-          rgba(251, 246, 243, 0.20) 76%,
-          rgba(251, 246, 243, 0.0) 92%);
-    }
+    /* ::after-Wash auf Desktop bewusst leer — keine Überlagerung
+       mehr, die Cream-Box am hero__main übernimmt die Lesbarkeit. */
   }
-  /* Hero-Komposition: Main-Block links, Begegnungs-Pin rechts.
-     Grid mit zwei Spalten, Items am unteren Rand ausgerichtet. */
+  /* Hero-Komposition: Main-Block trägt allein, links angeordnet
+     (Begegnungs-Pin rechts wurde entfernt — Katharina · 18.05.). */
   .hero__inner {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr);
     gap: clamp(24px, 4vw, 64px);
     align-items: end;
   }
   .hero__main { max-width: 1000px; }
   .hero__eyebrow {
     margin-bottom: 32px;
-    color: var(--text-secondary);
+    /* Eyebrow sitzt direkt auf dem Lagerfeuer-Bild — heller Cream
+       trägt gegen die dunklen Twilight- und mittleren Glow-Bereiche.
+       Text-Shadow gibt Konturen-Schärfe, falls das Bild stellenweise
+       heller wird (Feuer-Glow). */
+    color: rgba(251, 246, 243, 0.96);
+    text-shadow:
+      0 1px 6px rgba(45, 36, 53, 0.55),
+      0 0 14px rgba(45, 36, 53, 0.35);
     font-weight: 500;
-    /* Eyebrow wird zum Claim — mixed-case, italic Cormorant fuer Ruhe */
+    /* Eyebrow wird zum Claim — mixed-case, italic Cormorant fuer Ruhe.
+       Katharinas Folge-Wunsch (18.05.): Striche weg, größer, hell
+       auf Bild. */
     text-transform: none;
     letter-spacing: 0;
-    font-size: clamp(15px, 1.4vw, 18px);
+    font-size: clamp(20px, 2.1vw, 26px);
     font-family: var(--font-display);
     font-style: italic;
-    line-height: 1.5;
-    max-width: 640px;
+    line-height: 1.45;
+    max-width: 720px;
   }
-  .hero__eyebrow::before {
-    /* Strich verkuerzen, weil Eyebrow jetzt langer Text ist */
-    width: 18px;
-  }
-  /* Symmetrischer Strich auch hinten — Katharinas Wunsch
-     („langer Gedankenstrich vorn UND hinten"). Beide Striche
-     rahmen den Claim wie ein Atemzeichen. */
+  /* Striche entfernen — sowohl der Default ::before-Strich aus
+     .eyebrow als auch der frühere symmetrische ::after-Strich. Der
+     Claim wirkt ohne Rahmung freier und größer. */
+  .hero__eyebrow::before,
   .hero__eyebrow::after {
-    content: '';
-    width: 18px;
-    height: 1px;
-    background: currentColor;
-    opacity: 0.6;
-    flex-shrink: 0;
+    content: none;
+    display: none;
   }
   /* WERK-Silbe in Honig-Gold — gleiche Familie wie "Gemeinschaft?" und CTAs.
      Generische Klasse, ueberall einsetzbar (Header-Brand, Eyebrow, Footer).
@@ -621,12 +602,13 @@
   }
   /* Nowrap-Wrapper verhindert dass „GemeinschaftsWERK" über Zeilen-
      umbruch getrennt wird. Margin-right negativ zieht das nach-
-     folgende „statt" deutlich enger an WERK heran — sonst wirkt
-     der Abstand wegen Flex-gap (12 px aus .eyebrow) + Bold-
-     Champagne-Sprung optisch zu groß. */
+     folgende „statt" enger an WERK heran. Wert in em, damit er mit
+     der Schriftgröße mitskaliert (vorher fix -0.55em war auf 18 px
+     geeicht, bei 26 px zog's „statt" auf WERK). Mit gap 12 px aus
+     .eyebrow ergibt -0.30em bei 26 px einen sauberen Wort-Abstand. */
   .hero__eyebrow-nowrap {
     white-space: nowrap;
-    margin-right: -0.55em;
+    margin-right: -0.30em;
   }
   /* Eyebrow-Lines: auf Desktop inline (eine Zeile, " " als Verbinder),
      auf Mobile zwei kontrollierte Zeilen statt 3-zeiliger Bruch.
@@ -702,36 +684,45 @@
   @media (max-width: 640px) {
     .page-banner { aspect-ratio: 8 / 3; }
   }
+  /* H1 sitzt als einzige Komponente in der runden Cream-Lesbarkeits-
+     Box. Cream-Grund (88 % opak — Katharina · 18.05.: „box hintergrund
+     muss was heller sein"), backdrop-blur als Glas-Effekt. Width
+     fit-content hält die Box genau so breit wie der Text. Doppelter
+     Inset-Highlight gibt dezenten Glas-Schimmer. */
   .hero__title {
     font-size: clamp(2.5rem, 6.8vw, 5.5rem);
-    line-height: 1.05;
+    line-height: 1.1;
     letter-spacing: -0.02em;
     font-weight: 500;
     font-style: normal;
+    display: inline-block;
+    width: fit-content;
+    max-width: 100%;
+    background: rgba(252, 248, 244, 0.88);
+    backdrop-filter: blur(18px) saturate(1.08);
+    -webkit-backdrop-filter: blur(18px) saturate(1.08);
+    border-radius: clamp(24px, 3.4vw, 44px);
+    padding: clamp(24px, 3vw, 44px) clamp(28px, 3.6vw, 52px);
+    box-shadow:
+      0 28px 60px -32px rgba(45, 36, 53, 0.35),
+      0 6px 18px -10px rgba(45, 36, 53, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.65),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.40);
   }
-  /* „Auf der Suche —" in Plum — konsistente Plum-Achse mit den
-     Eyebrow-Strichen und dem Begegnungs-Pin. Dezenter Cream-Lift-
-     Shadow gibt Konturen-Schärfe gegen dunkle Bildbereiche, ohne
-     dass die Headline „glüht". */
-  .hero__title-a {
-    color: var(--accent-deep);
-    text-shadow: 0 1px 3px rgba(251, 246, 243, 0.6);
-  }
-  /* „wie wird Gemeinschaft?" in Champagne-Gold — Katharinas
-     Brand-Logik: Gold trägt die Wortmarken-Trias mit WERKSTATT,
-     den BAR-Endungen und „Website". Doppel-Shadow: Champagne-Glow
-     (Brand-Echo) + Cream-Lift (Konturen-Schärfe gegen dunkle
-     Bildbereiche im Lagerfeuer-Hero). */
+  /* Headline-Trias (Katharina · 18.05.: „klar und schein sein, kein
+     schleier blur effect in sachen schrift, nur zwei farben"):
+       · „Auf der Suche — wie wird"  → Logo-Champagne (--accent)
+       · „Gemeinschaft?"             → Bergsee-Türkis (--accent-blue)
+     Pure Schrift, kein Text-Shadow, kein Glow — die hellere Cream-
+     Box trägt den Kontrast. */
+  .hero__title-a,
   .hero__title-b {
     color: var(--accent);
-    text-shadow:
-      0 0 36px rgba(200, 154, 120, 0.35),
-      0 1px 3px rgba(251, 246, 243, 0.55);
   }
   .hero__title em {
     font-style: italic;
     font-weight: 500;
-    color: inherit;  /* erbt von .hero__title-b (Champagne-Gold) */
+    color: var(--accent-blue);
   }
   .hero__lead {
     margin-top: clamp(28px, 4vw, 44px);
@@ -748,12 +739,28 @@
   }
   .hero__subtitle {
     margin-top: clamp(24px, 3.5vw, 36px);
-    max-width: 560px;
+    max-width: 640px;
     font-family: var(--font-display);
-    font-size: clamp(19px, 1.8vw, 23px);
+    font-size: clamp(23px, 2.3vw, 28px);
     font-style: normal;
     line-height: 1.5;
-    color: var(--text-body);
+    /* Subtitle steht — wie der Eyebrow — direkt auf dem Bild. Heller
+       Cream + Text-Shadow für Konturen-Schärfe gegen das warme
+       Lagerfeuer (Katharina · 18.05.: „andere texte farblich anpassen
+       damit lesbar auf dem bild"). */
+    color: rgba(251, 246, 243, 0.95);
+    text-shadow:
+      0 1px 6px rgba(45, 36, 53, 0.55),
+      0 0 14px rgba(45, 36, 53, 0.35);
+  }
+  /* Subtitle-Trenner in Türkis — Brand-Echo zu „Gemeinschaft?"
+     (Katharina · 18.05.: Variant-A-Polish). Die Wortreihe lebt
+     dadurch rhythmisch statt als monotone Aufzählung. */
+  .hero__subtitle-dot {
+    color: var(--accent-blue);
+    font-weight: 600;
+    margin: 0 2px;
+    opacity: 0.92;
   }
   .hero__cta-row {
     margin-top: clamp(28px, 4vw, 44px);
@@ -812,32 +819,17 @@
     /* Meta-Capsule (Nächste Begegnung) auf Mobile weg — Info kommt
        prominent in der machBAR, im Hero war sie ein Anhängsel. */
     .hero__meta { display: none; }
-    /* Mobile: Bild-Position so dass Feuer und Personen den Vorder-
-       grund tragen, der mauve-violette Himmelsstreifen oben weit-
-       gehend rauscht. brightness <1 dunkelt das Feuer dezent ab,
-       sodass die Plum-Headlines sich klar abheben („BITTE klare
-       Schrift" – Katharina Liste 4 · 16.05.). saturate <1 + sepia
-       entfernen den rosa Schleier. */
+    /* Mobile: kräftigerer Blur (Bild wirkt malerisch-weich), Kontrast
+       milde gegen die starke Hell-Dunkel-Spreizung von Twilight↔Feuer.
+       saturate <1 + sepia entfernen restlichen rosa Stich. */
     .hero::before {
       opacity: 0.92;
-      filter: blur(1.5px) saturate(0.80) brightness(0.94) contrast(1.14) sepia(0.14);
+      filter: blur(3px) saturate(0.76) brightness(0.94) contrast(0.96) sepia(0.12);
       background-position: 60% 70%;
     }
-    /* Mobile-Wash: Cream-Schicht trägt durch den ganzen Headline-
-       Bereich (bis ~62 %), dann zügig klar — das Lagerfeuer-Bild
-       atmet im unteren Drittel, keine großflächige Mauve-Cream-
-       Mischzone mehr (Katharinas Liste 4: „auf dem Handy sieht man
-       nur das"). Lesbarkeit hat Priorität auf Mobile. */
-    .hero::after {
-      background:
-        linear-gradient(180deg,
-          rgba(251, 246, 243, 0.95) 0%,
-          rgba(251, 246, 243, 0.88) 32%,
-          rgba(251, 246, 243, 0.62) 50%,
-          rgba(251, 246, 243, 0.25) 72%,
-          rgba(251, 246, 243, 0.05) 90%,
-          transparent 100%);
-    }
+    /* Mobile-Wash bewusst leer — die Cream-Box am hero__main trägt
+       die Lesbarkeit allein (Katharina · 18.05.: „entferne weißen
+       Schleier vom Hero-Bild"). */
     /* Mobile CTAs: vertikal gestapelt, links angeordnet (Hero ist
        wieder links-aligned). Beide als richtige Buttons, intrinsic
        width. */
@@ -852,9 +844,9 @@
       padding: 13px 22px;
       font-size: 15px;
     }
-    /* Primary-Gold auf Mobile solide halten — Champagne ist zu hell,
-       um mit Transparenz auf Lehm-Foto noch genug Kontrast zum
-       weißen Label zu liefern. Lieber kompakter, klarer Button. */
+    /* Primary auf Mobile: warmes Champagne-Gold (--accent), Logo-
+       Familie, statt zu schokoladiges Bronze (Katharina · 18.05.:
+       „too broun"). */
     .hero__cta-row .btn--primary {
       background: var(--accent);
       border-color: var(--accent);
@@ -864,6 +856,37 @@
       background: rgba(251, 246, 243, 0.88);
       border-width: 1.5px;
     }
+  }
+
+  /* Hero-spezifische CTA-Farben: Primary in warmem Logo-Champagne
+     (--accent #c89a78) — Echo zur Logo-Wortmarke „WERKSTATT".
+     Vorherige Bronze-Schokoladen-Variante (#8d5f3c) war Katharina
+     zu braun (18.05.: „too broun"). Hover zieht eine Stufe tiefer
+     (--accent-hover) und gibt der Headline-Bronze die Hand. Ghost--
+     fresh bleibt türkis (Brand-Echo zu „Gemeinschaft?"). */
+  .hero__cta-row .btn--primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow:
+      0 8px 22px -6px rgba(200, 154, 120, 0.50),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  }
+  .hero__cta-row .btn--primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    box-shadow:
+      0 14px 32px -8px rgba(200, 154, 120, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  }
+  /* Türkis-Ghost in Hero kräftiger — Brand-Echo zu „Gemeinschaft?",
+     dichteres Cream-Bett damit der Button auf dem Lagerfeuer-Bild
+     klar trägt. */
+  .hero__cta-row .btn--ghost.btn--fresh {
+    background: rgba(251, 246, 243, 0.85);
+    border-width: 1.5px;
+    box-shadow:
+      0 8px 22px -8px rgba(84, 151, 184, 0.30),
+      0 2px 6px -2px rgba(45, 36, 53, 0.12);
   }
 
   /* Buttons — sanftere Rundung (6 px), mehr Präsenz durch Padding +
