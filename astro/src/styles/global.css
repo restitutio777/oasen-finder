@@ -634,16 +634,18 @@
     display: none;
     content: none;
   }
-  /* Eyebrow als feine italic-Zeile oben — „— GemeinschaftsWERK
-     statt allein unterwegs" mit em-Dash als Atemzeichen. */
+  /* Eyebrow als italic-Zeile oben — „GemeinschaftsWERK statt allein
+     unterwegs". Strich davor entfernt (Katharina · 18.05.: „ohne
+     strich und was größer"); Schrift deutlich präsenter. */
   .hero--editorial .hero__eyebrow-line {
     display: inline-block;
     font-family: var(--font-display);
     font-style: italic;
-    font-size: clamp(16px, 1.4vw, 19px);
+    font-size: clamp(20px, 2vw, 26px);
     color: var(--accent-hover);
-    margin-bottom: clamp(20px, 2.4vw, 32px);
+    margin-bottom: clamp(24px, 2.8vw, 36px);
     letter-spacing: 0.01em;
+    line-height: 1.4;
   }
   .hero--editorial .hero__eyebrow-line .hero__eyebrow-werk {
     font-style: normal;
