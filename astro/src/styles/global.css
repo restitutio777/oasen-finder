@@ -516,18 +516,19 @@
        aus warm (Feuer-Orange + Twilight-Blau). Bg-Position auf
        65 % vertikal, damit der mauve-violette Himmelsstreifen oben
        reduziert wird und Feuer + Personen den Vordergrund tragen. */
-    /* Hero-Bild: Sonnenblume mit Biene (Kreta, Mai 2026) — von
-       Katharina geliefert (18.05.). Bild ist von Natur warm,
-       gelb-grün-dominant; ohne den Twilight-Mauve-Stich des alten
-       Lagerfeuers, deshalb keine Sepia-Korrektur mehr nötig. Wird
-       nur noch auf der /hero-test/-Seite Variant A genutzt; die
+    /* Hero-Bild: Sonnenblume mit Biene (Kreta, Mai 2026 · von
+       Katharina). Wird nur in /hero-test/ Variant A genutzt — die
        Landing ist auf .hero--editorial umgestellt und deaktiviert
-       das ::before. */
+       das ::before. Katharinas Folge-Wunsch (18.05.: „in Entwurf A
+       weniger ranzoomen") — von „cover" auf „contain", Bild komplett
+       sichtbar, drum herum Cream als Passepartout. */
     background-image: url('/hero/sonnenblume.jpg');
-    background-size: cover;
-    background-position: center 50%;
-    filter: blur(3px) saturate(0.92) brightness(1.0) contrast(0.98);
-    opacity: 0.92;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--bg-base);
+    filter: blur(1px) saturate(0.92) brightness(1.0) contrast(0.98);
+    opacity: 0.95;
     z-index: -2;
   }
   /* Hero-Wash entfernt (Katharina · 18.05.: „entferne weißen Schleier
