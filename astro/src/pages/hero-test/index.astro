@@ -100,6 +100,33 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   {/* ============================================================
+     VARIANT C2 — Cinematic · Bild gedämpft
+     Wie C, aber zusätzlich ein dunkler Dim-Layer über dem Foto.
+     Bild bleibt scharf (kein Blur), wird aber gleichmäßig
+     abgedunkelt — die helle Cream-Schrift trägt damit klar.
+     ============================================================ */}
+  <div class="variant-label"><div class="container"><span>Entwurf C2 · Cinematic · Bild gedämpft</span></div></div>
+  <section class="hero hero--c2">
+    <div class="hero-c2__image" role="img" aria-label="Sonnenblume mit Biene, Kreta"></div>
+    <div class="hero-c2__dim" aria-hidden="true"></div>
+    <div class="hero-c2__vignette" aria-hidden="true"></div>
+    <div class="container hero-c2__content">
+      <span class="hero-c2__eyebrow">— GemeinschaftsWERK statt allein unterwegs</span>
+      <h1 class="hero-c2__title">
+        Auf der Suche —<br />
+        wie wird <em>Gemeinschaft?</em>
+      </h1>
+      <p class="hero-c2__subtitle">
+        Reisen · Werkstätten · Notizen · Fotos
+      </p>
+      <div class="hero-c2__cta-row">
+        <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
+        <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
+      </div>
+    </div>
+  </section>
+
+  {/* ============================================================
      VARIANT D — Split-Layout · klare Trennung
      Desktop: 50/50-Grid, links voll-bleed Sonnenblume, rechts
      ruhige Cream-Säule mit Text. Klare vertikale Kante, keine
@@ -196,7 +223,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       font-style: italic;
       font-size: clamp(20px, 2vw, 26px);
       line-height: 1.4;
-      color: var(--accent-hover);
+      /* Dunkles Plum (AAA-Kontrast auf Cream) statt zartem Bronze —
+         kleine italic-Schrift muss klar lesbar sein. */
+      color: var(--text-body);
       margin: 0;
     }
     .hero-a__title {
@@ -218,7 +247,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       font-size: clamp(13px, 1.1vw, 15px);
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--accent-hover);
+      /* text-body statt accent-hover — kleine Caps-Schrift braucht
+         klaren Kontrast, nicht „edlen" Bronze-Schimmer. */
+      color: var(--text-body);
       margin: 0;
     }
     .hero-a__cta-row {
@@ -285,36 +316,36 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       display: none;
       content: none;
     }
-    /* Bild-Hauch rechts — Sonnenblume als progressives Reveal:
-       links beginnt es als reines Cream (mask transparent), nach
-       rechts hin wird das Bild zunehmend sichtbar. Zusätzlich
-       radial-Verstärkung in der rechten Bildmitte für sanften
-       Ankerpunkt. (Katharina · 18.05.: „progressive reveal"). */
+    /* Bild rechts — scharf, ohne Blur, ohne Brightness-Wash. Linker
+       Rand verläuft graduell ins Cream über eine lineare Mask. Rechts
+       voll opak, links transparent, dazwischen gleichmäßiger Verlauf.
+       (Katharina · 18.05.: „rechts deutlich sichtbar, dann gradueller
+       Verlauf ins Weiße"). */
     .hero-b__photo-hint {
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
-      width: 75%;
+      width: 50%;
       background-image: url('/hero/sonnenblume.jpg');
       background-size: cover;
       background-position: center 45%;
-      filter: blur(4px) saturate(0.95) brightness(1.04);
-      opacity: 0.55;
+      filter: saturate(0.95);
+      opacity: 1;
+      /* Linearer Verlauf: links cream-transparent, rechts voll opak.
+         Mittelpunkt etwas zur rechten Hälfte verschoben (60 %) — gibt
+         der Text-Säule links spürbar mehr cream-Atmung, bevor das
+         Bild aufkommt. */
       mask-image: linear-gradient(to right,
           transparent 0%,
-          rgba(0, 0, 0, 0.0) 18%,
-          rgba(0, 0, 0, 0.15) 40%,
-          rgba(0, 0, 0, 0.45) 65%,
-          rgba(0, 0, 0, 0.80) 85%,
-          rgba(0, 0, 0, 0.95) 100%);
+          rgba(0, 0, 0, 0.35) 35%,
+          rgba(0, 0, 0, 0.85) 75%,
+          rgba(0, 0, 0, 1) 100%);
       -webkit-mask-image: linear-gradient(to right,
           transparent 0%,
-          rgba(0, 0, 0, 0.0) 18%,
-          rgba(0, 0, 0, 0.15) 40%,
-          rgba(0, 0, 0, 0.45) 65%,
-          rgba(0, 0, 0, 0.80) 85%,
-          rgba(0, 0, 0, 0.95) 100%);
+          rgba(0, 0, 0, 0.35) 35%,
+          rgba(0, 0, 0, 0.85) 75%,
+          rgba(0, 0, 0, 1) 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -428,10 +459,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       display: inline-block;
       font-family: var(--font-display);
       font-style: italic;
-      font-size: clamp(16px, 1.4vw, 20px);
-      color: rgba(251, 246, 243, 0.92);
+      /* Eyebrow auf cinematic ist klein-italic über dem Bild — größer
+         und mit dickerem Plum-Schatten, damit er nicht zwischen den
+         hellen Sonnenblumen-Glanzlichtern verloren geht. */
+      font-size: clamp(20px, 1.8vw, 26px);
+      color: rgba(251, 246, 243, 0.98);
       margin-bottom: clamp(20px, 2.4vw, 32px);
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+      text-shadow:
+        0 1px 4px rgba(0, 0, 0, 0.75),
+        0 2px 14px rgba(0, 0, 0, 0.60),
+        0 0 22px rgba(0, 0, 0, 0.35);
     }
     .hero-c__title {
       font-family: var(--font-display);
@@ -483,6 +520,126 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
 
     /* ============================================================
+       VARIANT C2 — Cinematic · Bild gedämpft
+       Identisch zu C, plus ein zusätzlicher dunkler Dim-Layer
+       (40 %) über dem scharfen Foto. Das Bild bleibt voll
+       fokussiert (kein Blur, keine Sättigungs-Wäsche), nur das
+       Helligkeits-Niveau wird gleichmäßig gesenkt — die helle
+       Cream-Schrift trägt damit ohne Lesbarkeits-Risiko.
+       ============================================================ */
+    .hero--c2 {
+      position: relative;
+      padding: 0;
+      min-height: clamp(580px, 88vh, 880px);
+      overflow: hidden;
+      isolation: isolate;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero--c2::before,
+    .hero--c2::after {
+      display: none;
+      content: none;
+    }
+    .hero-c2__image {
+      position: absolute;
+      inset: 0;
+      background-image: url('/hero/sonnenblume.jpg');
+      background-size: cover;
+      background-position: center 45%;
+      filter: saturate(0.92) contrast(1.02);
+      z-index: -3;
+    }
+    /* Dim-Layer · gleichmäßige Helligkeits-Senkung. */
+    .hero-c2__dim {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.42);
+      z-index: -2;
+    }
+    /* Vignette identisch zu C — sanfter dunkler Rand, betont
+       Komposition zur Mitte hin. */
+    .hero-c2__vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 120% 90% at 50% 35%,
+          rgba(0, 0, 0, 0.0) 30%,
+          rgba(0, 0, 0, 0.25) 75%,
+          rgba(0, 0, 0, 0.40) 100%),
+        linear-gradient(180deg,
+          rgba(0, 0, 0, 0.20) 0%,
+          rgba(0, 0, 0, 0.0) 30%,
+          rgba(0, 0, 0, 0.0) 60%,
+          rgba(0, 0, 0, 0.55) 100%);
+      z-index: -1;
+    }
+    .hero-c2__content {
+      padding: clamp(60px, 9vw, 120px) 0 clamp(56px, 8vw, 100px);
+      max-width: 1080px;
+      color: #fff;
+    }
+    .hero-c2__eyebrow {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(20px, 1.8vw, 26px);
+      color: rgba(251, 246, 243, 0.98);
+      margin-bottom: clamp(20px, 2.4vw, 32px);
+      text-shadow:
+        0 1px 4px rgba(0, 0, 0, 0.70),
+        0 2px 14px rgba(0, 0, 0, 0.50);
+    }
+    .hero-c2__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 7.4vw, 6rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+      color: rgba(251, 246, 243, 0.98);
+      margin: 0;
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+    }
+    .hero-c2__title em {
+      font-style: italic;
+      color: #8fc4dc;
+      font-weight: 500;
+    }
+    .hero-c2__subtitle {
+      margin-top: clamp(20px, 2.6vw, 32px);
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2vw, 26px);
+      color: rgba(251, 246, 243, 0.95);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.50);
+      max-width: 640px;
+    }
+    .hero-c2__cta-row {
+      margin-top: clamp(32px, 4vw, 48px);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+    .hero--c2 .btn--primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow:
+        0 10px 30px -8px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.20);
+    }
+    .hero--c2 .btn--ghost.btn--fresh {
+      background: rgba(251, 246, 243, 0.18);
+      color: #fff;
+      border-color: rgba(251, 246, 243, 0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .hero--c2 .btn--ghost.btn--fresh:hover {
+      background: rgba(251, 246, 243, 0.92);
+      color: var(--text-primary);
+    }
+
+    /* ============================================================
        VARIANT D — Split-Layout · klare Trennung
        Desktop: 50/50-Grid, links voll-bleed Sonnenblume, rechts
        Cream-Textspalte mit linksbündigem Inhalt. Klare vertikale
@@ -505,8 +662,22 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
     @media (min-width: 900px) {
       .hero--d {
-        grid-template-columns: 1fr 1fr;
+        /* Text-Säule bekommt mehr Platz als das Bild — die Sonnen-
+           blume soll Akzent setzen, nicht dominieren. (Katharina ·
+           18.05.: „Bild ist viel zu dominant, Text gequetscht"). */
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
         min-height: clamp(560px, 80vh, 760px);
+      }
+      /* Spalten gedreht: Text LINKS, Bild RECHTS — HTML-Reihenfolge
+         bleibt (Bild zuerst, damit auf Mobile das Foto oben sitzt),
+         auf Desktop via grid-column-Override umsortiert. */
+      .hero-d__text {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .hero-d__image {
+        grid-column: 2;
+        grid-row: 1;
       }
     }
     /* Bild-Spalte — voll-bleed, klare Kante. */
@@ -524,14 +695,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       }
     }
     /* Text-Spalte — ruhige Cream-Säule, linksbündig, vertikal
-       zentriert. Alle Texte dunkel auf Cream → garantiert lesbar. */
+       zentriert. Alle Texte dunkel auf Cream → garantiert lesbar.
+       Großzügiges max-width (720) + viel horizontales Padding sorgen
+       für Atmung. */
     .hero-d__text {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: clamp(20px, 2.6vw, 32px);
-      padding: clamp(56px, 8vw, 96px) clamp(24px, 5vw, 72px);
-      max-width: 620px;
+      gap: clamp(22px, 2.6vw, 34px);
+      padding: clamp(56px, 8vw, 104px) clamp(28px, 6vw, 88px);
+      max-width: 720px;
     }
     .hero-d__eyebrow {
       font-family: var(--font-display);
