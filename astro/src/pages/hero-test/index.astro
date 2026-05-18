@@ -19,31 +19,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   description="Interne Hero-Konzept-Abstimmung — drei Entwürfe zur Auswahl"
 >
   {/* ============================================================
-     VARIANT A — Aktuelle Linie (= Landing-Hero)
-     Cream-Glas-Box auf weichem Lagerfeuer-Foto. Zwei Farben in der
-     Headline (Logo-Champagne + Türkis), klar und scharf, kein Glow.
-     Subtitle-Trenner in Türkis als Brand-Akzent.
+     VARIANT A — Editorial · Headline + Foto-Karte
+     Cream-Hintergrund, links Text-Säule (Eyebrow + zweifarbige
+     Headline + Subtitle + CTAs), rechts eine Portrait-Foto-Karte
+     (4:5, gerundete Ecken, dezenter Schatten). Alle Texte sitzen
+     auf Cream und sind damit garantiert lesbar — keine Glas-Box-
+     Tricks, kein Foto-Hintergrund, keine Lesbarkeits-Lottos.
+     Mobile: Stack, Foto-Karte oben im 5:4-Format.
      ============================================================ */}
-  <div class="variant-label"><div class="container"><span>Entwurf A · Cream-Glas-Box auf Sonnenblume</span></div></div>
+  <div class="variant-label"><div class="container"><span>Entwurf A · Editorial · Headline + Foto-Karte</span></div></div>
   <section class="hero hero--a">
-    <div class="hero-a__photo-band" aria-hidden="true"></div>
-    <div class="container hero__inner">
-      <div class="hero__main">
-        <span class="eyebrow hero__eyebrow">
-          <span class="hero__eyebrow-nowrap">Gemeinschafts<em class="hero__eyebrow-werk">WERK</em></span> statt allein unterwegs
-        </span>
-        <h1 class="hero__title">
-          <span class="hero__title-a">Auf der Suche —</span><br />
-          <span class="hero__title-b">wie wird <em>Gemeinschaft?</em></span>
+    <div class="container hero-a__grid">
+      <div class="hero-a__text">
+        <span class="hero-a__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
+        <h1 class="hero-a__title">
+          Auf der Suche —<br />
+          wie wird <em>Gemeinschaft?</em>
         </h1>
-        <p class="hero__subtitle">
-          Reisen <span class="hero__subtitle-dot">·</span> Werkstätten <span class="hero__subtitle-dot">·</span> Notizen <span class="hero__subtitle-dot">·</span> Fotos
-        </p>
-        <div class="hero__cta-row">
+        <p class="hero-a__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
+        <div class="hero-a__cta-row">
           <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
           <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
         </div>
       </div>
+      <div class="hero-a__photo" role="img" aria-label="Sonnenblume mit Biene, Kreta"></div>
     </div>
   </section>
 
@@ -101,13 +100,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   {/* ============================================================
-     VARIANT D — Magazin-Cover-Split (kreativer Entwurf)
-     Vollbild-Sonnenblume links als emotionale Komposition, Cream-
-     Textspalte rechts als ruhiges Pendant. Soft-Fade an der Naht
-     für organischen Übergang. Auf Mobile stacked (Bild oben, Text
-     unten).
+     VARIANT D — Split-Layout · klare Trennung
+     Desktop: 50/50-Grid, links voll-bleed Sonnenblume, rechts
+     ruhige Cream-Säule mit Text. Klare vertikale Kante, keine
+     Soft-Fade-Masken, keine Verspieltheit. Alle Texte auf Cream
+     → garantiert lesbar. Mobile: Stack, Foto oben (4:3), Text
+     darunter auf Cream.
      ============================================================ */}
-  <div class="variant-label"><div class="container"><span>Entwurf D · Magazin-Cover · Split-Layout</span></div></div>
+  <div class="variant-label"><div class="container"><span>Entwurf D · Split-Layout · klare Trennung</span></div></div>
   <section class="hero hero--d">
     <div class="hero-d__image" role="img" aria-label="Sonnenblume mit Biene, Kreta"></div>
     <div class="hero-d__text">
@@ -116,9 +116,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         Auf der Suche —<br />
         wie wird <em>Gemeinschaft?</em>
       </h1>
-      <p class="hero-d__subtitle">
-        Reisen · Werkstätten · Notizen · Fotos
-      </p>
+      <p class="hero-d__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
       <div class="hero-d__cta-row">
         <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
         <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
@@ -155,91 +153,115 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
 
     /* ============================================================
-       VARIANT A — Cream-Glas-Box auf Sonnenblume (contain), mit
-       Cream-Passepartout drum herum. Eyebrow + Subtitle brauchen
-       DUNKLE Schrift (nicht das alte Cream-auf-Foto-Setup), sonst
-       sind sie auf dem Cream-Passepartout unsichtbar.
+       VARIANT A — Editorial · Headline + Foto-Karte
+       Cream-Hintergrund, klare 2-Spalten-Komposition auf Desktop
+       (Text links, Foto-Karte rechts), Stack auf Mobile (Foto-
+       Karte oben, Text drunter). Alle Texte sitzen auf Cream —
+       keine Lesbarkeits-Tricks nötig.
+       Globale .hero-Styles (full-bleed-bg via ::before, fix min-
+       height) werden für .hero--a komplett deaktiviert.
        ============================================================ */
-    .hero--a .hero__eyebrow {
-      color: var(--text-body);
-      text-shadow: none;
+    .hero--a {
+      background: var(--bg-base);
+      padding: clamp(64px, 9vw, 120px) 0 clamp(56px, 8vw, 100px);
+      min-height: auto;
+      overflow: visible;
+      isolation: auto;
     }
-    .hero--a .hero__subtitle {
-      color: var(--text-body);
-      text-shadow: none;
+    .hero--a::before,
+    .hero--a::after {
+      display: none;
+      content: none;
     }
-    /* Subtitle-Trenner bleiben Türkis als Brand-Akzent. */
-    .hero--a .hero__subtitle-dot {
+    .hero-a__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(36px, 5vw, 64px);
+      align-items: center;
+    }
+    @media (min-width: 900px) {
+      .hero-a__grid {
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        gap: clamp(48px, 6vw, 96px);
+      }
+    }
+    .hero-a__text {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(20px, 2.4vw, 30px);
+      max-width: 720px;
+    }
+    .hero-a__eyebrow {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(20px, 2vw, 26px);
+      line-height: 1.4;
+      color: var(--accent-hover);
+      margin: 0;
+    }
+    .hero-a__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .hero-a__title em {
+      font-style: italic;
       color: var(--accent-blue);
+      font-weight: 500;
     }
-
-    /* Foto-Band-Element: nur auf Mobile sichtbar. Auf Desktop trägt
-       das globale .hero::before den Sonnenblumen-Background im
-       Cream-Passepartout — auf Mobile übernimmt dieses echte DOM-
-       Element die Bild-Funktion (zuverlässiger als ein ::before-
-       Reset, der mit Astro scoped CSS unscharf greift). */
-    .hero-a__photo-band { display: none; }
-
-    /* Mobile-Komposition für Variant A: STACK statt Overlay.
-       Katharina · 18.05.: Glas-Box auf Mobile war „verschoben" und
-       unbrauchbar — sie hatte ihre Logik im Tragen von Schrift auf
-       Foto. Auf Mobile lösen wir Foto und Text sauber auseinander:
-         1. Foto-Band oben (full-bleed, Aspect 5:4) — eigene Komposition
-            statt halb-verdeckt.
-         2. Cream-Bereich darunter: Eyebrow, zweifarbige Headline OHNE
-            Glas-Box (auf Cream nicht nötig), Subtitle, CTAs. */
-    @media (max-width: 720px) {
-      .hero--a {
-        padding: 0 0 clamp(48px, 9vw, 80px);
-        min-height: auto;
-        overflow: visible;
-      }
-      /* Globales ::before-Hintergrundbild auf Mobile komplett aus —
-         das Foto-Band-Element übernimmt. */
-      .hero--a::before {
-        display: none;
-        content: none;
-      }
-      .hero-a__photo-band {
-        display: block;
-        width: 100%;
-        aspect-ratio: 5 / 4;
-        background-image: url('/hero/sonnenblume.jpg');
-        background-size: cover;
-        background-position: center 45%;
-        background-repeat: no-repeat;
-        filter: saturate(0.95);
-        margin: 0 0 clamp(32px, 6vw, 48px);
-      }
-      /* Headline-Glas-Box auflösen — Cream-Trägerflächen-Effekt war
-         für Foto-Hintergrund gedacht, auf reinem Cream nicht nötig.
-         Headline trägt sich selbst, zweifarbig (Logo-Champagne +
-         Türkis). */
-      .hero--a .hero__title {
-        display: block;
-        width: 100%;
-        max-width: 100%;
-        background: transparent;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        box-shadow: none;
-        padding: 0;
-        border-radius: 0;
-      }
-      /* Eyebrow + Subtitle dunkel auf Cream (kein Bild mehr im
-         Hintergrund). Eyebrow etwas enger an die Headline gerückt. */
-      .hero--a .hero__eyebrow {
-        color: var(--text-body);
-        text-shadow: none;
-        margin-bottom: 20px;
-      }
-      .hero--a .hero__subtitle {
-        color: var(--text-body);
-        text-shadow: none;
-      }
-      .hero--a .hero__subtitle-dot {
-        color: var(--accent-blue);
-        text-shadow: none;
+    .hero-a__subtitle {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1.1vw, 15px);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-hover);
+      margin: 0;
+    }
+    .hero-a__cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: clamp(8px, 1vw, 16px);
+    }
+    .hero--a .btn--primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px -6px rgba(200, 154, 120, 0.45);
+    }
+    .hero--a .btn--primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+    .hero--a .btn--ghost.btn--fresh {
+      background: transparent;
+      border-width: 1.5px;
+      box-shadow: none;
+    }
+    /* Foto-Karte als ruhiger Komposition-Anker rechts (Mobile:
+       oben). Portrait-Format auf Desktop (4:5), Landscape auf
+       Mobile (5:4) — beides bewährte Editorial-Cover-Proportionen.
+       Sanfter Schatten gibt der Karte Schwebe ohne Foto zu dunkeln. */
+    .hero-a__photo {
+      width: 100%;
+      aspect-ratio: 5 / 4;
+      background-image: url('/hero/sonnenblume.jpg');
+      background-size: cover;
+      background-position: center 45%;
+      background-repeat: no-repeat;
+      border-radius: clamp(14px, 2.6vw, 22px);
+      filter: saturate(0.95);
+      box-shadow:
+        0 30px 60px -24px rgba(45, 36, 53, 0.28),
+        0 12px 24px -12px rgba(45, 36, 53, 0.14);
+    }
+    @media (min-width: 900px) {
+      .hero-a__photo {
+        aspect-ratio: 4 / 5;
+        border-radius: clamp(18px, 2vw, 26px);
       }
     }
 
@@ -461,19 +483,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
 
     /* ============================================================
-       VARIANT D — Magazin-Cover-Split
-       Bild links 58 %, Cream-Textspalte rechts 42 %. Soft-Fade an
-       der Naht via linear-gradient mask. Mobile stacked.
+       VARIANT D — Split-Layout · klare Trennung
+       Desktop: 50/50-Grid, links voll-bleed Sonnenblume, rechts
+       Cream-Textspalte mit linksbündigem Inhalt. Klare vertikale
+       Kante, keine Soft-Fade-Masken, keine Verspieltheit.
+       Mobile: Stack — Foto oben (4:3), Text drunter.
        ============================================================ */
     .hero--d {
-      position: relative;
       display: grid;
       grid-template-columns: 1fr;
-      min-height: clamp(620px, 88vh, 880px);
       background: var(--bg-base);
       overflow: hidden;
-      isolation: isolate;
+      isolation: auto;
       padding: 0;
+      min-height: auto;
     }
     .hero--d::before,
     .hero--d::after {
@@ -482,73 +505,45 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
     @media (min-width: 900px) {
       .hero--d {
-        grid-template-columns: 1.38fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        min-height: clamp(560px, 80vh, 760px);
       }
     }
-    /* Bild-Spalte: vollformatig, satte Sättigung. An der rechten Kante
-       (Übergang zur Textspalte) ein weicher Cream-Fade via Mask, sodass
-       die Naht organisch zur Text-Seite atmet statt mit harter Kante zu
-       brechen. */
+    /* Bild-Spalte — voll-bleed, klare Kante. */
     .hero-d__image {
-      position: relative;
       background-image: url('/hero/sonnenblume.jpg');
       background-size: cover;
-      background-position: 50% 45%;
-      min-height: clamp(280px, 38vh, 420px);
-      filter: saturate(0.95) contrast(1.02);
-      mask-image: linear-gradient(to right,
-          black 0%,
-          black 78%,
-          rgba(0, 0, 0, 0.5) 95%,
-          transparent 100%);
-      -webkit-mask-image: linear-gradient(to right,
-          black 0%,
-          black 78%,
-          rgba(0, 0, 0, 0.5) 95%,
-          transparent 100%);
+      background-position: center 45%;
+      background-repeat: no-repeat;
+      aspect-ratio: 4 / 3;
+      filter: saturate(0.95);
     }
     @media (min-width: 900px) {
       .hero-d__image {
-        min-height: 0;
+        aspect-ratio: auto;
       }
     }
-    /* Auf Mobile: vertikales Fade unten statt horizontal rechts. */
-    @media (max-width: 899px) {
-      .hero-d__image {
-        mask-image: linear-gradient(to bottom,
-            black 0%,
-            black 78%,
-            rgba(0, 0, 0, 0.5) 95%,
-            transparent 100%);
-        -webkit-mask-image: linear-gradient(to bottom,
-            black 0%,
-            black 78%,
-            rgba(0, 0, 0, 0.5) 95%,
-            transparent 100%);
-      }
-    }
-    /* Text-Spalte: zentrierter Inhalt in einer Cream-Säule. */
+    /* Text-Spalte — ruhige Cream-Säule, linksbündig, vertikal
+       zentriert. Alle Texte dunkel auf Cream → garantiert lesbar. */
     .hero-d__text {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: clamp(20px, 2.4vw, 30px);
-      padding: clamp(48px, 7vw, 96px) clamp(32px, 5vw, 72px);
+      gap: clamp(20px, 2.6vw, 32px);
+      padding: clamp(56px, 8vw, 96px) clamp(24px, 5vw, 72px);
       max-width: 620px;
     }
     .hero-d__eyebrow {
-      display: inline-block;
       font-family: var(--font-display);
       font-style: italic;
-      font-size: clamp(18px, 1.9vw, 24px);
-      color: var(--accent-hover);
-      letter-spacing: 0.01em;
+      font-size: clamp(20px, 1.9vw, 24px);
       line-height: 1.4;
+      color: var(--accent-hover);
       margin: 0;
     }
     .hero-d__title {
       font-family: var(--font-display);
-      font-size: clamp(2.4rem, 6.4vw, 5rem);
+      font-size: clamp(2.4rem, 5.6vw, 4.4rem);
       line-height: 1.05;
       letter-spacing: -0.018em;
       font-weight: 400;
@@ -571,9 +566,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .hero-d__cta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
-      margin-top: clamp(8px, 1vw, 14px);
+      gap: 14px;
+      margin-top: clamp(8px, 1vw, 16px);
     }
     .hero--d .btn--primary {
       background: var(--accent);
