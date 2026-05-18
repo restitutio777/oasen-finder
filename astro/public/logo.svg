@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" fill="none" color="#c89a78" aria-label="WERKSTATT — W mit Cormorant-Swash">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" aria-label="WERKSTATT — W mit Cormorant-Swash">
   
 
   
-  <text x="40" y="56" text-anchor="middle" font-family="&#39;Cormorant Garamond&#39;, &#39;Cormorant&#39;, Georgia, &#39;Times New Roman&#39;, serif" font-weight="700" font-size="68" fill="currentColor">W</text>
+  <text x="40" y="56" text-anchor="middle" font-family="&#39;Cormorant Garamond&#39;, &#39;Cormorant&#39;, Georgia, &#39;Times New Roman&#39;, serif" font-weight="700" font-size="68" fill="#c89a78">W</text>
 
   
-  <path d="M 64,18&#xA;       C 84,8 108,18 110,40&#xA;       C 110,62 92,82 60,84&#xA;       C 32,86 14,76 12,60&#xA;       C 12,52 18,46 26,48&#xA;       C 32,49 34,54 30,56" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+  <path d="M 64,18&#xA;       C 84,8 108,18 110,40&#xA;       C 110,62 92,82 60,84&#xA;       C 32,86 14,76 12,60&#xA;       C 12,52 18,46 26,48&#xA;       C 32,49 34,54 30,56" stroke="#5497b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
 
   
-  <circle cx="30" cy="56" r="1.6" fill="currentColor"></circle>
+  <circle cx="30" cy="56" r="1.6" fill="#5497b8"></circle>
 </svg>
