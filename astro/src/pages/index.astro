@@ -32,18 +32,23 @@ const mantra: string | undefined = localized(about?.mantra);
   title="werkSTATT Gemeinschaft — Katharina Offenborn"
   description="Miteinander vereinBAR — GemeinschaftsWERK statt allein unterwegs. Katharina Offenborn auf Reisen zu Gemeinschaftsorten."
 >
-  <section class="hero">
+  {/* Editorial-Hero ohne Foto (Katharina · 18.05.: „nimm den zweiten
+      entwurf aus test allerdings ohne bild — saubere grundlage").
+      Cream-First, große Cormorant-Typo, italic Lead, CAPS-Subtitle. */}
+  <section class="hero hero--editorial">
     <div class="container hero__inner">
       <div class="hero__main">
-        <span class="eyebrow hero__eyebrow">
-          <span class="hero__eyebrow-nowrap">Gemeinschafts<em class="hero__eyebrow-werk">WERK</em></span> statt allein unterwegs
-        </span>
+        <span class="hero__eyebrow-line">— Gemeinschafts<em class="hero__eyebrow-werk">WERK</em> statt allein unterwegs</span>
         <h1 class="hero__title">
-          <span class="hero__title-a">Auf der Suche —</span><br />
-          <span class="hero__title-b">wie wird <em>Gemeinschaft?</em></span>
+          Auf der Suche —<br />
+          wie wird <em>Gemeinschaft?</em>
         </h1>
+        <p class="hero__lead">
+          Eine fortlaufende Werkstatt von Reisen, Begegnungen und
+          Lesefrüchten. Wächst, wenn etwas wachsen will.
+        </p>
         <p class="hero__subtitle">
-          Reisen <span class="hero__subtitle-dot">·</span> Werkstätten <span class="hero__subtitle-dot">·</span> Notizen <span class="hero__subtitle-dot">·</span> Fotos
+          Reisen · Werkstätten · Notizen · Fotos
         </p>
         <div class="hero__cta-row">
           <a href="/schreibbar/" class="btn btn--primary">
@@ -56,9 +61,6 @@ const mantra: string | undefined = localized(about?.mantra);
           <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
         </div>
       </div>
-      {/* „Nächste Begegnung"-Capsule entfernt (Katharina · 18.05.):
-          Hero trägt sich allein, der Termin lebt prominent in der
-          machBAR und in der Räume-Übersicht weiter unten. */}
     </div>
   </section>
 

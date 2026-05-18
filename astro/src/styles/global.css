@@ -619,6 +619,106 @@
     .hero__eyebrow { line-height: 1.45; }
   }
 
+  /* =============================================================
+     Hero · Editorial-Variante (Cream-First, kein Foto)
+     Katharina · 18.05.: „nimm den zweiten entwurf aus test
+     allerdings ohne bild — saubere grundlage".
+     ============================================================= */
+  .hero--editorial {
+    background: var(--bg-base);
+    padding: clamp(80px, 11vw, 140px) 0 clamp(72px, 9vw, 120px);
+    min-height: auto;
+    overflow: visible;
+    isolation: auto;
+  }
+  .hero--editorial::before,
+  .hero--editorial::after {
+    display: none;
+    content: none;
+  }
+  /* Eyebrow als feine italic-Zeile oben — „— GemeinschaftsWERK
+     statt allein unterwegs" mit em-Dash als Atemzeichen. */
+  .hero--editorial .hero__eyebrow-line {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: var(--accent-hover);
+    margin-bottom: clamp(20px, 2.4vw, 32px);
+    letter-spacing: 0.01em;
+  }
+  .hero--editorial .hero__eyebrow-line .hero__eyebrow-werk {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0;
+  }
+  /* Editorial-H1: pur auf Cream, kein Glas-Box-Wrap, kein Backdrop,
+     keine Shadow. Plum für die ruhige Statement-Qualität, em
+     „Gemeinschaft?" in Türkis als Brand-Echo. */
+  .hero--editorial .hero__title {
+    font-size: clamp(2.6rem, 7vw, 5.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.018em;
+    font-weight: 400;
+    color: var(--text-primary);
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    display: block;
+    width: auto;
+    max-width: 100%;
+  }
+  .hero--editorial .hero__title em {
+    font-style: italic;
+    color: var(--accent-blue);
+    font-weight: 500;
+  }
+  /* Italic Lead-Paragraph als „Brief-Atemzug" unter dem Titel. */
+  .hero--editorial .hero__lead {
+    margin-top: clamp(24px, 3vw, 36px);
+    max-width: 540px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.55;
+    color: var(--text-body);
+  }
+  /* Subtitle in CAPS + Letter-Spacing — Tag-line-Charakter. */
+  .hero--editorial .hero__subtitle {
+    margin-top: clamp(20px, 2.4vw, 28px);
+    font-family: var(--font-text);
+    font-size: clamp(13px, 1.1vw, 15px);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-hover);
+    text-shadow: none;
+    max-width: none;
+  }
+  .hero--editorial .hero__cta-row {
+    margin-top: clamp(28px, 3.5vw, 44px);
+  }
+  /* Editorial-CTA: Primary in Logo-Champagne, Ghost in Türkis-Border-
+     auf-Cream — beide ohne Inset-Glas-Effekte (passt zum flachen
+     Cream-Hintergrund). */
+  .hero--editorial .hero__cta-row .btn--primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 6px 18px -6px rgba(200, 154, 120, 0.45);
+  }
+  .hero--editorial .hero__cta-row .btn--primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+  .hero--editorial .hero__cta-row .btn--ghost.btn--fresh {
+    background: transparent;
+    border-width: 1.5px;
+    box-shadow: none;
+  }
+
   /* Mood-Banner als flacher Stimmungs-Streifen oben auf jeder
      Hauptseite. Aspect-Ratio fix gegen Layout-Shift. */
   .page-banner {
