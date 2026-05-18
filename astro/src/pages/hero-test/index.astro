@@ -24,7 +24,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
      Headline (Logo-Champagne + Türkis), klar und scharf, kein Glow.
      Subtitle-Trenner in Türkis als Brand-Akzent.
      ============================================================ */}
-  <div class="variant-label"><div class="container"><span>Entwurf A · Aktuelle Linie (= Landing-Hero)</span></div></div>
+  <div class="variant-label"><div class="container"><span>Entwurf A · Cream-Glas-Box auf Sonnenblume</span></div></div>
   <section class="hero hero--a">
     <div class="container hero__inner">
       <div class="hero__main">
@@ -154,9 +154,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
 
     /* ============================================================
-       VARIANT A — erbt komplett von globalen .hero-Regeln
-       (gleicher Stand wie Landing-Hero). Keine Overrides nötig.
+       VARIANT A — Cream-Glas-Box auf Sonnenblume (contain), mit
+       Cream-Passepartout drum herum. Eyebrow + Subtitle brauchen
+       DUNKLE Schrift (nicht das alte Cream-auf-Foto-Setup), sonst
+       sind sie auf dem Cream-Passepartout unsichtbar.
        ============================================================ */
+    .hero--a .hero__eyebrow {
+      color: var(--text-body);
+      text-shadow: none;
+    }
+    .hero--a .hero__subtitle {
+      color: var(--text-body);
+      text-shadow: none;
+    }
+    /* Subtitle-Trenner bleiben Türkis als Brand-Akzent. */
+    .hero--a .hero__subtitle-dot {
+      color: var(--accent-blue);
+    }
 
     /* ============================================================
        VARIANT B — Editorial mit dezentem Bild-Hauch
