@@ -1,0 +1,370 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+/**
+ * Hero-Vergleich (interne Abstimmung mit Katharina · 18.05.).
+ * Drei Hero-Konzepte untereinander, nicht in der Navigation verlinkt:
+ *   A — Aktuelle Linie (Cream-Glas-Box auf weichem Foto)
+ *   B — Editorial (Cream-First, Foto als Polaroid-Akzent)
+ *   C — Cinematic (Vollbild-Foto klar, Minimal-Text-Overlay)
+ *
+ * Diese Seite ist eine Diskussionsbasis. Wenn die Entscheidung
+ * gefallen ist, kann sie gelöscht werden — bis dahin URL teilen
+ * für externes Feedback.
+ */
+---
+
+<BaseLayout
+  title="Hero-Vergleich · WERKSTATT Gemeinschaft"
+  description="Interne Hero-Konzept-Abstimmung — drei Entwürfe zur Auswahl"
+>
+  <div class="vergleich-info">
+    <div class="container">
+      <p class="vergleich-label">Interne Abstimmung — drei Hero-Entwürfe untereinander. Bitte schau dir alle drei in Ruhe an, dann sag mir welche dir am meisten zusagt (oder welche Elemente du aus welcher kombinieren möchtest).</p>
+    </div>
+  </div>
+
+  {/* ============================================================
+     VARIANT A — Aktuelle Linie (= Landing-Hero)
+     Cream-Glas-Box auf weichem Lagerfeuer-Foto. Zwei Farben in der
+     Headline (Logo-Champagne + Türkis), klar und scharf, kein Glow.
+     Subtitle-Trenner in Türkis als Brand-Akzent.
+     ============================================================ */}
+  <div class="variant-label"><div class="container"><span>Entwurf A · Aktuelle Linie (= Landing-Hero)</span></div></div>
+  <section class="hero hero--a">
+    <div class="container hero__inner">
+      <div class="hero__main">
+        <span class="eyebrow hero__eyebrow">
+          <span class="hero__eyebrow-nowrap">Gemeinschafts<em class="hero__eyebrow-werk">WERK</em></span> statt allein unterwegs
+        </span>
+        <h1 class="hero__title">
+          <span class="hero__title-a">Auf der Suche —</span><br />
+          <span class="hero__title-b">wie wird <em>Gemeinschaft?</em></span>
+        </h1>
+        <p class="hero__subtitle">
+          Reisen <span class="hero__subtitle-dot">·</span> Werkstätten <span class="hero__subtitle-dot">·</span> Notizen <span class="hero__subtitle-dot">·</span> Fotos
+        </p>
+        <div class="hero__cta-row">
+          <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
+          <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ============================================================
+     VARIANT B — Editorial / Brief-von-unterwegs
+     Cream-Hintergrund, kein Foto-Background. Sehr große Cormorant-
+     Typo links, ein kleines Polaroid-Foto rechts als Akzent. Wie
+     ein Brief, ruhig, literarisch.
+     ============================================================ */}
+  <div class="variant-label"><div class="container"><span>Entwurf B · Editorial · Brief von unterwegs</span></div></div>
+  <section class="hero hero--b">
+    <div class="container hero-b__grid">
+      <div class="hero-b__text">
+        <span class="hero-b__eyebrow">— GemeinschaftsWERK statt allein unterwegs</span>
+        <h1 class="hero-b__title">
+          Auf der Suche —<br />
+          wie wird <em>Gemeinschaft?</em>
+        </h1>
+        <p class="hero-b__lead">
+          Eine fortlaufende Werkstatt von Reisen, Begegnungen und
+          Lesefrüchten. Wächst, wenn etwas wachsen will.
+        </p>
+        <p class="hero-b__subtitle">
+          Reisen · Werkstätten · Notizen · Fotos
+        </p>
+        <div class="hero-b__cta-row">
+          <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
+          <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
+        </div>
+      </div>
+      <div class="hero-b__photo">
+        <div class="hero-b__polaroid">
+          <img
+            src="/hero/gemeinschaft-am-feuer.jpg"
+            alt="Gemeinschaft am Lagerfeuer"
+            loading="lazy"
+            width="320"
+            height="380"
+          />
+          <span class="hero-b__caption">am Feuer · Tempelhof, Mai 2025</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ============================================================
+     VARIANT C — Cinematic
+     Vollbild-Foto in voller Schärfe (kein Blur), dezente Vignette.
+     Headlines + Subtitle als heller Cream-Text auf dem Bild,
+     dramatisch-cinematic.
+     ============================================================ */}
+  <div class="variant-label"><div class="container"><span>Entwurf C · Cinematic · Bild dominiert</span></div></div>
+  <section class="hero hero--c">
+    <div class="hero-c__image" role="img" aria-label="Gemeinschaft am Lagerfeuer"></div>
+    <div class="hero-c__vignette" aria-hidden="true"></div>
+    <div class="container hero-c__content">
+      <span class="hero-c__eyebrow">— GemeinschaftsWERK statt allein unterwegs</span>
+      <h1 class="hero-c__title">
+        Auf der Suche —<br />
+        wie wird <em>Gemeinschaft?</em>
+      </h1>
+      <p class="hero-c__subtitle">
+        Reisen · Werkstätten · Notizen · Fotos
+      </p>
+      <div class="hero-c__cta-row">
+        <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
+        <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* ========== Info-Banner oben ========== */
+    .vergleich-info {
+      background: #2d2435;
+      color: rgba(255, 255, 255, 0.9);
+      padding: 18px 0;
+      font-size: 14px;
+    }
+    .vergleich-label {
+      max-width: 760px;
+      margin: 0;
+      line-height: 1.55;
+    }
+    .variant-label {
+      background: var(--bg-warm-soft);
+      padding: 14px 0;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .variant-label span {
+      font-family: var(--font-text);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-hover);
+      font-weight: 500;
+    }
+
+    /* ============================================================
+       VARIANT A — erbt komplett von globalen .hero-Regeln
+       (gleicher Stand wie Landing-Hero). Keine Overrides nötig.
+       ============================================================ */
+
+    /* ============================================================
+       VARIANT B — Editorial / Brief von unterwegs
+       ============================================================ */
+    .hero--b {
+      background: var(--bg-base);
+      padding: clamp(80px, 11vw, 140px) 0 clamp(72px, 9vw, 120px);
+      min-height: auto;
+      overflow: visible;
+      isolation: auto;
+    }
+    .hero--b::before,
+    .hero--b::after {
+      display: none;
+      content: none;
+    }
+    .hero-b__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(40px, 6vw, 80px);
+      align-items: center;
+    }
+    @media (min-width: 900px) {
+      .hero-b__grid {
+        grid-template-columns: 1.4fr 1fr;
+      }
+    }
+    .hero-b__eyebrow {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(16px, 1.4vw, 19px);
+      color: var(--accent-hover);
+      margin-bottom: clamp(20px, 2.4vw, 32px);
+      letter-spacing: 0.01em;
+    }
+    .hero-b__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 5.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .hero-b__title em {
+      font-style: italic;
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+    .hero-b__lead {
+      margin-top: clamp(24px, 3vw, 36px);
+      max-width: 480px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(18px, 1.6vw, 22px);
+      line-height: 1.55;
+      color: var(--text-body);
+    }
+    .hero-b__subtitle {
+      margin-top: clamp(20px, 2.4vw, 28px);
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1.1vw, 15px);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-hover);
+    }
+    .hero-b__cta-row {
+      margin-top: clamp(28px, 3.5vw, 44px);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .hero-b__photo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-b__polaroid {
+      background: #fff;
+      padding: 14px 14px 56px;
+      box-shadow:
+        0 22px 50px -22px rgba(45, 36, 53, 0.32),
+        0 6px 16px -8px rgba(45, 36, 53, 0.16);
+      transform: rotate(-2.5deg);
+      max-width: 320px;
+      border-radius: 2px;
+      position: relative;
+    }
+    .hero-b__polaroid img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      filter: sepia(0.06) saturate(0.92);
+    }
+    .hero-b__caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 20px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 13px;
+      color: var(--text-body);
+      letter-spacing: 0.01em;
+    }
+
+    /* ============================================================
+       VARIANT C — Cinematic
+       ============================================================ */
+    .hero--c {
+      position: relative;
+      padding: 0;
+      min-height: clamp(580px, 88vh, 880px);
+      overflow: hidden;
+      isolation: isolate;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero--c::before,
+    .hero--c::after {
+      display: none;
+      content: none;
+    }
+    .hero-c__image {
+      position: absolute;
+      inset: 0;
+      background-image: url('/hero/gemeinschaft-am-feuer.jpg');
+      background-size: cover;
+      background-position: center 55%;
+      filter: saturate(0.92) contrast(1.02);
+      z-index: -2;
+    }
+    .hero-c__vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 120% 90% at 50% 35%,
+          rgba(0, 0, 0, 0.0) 30%,
+          rgba(0, 0, 0, 0.35) 75%,
+          rgba(0, 0, 0, 0.55) 100%),
+        linear-gradient(180deg,
+          rgba(0, 0, 0, 0.30) 0%,
+          rgba(0, 0, 0, 0.0) 30%,
+          rgba(0, 0, 0, 0.0) 60%,
+          rgba(0, 0, 0, 0.70) 100%);
+      z-index: -1;
+    }
+    .hero-c__content {
+      padding: clamp(60px, 9vw, 120px) 0 clamp(56px, 8vw, 100px);
+      max-width: 1080px;
+      color: #fff;
+    }
+    .hero-c__eyebrow {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(16px, 1.4vw, 20px);
+      color: rgba(251, 246, 243, 0.92);
+      margin-bottom: clamp(20px, 2.4vw, 32px);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+    }
+    .hero-c__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 7.4vw, 6rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+      color: rgba(251, 246, 243, 0.98);
+      margin: 0;
+      text-shadow: 0 4px 28px rgba(0, 0, 0, 0.55);
+    }
+    .hero-c__title em {
+      font-style: italic;
+      color: #8fc4dc;
+      font-weight: 500;
+    }
+    .hero-c__subtitle {
+      margin-top: clamp(20px, 2.6vw, 32px);
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2vw, 26px);
+      color: rgba(251, 246, 243, 0.92);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+      max-width: 640px;
+    }
+    .hero-c__cta-row {
+      margin-top: clamp(32px, 4vw, 48px);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+    .hero--c .btn--primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow:
+        0 10px 30px -8px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.20);
+    }
+    .hero--c .btn--ghost.btn--fresh {
+      background: rgba(251, 246, 243, 0.18);
+      color: #fff;
+      border-color: rgba(251, 246, 243, 0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .hero--c .btn--ghost.btn--fresh:hover {
+      background: rgba(251, 246, 243, 0.92);
+      color: var(--text-primary);
+    }
+  </style>
+</BaseLayout>
