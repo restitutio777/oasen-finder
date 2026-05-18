@@ -99,6 +99,32 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  {/* ============================================================
+     VARIANT D — Magazin-Cover-Split (kreativer Entwurf)
+     Vollbild-Sonnenblume links als emotionale Komposition, Cream-
+     Textspalte rechts als ruhiges Pendant. Soft-Fade an der Naht
+     für organischen Übergang. Auf Mobile stacked (Bild oben, Text
+     unten).
+     ============================================================ */}
+  <div class="variant-label"><div class="container"><span>Entwurf D · Magazin-Cover · Split-Layout</span></div></div>
+  <section class="hero hero--d">
+    <div class="hero-d__image" role="img" aria-label="Sonnenblume mit Biene, Kreta"></div>
+    <div class="hero-d__text">
+      <span class="hero-d__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
+      <h1 class="hero-d__title">
+        Auf der Suche —<br />
+        wie wird <em>Gemeinschaft?</em>
+      </h1>
+      <p class="hero-d__subtitle">
+        Reisen · Werkstätten · Notizen · Fotos
+      </p>
+      <div class="hero-d__cta-row">
+        <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
+        <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
+      </div>
+    </div>
+  </section>
+
   <style>
     /* ========== Info-Banner oben ========== */
     .vergleich-info {
@@ -152,27 +178,36 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       display: none;
       content: none;
     }
-    /* Bild-Hauch rechts — Sonnenblume sehr dezent durchscheinend,
-       mit weichem Mask-Verlauf zur Mitte hin sanft auslaufend. */
+    /* Bild-Hauch rechts — Sonnenblume als progressives Reveal:
+       links beginnt es als reines Cream (mask transparent), nach
+       rechts hin wird das Bild zunehmend sichtbar. Zusätzlich
+       radial-Verstärkung in der rechten Bildmitte für sanften
+       Ankerpunkt. (Katharina · 18.05.: „progressive reveal"). */
     .hero-b__photo-hint {
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
-      width: 60%;
+      width: 75%;
       background-image: url('/hero/sonnenblume.jpg');
       background-size: cover;
       background-position: center 45%;
-      filter: blur(6px) saturate(0.88) brightness(1.05);
-      opacity: 0.22;
-      mask-image: radial-gradient(ellipse 80% 100% at 80% 50%,
-        black 0%,
-        rgba(0, 0, 0, 0.65) 45%,
-        transparent 95%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 100% at 80% 50%,
-        black 0%,
-        rgba(0, 0, 0, 0.65) 45%,
-        transparent 95%);
+      filter: blur(4px) saturate(0.95) brightness(1.04);
+      opacity: 0.55;
+      mask-image: linear-gradient(to right,
+          transparent 0%,
+          rgba(0, 0, 0, 0.0) 18%,
+          rgba(0, 0, 0, 0.15) 40%,
+          rgba(0, 0, 0, 0.45) 65%,
+          rgba(0, 0, 0, 0.80) 85%,
+          rgba(0, 0, 0, 0.95) 100%);
+      -webkit-mask-image: linear-gradient(to right,
+          transparent 0%,
+          rgba(0, 0, 0, 0.0) 18%,
+          rgba(0, 0, 0, 0.15) 40%,
+          rgba(0, 0, 0, 0.45) 65%,
+          rgba(0, 0, 0, 0.80) 85%,
+          rgba(0, 0, 0, 0.95) 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -338,6 +373,136 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .hero--c .btn--ghost.btn--fresh:hover {
       background: rgba(251, 246, 243, 0.92);
       color: var(--text-primary);
+    }
+
+    /* ============================================================
+       VARIANT D — Magazin-Cover-Split
+       Bild links 58 %, Cream-Textspalte rechts 42 %. Soft-Fade an
+       der Naht via linear-gradient mask. Mobile stacked.
+       ============================================================ */
+    .hero--d {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: clamp(620px, 88vh, 880px);
+      background: var(--bg-base);
+      overflow: hidden;
+      isolation: isolate;
+      padding: 0;
+    }
+    .hero--d::before,
+    .hero--d::after {
+      display: none;
+      content: none;
+    }
+    @media (min-width: 900px) {
+      .hero--d {
+        grid-template-columns: 1.38fr 1fr;
+      }
+    }
+    /* Bild-Spalte: vollformatig, satte Sättigung. An der rechten Kante
+       (Übergang zur Textspalte) ein weicher Cream-Fade via Mask, sodass
+       die Naht organisch zur Text-Seite atmet statt mit harter Kante zu
+       brechen. */
+    .hero-d__image {
+      position: relative;
+      background-image: url('/hero/sonnenblume.jpg');
+      background-size: cover;
+      background-position: 50% 45%;
+      min-height: clamp(280px, 38vh, 420px);
+      filter: saturate(0.95) contrast(1.02);
+      mask-image: linear-gradient(to right,
+          black 0%,
+          black 78%,
+          rgba(0, 0, 0, 0.5) 95%,
+          transparent 100%);
+      -webkit-mask-image: linear-gradient(to right,
+          black 0%,
+          black 78%,
+          rgba(0, 0, 0, 0.5) 95%,
+          transparent 100%);
+    }
+    @media (min-width: 900px) {
+      .hero-d__image {
+        min-height: 0;
+      }
+    }
+    /* Auf Mobile: vertikales Fade unten statt horizontal rechts. */
+    @media (max-width: 899px) {
+      .hero-d__image {
+        mask-image: linear-gradient(to bottom,
+            black 0%,
+            black 78%,
+            rgba(0, 0, 0, 0.5) 95%,
+            transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom,
+            black 0%,
+            black 78%,
+            rgba(0, 0, 0, 0.5) 95%,
+            transparent 100%);
+      }
+    }
+    /* Text-Spalte: zentrierter Inhalt in einer Cream-Säule. */
+    .hero-d__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(20px, 2.4vw, 30px);
+      padding: clamp(48px, 7vw, 96px) clamp(32px, 5vw, 72px);
+      max-width: 620px;
+    }
+    .hero-d__eyebrow {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(18px, 1.9vw, 24px);
+      color: var(--accent-hover);
+      letter-spacing: 0.01em;
+      line-height: 1.4;
+      margin: 0;
+    }
+    .hero-d__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6.4vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .hero-d__title em {
+      font-style: italic;
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+    .hero-d__subtitle {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1.1vw, 15px);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-hover);
+      margin: 0;
+    }
+    .hero-d__cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      margin-top: clamp(8px, 1vw, 14px);
+    }
+    .hero--d .btn--primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px -6px rgba(200, 154, 120, 0.45);
+    }
+    .hero--d .btn--primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+    .hero--d .btn--ghost.btn--fresh {
+      background: transparent;
+      border-width: 1.5px;
+      box-shadow: none;
     }
   </style>
 </BaseLayout>
