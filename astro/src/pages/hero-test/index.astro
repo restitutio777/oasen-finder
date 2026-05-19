@@ -19,51 +19,24 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   description="Interne Hero-Konzept-Abstimmung — drei Entwürfe zur Auswahl"
 >
   {/* ============================================================
-     VARIANT A — Editorial · Headline + Foto-Karte
-     Cream-Hintergrund, links Text-Säule (Eyebrow + zweifarbige
-     Headline + Subtitle + CTAs), rechts eine Portrait-Foto-Karte
-     (4:5, gerundete Ecken, dezenter Schatten). Alle Texte sitzen
-     auf Cream und sind damit garantiert lesbar — keine Glas-Box-
-     Tricks, kein Foto-Hintergrund, keine Lesbarkeits-Lottos.
-     Mobile: Stack, Foto-Karte oben im 5:4-Format.
+     VARIANT I — Atelier als Hintergrund-Hauch, Text-Insel
+     Bild deckt fast die ganze Breite ab, ABER linke ~55 % sind mit
+     einer kräftigen Cream-Maske überdeckt — der Text sitzt wie eine
+     ruhige Insel im Cream, das Atelier scheint nur durch den rechten
+     Bildausschnitt durch. Mobile: Bild fadet komplett ins Cream
+     (Stack mit zarter Hintergrundandeutung).
      ============================================================ */}
-  <section class="hero hero--a">
-    <span class="hero-num" aria-hidden="true">A</span>
-    <div class="container hero-a__grid">
-      <div class="hero-a__text">
-        <span class="hero-a__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
-        <h1 class="hero-a__title">
-          Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
+  <section class="hero hero--i">
+    <span class="hero-num" aria-hidden="true">I</span>
+    <div class="hero-i__image" role="img" aria-label="Sabines Töpferatelier — Helga mit hochgesteckten Haaren rechts modelliert eine Tonfigur"></div>
+    <div class="container hero-i__inner">
+      <div class="hero-i__text">
+        <span class="hero-i__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
+        <h1 class="hero-i__title">
+          Auf der Suche —<br />wie wird <em>Gemeinschaft?</em>
         </h1>
-        <p class="hero-a__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
-        <div class="hero-a__cta-row">
-          <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
-          <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
-        </div>
-      </div>
-      <div class="hero-a__photo" role="img" aria-label="Sonnenblume mit Biene, Kreta"></div>
-    </div>
-  </section>
-
-  {/* ============================================================
-     VARIANT B — Editorial / Brief-von-unterwegs
-     Cream-Hintergrund, kein Foto-Background. Sehr große Cormorant-
-     Typo links, ein kleines Polaroid-Foto rechts als Akzent. Wie
-     ein Brief, ruhig, literarisch.
-     ============================================================ */}
-  <section class="hero hero--b">
-    <span class="hero-num" aria-hidden="true">B</span>
-    <div class="hero-b__photo-hint" aria-hidden="true"></div>
-    <div class="container hero-b__inner">
-      <div class="hero-b__text">
-        <span class="hero-b__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
-        <h1 class="hero-b__title">
-          Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
-        </h1>
-        <p class="hero-b__subtitle">
-          Reisen · Werkstätten · Notizen · Fotos
-        </p>
-        <div class="hero-b__cta-row">
+        <p class="hero-i__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
+        <div class="hero-i__cta-row">
           <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
           <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
         </div>
@@ -72,74 +45,71 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   {/* ============================================================
-     VARIANT C — Cinematic
-     Vollbild-Foto in voller Schärfe (kein Blur), dezente Vignette.
-     Headlines + Subtitle als heller Cream-Text auf dem Bild,
-     dramatisch-cinematic.
+     VARIANT H — Atelier dominanter (60/40), breitere Verschleierung
+     Bild nimmt ~60 % rechts ein, Text-Säule schmaler (40 %). Maske
+     fließt weiter ins Bild hinein — Werkstatt-Stimmung wird stärker
+     spürbar, der Text bleibt aber durch ruhige Cream-Säule garantiert
+     lesbar. Mobile: Stack wie G.
      ============================================================ */}
-  <section class="hero hero--c">
-    <span class="hero-num" aria-hidden="true">C</span>
-    <div class="hero-c__image" role="img" aria-label="Sonnenblume mit Biene, Kreta"></div>
-    <div class="hero-c__vignette" aria-hidden="true"></div>
-    <div class="container hero-c__content">
-      <span class="hero-c__eyebrow">— GemeinschaftsWERK statt allein unterwegs</span>
-      <h1 class="hero-c__title">
-        Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
+  <section class="hero hero--h">
+    <span class="hero-num" aria-hidden="true">H</span>
+    <div class="hero-h__text">
+      <span class="hero-h__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
+      <h1 class="hero-h__title">
+        Auf der Suche —<br />wie wird <em>Gemeinschaft?</em>
       </h1>
-      <p class="hero-c__subtitle">
-        Reisen · Werkstätten · Notizen · Fotos
-      </p>
-      <div class="hero-c__cta-row">
+      <p class="hero-h__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
+      <div class="hero-h__cta-row">
         <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
         <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
       </div>
     </div>
+    <div class="hero-h__image" role="img" aria-label="Sabines Töpferatelier — Helga mit hochgesteckten Haaren rechts modelliert eine Tonfigur"></div>
   </section>
 
   {/* ============================================================
-     VARIANT C2 — Cinematic · Bild gedämpft
-     Wie C, aber zusätzlich ein dunkler Dim-Layer über dem Foto.
-     Bild bleibt scharf (kein Blur), wird aber gleichmäßig
-     abgedunkelt — die helle Cream-Schrift trägt damit klar.
+     VARIANT G — Atelier rechts, weiche Verschleierung links
+     Katharinas Idee · 19.05.: „halben Hero rechts für das Werkstatt-
+     bild — Helga rechts ist es bestimmt recht, Türkis dabei. Das
+     linke Bild-Ende verschleiern, damit der Text-Bereich darin
+     atmen kann." Klassisches 50/50 (Text links auf Cream, Atelier-
+     Bild rechts mit linearer Soft-Mask am linken Rand). Mobile:
+     Stack — Bild oben (16/10), Text drunter auf Cream.
      ============================================================ */}
-  <section class="hero hero--c2">
-    <span class="hero-num" aria-hidden="true">C2</span>
-    <div class="hero-c2__image" role="img" aria-label="Sonnenblume mit Biene, Kreta"></div>
-    <div class="hero-c2__dim" aria-hidden="true"></div>
-    <div class="hero-c2__vignette" aria-hidden="true"></div>
-    <div class="container hero-c2__content">
-      <span class="hero-c2__eyebrow">— GemeinschaftsWERK statt allein unterwegs</span>
-      <h1 class="hero-c2__title">
-        Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
+  <section class="hero hero--g">
+    <span class="hero-num" aria-hidden="true">G</span>
+    <div class="hero-g__text">
+      <span class="hero-g__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
+      <h1 class="hero-g__title">
+        Auf der Suche —<br />wie wird <em>Gemeinschaft?</em>
       </h1>
-      <p class="hero-c2__subtitle">
-        Reisen · Werkstätten · Notizen · Fotos
-      </p>
-      <div class="hero-c2__cta-row">
+      <p class="hero-g__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
+      <div class="hero-g__cta-row">
         <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
         <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
       </div>
     </div>
+    <div class="hero-g__image" role="img" aria-label="Sabines Töpferatelier — Helga mit hochgesteckten Haaren rechts modelliert eine Tonfigur"></div>
   </section>
 
   {/* ============================================================
-     VARIANT D — Split-Layout · klare Trennung
-     Desktop: 50/50-Grid, links voll-bleed Sonnenblume, rechts
-     ruhige Cream-Säule mit Text. Klare vertikale Kante, keine
-     Soft-Fade-Masken, keine Verspieltheit. Alle Texte auf Cream
-     → garantiert lesbar. Mobile: Stack, Foto oben (4:3), Text
-     darunter auf Cream.
+     VARIANT F — Magazin-Split · Bild links, Cream rechts
+     Desktop: 1.45 / 1-Grid, links voll-bleed Wandergruppe-Foto,
+     rechts ruhige Cream-Säule mit Text. Klare vertikale Kante,
+     keine Soft-Fade-Masken. Bild bekommt mehr Raum, weil das
+     Panorama es trägt — Text-Säule bleibt schmal-elegant.
+     Mobile: Stack — Bild oben (16:9), Text drunter.
      ============================================================ */}
-  <section class="hero hero--d">
-    <span class="hero-num" aria-hidden="true">D</span>
-    <div class="hero-d__image" role="img" aria-label="Sonnenblume mit Biene, Kreta"></div>
-    <div class="hero-d__text">
-      <span class="hero-d__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
-      <h1 class="hero-d__title">
-        Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
+  <section class="hero hero--f">
+    <span class="hero-num" aria-hidden="true">F</span>
+    <div class="hero-f__image" role="img" aria-label="Wandergruppe in einer Schlucht, Kreta"></div>
+    <div class="hero-f__text">
+      <span class="hero-f__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
+      <h1 class="hero-f__title">
+        Auf der Suche —<br />wie wird <em>Gemeinschaft?</em>
       </h1>
-      <p class="hero-d__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
-      <div class="hero-d__cta-row">
+      <p class="hero-f__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
+      <div class="hero-f__cta-row">
         <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
         <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
       </div>
@@ -162,7 +132,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="container hero-e__inner">
         <span class="hero-e__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
         <h1 class="hero-e__title">
-          Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
+          Auf der Suche —<br />wie wird <em>Gemeinschaft?</em>
         </h1>
         <p class="hero-e__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
         <div class="hero-e__cta-row">
@@ -174,23 +144,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   {/* ============================================================
-     VARIANT F — Magazin-Split · Bild links, Cream rechts
-     Desktop: 1.45 / 1-Grid, links voll-bleed Wandergruppe-Foto,
-     rechts ruhige Cream-Säule mit Text. Klare vertikale Kante,
-     keine Soft-Fade-Masken. Bild bekommt mehr Raum, weil das
-     Panorama es trägt — Text-Säule bleibt schmal-elegant.
-     Mobile: Stack — Bild oben (16:9), Text drunter.
+     VARIANT D — Split-Layout · klare Trennung
+     Desktop: 50/50-Grid, links voll-bleed Sonnenblume, rechts
+     ruhige Cream-Säule mit Text. Klare vertikale Kante, keine
+     Soft-Fade-Masken, keine Verspieltheit. Alle Texte auf Cream
+     → garantiert lesbar. Mobile: Stack, Foto oben (4:3), Text
+     darunter auf Cream.
      ============================================================ */}
-  <section class="hero hero--f">
-    <span class="hero-num" aria-hidden="true">F</span>
-    <div class="hero-f__image" role="img" aria-label="Wandergruppe in einer Schlucht, Kreta"></div>
-    <div class="hero-f__text">
-      <span class="hero-f__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
-      <h1 class="hero-f__title">
-        Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
+  <section class="hero hero--d">
+    <span class="hero-num" aria-hidden="true">D</span>
+    <div class="hero-d__image" role="img" aria-label="Sonnenblume mit Biene, Kreta"></div>
+    <div class="hero-d__text">
+      <span class="hero-d__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
+      <h1 class="hero-d__title">
+        Auf der Suche —<br />wie wird <em>Gemeinschaft?</em>
       </h1>
-      <p class="hero-f__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
-      <div class="hero-f__cta-row">
+      <p class="hero-d__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
+      <div class="hero-d__cta-row">
         <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
         <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
       </div>
@@ -198,76 +168,106 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   {/* ============================================================
-     VARIANT G — Atelier rechts, weiche Verschleierung links
-     Katharinas Idee · 19.05.: „halben Hero rechts für das Werkstatt-
-     bild — Helga rechts ist es bestimmt recht, Türkis dabei. Das
-     linke Bild-Ende verschleiern, damit der Text-Bereich darin
-     atmen kann." Klassisches 50/50 (Text links auf Cream, Atelier-
-     Bild rechts mit linearer Soft-Mask am linken Rand). Mobile:
-     Stack — Bild oben (16/10), Text drunter auf Cream.
+     VARIANT C2 — Cinematic · Bild gedämpft
+     Wie C, aber zusätzlich ein dunkler Dim-Layer über dem Foto.
+     Bild bleibt scharf (kein Blur), wird aber gleichmäßig
+     abgedunkelt — die helle Cream-Schrift trägt damit klar.
      ============================================================ */}
-  <section class="hero hero--g">
-    <span class="hero-num" aria-hidden="true">G</span>
-    <div class="hero-g__text">
-      <span class="hero-g__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
-      <h1 class="hero-g__title">
-        Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
+  <section class="hero hero--c2">
+    <span class="hero-num" aria-hidden="true">C2</span>
+    <div class="hero-c2__image" role="img" aria-label="Sonnenblume mit Biene, Kreta"></div>
+    <div class="hero-c2__dim" aria-hidden="true"></div>
+    <div class="hero-c2__vignette" aria-hidden="true"></div>
+    <div class="container hero-c2__content">
+      <span class="hero-c2__eyebrow">— GemeinschaftsWERK statt allein unterwegs</span>
+      <h1 class="hero-c2__title">
+        Auf der Suche —<br />wie wird <em>Gemeinschaft?</em>
       </h1>
-      <p class="hero-g__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
-      <div class="hero-g__cta-row">
+      <p class="hero-c2__subtitle">
+        Reisen · Werkstätten · Notizen · Fotos
+      </p>
+      <div class="hero-c2__cta-row">
         <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
         <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
       </div>
     </div>
-    <div class="hero-g__image" role="img" aria-label="Sabines Töpferatelier — Helga mit hochgesteckten Haaren rechts modelliert eine Tonfigur"></div>
   </section>
 
   {/* ============================================================
-     VARIANT H — Atelier dominanter (60/40), breitere Verschleierung
-     Bild nimmt ~60 % rechts ein, Text-Säule schmaler (40 %). Maske
-     fließt weiter ins Bild hinein — Werkstatt-Stimmung wird stärker
-     spürbar, der Text bleibt aber durch ruhige Cream-Säule garantiert
-     lesbar. Mobile: Stack wie G.
+     VARIANT C — Cinematic
+     Vollbild-Foto in voller Schärfe (kein Blur), dezente Vignette.
+     Headlines + Subtitle als heller Cream-Text auf dem Bild,
+     dramatisch-cinematic.
      ============================================================ */}
-  <section class="hero hero--h">
-    <span class="hero-num" aria-hidden="true">H</span>
-    <div class="hero-h__text">
-      <span class="hero-h__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
-      <h1 class="hero-h__title">
-        Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
+  <section class="hero hero--c">
+    <span class="hero-num" aria-hidden="true">C</span>
+    <div class="hero-c__image" role="img" aria-label="Sonnenblume mit Biene, Kreta"></div>
+    <div class="hero-c__vignette" aria-hidden="true"></div>
+    <div class="container hero-c__content">
+      <span class="hero-c__eyebrow">— GemeinschaftsWERK statt allein unterwegs</span>
+      <h1 class="hero-c__title">
+        Auf der Suche —<br />wie wird <em>Gemeinschaft?</em>
       </h1>
-      <p class="hero-h__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
-      <div class="hero-h__cta-row">
+      <p class="hero-c__subtitle">
+        Reisen · Werkstätten · Notizen · Fotos
+      </p>
+      <div class="hero-c__cta-row">
         <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
         <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
       </div>
     </div>
-    <div class="hero-h__image" role="img" aria-label="Sabines Töpferatelier — Helga mit hochgesteckten Haaren rechts modelliert eine Tonfigur"></div>
   </section>
 
   {/* ============================================================
-     VARIANT I — Atelier als Hintergrund-Hauch, Text-Insel
-     Bild deckt fast die ganze Breite ab, ABER linke ~55 % sind mit
-     einer kräftigen Cream-Maske überdeckt — der Text sitzt wie eine
-     ruhige Insel im Cream, das Atelier scheint nur durch den rechten
-     Bildausschnitt durch. Mobile: Bild fadet komplett ins Cream
-     (Stack mit zarter Hintergrundandeutung).
+     VARIANT B — Editorial / Brief-von-unterwegs
+     Cream-Hintergrund, kein Foto-Background. Sehr große Cormorant-
+     Typo links, ein kleines Polaroid-Foto rechts als Akzent. Wie
+     ein Brief, ruhig, literarisch.
      ============================================================ */}
-  <section class="hero hero--i">
-    <span class="hero-num" aria-hidden="true">I</span>
-    <div class="hero-i__image" role="img" aria-label="Sabines Töpferatelier — Helga mit hochgesteckten Haaren rechts modelliert eine Tonfigur"></div>
-    <div class="container hero-i__inner">
-      <div class="hero-i__text">
-        <span class="hero-i__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
-        <h1 class="hero-i__title">
-          Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
+  <section class="hero hero--b">
+    <span class="hero-num" aria-hidden="true">B</span>
+    <div class="hero-b__photo-hint" aria-hidden="true"></div>
+    <div class="container hero-b__inner">
+      <div class="hero-b__text">
+        <span class="hero-b__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
+        <h1 class="hero-b__title">
+          Auf der Suche —<br />wie wird <em>Gemeinschaft?</em>
         </h1>
-        <p class="hero-i__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
-        <div class="hero-i__cta-row">
+        <p class="hero-b__subtitle">
+          Reisen · Werkstätten · Notizen · Fotos
+        </p>
+        <div class="hero-b__cta-row">
           <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
           <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  {/* ============================================================
+     VARIANT A — Editorial · Headline + Foto-Karte
+     Cream-Hintergrund, links Text-Säule (Eyebrow + zweifarbige
+     Headline + Subtitle + CTAs), rechts eine Portrait-Foto-Karte
+     (4:5, gerundete Ecken, dezenter Schatten). Alle Texte sitzen
+     auf Cream und sind damit garantiert lesbar — keine Glas-Box-
+     Tricks, kein Foto-Hintergrund, keine Lesbarkeits-Lottos.
+     Mobile: Stack, Foto-Karte oben im 5:4-Format.
+     ============================================================ */}
+  <section class="hero hero--a">
+    <span class="hero-num" aria-hidden="true">A</span>
+    <div class="container hero-a__grid">
+      <div class="hero-a__text">
+        <span class="hero-a__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
+        <h1 class="hero-a__title">
+          Auf der Suche —<br />wie wird <em>Gemeinschaft?</em>
+        </h1>
+        <p class="hero-a__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
+        <div class="hero-a__cta-row">
+          <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
+          <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
+        </div>
+      </div>
+      <div class="hero-a__photo" role="img" aria-label="Sonnenblume mit Biene, Kreta"></div>
     </div>
   </section>
 
@@ -1121,18 +1121,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
 
     /* ============================================================
-       VARIANT G — Atelier rechts, Soft-Mask 50/50
-       Desktop: 1fr (Text) / 1fr (Bild). Bild hat linear-gradient
-       Mask am linken Rand, der ~25 % der Bildbreite weich ins Cream
-       fadet. Helga sitzt rechts im Bild → wird durch Mask nicht
-       angegriffen, bleibt klar sichtbar.
-       Mobile: Stack — Bild oben (16/10), Text drunter auf Cream.
+       VARIANT G — Atelier rechts, als klar geformte Foto-Karte
+       Desktop: 1fr (Text) / 1fr (Bild-Bereich). Das Bild sitzt
+       NICHT full-bleed in der Spalte mit Soft-Mask — sondern als
+       eigene Karte mit großzügigem Border-Radius (28 px) und
+       weichem Schatten, eingebettet im Cream-Raum. Klare Form,
+       keine Verlauf/harte-Kante-Mischung.
+       Mobile: Stack — Foto-Karte oben (4/5 portrait), Text drunter.
        ============================================================ */
     .hero--g {
       display: grid;
       grid-template-columns: 1fr;
       background: var(--bg-base);
-      overflow: hidden;
+      overflow: visible;
       isolation: auto;
       padding: 0;
       min-height: auto;
@@ -1141,34 +1142,35 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .hero--g::after { display: none; content: none; }
     @media (min-width: 900px) {
       .hero--g {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+        align-items: center;
         min-height: clamp(560px, 80vh, 760px);
       }
     }
+    /* Foto-Karte rechts — eingebettet im Cream mit Padding, klar
+       abgerundet, dezenter Schatten. Aspect 4/5 portrait, Helga
+       und der Türkis-Schrank sitzen klar im Bild. */
     .hero-g__image {
       background-image: url('/hero/atelier.jpg');
       background-size: cover;
-      background-position: center center;
+      background-position: center 35%;
       background-repeat: no-repeat;
-      aspect-ratio: 16 / 10;
-      filter: saturate(0.95);
+      aspect-ratio: 5 / 4;
+      filter: saturate(0.96);
+      border-radius: clamp(20px, 2.4vw, 28px);
+      box-shadow:
+        0 30px 60px -22px rgba(45, 36, 53, 0.22),
+        0 14px 28px -14px rgba(45, 36, 53, 0.12);
+      margin: clamp(28px, 5vw, 56px) clamp(28px, 5vw, 56px) clamp(28px, 5vw, 56px) 0;
+    }
+    @media (max-width: 899px) {
+      .hero-g__image {
+        margin: 0 clamp(20px, 5vw, 32px) clamp(28px, 5vw, 56px);
+      }
     }
     @media (min-width: 900px) {
       .hero-g__image {
-        aspect-ratio: auto;
-        /* Soft-Mask: links 25 % fading ins Cream (Katharinas
-           Verschleierung), rechts voll opaque — Helga sitzt rechts,
-           bleibt klar. */
-        mask-image: linear-gradient(to right,
-            transparent 0%,
-            rgba(0,0,0,0.4) 12%,
-            rgba(0,0,0,0.95) 25%,
-            rgba(0,0,0,1) 35%);
-        -webkit-mask-image: linear-gradient(to right,
-            transparent 0%,
-            rgba(0,0,0,0.4) 12%,
-            rgba(0,0,0,0.95) 25%,
-            rgba(0,0,0,1) 35%);
+        aspect-ratio: 4 / 5;
       }
     }
     .hero-g__text {
