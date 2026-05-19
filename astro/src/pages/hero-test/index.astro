@@ -204,6 +204,83 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  {/* ============================================================
+     VARIANT G — Atelier rechts, weiche Verschleierung links
+     Katharinas Idee · 19.05.: „halben Hero rechts für das Werkstatt-
+     bild — Helga rechts ist es bestimmt recht, Türkis dabei. Das
+     linke Bild-Ende verschleiern, damit der Text-Bereich darin
+     atmen kann." Klassisches 50/50 (Text links auf Cream, Atelier-
+     Bild rechts mit linearer Soft-Mask am linken Rand). Mobile:
+     Stack — Bild oben (16/10), Text drunter auf Cream.
+     ============================================================ */}
+  <div class="variant-label"><div class="container"><span>Entwurf G · Atelier rechts · Soft-Mask 50/50</span></div></div>
+  <section class="hero hero--g">
+    <div class="hero-g__text">
+      <span class="hero-g__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
+      <h1 class="hero-g__title">
+        Auf der Suche —<br />
+        wie wird <em>Gemeinschaft?</em>
+      </h1>
+      <p class="hero-g__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
+      <div class="hero-g__cta-row">
+        <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
+        <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
+      </div>
+    </div>
+    <div class="hero-g__image" role="img" aria-label="Sabines Töpferatelier — Helga mit hochgesteckten Haaren rechts modelliert eine Tonfigur"></div>
+  </section>
+
+  {/* ============================================================
+     VARIANT H — Atelier dominanter (60/40), breitere Verschleierung
+     Bild nimmt ~60 % rechts ein, Text-Säule schmaler (40 %). Maske
+     fließt weiter ins Bild hinein — Werkstatt-Stimmung wird stärker
+     spürbar, der Text bleibt aber durch ruhige Cream-Säule garantiert
+     lesbar. Mobile: Stack wie G.
+     ============================================================ */}
+  <div class="variant-label"><div class="container"><span>Entwurf H · Atelier dominant · 60/40 mit breiter Mask</span></div></div>
+  <section class="hero hero--h">
+    <div class="hero-h__text">
+      <span class="hero-h__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
+      <h1 class="hero-h__title">
+        Auf der Suche —<br />
+        wie wird <em>Gemeinschaft?</em>
+      </h1>
+      <p class="hero-h__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
+      <div class="hero-h__cta-row">
+        <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
+        <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
+      </div>
+    </div>
+    <div class="hero-h__image" role="img" aria-label="Sabines Töpferatelier — Helga mit hochgesteckten Haaren rechts modelliert eine Tonfigur"></div>
+  </section>
+
+  {/* ============================================================
+     VARIANT I — Atelier als Hintergrund-Hauch, Text-Insel
+     Bild deckt fast die ganze Breite ab, ABER linke ~55 % sind mit
+     einer kräftigen Cream-Maske überdeckt — der Text sitzt wie eine
+     ruhige Insel im Cream, das Atelier scheint nur durch den rechten
+     Bildausschnitt durch. Mobile: Bild fadet komplett ins Cream
+     (Stack mit zarter Hintergrundandeutung).
+     ============================================================ */}
+  <div class="variant-label"><div class="container"><span>Entwurf I · Atelier als Hintergrund-Hauch · Text-Insel</span></div></div>
+  <section class="hero hero--i">
+    <div class="hero-i__image" role="img" aria-label="Sabines Töpferatelier — Helga mit hochgesteckten Haaren rechts modelliert eine Tonfigur"></div>
+    <div class="container hero-i__inner">
+      <div class="hero-i__text">
+        <span class="hero-i__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
+        <h1 class="hero-i__title">
+          Auf der Suche —<br />
+          wie wird <em>Gemeinschaft?</em>
+        </h1>
+        <p class="hero-i__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
+        <div class="hero-i__cta-row">
+          <a href="/schreibbar/" class="btn btn--primary">In die schreibBAR →</a>
+          <a href="#raeume" class="btn btn--ghost btn--fresh">Wohin dann?</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <style>
     /* ========== Info-Banner oben ========== */
     .vergleich-info {
@@ -1006,6 +1083,335 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       background: transparent;
       border-width: 1.5px;
       box-shadow: none;
+    }
+
+    /* ============================================================
+       VARIANT G — Atelier rechts, Soft-Mask 50/50
+       Desktop: 1fr (Text) / 1fr (Bild). Bild hat linear-gradient
+       Mask am linken Rand, der ~25 % der Bildbreite weich ins Cream
+       fadet. Helga sitzt rechts im Bild → wird durch Mask nicht
+       angegriffen, bleibt klar sichtbar.
+       Mobile: Stack — Bild oben (16/10), Text drunter auf Cream.
+       ============================================================ */
+    .hero--g {
+      display: grid;
+      grid-template-columns: 1fr;
+      background: var(--bg-base);
+      overflow: hidden;
+      isolation: auto;
+      padding: 0;
+      min-height: auto;
+    }
+    .hero--g::before,
+    .hero--g::after { display: none; content: none; }
+    @media (min-width: 900px) {
+      .hero--g {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        min-height: clamp(560px, 80vh, 760px);
+      }
+    }
+    .hero-g__image {
+      background-image: url('/hero/atelier.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      aspect-ratio: 16 / 10;
+      filter: saturate(0.95);
+    }
+    @media (min-width: 900px) {
+      .hero-g__image {
+        aspect-ratio: auto;
+        /* Soft-Mask: links 25 % fading ins Cream (Katharinas
+           Verschleierung), rechts voll opaque — Helga sitzt rechts,
+           bleibt klar. */
+        mask-image: linear-gradient(to right,
+            transparent 0%,
+            rgba(0,0,0,0.4) 12%,
+            rgba(0,0,0,0.95) 25%,
+            rgba(0,0,0,1) 35%);
+        -webkit-mask-image: linear-gradient(to right,
+            transparent 0%,
+            rgba(0,0,0,0.4) 12%,
+            rgba(0,0,0,0.95) 25%,
+            rgba(0,0,0,1) 35%);
+      }
+    }
+    .hero-g__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(22px, 2.6vw, 34px);
+      padding: clamp(96px, 12vw, 120px) clamp(28px, 6vw, 88px) clamp(56px, 8vw, 104px);
+      max-width: 720px;
+    }
+    @media (min-width: 900px) {
+      .hero-g__text {
+        padding-block: clamp(56px, 8vw, 104px);
+      }
+    }
+    .hero-g__eyebrow {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(20px, 1.9vw, 24px);
+      line-height: 1.4;
+      color: var(--accent-hover);
+      margin: 0;
+    }
+    .hero-g__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .hero-g__title em {
+      font-style: italic;
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+    .hero-g__subtitle {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1.1vw, 15px);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-hover);
+      margin: 0;
+    }
+    .hero-g__cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: clamp(8px, 1vw, 16px);
+    }
+    .hero--g .btn--primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px -6px rgba(200, 154, 120, 0.45);
+    }
+    .hero--g .btn--ghost.btn--fresh {
+      background: transparent;
+      border-width: 1.5px;
+      box-shadow: none;
+    }
+
+    /* ============================================================
+       VARIANT H — Atelier dominanter (60/40), breitere Mask
+       Bild ~60 %, Text-Säule schmaler (40 %). Mask reicht weiter ins
+       Bild — Werkstatt-Stimmung trägt mehr.
+       ============================================================ */
+    .hero--h {
+      display: grid;
+      grid-template-columns: 1fr;
+      background: var(--bg-base);
+      overflow: hidden;
+      isolation: auto;
+      padding: 0;
+      min-height: auto;
+    }
+    .hero--h::before,
+    .hero--h::after { display: none; content: none; }
+    @media (min-width: 900px) {
+      .hero--h {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+        min-height: clamp(560px, 80vh, 760px);
+      }
+    }
+    .hero-h__image {
+      background-image: url('/hero/atelier.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      aspect-ratio: 16 / 10;
+      filter: saturate(0.95);
+    }
+    @media (min-width: 900px) {
+      .hero-h__image {
+        aspect-ratio: auto;
+        /* Breitere Mask als G: linke 35 % fließen ins Cream. */
+        mask-image: linear-gradient(to right,
+            transparent 0%,
+            rgba(0,0,0,0.3) 18%,
+            rgba(0,0,0,0.85) 32%,
+            rgba(0,0,0,1) 45%);
+        -webkit-mask-image: linear-gradient(to right,
+            transparent 0%,
+            rgba(0,0,0,0.3) 18%,
+            rgba(0,0,0,0.85) 32%,
+            rgba(0,0,0,1) 45%);
+      }
+    }
+    .hero-h__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(20px, 2.4vw, 30px);
+      padding: clamp(96px, 12vw, 120px) clamp(24px, 5vw, 64px) clamp(48px, 7vw, 88px);
+      max-width: 560px;
+    }
+    @media (min-width: 900px) {
+      .hero-h__text {
+        padding-block: clamp(48px, 7vw, 88px);
+      }
+    }
+    .hero-h__eyebrow {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(18px, 1.7vw, 22px);
+      line-height: 1.4;
+      color: var(--accent-hover);
+      margin: 0;
+    }
+    .hero-h__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .hero-h__title em {
+      font-style: italic;
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+    .hero-h__subtitle {
+      font-family: var(--font-text);
+      font-size: clamp(12px, 1vw, 14px);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-hover);
+      margin: 0;
+    }
+    .hero-h__cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: clamp(8px, 1vw, 16px);
+    }
+    .hero--h .btn--primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px -6px rgba(200, 154, 120, 0.45);
+    }
+    .hero--h .btn--ghost.btn--fresh {
+      background: transparent;
+      border-width: 1.5px;
+      box-shadow: none;
+    }
+
+    /* ============================================================
+       VARIANT I — Atelier als Hintergrund-Hauch, Text-Insel
+       Bild deckt volle Breite, aber linke ~55 % sind mit dichtem
+       Cream-Overlay belegt — Text sitzt als Insel im Cream, das
+       Atelier scheint nur rechts durch. Bild ist überall sichtbar
+       als sehr dezenter Hauch.
+       ============================================================ */
+    .hero--i {
+      position: relative;
+      background: var(--bg-base);
+      padding: clamp(80px, 11vw, 140px) 0 clamp(72px, 9vw, 120px);
+      min-height: auto;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero--i::before,
+    .hero--i::after { display: none; content: none; }
+    .hero-i__image {
+      position: absolute;
+      inset: 0;
+      background-image: url('/hero/atelier.jpg');
+      background-size: cover;
+      background-position: center 45%;
+      background-repeat: no-repeat;
+      filter: saturate(0.92);
+      /* Mask: linke 55 % komplett ins Cream gefadet, rechts opaque. */
+      mask-image: linear-gradient(to right,
+          transparent 0%,
+          transparent 35%,
+          rgba(0,0,0,0.45) 55%,
+          rgba(0,0,0,1) 75%);
+      -webkit-mask-image: linear-gradient(to right,
+          transparent 0%,
+          transparent 35%,
+          rgba(0,0,0,0.45) 55%,
+          rgba(0,0,0,1) 75%);
+      z-index: 0;
+    }
+    .hero-i__inner {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-i__text {
+      max-width: 620px;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(20px, 2.4vw, 30px);
+    }
+    .hero-i__eyebrow {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(20px, 1.9vw, 24px);
+      line-height: 1.4;
+      color: var(--accent-hover);
+      margin: 0;
+    }
+    .hero-i__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .hero-i__title em {
+      font-style: italic;
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+    .hero-i__subtitle {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1.1vw, 15px);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-hover);
+      margin: 0;
+    }
+    .hero-i__cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: clamp(8px, 1vw, 16px);
+    }
+    .hero--i .btn--primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px -6px rgba(200, 154, 120, 0.45);
+    }
+    .hero--i .btn--ghost.btn--fresh {
+      background: transparent;
+      border-width: 1.5px;
+      box-shadow: none;
+    }
+    /* Auf schmalen Viewports: Bild rückt unter den Text, sodass es
+       nicht den Text-Bereich überdeckt. Mask wird vertikal statt
+       horizontal — Bild scheint von unten durch. */
+    @media (max-width: 720px) {
+      .hero-i__image {
+        mask-image: linear-gradient(to bottom,
+            transparent 0%,
+            transparent 60%,
+            rgba(0,0,0,0.35) 85%,
+            rgba(0,0,0,0.6) 100%);
+        -webkit-mask-image: linear-gradient(to bottom,
+            transparent 0%,
+            transparent 60%,
+            rgba(0,0,0,0.35) 85%,
+            rgba(0,0,0,0.6) 100%);
+      }
     }
   </style>
 </BaseLayout>
