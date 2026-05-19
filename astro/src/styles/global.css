@@ -635,12 +635,12 @@
      allerdings ohne bild — saubere grundlage".
      ============================================================= */
   .hero--editorial {
-    /* Hauch von Wärme: ein einziger sehr breiter, weicher Bronze-Glow
-       (~5 % Opazität) als Wash von oben, sanft fading ins Cream. Keine
-       zwei harten Spots mehr — ein durchgehender Atem statt zweier
-       Pinsel-Striche. Wirkt wie Morgenlicht, nicht wie Effekt. */
+    /* Dezenter Wärme-Verlauf: ein breiter Bronze-Wash von oben Mitte
+       (~13 %), sanft fading nach unten. Plus ein schwacher Echo-Glow
+       (~5 %) unten — gibt dem Hero Tiefe, ohne ihn zu beladen. */
     background:
-      radial-gradient(ellipse 130% 65% at 50% 15%, rgba(200, 154, 120, 0.055), transparent 72%),
+      radial-gradient(ellipse 120% 75% at 50% 20%, rgba(200, 154, 120, 0.13), transparent 70%),
+      radial-gradient(ellipse 90% 45% at 50% 100%, rgba(220, 175, 130, 0.05), transparent 75%),
       var(--bg-base);
     padding: clamp(80px, 11vw, 140px) 0 clamp(72px, 9vw, 120px);
     /* min-height + flex-center: Hero füllt den Viewport (abzüglich
