@@ -743,11 +743,14 @@
     box-shadow: none;
   }
 
-  /* Mood-Banner als flacher Stimmungs-Streifen oben auf jeder
-     Hauptseite. Aspect-Ratio fix gegen Layout-Shift. */
+  /* Mood-Banner als Stimmungs-Streifen oben auf jeder Hauptseite.
+     Aspect-Ratio 3:1 (= 12/4) ist die einheitliche Höhe für alle
+     Räume — etwas höher als die alten 4:1-Banner (mehr vom Motiv
+     sichtbar), aber niedriger als das frühere hörBAR-12/5, das
+     einzeln zu dominant war. */
   .page-banner {
     width: 100%;
-    aspect-ratio: 12 / 3;
+    aspect-ratio: 12 / 4;
     overflow: hidden;
     background: var(--bg-warm);
     margin: 0;
@@ -807,7 +810,10 @@
     height: 16px;
   }
   @media (max-width: 640px) {
-    .page-banner { aspect-ratio: 8 / 3; }
+    /* Mobile bleibt etwas höher als das Desktop-3:1, damit das Motiv
+       auf schmalen Screens nicht zur Briefmarke wird (~150 px hoch
+       bei 375 vw statt nur 125). */
+    .page-banner { aspect-ratio: 5 / 2; }
   }
   /* H1 sitzt als einzige Komponente in der runden Cream-Lesbarkeits-
      Box. Cream-Grund (88 % opak — Katharina · 18.05.: „box hintergrund
