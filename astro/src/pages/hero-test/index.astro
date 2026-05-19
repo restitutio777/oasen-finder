@@ -33,7 +33,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="hero-a__text">
         <span class="hero-a__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
         <h1 class="hero-a__title">
-          Auf der Suche — wie wird <em>Gemeinschaft?</em>
+          Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
         </h1>
         <p class="hero-a__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
         <div class="hero-a__cta-row">
@@ -58,7 +58,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="hero-b__text">
         <span class="hero-b__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
         <h1 class="hero-b__title">
-          Auf der Suche — wie wird <em>Gemeinschaft?</em>
+          Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
         </h1>
         <p class="hero-b__subtitle">
           Reisen · Werkstätten · Notizen · Fotos
@@ -84,7 +84,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="container hero-c__content">
       <span class="hero-c__eyebrow">— GemeinschaftsWERK statt allein unterwegs</span>
       <h1 class="hero-c__title">
-        Auf der Suche — wie wird <em>Gemeinschaft?</em>
+        Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
       </h1>
       <p class="hero-c__subtitle">
         Reisen · Werkstätten · Notizen · Fotos
@@ -110,7 +110,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="container hero-c2__content">
       <span class="hero-c2__eyebrow">— GemeinschaftsWERK statt allein unterwegs</span>
       <h1 class="hero-c2__title">
-        Auf der Suche — wie wird <em>Gemeinschaft?</em>
+        Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
       </h1>
       <p class="hero-c2__subtitle">
         Reisen · Werkstätten · Notizen · Fotos
@@ -136,7 +136,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="hero-d__text">
       <span class="hero-d__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
       <h1 class="hero-d__title">
-        Auf der Suche — wie wird <em>Gemeinschaft?</em>
+        Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
       </h1>
       <p class="hero-d__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
       <div class="hero-d__cta-row">
@@ -162,7 +162,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="container hero-e__inner">
         <span class="hero-e__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
         <h1 class="hero-e__title">
-          Auf der Suche — wie wird <em>Gemeinschaft?</em>
+          Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
         </h1>
         <p class="hero-e__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
         <div class="hero-e__cta-row">
@@ -187,7 +187,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="hero-f__text">
       <span class="hero-f__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
       <h1 class="hero-f__title">
-        Auf der Suche — wie wird <em>Gemeinschaft?</em>
+        Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
       </h1>
       <p class="hero-f__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
       <div class="hero-f__cta-row">
@@ -211,7 +211,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="hero-g__text">
       <span class="hero-g__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
       <h1 class="hero-g__title">
-        Auf der Suche — wie wird <em>Gemeinschaft?</em>
+        Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
       </h1>
       <p class="hero-g__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
       <div class="hero-g__cta-row">
@@ -234,7 +234,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="hero-h__text">
       <span class="hero-h__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
       <h1 class="hero-h__title">
-        Auf der Suche — wie wird <em>Gemeinschaft?</em>
+        Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
       </h1>
       <p class="hero-h__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
       <div class="hero-h__cta-row">
@@ -260,7 +260,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="hero-i__text">
         <span class="hero-i__eyebrow">GemeinschaftsWERK statt allein unterwegs</span>
         <h1 class="hero-i__title">
-          Auf der Suche — wie wird <em>Gemeinschaft?</em>
+          Auf der Suche —&nbsp;wie wird <em>Gemeinschaft?</em>
         </h1>
         <p class="hero-i__subtitle">Reisen · Werkstätten · Notizen · Fotos</p>
         <div class="hero-i__cta-row">
@@ -304,12 +304,44 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       pointer-events: none;
       user-select: none;
     }
+    /* Auf Mobile sitzen bei A/G/H der Text oben und das Bild unten
+       (Stack). Damit der Marker auf dem Bild landet, nicht im leeren
+       Cream-Bereich des Text-Headers, schalten wir auf bottom-right.
+       Plus: invertiertes Farb-Schema — heller Marker mit dunklem
+       Schatten, damit er auf dem Foto-Hintergrund lesbar bleibt. */
+    @media (max-width: 899px) {
+      .hero--a .hero-num,
+      .hero--g .hero-num,
+      .hero--h .hero-num {
+        top: auto;
+        bottom: 12px;
+        color: rgba(251, 246, 243, 0.85);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+      }
+    }
+    /* Variant C/C2/I haben das Foto immer im Hintergrund (auch
+       Desktop) — Marker oben rechts braucht hellen Kontrast. */
+    .hero--c .hero-num,
+    .hero--c2 .hero-num,
+    .hero--i .hero-num {
+      color: rgba(251, 246, 243, 0.85);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+    }
     /* Subtle Trenner zwischen Heros — eine zarte Cream-Linie, kein
        voller Streifen mehr. Hilft das Auge, einzelne Heros von oben
        bis unten zu unterscheiden. */
     .hero + .hero,
     [class*="hero--"] + [class*="hero--"] {
       border-top: 1px solid rgba(45, 36, 53, 0.08);
+    }
+    /* Typografische Hygiene auf allen Hero-Titles: text-wrap pretty
+       lässt den Browser bessere Umbrüche wählen (kein „— wie" allein
+       am Zeilenende), hyphens manual blockt unschöne Worttrennung
+       automatischer Hyphenation. nbsp im HTML hält Em-dash + „wie"
+       als atomic Block — Em-dash steht so nie alleine am Zeilen-Ende. */
+    [class*="hero-"][class*="__title"] {
+      text-wrap: pretty;
+      hyphens: manual;
     }
 
     /* ============================================================
