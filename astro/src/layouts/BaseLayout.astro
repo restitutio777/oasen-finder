@@ -27,8 +27,10 @@ export interface Props {
 }
 
 const siteUrl = 'https://oasen-finder.vercel.app';
-const defaultOgImage =
-  'https://images.unsplash.com/photo-1733819109723-92a56f6872a5?w=1200&h=630&fit=crop&q=85';
+/* Brand-OG-Image (1200×630): Cream + warmer Bronze-Wash mit Logo +
+   Headline. Lokal in public/og-image.png. Vorher war Unsplash-Foto-
+   Fallback — jetzt eigene Marke. */
+const defaultOgImage = `${siteUrl}/og-image.png`;
 
 const {
   title = 'werkSTATT Gemeinschaft — Katharina Offenborn',
