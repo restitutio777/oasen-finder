@@ -635,12 +635,12 @@
      allerdings ohne bild — saubere grundlage".
      ============================================================= */
   .hero--editorial {
-    /* Dezenter Wärme-Verlauf: ein breiter Bronze-Wash von oben Mitte
-       (~13 %), sanft fading nach unten. Plus ein schwacher Echo-Glow
-       (~5 %) unten — gibt dem Hero Tiefe, ohne ihn zu beladen. */
+    /* Dezenter Wärme-Verlauf von unten nach oben: Bronze-Wash am
+       unteren Rand (~14 %), sanft fading nach oben — der obere
+       Bereich bleibt heller Cream. Wirkt wie Bodenwärme, der Kopf
+       der Seite atmet frei. */
     background:
-      radial-gradient(ellipse 120% 75% at 50% 20%, rgba(200, 154, 120, 0.13), transparent 70%),
-      radial-gradient(ellipse 90% 45% at 50% 100%, rgba(220, 175, 130, 0.05), transparent 75%),
+      radial-gradient(ellipse 120% 75% at 50% 100%, rgba(200, 154, 120, 0.14), transparent 70%),
       var(--bg-base);
     padding: clamp(80px, 11vw, 140px) 0 clamp(72px, 9vw, 120px);
     /* min-height + flex-center: Hero füllt den Viewport (abzüglich
