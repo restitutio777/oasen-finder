@@ -13,6 +13,8 @@ export async function getStaticPaths() {
       publishedAt,
       summary,
       "coverUrl": cover.asset->url,
+      "audioUrl": audioFile.asset->url,
+      "audioMime": audioFile.asset->mimeType,
       "transcriptUrl": transcriptPdf.asset->url
     }
   `);
@@ -52,8 +54,40 @@ const ogImage = episode.coverUrl
         <img src={episode.coverUrl} alt="" style="max-width: 400px; margin: 2rem 0; border-radius: 6px;" />
       )}
 
-      {/* Automatisches Embed je nach Plattform (YouTube/Spotify/Apple/etc.) */}
-      <MediaLink url={episode.url} label={`Auf ${episode.platform} öffnen`} />
+      {/* Audio-Player-Priorität:
+          1. Wenn audioFile gesetzt → eigener HTML5-Player im Brand-Look
+             (datenschutzfreundlich, kein Plattform-Cookie)
+          2. Falls zusätzlich URL gesetzt → kleine „auch auf X hören"-Zeile
+          3. Wenn nur URL → klassisches Embed (YouTube/Spotify/Apple/etc.) */}
+      {episode.audioUrl ? (
+        <>
+          <figure class="hoerbar-player">
+            <audio
+              controls
+              preload="metadata"
+              src={episode.audioUrl}
+              style="width: 100%; max-width: 720px; border-radius: 8px;"
+            >
+              Dein Browser kann diese Audio-Datei leider nicht abspielen.
+              <a href={episode.audioUrl}>Direkt herunterladen</a>
+            </audio>
+            <figcaption style="font-size: 13px; color: var(--text-secondary); margin-top: 0.5rem;">
+              Hörzeit · direkt auf der Seite — kein externes Konto nötig
+            </figcaption>
+          </figure>
+          {episode.url && episode.platform !== 'direkt' && (
+            <p style="margin-top: 1rem; font-size: 14px;">
+              Auch hörbar auf <a href={episode.url} target="_blank" rel="noopener" style="color: var(--accent);">{episode.platform === 'youtube' ? 'YouTube' : episode.platform === 'spotify' ? 'Spotify' : episode.platform === 'applemusic' ? 'Apple Music' : episode.platform} →</a>
+            </p>
+          )}
+        </>
+      ) : episode.url ? (
+        <MediaLink url={episode.url} label={`Auf ${episode.platform} öffnen`} />
+      ) : (
+        <p style="margin: 1.5rem 0; color: var(--text-secondary); font-style: italic;">
+          Audio folgt — diese Episode ist angekündigt, aber noch nicht eingespielt.
+        </p>
+      )}
 
       <div style="margin-top: 2rem;">
         <PortableText value={episode.summary} />

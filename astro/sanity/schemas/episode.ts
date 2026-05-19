@@ -32,12 +32,14 @@ export const episode = defineType({
     defineField({
       name: 'platform',
       title: 'Plattform',
+      description: 'Wenn die Folge auf YouTube/Spotify/Apple Music liegt, wähle die Plattform. Wenn du die Audio-Datei direkt in Sanity hochlädst (unten), kann das hier auf „Direkt-Upload" stehen.',
       type: 'string',
       options: {
         list: [
           { title: 'YouTube', value: 'youtube' },
           { title: 'Spotify', value: 'spotify' },
           { title: 'Apple Music', value: 'applemusic' },
+          { title: 'Direkt-Upload (Audio in Sanity)', value: 'direkt' },
           { title: 'Sonstige', value: 'sonstige' },
         ],
       },
@@ -46,8 +48,15 @@ export const episode = defineType({
     defineField({
       name: 'url',
       title: 'URL zur Folge',
+      description: 'Bei externen Plattformen Pflicht. Bei „Direkt-Upload" kannst du es leer lassen.',
       type: 'url',
-      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'audioFile',
+      title: 'Audio-Datei (Direkt-Upload)',
+      description: 'Alternative zur externen URL: lade hier eine MP3/M4A/WAV/OGG hoch. Die Site zeigt dann einen eigenen Player im Brand-Look — Besucher hören direkt auf der Seite, ohne Plattform-Cookies.',
+      type: 'file',
+      options: { accept: 'audio/mpeg,audio/mp4,audio/m4a,audio/wav,audio/ogg,audio/x-m4a' },
     }),
     defineField({
       name: 'publishedAt',
