@@ -643,7 +643,13 @@
       radial-gradient(ellipse 40% 35% at 90% 15%, rgba(220, 180, 140, 0.06), transparent 70%),
       var(--bg-base);
     padding: clamp(80px, 11vw, 140px) 0 clamp(72px, 9vw, 120px);
-    min-height: auto;
+    /* min-height + flex-center: Hero füllt den Viewport (abzüglich
+       Header), Content sitzt vertikal mittig. Sonst rutscht auf Mobile
+       der folgende Block „Diese Webseite dient zweierlei" schon ins
+       sichtbare Fenster und unterbricht die Einstiegswirkung. */
+    min-height: clamp(560px, calc(100vh - 73px), 820px);
+    display: flex;
+    align-items: center;
     overflow: visible;
     isolation: auto;
   }
