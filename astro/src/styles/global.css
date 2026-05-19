@@ -180,7 +180,9 @@
     color: var(--text-primary);
     display: inline-flex;
     align-items: center;
-    gap: 0.3em;
+    /* gap reduziert von 0.3em → 0.15em: Icon und Schriftzug sitzen
+       enger als typografische Einheit zusammen. */
+    gap: 0.15em;
     flex-shrink: 1;
     min-width: 0;
   }
@@ -633,7 +635,13 @@
      allerdings ohne bild — saubere grundlage".
      ============================================================= */
   .hero--editorial {
-    background: var(--bg-base);
+    /* Zarter Wärme-Hauch von oben: weicher Bronze-Glow (~7 % Opazität),
+       der nach unten ins Cream verläuft. Wirkt wie Morgenlicht auf der
+       Seite, ohne den Cream-First-Charakter zu kippen. */
+    background:
+      radial-gradient(ellipse 75% 55% at 50% 0%, rgba(200, 154, 120, 0.10), transparent 65%),
+      radial-gradient(ellipse 40% 35% at 90% 15%, rgba(220, 180, 140, 0.06), transparent 70%),
+      var(--bg-base);
     padding: clamp(80px, 11vw, 140px) 0 clamp(72px, 9vw, 120px);
     min-height: auto;
     overflow: visible;
