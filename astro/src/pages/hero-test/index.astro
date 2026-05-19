@@ -284,26 +284,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       margin: 0;
       line-height: 1.55;
     }
-    /* Hero-Marker (klein, dezent, oben rechts) statt der dicken
-       Entwurfs-Streifen. Lässt die Heros direkt visuell sprechen,
-       die Beschriftung tritt zurück — eine Buchstaben-Marke reicht
-       zur Orientierung. */
+    /* Hero-Marker: ein einzelner Buchstabe als reines Overlay-Zeichen,
+       ohne Box, ohne Hintergrund, ohne Padding — kein Millimeter Platz
+       im Layout. Sitzt absolute oben rechts. Subtiler text-shadow gegen
+       Foto-Hintergrund, damit das Zeichen auch auf hellen UND dunklen
+       Bereichen erkennbar bleibt. */
     .hero { position: relative; }
     .hero-num {
       position: absolute;
-      top: 14px;
-      right: 16px;
+      top: 12px;
+      right: 14px;
       z-index: 8;
       font-family: var(--font-text);
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.22em;
-      color: rgba(45, 36, 53, 0.55);
-      background: rgba(251, 246, 243, 0.78);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      padding: 4px 9px;
-      border-radius: 2px;
+      color: rgba(45, 36, 53, 0.4);
+      text-shadow: 0 1px 2px rgba(251, 246, 243, 0.7);
       pointer-events: none;
       user-select: none;
     }
