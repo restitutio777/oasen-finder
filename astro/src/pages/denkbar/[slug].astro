@@ -1,0 +1,187 @@
+---
+/**
+ * denkBAR-Detail — unified handler für die zwei Doc-Types in DenkBAR:
+ *   - note (kind ∈ idee/vision/umfrage)  → Gedankenfaden
+ *   - event (kind = forschungstreffen)   → Termin
+ *
+ * Slug-Collision-Risiko zwischen den beiden ist akzeptiert — Katharina
+ * setzt Slugs selbst, im seltenen Konflikt würde Astro beim Build
+ * einen Fehler werfen, dann kann sie den Slug umbenennen.
+ *
+ * Layout passt sich dem Doc-Type an: Note rendert wie eine schreibBAR-
+ * Notiz (PortableText), Termin wie eine machBAR-Event-Page (Datum, Ort,
+ * Beschreibung).
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PortableText from '../../components/PortableText.astro';
+import SanityImage from '../../components/SanityImage.astro';
+import MediaLink from '../../components/MediaLink.astro';
+import ShareButton from '../../components/ShareButton.astro';
+import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+
+export async function getStaticPaths() {
+  if (!isSanityConfigured) return [];
+
+  const notes = await sanity.fetch(`
+    *[_type == "note" && kind in ["idee", "vision", "umfrage"] && defined(slug.current)] {
+      "slug": slug.current,
+      _id, title, kind, publishedAt,
+      body, tags, hero, mediaLink, externalLink, substackUrl,
+      "pdfUrl": pdfAttachment.asset->url
+    }
+  `);
+
+  const treffen = await sanity.fetch(`
+    *[_type == "event" && kind == "forschungstreffen" && defined(slug.current)] {
+      "slug": slug.current,
+      _id, title, startDate, endDate, ownership,
+      season, location,
+      description,
+      registration, fees, photo,
+      "programPdfUrl": programPdf.asset->url
+    }
+  `);
+
+  return [
+    ...notes.map((n: any) => ({ params: { slug: n.slug }, props: { docType: 'note', data: n } })),
+    ...treffen.map((t: any) => ({ params: { slug: t.slug }, props: { docType: 'event', data: t } })),
+  ];
+}
+
+const { docType, data } = Astro.props;
+
+const kindLabels: Record<string, string> = {
+  idee: 'Idee',
+  vision: 'Vision',
+  umfrage: 'Umfrage',
+};
+
+const title = localized(data.title) || (docType === 'event' ? 'Forschungstreffen' : 'Gedankenfaden');
+
+// OG-Image
+const fallbackOg = 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=630&fit=crop&q=85';
+const ogImage = docType === 'note' && data.hero?.asset
+  ? urlFor(data.hero).width(1200).height(630).fit('crop').auto('format').quality(85).url()
+  : docType === 'event' && data.photo?.asset
+    ? urlFor(data.photo).width(1200).height(630).fit('crop').auto('format').quality(85).url()
+    : fallbackOg;
+
+const descriptionText = docType === 'event'
+  ? `Forschungstreffen am ${new Date(data.startDate).toLocaleDateString('de-DE')}${data.location ? ` in ${data.location}` : ''}`
+  : `denkBAR-Eintrag${data.kind ? ` · ${kindLabels[data.kind] || data.kind}` : ''}`;
+---
+
+<BaseLayout
+  title={`${title} — denkBAR`}
+  description={descriptionText}
+  image={ogImage}
+  ogType="article"
+>
+  <article style="padding: 4rem 0; max-width: 720px; margin: 0 auto;">
+    <div class="container">
+      <a href="/denkbar/" style="color: var(--accent); text-decoration: none; font-size: 14px;">
+        ← Zurück zur denkBAR
+      </a>
+
+      {docType === 'note' && (
+        <>
+          <span class="entry__tag" data-tag={data.kind} style="display: inline-block; margin-top: 1.5rem;">
+            {kindLabels[data.kind] || data.kind}
+          </span>
+          <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin: 0.5rem 0 1rem;">
+            {localized(data.title)}
+          </h1>
+          <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 2rem;">
+            {new Date(data.publishedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </p>
+
+          <SanityImage
+            image={data.hero}
+            width={1200}
+            aspect={16 / 9}
+            eager
+            showCaption
+          />
+
+          <PortableText value={data.body} />
+
+          {data.mediaLink && <MediaLink url={data.mediaLink} />}
+
+          {(data.externalLink || data.substackUrl || data.pdfUrl) && (
+            <aside style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle);">
+              <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-muted); margin-bottom: 1rem;">
+                Weiterlesen
+              </h3>
+              <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+                {data.externalLink && (
+                  <li><a href={data.externalLink} target="_blank" rel="noopener">Externer Link →</a></li>
+                )}
+                {data.substackUrl && (
+                  <li><a href={data.substackUrl} target="_blank" rel="noopener">Auf Substack →</a></li>
+                )}
+                {data.pdfUrl && (
+                  <li><a href={data.pdfUrl} target="_blank" rel="noopener">Dokument herunterladen →</a></li>
+                )}
+              </ul>
+            </aside>
+          )}
+        </>
+      )}
+
+      {docType === 'event' && (
+        <>
+          <span class="eyebrow" style="display: inline-block; margin-top: 1.5rem;">
+            denkBAR · Forschungstreffen
+          </span>
+          <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); margin: 0.5rem 0 1rem;">
+            {localized(data.title)}
+          </h1>
+          <p style="color: var(--text-secondary); font-size: 16px; margin-bottom: 0.5rem;">
+            {new Date(data.startDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}
+            {data.endDate && ` – ${new Date(data.endDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}`}
+          </p>
+          {data.location && (
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">{data.location}</p>
+          )}
+
+          {data.photo?.asset && (
+            <SanityImage
+              image={data.photo}
+              width={1200}
+              aspect={16 / 9}
+              eager
+              showCaption
+            />
+          )}
+
+          <PortableText value={data.description} />
+
+          {data.registration && (
+            <aside style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-warm); border-radius: 6px;">
+              <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-muted); margin: 0 0 0.75rem;">
+                Anmeldung
+              </h3>
+              {data.registration.contactName && <p style="margin: 0;">{data.registration.contactName}</p>}
+              {data.registration.contactEmail && (
+                <p style="margin: 0;"><a href={`mailto:${data.registration.contactEmail}`}>{data.registration.contactEmail}</a></p>
+              )}
+              {data.registration.url && (
+                <p style="margin: 0.5rem 0 0;"><a href={data.registration.url} target="_blank" rel="noopener">Online anmelden →</a></p>
+              )}
+            </aside>
+          )}
+
+          {data.programPdfUrl && (
+            <p style="margin-top: 1.5rem;">
+              <a href={data.programPdfUrl} target="_blank" rel="noopener">Programm herunterladen →</a>
+            </p>
+          )}
+        </>
+      )}
+
+      <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+        <ShareButton title={title} />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

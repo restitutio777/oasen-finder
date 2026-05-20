@@ -5,8 +5,13 @@ import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 let events: any[] = [];
 if (isSanityConfigured) {
+  /* Filter: kind != forschungstreffen — diese leben unter /denkbar/
+     (Katharinas Entscheidung 19.05.: überregionale Forschungstreffen
+     gehören in die Zukunftsschmiede, nicht zu den klassischen Werkstatt-
+     Terminen). Default-Wert „werkstatt" + kein-kind-gesetzt sind beide
+     OK für machBAR. */
   events = await sanity.fetch(`
-    *[_type == "event"] | order(startDate asc) {
+    *[_type == "event" && (kind != "forschungstreffen" || !defined(kind))] | order(startDate asc) {
       _id, title, "slug": slug.current, startDate, endDate, ownership,
       season, location, dogFriendly,
       "thumb": photo { asset->{ url } }

@@ -13,8 +13,11 @@ import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 let notes: any[] = [];
 
 if (isSanityConfigured) {
+  /* Nur notiz + poesie hier — idee/vision/umfrage leben seit
+     19.05. in /denkbar/ (Katharinas Entscheidung: eigener Raum
+     für die Zukunftsschmiede). */
   notes = await sanity.fetch(`
-    *[_type == "note"] | order(publishedAt desc) {
+    *[_type == "note" && kind in ["notiz", "poesie"]] | order(publishedAt desc) {
       _id, title, kind, publishedAt, "slug": slug.current,
       tags, "hero": hero { asset->{ url, metadata { dimensions } }, alt, caption }
     }

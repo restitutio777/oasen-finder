@@ -7,8 +7,10 @@ import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity'
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
+  /* Filter: kind != forschungstreffen — Forschungstreffen werden unter
+     /denkbar/{slug} ausgespielt (Katharinas Entscheidung 19.05.). */
   const events = await sanity.fetch(`
-    *[_type == "event" && defined(slug.current)] {
+    *[_type == "event" && (kind != "forschungstreffen" || !defined(kind)) && defined(slug.current)] {
       "slug": slug.current, _id, title, startDate, endDate, ownership,
       season, location, locationCoords,
       description,

@@ -9,8 +9,11 @@ import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity'
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
 
+  /* Filter: nur notiz/poesie unter /schreibbar/{slug} — idee/vision/
+     umfrage werden unter /denkbar/{slug} ausgespielt (Katharinas
+     Entscheidung 19.05.: eigener denkBAR-Raum). */
   const notes = await sanity.fetch(`
-    *[_type == "note" && defined(slug.current)] {
+    *[_type == "note" && kind in ["notiz", "poesie"] && defined(slug.current)] {
       "slug": slug.current,
       _id, title, kind, publishedAt,
       body,

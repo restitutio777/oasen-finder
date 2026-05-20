@@ -54,6 +54,22 @@ export const event = defineType({
       group: 'inhalt',
     }),
     defineField({
+      name: 'kind',
+      title: 'Art des Termins',
+      description: 'Klassische MachBAR-Werkstatt oder überregionales Forschungstreffen (DenkBAR)?',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Werkstatt (machBAR)', value: 'werkstatt' },
+          { title: 'Forschungstreffen (DenkBAR)', value: 'forschungstreffen' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'werkstatt',
+      validation: (Rule) => Rule.required(),
+      group: 'inhalt',
+    }),
+    defineField({
       name: 'season',
       title: 'Saison',
       type: 'string',

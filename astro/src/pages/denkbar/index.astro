@@ -1,0 +1,128 @@
+---
+/**
+ * denkBAR — die Zukunftsschmiede.
+ *
+ * Katharinas Entscheidung 19.05.: eigener Raum. „Was denkbar ist,
+ * wird irgendwann machbar (Gegenwart)." Sammelt zwei Doc-Types:
+ *   - notes mit kind ∈ {idee, vision, umfrage}  → Gedankenfäden
+ *   - events mit kind = forschungstreffen      → überregionale Treffen
+ *
+ * Listings sind getrennt nach Art (oben Forschungstreffen mit Datum,
+ * unten Texte chronologisch), weil die zwei Kategorien unterschiedlich
+ * gelesen werden — Termine drängen, Notizen warten geduldig.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageBanner from '../../components/PageBanner.astro';
+import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+
+let notes: any[] = [];
+let treffen: any[] = [];
+
+if (isSanityConfigured) {
+  notes = await sanity.fetch(`
+    *[_type == "note" && kind in ["idee", "vision", "umfrage"]] | order(publishedAt desc) {
+      _id, title, kind, publishedAt, "slug": slug.current,
+      tags
+    }
+  `);
+  treffen = await sanity.fetch(`
+    *[_type == "event" && kind == "forschungstreffen"] | order(startDate desc) {
+      _id, title, startDate, endDate, location,
+      "slug": slug.current
+    }
+  `);
+}
+
+const kindLabels: Record<string, string> = {
+  idee: 'Idee',
+  vision: 'Vision',
+  umfrage: 'Umfrage',
+};
+---
+
+<BaseLayout
+  title="denkBAR — werkSTATT Gemeinschaft"
+  description="Zukunftsschmiede: Ideen, Visionen, Forschungstreffen — was denkbar ist, wird irgendwann machbar."
+>
+  <PageBanner
+    photo="photo-1456513080510-7bf3a84b82f8"
+    alt="Aufgeschlagenes Notizbuch mit handschriftlichen Skizzen — Denken, das noch Form sucht"
+    position="center 40%"
+  />
+  <section style="padding: 4rem 0;">
+    <div class="container">
+      <span class="eyebrow">Zukunftsschmiede</span>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin: 1rem 0;">
+        denk<em>BAR</em>
+      </h1>
+      <p style="font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.4rem); font-style: italic; color: var(--text-secondary); margin-bottom: 1rem;">
+        Ideen, Visionen, Forschungstreffen
+      </p>
+      <p style="max-width: 640px; color: var(--text-body); margin-bottom: 2rem;">
+        Was denkbar ist, wird irgendwann machbar. Hier sammeln sich Gedankenfäden
+        — und die Termine, an denen wir sie gemeinsam weiterdenken.
+      </p>
+
+      {treffen.length === 0 && notes.length === 0 && (
+        <p style="color: var(--text-secondary);">Bald geht es los — sobald die ersten Gedanken und Termine in Sanity stehen.</p>
+      )}
+
+      {treffen.length > 0 && (
+        <section style="margin-top: 3rem;">
+          <h2 class="eyebrow">Forschungstreffen</h2>
+          <ul style="list-style: none; padding: 0; margin-top: 1rem; display: grid; gap: 1rem;">
+            {treffen.map((t: any, idx: number) => (
+              <li class={idx >= 8 ? 'is-hidden' : ''}>
+                <a href={`/denkbar/${t.slug}/`} style="display: block; padding: 1.25rem 1.5rem; background: var(--bg-elevated); border-radius: 6px; text-decoration: none; color: inherit;">
+                  <p class="eyebrow" style="color: var(--accent);">
+                    {new Date(t.startDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}
+                    {t.location && ` · ${t.location}`}
+                  </p>
+                  <h3 style="font-family: var(--font-display); margin: 0.5rem 0 0;">{localized(t.title)}</h3>
+                </a>
+              </li>
+            ))}
+          </ul>
+          {treffen.length > 8 && (
+            <div class="load-more-wrap">
+              <button class="load-more" type="button">Weitere anzeigen ({treffen.length - 8})</button>
+            </div>
+          )}
+        </section>
+      )}
+
+      {notes.length > 0 && (
+        <section style="margin-top: 3rem;">
+          <h2 class="eyebrow">Gedankenfäden</h2>
+          <ol class="chronicle__list" style="margin-top: 1rem;">
+            {notes.map((note: any, idx: number) => (
+              <li class={`entry${idx >= 8 ? ' is-hidden' : ''}`}>
+                <span class="entry__bead" aria-hidden="true"></span>
+                <div class="entry__date">
+                  <span class="entry__day">{new Date(note.publishedAt).getDate()}</span>
+                  <span class="entry__month">
+                    {new Date(note.publishedAt).toLocaleDateString('de-DE', { month: 'long' })}
+                  </span>
+                  <span class="entry__year">{new Date(note.publishedAt).getFullYear()}</span>
+                </div>
+                <div class="entry__body">
+                  <span class="entry__tag" data-tag={note.kind}>
+                    {kindLabels[note.kind] || note.kind}
+                  </span>
+                  <h3 class="entry__title">
+                    <a href={`/denkbar/${note.slug}/`}>{localized(note.title)}</a>
+                  </h3>
+                </div>
+              </li>
+            ))}
+          </ol>
+          {notes.length > 8 && (
+            <div class="load-more-wrap">
+              <button class="load-more" type="button">Weitere anzeigen ({notes.length - 8})</button>
+            </div>
+          )}
+        </section>
+      )}
+    </div>
+  </section>
+</BaseLayout>
