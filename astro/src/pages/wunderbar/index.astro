@@ -53,8 +53,8 @@ if (isSanityConfigured) {
 
       {entries.length > 0 && (
         <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-          {entries.map((entry: any) => (
-            <li>
+          {entries.map((entry: any, idx: number) => (
+            <li class={idx >= 8 ? 'is-hidden' : ''}>
               <a
                 href={`/wunderbar/${entry.slug}/`}
                 style="display: block; padding: 1.5rem 1.5rem 1.75rem; border: 1px solid var(--border-subtle); border-radius: 4px; background: var(--bg-warm); text-decoration: none; color: var(--text-primary); transition: transform 0.15s ease, border-color 0.15s ease;"
@@ -78,6 +78,12 @@ if (isSanityConfigured) {
             </li>
           ))}
         </ul>
+      )}
+
+      {entries.length > 8 && (
+        <div class="load-more-wrap">
+          <button class="load-more" type="button">Weitere anzeigen ({entries.length - 8})</button>
+        </div>
       )}
     </div>
   </section>

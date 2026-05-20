@@ -104,5 +104,22 @@ const ogLocale = locale === 'de' ? 'de_DE' : locale === 'fr' ? 'fr_FR' : 'en_US'
       import { inject } from '@vercel/analytics';
       inject();
     </script>
+
+    {/* Listing-Limit (Stufe 1 aus Katharinas Wachstums-Plan, 19.05.):
+        Jede Raum-Liste zeigt initial nur die ersten N Einträge (per
+        .is-hidden auf späteren Items). Ein „Weitere anzeigen"-Button
+        blendet beim Klick alle weiteren Items ein. Reine Progressive-
+        Enhancement-Lösung — ohne JS sind eh alle Items im HTML, der
+        Button macht sie nur sichtbar. */}
+    <script is:inline>
+      document.addEventListener('click', (e) => {
+        const btn = e.target instanceof Element ? e.target.closest('.load-more') : null;
+        if (!btn) return;
+        const wrap = btn.closest('.load-more-wrap');
+        if (!wrap || !wrap.parentElement) return;
+        wrap.parentElement.querySelectorAll('.is-hidden').forEach((el) => el.classList.remove('is-hidden'));
+        wrap.remove();
+      });
+    </script>
   </body>
 </html>

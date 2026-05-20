@@ -156,6 +156,33 @@
 
   .container { width: 100%; max-width: var(--max-w); margin: 0 auto; padding-inline: var(--gutter); }
 
+  /* Listing-Pagination (Stufe 1 von Katharinas Wachstums-Plan, 19.05.):
+     .is-hidden versteckt Items in der Listing-Liste bis der „Weitere
+     anzeigen"-Button geklickt wird. JS dazu im BaseLayout. */
+  .is-hidden { display: none !important; }
+  .load-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin: clamp(28px, 4vw, 48px) 0 clamp(16px, 2vw, 24px);
+  }
+  .load-more {
+    font-family: var(--font-text);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--accent-hover);
+    background: transparent;
+    border: 1.5px solid var(--accent);
+    border-radius: 4px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  }
+  .load-more:hover {
+    background: var(--accent);
+    color: var(--text-inverse);
+  }
+
   /* ---------- Header ---------- */
   .site-header {
     position: sticky;

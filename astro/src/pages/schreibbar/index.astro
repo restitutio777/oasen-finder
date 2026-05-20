@@ -57,8 +57,8 @@ if (isSanityConfigured) {
 
       {notes.length > 0 && (
         <ol class="chronicle__list">
-          {notes.map((note) => (
-            <li class="entry">
+          {notes.map((note, idx) => (
+            <li class={`entry${idx >= 8 ? ' is-hidden' : ''}`}>
               <span class="entry__bead" aria-hidden="true"></span>
               <div class="entry__date">
                 <span class="entry__day">{new Date(note.publishedAt).getDate()}</span>
@@ -82,6 +82,12 @@ if (isSanityConfigured) {
             </li>
           ))}
         </ol>
+      )}
+
+      {notes.length > 8 && (
+        <div class="load-more-wrap">
+          <button class="load-more" type="button">Weitere anzeigen ({notes.length - 8})</button>
+        </div>
       )}
     </div>
   </section>

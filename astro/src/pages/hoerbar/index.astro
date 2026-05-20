@@ -42,8 +42,8 @@ if (isSanityConfigured) {
       )}
 
       <ul style="list-style: none; padding: 0; display: grid; gap: 1.5rem; margin-top: 2rem;">
-        {episodes.map((ep) => (
-          <li>
+        {episodes.map((ep, idx) => (
+          <li class={idx >= 8 ? 'is-hidden' : ''}>
             <a href={`/hoerbar/${ep.slug}/`} style="display: block; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; text-decoration: none; color: inherit;">
               <p class="eyebrow">
                 {ep.episodeNumber && `#${ep.episodeNumber} · `}
@@ -54,6 +54,12 @@ if (isSanityConfigured) {
           </li>
         ))}
       </ul>
+
+      {episodes.length > 8 && (
+        <div class="load-more-wrap">
+          <button class="load-more" type="button">Weitere anzeigen ({episodes.length - 8})</button>
+        </div>
+      )}
     </div>
   </section>
 </BaseLayout>
