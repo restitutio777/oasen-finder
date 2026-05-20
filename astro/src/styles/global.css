@@ -770,6 +770,107 @@
     box-shadow: none;
   }
 
+  /* ============================================================
+     Landing-Hero · Variante E (Katharinas Favorit, 20.05.)
+     Panorama-Foto (Wandergruppe Kreta) oben über die ganze Breite,
+     darunter Cream-Block mit Headline + Subtitle + Buttons. Bild
+     erzählt „gemeinsam unterwegs", Text bleibt auf Cream lesbar
+     ohne Overlay-Tricks. Desktop: Bild 21:9, Mobile: Bild 4:3.
+     ============================================================ */
+  .hero--landing-e {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--bg-base);
+    overflow: hidden;
+    isolation: auto;
+    padding: 0;
+    min-height: auto;
+  }
+  .hero--landing-e::before,
+  .hero--landing-e::after { display: none; content: none; }
+  .hero-le__image {
+    background-image: url('/hero/bewegbar.jpg');
+    background-size: cover;
+    background-position: center 55%;
+    background-repeat: no-repeat;
+    aspect-ratio: 4 / 3;
+    filter: saturate(0.95);
+  }
+  @media (min-width: 900px) {
+    .hero-le__image {
+      aspect-ratio: 21 / 9;
+    }
+  }
+  .hero-le__panel {
+    background: var(--bg-base);
+  }
+  .hero-le__inner {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 2.4vw, 30px);
+    /* padding-block (statt shorthand) → das padding-inline aus
+       .container (--gutter) bleibt erhalten, sonst klebt der Text
+       auf Mobile am linken Rand. */
+    padding-block: clamp(48px, 7vw, 88px);
+    max-width: 920px;
+  }
+  .hero-le__eyebrow {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.4;
+    color: var(--text-body);
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+  .hero-le__eyebrow-werk {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .hero-le__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 7vw, 5.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.018em;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 0;
+  }
+  .hero-le__title em {
+    font-style: italic;
+    color: var(--accent-blue);
+    font-weight: 500;
+  }
+  .hero-le__subtitle {
+    font-family: var(--font-text);
+    font-size: clamp(13px, 1.1vw, 15px);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-body);
+    margin: 0;
+  }
+  .hero-le__cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: clamp(8px, 1vw, 16px);
+  }
+  .hero--landing-e .btn--primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 6px 18px -6px rgba(200, 154, 120, 0.45);
+  }
+  .hero--landing-e .btn--primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+  .hero--landing-e .btn--ghost.btn--fresh {
+    background: transparent;
+    border-width: 1.5px;
+    box-shadow: none;
+  }
+
   /* Mood-Banner als Stimmungs-Streifen oben auf jeder Hauptseite.
      Aspect-Ratio 3:1 (= 12/4) ist die einheitliche Höhe für alle
      Räume — etwas höher als die alten 4:1-Banner (mehr vom Motiv
