@@ -1,18 +1,27 @@
 ---
+/**
+ * brauchBAR-Detail — Konzepte und Werkzeuge.
+ *
+ * Schwester-Route zu /lesbar/[slug]: beide Pages teilen das Sanity-
+ * Schema `resource`, getrennt nur durch den kind-Filter. Konzepte
+ * und Werkzeuge leben unter brauchBAR (eigener Raum, eigene URL),
+ * Bücher/Artikel/Filme/Podcasts/Gespräche unter lesBAR.
+ *
+ * Render-Logik bewusst identisch zu lesbar/[slug].astro gehalten —
+ * gleiche Felder, gleiches Layout, nur Raum-Label und Zurück-Link
+ * abweichend. Wenn das Layout dort iteriert wird, sollte hier
+ * nachgezogen werden.
+ */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import MediaLink from '../../components/MediaLink.astro';
 import ShareButton from '../../components/ShareButton.astro';
-import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
-  /* Filter: kind nicht in konzept/werkzeug — diese leben unter
-     /brauchbar/[slug]. Sonst entstünden zwei URLs pro Doc, die
-     gleichen Inhalt zeigen (URL-Sprung-Problem aus der Karten-
-     Analyse — Kath stimmte 19.05. der Trennung zu). */
   const resources = await sanity.fetch(`
-    *[_type == "resource" && !(kind in ["konzept", "werkzeug"]) && defined(slug.current)] {
+    *[_type == "resource" && kind in ["konzept", "werkzeug"] && defined(slug.current)] {
       "slug": slug.current, _id, title, kind, authorOrSource,
       note,
       link,
@@ -26,35 +35,28 @@ export async function getStaticPaths() {
 const { resource } = Astro.props;
 
 const kindLabels: Record<string, string> = {
-  buch: 'Buch',
-  webseite: 'Webseite',
-  aufsatz: 'Aufsatz',
-  film: 'Film',
-  podcast: 'Podcast',
-  gespraech: 'Gespräch',
-  konzept: 'Konzept · brauchBAR',
-  werkzeug: 'Werkzeug · brauchBAR',
+  konzept: 'Konzept',
+  werkzeug: 'Werkzeug',
 };
 
 const resourceTitle = localized(resource.title) || 'Eintrag';
 const fallbackOgPhoto =
-  'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=630&fit=crop&q=85';
-// Sanity-CDN-URLs unterstützen URL-Parameter für OG-Crop direkt.
+  'https://images.unsplash.com/photo-1590880795696-20c7dfadacde?w=1200&h=630&fit=crop&q=85';
 const ogImage = resource.coverUrl
   ? `${resource.coverUrl}?w=1200&h=630&fit=crop&auto=format&q=85`
   : fallbackOgPhoto;
 ---
 
 <BaseLayout
-  title={`${resourceTitle} — lesBAR`}
-  description={`${kindLabels[resource.kind] || 'Quelle'}${resource.authorOrSource ? ` — ${resource.authorOrSource}` : ''}`}
+  title={`${resourceTitle} — brauchBAR`}
+  description={`${kindLabels[resource.kind] || 'Werkzeug'}${resource.authorOrSource ? ` — ${resource.authorOrSource}` : ''}`}
   image={ogImage}
   ogType="article"
 >
   <article style="padding: 4rem 0;">
     <div class="container" style="max-width: 720px;">
-      <a href="/lesbar/" style="color: var(--accent); font-size: 14px;">← Zurück zur Bibliothek</a>
-      <span class="eyebrow" style="display: inline-block; margin-top: 1.5rem;">lesBAR · {kindLabels[resource.kind] || resource.kind}</span>
+      <a href="/brauchbar/" style="color: var(--accent); font-size: 14px;">← Zurück zur brauchBAR</a>
+      <span class="eyebrow" style="display: inline-block; margin-top: 1.5rem;">brauchBAR · {kindLabels[resource.kind] || resource.kind}</span>
       <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); margin: 0.5rem 0 0.5rem;">
         {localized(resource.title)}
       </h1>
@@ -68,8 +70,6 @@ const ogImage = resource.coverUrl
 
       <PortableText value={resource.note} />
 
-      {/* Quellen-Link: YouTube/Spotify werden direkt eingebettet,
-          Telegram bekommt eine Card, alles andere klassischer Link. */}
       {resource.link && <MediaLink url={resource.link} label="Zur Quelle" />}
 
       {resource.pdfUrl && (

@@ -10,9 +10,9 @@ import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
  * Filme, Podcasts), brauchBAR zeigt Konzepte und Werkzeuge —
  * dieselbe Sanity-Resource-Schema, andere kind-Filterung.
  *
- * Detail-Seiten teilen wir mit lesBAR (alle Resources sind unter
- * /lesbar/[slug]/ erreichbar), damit es keine duplikaten Routen
- * und doppelten Slugs gibt.
+ * Eigene Detail-Pages unter /brauchbar/[slug]/ (Kath · 19.05.: URL
+ * soll zum Eingangs-Raum passen). lesBAR/[slug] filtert konzept/
+ * werkzeug raus, jeder Doc hat genau eine kanonische URL.
  */
 
 let resources: any[] = [];
@@ -68,7 +68,7 @@ const kindLabels: Record<string, string> = {
           <ul style="list-style: none; padding: 0; margin-top: 1rem; display: grid; gap: 1rem;">
             {items.map((r) => (
               <li>
-                <a href={`/lesbar/${r.slug}/`} style="display: block; padding: 1rem 1.5rem; background: var(--bg-elevated); border-radius: 6px; text-decoration: none; color: inherit;">
+                <a href={`/brauchbar/${r.slug}/`} style="display: block; padding: 1rem 1.5rem; background: var(--bg-elevated); border-radius: 6px; text-decoration: none; color: inherit;">
                   <h3 style="font-family: var(--font-display); margin: 0;">{localized(r.title)}</h3>
                   {r.authorOrSource && (
                     <p style="font-size: 14px; color: var(--text-muted); margin-top: 0.25rem;">{r.authorOrSource}</p>
