@@ -806,11 +806,11 @@
       aspect-ratio: auto;
       width: 100%;
       height: clamp(300px, 42vh, 480px);
-      /* Focal Point tiefer als Mobile — bei dem flachen Desktop-Crop
-         (21:9 statt 4:3) würden bei center 55 % nur Felsen/Himmel
-         sichtbar bleiben. Mit 78 % sitzt die Wandergruppe in der
-         unteren Bildhälfte mittig im sichtbaren Streifen. */
-      background-position: center 78%;
+      /* Focal Point Desktop: Gruppe soll im oberen Drittel des
+         Banner-Streifens sitzen. Höheres pos-y zeigt mehr Boden/
+         Pfad unter den Wanderern → die Gruppe rutscht visuell nach
+         oben im sichtbaren Bereich. */
+      background-position: center 90%;
     }
   }
   .hero-le__panel {
