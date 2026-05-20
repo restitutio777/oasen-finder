@@ -1448,9 +1448,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
     /* Auf Mobile: Hintergrund-Hauch-Logik macht keinen Sinn (schmaler
        Viewport, kein Platz für Text-Insel). Stattdessen Stack-Layout —
-       Bild als full-width Banner oben (4/3), Text drunter auf Cream.
+       Bild als full-width Banner oben (5/4), Text drunter auf Cream.
        Das Atelier ist klar im oberen Bereich sichtbar, wo das Auge
-       zuerst landet. */
+       zuerst landet.
+       aspect-ratio 5/4 statt 4/3 + background-size 112 % → das Bild
+       wird etwas reingezoomt, die Mitte (Helga + Sabine modellieren
+       Ton) tritt prominent in den Vordergrund, Bildränder werden
+       leicht angeschnitten. */
     @media (max-width: 899px) {
       .hero--i {
         padding: 0;
@@ -1459,9 +1463,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       .hero-i__image {
         position: relative;
         inset: auto;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 5 / 4;
         width: 100%;
         flex-shrink: 0;
+        background-size: 112%;
+        background-position: center 52%;
         mask-image: none;
         -webkit-mask-image: none;
       }
