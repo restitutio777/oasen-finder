@@ -798,7 +798,14 @@
   }
   @media (min-width: 900px) {
     .hero-le__image {
-      aspect-ratio: 21 / 9;
+      /* Desktop: full-width, Höhe als clamp begrenzt. aspect-ratio +
+         max-height kollidieren — der Browser schrumpft dann die Width
+         um beide einzuhalten. Daher kein aspect-ratio hier, sondern
+         direkt height. So bleibt das Bild voll-bleed und Headline +
+         Buttons sind im 900-vh-Viewport ohne Scrollen sichtbar. */
+      aspect-ratio: auto;
+      width: 100%;
+      height: clamp(300px, 42vh, 480px);
     }
   }
   .hero-le__panel {
@@ -807,11 +814,12 @@
   .hero-le__inner {
     display: flex;
     flex-direction: column;
-    gap: clamp(20px, 2.4vw, 30px);
+    gap: clamp(18px, 2vw, 26px);
     /* padding-block (statt shorthand) → das padding-inline aus
        .container (--gutter) bleibt erhalten, sonst klebt der Text
-       auf Mobile am linken Rand. */
-    padding-block: clamp(48px, 7vw, 88px);
+       auf Mobile am linken Rand. Tighter auf Desktop, damit Hero
+       + Headline + Buttons in den Viewport passen. */
+    padding-block: clamp(36px, 5vw, 60px);
     max-width: 920px;
   }
   .hero-le__eyebrow {
