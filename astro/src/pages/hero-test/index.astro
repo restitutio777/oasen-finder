@@ -1196,7 +1196,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
     .hero-g__title {
       font-family: var(--font-display);
-      font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+      /* Min 2.15rem statt 2.4 — auf Mobile war „wie wird Gemeinschaft?"
+         zu breit für die Spalte und brach in drei Zeilen statt zwei. */
+      font-size: clamp(2.15rem, 5.6vw, 4.4rem);
       line-height: 1.05;
       letter-spacing: -0.018em;
       font-weight: 400;
