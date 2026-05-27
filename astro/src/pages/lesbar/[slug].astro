@@ -63,7 +63,7 @@ const ogImage = resource.coverUrl
       )}
 
       {resource.coverUrl && (
-        <img src={resource.coverUrl} alt="" style="max-width: 300px; margin: 1rem 0 2rem; border-radius: 4px;" />
+        <img src={resource.coverUrl} alt="" style="max-width: 300px; margin: 1rem 0 2rem; border-radius: 4px;" loading="lazy" decoding="async" />
       )}
 
       <PortableText value={resource.note} />

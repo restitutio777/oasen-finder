@@ -354,6 +354,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       text-wrap: pretty;
       hyphens: manual;
     }
+    .hero--b, .hero--c, .hero--c2, .hero--d {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 100vh;
+    }
 
     /* ============================================================
        VARIANT A — Editorial · Headline + Foto-Karte
@@ -684,11 +688,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         inset 0 1px 0 rgba(255, 255, 255, 0.20);
     }
     .hero--c .btn--ghost.btn--fresh {
-      background: rgba(251, 246, 243, 0.18);
+      background: rgba(251, 246, 243, 0.25);
       color: #fff;
       border-color: rgba(251, 246, 243, 0.6);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
     }
     .hero--c .btn--ghost.btn--fresh:hover {
       background: rgba(251, 246, 243, 0.92);
@@ -804,11 +806,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         inset 0 1px 0 rgba(255, 255, 255, 0.20);
     }
     .hero--c2 .btn--ghost.btn--fresh {
-      background: rgba(251, 246, 243, 0.18);
+      background: rgba(251, 246, 243, 0.25);
       color: #fff;
       border-color: rgba(251, 246, 243, 0.6);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
     }
     .hero--c2 .btn--ghost.btn--fresh:hover {
       background: rgba(251, 246, 243, 0.92);

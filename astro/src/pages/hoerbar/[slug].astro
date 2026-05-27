@@ -51,7 +51,7 @@ const ogImage = episode.coverUrl
       </p>
 
       {episode.coverUrl && (
-        <img src={episode.coverUrl} alt="" style="max-width: 400px; margin: 2rem 0; border-radius: 6px;" />
+        <img src={episode.coverUrl} alt="" style="max-width: 400px; margin: 2rem 0; border-radius: 6px;" loading="lazy" decoding="async" />
       )}
 
       {/* Audio-Player-Priorität:
