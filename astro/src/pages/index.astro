@@ -46,36 +46,40 @@ if (isSanityConfigured) {
 
 const mantra: string | undefined = localized(about?.mantra);
 
-// Sanity-Typ (+ kind) → Raum-Metadaten: Label, Art-Bezeichnung, Akzent-
-// farbe und URL-Basis. Spiegelt die Routing-Logik der Detail-Seiten:
+// Sanity-Typ (+ kind) → Raum-Metadaten: Label, Akzentfarbe und URL-Basis.
+// Spiegelt die Routing-Logik der Detail-Seiten:
 //   note  notiz/poesie        → /schreibbar/   · idee/vision/umfrage → /denkbar/
 //   event werkstatt           → /machbar/      · forschungstreffen   → /denkbar/
 //   resource buch/film/…      → /lesbar/       · konzept/werkzeug    → /brauchbar/
 //   station / episode / wonder→ /bewegbar/ · /hoerbar/ · /wunderbar/
-type RoomMeta = { base: string; label: string; kindLabel: string; accent: string };
+// Farben folgen den Raum-Akzenten von Header und Räume-Übersicht. lesBAR
+// nutzt hier --text-secondary (statt des sehr hellen --neutral), damit das
+// kleine kursive Label lesbar bleibt, ohne die ruhige Bibliotheks-Identität
+// zu verlassen.
+type RoomMeta = { base: string; label: string; accent: string };
 function roomFor(item: any): RoomMeta {
   const k: string = item.kind;
   switch (item._type) {
     case 'note':
       return ['idee', 'vision', 'umfrage'].includes(k)
-        ? { base: 'denkbar', label: 'denkBAR', kindLabel: ({ idee: 'Idee', vision: 'Vision', umfrage: 'Umfrage' } as Record<string, string>)[k] || 'Gedanke', accent: 'var(--accent-hover)' }
-        : { base: 'schreibbar', label: 'schreibBAR', kindLabel: k === 'poesie' ? 'Poesie' : 'Notiz', accent: 'var(--accent-deep)' };
+        ? { base: 'denkbar', label: 'denkBAR', accent: 'var(--accent-hover)' }
+        : { base: 'schreibbar', label: 'schreibBAR', accent: 'var(--accent-deep)' };
     case 'event':
       return k === 'forschungstreffen'
-        ? { base: 'denkbar', label: 'denkBAR', kindLabel: 'Forschungstreffen', accent: 'var(--accent-hover)' }
-        : { base: 'machbar', label: 'machBAR', kindLabel: 'Werkstatt-Termin', accent: 'var(--accent)' };
+        ? { base: 'denkbar', label: 'denkBAR', accent: 'var(--accent-hover)' }
+        : { base: 'machbar', label: 'machBAR', accent: 'var(--accent)' };
     case 'resource':
       return ['konzept', 'werkzeug'].includes(k)
-        ? { base: 'brauchbar', label: 'brauchBAR', kindLabel: k === 'werkzeug' ? 'Werkzeug' : 'Konzept', accent: 'var(--text-primary)' }
-        : { base: 'lesbar', label: 'lesBAR', kindLabel: ({ buch: 'Buch', webseite: 'Webseite', aufsatz: 'Aufsatz', film: 'Film', podcast: 'Podcast', gespraech: 'Gespräch' } as Record<string, string>)[k] || 'Quelle', accent: 'var(--neutral)' };
+        ? { base: 'brauchbar', label: 'brauchBAR', accent: 'var(--text-primary)' }
+        : { base: 'lesbar', label: 'lesBAR', accent: 'var(--text-secondary)' };
     case 'station':
-      return { base: 'bewegbar', label: 'bewegBAR', kindLabel: 'Station', accent: 'var(--accent-blue)' };
+      return { base: 'bewegbar', label: 'bewegBAR', accent: 'var(--accent-blue)' };
     case 'episode':
-      return { base: 'hoerbar', label: 'hörBAR', kindLabel: 'Episode', accent: 'var(--accent-mauve)' };
+      return { base: 'hoerbar', label: 'hörBAR', accent: 'var(--accent-mauve)' };
     case 'wonder':
-      return { base: 'wunderbar', label: 'wunderBAR', kindLabel: 'Kreatives', accent: 'var(--accent-green)' };
+      return { base: 'wunderbar', label: 'wunderBAR', accent: 'var(--accent-green)' };
     default:
-      return { base: '', label: '', kindLabel: '', accent: 'var(--accent)' };
+      return { base: '', label: '', accent: 'var(--accent)' };
   }
 }
 
