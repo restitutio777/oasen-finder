@@ -12,6 +12,7 @@ import { sanity, localized, isSanityConfigured } from '../lib/sanity';
 
 let upcomingEvents: any[] = [];
 let about: any = null;
+let latest: any[] = [];
 
 if (isSanityConfigured) {
   // Nächste Werkstatt-Termine — zeigen sich im Hero („Nächste Begegnung")
@@ -23,9 +24,76 @@ if (isSanityConfigured) {
   `);
   // Mantra/Leitfrage aus dem About-Singleton — Pull-Quote unter dem Fold
   about = await sanity.fetch(`*[_type == "about" && _id == "about"][0]{ mantra }`);
+
+  // „Zuletzt veröffentlicht" — eine schlichte Liste der jüngsten Beiträge
+  // quer durch alle Räume. Abkürzung für Besucher: zeigt auf einen Blick,
+  // wo zuletzt etwas dazukam, mit Direktlink — ohne jeden Raum einzeln zu
+  // öffnen. Bewusst nur drei Einträge und reine Textzeilen, damit es nicht
+  // mit der Raum-Übersicht („Wohin als nächstes?") konkurriert. Sortiert
+  // nach _updatedAt (Sanitys Zeitpunkt der letzten Veröffentlichung);
+  // defined(slug.current) sichert, dass nur verlinkbare Einträge erscheinen.
+  latest = await sanity.fetch(`
+    *[
+      _type in ["note", "station", "event", "resource", "episode", "wonder"]
+      && defined(slug.current)
+    ] | order(_updatedAt desc) [0...3] {
+      _type, _id, _updatedAt, kind,
+      "slug": slug.current,
+      title, name
+    }
+  `);
 }
 
 const mantra: string | undefined = localized(about?.mantra);
+
+// Sanity-Typ (+ kind) → Raum-Metadaten: Label, Art-Bezeichnung, Akzent-
+// farbe und URL-Basis. Spiegelt die Routing-Logik der Detail-Seiten:
+//   note  notiz/poesie        → /schreibbar/   · idee/vision/umfrage → /denkbar/
+//   event werkstatt           → /machbar/      · forschungstreffen   → /denkbar/
+//   resource buch/film/…      → /lesbar/       · konzept/werkzeug    → /brauchbar/
+//   station / episode / wonder→ /bewegbar/ · /hoerbar/ · /wunderbar/
+type RoomMeta = { base: string; label: string; kindLabel: string; accent: string };
+function roomFor(item: any): RoomMeta {
+  const k: string = item.kind;
+  switch (item._type) {
+    case 'note':
+      return ['idee', 'vision', 'umfrage'].includes(k)
+        ? { base: 'denkbar', label: 'denkBAR', kindLabel: ({ idee: 'Idee', vision: 'Vision', umfrage: 'Umfrage' } as Record<string, string>)[k] || 'Gedanke', accent: 'var(--accent-hover)' }
+        : { base: 'schreibbar', label: 'schreibBAR', kindLabel: k === 'poesie' ? 'Poesie' : 'Notiz', accent: 'var(--accent-deep)' };
+    case 'event':
+      return k === 'forschungstreffen'
+        ? { base: 'denkbar', label: 'denkBAR', kindLabel: 'Forschungstreffen', accent: 'var(--accent-hover)' }
+        : { base: 'machbar', label: 'machBAR', kindLabel: 'Werkstatt-Termin', accent: 'var(--accent)' };
+    case 'resource':
+      return ['konzept', 'werkzeug'].includes(k)
+        ? { base: 'brauchbar', label: 'brauchBAR', kindLabel: k === 'werkzeug' ? 'Werkzeug' : 'Konzept', accent: 'var(--text-primary)' }
+        : { base: 'lesbar', label: 'lesBAR', kindLabel: ({ buch: 'Buch', webseite: 'Webseite', aufsatz: 'Aufsatz', film: 'Film', podcast: 'Podcast', gespraech: 'Gespräch' } as Record<string, string>)[k] || 'Quelle', accent: 'var(--neutral)' };
+    case 'station':
+      return { base: 'bewegbar', label: 'bewegBAR', kindLabel: 'Station', accent: 'var(--accent-blue)' };
+    case 'episode':
+      return { base: 'hoerbar', label: 'hörBAR', kindLabel: 'Episode', accent: 'var(--accent-mauve)' };
+    case 'wonder':
+      return { base: 'wunderbar', label: 'wunderBAR', kindLabel: 'Kreatives', accent: 'var(--accent-green)' };
+    default:
+      return { base: '', label: '', kindLabel: '', accent: 'var(--accent)' };
+  }
+}
+
+const latestDateFmt = new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const latestItems = latest
+  .map((item: any) => {
+    const room = roomFor(item);
+    const title = item._type === 'station' ? item.name : localized(item.title);
+    return {
+      title: title || '(ohne Titel)',
+      href: `/${room.base}/${item.slug}/`,
+      room,
+      updatedAt: item._updatedAt as string,
+      dateLabel: item._updatedAt ? latestDateFmt.format(new Date(item._updatedAt)) : '',
+    };
+  })
+  .filter((i) => i.room.base);
 ---
 
 <BaseLayout
@@ -90,6 +158,122 @@ const mantra: string | undefined = localized(about?.mantra);
       )}
     </div>
   </section>
+
+  {/* Zuletzt veröffentlicht — schlichte Textliste der drei jüngsten
+      Beiträge quer durch alle Räume. Bewusst kein Kachel-Grid (sonst
+      Doppelung mit „Wohin als nächstes?" direkt darunter): nur Titel,
+      Raum und Datum als ruhige Zeilen, jede ein Direktlink. Rendert
+      nur, wenn es verlinkbare Einträge gibt. */}
+  {latestItems.length > 0 && (
+    <section class="freshly" aria-labelledby="freshly-title">
+      <div class="container freshly__inner">
+        <h2 id="freshly-title" class="eyebrow freshly__label">Zuletzt veröffentlicht</h2>
+        <ul class="freshly__list">
+          {latestItems.map((item) => (
+            <li class="freshly__item">
+              <a class="freshly__link" href={item.href}>
+                <span class="freshly__entry-title">{item.title}</span>
+                <span class="freshly__meta">
+                  <span class="freshly__room" style={`color: ${item.room.accent};`}>{item.room.label}</span>
+                  {item.dateLabel && (
+                    <>
+                      <span class="freshly__dot" aria-hidden="true">·</span>
+                      <time class="freshly__time" datetime={item.updatedAt}>{item.dateLabel}</time>
+                    </>
+                  )}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+  <style>
+    .freshly {
+      padding: 4rem 0 1rem;
+      background: var(--bg-base);
+    }
+    .freshly__inner {
+      max-width: 640px;
+    }
+    .freshly__label {
+      display: block;
+      margin: 0 0 1.25rem;
+    }
+    .freshly__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .freshly__item + .freshly__item {
+      border-top: 1px solid var(--border-subtle);
+    }
+    /* Ruhige Textzeile statt Kachel: Titel links, Raum + Datum als
+       kleine gedämpfte Meta rechts. Auf Hover färbt sich der Titel in
+       die Raum-Akzentfarbe (keine Box, kein Pfeil, kein Schatten). */
+    .freshly__link {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.25rem;
+      padding: 0.9rem 0;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    .freshly__entry-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      line-height: 1.3;
+      transition: color 0.15s ease;
+    }
+    .freshly__link:hover .freshly__entry-title {
+      color: var(--accent-hover);
+    }
+    .freshly__meta {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      font-size: 13px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .freshly__room {
+      font-style: italic;
+    }
+    .freshly__dot {
+      opacity: 0.6;
+    }
+  </style>
+  <script>
+    // Build-Zeit-Datum durch eine relative Angabe ersetzen, die zum
+    // tatsächlichen Besuchszeitpunkt passt. Die Site ist statisch —
+    // ohne dieses Skript würde „heute" am Deploy-Tag einfrieren. Fällt
+    // ohne JS sauber auf das absolute Datum zurück.
+    function relativeDe(iso: string): string | null {
+      const then = new Date(iso).getTime();
+      if (Number.isNaN(then)) return null;
+      const days = Math.floor((Date.now() - then) / 86400000);
+      if (days <= 0) return 'heute';
+      if (days === 1) return 'gestern';
+      if (days < 7) return `vor ${days} Tagen`;
+      if (days < 14) return 'vor einer Woche';
+      if (days < 31) return `vor ${Math.floor(days / 7)} Wochen`;
+      if (days < 60) return 'vor einem Monat';
+      if (days < 365) return `vor ${Math.floor(days / 30)} Monaten`;
+      const years = Math.floor(days / 365);
+      return years === 1 ? 'vor einem Jahr' : `vor ${years} Jahren`;
+    }
+    document.querySelectorAll<HTMLTimeElement>('.freshly__time').forEach((el) => {
+      const iso = el.getAttribute('datetime');
+      const label = iso ? relativeDe(iso) : null;
+      if (label) {
+        el.title = el.textContent || '';
+        el.textContent = label;
+      }
+    });
+  </script>
 
   {/* „Der rote Faden" mit Notizen-Vorschau wurde von der Landing
       entfernt — Mantra + Räume-Übersicht tragen den Einstieg jetzt
