@@ -25,17 +25,18 @@ if (isSanityConfigured) {
   // Mantra/Leitfrage aus dem About-Singleton — Pull-Quote unter dem Fold
   about = await sanity.fetch(`*[_type == "about" && _id == "about"][0]{ mantra }`);
 
-  // „Frisch veröffentlicht" — quer durch alle Räume. Eine Abkürzung für
-  // Besucher: statt jeden Raum einzeln zu öffnen, zeigt dieser Streifen
-  // die jüngsten Einträge mit Direktlink. Sortiert nach _updatedAt —
-  // Sanitys Zeitpunkt der letzten Veröffentlichung, sodass jeder neue
-  // Publish hier oben auftaucht. defined(slug.current) sichert, dass nur
-  // verlinkbare Einträge erscheinen (jeder Slug hat eine Detail-Seite).
+  // „Zuletzt veröffentlicht" — eine schlichte Liste der jüngsten Beiträge
+  // quer durch alle Räume. Abkürzung für Besucher: zeigt auf einen Blick,
+  // wo zuletzt etwas dazukam, mit Direktlink — ohne jeden Raum einzeln zu
+  // öffnen. Bewusst nur drei Einträge und reine Textzeilen, damit es nicht
+  // mit der Raum-Übersicht („Wohin als nächstes?") konkurriert. Sortiert
+  // nach _updatedAt (Sanitys Zeitpunkt der letzten Veröffentlichung);
+  // defined(slug.current) sichert, dass nur verlinkbare Einträge erscheinen.
   latest = await sanity.fetch(`
     *[
       _type in ["note", "station", "event", "resource", "episode", "wonder"]
       && defined(slug.current)
-    ] | order(_updatedAt desc) [0...5] {
+    ] | order(_updatedAt desc) [0...3] {
       _type, _id, _updatedAt, kind,
       "slug": slug.current,
       title, name
@@ -158,41 +159,28 @@ const latestItems = latest
     </div>
   </section>
 
-  {/* Frisch veröffentlicht — Abkürzung zum Neuesten quer durch alle
-      Räume. Antwort auf das „viele Räume"-Problem: der Besucher sieht
-      auf einen Blick, wo zuletzt etwas dazukam, und springt direkt zum
-      Beitrag, ohne jeden Raum einzeln zu durchsuchen. Rendert nur, wenn
-      es überhaupt verlinkbare Einträge gibt. */}
+  {/* Zuletzt veröffentlicht — schlichte Textliste der drei jüngsten
+      Beiträge quer durch alle Räume. Bewusst kein Kachel-Grid (sonst
+      Doppelung mit „Wohin als nächstes?" direkt darunter): nur Titel,
+      Raum und Datum als ruhige Zeilen, jede ein Direktlink. Rendert
+      nur, wenn es verlinkbare Einträge gibt. */}
   {latestItems.length > 0 && (
     <section class="freshly" aria-labelledby="freshly-title">
-      <div class="container">
-        <header class="freshly__head">
-          <span class="eyebrow">Frisch veröffentlicht</span>
-          <h2 id="freshly-title" class="freshly__title">Was zuletzt <em>dazukam</em></h2>
-          <p class="freshly__lead">
-            Direkt zum Neuesten — quer durch alle Räume, ohne jeden einzeln zu durchsuchen.
-          </p>
-        </header>
+      <div class="container freshly__inner">
+        <h2 id="freshly-title" class="eyebrow freshly__label">Zuletzt veröffentlicht</h2>
         <ul class="freshly__list">
-          {latestItems.map((item, i) => (
+          {latestItems.map((item) => (
             <li class="freshly__item">
-              <a class="freshly__link" href={item.href} style={`--item-accent: ${item.room.accent};`}>
-                <span class="freshly__room">{item.room.label}</span>
-                <span class="freshly__entry">
-                  <span class="freshly__entry-title">{item.title}</span>
-                  <span class="freshly__meta">
-                    <span class="freshly__kind">{item.room.kindLabel}</span>
-                    {item.dateLabel && (
-                      <>
-                        <span class="freshly__dot" aria-hidden="true">·</span>
-                        <time class="freshly__time" datetime={item.updatedAt}>{item.dateLabel}</time>
-                      </>
-                    )}
-                  </span>
-                </span>
-                <span class="freshly__trail">
-                  {i === 0 && <span class="freshly__badge">Neu</span>}
-                  <span class="freshly__arrow" aria-hidden="true">→</span>
+              <a class="freshly__link" href={item.href}>
+                <span class="freshly__entry-title">{item.title}</span>
+                <span class="freshly__meta">
+                  <span class="freshly__room" style={`color: ${item.room.accent};`}>{item.room.label}</span>
+                  {item.dateLabel && (
+                    <>
+                      <span class="freshly__dot" aria-hidden="true">·</span>
+                      <time class="freshly__time" datetime={item.updatedAt}>{item.dateLabel}</time>
+                    </>
+                  )}
                 </span>
               </a>
             </li>
@@ -203,132 +191,59 @@ const latestItems = latest
   )}
   <style>
     .freshly {
-      padding: 5rem 0 2rem;
-      background: var(--bg-warm-soft);
+      padding: 4rem 0 1rem;
+      background: var(--bg-base);
     }
-    .freshly__head {
-      max-width: 720px;
-      margin: 0 auto 2.5rem;
-      text-align: center;
+    .freshly__inner {
+      max-width: 640px;
     }
-    .freshly__title {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      margin: 0.6rem 0 0;
-      color: var(--accent-hover);
-    }
-    .freshly__title em {
-      font-style: italic;
-      color: inherit;
-    }
-    .freshly__lead {
-      margin: 0.9rem auto 0;
-      max-width: 520px;
-      color: var(--text-secondary);
-      font-size: 15px;
-      line-height: 1.55;
+    .freshly__label {
+      display: block;
+      margin: 0 0 1.25rem;
     }
     .freshly__list {
       list-style: none;
-      margin: 0 auto;
+      margin: 0;
       padding: 0;
-      max-width: 760px;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
     }
-    /* Zeilen-Karte mit Tür-Leibung links — dasselbe Motiv wie die
-       Räume-Karten unten, nur horizontal: Akzent-Kante links,
-       weißer Grund auf dem warmen Sand der Section. */
+    .freshly__item + .freshly__item {
+      border-top: 1px solid var(--border-subtle);
+    }
+    /* Ruhige Textzeile statt Kachel: Titel links, Raum + Datum als
+       kleine gedämpfte Meta rechts. Auf Hover färbt sich der Titel in
+       die Raum-Akzentfarbe (keine Box, kein Pfeil, kein Schatten). */
     .freshly__link {
-      display: grid;
-      grid-template-columns: minmax(6.5rem, max-content) 1fr auto;
-      grid-template-areas: "room entry trail";
-      align-items: center;
-      gap: 0.4rem 1.5rem;
-      padding: 1.1rem 1.5rem 1.1rem 1.4rem;
-      background: #ffffff;
-      border: 1px solid rgba(45, 36, 53, 0.10);
-      border-left: 3px solid var(--item-accent);
-      border-radius: 0 6px 6px 0;
-      box-shadow: 0 8px 24px -16px rgba(45, 36, 53, 0.20);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.25rem;
+      padding: 0.9rem 0;
       text-decoration: none;
       color: var(--text-primary);
-      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.2s ease;
-    }
-    .freshly__link:hover {
-      transform: translateY(-2px);
-      border-color: var(--item-accent);
-      box-shadow: 0 14px 32px -18px rgba(45, 36, 53, 0.28);
-    }
-    .freshly__room {
-      grid-area: room;
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 1.05rem;
-      color: var(--item-accent);
-      white-space: nowrap;
-    }
-    .freshly__entry {
-      grid-area: entry;
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-      min-width: 0;
     }
     .freshly__entry-title {
       font-family: var(--font-display);
-      font-size: 1.15rem;
-      line-height: 1.25;
-      color: var(--text-primary);
+      font-size: 1.2rem;
+      line-height: 1.3;
+      transition: color 0.15s ease;
+    }
+    .freshly__link:hover .freshly__entry-title {
+      color: var(--accent-hover);
     }
     .freshly__meta {
       display: flex;
-      align-items: center;
-      flex-wrap: wrap;
+      align-items: baseline;
       gap: 0.4rem;
       font-size: 13px;
       color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .freshly__room {
+      font-style: italic;
     }
     .freshly__dot {
       opacity: 0.6;
-    }
-    .freshly__trail {
-      grid-area: trail;
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      justify-self: end;
-    }
-    .freshly__badge {
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      background: var(--item-accent);
-      color: #ffffff;
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-    .freshly__arrow {
-      color: var(--item-accent);
-      font-size: 1.15rem;
-      line-height: 1;
-      transition: transform 0.15s ease;
-    }
-    .freshly__link:hover .freshly__arrow {
-      transform: translateX(3px);
-    }
-    /* Mobile: Raum-Label und Pfeil in der Kopfzeile, Titel darunter
-       über die volle Breite. */
-    @media (max-width: 560px) {
-      .freshly__link {
-        grid-template-columns: 1fr auto;
-        grid-template-areas:
-          "room trail"
-          "entry entry";
-        row-gap: 0.5rem;
-      }
     }
   </style>
   <script>
