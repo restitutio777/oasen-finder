@@ -43,8 +43,7 @@ export const wonder = defineType({
       title: 'Schlagworte',
       type: 'array',
       of: [{ type: 'string' }],
-      options: { layout: 'tags' },
-      description: 'Optional — z.B. „Spiel", „Skizze", „Frage", „Witz"',
+      description: 'Optional — jeweils ein Wort über den „Hinzufügen"-Button. z.B. „Spiel", „Skizze", „Frage", „Witz"',
       group: 'inhalt',
     }),
     defineField({

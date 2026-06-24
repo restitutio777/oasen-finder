@@ -57,8 +57,7 @@ export const note = defineType({
       title: 'Schlagworte',
       type: 'array',
       of: [{ type: 'string' }],
-      options: { layout: 'tags' },
-      description: 'Tippe ein Wort und drücke Enter. Optional. Beispiele: Kreta, Werkstatt, Pikler.',
+      description: 'Optional. Jeweils ein Wort über den „Hinzufügen"-Button (funktioniert auch am Handy). Beispiele: Kreta, Werkstatt, Pikler.',
       group: 'inhalt',
     }),
     defineField({

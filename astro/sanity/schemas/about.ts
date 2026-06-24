@@ -67,8 +67,7 @@ export const about = defineType({
       title: 'Don\'t-Liste — so nicht beschreiben',
       type: 'array',
       of: [{ type: 'string' }],
-      options: { layout: 'tags' },
-      description: 'Aus Antwort 3.1d — z.B. Coach, Referent, Experte',
+      description: 'Aus Antwort 3.1d — jeweils ein Wort über den „Hinzufügen"-Button. z.B. Coach, Referent, Experte',
     }),
     defineField({
       name: 'invitations',
