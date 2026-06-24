@@ -80,8 +80,7 @@ export const station = defineType({
       title: 'Schlagworte',
       type: 'array',
       of: [{ type: 'string' }],
-      options: { layout: 'tags' },
-      description: 'Tippe ein Wort und drücke Enter. Beispiele: Ökodorf, Cohousing, Spirituell, Steiner.',
+      description: 'Optional. Jeweils ein Wort über den „Hinzufügen"-Button (funktioniert auch am Handy). Beispiele: Ökodorf, Cohousing, Spirituell, Steiner.',
       group: 'inhalt',
     }),
     defineField({

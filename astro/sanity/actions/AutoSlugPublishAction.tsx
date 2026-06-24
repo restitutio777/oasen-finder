@@ -5,6 +5,7 @@ import {
   useDocumentOperation,
   useClient,
 } from 'sanity';
+import { useToast } from '@sanity/ui';
 import { slugify } from '../lib/slugify';
 import { geocode } from '../lib/geocode';
 
@@ -22,6 +23,12 @@ import { geocode } from '../lib/geocode';
  * So muss Katharina weder „Generate" am Slug klicken noch sich mit
  * Longitude/Latitude beschäftigen — sie tippt nur den Ortsnamen
  * bzw. eine Adresse ein, der Rest passiert automatisch.
+ *
+ * Robustheit (wichtig fürs Handy / wackliges Netz): Die Auto-
+ * Enrichment-Schritte dürfen das Veröffentlichen NIE blockieren.
+ * Schlägt Slug-Patch oder Geocoding fehl, wird der Eintrag trotzdem
+ * publiziert und Katharina bekommt einen sichtbaren Hinweis (Toast)
+ * statt eines stummen Abbruchs, der wie ein „Backend-Fehler" wirkt.
  */
 export const AutoSlugPublishAction: DocumentActionComponent = (
   props: DocumentActionProps,
@@ -29,6 +36,7 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
   const { id, type, draft, published, onComplete } = props;
   const { publish } = useDocumentOperation(id, type);
   const client = useClient({ apiVersion: '2024-03-01' });
+  const toast = useToast();
   const [processing, setProcessing] = useState(false);
 
   // Es wird mit dem Draft gearbeitet (oder Published, falls keine
@@ -65,10 +73,22 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
       if (titleSource && !doc?.slug?.current) {
         const generated = slugify(titleSource);
         if (generated) {
-          await client
-            .patch(patchTargetId)
-            .set({ slug: { _type: 'slug', current: generated } })
-            .commit();
+          // Eigener try/catch: ein fehlgeschlagener Slug-Patch darf
+          // das Veröffentlichen nicht verhindern.
+          try {
+            await client
+              .patch(patchTargetId)
+              .set({ slug: { _type: 'slug', current: generated } })
+              .commit();
+          } catch (err) {
+            console.error('[AutoSlugPublishAction] Slug-Patch fehlgeschlagen:', err);
+            toast.push({
+              status: 'warning',
+              title: 'URL-Adresse konnte nicht automatisch gesetzt werden',
+              description:
+                'Der Eintrag wird trotzdem veröffentlicht. Du kannst die URL-Adresse bei Bedarf unter „Mehr" von Hand eintragen.',
+            });
+          }
         }
       }
 
@@ -90,36 +110,74 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
         (!doc?.coordinates?.lat || !doc?.coordinates?.lng || addressChanged);
 
       if (needsGeocode) {
-        const coords = await geocode(draftAddress!);
-        if (coords) {
-          await client
-            .patch(patchTargetId)
-            .set({
-              coordinates: {
-                _type: 'geopoint',
-                lat: coords.lat,
-                lng: coords.lng,
-              },
-            })
-            .commit();
-          console.log(
-            `[AutoSlugPublishAction] Geocoded "${draftAddress}" → ${coords.lat.toFixed(4)}, ${coords.lng.toFixed(4)}` +
-              (addressChanged ? ' (address changed, overwriting old pin)' : ''),
-          );
-        } else {
-          console.warn(
-            `[AutoSlugPublishAction] No coordinates found for "${draftAddress}". ` +
-              `Set the pin manually under "Mehr → Karten-Koordinaten".`,
-          );
+        // Eigener try/catch: Karten-Suche (Nominatim) ist „best effort".
+        // Netzfehler/Timeout dürfen das Veröffentlichen nie aufhalten.
+        try {
+          const coords = await geocode(draftAddress!);
+          if (coords) {
+            await client
+              .patch(patchTargetId)
+              .set({
+                coordinates: {
+                  _type: 'geopoint',
+                  lat: coords.lat,
+                  lng: coords.lng,
+                },
+              })
+              .commit();
+            console.log(
+              `[AutoSlugPublishAction] Geocoded "${draftAddress}" → ${coords.lat.toFixed(4)}, ${coords.lng.toFixed(4)}` +
+                (addressChanged ? ' (address changed, overwriting old pin)' : ''),
+            );
+          } else {
+            console.warn(
+              `[AutoSlugPublishAction] No coordinates found for "${draftAddress}". ` +
+                `Set the pin manually under "Mehr → Karten-Koordinaten".`,
+            );
+            toast.push({
+              status: 'warning',
+              title: 'Kein Karten-Punkt gefunden',
+              description:
+                `Für „${draftAddress}" wurde kein Ort gefunden. Der Eintrag wird trotzdem veröffentlicht — ` +
+                'den Pin kannst du unter „Mehr → Karten-Koordinaten" von Hand auf der Karte setzen.',
+            });
+          }
+        } catch (err) {
+          console.error('[AutoSlugPublishAction] Geocoding fehlgeschlagen:', err);
+          toast.push({
+            status: 'warning',
+            title: 'Karten-Suche gerade nicht erreichbar',
+            description:
+              'Der Eintrag wird trotzdem veröffentlicht. Den Karten-Pin kannst du später unter „Mehr → Karten-Koordinaten" setzen.',
+          });
         }
       }
 
+      // ---- Veröffentlichen ----
+      // Läuft IMMER, auch wenn die Schritte oben fehlgeschlagen sind.
       publish.execute();
+    } catch (err) {
+      // Letztes Sicherheitsnetz: Selbst bei einem unerwarteten Fehler
+      // soll Katharina nicht mit einem stummen, „toten" Button
+      // dastehen. Wir zeigen den Fehler und versuchen trotzdem zu
+      // veröffentlichen.
+      console.error('[AutoSlugPublishAction] Unerwarteter Fehler:', err);
+      toast.push({
+        status: 'error',
+        title: 'Da ist etwas schiefgelaufen',
+        description:
+          'Bitte tippe noch einmal auf „Publish". Falls es weiter klemmt, sag Reto Bescheid.',
+      });
+      try {
+        publish.execute();
+      } catch {
+        /* publish nicht möglich — Fehler wurde bereits gemeldet */
+      }
     } finally {
       setProcessing(false);
       onComplete();
     }
-  }, [client, doc, id, patchTargetId, publish, onComplete, type, draftAddress, addressChanged]);
+  }, [client, doc, patchTargetId, publish, onComplete, type, draftAddress, addressChanged, toast]);
 
   return {
     label: processing ? 'Wird veröffentlicht …' : 'Publish',
