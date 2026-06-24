@@ -4,8 +4,8 @@ import {
   type DocumentActionProps,
   useDocumentOperation,
   useClient,
-  useToast,
 } from 'sanity';
+import { useToast } from '@sanity/ui';
 import { slugify } from '../lib/slugify';
 import { geocode } from '../lib/geocode';
 
