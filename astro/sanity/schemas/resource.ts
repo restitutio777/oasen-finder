@@ -36,6 +36,7 @@ export const resource = defineType({
           { title: 'Werkzeug (BrauchBAR)', value: 'werkzeug' },
         ],
       },
+      initialValue: 'buch',
       validation: (Rule) => Rule.required(),
       group: 'inhalt',
     }),

@@ -138,4 +138,50 @@ const html = blocks ? toHTML(blocks, { components }) : '';
     color: var(--text-body, #4a3d5a);
     margin-top: 0.5em;
   }
+
+  /* Gedicht-Layout (kind === 'poesie'): ersetzt die Artikel-Typo durch
+     poesietauglichen Zeilen-/Versabstand. Jede Verszeile ist ein eigener
+     Block — daher bewusst kleiner Block-Abstand; eine leere Zeile im Text
+     wirkt dadurch als Strophen-Trenner. Gesteuert über die Backend-Felder
+     poemAlign / poemLineSpacing / poemImageGap / poemItalic. */
+  .poem {
+    --verse-gap: 0.4em;
+  }
+  .poem > * + * {
+    margin-top: var(--verse-gap);
+  }
+  .poem p {
+    line-height: 1.5;
+  }
+  .poem.poem--align-zentriert {
+    text-align: center;
+  }
+  .poem.poem--italic p {
+    font-style: italic;
+  }
+  .poem.poem--verse-eng {
+    --verse-gap: 0.15em;
+  }
+  .poem.poem--verse-eng p {
+    line-height: 1.4;
+  }
+  .poem.poem--verse-normal {
+    --verse-gap: 0.4em;
+  }
+  .poem.poem--verse-weit {
+    --verse-gap: 0.85em;
+  }
+  .poem.poem--verse-weit p {
+    line-height: 1.7;
+  }
+  /* Abstand zwischen Hauptbild und Gedicht-Text */
+  .poem.poem--imggap-eng {
+    margin-top: 1rem;
+  }
+  .poem.poem--imggap-normal {
+    margin-top: 2rem;
+  }
+  .poem.poem--imggap-weit {
+    margin-top: 3.5rem;
+  }
 </style>

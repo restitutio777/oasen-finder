@@ -12,6 +12,15 @@ export const note = defineType({
   type: 'document',
   icon: ComposeIcon,
   groups: [...docGroups],
+  fieldsets: [
+    {
+      name: 'gedicht',
+      title: 'Gedicht-Darstellung',
+      description:
+        'Nur für Gedichte (Art = „Poesie"). Feinjustierung, wie der Text auf der Seite erscheint — Voreinstellung passt für die meisten Gedichte.',
+      options: { collapsible: true, collapsed: false },
+    },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -51,6 +60,66 @@ export const note = defineType({
       title: 'Haupttext',
       type: 'i18nText',
       group: 'inhalt',
+    }),
+    defineField({
+      name: 'poemAlign',
+      title: 'Ausrichtung',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Linksbündig', value: 'links' },
+          { title: 'Zentriert', value: 'zentriert' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'links',
+      group: 'inhalt',
+      fieldset: 'gedicht',
+      hidden: ({ document }) => document?.kind !== 'poesie',
+    }),
+    defineField({
+      name: 'poemLineSpacing',
+      title: 'Zeilenabstand',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Eng', value: 'eng' },
+          { title: 'Normal', value: 'normal' },
+          { title: 'Weit', value: 'weit' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'normal',
+      group: 'inhalt',
+      fieldset: 'gedicht',
+      hidden: ({ document }) => document?.kind !== 'poesie',
+    }),
+    defineField({
+      name: 'poemImageGap',
+      title: 'Abstand zum Bild',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Eng', value: 'eng' },
+          { title: 'Normal', value: 'normal' },
+          { title: 'Weit', value: 'weit' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'normal',
+      group: 'inhalt',
+      fieldset: 'gedicht',
+      hidden: ({ document }) => document?.kind !== 'poesie',
+    }),
+    defineField({
+      name: 'poemItalic',
+      title: 'Kursiv setzen',
+      type: 'boolean',
+      description: 'Gibt dem Gedicht einen weicheren, handschriftlicheren Ton.',
+      initialValue: false,
+      group: 'inhalt',
+      fieldset: 'gedicht',
+      hidden: ({ document }) => document?.kind !== 'poesie',
     }),
     defineField({
       name: 'tags',

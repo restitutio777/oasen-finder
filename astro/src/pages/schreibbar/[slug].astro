@@ -17,6 +17,7 @@ export async function getStaticPaths() {
       "slug": slug.current,
       _id, title, kind, publishedAt,
       body,
+      poemAlign, poemLineSpacing, poemImageGap, poemItalic,
       tags, hero,
       mediaLink, externalLink, substackUrl,
       "pdfUrl": pdfAttachment.asset->url
@@ -47,6 +48,25 @@ const ogImage = note.hero?.asset
   ? urlFor(note.hero).width(1200).height(630).fit('crop').auto('format').quality(85).url()
   : fallbackOgPhoto;
 const noteTitle = localized(note.title) || 'Notiz';
+
+/* Gedichte (kind === 'poesie') bekommen ein eigenes Layout statt der
+   allgemeinen Artikel-Typo: enger Zeilen-/Versabstand, wählbare
+   Ausrichtung, optional kursiv, definierter Abstand zum Bild. Gesteuert
+   über die kuratierten Backend-Felder (poemAlign/-LineSpacing/-ImageGap/
+   -Italic), Defaults greifen, wenn nichts gesetzt ist. */
+const isPoem = note.kind === 'poesie';
+const bodyClass = isPoem
+  ? [
+      'rich',
+      'poem',
+      `poem--align-${note.poemAlign || 'links'}`,
+      `poem--verse-${note.poemLineSpacing || 'normal'}`,
+      note.hero ? `poem--imggap-${note.poemImageGap || 'normal'}` : '',
+      note.poemItalic ? 'poem--italic' : '',
+    ]
+      .filter(Boolean)
+      .join(' ')
+  : 'rich';
 ---
 
 <BaseLayout
@@ -79,7 +99,7 @@ const noteTitle = localized(note.title) || 'Notiz';
         className="schreibbar-hero"
       />
 
-      <PortableText value={note.body} />
+      <PortableText value={note.body} className={bodyClass} />
 
       {/* Medien-Link: YouTube/Spotify/Apple Music werden direkt
           eingebettet, Telegram bekommt eine eigene Card,

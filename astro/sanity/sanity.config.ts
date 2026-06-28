@@ -9,6 +9,7 @@ import {
   PinIcon,
   CalendarIcon,
   BookIcon,
+  WrenchIcon,
   PlayIcon,
   SparkleIcon,
 } from '@sanity/icons';
@@ -69,9 +70,27 @@ export default defineConfig({
             S.documentTypeListItem('event')
               .title('machBAR — Werkstatt-Termine')
               .icon(CalendarIcon),
-            S.documentTypeListItem('resource')
-              .title('lesBAR — Quellen & Werkzeuge')
-              .icon(BookIcon),
+            S.listItem()
+              .title('lesBAR — Quellen')
+              .id('lesbar')
+              .icon(BookIcon)
+              .child(
+                S.documentTypeList('resource')
+                  .title('lesBAR — Quellen')
+                  .filter('_type == "resource" && !(kind in ["konzept", "werkzeug"])'),
+              ),
+            S.listItem()
+              .title('brauchBAR — Konzepte & Werkzeuge')
+              .id('brauchbar')
+              .icon(WrenchIcon)
+              .child(
+                S.documentTypeList('resource')
+                  .title('brauchBAR — Konzepte & Werkzeuge')
+                  .filter('_type == "resource" && kind in ["konzept", "werkzeug"]')
+                  .initialValueTemplates([
+                    S.initialValueTemplateItem('resource-brauchbar'),
+                  ]),
+              ),
             S.documentTypeListItem('episode')
               .title('hörBAR — Episoden')
               .icon(PlayIcon),
@@ -166,8 +185,17 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
-    templates: (templates) =>
-      templates.filter(({ schemaType }) => !['about', 'contact'].includes(schemaType)),
+    templates: (templates) => [
+      ...templates.filter(({ schemaType }) => !['about', 'contact'].includes(schemaType)),
+      // „+" im brauchBAR-Menü legt direkt einen Konzept-Eintrag an,
+      // damit er sofort in der gefilterten brauchBAR-Liste auftaucht.
+      {
+        id: 'resource-brauchbar',
+        title: 'brauchBAR — Konzept / Werkzeug',
+        schemaType: 'resource',
+        value: { kind: 'konzept' },
+      },
+    ],
   },
 
   document: {

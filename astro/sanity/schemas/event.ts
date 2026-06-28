@@ -70,6 +70,22 @@ export const event = defineType({
       group: 'inhalt',
     }),
     defineField({
+      name: 'format',
+      title: 'Wo findet es statt?',
+      description: 'Vor Ort an einem Ort oder als Online-Treffen (z. B. zu den Nebenübungen)?',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Vor Ort', value: 'vorort' },
+          { title: 'Online-Treffen', value: 'online' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'vorort',
+      validation: (Rule) => Rule.required(),
+      group: 'inhalt',
+    }),
+    defineField({
       name: 'season',
       title: 'Saison',
       type: 'string',

@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   const events = await sanity.fetch(`
     *[_type == "event" && (kind != "forschungstreffen" || !defined(kind)) && defined(slug.current)] {
       "slug": slug.current, _id, title, startDate, endDate, ownership,
-      season, location, locationCoords,
+      season, location, format, locationCoords,
       description,
       registration, dogFriendly,
       fees,
@@ -57,10 +57,10 @@ const ogImage = event.photo?.asset
         <strong>{new Date(event.startDate).toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</strong>
         {event.endDate && ` bis ${new Date(event.endDate).toLocaleDateString('de-DE')}`}
         <br />
-        {event.location}
+        {event.format === 'online' ? 'Online-Treffen' : event.location}
       </p>
 
-      {event.dogFriendly && (
+      {event.dogFriendly && event.format !== 'online' && (
         <p style="font-size: 14px; color: var(--accent); margin-bottom: 1.5rem;">
           🐕 Hundefreundlich — Carla ist dabei
         </p>
