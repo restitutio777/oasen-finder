@@ -42,8 +42,8 @@ Oder über das Claude-Preview-Panel — die `.claude/launch.json` startet dassel
 
 Über Vercel als Static-Site. Push auf `main` → automatischer Deploy.
 
-**Live:** https://oasen-finder.vercel.app
-*(Der Vercel-Slug bleibt vorerst `oasen-finder` — der Name lässt sich ohne Datenverlust umstellen, wenn die Marke endgültig festgelegt ist.)*
+**Live:** https://reise-zueinander.de
+*(Finale Domain seit 29.06.2026. `katharina-offenborn.de` und `www.` leiten per 308 dorthin. Vercel-Slug bleibt intern `oasen-finder`, `oasen-finder.vercel.app` läuft weiter mit Canonical auf reise-zueinander.de.)*
 
 ## Phase 2 — Sanity-CMS für Katharina
 

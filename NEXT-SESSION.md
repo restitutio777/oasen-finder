@@ -1,16 +1,48 @@
 # Nächste Session — Wiedereinstieg
 
-*Hand-off vom 12. Mai 2026, spät. Site visuell + funktional rund.*
+*Aktueller Stand 29. Juni 2026 ganz oben. Der Hand-off vom 12. Mai steht darunter als historischer Schnappschuss.*
 
-## In 30 Sekunden: was zu tun ist
+## STAND 29.06.2026 — PRODUKTIV auf reise-zueinander.de
 
-1. **Vercel-Analytics aktivieren** — 1 Klick im Dashboard *(Schritt 1 unten)*
-2. **Resend einrichten** — Account + 3 Env-Variables → Mitkommen-Mails gehen wirklich raus *(Schritt 2)*
-3. **Mail an Katharina** mit den offenen Fragen *(Schritt 3 — Vorlage in `KATHARINA-FRAGEN.md`)*
-4. **Domain entscheiden + setup** sobald Katharina sich entschieden hat
-5. **Strategische Items** *(DSGVO-Generator, Bus-Faktor, A11y, Hub-Logik)*
+Site ist live unter der finalen Domain. Domain-Umzug + DSGVO-Härtung + Katharinas erstes Feedback sind umgesetzt, in `main` gemergt und live verifiziert.
 
-## Wo wir stehen — Stand
+### Domains / Routing (alle live)
+
+- **reise-zueinander.de** — Hauptadresse (Production). Canonical/OG/Sitemap/robots zeigen hierhin.
+- **katharina-offenborn.de** — 308-Redirect auf reise-zueinander.de (pfad-erhaltend).
+- **www.** beider Domains — 308-Redirect auf reise-zueinander.de.
+- **oasen-finder.vercel.app** — läuft weiter, Canonical zeigt aber auf reise-zueinander.de.
+- **DNS bei Infomaniak** (Nameserver dort lassen — sonst Mail kaputt!): `A @ 216.198.79.1`, `www CNAME cname.vercel-dns.com`. Vercel empfiehlt kosmetisch ein neues www-Ziel (`52d7b88e07efd895.vercel-dns-017.com`); das alte funktioniert dauerhaft weiter.
+
+### DSGVO-Härtung (Commit `17db52f`)
+
+- Google Fonts **self-hosted** via `@fontsource` (kein Google-Aufruf mehr).
+- Medien-Player (`MediaLink.astro`) auf **Klick-zum-Laden** — kein Drittanbieter-Embed/Cookie vor aktivem Klick.
+- Datenschutzseite angepasst; `vercel.json` nutzt CSP `frame-ancestors` (statt `X-Frame-Options`), damit das Sanity-Presentation-Iframe lädt.
+
+### Katharina-Feedback (Commit `ae99fb3`)
+
+- **Gedichte** (note, Art=Poesie): eigenes Layout + 4 Backend-Felder `poemAlign/poemLineSpacing/poemImageGap/poemItalic` (nur bei Poesie sichtbar); Poem-CSS im PortableText-Renderer.
+- **brauchBAR**: eigener Studio-Menüpunkt (`resource` mit `kind in [konzept, werkzeug]`) + Vorlage `resource-brauchbar`; lesBAR zeigt nur noch die übrigen Quellen; `resource.kind` Default `buch`.
+- **machBAR**: neues Event-Feld `format` (Vor Ort / Online-Treffen).
+- Irreführenden Leerzustand „… sobald Sanity verbunden ist" in allen 5 Räumen umformuliert.
+
+### Studio-Deploy — WICHTIG für nächstes Mal
+
+Studio: **werkstatt-gemeinschaft.sanity.studio** (Org Intuitivmedia `ow7ACwTD3`, Projekt `z6eclgt8`).
+- **Der per `sanity login` (Google) eingeloggte Account hat KEINEN Zugriff** auf z6eclgt8 (nur 2 Projekt-Member). Deploy daher über **Deploy-Token**: manage.sanity.io → Projekt z6eclgt8 → API → Tokens (Rolle „Deploy Studio"/Administrator) → `SANITY_AUTH_TOKEN=… npx sanity deploy` aus `astro/sanity`.
+- **react-is-Fix (Commit `6cb127c`):** `astro/sanity` brauchte `react-is` (Peer von `@sanity/ui` 2.x), sonst bricht `sanity build`.
+
+### Noch offen (optional, nicht dringend)
+
+- **Resend/E-Mail:** Mitkommen-Empfänger-Default = `katharina.offenborn@googlemail.com`. Echte Zustellung braucht verifizierte Resend-Absender-Domain; aktuell Sandbox/Log-Modus *(siehe Schritt 2 im historischen Teil)*.
+- **Google Search Console:** neue Property `reise-zueinander.de` + Sitemap einreichen.
+- **www „DNS Change Recommended":** kosmetisch (siehe oben).
+- **Sanity-Dataset:** ggf. alte absolute `oasen-finder.vercel.app`-Links im Content prüfen.
+
+---
+
+## Wo wir stehen — Stand 12. Mai 2026 (historisch)
 
 ### Live auf [oasen-finder.vercel.app](https://oasen-finder.vercel.app)
 
@@ -79,7 +111,7 @@ Beide Pakete sind installiert und im BaseLayout eingebunden, aber **im Dashboard
    - `MITKOMMEN_TO` = `katharina.offenborn@googlemail.com` *(echte Empfänger-Mail, schon in Sanity contact gespeichert)*
    - `MITKOMMEN_FROM` = `mitkommen@<DOMAIN>` *(sobald Domain verifiziert; bis dahin `onboarding@resend.dev`)*
 5. **Re-deploy auslösen** *(Push oder Vercel-Dashboard „Redeploy")*
-6. **Test:** Formular auf <https://oasen-finder.vercel.app/mitkommen/> → Mail muss bei `MITKOMMEN_TO` ankommen
+6. **Test:** Formular auf <https://reise-zueinander.de/mitkommen/> → Mail muss bei `MITKOMMEN_TO` ankommen
 
 Anti-Spam ist eingebaut: Honeypot-Feld, Mail-Format-Check, Pflichtfeld-Validation, Reply-To korrekt.
 
@@ -166,7 +198,7 @@ Strukturierte Liste in **`KATHARINA-FRAGEN.md`** — direkt copy-paste-fertig. A
 
 | | URL |
 |---|---|
-| Live-Site | <https://oasen-finder.vercel.app> |
+| Live-Site | <https://reise-zueinander.de> *(alt: oasen-finder.vercel.app)* |
 | GitHub | <https://github.com/restitutio777/oasen-finder> |
 | Vercel-Dashboard | <https://vercel.com/bolteds-projects/oasen-finder> |
 | Vercel-Analytics | <https://vercel.com/bolteds-projects/oasen-finder/analytics> |

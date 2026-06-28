@@ -12,7 +12,7 @@ Persönliche Website für **Katharina Offenborn** *(Ergotherapeutin, Ende 60, me
 
 ## Wo wir gerade stehen *(Stand 12. Mai 2026, spät — komplett ausiteriert)*
 
-### Was live ist auf [oasen-finder.vercel.app](https://oasen-finder.vercel.app)
+### Was live ist auf [reise-zueinander.de](https://reise-zueinander.de) *(seit 29.06.2026; vorher oasen-finder.vercel.app)*
 
 - ✅ **Astro 5 Multi-Page-Site** — 23 Routes, alle BAR-Räume mit Index + Detail-Pages, plus Legals + FR/EN-Stubs
 - ✅ **Brand werkSTATT Gemeinschaft** — Akzent auf STATT, werk + Gemeinschaft italic Aubergine *(eine Akzentfarbe statt zwei)*
@@ -190,7 +190,7 @@ Kontext: vier Verbesserungen aus Session-Review
 ### Jetzt *(Prototyp)*
 - **Statische HTML** in `index.html` *(eine Datei, ~2000 Zeilen)*
 - Inline CSS
-- Hosting: **Vercel** (`oasen-finder.vercel.app`)
+- Hosting: **Vercel** (Domain `reise-zueinander.de`, intern `oasen-finder.vercel.app`)
 - Repo: **GitHub** `restitutio777/oasen-finder`
 - **Hero-Foto:** Unsplash-Platzhalter *(`photo-1761092315416-ed229b18e3d6` — communal table mit Blumen, blurred 28px als atmosphärische Stimmung)*. Stützt die -BAR-Idee *(Treffpunkt + Werkstatt-Charakter)*. Vorher: `photo-1738034950582-271276c5af7d` *(golden-hour communal dinner)*. Vor Public-Launch durch eigenes Material von Katharina ersetzen — Unsplash-Lizenz ist auch kommerziell ok, aber als zentrales Brand-Bild ist Eigen-Material besser.
 
@@ -345,7 +345,7 @@ Damit du nicht überrascht bist von Sachen, die schon erwogen und verworfen sind
 
 ## Live-Links und Zugänge
 
-- **Live-Site:** https://oasen-finder.vercel.app
+- **Live-Site:** https://reise-zueinander.de *(seit 29.06.2026; katharina-offenborn.de + www. → 308 hierhin; oasen-finder.vercel.app läuft weiter)*
 - **GitHub-Repo:** https://github.com/restitutio777/oasen-finder
 - **GitHub-Account:** `restitutio777` *(User ist eingeloggt)*
 - **Vercel:** Account `bolteds-projects`, Projekt `oasen-finder`
