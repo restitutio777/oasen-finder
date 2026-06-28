@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://oasen-finder.vercel.app', // wird auf finale Domain umgezogen
+  site: 'https://reise-zueinander.de', // finale Domain (kanonisch); katharina-offenborn.de leitet per 301 hierher
   output: 'static',
   integrations: [sitemap()],
   i18n: {

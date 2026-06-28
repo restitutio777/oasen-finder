@@ -30,7 +30,7 @@ import { AutoSlugPublishAction } from './actions/AutoSlugPublishAction';
  * Vision-Tool (GROQ-Playground) nur im lokalen Dev-Server.
  */
 
-const SITE_URL = 'https://oasen-finder.vercel.app';
+const SITE_URL = 'https://reise-zueinander.de';
 
 export default defineConfig({
   name: 'werkstatt-gemeinschaft',

@@ -3,6 +3,17 @@
  * Basis-Layout für alle Seiten.
  * Lädt globale Styles, Fonts, Brand-Header und Footer.
  */
+/* Schriften self-hosted (DSGVO: keine Verbindung zu Google-Fonts-CDN).
+   Cormorant Garamond: 400/500/600 + Italic 400/500 — Inter: 400/500/600/700. */
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/500-italic.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -26,7 +37,7 @@ export interface Props {
   ogType?: 'website' | 'article';
 }
 
-const siteUrl = 'https://oasen-finder.vercel.app';
+const siteUrl = 'https://reise-zueinander.de';
 /* Brand-OG-Image (1200×630): Cream + warmer Bronze-Wash mit Logo +
    Headline. Lokal in public/og-image.png. Vorher war Unsplash-Foto-
    Fallback — jetzt eigene Marke. */
@@ -57,13 +68,8 @@ const ogLocale = locale === 'de' ? 'de_DE' : locale === 'fr' ? 'fr_FR' : 'en_US'
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalUrl} />
 
-    {/* Fonts — preconnect + load */}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    {/* Schriften werden lokal ausgeliefert (self-hosted via @fontsource,
+        Import im Frontmatter) — keine Verbindung zu Google-Servern. */}
 
     {/* hreflang-Alternativen für i18n */}
     <link rel="alternate" hreflang="de" href={`${siteUrl}${path}`} />

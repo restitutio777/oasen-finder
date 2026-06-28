@@ -36,4 +36,4 @@ User-agent: Discordbot
 Allow: /
 
 # Sitemap (wird automatisch von @astrojs/sitemap generiert)
-Sitemap: https://oasen-finder.vercel.app/sitemap-index.xml
+Sitemap: https://reise-zueinander.de/sitemap-index.xml

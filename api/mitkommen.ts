@@ -104,7 +104,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   ].join('\n');
 
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
-  const TO_EMAIL = process.env.MITKOMMEN_TO || 'kontakt@werkstatt-gemeinschaft.example';
+  const TO_EMAIL = process.env.MITKOMMEN_TO || 'katharina.offenborn@googlemail.com';
   const FROM_EMAIL = process.env.MITKOMMEN_FROM || 'onboarding@resend.dev';
 
   // Log-Modus: kein API-Key gesetzt → loggen und Erfolg melden

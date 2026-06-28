@@ -2,15 +2,15 @@
 /**
  * MediaLink — Smart-Detection für Medien-URLs.
  *
- * Statt einen blanken Link zu zeigen, erkennt diese Komponente die
- * Plattform und rendert das passende Embed:
+ * Erkennt die Plattform und rendert das passende Format:
  *
- *   - YouTube  → eingebetteter Player (16/9, lazy load)
- *   - Spotify  → eingebetteter Player (Track / Album / Episode / Show)
- *   - Apple Music → eingebetteter Player
- *   - Vimeo    → eingebetteter Player
- *   - SoundCloud → eingebetteter Player
- *   - Telegram → schöne Card mit Telegram-Icon, Klick öffnet App/Web
+ *   - YouTube / Spotify / Apple Music / Vimeo / SoundCloud
+ *       → DSGVO-konformes „Klick-zum-Laden": zunächst nur ein
+ *         Vorschau-Platzhalter mit Lade-Button. Erst wenn der Besucher
+ *         aktiv klickt, wird der Player eingebettet und eine Verbindung
+ *         zur Plattform aufgebaut. Vor dem Klick: KEINE Verbindung,
+ *         keine Cookies, keine IP-Übertragung an Dritte.
+ *   - Telegram → Card mit Icon, Klick öffnet App/Web
  *   - sonst    → klassischer Link mit Pfeil
  *
  * Plattform-Wechsel erfordert kein Eintrag-Update — Katharina pflegt
@@ -65,61 +65,100 @@ function detectPlatform(u: string): Platform {
   return { type: 'other' };
 }
 
+/**
+ * Darstellungs-Metadaten je Plattform für das Klick-zum-Laden-Embed.
+ * `ratio` für Video (16/9-Container), `height` für Audio-Player.
+ */
+type EmbedMeta = {
+  provider: string;
+  src: string;
+  title: string;
+  allow: string;
+  fullscreen?: boolean;
+  sandbox?: string;
+  ratio?: string;
+  height?: number;
+};
+
 const platform = detectPlatform(url);
+
+function toEmbedMeta(p: Platform): EmbedMeta | null {
+  switch (p.type) {
+    case 'youtube':
+      return {
+        provider: 'YouTube',
+        src: p.embed,
+        title: 'YouTube-Video',
+        allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share',
+        fullscreen: true,
+        ratio: '16 / 9',
+      };
+    case 'vimeo':
+      return {
+        provider: 'Vimeo',
+        src: p.embed,
+        title: 'Vimeo-Video',
+        allow: 'autoplay; fullscreen; picture-in-picture',
+        fullscreen: true,
+        ratio: '16 / 9',
+      };
+    case 'spotify':
+      return {
+        provider: 'Spotify',
+        src: p.embed,
+        title: 'Spotify-Player',
+        allow: 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture',
+        height: 352,
+      };
+    case 'apple-music':
+      return {
+        provider: 'Apple Music',
+        src: p.embed,
+        title: 'Apple-Music-Player',
+        allow: 'autoplay *; encrypted-media *; clipboard-write',
+        sandbox: 'allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation',
+        height: 175,
+      };
+    case 'soundcloud':
+      return {
+        provider: 'SoundCloud',
+        src: p.embed,
+        title: 'SoundCloud-Player',
+        allow: 'autoplay',
+        height: 166,
+      };
+    default:
+      return null;
+  }
+}
+
+const media = toEmbedMeta(platform);
+const sizeStyle = media?.ratio
+  ? `aspect-ratio: ${media.ratio};`
+  : media?.height
+  ? `height: ${media.height}px;`
+  : '';
 ---
 
-{platform.type === 'youtube' && (
-  <div style="aspect-ratio: 16/9; margin: 1.5rem 0; max-width: 720px; background: var(--bg-warm);">
-    <iframe
-      src={platform.embed}
-      title="YouTube-Video"
-      style="width: 100%; height: 100%; border: 0; border-radius: 4px; display: block;"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
-      loading="lazy"
-    ></iframe>
-  </div>
-)}
-
-{platform.type === 'spotify' && (
-  <iframe
-    src={platform.embed}
-    style="width: 100%; max-width: 720px; height: 352px; margin: 1.5rem 0; border: 0; border-radius: 12px; display: block;"
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-    loading="lazy"
-  ></iframe>
-)}
-
-{platform.type === 'apple-music' && (
-  <iframe
-    src={platform.embed}
-    style="width: 100%; max-width: 720px; height: 175px; margin: 1.5rem 0; border: 0; border-radius: 10px; display: block;"
-    allow="autoplay *; encrypted-media *; clipboard-write"
-    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
-    loading="lazy"
-  ></iframe>
-)}
-
-{platform.type === 'vimeo' && (
-  <div style="aspect-ratio: 16/9; margin: 1.5rem 0; max-width: 720px; background: var(--bg-warm);">
-    <iframe
-      src={platform.embed}
-      title="Vimeo-Video"
-      style="width: 100%; height: 100%; border: 0; border-radius: 4px; display: block;"
-      allow="autoplay; fullscreen; picture-in-picture"
-      allowfullscreen
-      loading="lazy"
-    ></iframe>
-  </div>
-)}
-
-{platform.type === 'soundcloud' && (
-  <iframe
-    src={platform.embed}
-    style="width: 100%; max-width: 720px; height: 166px; margin: 1.5rem 0; border: 0; display: block;"
-    allow="autoplay"
-    loading="lazy"
-  ></iframe>
+{media && (
+  <figure
+    class="media-embed"
+    data-src={media.src}
+    data-title={media.title}
+    data-allow={media.allow}
+    data-fullscreen={media.fullscreen ? 'true' : 'false'}
+    data-sandbox={media.sandbox ?? ''}
+    style={sizeStyle}
+  >
+    <button type="button" class="media-embed__btn" aria-label={`${media.provider}-Player laden`}>
+      <span class="media-embed__play" aria-hidden="true">►</span>
+      <span class="media-embed__label">{media.provider}-Inhalt laden</span>
+      <span class="media-embed__note">
+        Beim Laden wird eine Verbindung zu {media.provider} aufgebaut; dabei können
+        Cookies gesetzt werden. <a href="/datenschutz/">Mehr im Datenschutz</a>.
+      </span>
+    </button>
+  </figure>
 )}
 
 {platform.type === 'telegram' && (
@@ -151,3 +190,97 @@ const platform = detectPlatform(url);
     </a>
   </p>
 )}
+
+<style>
+  .media-embed {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    margin: 1.5rem 0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg-warm);
+    border: 1px solid var(--border-subtle);
+  }
+  .media-embed__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    height: 100%;
+    min-height: 132px;
+    padding: 1.5rem 1.25rem;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    text-align: center;
+    color: var(--text-primary);
+    font-family: var(--font-text);
+    transition: background 0.18s;
+  }
+  .media-embed__btn:hover,
+  .media-embed__btn:focus-visible {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    outline: none;
+  }
+  .media-embed__play {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg-base);
+    font-size: 18px;
+    line-height: 1;
+    padding-left: 3px;
+  }
+  .media-embed__label {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .media-embed__note {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    max-width: 42ch;
+  }
+  .media-embed__note a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  /* Nach dem Laden füllt das injizierte iframe den Container randlos. */
+  .media-embed.is-loaded {
+    background: var(--bg-base);
+  }
+</style>
+
+<script>
+  // Klick-zum-Laden: erst auf aktiven Klick wird der Drittanbieter-Player
+  // eingebettet. Vorher keine Verbindung zu YouTube/Spotify/Apple/Vimeo/SoundCloud.
+  document.querySelectorAll('.media-embed[data-src]').forEach((el) => {
+    const figure = el as HTMLElement;
+    const btn = figure.querySelector('.media-embed__btn');
+    if (!btn) return;
+    btn.addEventListener(
+      'click',
+      () => {
+        const iframe = document.createElement('iframe');
+        iframe.src = figure.dataset.src || '';
+        iframe.title = figure.dataset.title || '';
+        iframe.loading = 'lazy';
+        iframe.setAttribute('allow', figure.dataset.allow || '');
+        if (figure.dataset.fullscreen === 'true') iframe.setAttribute('allowfullscreen', '');
+        if (figure.dataset.sandbox) iframe.setAttribute('sandbox', figure.dataset.sandbox);
+        iframe.style.cssText = 'width:100%;height:100%;border:0;display:block;';
+        figure.replaceChildren(iframe);
+        figure.classList.add('is-loaded');
+      },
+      { once: true },
+    );
+  });
+</script>
