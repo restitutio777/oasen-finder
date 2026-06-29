@@ -133,15 +133,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json({ ok: true, mode: 'log-only' });
   }
 
-  // TEMPORÄRE DIAGNOSE — loggt KEIN Passwort, nur Form/Laenge der Env-Werte,
-  // um EAUTH/535 einzugrenzen. Nach erfolgreicher Verifikation wieder entfernen.
-  console.log('[Mitkommen][diag] host=%j port=%d', SMTP_HOST, SMTP_PORT);
-  console.log('[Mitkommen][diag] user=%j userLen=%d userTrimmedLen=%d',
-    SMTP_USER, SMTP_USER.length, SMTP_USER.trim().length);
-  console.log('[Mitkommen][diag] from=%j', FROM_EMAIL);
-  console.log('[Mitkommen][diag] passLen=%d passTrimmedLen=%d passHasSpace=%s',
-    SMTP_PASS.length, SMTP_PASS.trim().length, /\s/.test(SMTP_PASS));
-
   // Echter Versand via SMTP (Nodemailer)
   try {
     const transporter = nodemailer.createTransport({
