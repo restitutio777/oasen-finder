@@ -1,0 +1,14 @@
+{
+  "name": "werkstatt-gemeinschaft-functions",
+  "private": true,
+  "description": "Root-Manifest nur fuer die Vercel-Serverless-Functions in /api. Das Astro-Frontend hat sein eigenes package.json in astro/.",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "nodemailer": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^8.0.1"
+  }
+}
