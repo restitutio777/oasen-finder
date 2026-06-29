@@ -197,20 +197,28 @@ const latestItems = latest
     /* Bewusst knapp gehalten — sitzt als Addon direkt unter dem Intro/
        Mantra-Block (gleicher --bg-base), nicht als eigene Sektion. */
     .freshly {
-      padding: 0.5rem 0 1.5rem;
+      padding: 0 0 2rem;
       background: var(--bg-base);
     }
+    /* Linksbündig an der Container-Kante — gleiche linke Kante und
+       Breite wie die linke Intro-Spalte darüber. KEINE zentrierte
+       Insel mehr (das ließ die Box mittig schweben, ohne Bezug zum
+       Seitenraster). So entsteht eine durchgehende linke Kante:
+       Headline → Statement → Zuletzt veröffentlicht. */
     .freshly__inner {
-      max-width: 640px;
+      display: flex;
+      flex-direction: column;
     }
     .freshly__label {
       display: block;
       margin: 0 0 0.7rem;
+      max-width: 34rem;
     }
     .freshly__list {
       list-style: none;
       margin: 0;
       padding: 0;
+      max-width: 34rem;
     }
     .freshly__item + .freshly__item {
       border-top: 1px solid var(--border-subtle);
