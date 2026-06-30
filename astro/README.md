@@ -110,7 +110,7 @@ Mindest-Content für Soft-Launch *(strategisches Item 5 in CONTEXT.md)*:
 - 3-5 SchreibBAR-Notizen: ✅ 3 drin
 - 2-3 BewegBAR-Stationen: ✅ 2 drin
 - 1-2 LesBAR-Einträge: ✅ 2 drin
-- Mitkommen-Mail-Adresse: ⚠️ aktuell `example.com` — vor Public-Launch echte Adresse
+- Mitkommen-Mail-Adresse: ✅ `kontakt@reise-zueinander.de` (Empfänger via Vercel-Env `MITKOMMEN_TO`)
 
 ## Lokale Entwicklung
 
