@@ -35,4 +35,4 @@ sein, damit der lokale CLI-Cache die Auth hat.
 - **Echte Fotos** (aktuell nur Text — `hero`/`portraits`/`images` leer)
 - **FR/EN-Übersetzungen** (aktuell nur DE)
 - **Mehr Stationen** aus ihren Reisetagebüchern
-- **Echte Mail-Adresse** im `contact.emailRecipient` *(aktuell example.com)*
+- ~~**Echte Mail-Adresse** im `contact.emailRecipient`~~ ✅ erledigt (`kontakt@reise-zueinander.de`)
