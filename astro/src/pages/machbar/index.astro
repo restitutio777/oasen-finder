@@ -19,8 +19,15 @@ if (isSanityConfigured) {
   `);
 }
 
-const upcoming = events.filter((e) => new Date(e.startDate) >= new Date());
-const past = events.filter((e) => new Date(e.startDate) < new Date());
+// Ein Termin zählt erst als "vergangen", wenn er wirklich vorbei ist —
+// bei mehrtägigen Terminen also nach dem endDate, nicht schon nach dem
+// startDate. Sonst verschwindet ein laufender Termin unter "Vergangene
+// Termine", sobald er begonnen hat (Bug 03.07., z.B. "Nebenübungen zu
+// dritt": 29.6.–7.8., am 3.7. fälschlich als vergangen einsortiert).
+const now = new Date();
+const isPast = (e: any) => new Date(e.endDate || e.startDate) < now;
+const upcoming = events.filter((e) => !isPast(e));
+const past = events.filter((e) => isPast(e));
 ---
 
 <BaseLayout title="machBAR — werkSTATT Gemeinschaft" description="Werkstatt-Termine zu Miteinander-Leben, -Arbeiten, -Reden">
@@ -54,7 +61,7 @@ const past = events.filter((e) => new Date(e.startDate) < new Date());
             {upcoming.map((e) => (
               <li>
                 <a href={`/machbar/${e.slug}/`} style="display: block; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border-subtle); text-decoration: none; color: inherit;">
-                  <p class="eyebrow">{new Date(e.startDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}{(e.format === 'online' || e.location) && ' · '}{e.format === 'online' ? 'Online-Treffen' : e.location}</p>
+                  <p class="eyebrow">{new Date(e.startDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}{e.endDate && e.endDate !== e.startDate && ` bis ${new Date(e.endDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}`}{(e.format === 'online' || e.location) && ' · '}{e.format === 'online' ? 'Online-Treffen' : e.location}</p>
                   <h3 style="font-family: var(--font-display); margin: 0.5rem 0;">{localized(e.title)}</h3>
                   {e.dogFriendly && e.format !== 'online' && <span style="font-size: 12px; color: var(--accent);">🐕 Carla willkommen</span>}
                 </a>

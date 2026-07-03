@@ -16,9 +16,12 @@ let latest: any[] = [];
 
 if (isSanityConfigured) {
   // Nächste Werkstatt-Termine — zeigen sich im Hero („Nächste Begegnung")
-  // und in der machBAR-Karte der Räume-Übersicht
+  // und in der machBAR-Karte der Räume-Übersicht. Mehrtägige Termine
+  // zählen als "nächster/aktueller Termin" bis zum endDate, nicht nur
+  // bis zum startDate — sonst verschwindet ein laufender Termin aus der
+  // Vorschau, sobald er begonnen hat (Bug 03.07.).
   upcomingEvents = await sanity.fetch(`
-    *[_type == "event" && startDate >= now()] | order(startDate asc) [0...3] {
+    *[_type == "event" && (endDate >= now() || (!defined(endDate) && startDate >= now()))] | order(startDate asc) [0...3] {
       _id, title, "slug": slug.current, startDate, location
     }
   `);
