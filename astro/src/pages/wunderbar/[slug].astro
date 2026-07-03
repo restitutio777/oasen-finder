@@ -28,11 +28,11 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 
 const entryTitle = localized(entry.title) || 'Eintrag';
-const fallbackOgPhoto =
-  'https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?w=1200&h=630&fit=crop&q=85';
+// OG-Image: Hero-Bild, wenn vorhanden — sonst greift BaseLayouts
+// eigener Marken-Default (kein Unsplash-Fallback mehr, 03.07.).
 const ogImage = entry.hero?.asset
   ? urlFor(entry.hero).width(1200).height(630).fit('crop').auto('format').quality(85).url()
-  : fallbackOgPhoto;
+  : undefined;
 ---
 
 <BaseLayout

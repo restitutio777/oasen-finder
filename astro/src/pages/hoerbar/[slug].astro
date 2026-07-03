@@ -24,11 +24,11 @@ export async function getStaticPaths() {
 const { episode } = Astro.props;
 
 const episodeTitle = localized(episode.title) || 'Episode';
-const fallbackOgPhoto =
-  'https://images.unsplash.com/photo-1693778259075-c47eda5e4b43?w=1200&h=630&fit=crop&q=85';
+// OG-Image: Cover, wenn vorhanden — sonst greift BaseLayouts eigener
+// Marken-Default (kein Unsplash-Fallback mehr, 03.07.).
 const ogImage = episode.coverUrl
   ? `${episode.coverUrl}?w=1200&h=630&fit=crop&auto=format&q=85`
-  : fallbackOgPhoto;
+  : undefined;
 ---
 
 <BaseLayout

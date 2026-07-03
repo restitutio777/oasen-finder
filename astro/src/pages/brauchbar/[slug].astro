@@ -40,11 +40,11 @@ const kindLabels: Record<string, string> = {
 };
 
 const resourceTitle = localized(resource.title) || 'Eintrag';
-const fallbackOgPhoto =
-  'https://images.unsplash.com/photo-1590880795696-20c7dfadacde?w=1200&h=630&fit=crop&q=85';
+// OG-Image: Cover, wenn vorhanden — sonst greift BaseLayouts eigener
+// Marken-Default (kein Unsplash-Fallback mehr, 03.07.).
 const ogImage = resource.coverUrl
   ? `${resource.coverUrl}?w=1200&h=630&fit=crop&auto=format&q=85`
-  : fallbackOgPhoto;
+  : undefined;
 ---
 
 <BaseLayout

@@ -24,12 +24,12 @@ export async function getStaticPaths() {
 
 const { station } = Astro.props;
 
-const fallbackOgPhoto =
-  'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&h=630&fit=crop&q=85';
+// OG-Image: erstes Stationsfoto, wenn vorhanden — sonst greift
+// BaseLayouts eigener Marken-Default (kein Unsplash-Fallback mehr, 03.07.).
 const firstImage = Array.isArray(station.images) ? station.images[0] : null;
 const ogImage = firstImage?.asset
   ? urlFor(firstImage).width(1200).height(630).fit('crop').auto('format').quality(85).url()
-  : fallbackOgPhoto;
+  : undefined;
 ---
 
 <BaseLayout

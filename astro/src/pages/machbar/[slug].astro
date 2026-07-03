@@ -16,8 +16,7 @@ export async function getStaticPaths() {
       description,
       registration, dogFriendly,
       fees,
-      photo,
-      "programPdfUrl": programPdf.asset->url
+      photo
     }
   `);
   return events.map((e: any) => ({ params: { slug: e.slug }, props: { event: e } }));
@@ -31,11 +30,11 @@ const eventDate = new Date(event.startDate).toLocaleDateString('de-DE', {
   month: 'long',
   year: 'numeric',
 });
-const fallbackOgPhoto =
-  'https://images.unsplash.com/photo-1654909345733-868817fd0f76?w=1200&h=630&fit=crop&q=85';
+// OG-Image: Terminfoto, wenn vorhanden — sonst greift BaseLayouts
+// eigener Marken-Default (kein Unsplash-Fallback mehr, 03.07.).
 const ogImage = event.photo?.asset
   ? urlFor(event.photo).width(1200).height(630).fit('crop').auto('format').quality(85).url()
-  : fallbackOgPhoto;
+  : undefined;
 ---
 
 <BaseLayout
@@ -107,12 +106,6 @@ const ogImage = event.photo?.asset
             )}
           </p>
         </aside>
-      )}
-
-      {event.programPdfUrl && (
-        <p style="margin-top: 2rem;">
-          <a href={event.programPdfUrl} target="_blank" rel="noopener">Programm-PDF →</a>
-        </p>
       )}
 
       <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">

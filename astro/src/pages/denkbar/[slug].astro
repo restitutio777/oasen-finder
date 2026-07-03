@@ -37,8 +37,7 @@ export async function getStaticPaths() {
       _id, title, startDate, endDate, ownership,
       season, location,
       description,
-      registration, fees, photo,
-      "programPdfUrl": programPdf.asset->url
+      registration, fees, photo
     }
   `);
 
@@ -58,13 +57,13 @@ const kindLabels: Record<string, string> = {
 
 const title = localized(data.title) || (docType === 'event' ? 'Forschungstreffen' : 'Gedankenfaden');
 
-// OG-Image
-const fallbackOg = 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=630&fit=crop&q=85';
+// OG-Image: Hero-/Terminfoto, wenn vorhanden — sonst greift BaseLayouts
+// eigener Marken-Default (kein Unsplash-Fallback mehr, 03.07.).
 const ogImage = docType === 'note' && data.hero?.asset
   ? urlFor(data.hero).width(1200).height(630).fit('crop').auto('format').quality(85).url()
   : docType === 'event' && data.photo?.asset
     ? urlFor(data.photo).width(1200).height(630).fit('crop').auto('format').quality(85).url()
-    : fallbackOg;
+    : undefined;
 
 const descriptionText = docType === 'event'
   ? `Forschungstreffen am ${new Date(data.startDate).toLocaleDateString('de-DE')}${data.location ? ` in ${data.location}` : ''}`
@@ -171,11 +170,6 @@ const descriptionText = docType === 'event'
             </aside>
           )}
 
-          {data.programPdfUrl && (
-            <p style="margin-top: 1.5rem;">
-              <a href={data.programPdfUrl} target="_blank" rel="noopener">Programm herunterladen →</a>
-            </p>
-          )}
         </>
       )}
 
