@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "test": "node --test",
+    "build": "npm test && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "sanity:dev": "cd sanity && sanity dev",

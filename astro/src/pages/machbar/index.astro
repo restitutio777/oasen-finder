@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+import { isEventPast } from '../../lib/events.js';
 
 let events: any[] = [];
 if (isSanityConfigured) {
@@ -19,15 +20,8 @@ if (isSanityConfigured) {
   `);
 }
 
-// Ein Termin zählt erst als "vergangen", wenn er wirklich vorbei ist —
-// bei mehrtägigen Terminen also nach dem endDate, nicht schon nach dem
-// startDate. Sonst verschwindet ein laufender Termin unter "Vergangene
-// Termine", sobald er begonnen hat (Bug 03.07., z.B. "Nebenübungen zu
-// dritt": 29.6.–7.8., am 3.7. fälschlich als vergangen einsortiert).
-const now = new Date();
-const isPast = (e: any) => new Date(e.endDate || e.startDate) < now;
-const upcoming = events.filter((e) => !isPast(e));
-const past = events.filter((e) => isPast(e));
+const upcoming = events.filter((e) => !isEventPast(e));
+const past = events.filter((e) => isEventPast(e));
 ---
 
 <BaseLayout title="machBAR — werkSTATT Gemeinschaft" description="Werkstatt-Termine zu Miteinander-Leben, -Arbeiten, -Reden">

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NewsletterBlock from '../components/NewsletterBlock.astro';
 import { sanity, localized, isSanityConfigured } from '../lib/sanity';
+import { isEventPast } from '../lib/events.js';
 
 // Landing — Übersicht aller BARs.
 //
@@ -16,15 +17,17 @@ let latest: any[] = [];
 
 if (isSanityConfigured) {
   // Nächste Werkstatt-Termine — zeigen sich im Hero („Nächste Begegnung")
-  // und in der machBAR-Karte der Räume-Übersicht. Mehrtägige Termine
-  // zählen als "nächster/aktueller Termin" bis zum endDate, nicht nur
-  // bis zum startDate — sonst verschwindet ein laufender Termin aus der
-  // Vorschau, sobald er begonnen hat (Bug 03.07.).
-  upcomingEvents = await sanity.fetch(`
-    *[_type == "event" && (endDate >= now() || (!defined(endDate) && startDate >= now()))] | order(startDate asc) [0...3] {
-      _id, title, "slug": slug.current, startDate, location
+  // und in der machBAR-Karte der Räume-Übersicht. Filterung über
+  // isEventPast() (lib/events.js) statt einer eigenen GROQ-Bedingung,
+  // damit "vergangen vs. laufend/nächste" nur an einer Stelle im Code
+  // definiert ist (Bug 03.07.: zwei unabhängige, abweichende
+  // Implementierungen dieser Regel hatten den gleichen Fehler).
+  const allEvents = await sanity.fetch(`
+    *[_type == "event"] | order(startDate asc) {
+      _id, title, "slug": slug.current, startDate, endDate, location
     }
   `);
+  upcomingEvents = allEvents.filter((e: any) => !isEventPast(e)).slice(0, 3);
   // Mantra/Leitfrage aus dem About-Singleton — Pull-Quote unter dem Fold
   about = await sanity.fetch(`*[_type == "about" && _id == "about"][0]{ mantra }`);
 
