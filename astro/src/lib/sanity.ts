@@ -21,8 +21,17 @@ const config: ClientConfig = {
   projectId,
   dataset,
   apiVersion,
-  // Lese-Zugriff via CDN — schnell + kostenfrei für public datasets
-  useCdn: true,
+  /* useCdn MUSS hier false sein (Bug 11.07.): Der Vercel-Build startet
+     ~5 Sekunden nach Katharinas Publish (Deploy-Hook) — das API-CDN
+     lieferte da noch veraltete Daten. Folge: Der neue lesBAR-Eintrag
+     stand zwar in der Liste (eine Query traf frischen Cache), aber
+     getStaticPaths bekam ihn nicht (andere Query, alter Cache) → der
+     Klick aus der Liste lief die ganze Nacht auf 404. Gleiche Ursache,
+     wenn frisch hochgeladene Bilder nach dem Rebuild fehlten.
+     Die Site ist statisch, es gibt nur eine Handvoll Queries pro Build —
+     api.sanity.io ohne CDN ist immer konsistent-frisch und kostet hier
+     praktisch nichts. NICHT zurück auf true stellen. */
+  useCdn: false,
 };
 
 export const sanity = createClient(config);
