@@ -94,6 +94,38 @@ Für PDFs/Dokumente gilt dasselbe beim Feld **„Dokument-Anhang"** — dort üb
 
 ---
 
+## 5. Bild mitten im Text einfügen (neu!)
+
+Du kannst Bilder jetzt auch **direkt in den Text** setzen — genau an die
+Stelle, wo sie hingehören (z.B. zwischen zwei Absätze deines Berichts):
+
+1. Im Textfeld an die Stelle tippen, wo das Bild hin soll.
+2. Auf das **Bild-Symbol in der Werkzeugleiste** über dem Text tippen —
+   oder auf das **„+"**, das zwischen zwei Absätzen erscheint, und dann
+   **„Bild"** wählen.
+3. Wie gewohnt hochladen (Galerie/Kamera, siehe Punkt 4).
+4. Wenn du magst: eine **Bildunterschrift** dazuschreiben — sie erscheint
+   klein unter dem Bild.
+5. **Veröffentlichen** — fertig.
+
+Das **„Foto"-Feld** (unter „Bilder & Anhänge") gibt es weiterhin: das ist
+das große Bild **oben** im Beitrag. Bilder **im Text** kommen zusätzlich
+dazu, du kannst so viele einfügen, wie du möchtest.
+
+---
+
+## 6. Nach dem Veröffentlichen: 2–3 Minuten Geduld
+
+Nach dem Tippen auf **Publish** baut sich die Webseite einmal **neu** —
+das dauert **etwa 2 bis 3 Minuten**. So lange kann es aussehen, als wäre
+dein Text oder Bild „nicht angekommen". Ist es aber!
+
+- Kurz warten, dann die Webseite **neu laden** (nach unten wischen oder
+  Reload-Pfeil im Browser).
+- Wenn es nach **10 Minuten** immer noch fehlt: Screenshot an Reto.
+
+---
+
 ## Wenn mal gar nichts geht
 
 - **Internet prüfen** (WLAN/Mobilfunk) — Sanity braucht eine Verbindung.

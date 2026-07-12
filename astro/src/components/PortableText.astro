@@ -13,7 +13,7 @@
  *   <PortableText blocks={note.body?.de} />
  */
 import { toHTML, type PortableTextOptions } from '@portabletext/to-html';
-import { localized, type Locale } from '../lib/sanity';
+import { localized, urlFor, type Locale } from '../lib/sanity';
 
 export interface Props {
   /** Lokalisiertes PortableText-Feld (i18nText) oder direkt ein Block-Array */
@@ -36,7 +36,37 @@ const blocks = Array.isArray(value)
     ? localized(value, locale)
     : null;
 
+/** HTML-Escape für Nutzertext, der in Attribute/Markup eingebaut wird. */
+const esc = (s: string) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
 const components: PortableTextOptions['components'] = {
+  types: {
+    /* Bild im Fließtext (12.07.): Katharina fügt im Studio ein Bild
+       zwischen zwei Absätzen ein — hier wird es responsive gerendert.
+       Ohne diesen Handler würde @portabletext/to-html den Block still
+       verschlucken und das Bild erschiene nie auf der Seite. */
+    image: ({ value }) => {
+      const ref: string = value?.asset?._ref || value?.asset?._id || '';
+      if (!ref) return '';
+      // Originalmaße stecken im Asset-Namen (image-<hash>-<BxH>-<format>) —
+      // width/height am <img> verhindern Springen beim Laden.
+      const dims = /-(\d+)x(\d+)-/.exec(ref);
+      const w = 1200;
+      const h = dims ? Math.round((Number(dims[2]) / Number(dims[1])) * w) : undefined;
+      const src = (width: number) =>
+        urlFor(value).width(width).fit('max').auto('format').quality(80).url();
+      const srcset = [400, 800, 1200].map((x) => `${src(x)} ${x}w`).join(', ');
+      const caption = typeof value?.caption === 'string' ? value.caption.trim() : '';
+      return (
+        `<figure class="rich__image">` +
+        `<img src="${src(w)}" srcset="${srcset}" sizes="(max-width: 720px) 100vw, 680px"` +
+        ` alt="${esc(caption)}" loading="lazy" decoding="async" width="${w}"${h ? ` height="${h}"` : ''}>` +
+        (caption ? `<figcaption>${esc(caption)}</figcaption>` : '') +
+        `</figure>`
+      );
+    },
+  },
   block: {
     // Standard-Absatz
     normal: ({ children }) => `<p>${children}</p>`,
@@ -137,6 +167,24 @@ const html = blocks ? toHTML(blocks, { components }) : '';
     line-height: 1.6;
     color: var(--text-body, #4a3d5a);
     margin-top: 0.5em;
+  }
+  /* Bild im Textfluss (types.image) — etwas mehr Luft als Absätze,
+     gleiche Kantenrundung wie SanityImage. */
+  .rich .rich__image {
+    margin: 2em 0;
+  }
+  .rich .rich__image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+  .rich .rich__image figcaption {
+    margin-top: 0.5rem;
+    font-family: var(--font-display, 'Cormorant Garamond', serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-secondary, #6a5a78);
   }
 
   /* Gedicht-Layout (kind === 'poesie'): ersetzt die Artikel-Typo durch

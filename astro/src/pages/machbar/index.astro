@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
-import { isEventPast } from '../../lib/events.js';
+import { isEventPast, isEventArchived } from '../../lib/events.js';
 
 let events: any[] = [];
 if (isSanityConfigured) {
@@ -10,18 +10,39 @@ if (isSanityConfigured) {
      (Katharinas Entscheidung 19.05.: überregionale Forschungstreffen
      gehören in die Zukunftsschmiede, nicht zu den klassischen Werkstatt-
      Terminen). Default-Wert „werkstatt" + kein-kind-gesetzt sind beide
-     OK für machBAR. */
+     OK für machBAR.
+     _updatedAt (Sanitys letzter Publish-Zeitpunkt) braucht isEventArchived(). */
   events = await sanity.fetch(`
     *[_type == "event" && (kind != "forschungstreffen" || !defined(kind))] | order(startDate asc) {
-      _id, title, "slug": slug.current, startDate, endDate, ownership,
+      _id, _updatedAt, title, "slug": slug.current, startDate, endDate, ownership,
       season, location, format, dogFriendly,
       "thumb": photo { asset->{ url } }
     }
   `);
 }
 
+/* Drei Stufen statt zwei (12.07.): Ein gerade beendeter oder frisch
+   veröffentlichter Termin bleibt sichtbar im „Rückblick", bevor er ins
+   eingeklappte „Vergangene Termine" rutscht — sonst verschwindet ein
+   eben publizierter Bericht sofort unauffindbar (siehe lib/events.js). */
 const upcoming = events.filter((e) => !isEventPast(e));
-const past = events.filter((e) => isEventPast(e));
+const lookback = events
+  .filter((e) => isEventPast(e) && !isEventArchived(e))
+  .sort((a, b) => +new Date(b.endDate || b.startDate) - +new Date(a.endDate || a.startDate));
+const past = events
+  .filter((e) => isEventArchived(e))
+  .sort((a, b) => +new Date(b.startDate) - +new Date(a.startDate));
+
+const longDate = (d: string) =>
+  new Date(d).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
+
+/** Datums-/Ort-Zeile der Termin-Karte — identisch für „Nächste" und „Rückblick". */
+function eventMeta(e: any): string {
+  let s = longDate(e.startDate);
+  if (e.endDate && e.endDate !== e.startDate) s += ` bis ${longDate(e.endDate)}`;
+  const ort = e.format === 'online' ? 'Online-Treffen' : e.location;
+  return ort ? `${s} · ${ort}` : s;
+}
 ---
 
 <BaseLayout title="machBAR — werkSTATT Gemeinschaft" description="Werkstatt-Termine zu Miteinander-Leben, -Arbeiten, -Reden">
@@ -55,7 +76,7 @@ const past = events.filter((e) => isEventPast(e));
             {upcoming.map((e) => (
               <li>
                 <a href={`/machbar/${e.slug}/`} style="display: block; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border-subtle); text-decoration: none; color: inherit;">
-                  <p class="eyebrow">{new Date(e.startDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}{e.endDate && e.endDate !== e.startDate && ` bis ${new Date(e.endDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}`}{(e.format === 'online' || e.location) && ' · '}{e.format === 'online' ? 'Online-Treffen' : e.location}</p>
+                  <p class="eyebrow">{eventMeta(e)}</p>
                   <h3 style="font-family: var(--font-display); margin: 0.5rem 0;">{localized(e.title)}</h3>
                   {e.dogFriendly && e.format !== 'online' && <span style="font-size: 12px; color: var(--accent);">🐕 Carla willkommen</span>}
                 </a>
@@ -65,8 +86,27 @@ const past = events.filter((e) => isEventPast(e));
         </>
       )}
 
-      {events.length === 0 && (
+      {upcoming.length === 0 && (
         <p style="color: var(--text-secondary);">Die nächsten Termine stehen noch nicht fest — schau bald wieder vorbei.</p>
+      )}
+
+      {/* Rückblick: gerade beendete oder frisch veröffentlichte Termine —
+          volle Karte, gleiche Aufmachung wie oben. Erst nach der Schonfrist
+          (lib/events.js) rutschen sie ins eingeklappte Archiv darunter. */}
+      {lookback.length > 0 && (
+        <>
+          <h2 class="eyebrow" style="margin-top: 2rem;">Rückblick</h2>
+          <ul style="list-style: none; padding: 0; display: grid; gap: 1.5rem; margin: 1rem 0 3rem;">
+            {lookback.map((e) => (
+              <li>
+                <a href={`/machbar/${e.slug}/`} style="display: block; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border-subtle); text-decoration: none; color: inherit;">
+                  <p class="eyebrow">{eventMeta(e)}</p>
+                  <h3 style="font-family: var(--font-display); margin: 0.5rem 0;">{localized(e.title)}</h3>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
       )}
 
       {past.length > 0 && (
@@ -75,7 +115,7 @@ const past = events.filter((e) => isEventPast(e));
           <ul style="list-style: none; padding: 1rem 0; display: grid; gap: 0.75rem;">
             {past.map((e) => (
               <li>
-                <a href={`/machbar/${e.slug}/`} style="text-decoration: none; color: var(--text-secondary);">
+                <a href={`/machbar/${e.slug}/`} style="text-decoration: none; color: var(--text-secondary); border-bottom: 1px solid var(--border-subtle);">
                   {new Date(e.startDate).toLocaleDateString('de-DE')} — {localized(e.title)}
                 </a>
               </li>
