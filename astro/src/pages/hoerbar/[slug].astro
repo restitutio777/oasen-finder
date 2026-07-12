@@ -83,11 +83,7 @@ const ogImage = episode.coverUrl
         </>
       ) : episode.url ? (
         <MediaLink url={episode.url} label={`Auf ${episode.platform} öffnen`} />
-      ) : (
-        <p style="margin: 1.5rem 0; color: var(--text-secondary); font-style: italic;">
-          Audio folgt — diese Episode ist angekündigt, aber noch nicht eingespielt.
-        </p>
-      )}
+      ) : null}
 
       <div style="margin-top: 2rem;">
         <PortableText value={episode.summary} />
