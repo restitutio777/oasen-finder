@@ -128,12 +128,14 @@ const html = blocks ? toHTML(blocks, { components }) : '';
     color: var(--text-primary, #2d2435);
   }
   .rich a {
-    color: var(--accent, #c89a78);
-    border-bottom: 1px solid currentColor;
+    color: var(--link, #8a6348);
+    font-weight: 600;
+    border-bottom: 1.5px solid currentColor;
+    text-underline-offset: 2px;
     transition: color 200ms ease;
   }
   .rich a:hover {
-    color: var(--accent-hover, #a87e5e);
+    color: var(--link-hover, #6d4d38);
   }
   .rich__h2 {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
