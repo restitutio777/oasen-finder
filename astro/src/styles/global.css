@@ -41,8 +41,8 @@
     /* — 3. Akzente ——————————————————————————————————— */
     --accent:            #c89a78;  /* CHAMPAGNE-GOLD · Brand-Anker, CTAs, BAR-Marken */
     --accent-hover:      #a87e5e;  /* Champagne tiefer · Hover */
-    --link:              #2f6b85;  /* Fließtext-Links · abgedunkeltes Bergsee-Türkis (Brand-Echo zum „Gemeinschaft"-Logo-Schriftzug), ~5.5:1 auf --bg-base (WCAG-AA lesbar). Reines --accent-blue (#5497b8) läge nur bei ~3:1 und wäre für Fließtext zu kontrastarm. Katharinas Wunsch (14.07.): Türkis aus dem Logo als Link-Kontrastfarbe. */
-    --link-hover:        #234f63;  /* Türkis noch tiefer · Hover */
+    --link:              #3a7894;  /* Fließtext-Links · Bergsee-Türkis, so nah wie möglich am Logo-Ton --accent-blue (#5497b8) während noch WCAG-AA (~4.5:1 auf --bg-base) eingehalten wird. Reines --accent-blue läge nur bei ~3:1. Katharinas Wunsch (14.07.): Türkis aus dem Logo als Link-Kontrastfarbe, möglichst nah am Original. */
+    --link-hover:        #2c5a6f;  /* Türkis noch tiefer · Hover */
     --accent-soft:       #e8d2b5;  /* Champagne hell · auf dunklem Grund */
     --accent-blue:       #5497b8;  /* BERGSEE-TÜRKIS · bewegBAR, „Gemeinschaft"-Logo */
     --accent-deep:       #8a6caa;  /* PLUM · schreibBAR, Mantra */
