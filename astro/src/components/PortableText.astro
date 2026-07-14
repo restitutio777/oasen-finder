@@ -115,7 +115,10 @@ const html = blocks ? toHTML(blocks, { components }) : '';
   }
   .rich p {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
-    font-size: clamp(17px, 1.4vw, 19px);
+    /* Mindestgröße 18px (statt 17px) — Cormorant Garamond wirkt auf
+       kleinen Screens dünner als Sans-Serif, braucht daher etwas mehr
+       Größe für bequeme Lesbarkeit (Katharina 14.07.). */
+    font-size: clamp(18px, 1.4vw, 20px);
     line-height: 1.7;
     color: var(--text-body, #4a3d5a);
   }
@@ -165,7 +168,7 @@ const html = blocks ? toHTML(blocks, { components }) : '';
   }
   .rich__list li {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
-    font-size: clamp(17px, 1.4vw, 19px);
+    font-size: clamp(18px, 1.4vw, 20px);
     line-height: 1.6;
     color: var(--text-body, #4a3d5a);
     margin-top: 0.5em;
