@@ -41,8 +41,8 @@
     /* — 3. Akzente ——————————————————————————————————— */
     --accent:            #c89a78;  /* CHAMPAGNE-GOLD · Brand-Anker, CTAs, BAR-Marken */
     --accent-hover:      #a87e5e;  /* Champagne tiefer · Hover */
-    --link:              #7d6250;  /* Fließtext-Links · gedämpftes Bronze (leicht entsättigt), ~4.6:1 auf --bg-base (WCAG-AA lesbar), bleibt in der warmen Champagne-Familie. Champagne (--accent) war auf Creme zu hell/schwer lesbar (Katharina 14.07.). */
-    --link-hover:        #634d3e;  /* Bronze noch tiefer · Hover */
+    --link:              #3a7894;  /* Fließtext-Links · Bergsee-Türkis, so nah wie möglich am Logo-Ton --accent-blue (#5497b8) während noch WCAG-AA (~4.5:1 auf --bg-base) eingehalten wird. Reines --accent-blue läge nur bei ~3:1. Katharinas Wunsch (14.07.): Türkis aus dem Logo als Link-Kontrastfarbe, möglichst nah am Original. */
+    --link-hover:        #2c5a6f;  /* Türkis noch tiefer · Hover */
     --accent-soft:       #e8d2b5;  /* Champagne hell · auf dunklem Grund */
     --accent-blue:       #5497b8;  /* BERGSEE-TÜRKIS · bewegBAR, „Gemeinschaft"-Logo */
     --accent-deep:       #8a6caa;  /* PLUM · schreibBAR, Mantra */
