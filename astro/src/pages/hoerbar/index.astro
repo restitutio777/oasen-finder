@@ -7,15 +7,25 @@ let episodes: any[] = [];
 if (isSanityConfigured) {
   episodes = await sanity.fetch(`
     *[_type == "episode"] | order(publishedAt desc) {
-      _id, episodeNumber, title, platform, url, publishedAt,
+      _id, episodeNumber, title, kind, platform, url, publishedAt,
       "slug": slug.current,
       "thumb": cover { asset->{ url } }
     }
   `);
 }
+
+/* Kennzeichnung der Episoden-Art — analog zu Notiz/Poesie in der schreibBAR.
+   Alte Episoden ohne `kind` zeigen einfach kein Label. */
+const KIND_LABELS: Record<string, string> = {
+  gespraech: 'Gespräch',
+  vortrag: 'Vortrag',
+  gedicht: 'Gedicht',
+  lied: 'Lied',
+  reflexion: 'Reflexion',
+};
 ---
 
-<BaseLayout title="hörBAR — werkSTATT Gemeinschaft" description="Eingesprochene Reflexionen, Gedichte und Lieder">
+<BaseLayout title="hörBAR — werkSTATT Gemeinschaft" description="Eingesprochene Reflexionen, Gespräche, Vorträge, Gedichte und Lieder">
   <PageBanner
     photo="photo-1693778259075-c47eda5e4b43"
     alt="Frau hält eine Muschel ans Ohr und blickt aufs Meer"
@@ -28,7 +38,7 @@ if (isSanityConfigured) {
         hör<em>BAR</em>
       </h1>
       <p style="font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.4rem); font-style: italic; color: var(--text-secondary); margin-bottom: 1rem;">
-        Reflexionen, Gedichte, Lieder
+        Reflexionen, Gespräche, Vorträge, Gedichte, Lieder
       </p>
       <p style="max-width: 600px; color: var(--text-body);">
         Eingesprochene Gedanken. Plus Gespräche von und mit Menschen, denen
@@ -46,9 +56,15 @@ if (isSanityConfigured) {
           <li class={idx >= 8 ? 'is-hidden' : ''}>
             <a href={`/hoerbar/${ep.slug}/`} style="display: block; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; text-decoration: none; color: inherit;">
               <p class="eyebrow">
-                {ep.episodeNumber && `#${ep.episodeNumber} · `}
-                {ep.platform} · {new Date(ep.publishedAt).toLocaleDateString('de-DE')}
+                {[
+                  ep.episodeNumber && `#${ep.episodeNumber}`,
+                  ep.platform,
+                  new Date(ep.publishedAt).toLocaleDateString('de-DE'),
+                ].filter(Boolean).join(' · ')}
               </p>
+              {ep.kind && KIND_LABELS[ep.kind] && (
+                <span class="entry__tag" data-tag={ep.kind} style="margin-top: 0.5rem;">{KIND_LABELS[ep.kind]}</span>
+              )}
               <h3 style="font-family: var(--font-display); margin: 0.5rem 0;">{localized(ep.title)}</h3>
             </a>
           </li>
