@@ -4,21 +4,23 @@ import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 /**
- * brauchBAR — Konzepte und Werkzeuge für die Praxis des Miteinander.
+ * brauchBAR — Webseiten, Konzepte und Werkzeuge für die Praxis des
+ * Miteinander.
  *
  * Schwester-Raum zur lesBAR: lesBAR zeigt Quellen (Bücher, Artikel,
- * Filme, Podcasts), brauchBAR zeigt Konzepte und Werkzeuge —
- * dieselbe Sanity-Resource-Schema, andere kind-Filterung.
+ * Filme, Podcasts), brauchBAR zeigt Webseiten, Konzepte und Werkzeuge
+ * (Kath 18.07.: „Webseite, Konzept, Werkzeug") — dieselbe
+ * Sanity-Resource-Schema, andere kind-Filterung.
  *
  * Eigene Detail-Pages unter /brauchbar/[slug]/ (Kath · 19.05.: URL
- * soll zum Eingangs-Raum passen). lesBAR/[slug] filtert konzept/
- * werkzeug raus, jeder Doc hat genau eine kanonische URL.
+ * soll zum Eingangs-Raum passen). lesBAR/[slug] filtert webseite/
+ * konzept/werkzeug raus, jeder Doc hat genau eine kanonische URL.
  */
 
 let resources: any[] = [];
 if (isSanityConfigured) {
   resources = await sanity.fetch(`
-    *[_type == "resource" && kind in ["konzept", "werkzeug"]] | order(_createdAt desc) {
+    *[_type == "resource" && kind in ["webseite", "konzept", "werkzeug"]] | order(_createdAt desc) {
       _id, title, kind, authorOrSource, note, "slug": slug.current
     }
   `);
@@ -31,13 +33,20 @@ const byKind = resources.reduce((acc: Record<string, any[]>, r) => {
   return acc;
 }, {});
 
+// Rubriken-Reihenfolge fix (Katharinas Nennung), nicht nach Erstelldatum
+const kindOrder = ['webseite', 'konzept', 'werkzeug'];
+const sortedKinds = Object.entries(byKind).sort(
+  ([a], [b]) => kindOrder.indexOf(a) - kindOrder.indexOf(b),
+);
+
 const kindLabels: Record<string, string> = {
+  webseite: 'Webseiten',
   konzept: 'Konzepte',
   werkzeug: 'Werkzeuge',
 };
 ---
 
-<BaseLayout title="brauchBAR — werkSTATT Gemeinschaft" description="Konzepte und Werkzeuge für die Praxis des Miteinander">
+<BaseLayout title="brauchBAR — werkSTATT Gemeinschaft" description="Webseiten, Konzepte und Werkzeuge für die Praxis des Miteinander">
   <PageBanner
     photo="photo-1590880795696-20c7dfadacde"
     alt="Traditionelle Holz-Werkstatt mit Werkzeugen, Werkbänken und warmem Tageslicht durch Fenster"
@@ -50,11 +59,11 @@ const kindLabels: Record<string, string> = {
         brauch<em>BAR</em>
       </h1>
       <p style="font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.4rem); font-style: italic; color: var(--text-secondary); margin-bottom: 1rem;">
-        Konzepte und Werkzeuge
+        Webseiten, Konzepte und Werkzeuge
       </p>
       <p style="max-width: 640px; color: var(--text-body); margin-bottom: 2rem;">
-        Was sich in der Praxis als hilfreich erweist — gesammelte Konzepte,
-        Methoden und kleine Werkzeuge für das Miteinander-Leben,
+        Was sich in der Praxis als hilfreich erweist — gesammelte Webseiten,
+        Konzepte, Methoden und kleine Werkzeuge für das Miteinander-Leben,
         -Arbeiten und -Reden
       </p>
 
@@ -62,7 +71,7 @@ const kindLabels: Record<string, string> = {
         <p style="color: var(--text-secondary);">Noch keine Einträge — die brauchBAR füllt sich, sobald die ersten Konzepte und Werkzeuge in Sanity stehen.</p>
       )}
 
-      {Object.entries(byKind).map(([kind, items]) => (
+      {sortedKinds.map(([kind, items]) => (
         <section style="margin-bottom: 3rem;">
           <h2 class="eyebrow">{kindLabels[kind] || kind}</h2>
           <ul style="list-style: none; padding: 0; margin-top: 1rem; display: grid; gap: 1rem;">

@@ -3,9 +3,9 @@
  * brauchBAR-Detail — Konzepte und Werkzeuge.
  *
  * Schwester-Route zu /lesbar/[slug]: beide Pages teilen das Sanity-
- * Schema `resource`, getrennt nur durch den kind-Filter. Konzepte
- * und Werkzeuge leben unter brauchBAR (eigener Raum, eigene URL),
- * Bücher/Artikel/Filme/Podcasts/Gespräche unter lesBAR.
+ * Schema `resource`, getrennt nur durch den kind-Filter. Webseiten,
+ * Konzepte und Werkzeuge leben unter brauchBAR (eigener Raum, eigene
+ * URL), Bücher/Artikel/Filme/Podcasts/Gespräche unter lesBAR.
  *
  * Render-Logik bewusst identisch zu lesbar/[slug].astro gehalten —
  * gleiche Felder, gleiches Layout, nur Raum-Label und Zurück-Link
@@ -21,7 +21,7 @@ import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
   const resources = await sanity.fetch(`
-    *[_type == "resource" && kind in ["konzept", "werkzeug"] && defined(slug.current)] {
+    *[_type == "resource" && kind in ["webseite", "konzept", "werkzeug"] && defined(slug.current)] {
       "slug": slug.current, _id, title, kind, authorOrSource,
       note,
       link,
@@ -35,6 +35,7 @@ export async function getStaticPaths() {
 const { resource } = Astro.props;
 
 const kindLabels: Record<string, string> = {
+  webseite: 'Webseite',
   konzept: 'Konzept',
   werkzeug: 'Werkzeug',
 };

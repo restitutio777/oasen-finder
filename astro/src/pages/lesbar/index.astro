@@ -5,10 +5,10 @@ import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 let resources: any[] = [];
 if (isSanityConfigured) {
-  // konzept/werkzeug-Resources leben jetzt unter /brauchbar/
+  // webseite/konzept/werkzeug-Resources leben jetzt unter /brauchbar/
   // — die lesBAR zeigt nur Bücher, Artikel, Filme, Podcasts, Gespräche.
   resources = await sanity.fetch(`
-    *[_type == "resource" && !(kind in ["konzept", "werkzeug"])] | order(_createdAt desc) {
+    *[_type == "resource" && !(kind in ["webseite", "konzept", "werkzeug"])] | order(_createdAt desc) {
       _id, title, kind, authorOrSource, "slug": slug.current,
       "thumb": coverImage { asset->{ url } }
     }
@@ -25,7 +25,6 @@ const byKind = resources.reduce((acc: Record<string, any[]>, r) => {
 
 const kindLabels: Record<string, string> = {
   buch: 'Bücher',
-  webseite: 'Webseiten',
   aufsatz: 'Aufsätze',
   film: 'Filme',
   podcast: 'Podcasts',
@@ -33,7 +32,7 @@ const kindLabels: Record<string, string> = {
 };
 ---
 
-<BaseLayout title="lesBAR — werkSTATT Gemeinschaft" description="Bücher, Webseiten und Werkzeuge zu Fragen des Miteinander">
+<BaseLayout title="lesBAR — werkSTATT Gemeinschaft" description="Bücher, Artikel und Gedichte zu Fragen des Miteinander">
   <PageBanner
     photo="/banner/lesbar-buecherregal.jpeg"
     alt="Dreireihiges Bücherregal mit bunten Buchrücken — oben Orange/Rot, mittig Grün/Gelb, unten Blau"
@@ -49,9 +48,9 @@ const kindLabels: Record<string, string> = {
         Quellen, Werkzeuge, Stimmen
       </p>
       <p style="max-width: 640px; color: var(--text-body); margin-bottom: 2rem;">
-        Bücher, Artikel, Webseiten und Gedichte zu Fragen des Miteinander —
-        mit kurzer Notiz, warum sie hier stehen. Für Konzepte und Werkzeuge
-        siehe die <a href="/brauchbar/">brauchBAR</a>
+        Bücher, Artikel und Gedichte zu Fragen des Miteinander —
+        mit kurzer Notiz, warum sie hier stehen. Für Webseiten, Konzepte
+        und Werkzeuge siehe die <a href="/brauchbar/">brauchBAR</a>
       </p>
 
       {resources.length === 0 && (

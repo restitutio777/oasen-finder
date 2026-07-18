@@ -56,7 +56,7 @@ const mantra: string | undefined = localized(about?.mantra);
 // Spiegelt die Routing-Logik der Detail-Seiten:
 //   note  notiz/poesie        → /schreibbar/   · idee/vision/umfrage → /denkbar/
 //   event werkstatt           → /machbar/      · forschungstreffen   → /denkbar/
-//   resource buch/film/…      → /lesbar/       · konzept/werkzeug    → /brauchbar/
+//   resource buch/film/…      → /lesbar/  · webseite/konzept/werkzeug → /brauchbar/
 //   station / episode / wonder→ /bewegbar/ · /hoerbar/ · /wunderbar/
 // Farben folgen den Raum-Akzenten von Header und Räume-Übersicht. lesBAR
 // nutzt hier --text-secondary (statt des sehr hellen --neutral), damit das
@@ -75,7 +75,7 @@ function roomFor(item: any): RoomMeta {
         ? { base: 'denkbar', label: 'denkBAR', accent: 'var(--accent-hover)' }
         : { base: 'machbar', label: 'machBAR', accent: 'var(--accent)' };
     case 'resource':
-      return ['konzept', 'werkzeug'].includes(k)
+      return ['webseite', 'konzept', 'werkzeug'].includes(k)
         ? { base: 'brauchbar', label: 'brauchBAR', accent: 'var(--text-primary)' }
         : { base: 'lesbar', label: 'lesBAR', accent: 'var(--text-secondary)' };
     case 'station':
@@ -340,8 +340,8 @@ const latestItems = latest
           { slug: 'machbar', eyebrow: 'Werkstatt', stem: 'mach', desc: 'Werkstatt-Termine zum Mitmachen — drei Themen, im Jahres-Rhythmus', accent: 'var(--accent)' },
           { slug: 'bewegbar', eyebrow: 'Reisen', stem: 'beweg', desc: 'Orte, an denen ich war — Ökodörfer, Cohousing-Projekte und gemeinsame Lebensorte, auf einer Karte', accent: 'var(--accent-blue)' },
           { slug: 'hoerbar', eyebrow: 'Audio', stem: 'hör', desc: 'Eingesprochene Reflexionen, Gedichte, Lieder — plus Gespräche mit Menschen, die in Gemeinschaft leben', accent: 'var(--accent-mauve)' },
-          { slug: 'lesbar', eyebrow: 'Bibliothek', stem: 'les', desc: 'Bücher, Webseiten und Quellen zu Fragen des Miteinander', accent: 'var(--neutral)' },
-          { slug: 'brauchbar', eyebrow: 'Werkzeuge', stem: 'brauch', desc: 'Konzepte und Werkzeuge — was sich in der Praxis als hilfreich erweist', accent: 'var(--text-primary)' },
+          { slug: 'lesbar', eyebrow: 'Bibliothek', stem: 'les', desc: 'Bücher, Artikel und Quellen zu Fragen des Miteinander', accent: 'var(--neutral)' },
+          { slug: 'brauchbar', eyebrow: 'Werkzeuge', stem: 'brauch', desc: 'Webseiten, Konzepte und Werkzeuge — was sich in der Praxis als hilfreich erweist', accent: 'var(--text-primary)' },
           { slug: 'wunderbar', eyebrow: 'Kreatives', stem: 'wunder', desc: 'Was nicht in die anderen Räume passt — spielerisch, offen, ungeordnet', accent: 'var(--accent-green)' },
         ].map((room) => (
           <a class="room-card" href={`/${room.slug}/`} style={`--card-accent: ${room.accent};`}>

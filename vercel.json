@@ -6,7 +6,9 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "redirects": [
-    { "source": "/sitemap.xml", "destination": "/sitemap-index.xml", "permanent": true }
+    { "source": "/sitemap.xml", "destination": "/sitemap-index.xml", "permanent": true },
+    { "source": "/lesbar/anthroposophie-lebensnah/", "destination": "/brauchbar/anthroposophie-lebensnah/", "permanent": true },
+    { "source": "/lesbar/wortgetreu-com/", "destination": "/brauchbar/wortgetreu-com/", "permanent": true }
   ],
   "headers": [
     {

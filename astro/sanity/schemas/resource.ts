@@ -4,7 +4,9 @@ import { docGroups, accentColorField } from './_shared';
 
 /**
  * LesBAR-Eintrag (+ BrauchBAR via kind-Filter).
- * Bücher, Webseiten, Filme, Podcasts, Gespräche, plus Konzepte/Werkzeuge.
+ * Bücher, Aufsätze, Filme, Podcasts, Gespräche — plus Webseiten/Konzepte/
+ * Werkzeuge, die in der brauchBAR leben (Kath 18.07.: „Webseite, Konzept,
+ * Werkzeug").
  */
 export const resource = defineType({
   name: 'resource',
@@ -27,11 +29,11 @@ export const resource = defineType({
       options: {
         list: [
           { title: 'Buch', value: 'buch' },
-          { title: 'Webseite', value: 'webseite' },
           { title: 'Aufsatz / Artikel', value: 'aufsatz' },
           { title: 'Film', value: 'film' },
           { title: 'Podcast', value: 'podcast' },
           { title: 'Gespräch', value: 'gespraech' },
+          { title: 'Webseite (BrauchBAR)', value: 'webseite' },
           { title: 'Konzept (BrauchBAR)', value: 'konzept' },
           { title: 'Werkzeug (BrauchBAR)', value: 'werkzeug' },
         ],
@@ -94,7 +96,7 @@ export const resource = defineType({
     prepare({ title, kind, authorOrSource, media }) {
       const kindLabel: Record<string, string> = {
         buch: 'Buch',
-        webseite: 'Webseite',
+        webseite: 'Webseite (brauchBAR)',
         aufsatz: 'Aufsatz',
         film: 'Film',
         podcast: 'Podcast',

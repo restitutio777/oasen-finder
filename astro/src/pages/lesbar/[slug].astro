@@ -7,12 +7,12 @@ import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity'
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
-  /* Filter: kind nicht in konzept/werkzeug — diese leben unter
-     /brauchbar/[slug]. Sonst entstünden zwei URLs pro Doc, die
+  /* Filter: kind nicht in webseite/konzept/werkzeug — diese leben
+     unter /brauchbar/[slug]. Sonst entstünden zwei URLs pro Doc, die
      gleichen Inhalt zeigen (URL-Sprung-Problem aus der Karten-
      Analyse — Kath stimmte 19.05. der Trennung zu). */
   const resources = await sanity.fetch(`
-    *[_type == "resource" && !(kind in ["konzept", "werkzeug"]) && defined(slug.current)] {
+    *[_type == "resource" && !(kind in ["webseite", "konzept", "werkzeug"]) && defined(slug.current)] {
       "slug": slug.current, _id, title, kind, authorOrSource,
       note,
       link,
@@ -27,11 +27,11 @@ const { resource } = Astro.props;
 
 const kindLabels: Record<string, string> = {
   buch: 'Buch',
-  webseite: 'Webseite',
   aufsatz: 'Aufsatz',
   film: 'Film',
   podcast: 'Podcast',
   gespraech: 'Gespräch',
+  webseite: 'Webseite · brauchBAR',
   konzept: 'Konzept · brauchBAR',
   werkzeug: 'Werkzeug · brauchBAR',
 };

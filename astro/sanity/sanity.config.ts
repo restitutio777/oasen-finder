@@ -77,16 +77,16 @@ export default defineConfig({
               .child(
                 S.documentTypeList('resource')
                   .title('lesBAR — Quellen')
-                  .filter('_type == "resource" && !(kind in ["konzept", "werkzeug"])'),
+                  .filter('_type == "resource" && !(kind in ["webseite", "konzept", "werkzeug"])'),
               ),
             S.listItem()
-              .title('brauchBAR — Konzepte & Werkzeuge')
+              .title('brauchBAR — Webseiten, Konzepte & Werkzeuge')
               .id('brauchbar')
               .icon(WrenchIcon)
               .child(
                 S.documentTypeList('resource')
-                  .title('brauchBAR — Konzepte & Werkzeuge')
-                  .filter('_type == "resource" && kind in ["konzept", "werkzeug"]')
+                  .title('brauchBAR — Webseiten, Konzepte & Werkzeuge')
+                  .filter('_type == "resource" && kind in ["webseite", "konzept", "werkzeug"]')
                   .initialValueTemplates([
                     S.initialValueTemplateItem('resource-brauchbar'),
                   ]),
