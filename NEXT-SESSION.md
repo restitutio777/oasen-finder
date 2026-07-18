@@ -2,6 +2,22 @@
 
 *Aktueller Stand 18. Juli 2026 ganz oben. Ältere Stände darunter als historische Schnappschüsse.*
 
+## STAND 19.07.2026 — brauchBAR mit Webseiten
+
+### brauchBAR: Webseite als dritte Art (Katharinas Wunsch 18.07., Commit `5d9ff3c`)
+
+- brauchBAR = **Webseiten, Konzepte, Werkzeuge**. Art `webseite` wandert komplett von der lesBAR in die brauchBAR — gleicher kind-Wert, keine Datenmigration. Dropdown-Label im Studio: „Webseite (BrauchBAR)".
+- Alle kind-Filter angepasst (Studio-Struktur, brauchbar/lesbar Index + Detail, Startseiten-Router, erkennBAR/Startseiten-Beschreibungen). Rubriken-Reihenfolge auf /brauchbar/ fix: Webseiten → Konzepte → Werkzeuge.
+- 308-Redirects in `vercel.json` für die zwei umgezogenen Einträge (`/lesbar/anthroposophie-lebensnah/`, `/lesbar/wortgetreu-com/` → `/brauchbar/…`).
+- Studio am 19.07. deployt (Schema-Manifest verifiziert).
+
+### „gelogen" im Sanity-Dashboard (Katharinas Frage 18.07., 20:40)
+
+- Kein Inhalt heißt so: Volltext-Suche über Dataset (inkl. Drafts), Dokument-Historie des Dante-Eintrags und Asset-Dateinamen ergab **null Treffer** für „gelogen". Der Dante-Eintrag heißt korrekt „Dante mal anders".
+- Das Wort erscheint nur in der „Zuletzt angesehen"-Liste des sanity.io-Dashboards (Mobile), die auch sonst falsche Titel zeigt (brauchBAR-Einträge erscheinen dort als „Konzept"/„Werkzeug" statt mit echtem Titel). Anzeige-Bug des Sanity-Dashboards, nicht unserer Inhalte — Studio und Website sind sauber.
+
+---
+
 ## STAND 18.07.2026 — hörBAR-Kennzeichnung live, lesBAR-Beschreibung bereinigt
 
 ### hörBAR: Episoden-Art (Katharinas Wunsch, PR #7, Commit `8e00a46`)
