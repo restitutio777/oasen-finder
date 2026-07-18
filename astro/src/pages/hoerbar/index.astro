@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageBanner from '../../components/PageBanner.astro';
+import ListFilter from '../../components/ListFilter.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 let episodes: any[] = [];
@@ -23,6 +24,20 @@ const KIND_LABELS: Record<string, string> = {
   lied: 'Lied',
   reflexion: 'Reflexion',
 };
+
+/* Art-Filter: erscheint erst ab FILTER_THRESHOLD Episoden automatisch
+   (darunter würde er eher leer wirken). Zeigt nur Arten, die es wirklich
+   gibt, und nur wenn mindestens zwei verschiedene existieren. */
+const FILTER_THRESHOLD = 20;
+const KIND_ORDER = ['gespraech', 'vortrag', 'gedicht', 'lied', 'reflexion'];
+const kindCounts: Record<string, number> = {};
+for (const ep of episodes) {
+  if (ep.kind) kindCounts[ep.kind] = (kindCounts[ep.kind] ?? 0) + 1;
+}
+const filters = KIND_ORDER
+  .filter((k) => kindCounts[k])
+  .map((k) => ({ value: k, label: KIND_LABELS[k], count: kindCounts[k] }));
+const showFilter = episodes.length >= FILTER_THRESHOLD && filters.length >= 2;
 ---
 
 <BaseLayout title="hörBAR — werkSTATT Gemeinschaft" description="Eingesprochene Reflexionen, Gespräche, Vorträge, Gedichte und Lieder">
@@ -51,31 +66,35 @@ const KIND_LABELS: Record<string, string> = {
         </p>
       )}
 
-      <ul style="list-style: none; padding: 0; display: grid; gap: 1.5rem; margin-top: 2rem;">
-        {episodes.map((ep, idx) => (
-          <li class={idx >= 8 ? 'is-hidden' : ''}>
-            <a href={`/hoerbar/${ep.slug}/`} style="display: block; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; text-decoration: none; color: inherit;">
-              <p class="eyebrow">
-                {[
-                  ep.episodeNumber && `#${ep.episodeNumber}`,
-                  ep.platform,
-                  new Date(ep.publishedAt).toLocaleDateString('de-DE'),
-                ].filter(Boolean).join(' · ')}
-              </p>
-              {ep.kind && KIND_LABELS[ep.kind] && (
-                <span class="entry__tag" data-tag={ep.kind} style="margin-top: 0.5rem;">{KIND_LABELS[ep.kind]}</span>
-              )}
-              <h3 style="font-family: var(--font-display); margin: 0.5rem 0;">{localized(ep.title)}</h3>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div class="filterable">
+        {showFilter && <ListFilter filters={filters} total={episodes.length} />}
 
-      {episodes.length > 8 && (
-        <div class="load-more-wrap">
-          <button class="load-more" type="button">Weitere anzeigen ({episodes.length - 8})</button>
-        </div>
-      )}
+        <ul style="list-style: none; padding: 0; display: grid; gap: 1.5rem; margin-top: 2rem;">
+          {episodes.map((ep, idx) => (
+            <li class={`filterable-item${idx >= 8 ? ' is-hidden' : ''}`} data-kind={ep.kind}>
+              <a href={`/hoerbar/${ep.slug}/`} style="display: block; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; text-decoration: none; color: inherit;">
+                <p class="eyebrow">
+                  {[
+                    ep.episodeNumber && `#${ep.episodeNumber}`,
+                    ep.platform,
+                    new Date(ep.publishedAt).toLocaleDateString('de-DE'),
+                  ].filter(Boolean).join(' · ')}
+                </p>
+                {ep.kind && KIND_LABELS[ep.kind] && (
+                  <span class="entry__tag" data-tag={ep.kind} style="margin-top: 0.5rem;">{KIND_LABELS[ep.kind]}</span>
+                )}
+                <h3 style="font-family: var(--font-display); margin: 0.5rem 0;">{localized(ep.title)}</h3>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {episodes.length > 8 && (
+          <div class="load-more-wrap">
+            <button class="load-more" type="button">Weitere anzeigen ({episodes.length - 8})</button>
+          </div>
+        )}
+      </div>
     </div>
   </section>
 </BaseLayout>

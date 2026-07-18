@@ -185,6 +185,46 @@
     color: var(--text-inverse);
   }
 
+  /* Art-Filter über einer Listing-Liste (hörBAR, schreibBAR …).
+     Erscheint serverseitig erst ab Schwelle (siehe ListFilter.astro); JS im
+     BaseLayout schaltet die Sichtbarkeit. Pillen im Champagne-Farbsystem. */
+  .list-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0 4px;
+  }
+  .list-filter__btn {
+    font-family: var(--font-text);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--text-secondary);
+    background: transparent;
+    border: 1.5px solid var(--text-muted);
+    border-radius: 999px;
+    padding: 6px 15px;
+    cursor: pointer;
+    transition: background var(--t-fast) var(--ease),
+                color var(--t-fast) var(--ease),
+                border-color var(--t-fast) var(--ease);
+  }
+  .list-filter__btn:hover {
+    color: var(--text-primary);
+    border-color: var(--accent);
+  }
+  .list-filter__btn.is-active {
+    color: var(--text-inverse);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .list-filter__count {
+    opacity: 0.6;
+    margin-left: 3px;
+    font-variant-numeric: tabular-nums;
+  }
+  .list-filter__btn.is-active .list-filter__count { opacity: 0.75; }
+
   /* ---------- Header ---------- */
   .site-header {
     position: sticky;

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageBanner from '../../components/PageBanner.astro';
+import ListFilter from '../../components/ListFilter.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 
 /**
@@ -23,6 +24,20 @@ if (isSanityConfigured) {
     }
   `);
 }
+
+/* Art-Filter (Notiz/Poesie): erscheint erst ab FILTER_THRESHOLD Einträgen
+   automatisch und nur, wenn mindestens zwei Arten vorkommen. */
+const FILTER_THRESHOLD = 20;
+const NOTE_LABELS: Record<string, string> = { notiz: 'Notiz', poesie: 'Poesie' };
+const NOTE_ORDER = ['notiz', 'poesie'];
+const noteCounts: Record<string, number> = {};
+for (const n of notes) {
+  if (n.kind) noteCounts[n.kind] = (noteCounts[n.kind] ?? 0) + 1;
+}
+const filters = NOTE_ORDER
+  .filter((k) => noteCounts[k])
+  .map((k) => ({ value: k, label: NOTE_LABELS[k], count: noteCounts[k] }));
+const showFilter = notes.length >= FILTER_THRESHOLD && filters.length >= 2;
 ---
 
 <BaseLayout
@@ -59,9 +74,11 @@ if (isSanityConfigured) {
       )}
 
       {notes.length > 0 && (
+        <div class="filterable">
+        {showFilter && <ListFilter filters={filters} total={notes.length} />}
         <ol class="chronicle__list">
           {notes.map((note, idx) => (
-            <li class={`entry${idx >= 8 ? ' is-hidden' : ''}`}>
+            <li class={`entry filterable-item${idx >= 8 ? ' is-hidden' : ''}`} data-kind={note.kind}>
               <span class="entry__bead" aria-hidden="true"></span>
               <div class="entry__date">
                 <span class="entry__day">{new Date(note.publishedAt).getDate()}</span>
@@ -85,11 +102,11 @@ if (isSanityConfigured) {
             </li>
           ))}
         </ol>
-      )}
-
-      {notes.length > 8 && (
-        <div class="load-more-wrap">
-          <button class="load-more" type="button">Weitere anzeigen ({notes.length - 8})</button>
+        {notes.length > 8 && (
+          <div class="load-more-wrap">
+            <button class="load-more" type="button">Weitere anzeigen ({notes.length - 8})</button>
+          </div>
+        )}
         </div>
       )}
     </div>

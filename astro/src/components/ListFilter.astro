@@ -1,0 +1,34 @@
+---
+/**
+ * ListFilter — Art-Filter über einer Listing-Liste (hörBAR, schreibBAR …).
+ *
+ * Erscheint nur, wenn die Seite genug Inhalte hat (Schwelle, Default 20) —
+ * darunter würde ein Filter eher leer wirken als helfen. Die Sichtbarkeits-
+ * Logik + Zusammenspiel mit „Weitere anzeigen" steckt im Inline-Script in
+ * BaseLayout.astro; hier wird nur die Leiste gerendert.
+ *
+ * Voraussetzung im Aufrufer:
+ *  - Liste + Button in <div class="filterable"> wickeln, diese Komponente als
+ *    erstes Kind einsetzen.
+ *  - Jedes Listen-Item bekommt `class="… filterable-item"` und `data-kind={kind}`.
+ *
+ * Props:
+ *  - filters: { value, label, count }[]  — nur tatsächlich vorkommende Arten
+ *  - total:   Gesamtzahl (Label des „Alle"-Buttons)
+ */
+interface FilterOption { value: string; label: string; count: number }
+const { filters = [], total = 0 } = Astro.props as {
+  filters: FilterOption[];
+  total: number;
+};
+---
+<div class="list-filter" role="group" aria-label="Nach Art filtern">
+  <button class="list-filter__btn is-active" type="button" data-filter="all">
+    Alle <span class="list-filter__count">{total}</span>
+  </button>
+  {filters.map((f) => (
+    <button class="list-filter__btn" type="button" data-filter={f.value}>
+      {f.label} <span class="list-filter__count">{f.count}</span>
+    </button>
+  ))}
+</div>

@@ -122,10 +122,67 @@ const ogLocale = locale === 'de' ? 'de_DE' : locale === 'fr' ? 'fr_FR' : 'en_US'
       document.addEventListener('click', (e) => {
         const btn = e.target instanceof Element ? e.target.closest('.load-more') : null;
         if (!btn) return;
+        /* Nur wenn tatsächlich eine Filterleiste da ist, steuert das
+           Filter-Script (unten) „Weitere anzeigen" selbst. Ohne Leiste
+           (unter der Schwelle) bleibt dieser einfache Handler zuständig. */
+        const box = btn.closest('.filterable');
+        if (box && box.querySelector('.list-filter')) return;
         const wrap = btn.closest('.load-more-wrap');
         if (!wrap || !wrap.parentElement) return;
         wrap.parentElement.querySelectorAll('.is-hidden').forEach((el) => el.classList.remove('is-hidden'));
         wrap.remove();
+      });
+    </script>
+
+    {/* Art-Filter (hörBAR, schreibBAR …): erscheint ab Schwelle automatisch
+        (Rendering + Schwelle in ListFilter.astro bzw. der Seite). Steuert
+        Sichtbarkeit der Items und das Zusammenspiel mit „Weitere anzeigen":
+        - „Alle": erste 8 sichtbar, Button blendet den Rest ein (wie gehabt).
+        - Eine Art gewählt: alle Einträge dieser Art sichtbar, Button aus. */}
+    <script is:inline>
+      document.querySelectorAll('.filterable').forEach((box) => {
+        const bar = box.querySelector('.list-filter');
+        if (!bar) return; // unter der Schwelle: kein Filter, Standard-Handler greift
+        const items = Array.from(box.querySelectorAll('.filterable-item'));
+        const buttons = Array.from(bar.querySelectorAll('.list-filter__btn'));
+        const moreWrap = box.querySelector('.load-more-wrap');
+        // „Overflow"-Items = die, die initial per is-hidden versteckt sind
+        const overflow = new WeakSet();
+        items.forEach((li) => { if (li.classList.contains('is-hidden')) overflow.add(li); });
+        let active = 'all';
+        let expanded = false;
+
+        const apply = () => {
+          items.forEach((li) => {
+            const kind = li.getAttribute('data-kind') || '';
+            const show = active === 'all' ? (expanded || !overflow.has(li)) : kind === active;
+            li.classList.toggle('is-hidden', !show);
+          });
+          if (moreWrap) {
+            const showMore = active === 'all' && !expanded && items.some((li) => overflow.has(li));
+            moreWrap.style.display = showMore ? '' : 'none';
+          }
+          buttons.forEach((b) => {
+            const on = b.getAttribute('data-filter') === active;
+            b.classList.toggle('is-active', on);
+            b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+        };
+
+        bar.addEventListener('click', (e) => {
+          const b = e.target instanceof Element ? e.target.closest('.list-filter__btn') : null;
+          if (!b) return;
+          active = b.getAttribute('data-filter') || 'all';
+          apply();
+        });
+        if (moreWrap) {
+          moreWrap.addEventListener('click', (e) => {
+            if (!(e.target instanceof Element) || !e.target.closest('.load-more')) return;
+            expanded = true;
+            apply();
+          });
+        }
+        apply();
       });
     </script>
   </body>
