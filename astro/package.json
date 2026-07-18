@@ -14,8 +14,8 @@
     "build": "npm test && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "sanity:dev": "cd sanity && sanity dev",
-    "sanity:deploy": "cd sanity && sanity deploy"
+    "sanity:dev": "cd sanity && npm run dev",
+    "sanity:deploy": "cd sanity && npm run deploy"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
