@@ -1,6 +1,22 @@
 # Nächste Session — Wiedereinstieg
 
-*Aktueller Stand 29. Juni 2026 ganz oben. Der Hand-off vom 12. Mai steht darunter als historischer Schnappschuss.*
+*Aktueller Stand 18. Juli 2026 ganz oben. Ältere Stände darunter als historische Schnappschüsse.*
+
+## STAND 18.07.2026 — hörBAR-Kennzeichnung live, lesBAR-Beschreibung bereinigt
+
+### hörBAR: Episoden-Art (Katharinas Wunsch, PR #7, Commit `8e00a46`)
+
+- **Neues Pflichtfeld `episode.kind`** („Art", Radio): Gespräch · Vortrag · Gedicht · Lied · Reflexion *(Default: Reflexion)* — analog zu Notiz/Poesie in der schreibBAR.
+- **Anzeige:** farbiges `entry__tag`-Label über dem Titel in der hörBAR-Liste + Art in der Eyebrow-Zeile und Meta-Description der Detailseite. Art-Farben in `global.css` *(Gespräch = Bergsee-Türkis, Vortrag = Plum, Gedicht = Champagne, Lied = Frühlingsblatt, Reflexion = Berry-Plum)*.
+- **Abwärtskompatibel:** Episoden ohne gesetzte Art zeigen einfach kein Label. Eyebrow/Description werden aus vorhandenen Teilen zusammengesetzt *(behebt auch das hängende „·" bei `platform: null`)*.
+- **Art-Filter** (Commit `164c5bd`): Pillen-Filterleiste über hörBAR- und schreibBAR-Liste, erscheint automatisch ab 20 Einträgen und mindestens zwei Arten.
+- **Studio deployt am 18.07.** — das Art-Feld ist im Live-Studio verifiziert *(create-schema.json im Studio-Static enthält `episode.kind` mit allen 5 Optionen)*.
+- **Für Katharina offen:** Die 4 bestehenden Episoden einmal im Studio öffnen und die Art anklicken — dann erscheint das Label auf der Site.
+
+### lesBAR: Beschreibung ohne Filme/Podcasts (PR #8)
+
+- Filme und Podcasts leben in der hörBAR — die lesBAR-Beschreibungen erwähnen sie nicht mehr: Startseiten-Raumkarte, lesBAR-Seite (Meta-Description + Intro) und erkennBAR-`defaultDescription`.
+- Die Rubriken „Filme"/„Podcasts" **innerhalb** der lesBAR-Liste bleiben — vorhandene Einträge dieser Art werden weiterhin angezeigt.
 
 ## STAND 29.06.2026 — PRODUKTIV auf reise-zueinander.de
 
