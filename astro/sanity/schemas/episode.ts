@@ -30,6 +30,24 @@ export const episode = defineType({
       options: { source: 'title.de', maxLength: 96 },
     }),
     defineField({
+      name: 'kind',
+      title: 'Art',
+      description: 'Wird auf der Website als Kennzeichnung angezeigt — wie Notiz/Poesie in der schreibBAR.',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Gespräch', value: 'gespraech' },
+          { title: 'Vortrag', value: 'vortrag' },
+          { title: 'Gedicht', value: 'gedicht' },
+          { title: 'Lied', value: 'lied' },
+          { title: 'Reflexion', value: 'reflexion' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'reflexion',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'platform',
       title: 'Plattform',
       description: 'Wenn die Folge auf YouTube/Spotify/Apple Music liegt, wähle die Plattform. Wenn du die Audio-Datei direkt in Sanity hochlädst (unten), kann das hier auf „Direkt-Upload" stehen.',
@@ -93,15 +111,23 @@ export const episode = defineType({
   preview: {
     select: {
       title: 'title.de',
+      kind: 'kind',
       platform: 'platform',
       publishedAt: 'publishedAt',
       number: 'episodeNumber',
       media: 'cover',
     },
-    prepare({ title, platform, publishedAt, number, media }) {
+    prepare({ title, kind, platform, publishedAt, number, media }) {
+      const kindLabel: Record<string, string> = {
+        gespraech: 'Gespräch',
+        vortrag: 'Vortrag',
+        gedicht: 'Gedicht',
+        lied: 'Lied',
+        reflexion: 'Reflexion',
+      };
       return {
         title: number ? `#${number} — ${title || '(ohne Titel)'}` : title || '(ohne Titel)',
-        subtitle: [platform, publishedAt].filter(Boolean).join(' · '),
+        subtitle: [kindLabel[kind], platform, publishedAt].filter(Boolean).join(' · '),
         media,
       };
     },

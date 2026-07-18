@@ -1835,6 +1835,12 @@
   /* Tag-Differenzierung nach Sektion — bringt subtle Lebendigkeit ohne Chaos */
   .entry__tag[data-tag="werkstatt"] { color: var(--accent-green); }
   .entry__tag[data-tag="poesie"] { color: var(--accent); }
+  /* hörBAR-Episoden-Arten (Gespräch/Vortrag/Gedicht/Lied/Reflexion) */
+  .entry__tag[data-tag="gespraech"] { color: var(--accent-blue); }
+  .entry__tag[data-tag="vortrag"] { color: var(--accent-deep); }
+  .entry__tag[data-tag="gedicht"] { color: var(--accent); }
+  .entry__tag[data-tag="lied"] { color: var(--accent-green); }
+  .entry__tag[data-tag="reflexion"] { color: var(--accent-mauve); }
   .entry__title {
     font-size: clamp(20px, 1.8vw, 24px);
     line-height: 1.2;

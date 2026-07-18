@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
   const eps = await sanity.fetch(`
     *[_type == "episode" && defined(slug.current)] {
-      "slug": slug.current, _id, episodeNumber, title, platform, url,
+      "slug": slug.current, _id, episodeNumber, title, kind, platform, url,
       publishedAt,
       summary,
       "coverUrl": cover.asset->url,
@@ -24,6 +24,16 @@ export async function getStaticPaths() {
 const { episode } = Astro.props;
 
 const episodeTitle = localized(episode.title) || 'Episode';
+
+/* Kennzeichnung der Episoden-Art — analog zur schreibBAR. */
+const KIND_LABELS: Record<string, string> = {
+  gespraech: 'Gespräch',
+  vortrag: 'Vortrag',
+  gedicht: 'Gedicht',
+  lied: 'Lied',
+  reflexion: 'Reflexion',
+};
+const kindLabel = episode.kind ? KIND_LABELS[episode.kind] : undefined;
 // OG-Image: Cover, wenn vorhanden — sonst greift BaseLayouts eigener
 // Marken-Default (kein Unsplash-Fallback mehr, 03.07.).
 const ogImage = episode.coverUrl
@@ -33,7 +43,11 @@ const ogImage = episode.coverUrl
 
 <BaseLayout
   title={`${episodeTitle} — hörBAR`}
-  description={`Episode${episode.episodeNumber ? ` #${episode.episodeNumber}` : ''} auf ${episode.platform}`}
+  description={[
+    `hörBAR-Episode${episode.episodeNumber ? ` #${episode.episodeNumber}` : ''}`,
+    kindLabel,
+    episode.platform && `auf ${episode.platform}`,
+  ].filter(Boolean).join(' · ')}
   image={ogImage}
   ogType="article"
 >
@@ -41,7 +55,12 @@ const ogImage = episode.coverUrl
     <div class="container" style="max-width: 720px;">
       <a href="/hoerbar/" style="color: var(--accent); font-size: 14px;">← Zurück zur hörBAR</a>
       <span class="eyebrow" style="display: inline-block; margin-top: 1.5rem;">
-        hörBAR {episode.episodeNumber && `· #${episode.episodeNumber}`} · {episode.platform}
+        {[
+          'hörBAR',
+          episode.episodeNumber && `#${episode.episodeNumber}`,
+          kindLabel,
+          episode.platform,
+        ].filter(Boolean).join(' · ')}
       </span>
       <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); margin: 0.5rem 0 1rem;">
         {localized(episode.title)}
