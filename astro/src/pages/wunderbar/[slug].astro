@@ -5,6 +5,7 @@ import SanityImage from '../../components/SanityImage.astro';
 import MediaLink from '../../components/MediaLink.astro';
 import ShareButton from '../../components/ShareButton.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+import { withSafeSlugs } from '../../lib/slug.js';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
@@ -19,7 +20,9 @@ export async function getStaticPaths() {
     }
   `);
 
-  return entries.map((entry: any) => ({
+  // withSafeSlugs: Slug aus Sanity nur übernehmen, wenn er als Adress-
+  // Segment taugt — sonst aus dem Titel neu bilden (siehe lib/slug.js).
+  return withSafeSlugs(entries).map((entry: any) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));

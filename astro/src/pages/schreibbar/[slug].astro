@@ -5,6 +5,7 @@ import SanityImage from '../../components/SanityImage.astro';
 import MediaLink from '../../components/MediaLink.astro';
 import ShareButton from '../../components/ShareButton.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+import { withSafeSlugs } from '../../lib/slug.js';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
@@ -24,7 +25,11 @@ export async function getStaticPaths() {
     }
   `);
 
-  return notes.map((note: any) => ({
+  /* withSafeSlugs: Der Slug aus Sanity wird nur übernommen, wenn er als
+     Adress-Segment taugt — sonst aus dem Titel neu gebildet. Genau hier
+     ist am 05.08. der komplette Build gescheitert, weil in „URL-Adresse"
+     ein Google-Photos-Link stand (siehe lib/slug.js). */
+  return withSafeSlugs(notes).map((note: any) => ({
     params: { slug: note.slug },
     props: { note },
   }));

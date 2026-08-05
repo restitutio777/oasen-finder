@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { PinIcon } from '@sanity/icons';
-import { docGroups, accentColorField } from './_shared';
+import { docGroups, accentColorField, slugField } from './_shared';
 
 /**
  * BewegBAR-Station — ein besuchter Gemeinschaftsort.
@@ -107,14 +107,7 @@ export const station = defineType({
       options: { accept: 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,text/plain' },
       group: 'medien',
     }),
-    defineField({
-      name: 'slug',
-      title: 'URL-Adresse',
-      description: 'Wird beim Veröffentlichen automatisch aus dem Namen generiert — du kannst sie hier auch eigenständig setzen, wenn du möchtest.',
-      type: 'slug',
-      options: { source: 'name', maxLength: 96 },
-      group: 'mehr',
-    }),
+    slugField({ source: 'name', group: 'mehr' }),
     defineField({
       name: 'coordinates',
       title: 'Karten-Koordinaten (automatisch)',

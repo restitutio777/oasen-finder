@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import ListFilter from '../../components/ListFilter.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+import { withSafeSlugs } from '../../lib/slug.js';
 
 let episodes: any[] = [];
 if (isSanityConfigured) {
@@ -13,6 +14,9 @@ if (isSanityConfigured) {
       "thumb": cover { asset->{ url } }
     }
   `);
+  /* Gleiche Slug-Absicherung wie in hoerbar/[slug].astro — sonst zeigt
+     die Liste auf eine Adresse, die es dort nicht gibt. */
+  episodes = withSafeSlugs(episodes);
 }
 
 /* Kennzeichnung der Episoden-Art — analog zu Notiz/Poesie in der schreibBAR.

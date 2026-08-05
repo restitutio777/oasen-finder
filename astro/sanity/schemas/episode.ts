@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { PlayIcon } from '@sanity/icons';
+import { slugField } from './_shared';
 
 /**
  * HörBAR-Episode — eingesprochene Reflexion, Gedicht, Lied, oder Gespräch.
@@ -22,13 +23,7 @@ export const episode = defineType({
       type: 'i18nString',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'slug',
-      title: 'URL-Adresse',
-      description: 'Wird beim Veröffentlichen automatisch aus dem Titel generiert — du kannst sie hier auch eigenständig setzen, wenn du möchtest.',
-      type: 'slug',
-      options: { source: 'title.de', maxLength: 96 },
-    }),
+    slugField({ source: 'title.de' }),
     defineField({
       name: 'kind',
       title: 'Art',

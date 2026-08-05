@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { CalendarIcon } from '@sanity/icons';
-import { accentColorField } from './_shared';
+import { accentColorField, slugField } from './_shared';
 
 /**
  * MachBAR-Event — Werkstatt-Termin.
@@ -169,14 +169,7 @@ export const event = defineType({
       options: { accept: 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,text/plain' },
       group: 'medien',
     }),
-    defineField({
-      name: 'slug',
-      title: 'URL-Adresse',
-      description: 'Wird beim Veröffentlichen automatisch aus dem Titel generiert — du kannst sie hier auch eigenständig setzen, wenn du möchtest.',
-      type: 'slug',
-      options: { source: 'title.de', maxLength: 96 },
-      group: 'mehr',
-    }),
+    slugField({ source: 'title.de', group: 'mehr' }),
     defineField({
       name: 'locationCoords',
       title: 'Koordinaten (für Karten-Verschneidung)',

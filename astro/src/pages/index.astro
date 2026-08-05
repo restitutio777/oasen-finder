@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import NewsletterBlock from '../components/NewsletterBlock.astro';
 import { sanity, localized, isSanityConfigured } from '../lib/sanity';
 import { isEventPast } from '../lib/events.js';
+import { withSafeSlugs } from '../lib/slug.js';
 
 // Landing — Übersicht aller BARs.
 //
@@ -35,19 +36,33 @@ if (isSanityConfigured) {
   // quer durch alle Räume. Abkürzung für Besucher: zeigt auf einen Blick,
   // wo zuletzt etwas dazukam, mit Direktlink — ohne jeden Raum einzeln zu
   // öffnen. Bewusst nur drei Einträge und reine Textzeilen, damit es nicht
-  // mit der Raum-Übersicht („Wohin als nächstes?") konkurriert. Sortiert
-  // nach _updatedAt (Sanitys Zeitpunkt der letzten Veröffentlichung);
+  // mit der Raum-Übersicht („Wohin als nächstes?") konkurriert.
+  //
+  // Sortiert und datiert nach _createdAt (05.08.: vorher _updatedAt).
+  // _updatedAt springt bei JEDER Änderung hoch — eine korrigierte
+  // Tippfehler-Zeile in einer alten Notiz katapultierte sie zurück an die
+  // Spitze und zeigte hier das heutige Datum, während dieselbe Notiz in
+  // der schreibBAR weiter ihr echtes Datum trug. Genau diese Unstimmigkeit
+  // hat Katharina gemeldet. _createdAt ist der Zeitpunkt der ERSTEN
+  // Veröffentlichung — passt zur Überschrift, bleibt stabil und ist das
+  // einzige Datumsfeld, das alle sechs Doc-Types gemeinsam haben.
+  //
   // defined(slug.current) sichert, dass nur verlinkbare Einträge erscheinen.
   latest = await sanity.fetch(`
     *[
       _type in ["note", "station", "event", "resource", "episode", "wonder"]
       && defined(slug.current)
-    ] | order(_updatedAt desc) [0...3] {
-      _type, _id, _updatedAt, kind,
+    ] | order(_createdAt desc) [0...3] {
+      _type, _id, _createdAt, kind,
       "slug": slug.current,
       title, name
     }
   `);
+  /* Gleiche Slug-Absicherung wie auf den Detailseiten — ein unbrauchbarer
+     Slug würde hier sonst direkt von der Startseite ins Leere führen. */
+  latest = withSafeSlugs(latest, (item: any) =>
+    item._type === 'station' ? item.name : item.title?.de,
+  );
 }
 
 const mantra: string | undefined = localized(about?.mantra);
@@ -99,8 +114,8 @@ const latestItems = latest
       title: title || '(ohne Titel)',
       href: `/${room.base}/${item.slug}/`,
       room,
-      updatedAt: item._updatedAt as string,
-      dateLabel: item._updatedAt ? latestDateFmt.format(new Date(item._updatedAt)) : '',
+      publishedAt: item._createdAt as string,
+      dateLabel: item._createdAt ? latestDateFmt.format(new Date(item._createdAt)) : '',
     };
   })
   .filter((i) => i.room.base);
@@ -188,7 +203,7 @@ const latestItems = latest
                   {item.dateLabel && (
                     <>
                       <span class="freshly__dot" aria-hidden="true">·</span>
-                      <time class="freshly__time" datetime={item.updatedAt}>{item.dateLabel}</time>
+                      <time class="freshly__time" datetime={item.publishedAt}>{item.dateLabel}</time>
                     </>
                   )}
                 </span>

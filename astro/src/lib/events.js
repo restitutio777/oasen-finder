@@ -44,8 +44,11 @@ export const LOOKBACK_AFTER_PUBLISH_DAYS = 14;
  *
  * Bewusst _updatedAt statt _createdAt: Der Sommer-Werkstatt-Eintrag
  * wurde im Mai angelegt, der Bericht aber erst im Juli eingepflegt —
- * _createdAt hätte ihn trotzdem sofort archiviert. Die Startseite
- * („Zuletzt veröffentlicht") nutzt _updatedAt genauso.
+ * _createdAt hätte ihn trotzdem sofort archiviert. Hier ist „zuletzt
+ * angefasst" also die richtige Frage. Die Startseite („Zuletzt
+ * veröffentlicht") fragt seit 05.08. das Gegenteil und nutzt deshalb
+ * _createdAt: Dort soll eine Tippfehler-Korrektur einen alten Eintrag
+ * NICHT wieder nach oben holen.
  *
  * @param {{ startDate: string, endDate?: string | null, _updatedAt?: string | null }} event
  * @param {Date} [now]

@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+import { withSafeSlugs } from '../../lib/slug.js';
 
 let resources: any[] = [];
 if (isSanityConfigured) {
@@ -13,6 +14,9 @@ if (isSanityConfigured) {
       "thumb": coverImage { asset->{ url } }
     }
   `);
+  /* Gleiche Slug-Absicherung wie in lesbar/[slug].astro — sonst zeigt
+     die Liste auf eine Adresse, die es dort nicht gibt. */
+  resources = withSafeSlugs(resources);
 }
 
 // Gruppierung nach kind

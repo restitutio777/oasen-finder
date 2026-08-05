@@ -17,6 +17,7 @@ import PortableText from '../../components/PortableText.astro';
 import MediaLink from '../../components/MediaLink.astro';
 import ShareButton from '../../components/ShareButton.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+import { withSafeSlugs } from '../../lib/slug.js';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
@@ -29,7 +30,12 @@ export async function getStaticPaths() {
       "pdfUrl": pdfAttachment.asset->url
     }
   `);
-  return resources.map((r: any) => ({ params: { slug: r.slug }, props: { resource: r } }));
+  // withSafeSlugs: Slug aus Sanity nur übernehmen, wenn er als Adress-
+  // Segment taugt — sonst aus dem Titel neu bilden (siehe lib/slug.js).
+  return withSafeSlugs(resources).map((r: any) => ({
+    params: { slug: r.slug },
+    props: { resource: r },
+  }));
 }
 
 const { resource } = Astro.props;

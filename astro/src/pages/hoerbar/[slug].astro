@@ -4,6 +4,7 @@ import PortableText from '../../components/PortableText.astro';
 import MediaLink from '../../components/MediaLink.astro';
 import ShareButton from '../../components/ShareButton.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+import { withSafeSlugs } from '../../lib/slug.js';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
@@ -18,7 +19,12 @@ export async function getStaticPaths() {
       "transcriptUrl": transcriptPdf.asset->url
     }
   `);
-  return eps.map((ep: any) => ({ params: { slug: ep.slug }, props: { episode: ep } }));
+  // withSafeSlugs: Slug aus Sanity nur übernehmen, wenn er als Adress-
+  // Segment taugt — sonst aus dem Titel neu bilden (siehe lib/slug.js).
+  return withSafeSlugs(eps).map((ep: any) => ({
+    params: { slug: ep.slug },
+    props: { episode: ep },
+  }));
 }
 
 const { episode } = Astro.props;

@@ -4,9 +4,11 @@
  *   - note (kind ∈ idee/vision/umfrage)  → Gedankenfaden
  *   - event (kind = forschungstreffen)   → Termin
  *
- * Slug-Collision-Risiko zwischen den beiden ist akzeptiert — Katharina
- * setzt Slugs selbst, im seltenen Konflikt würde Astro beim Build
- * einen Fehler werfen, dann kann sie den Slug umbenennen.
+ * Slug-Collision zwischen den beiden Doc-Types kann vorkommen, weil
+ * Katharina Slugs selbst setzen kann. Früher hätte Astro dann beim Build
+ * einen Fehler geworfen — seit 05.08. laufen beide Listen durch dieselbe
+ * withSafeSlugs()-Absicherung, die den zweiten Treffer auslässt statt
+ * den Build (und damit die ganze Site) scheitern zu lassen.
  *
  * Layout passt sich dem Doc-Type an: Note rendert wie eine schreibBAR-
  * Notiz (PortableText), Termin wie eine machBAR-Event-Page (Datum, Ort,
@@ -18,6 +20,7 @@ import SanityImage from '../../components/SanityImage.astro';
 import MediaLink from '../../components/MediaLink.astro';
 import ShareButton from '../../components/ShareButton.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
+import { withSafeSlugs } from '../../lib/slug.js';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
@@ -41,10 +44,16 @@ export async function getStaticPaths() {
     }
   `);
 
-  return [
-    ...notes.map((n: any) => ({ params: { slug: n.slug }, props: { docType: 'note', data: n } })),
-    ...treffen.map((t: any) => ({ params: { slug: t.slug }, props: { docType: 'event', data: t } })),
-  ];
+  /* Notizen und Termine gemeinsam durch die Slug-Absicherung: unbrauchbare
+     Slugs werden aus dem Titel neu gebildet, Kollisionen zwischen beiden
+     Listen fallen einmalig raus (siehe lib/slug.js). */
+  return withSafeSlugs([
+    ...notes.map((n: any) => ({ ...n, docType: 'note' })),
+    ...treffen.map((t: any) => ({ ...t, docType: 'event' })),
+  ]).map((entry: any) => ({
+    params: { slug: entry.slug },
+    props: { docType: entry.docType, data: entry },
+  }));
 }
 
 const { docType, data } = Astro.props;

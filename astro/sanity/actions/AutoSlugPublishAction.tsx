@@ -6,7 +6,7 @@ import {
   useClient,
 } from 'sanity';
 import { useToast } from '@sanity/ui';
-import { slugify } from '../lib/slugify';
+import { slugify, isUsableSlug } from '../lib/slugify';
 import { geocode } from '../lib/geocode';
 
 /**
@@ -14,8 +14,8 @@ import { geocode } from '../lib/geocode';
  * einem slug-Feld. Bevor das Dokument veröffentlicht wird, läuft die
  * Action durch ein paar Auto-Enrichment-Schritte:
  *
- *  1. Slug — wenn slug.current leer ist, generiere aus Titel
- *     (title.de oder name, je nach Schema).
+ *  1. Slug — wenn slug.current leer ODER unbrauchbar ist, generiere aus
+ *     Titel (title.de oder name, je nach Schema).
  *  2. Geocoding (nur für Stationen) — wenn address gefüllt und
  *     coordinates noch leer, hole Karten-Koordinaten via Nominatim
  *     (OpenStreetMap, kostenfrei, kein API-Key).
@@ -70,7 +70,18 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
       const titleSource: string | undefined =
         doc?.title?.de || doc?.name;
 
-      if (titleSource && !doc?.slug?.current) {
+      /* Nicht nur „leer", sondern „unbrauchbar" ist der Auslöser (05.08.):
+         In einer Notiz stand ein Google-Photos-Link im Adress-Feld. Astro
+         baut aus dem Slug den Dateipfad der Detailseite — mit Schrägstrichen
+         darin scheiterte der komplette Vercel-Build, und die Live-Site blieb
+         tagelang stehen, obwohl im Studio alles veröffentlicht aussah.
+         Deshalb wird eine kaputte Adresse hier beim Veröffentlichen still
+         durch eine saubere aus dem Titel ersetzt — mit sichtbarem Hinweis,
+         damit Katharina merkt, dass ihr Link woanders hingehört. */
+      const existingSlug: string | undefined = doc?.slug?.current;
+      const slugNeedsFix = !isUsableSlug(existingSlug);
+
+      if (titleSource && slugNeedsFix) {
         const generated = slugify(titleSource);
         if (generated) {
           // Eigener try/catch: ein fehlgeschlagener Slug-Patch darf
@@ -80,13 +91,24 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
               .patch(patchTargetId)
               .set({ slug: { _type: 'slug', current: generated } })
               .commit();
+            if (existingSlug) {
+              toast.push({
+                status: 'warning',
+                title: 'Adresse der Seite wurde korrigiert',
+                description:
+                  `Im Feld „Adresse dieser Seite" stand „${existingSlug}" — daraus lässt sich keine Web-Adresse bauen. ` +
+                  `Der Eintrag ist jetzt unter „${generated}" veröffentlicht. ` +
+                  'Falls du einen Link zeigen wolltest: Der gehört in „Externer Link" bzw. „Medien-Link".',
+                duration: 15000,
+              });
+            }
           } catch (err) {
             console.error('[AutoSlugPublishAction] Slug-Patch fehlgeschlagen:', err);
             toast.push({
               status: 'warning',
-              title: 'URL-Adresse konnte nicht automatisch gesetzt werden',
+              title: 'Adresse konnte nicht automatisch gesetzt werden',
               description:
-                'Der Eintrag wird trotzdem veröffentlicht. Du kannst die URL-Adresse bei Bedarf unter „Mehr" von Hand eintragen.',
+                'Der Eintrag wird trotzdem veröffentlicht. Du kannst „Adresse dieser Seite" bei Bedarf unter „Mehr" von Hand eintragen.',
             });
           }
         }

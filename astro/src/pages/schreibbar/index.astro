@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import ListFilter from '../../components/ListFilter.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
+import { withSafeSlugs } from '../../lib/slug.js';
 
 /**
  * schreibBAR — Notizen-Liste.
@@ -23,6 +24,9 @@ if (isSanityConfigured) {
       tags, "hero": hero { asset->{ url, metadata { dimensions } }, alt, caption }
     }
   `);
+  /* Gleiche Slug-Absicherung wie in schreibbar/[slug].astro — sonst zeigt
+     die Liste auf eine Adresse, die es dort nicht gibt. */
+  notes = withSafeSlugs(notes);
 }
 
 /* Art-Filter (Notiz/Poesie): erscheint erst ab FILTER_THRESHOLD Einträgen
