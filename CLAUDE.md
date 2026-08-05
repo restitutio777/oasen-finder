@@ -3,6 +3,12 @@
 Astro-Frontend + eingebettetes Sanity Studio. Live über Vercel, Studio unter
 https://werkstatt-gemeinschaft.sanity.studio/
 
+**Erst lesen, dann arbeiten:** `memory/MEMORY.md` (kompaktes Langzeitgedächtnis:
+Stand, Entscheidungen mit Begründung, offene Punkte, Stolpersteine). Details
+danach in `NEXT-SESSION.md` (chronologische Stände, neueste oben) und
+`CONTEXT.md`. `memory/SCRATCHPAD.md` ist nur für die laufende Aufgabe und wird
+danach geleert.
+
 ## Struktur
 
 - `astro/` — Astro-Site (eigenes npm-Projekt, eigenes `node_modules`)
@@ -26,7 +32,23 @@ in `astro/package.json` machen intern `cd sanity && npm run …` und funktionier
 ebenfalls aus `astro/`.
 
 Bei Login-Frage: `sanity login` im `astro/sanity/`-Ordner mit dem Account, zu dem
-dieses Projekt gehört (nicht automatisch der zuletzt eingeloggte).
+dieses Projekt gehört (nicht automatisch der zuletzt eingeloggte). Welcher Account
+gerade aktiv ist und ob er Zugriff hat: `npx sanity projects list` (muss
+`z6eclgt8 · WERKstatt Gemeinschaft` zeigen).
+
+## Studio-Links
+
+`werkstatt-gemeinschaft.sanity.studio` leitet auf Sanitys Dashboard weiter, der
+Pfad bleibt dabei erhalten. Deep-Links funktionieren also weiter:
+
+- Katharinas Alltagslink, direkt in die Notizen:
+  https://werkstatt-gemeinschaft.sanity.studio/structure/note
+- Ohne Weiterleitung (Backup):
+  `https://www.sanity.io/@ow7ACwTD3/studio/s46mw9a9tr31l8ffcu1sysv2/werkstatt-gemeinschaft/structure`
+
+Weitere Räume nach demselben Muster, `/structure/` plus Kennung aus
+`sanity.config.ts`: `note`, `event`, `station`, `episode`, `wonder`, `lesbar`,
+`brauchbar`, `about`, `contact`.
 
 ## Wichtig
 

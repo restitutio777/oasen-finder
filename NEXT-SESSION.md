@@ -1,6 +1,25 @@
 # Nächste Session — Wiedereinstieg
 
-*Aktueller Stand 18. Juli 2026 ganz oben. Ältere Stände darunter als historische Schnappschüsse.*
+*Aktueller Stand ganz oben. Ältere Stände darunter als historische Schnappschüsse.*
+
+## STAND 05.08.2026 — Build-Absturz durch Link im Slug-Feld, behoben
+
+**Symptom:** Katharina veröffentlicht, nichts erscheint. Vercel schickte Deploy-Failure-Mails.
+
+**Ursache:** In der Notiz „Vom Lebensfluss getragen" stand ein Google-Photos-Link im Feld „URL-Adresse" (slug). Astro baut daraus den Dateipfad der Detailseite; Schrägstriche darin lassen `getStaticPaths` mit `Missing parameter: slug` abbrechen und reißen den **gesamten** Build mit. Sie hatte den Link zusätzlich korrekt in „Medien-Link" eingetragen, der Wert stand also doppelt da (typischer Doppel-Paste am Handy). Ausfall ab ihrem ersten Publish 10:21 bis ~19:20, fünf verlorene Publishes. Der 25.07.-Stand davor war kein Ausfall, dazwischen wurde schlicht nichts veröffentlicht.
+
+**Fix (Commit `1ea8658`), vier Ebenen:**
+
+- `astro/src/lib/slug.js` (neu): `withSafeSlugs()` prüft jeden Slug aus Sanity, bildet einen unbrauchbaren aus dem Titel neu, wirft Duplikate raus. Läuft auf **allen** Detail- und Listenseiten. Wer eine neue Seite mit `slug.current` baut, muss diese Funktion benutzen, sonst zeigt die Liste auf eine Adresse, die die Route nicht kennt. Tests in `slug.test.js`, laufen bei jedem Build mit (`npm run build` ruft `npm test`).
+- `astro/sanity/schemas/_shared.ts`: `slugField()` für alle sechs Doc-Types. Feld heißt jetzt „Adresse dieser Seite" statt „URL-Adresse", mit Hilfetext und Validierung. Bewusst **Warnung statt Fehler**: Ein blockierter Publish-Button fühlt sich am Handy wie ein kaputtes Backend an.
+- `AutoSlugPublishAction`: repariert beim Publish auch einen unbrauchbaren (nicht nur fehlenden) Slug, mit erklärendem Toast.
+- Startseite „Zuletzt veröffentlicht": sortiert und datiert nach `_createdAt` statt `_updatedAt`. Vorher holte jede Tippfehler-Korrektur eine alte Notiz zurück an die Spitze und zeigte dort das heutige Datum, während dieselbe Notiz in der schreibBAR ihr echtes Datum trug. `isEventArchived()` in `lib/events.js` nutzt weiterhin bewusst `_updatedAt`, kein Widerspruch, Begründung steht dort im Kommentar.
+
+**Verifiziert:** Alle drei Beiträge vom 05.08. live, Detailseiten HTTP 200, Daten zwischen Startseite und Raum-Listen deckungsgleich. Studio deployt, das live ausgelieferte Bundle enthält alle drei Studio-Änderungen, der alte Feldname „URL-Adresse" kommt darin nicht mehr vor. Beide `slugify`-Implementierungen (Astro + Studio) liefern für Testtitel identische Ergebnisse.
+
+**Kosmetisch offen:** Der Link steht noch im Slug-Feld von `f21faaae-6c23-422b-953d-5b947c3cde8b`. Kein Handlungsdruck, kein Datenverlust (Link liegt korrekt in `mediaLink`), das Frontend leitet die Adresse aus dem Titel ab, und beim nächsten Publish räumt die Action das Feld selbst auf.
+
+---
 
 ## STAND 19.07.2026 — brauchBAR mit Webseiten
 
