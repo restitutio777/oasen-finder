@@ -2,6 +2,18 @@
 
 *Aktueller Stand ganz oben. Ältere Stände darunter als historische Schnappschüsse.*
 
+## STAND 04.09.2026 — Teilen-Button auch auf den Hauptseiten
+
+**Anlass:** Die Detailseiten trugen den `ShareButton` schon unter dem Beitrag, die Übersichts-Seiten gar nichts. Wer einen ganzen Raum weitergeben wollte, musste die URL aus der Adresszeile holen.
+
+**Umsetzung (Commit `0b50d83`):** Neue Komponente `astro/src/components/PageShare.astro` — kurze Haarlinie, eine Zeile in Cormorant-Italic („Diese Seite weitersagen"), darunter derselbe `ShareButton`. Kein neues Verhalten: Share-Sheet am Handy, Link-Kopie mit Bestätigung am Desktop, `prompt()` als letzter Notnagel. Kein Tracking, keine Third-Party-Widgets.
+
+**Wo:** Startseite und alle neun BAR-Übersichten. Auf der Landing hält der Block `--bg-warm-soft`, sonst entstünde zwischen Newsletter und Footer ein Farbsprung. Bewusst ausgelassen: Impressum, Datenschutz, Danke und die en/fr-Platzhalter.
+
+**Verifiziert:** `npm run build` grün (83 Seiten), nach dem Push auf allen zehn Adressen live geprüft.
+
+---
+
 ## STAND 05.08.2026 — Build-Absturz durch Link im Slug-Feld, behoben
 
 **Symptom:** Katharina veröffentlicht, nichts erscheint. Vercel schickte Deploy-Failure-Mails.

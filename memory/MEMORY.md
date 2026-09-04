@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 05.08.2026*
+*Stand: 04.09.2026*
 
 ## Projektziel
 
@@ -24,6 +24,9 @@ Telefon funktioniert.
 - Publish im Studio löst per Webhook einen Vercel-Build aus, ~1 bis 2 Minuten bis
   live.
 - Mitkommen-Formular versendet echt via Infomaniak-SMTP.
+- Teilen: `ShareButton` unter jedem Beitrag, `PageShare` als ruhiger
+  Seitenabschluss auf Startseite und allen BAR-Übersichten (04.09.). Web Share
+  API mit Clipboard-Fallback, kein Tracking.
 
 ## Entscheidungen mit Begründung
 
