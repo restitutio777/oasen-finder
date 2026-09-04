@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageShare from '../components/PageShare.astro';
 import NewsletterBlock from '../components/NewsletterBlock.astro';
 import { sanity, localized, isSanityConfigured } from '../lib/sanity';
 import { isEventPast } from '../lib/events.js';
@@ -697,4 +698,5 @@ const latestItems = latest
   </style>
 
   <NewsletterBlock variant="landing" />
+  <PageShare title="werkSTATT Gemeinschaft — Katharina Offenborn" text="Reisen zu Gemeinschaftsorten, Werkstatt-Termine, Notizen." background="var(--bg-warm-soft)" />
 </BaseLayout>

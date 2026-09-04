@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageShare from '../../components/PageShare.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 import { isEventPast, isEventArchived } from '../../lib/events.js';
@@ -129,4 +130,5 @@ function eventMeta(e: any): string {
       )}
     </div>
   </section>
+  <PageShare title="machBAR — werkSTATT Gemeinschaft" text="Werkstatt-Termine zu Miteinander-Leben, -Arbeiten, -Reden." />
 </BaseLayout>

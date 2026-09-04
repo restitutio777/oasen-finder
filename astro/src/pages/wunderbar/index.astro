@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageShare from '../../components/PageShare.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 import { withSafeSlugs } from '../../lib/slug.js';
@@ -91,4 +92,5 @@ if (isSanityConfigured) {
       )}
     </div>
   </section>
+  <PageShare title="wunderBAR — werkSTATT Gemeinschaft" text="Kreatives, Spielerisches, Off-Topic — was woanders nicht hinpasst." />
 </BaseLayout>

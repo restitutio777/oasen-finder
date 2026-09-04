@@ -1,0 +1,75 @@
+---
+/**
+ * PageShare — dezenter Teilen-Abschluss für die Hauptseiten.
+ *
+ * Die Detail-Seiten tragen den ShareButton direkt unter dem Beitrag.
+ * Die Übersichts-Seiten hatten bislang gar keine Möglichkeit, den Raum
+ * weiterzugeben. Dieser Block schließt die Seite ruhig ab: eine kurze
+ * Haarlinie, eine Zeile in der Display-Schrift, darunter derselbe
+ * Button wie auf den Detail-Seiten — gleiche Geste, gleiches Verhalten
+ * (Share-Sheet am Handy, Link-Kopie am Desktop), kein Tracking.
+ *
+ * `background` wird gesetzt, wo der Block auf eine farbige Section
+ * folgt (Landing: --bg-warm-soft), damit vor dem Footer kein
+ * Farbsprung entsteht.
+ */
+import ShareButton from './ShareButton.astro';
+
+export interface Props {
+  /** Titel für den Share-Dialog */
+  title: string;
+  /** Optionaler Begleittext */
+  text?: string;
+  /** Zeile über dem Button */
+  label?: string;
+  /** CSS-Farbwert, falls der Block den Grund der Section darüber halten soll */
+  background?: string;
+}
+
+const {
+  title,
+  text,
+  label = 'Diese Seite weitersagen',
+  background,
+} = Astro.props;
+---
+
+<section class="page-share" style={background ? `background: ${background};` : undefined}>
+  <div class="container">
+    <div class="page-share__inner">
+      <span class="page-share__rule" aria-hidden="true"></span>
+      <p class="page-share__label">{label}</p>
+      <ShareButton title={title} text={text} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-share {
+    padding: 3.5rem 0 4.5rem;
+  }
+  .page-share__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+  /* Kurze Haarlinie statt durchgezogener Trennlinie — schließt die
+     Seite ab, ohne sie zu zerschneiden. */
+  .page-share__rule {
+    display: block;
+    width: 56px;
+    height: 1px;
+    background: var(--border-subtle);
+    margin-bottom: 0.5rem;
+  }
+  .page-share__label {
+    margin: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+</style>

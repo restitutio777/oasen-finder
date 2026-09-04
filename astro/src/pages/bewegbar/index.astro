@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageShare from '../../components/PageShare.astro';
 import MapBewegBAR from '../../components/MapBewegBAR.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import { sanity, isSanityConfigured } from '../../lib/sanity';
@@ -85,4 +86,5 @@ if (isSanityConfigured) {
       )}
     </div>
   </section>
+  <PageShare title="bewegBAR — werkSTATT Gemeinschaft" text="Reisen zu Ökodörfern, Cohousing-Projekten und gemeinsamen Lebensorten." />
 </BaseLayout>

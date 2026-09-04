@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageShare from '../../components/PageShare.astro';
 import PortableText from '../../components/PortableText.astro';
 import SanityImage from '../../components/SanityImage.astro';
 import PageBanner from '../../components/PageBanner.astro';
@@ -188,4 +189,5 @@ const roomEntries: Array<{ room: string; description?: any; ctaLabel?: any }> =
   </section>
 
   <NewsletterBlock variant="page" />
+  <PageShare title="erkennBAR — werkSTATT Gemeinschaft" text="Wer Katharina Offenborn ist und was in der werkSTATT Gemeinschaft entsteht." />
 </BaseLayout>

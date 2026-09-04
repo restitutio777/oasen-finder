@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageShare from '../../components/PageShare.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 import { withSafeSlugs } from '../../lib/slug.js';
@@ -94,4 +95,5 @@ const kindLabels: Record<string, string> = {
       ))}
     </div>
   </section>
+  <PageShare title="brauchBAR — werkSTATT Gemeinschaft" text="Webseiten, Konzepte und Werkzeuge für die Praxis des Miteinander." />
 </BaseLayout>

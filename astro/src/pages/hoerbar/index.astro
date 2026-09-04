@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageShare from '../../components/PageShare.astro';
 import PageBanner from '../../components/PageBanner.astro';
 import ListFilter from '../../components/ListFilter.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
@@ -101,4 +102,5 @@ const showFilter = episodes.length >= FILTER_THRESHOLD && filters.length >= 2;
       </div>
     </div>
   </section>
+  <PageShare title="hörBAR — werkSTATT Gemeinschaft" text="Eingesprochene Reflexionen, Gespräche, Vorträge, Gedichte und Lieder." />
 </BaseLayout>
