@@ -17,6 +17,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import Translations from '../../components/Translations.astro';
+import TranslationLink from '../../components/TranslationLink.astro';
 import SanityImage from '../../components/SanityImage.astro';
 import MediaLink from '../../components/MediaLink.astro';
 import ShareButton from '../../components/ShareButton.astro';
@@ -104,6 +105,7 @@ const descriptionText = docType === 'event'
             {new Date(data.publishedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}
           </p>
 
+          <TranslationLink title={data.title} body={data.body} />
           <SanityImage
             image={data.hero}
             width={1200}
@@ -155,6 +157,7 @@ const descriptionText = docType === 'event'
           )}
 
           {data.photo?.asset && (
+            <TranslationLink title={data.title} body={data.description} />
             <SanityImage
               image={data.photo}
               width={1200}

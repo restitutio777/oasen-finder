@@ -3,62 +3,72 @@
  * Übersetzungen unter dem deutschen Text (09.09.26).
  *
  * Bewusst die einfachste Lösung: KEINE eigenen Sprach-Adressen, kein
- * Umschalter, keine Browser-Erkennung. Wenn Katharina im Studio unter
- * „Übersetzungen (optional)" Englisch oder Französisch ausfüllt, erscheint
- * die Fassung aufklappbar unter dem deutschen Beitrag — sonst gar nichts.
+ * Sprachumschalter im Menü, keine Browser-Erkennung. Wenn Katharina im
+ * Studio unter „Übersetzungen (optional)" Englisch oder Französisch
+ * ausfüllt, erscheint die Fassung aufklappbar unter dem deutschen Beitrag
+ * — plus ein Hinweis oben (TranslationLink.astro). Sonst gar nichts.
  *
- * Grund für diesen Zuschnitt (Betreiber, 09.09.): Katharina schreibt
- * ganz überwiegend deutsch, Übersetzungen sind die Ausnahme. Aufwand für
- * eine mehrsprachige Seitenstruktur lohnt sich erst, wenn sich über
- * Monate zeigt, dass sie das konsequent pflegt. Bis dahin: null Aufwand
- * für sie (eintippen reicht), null Pflege für uns.
+ * Die Überschrift des Aufklappers ist der ÜBERSETZTE TITEL selbst, nicht
+ * ein erklärender Satz: der Leser sieht sofort, worum es geht, und nichts
+ * wiederholt sich (Betreiber, 09.09.).
  *
  * Verwendung — direkt hinter dem deutschen <PortableText>:
  *   <Translations title={note.title} body={note.body} />
  */
 import PortableText from './PortableText.astro';
-import type { Locale } from '../lib/sanity';
+import { availableTranslations } from '../lib/sanity';
 
 export interface Props {
-  /** i18nString mit dem Titel — optional, wird über der Übersetzung gezeigt */
+  /** i18nString mit dem Titel */
   title?: any;
   /** i18nText mit dem Fließtext ({ de, fr, en }) */
   body?: any;
 }
 
 const { title, body } = Astro.props;
-
-/* Eine Sprache „existiert" nur, wenn wirklich Blöcke drinstehen. Ein
-   leeres Array (Katharina hat das Feld aufgeklappt und wieder zugemacht)
-   zählt nicht — sonst erschiene eine leere Überschrift. */
-const hasText = (locale: Locale) => Array.isArray(body?.[locale]) && body[locale].length > 0;
-
-const languages: { locale: Locale; label: string; hint: string }[] = [
-  { locale: 'en', label: 'English version', hint: 'Read this text in English' },
-  { locale: 'fr', label: 'Version française', hint: 'Lire ce texte en français' },
-];
-
-const available = languages.filter((lang) => hasText(lang.locale));
+const translations = availableTranslations(body, title);
 ---
 
-{available.length > 0 && (
+{translations.length > 0 && (
   <section class="translations">
-    {available.map((lang) => (
-      <details class="translations__item">
-        <summary class="translations__summary" lang={lang.locale}>
-          <span class="translations__label">{lang.label}</span>
-          <span class="translations__hint">{lang.hint}</span>
+    {translations.map((t) => (
+      <details class="translations__item" id={t.anchor}>
+        <summary class="translations__summary" lang={t.locale}>
+          <span class="translations__code">{t.locale.toUpperCase()}</span>
+          <span class="translations__title">{t.heading}</span>
         </summary>
-        <div class="translations__body" lang={lang.locale}>
-          {title?.[lang.locale] && (
-            <h2 class="translations__title">{title[lang.locale]}</h2>
-          )}
-          <PortableText value={body} locale={lang.locale} />
+        <div class="translations__body" lang={t.locale}>
+          <PortableText value={t.blocks} />
         </div>
       </details>
     ))}
   </section>
 )}
+
+<script>
+  /* Hinweis oben (TranslationLink) klappt den Text unten mit auf — sonst
+     landet der Leser auf einer zugeklappten Zeile und muss ein zweites Mal
+     klicken. Gleiches beim Aufruf mit Anker in der Adresse, damit ein
+     direkt verschickter Link (…/beitrag/#uebersetzung-en) sofort den
+     englischen Text zeigt. */
+  function openTranslation(anchor: string | null) {
+    if (!anchor) return;
+    const target = document.getElementById(anchor);
+    if (target instanceof HTMLDetailsElement) target.open = true;
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-translation-jump]').forEach((link) => {
+    link.addEventListener('click', () => openTranslation(link.dataset.translationJump ?? null));
+  });
+
+  if (location.hash) {
+    const anchor = decodeURIComponent(location.hash.slice(1));
+    openTranslation(anchor);
+    // Nach dem Aufklappen neu anspringen: der Browser hat vorher auf die
+    // zugeklappte (kurze) Zeile gescrollt.
+    document.getElementById(anchor)?.scrollIntoView();
+  }
+</script>
 
 <style>
   .translations {
@@ -69,50 +79,30 @@ const available = languages.filter((lang) => hasText(lang.locale));
     flex-direction: column;
     gap: 0.75rem;
   }
+  .translations__item {
+    /* Damit die Überschrift beim Anspringen nicht am Fensterrand klebt. */
+    scroll-margin-top: 1.5rem;
+  }
   .translations__summary {
     cursor: pointer;
     list-style: none;
     display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
     padding: 0.35rem 0;
-    transition: color 200ms ease;
   }
-  /* Eigenes Dreieck statt des Browser-Markers — links, mitdrehend. */
   .translations__summary::-webkit-details-marker {
     display: none;
   }
-  .translations__summary::before {
-    content: '';
-    width: 0;
-    height: 0;
-    border-left: 5px solid var(--accent, #c89a78);
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-    transform: translateY(-1px);
-    transition: transform 200ms ease;
-  }
-  .translations__item[open] > .translations__summary::before {
-    transform: rotate(90deg) translateX(-1px);
-  }
-  .translations__label {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--text-muted, #8a7d98);
-  }
-  .translations__summary:hover .translations__label {
-    color: var(--accent, #c89a78);
-  }
-  .translations__hint {
-    font-family: var(--font-display, 'Cormorant Garamond', serif);
-    font-style: italic;
-    font-size: 15px;
-    color: var(--text-secondary, #6a5a78);
-  }
-  .translations__body {
-    margin-top: 1.5rem;
+  .translations__code {
+    flex: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+    background: var(--accent, #c89a78);
+    color: #fff;
   }
   .translations__title {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
@@ -120,6 +110,22 @@ const available = languages.filter((lang) => hasText(lang.locale));
     font-weight: 500;
     line-height: 1.2;
     color: var(--text-primary, #2d2435);
-    margin: 0 0 1.25rem;
+    transition: color 200ms ease;
+  }
+  .translations__summary:hover .translations__title {
+    color: var(--accent, #c89a78);
+  }
+  .translations__body {
+    margin-top: 1.5rem;
+  }
+  /* Katharina fügt Übersetzungen als Ganzes ein — die Absätze stecken dann
+     als Zeilenumbrüche IN einem Block, nicht in getrennten Blöcken (bei
+     „Pancho's Garten" 4 Blöcke gegenüber 17 im deutschen Original, geprüft
+     09.09.). Ohne pre-line liefe der Text zu einer Wand zusammen. Bewusst
+     nur hier im Übersetzungsblock — die deutschen Beiträge bleiben, wie
+     sie sind. */
+  .translations__body :global(.rich p),
+  .translations__body :global(.rich li) {
+    white-space: pre-line;
   }
 </style>

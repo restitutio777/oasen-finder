@@ -15,6 +15,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import Translations from '../../components/Translations.astro';
+import TranslationLink from '../../components/TranslationLink.astro';
 import MediaLink from '../../components/MediaLink.astro';
 import ShareButton from '../../components/ShareButton.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
@@ -76,6 +77,7 @@ const ogImage = resource.coverUrl
         <img src={resource.coverUrl} alt="" style="max-width: 300px; margin: 1rem 0 2rem; border-radius: 4px;" />
       )}
 
+      <TranslationLink title={resource.title} body={resource.note} />
       <PortableText value={resource.note} />
       <Translations title={resource.title} body={resource.note} />
 

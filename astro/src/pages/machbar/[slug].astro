@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import Translations from '../../components/Translations.astro';
+import TranslationLink from '../../components/TranslationLink.astro';
 import SanityImage from '../../components/SanityImage.astro';
 import ShareButton from '../../components/ShareButton.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
@@ -73,6 +74,7 @@ const ogImage = event.photo?.asset
       )}
 
       {event.photo && (
+        <TranslationLink title={event.title} body={event.description} />
         <SanityImage
           image={event.photo}
           width={1200}

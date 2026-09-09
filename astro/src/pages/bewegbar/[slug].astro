@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import Translations from '../../components/Translations.astro';
+import TranslationLink from '../../components/TranslationLink.astro';
 import SanityImage from '../../components/SanityImage.astro';
 import ShareButton from '../../components/ShareButton.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
@@ -68,6 +69,7 @@ const ogImage = firstImage?.asset
       {station.images && station.images.length > 0 && (
         <div style="margin: 2rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
           {station.images.map((img: any) => (
+            <TranslationLink body={station.reflection} />
             <SanityImage image={img} width={800} showCaption />
           ))}
         </div>
