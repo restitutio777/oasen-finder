@@ -58,6 +58,9 @@ const translations = availableTranslations(body, title);
     padding: 0.7rem 1rem;
     border: 1px solid var(--accent, #c89a78);
     border-radius: 6px;
+    /* Erst eine einfarbige Rückfallebene, dann die getönte Variante —
+       ohne color-mix (ältere Browser) bliebe der Kasten sonst farblos. */
+    background: #f6ece4;
     background: color-mix(in srgb, var(--accent, #c89a78) 8%, transparent);
     text-decoration: none;
     transition: background 200ms ease, border-color 200ms ease;
