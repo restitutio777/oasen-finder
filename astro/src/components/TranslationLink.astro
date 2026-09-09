@@ -6,7 +6,15 @@
  * anderssprachige Leute. Die sollen sofort beim Öffnen sehen, dass es ihre
  * Fassung gibt — und nicht erst nach seitenlangem Scrollen. Deshalb steht
  * der Hinweis oben und springt zum Text unten, wo er zugleich aufgeklappt
- * wird (siehe translations.js).
+ * wird (siehe Translations.astro).
+ *
+ * Gestaltung: bewusst KEIN Kasten und kein farbiges Badge — das war der
+ * erste Versuch und stand als Fremdkörper in einer Seite, die sonst nur mit
+ * Typografie und feinen Linien arbeitet (Betreiber, 09.09.: „ugly and
+ * boxy"). Stattdessen das hauseigene Vokabular: der globale `.eyebrow`
+ * (gesperrte Versalien mit Strich davor, wie „NOTIZ" oder „POESIE") plus
+ * der Titel in der Display-Schrift. Fügt sich in die Titelzone ein, statt
+ * sie zu unterbrechen.
  *
  * Beschriftung in der ZIELsprache samt übersetztem Titel — wer nur Englisch
  * liest, versteht die Zeile auch dann, wenn ringsum alles deutsch ist.
@@ -31,12 +39,8 @@ const translations = availableTranslations(body, title);
   <nav class="translation-link" aria-label="Übersetzungen">
     {translations.map((t) => (
       <a class="translation-link__item" href={`#${t.anchor}`} lang={t.locale} data-translation-jump={t.anchor}>
-        <span class="translation-link__code">{t.locale.toUpperCase()}</span>
-        <span class="translation-link__text">
-          <span class="translation-link__invitation">{t.hasTitle ? `${t.invitation}:` : t.invitation}</span>
-          {t.hasTitle && <span class="translation-link__title">{t.heading}</span>}
-        </span>
-        <span class="translation-link__arrow" aria-hidden="true">↓</span>
+        <span class="eyebrow">{t.invitation}</span>
+        {t.hasTitle && <span class="translation-link__title">{t.heading}</span>}
       </a>
     ))}
   </nav>
@@ -46,62 +50,43 @@ const translations = availableTranslations(body, title);
   .translation-link {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    margin: 0 0 2rem;
+    gap: 1rem;
+    margin: 0 0 2.5rem;
   }
   .translation-link__item {
     display: flex;
-    /* Oben ausrichten: bei zweizeiligem Titel soll das Sprachkürzel an der
-       ERSTEN Zeile stehen, nicht mittig danebenrutschen. */
+    flex-direction: column;
+    /* Der Saum unter dem Titel soll am Text enden, nicht durch die ganze
+       Spalte laufen — sonst wirkt er wieder wie ein Rahmen. */
     align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.7rem 1rem;
-    border: 1px solid var(--accent, #c89a78);
-    border-radius: 6px;
-    /* Erst eine einfarbige Rückfallebene, dann die getönte Variante —
-       ohne color-mix (ältere Browser) bliebe der Kasten sonst farblos. */
-    background: #f6ece4;
-    background: color-mix(in srgb, var(--accent, #c89a78) 8%, transparent);
-    text-decoration: none;
-    transition: background 200ms ease, border-color 200ms ease;
-  }
-  .translation-link__item:hover {
-    background: color-mix(in srgb, var(--accent, #c89a78) 16%, transparent);
-  }
-  .translation-link__code {
-    flex: none;
-    /* Auf die Grundlinie der ersten Textzeile schieben. */
-    margin-top: 0.1rem;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 0.15rem 0.45rem;
-    border-radius: 3px;
-    background: var(--accent, #c89a78);
-    color: #fff;
-  }
-  .translation-link__text {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
     gap: 0.4rem;
-    min-width: 0;
-  }
-  .translation-link__invitation {
-    font-size: 14px;
-    color: var(--text-secondary, #6a5a78);
+    text-decoration: none;
+    /* Anfassbare Fläche, ohne sichtbaren Rahmen. */
+    padding: 0.1rem 0;
   }
   .translation-link__title {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text-primary, #2d2435);
+    font-size: clamp(19px, 1.6vw, 22px);
+    font-style: italic;
+    line-height: 1.35;
+    color: var(--link, #3a7894);
+    /* Feiner Saum statt Unterstreichung — wie die Fließtext-Links. */
+    box-shadow: inset 0 -1px 0 color-mix(in srgb, currentColor 35%, transparent);
+    transition: color 200ms ease, box-shadow 200ms ease;
   }
-  .translation-link__arrow {
-    margin-left: auto;
-    flex: none;
-    margin-top: 0.05rem;
+  .translation-link__title::after {
+    content: ' ↓';
+    font-style: normal;
+    font-size: 0.8em;
+    opacity: 0.7;
+  }
+  .translation-link__item:hover .translation-link__title {
+    color: var(--link-hover, #2f5f76);
+    box-shadow: inset 0 -1px 0 currentColor;
+  }
+  /* Ohne übersetzten Titel trägt der Eyebrow allein den Link — dann darf er
+     nicht wie unklickbare Meta-Zeile wirken. */
+  .translation-link__item:hover .eyebrow {
     color: var(--accent, #c89a78);
-    font-size: 16px;
   }
 </style>

@@ -34,7 +34,7 @@ const translations = availableTranslations(body, title);
     {translations.map((t) => (
       <details class="translations__item" id={t.anchor}>
         <summary class="translations__summary" lang={t.locale}>
-          <span class="translations__code">{t.locale.toUpperCase()}</span>
+          <span class="eyebrow">{t.locale === 'en' ? 'English' : 'Français'}</span>
           <span class="translations__title">{t.heading}</span>
         </summary>
         <div class="translations__body" lang={t.locale}>
@@ -87,22 +87,25 @@ const translations = availableTranslations(body, title);
     cursor: pointer;
     list-style: none;
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
     padding: 0.35rem 0;
   }
   .translations__summary::-webkit-details-marker {
     display: none;
   }
-  .translations__code {
-    flex: none;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 0.15rem 0.45rem;
-    border-radius: 3px;
-    background: var(--accent, #c89a78);
-    color: #fff;
+  /* Aufklapp-Zustand am Titel zeigen, nicht über ein zusätzliches Symbol:
+     ein Pfeil, der sich dreht — dieselbe Sprache wie der Hinweis oben. */
+  .translations__title::after {
+    content: ' ↓';
+    font-size: 0.6em;
+    opacity: 0.55;
+    display: inline-block;
+    transition: transform 200ms ease;
+  }
+  .translations__item[open] .translations__title::after {
+    transform: rotate(180deg);
   }
   .translations__title {
     font-family: var(--font-display, 'Cormorant Garamond', serif);

@@ -87,7 +87,7 @@ test('Französisch bekommt eigene Beschriftung und eigenen Anker', () => {
   const [t] = availableTranslations(body);
   assert.equal(t.locale, 'fr');
   assert.equal(t.anchor, 'uebersetzung-fr');
-  assert.equal(t.invitation, 'Également disponible en français');
+  assert.equal(t.invitation, 'Aussi en français');
   assert.equal(t.heading, 'Un titre');
 });
 

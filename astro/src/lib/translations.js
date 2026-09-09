@@ -18,8 +18,8 @@
  */
 
 const TRANSLATION_LABELS = {
-  en: { fallback: 'English version', invitation: 'Also available in English' },
-  fr: { fallback: 'Version française', invitation: 'Également disponible en français' },
+  en: { fallback: 'English version', invitation: 'Also in English' },
+  fr: { fallback: 'Version française', invitation: 'Aussi en français' },
 };
 
 /** Maximale Länge einer Zeile, die noch als Titel durchgeht. */
