@@ -51,7 +51,9 @@ const translations = availableTranslations(body, title);
   }
   .translation-link__item {
     display: flex;
-    align-items: center;
+    /* Oben ausrichten: bei zweizeiligem Titel soll das Sprachkürzel an der
+       ERSTEN Zeile stehen, nicht mittig danebenrutschen. */
+    align-items: flex-start;
     gap: 0.75rem;
     padding: 0.7rem 1rem;
     border: 1px solid var(--accent, #c89a78);
@@ -65,6 +67,8 @@ const translations = availableTranslations(body, title);
   }
   .translation-link__code {
     flex: none;
+    /* Auf die Grundlinie der ersten Textzeile schieben. */
+    margin-top: 0.1rem;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -93,6 +97,7 @@ const translations = availableTranslations(body, title);
   .translation-link__arrow {
     margin-left: auto;
     flex: none;
+    margin-top: 0.05rem;
     color: var(--accent, #c89a78);
     font-size: 16px;
   }
