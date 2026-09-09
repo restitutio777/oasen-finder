@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 04.09.2026*
+*Stand: 09.09.2026*
 
 ## Projektziel
 
@@ -49,6 +49,22 @@ Telefon funktioniert.
   holen. `isEventArchived()` nutzt bewusst weiterhin `_updatedAt`, dort ist
   „zuletzt angefasst" die richtige Frage.
 - **Direkt auf `main` arbeiten**, kein Feature-Branch-Zwang (seit 16.05.).
+- **Übersetzungen erscheinen im deutschen Beitrag, nicht in einem eigenen
+  Sprachbaum** (09.09.). Katharina hatte die `en`/`fr`-Felder längst befüllen
+  können, aber das Frontend rief nur `de` ab — ihre Übersetzungen lagen
+  gespeichert und unsichtbar im Dataset. Jetzt: Hinweis oben unter dem Titel
+  (`TranslationLink.astro`) plus aufklappbarer Text unten
+  (`Translations.astro`), gemeinsame Quelle `lib/translations.js`. Bewusst
+  KEINE eigenen Sprach-Adressen, kein Sprachumschalter, keine Browser-Erkennung:
+  Sie schreibt fast nur deutsch, übersetzt wird die Ausnahme (09.09.: 2 von rund
+  80 Beiträgen), und der Zweck ist, dass ein verschickter Link seine Fassung
+  sofort zeigt. Echte Mehrsprachigkeit lohnt erst, wenn sie das über Monate
+  konsequent pflegt — die Datenstruktur trägt das dann bereits.
+- **Der übersetzte Titel wird aus der fetten ersten Zeile gelesen**, nicht aus
+  dem Feld „Titel → English": Katharina füllt das Feld praktisch nie aus,
+  sondern setzt den Titel fett über den Text. Nur bei „fett", damit die erste
+  Verszeile eines Gedichts nicht als Titel missbraucht (und aus dem Gedicht
+  gelöscht) wird. Ein ausgefülltes Titelfeld gewinnt immer.
 
 ## Offene Aufgaben
 
@@ -77,6 +93,15 @@ Telefon funktioniert.
   Frontend zwei verschiedene Adressen.
 - **Bilder von Katharina** (Signal-Exporte) kommen als `-rw-------` und untracked
   an. Vor dem Push `chmod` und explizit `git add`.
+- **Eingefügte Übersetzungen haben ihre Absätze als Zeilenumbrüche IN einem
+  Block**, nicht in getrennten Blöcken (Pancho: 4 Blöcke gegenüber 17 im
+  deutschen Original) — Folge des Einfügens am Stück. Ohne `white-space:
+  pre-line` liefe der Text zu einer Wand zusammen. Gilt bewusst nur im
+  Übersetzungsblock; die deutschen Beiträge bleiben unangetastet.
+- **Grep auf Klassennamen im `dist/` beweist gar nichts.** Astro liefert das
+  Komponenten-CSS auf jeder Seite aus, die die Komponente importiert — auch wo
+  sie nichts rendert. Am 09.09. sahen so 65 Seiten nach Übersetzung aus, es
+  waren zwei. Immer auf das echte Markup prüfen (`<section class="…`).
 
 ## Umgang mit Katharina
 
