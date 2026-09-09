@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
+import Translations from '../../components/Translations.astro';
 import MediaLink from '../../components/MediaLink.astro';
 import ShareButton from '../../components/ShareButton.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
@@ -73,6 +74,7 @@ const ogImage = resource.coverUrl
       )}
 
       <PortableText value={resource.note} />
+      <Translations title={resource.title} body={resource.note} />
 
       {/* Quellen-Link: YouTube/Spotify werden direkt eingebettet,
           Telegram bekommt eine Card, alles andere klassischer Link. */}

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
+import Translations from '../../components/Translations.astro';
 import SanityImage from '../../components/SanityImage.astro';
 import MediaLink from '../../components/MediaLink.astro';
 import ShareButton from '../../components/ShareButton.astro';
@@ -68,6 +69,7 @@ const ogImage = entry.hero?.asset
       )}
 
       <PortableText value={entry.body} />
+      <Translations title={entry.title} body={entry.body} />
 
       {entry.mediaLink && <MediaLink url={entry.mediaLink} />}
 

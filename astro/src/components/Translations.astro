@@ -1,0 +1,125 @@
+---
+/**
+ * Übersetzungen unter dem deutschen Text (09.09.26).
+ *
+ * Bewusst die einfachste Lösung: KEINE eigenen Sprach-Adressen, kein
+ * Umschalter, keine Browser-Erkennung. Wenn Katharina im Studio unter
+ * „Übersetzungen (optional)" Englisch oder Französisch ausfüllt, erscheint
+ * die Fassung aufklappbar unter dem deutschen Beitrag — sonst gar nichts.
+ *
+ * Grund für diesen Zuschnitt (Betreiber, 09.09.): Katharina schreibt
+ * ganz überwiegend deutsch, Übersetzungen sind die Ausnahme. Aufwand für
+ * eine mehrsprachige Seitenstruktur lohnt sich erst, wenn sich über
+ * Monate zeigt, dass sie das konsequent pflegt. Bis dahin: null Aufwand
+ * für sie (eintippen reicht), null Pflege für uns.
+ *
+ * Verwendung — direkt hinter dem deutschen <PortableText>:
+ *   <Translations title={note.title} body={note.body} />
+ */
+import PortableText from './PortableText.astro';
+import type { Locale } from '../lib/sanity';
+
+export interface Props {
+  /** i18nString mit dem Titel — optional, wird über der Übersetzung gezeigt */
+  title?: any;
+  /** i18nText mit dem Fließtext ({ de, fr, en }) */
+  body?: any;
+}
+
+const { title, body } = Astro.props;
+
+/* Eine Sprache „existiert" nur, wenn wirklich Blöcke drinstehen. Ein
+   leeres Array (Katharina hat das Feld aufgeklappt und wieder zugemacht)
+   zählt nicht — sonst erschiene eine leere Überschrift. */
+const hasText = (locale: Locale) => Array.isArray(body?.[locale]) && body[locale].length > 0;
+
+const languages: { locale: Locale; label: string; hint: string }[] = [
+  { locale: 'en', label: 'English version', hint: 'Read this text in English' },
+  { locale: 'fr', label: 'Version française', hint: 'Lire ce texte en français' },
+];
+
+const available = languages.filter((lang) => hasText(lang.locale));
+---
+
+{available.length > 0 && (
+  <section class="translations">
+    {available.map((lang) => (
+      <details class="translations__item">
+        <summary class="translations__summary" lang={lang.locale}>
+          <span class="translations__label">{lang.label}</span>
+          <span class="translations__hint">{lang.hint}</span>
+        </summary>
+        <div class="translations__body" lang={lang.locale}>
+          {title?.[lang.locale] && (
+            <h2 class="translations__title">{title[lang.locale]}</h2>
+          )}
+          <PortableText value={body} locale={lang.locale} />
+        </div>
+      </details>
+    ))}
+  </section>
+)}
+
+<style>
+  .translations {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .translations__summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    padding: 0.35rem 0;
+    transition: color 200ms ease;
+  }
+  /* Eigenes Dreieck statt des Browser-Markers — links, mitdrehend. */
+  .translations__summary::-webkit-details-marker {
+    display: none;
+  }
+  .translations__summary::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid var(--accent, #c89a78);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    transform: translateY(-1px);
+    transition: transform 200ms ease;
+  }
+  .translations__item[open] > .translations__summary::before {
+    transform: rotate(90deg) translateX(-1px);
+  }
+  .translations__label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-muted, #8a7d98);
+  }
+  .translations__summary:hover .translations__label {
+    color: var(--accent, #c89a78);
+  }
+  .translations__hint {
+    font-family: var(--font-display, 'Cormorant Garamond', serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-secondary, #6a5a78);
+  }
+  .translations__body {
+    margin-top: 1.5rem;
+  }
+  .translations__title {
+    font-family: var(--font-display, 'Cormorant Garamond', serif);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--text-primary, #2d2435);
+    margin: 0 0 1.25rem;
+  }
+</style>

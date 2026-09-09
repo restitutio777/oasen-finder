@@ -16,6 +16,7 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PortableText from '../../components/PortableText.astro';
+import Translations from '../../components/Translations.astro';
 import SanityImage from '../../components/SanityImage.astro';
 import MediaLink from '../../components/MediaLink.astro';
 import ShareButton from '../../components/ShareButton.astro';
@@ -112,6 +113,7 @@ const descriptionText = docType === 'event'
           />
 
           <PortableText value={data.body} />
+          <Translations title={data.title} body={data.body} />
 
           {data.mediaLink && <MediaLink url={data.mediaLink} />}
 
@@ -163,6 +165,7 @@ const descriptionText = docType === 'event'
           )}
 
           <PortableText value={data.description} />
+          <Translations title={data.title} body={data.description} />
 
           {data.registration && (
             <aside style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-warm); border-radius: 6px;">
