@@ -100,14 +100,25 @@ const translations = availableTranslations(body, title);
   /* Aufklapp-Zustand am Titel zeigen, nicht über ein zusätzliches Symbol:
      ein Pfeil, der sich dreht — dieselbe Sprache wie der Hinweis oben. */
   .translations__title::after {
-    content: ' ↓';
-    font-size: 0.6em;
+    content: '↓';
+    font-size: 0.55em;
     opacity: 0.55;
     display: inline-block;
-    transition: transform 200ms ease;
+    /* Abstand und Höhe eigens setzen: direkt an den Buchstaben geklebt und
+       auf der Grundlinie sitzend wirkte der Pfeil wie ein Tippfehler. */
+    margin-left: 0.5em;
+    vertical-align: 0.35em;
+    transition: transform 200ms ease, opacity 200ms ease;
+  }
+  .translations__summary:hover .translations__title::after {
+    opacity: 0.9;
+  }
+  .translations__summary:hover .eyebrow {
+    color: var(--accent, #c89a78);
   }
   .translations__item[open] .translations__title::after {
     transform: rotate(180deg);
+    vertical-align: 0.1em;
   }
   .translations__title {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
