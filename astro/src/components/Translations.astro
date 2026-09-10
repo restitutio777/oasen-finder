@@ -37,7 +37,7 @@ const translations = availableTranslations(body, title);
           {/* Ohne erkennbaren Titel wäre der Eyebrow über „English version"
               nur eine Dopplung — dann trägt die eine Zeile alles. */}
           {t.hasTitle && <span class="eyebrow">{t.locale === 'en' ? 'English' : 'Français'}</span>}
-          <span class="translations__title">{t.heading}</span>
+          <h2 class="translations__title">{t.heading}</h2>
         </summary>
         <div class="translations__body" lang={t.locale}>
           <PortableText value={t.blocks} />
@@ -150,12 +150,16 @@ const translations = availableTranslations(body, title);
     transform: rotate(180deg);
     vertical-align: 0.1em;
   }
+  /* Als <h2> gesetzt: Schriftschnitt, Laufweite, Zeilenhöhe und Farbe
+     kommen damit aus derselben Regel wie die deutsche Überschrift
+     (h1, h2, h3 in global.css). Die Größe holt sich die Zeile aus
+     --article-title-size, die jede Beitragsseite auf ihrem <article>
+     setzt — die englische Überschrift ist dadurch IMMER genauso groß wie
+     die deutsche, auch wenn ein Raum eine andere Größe verwendet
+     (bewegBAR und machBAR sind größer, Betreiber 10.09.). */
   .translations__title {
-    font-family: var(--font-display, 'Cormorant Garamond', serif);
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    font-weight: 500;
-    line-height: 1.2;
-    color: var(--text-primary, #2d2435);
+    margin: 0;
+    font-size: var(--article-title-size, clamp(2rem, 4vw, 3rem));
     transition: color 200ms ease;
   }
   .translations__summary:hover .translations__title {
