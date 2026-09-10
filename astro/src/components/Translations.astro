@@ -52,23 +52,50 @@ const translations = availableTranslations(body, title);
      landet der Leser auf einer zugeklappten Zeile und muss ein zweites Mal
      klicken. Gleiches beim Aufruf mit Anker in der Adresse, damit ein
      direkt verschickter Link (…/beitrag/#uebersetzung-en) sofort den
-     englischen Text zeigt. */
-  function openTranslation(anchor: string | null) {
-    if (!anchor) return;
+     englischen Text zeigt.
+
+     Das Ausrichten übernimmt scrollIntoView, NICHT der native Ankersprung:
+     der findet statt, bevor der Aufklapper offen ist. Und es geschieht
+     mehrfach, weil Bilder oberhalb des Ankers ihre Höhe erst mit dem Laden
+     bekommen und den Anker danach verschieben — ohne die Wiederholung
+     landet der Leser 100 Pixel daneben (Betreiber, 10.09.). Den Abstand zum
+     klebenden Header hält scroll-margin-top frei, das respektiert
+     scrollIntoView von sich aus. */
+  function findeAufklapper(anchor: string | null): HTMLDetailsElement | null {
+    if (!anchor) return null;
     const target = document.getElementById(anchor);
-    if (target instanceof HTMLDetailsElement) target.open = true;
+    return target instanceof HTMLDetailsElement ? target : null;
   }
 
   document.querySelectorAll<HTMLAnchorElement>('[data-translation-jump]').forEach((link) => {
-    link.addEventListener('click', () => openTranslation(link.dataset.translationJump ?? null));
+    link.addEventListener('click', (event) => {
+      const target = findeAufklapper(link.dataset.translationJump ?? null);
+      if (!target) return;
+      // Selbst ausrichten statt den Browser springen zu lassen: erst öffnen,
+      // dann scrollen — sonst zielt der Sprung auf die zugeklappte Zeile.
+      event.preventDefault();
+      target.open = true;
+      target.scrollIntoView({ behavior: 'smooth' });
+      history.replaceState(null, '', `#${target.id}`);
+    });
   });
 
   if (location.hash) {
-    const anchor = decodeURIComponent(location.hash.slice(1));
-    openTranslation(anchor);
-    // Nach dem Aufklappen neu anspringen: der Browser hat vorher auf die
-    // zugeklappte (kurze) Zeile gescrollt.
-    document.getElementById(anchor)?.scrollIntoView();
+    const target = findeAufklapper(decodeURIComponent(location.hash.slice(1)));
+    if (target) {
+      target.open = true;
+      const ausrichten = () => target.scrollIntoView();
+      ausrichten();
+      requestAnimationFrame(ausrichten);
+      if (document.readyState !== 'complete') {
+        window.addEventListener('load', () => requestAnimationFrame(ausrichten), { once: true });
+      }
+      // Auch nach dem Eintreffen der Schriften: die Display-Schrift ändert
+      // die Höhe des deutschen Textes ÜBER dem Anker, und der Sprung des
+      // Browsers passiert davor. Ohne diese Korrektur landet der Leser rund
+      // 120 Pixel zu weit unten — am Textanfang statt am Titel.
+      document.fonts?.ready.then(() => requestAnimationFrame(ausrichten));
+    }
   }
 </script>
 
@@ -82,8 +109,11 @@ const translations = availableTranslations(body, title);
     gap: 0.75rem;
   }
   .translations__item {
-    /* Damit die Überschrift beim Anspringen nicht am Fensterrand klebt. */
-    scroll-margin-top: 1.5rem;
+    /* Sprungziel unter dem klebenden Header freihalten — sonst landet die
+       Überschrift dahinter und der Leser sieht nur noch den Textanfang
+       (Betreiber, 10.09.). Höhe kommt aus derselben Variablen wie der
+       Header selbst, damit beides nicht auseinanderlaufen kann. */
+    scroll-margin-top: calc(var(--header-height, 72px) + 1.5rem);
   }
   .translations__summary {
     cursor: pointer;

@@ -21,6 +21,12 @@
        Neue Farben: in der passenden Gruppe ergänzen, kein Alias.
        ============================================================ */
 
+    /* — 0. Maße ——————————————————————————————————————— */
+    --header-height: 72px;  /* .site-header__inner · klebt oben (position: sticky).
+                               Wer per Anker in die Seite springt, muss diese Höhe
+                               freihalten, sonst liegt das Sprungziel dahinter —
+                               siehe scroll-margin-top in Translations.astro. */
+
     /* — 1. Backgrounds ——————————————————————————————— */
     --bg-base:      #fbf6f3;  /* Page-Foundation · warm off-white */
     --bg-elevated:  #ffffff;  /* Karten · reines Weiss */
@@ -237,7 +243,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 72px;
+    height: var(--header-height);
   }
   .brand {
     font-family: var(--font-display);
