@@ -39,8 +39,16 @@ const translations = availableTranslations(body, title);
   <nav class="translation-link" aria-label="Übersetzungen">
     {translations.map((t) => (
       <a class="translation-link__item" href={`#${t.anchor}`} lang={t.locale} data-translation-jump={t.anchor}>
-        <span class="eyebrow">{t.invitation}</span>
-        {t.hasTitle && <span class="translation-link__title">{t.heading}</span>}
+        {t.hasTitle ? (
+          <>
+            <span class="eyebrow">{t.invitation}</span>
+            <span class="translation-link__title">{t.heading}</span>
+          </>
+        ) : (
+          /* Ohne erkennbaren Titel trägt die Einladung selbst den Link —
+             eine alleinstehende Eyebrow-Zeile sähe nicht klickbar aus. */
+          <span class="translation-link__title">{t.invitation}</span>
+        )}
       </a>
     ))}
   </nav>
@@ -84,8 +92,6 @@ const translations = availableTranslations(body, title);
     color: var(--link-hover, #2f5f76);
     box-shadow: inset 0 -1px 0 currentColor;
   }
-  /* Ohne übersetzten Titel trägt der Eyebrow allein den Link — dann darf er
-     nicht wie unklickbare Meta-Zeile wirken. */
   .translation-link__item:hover .eyebrow {
     color: var(--accent, #c89a78);
   }

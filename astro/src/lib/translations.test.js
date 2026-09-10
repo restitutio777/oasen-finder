@@ -34,9 +34,30 @@ test('fette erste Zeile wird Titel und verschwindet aus dem Text', () => {
   assert.equal(JSON.stringify(t.blocks).includes('Green Magic'), false);
 });
 
+test('führende Leerzeile verdeckt den Titel nicht', () => {
+  // Der reale Fall „Selbstgespräch" (10.09.): Sanity legt beim Einfügen einen
+  // leeren Block VOR den Text. Der fette Titel steckt dann in Block 1 — wer
+  // nur Block 0 anschaut, findet nichts und zeigt eine kahle Zeile.
+  const body = { en: [block(['']), block(['Self-talk', ['strong']]), block(['It is time…'])] };
+  const [t] = availableTranslations(body);
+  assert.equal(t.heading, 'Self-talk');
+  assert.equal(t.hasTitle, true);
+  // Leerblock und Titelblock sind weg, der Text beginnt sofort.
+  assert.equal(t.blocks.length, 1);
+  assert.equal(t.blocks[0].children[0].text, 'It is time…');
+});
+
+test('führende Leerzeilen fallen auch ohne Titel weg', () => {
+  const body = { en: [block(['']), block(['  ']), block(['Einfach Text'])] };
+  const [t] = availableTranslations(body);
+  assert.equal(t.hasTitle, false);
+  assert.equal(t.blocks.length, 1);
+  assert.equal(t.blocks[0].children[0].text, 'Einfach Text');
+});
+
 test('Gedicht: unmarkierte erste Zeile bleibt Verszeile', () => {
   // wonder „vertraue" — die erste Zeile ist Teil des Gedichts, kein Titel.
-  const body = { en: [block(['I trust your love \nto carry the memory of me'])] };
+  const body = { en: [block(['']), block(['I trust your love \nto carry the memory of me'])] };
   const [t] = availableTranslations(body);
   assert.equal(t.heading, 'English version');
   assert.equal(t.hasTitle, false);

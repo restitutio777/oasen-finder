@@ -34,7 +34,9 @@ const translations = availableTranslations(body, title);
     {translations.map((t) => (
       <details class="translations__item" id={t.anchor}>
         <summary class="translations__summary" lang={t.locale}>
-          <span class="eyebrow">{t.locale === 'en' ? 'English' : 'Français'}</span>
+          {/* Ohne erkennbaren Titel wäre der Eyebrow über „English version"
+              nur eine Dopplung — dann trägt die eine Zeile alles. */}
+          {t.hasTitle && <span class="eyebrow">{t.locale === 'en' ? 'English' : 'Français'}</span>}
           <span class="translations__title">{t.heading}</span>
         </summary>
         <div class="translations__body" lang={t.locale}>

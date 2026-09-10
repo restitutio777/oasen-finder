@@ -39,11 +39,22 @@ const MAX_TITLE_LENGTH = 120;
  * erste Zeile unmarkiert und einfach die erste Verszeile — die darf weder als
  * Titel missbraucht noch aus dem Gedicht gelöscht werden.
  *
+ * Gesucht wird im ersten Block MIT INHALT, nicht stur in Block 0: Sanity legt
+ * beim Einfügen oft einen leeren Block davor. Bei „Selbstgespräch" (10.09.)
+ * steckte der fette Titel dadurch in Block 1 und blieb unentdeckt — auf der
+ * Seite stand dann eine kahle „ALSO IN ENGLISH"-Zeile ohne Titel. Die
+ * führenden Leerblöcke fallen ohnehin weg, mit Titel wie ohne.
+ *
  * Arbeitet ohne Seiteneffekte: die Blöcke aus Sanity werden nie verändert,
  * nur flach kopiert.
  */
 export function extractTitleLine(blocks) {
-  const first = blocks[0];
+  // Führende Leerblöcke überspringen — und aus der Ausgabe entfernen.
+  const start = blocks.findIndex((b) => hasVisibleText([b]));
+  if (start === -1) return { title: '', blocks };
+  const kept = start > 0 ? blocks.slice(start) : blocks;
+
+  const first = kept[0];
   const span = first?.children?.[0];
   const isBoldOpening =
     first?._type === 'block' &&
@@ -51,12 +62,12 @@ export function extractTitleLine(blocks) {
     Array.isArray(span.marks) &&
     span.marks.includes('strong') &&
     typeof span.text === 'string';
-  if (!isBoldOpening) return { title: '', blocks };
+  if (!isBoldOpening) return { title: '', blocks: kept };
 
   const [firstLine, ...rest] = span.text.split('\n');
   const title = firstLine.trim();
   // Ein ganzer fetter Absatz ist kein Titel und bleibt unangetastet.
-  if (!title || title.length > MAX_TITLE_LENGTH) return { title: '', blocks };
+  if (!title || title.length > MAX_TITLE_LENGTH) return { title: '', blocks: kept };
 
   const remainder = rest.join('\n');
   const children = remainder
@@ -76,7 +87,7 @@ export function extractTitleLine(blocks) {
   }
   const trimmedFirst = { ...first, children };
   // Bleibt vom ersten Block nichts übrig, fällt er ganz weg.
-  const rebuilt = children.length ? [trimmedFirst, ...blocks.slice(1)] : blocks.slice(1);
+  const rebuilt = children.length ? [trimmedFirst, ...kept.slice(1)] : kept.slice(1);
   return { title, blocks: rebuilt };
 }
 
