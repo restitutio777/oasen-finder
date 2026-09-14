@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 09.09.2026*
+*Stand: 14.09.2026*
 
 ## Projektziel
 
@@ -30,6 +30,14 @@ Telefon funktioniert.
 
 ## Entscheidungen mit Begründung
 
+- **Lese-Typo steckt an einer Stelle** (`.rich` in
+  `astro/src/components/PortableText.astro`). Jeder lange Text der Site läuft
+  durch diese Komponente — BAR-Detailseiten, Übersetzungsblock, „Über mich",
+  Mitkommen-Einleitung. Größen- oder Farbwünsche zum Fließtext dort ändern, nicht
+  in den einzelnen Seiten. Seit 14.09.: `clamp(20px, 1.75vw, 23px)` und die
+  eigene Farbe `--text-reading` (#3a2f48) statt `--text-body` — Cormorant
+  Garamond ist feiner gezeichnet als die Sans und wirkt auf langen Strecken sonst
+  blass (Katharina: „größer und etwas dunkler").
 - **Statischer Output** (`output: 'static'`). Kein Token im Frontend, schnell,
   billig. Preis: Ein Build-Fehler friert den kompletten Live-Stand ein, ohne dass
   im Studio irgendetwas auffällt. Siehe Stolpersteine.
