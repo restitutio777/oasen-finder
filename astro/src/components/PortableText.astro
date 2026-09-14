@@ -110,8 +110,12 @@ const html = blocks ? toHTML(blocks, { components }) : '';
 <style is:global>
   /* Rich-Text-Styling — Block-Renderer aus PortableText.astro.
      Greift auf das globale Font/Color-Set, fügt nur Spacing dazu. */
+  /* Absatzabstand muss GRÖSSER sein als der Zeilenabstand, sonst liest sich
+     ein neuer Absatz wie eine weitere Zeile. 1.2em ergab bei 22px Schrift
+     26px Abstand gegenüber 37px Zeilenhöhe — der Absatzwechsel war damit
+     enger als der Zeilenwechsel. 1.75em (≈39px) setzt ihn wieder darüber. */
   .rich > * + * {
-    margin-top: 1.2em;
+    margin-top: 1.75em;
   }
   .rich p {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
@@ -124,11 +128,28 @@ const html = blocks ? toHTML(blocks, { components }) : '';
     font-size: clamp(20px, 1.75vw, 23px);
     line-height: 1.68;
     color: var(--text-reading, #3a2f48);
+    /* Cormorant Garamond ist eine Renaissance-Antiqua mit sehr feinen
+       Haarstrichen. Der Schnitt 500 (liegt bereits im Font-Paket, kostet
+       keinen zusätzlichen Download) verdickt nur die Striche, nicht die
+       Form: die Schrift bleibt dieselbe edle Antiqua, steht aber sichtbar
+       fester auf der Seite. Wirksamer als noch dunklere Farbe — der
+       wahrgenommene Kontrast hängt an der Strichstärke, nicht am Farbwert
+       (der liegt mit 11,7:1 längst hoch über jeder Anforderung). */
+    font-weight: 500;
+    /* macOS dünnt mit -webkit-font-smoothing: antialiased (global gesetzt,
+       für den hellen Text auf dem dunklen Footer sinnvoll) jede Schrift
+       aus. Bei einer Haarstrich-Antiqua auf hellem Grund frisst das genau
+       die Substanz weg, die den Text tragen soll. Hier zurück auf die
+       normale Glättung des Systems — bewusst nur im Lesetext. */
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
   }
   .rich em {
     font-style: italic;
     color: var(--text-primary, #2d2435);
   }
+  /* 600 gegenüber 500 im Fließtext: der Abstand bleibt sichtbar, seit der
+     Grundtext auf 500 steht. */
   .rich strong {
     font-weight: 600;
     color: var(--text-primary, #2d2435);
@@ -179,6 +200,9 @@ const html = blocks ? toHTML(blocks, { components }) : '';
     font-size: clamp(20px, 1.75vw, 23px);
     line-height: 1.6;
     color: var(--text-reading, #3a2f48);
+    font-weight: 500;
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
     margin-top: 0.5em;
   }
   /* Bild im Textfluss (types.image) — etwas mehr Luft als Absätze,
