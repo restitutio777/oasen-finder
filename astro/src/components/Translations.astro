@@ -152,16 +152,28 @@ const translations = availableTranslations(body, title);
   }
   /* Als <h2> gesetzt: Schriftschnitt, Laufweite, Zeilenhöhe und Farbe
      kommen damit aus derselben Regel wie die deutsche Überschrift
-     (h1, h2, h3 in global.css). Die Größe holt sich die Zeile aus
-     --article-title-size, die jede Beitragsseite auf ihrem <article>
-     setzt — die englische Überschrift ist dadurch IMMER genauso groß wie
-     die deutsche, auch wenn ein Raum eine andere Größe verwendet
-     (bewegBAR und machBAR sind größer, Betreiber 10.09.). */
+     (h1, h2, h3 in global.css).
+
+     Die Größe steht bewusst NICHT auf --article-title-size (so war es vom
+     10.09. bis 14.09.): auf Titelgröße gesetzt las sich die zugeklappte
+     Zeile wie der Anfang eines zweiten Artikels statt wie ein Angebot,
+     die Übersetzung zu öffnen — ein Aufklapper, der größer ruft als der
+     Beitrag selbst (Betreiber 14.09.). Eine Stufe darunter: klar eine
+     Überschrift, aber sichtbar untergeordnet. Eigener Wert statt einer
+     Ableitung aus der Variablen, damit die Zeile in jedem Raum gleich
+     bleibt — machBAR und bewegBAR setzen ihre H1 größer, der Aufklapper
+     soll davon nicht mitwachsen. */
   .translations__title {
     margin: 0;
-    font-size: var(--article-title-size, clamp(2rem, 4vw, 3rem));
+    font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+    /* Dasselbe Footer-Gold wie die Überschrift des Beitrags (Katharina
+       14.09.) — Begründung an .article__title in global.css. */
+    color: var(--bg-deep, #8e6c4a);
     transition: color 200ms ease;
   }
+  /* Hover geht jetzt nach OBEN ins hellere Logo-Gold: der Ruhezustand ist
+     bereits golden, ein zweites Gold derselben Tiefe wäre kein sichtbarer
+     Unterschied mehr. */
   .translations__summary:hover .translations__title {
     color: var(--accent, #c89a78);
   }
