@@ -115,12 +115,15 @@ const html = blocks ? toHTML(blocks, { components }) : '';
   }
   .rich p {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
-    /* Mindestgröße 18px (statt 17px) — Cormorant Garamond wirkt auf
-       kleinen Screens dünner als Sans-Serif, braucht daher etwas mehr
-       Größe für bequeme Lesbarkeit (Katharina 14.07.). */
-    font-size: clamp(18px, 1.4vw, 20px);
-    line-height: 1.7;
-    color: var(--text-body, #4a3d5a);
+    /* Mindestgröße 19px — Cormorant Garamond wirkt dünner als eine
+       Sans-Serif und braucht für bequeme Lesbarkeit mehr Größe
+       (Katharina 14.07., nochmals angehoben 14.09.). Farbe eine Stufe
+       tiefer als der allgemeine Body-Ton: auf langen Strecken liest
+       sich --text-body blass, --text-reading steht ruhig auf der Seite,
+       ohne so hart zu werden wie eine Headline. */
+    font-size: clamp(20px, 1.75vw, 23px);
+    line-height: 1.68;
+    color: var(--text-reading, #3a2f48);
   }
   .rich em {
     font-style: italic;
@@ -142,7 +145,7 @@ const html = blocks ? toHTML(blocks, { components }) : '';
   }
   .rich__h2 {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
     font-weight: 500;
     line-height: 1.2;
     color: var(--text-primary, #2d2435);
@@ -150,7 +153,7 @@ const html = blocks ? toHTML(blocks, { components }) : '';
   }
   .rich__h3 {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
-    font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+    font-size: clamp(1.4rem, 2.4vw, 1.7rem);
     font-weight: 500;
     color: var(--text-primary, #2d2435);
     margin-top: 1.6em;
@@ -160,7 +163,7 @@ const html = blocks ? toHTML(blocks, { components }) : '';
     padding-left: 1.2em;
     font-family: var(--font-display, 'Cormorant Garamond', serif);
     font-style: italic;
-    font-size: clamp(18px, 1.6vw, 22px);
+    font-size: clamp(21px, 1.9vw, 25px);
     color: var(--text-primary, #2d2435);
   }
   .rich__list {
@@ -168,9 +171,9 @@ const html = blocks ? toHTML(blocks, { components }) : '';
   }
   .rich__list li {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
-    font-size: clamp(18px, 1.4vw, 20px);
+    font-size: clamp(20px, 1.75vw, 23px);
     line-height: 1.6;
-    color: var(--text-body, #4a3d5a);
+    color: var(--text-reading, #3a2f48);
     margin-top: 0.5em;
   }
   /* Bild im Textfluss (types.image) — etwas mehr Luft als Absätze,

@@ -40,6 +40,7 @@
     /* — 2. Text ——————————————————————————————————————— */
     --text-primary:   #2d2435;  /* Aubergine-Plum · Headlines, Body-Strong */
     --text-body:      #4a3d5a;  /* gedämpftes Plum · Body */
+    --text-reading:   #3a2f48;  /* Plum tiefer · Fließtext in den Räumen. Cormorant Garamond ist feiner gezeichnet als die Sans — auf langen Strecken wirkt --text-body dadurch blass. ~11.7:1 auf --bg-base (vorher ~9.3:1). Katharinas Wunsch 14.09.: „größer und etwas dunkler". */
     --text-secondary: #6a5a78;  /* Sekundär · Subtitles, Captions */
     --text-muted:     #8a8290;  /* Lowest hierarchy · Meta, Timestamps */
     --text-inverse:   #ffffff;  /* auf dunklem Footer (ruhiges Bronze-Grau) */
