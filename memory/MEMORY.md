@@ -40,16 +40,15 @@ Telefon funktioniert.
   blass (Katharina: „größer und etwas dunkler"). **Nur Absätze und Listen** —
   Zwischenüberschriften und Zitat bleiben, wie sie waren (Katharina 14.09.:
   „headline nicht größer").
-- **Lesbarkeit des Fließtexts hängt an der Strichstärke, nicht am Farbwert**
-  (14.09.). Cormorant Garamond ist eine Haarstrich-Antiqua; der Text steht
-  deshalb auf `font-weight: 500` (liegt im Font-Paket) und auf
-  `-webkit-font-smoothing: auto` — die global gesetzte `antialiased`-Glättung
-  dünnt auf macOS genau die Substanz weg, die den Text trägt. Sie bleibt global
-  für den hellen Text auf dem dunklen Footer, wird aber im Lesetext
-  zurückgenommen. Absatzabstand 1.75em (39px): er MUSS über der Zeilenhöhe
-  (37px) liegen, sonst liest sich ein neuer Absatz wie eine weitere Zeile.
-  Zeilenlänge gemessen 64 Zeichen, im guten Bereich — an der Spaltenbreite
-  nichts ändern.
+- **An den Glyphen des Lesetexts NICHT drehen** (14.09., teuer gelernt).
+  `font-weight: 500` und `-webkit-font-smoothing: auto` sind technisch die
+  wirksamsten Hebel gegen „wirkt dünn" — optisch waren sie ein Fehlschlag: die
+  Antiqua wurde plump, die Systemglättung fransig („nein häßlich", noch am
+  selben Tag zurückgenommen). Cormorant Garamond soll fein bleiben; Lesbarkeit
+  über Größe, Zeilen- und Absatzabstand steuern. Absatzabstand 1.75em (39px)
+  liegt bewusst ÜBER der Zeilenhöhe (37px), sonst liest sich ein neuer Absatz
+  wie eine weitere Zeile. Zeilenlänge gemessen 64 Zeichen, guter Bereich — an
+  der Spaltenbreite nichts ändern.
 - **Überschriften im geöffneten Beitrag sind golden** (14.09.): Beitragstitel,
   Zwischenüberschriften und die Überschrift des Übersetzungs-Aufklappers tragen
   `--bg-deep` (#8e6c4a), das Gold der Footer-Fläche — eine Spur tiefer als das

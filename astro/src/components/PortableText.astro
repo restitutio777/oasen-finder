@@ -128,28 +128,18 @@ const html = blocks ? toHTML(blocks, { components }) : '';
     font-size: clamp(20px, 1.75vw, 23px);
     line-height: 1.68;
     color: var(--text-reading, #3a2f48);
-    /* Cormorant Garamond ist eine Renaissance-Antiqua mit sehr feinen
-       Haarstrichen. Der Schnitt 500 (liegt bereits im Font-Paket, kostet
-       keinen zusätzlichen Download) verdickt nur die Striche, nicht die
-       Form: die Schrift bleibt dieselbe edle Antiqua, steht aber sichtbar
-       fester auf der Seite. Wirksamer als noch dunklere Farbe — der
-       wahrgenommene Kontrast hängt an der Strichstärke, nicht am Farbwert
-       (der liegt mit 11,7:1 längst hoch über jeder Anforderung). */
-    font-weight: 500;
-    /* macOS dünnt mit -webkit-font-smoothing: antialiased (global gesetzt,
-       für den hellen Text auf dem dunklen Footer sinnvoll) jede Schrift
-       aus. Bei einer Haarstrich-Antiqua auf hellem Grund frisst das genau
-       die Substanz weg, die den Text tragen soll. Hier zurück auf die
-       normale Glättung des Systems — bewusst nur im Lesetext. */
-    -webkit-font-smoothing: auto;
-    -moz-osx-font-smoothing: auto;
+    /* NICHT anfassen: Strichstärke und Schriftglättung. Am 14.09. stand
+       der Lesetext kurz auf font-weight 500 und -webkit-font-smoothing:
+       auto — technisch der wirksamste Hebel für „wirkt dünn", optisch ein
+       Fehlschlag: die Antiqua wurde plump und die Systemglättung fransig
+       („nein häßlich", Katharina, noch am selben Tag zurückgenommen).
+       Cormorant Garamond soll fein bleiben. Lesbarkeit hier über Größe,
+       Zeilen- und Absatzabstand steuern, nicht über die Glyphen. */
   }
   .rich em {
     font-style: italic;
     color: var(--text-primary, #2d2435);
   }
-  /* 600 gegenüber 500 im Fließtext: der Abstand bleibt sichtbar, seit der
-     Grundtext auf 500 steht. */
   .rich strong {
     font-weight: 600;
     color: var(--text-primary, #2d2435);
@@ -200,9 +190,6 @@ const html = blocks ? toHTML(blocks, { components }) : '';
     font-size: clamp(20px, 1.75vw, 23px);
     line-height: 1.6;
     color: var(--text-reading, #3a2f48);
-    font-weight: 500;
-    -webkit-font-smoothing: auto;
-    -moz-osx-font-smoothing: auto;
     margin-top: 0.5em;
   }
   /* Bild im Textfluss (types.image) — etwas mehr Luft als Absätze,
