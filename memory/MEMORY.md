@@ -37,7 +37,9 @@ Telefon funktioniert.
   in den einzelnen Seiten. Seit 14.09.: `clamp(20px, 1.75vw, 23px)` und die
   eigene Farbe `--text-reading` (#3a2f48) statt `--text-body` — Cormorant
   Garamond ist feiner gezeichnet als die Sans und wirkt auf langen Strecken sonst
-  blass (Katharina: „größer und etwas dunkler").
+  blass (Katharina: „größer und etwas dunkler"). **Nur Absätze und Listen** —
+  Zwischenüberschriften und Zitat bleiben, wie sie waren (Katharina 14.09.:
+  „headline nicht größer").
 - **Statischer Output** (`output: 'static'`). Kein Token im Frontend, schnell,
   billig. Preis: Ein Build-Fehler friert den kompletten Live-Stand ein, ohne dass
   im Studio irgendetwas auffällt. Siehe Stolpersteine.
