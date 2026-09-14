@@ -40,6 +40,19 @@ Telefon funktioniert.
   blass (Katharina: „größer und etwas dunkler"). **Nur Absätze und Listen** —
   Zwischenüberschriften und Zitat bleiben, wie sie waren (Katharina 14.09.:
   „headline nicht größer").
+- **Überschriften im geöffneten Beitrag sind golden** (14.09.): Beitragstitel,
+  Zwischenüberschriften und die Überschrift des Übersetzungs-Aufklappers tragen
+  `--bg-deep` (#8e6c4a), das Gold der Footer-Fläche — eine Spur tiefer als das
+  Logo-Gold `--accent`. Kein neuer Farbwert, damit beides nicht auseinanderläuft.
+  Nur im Beitrag: Übersichten, Menü und Startseite behalten Aubergine-Plum, sonst
+  verliert das Gold seine Bedeutung. Die Farbe hängt an `.article__title`
+  (global.css) statt an neun Inline-Styles. Für Fließtext ist der Ton zu hell
+  (~4,5:1) — bewusst nur an Überschriften.
+- **Überschrift des Übersetzungs-Aufklappers ist kleiner als der Titel**
+  (`clamp(1.5rem, 2.6vw, 2.1rem)`, 14.09.). Vom 10.09. bis 14.09. stand sie auf
+  Titelgröße; zugeklappt las sich die Zeile dann wie der Beginn eines zweiten
+  Artikels. Eigener Wert, nicht `--article-title-size`: machBAR und bewegBAR
+  setzen ihre H1 größer, der Aufklapper soll nicht mitwachsen.
 - **Statischer Output** (`output: 'static'`). Kein Token im Frontend, schnell,
   billig. Preis: Ein Build-Fehler friert den kompletten Live-Stand ein, ohne dass
   im Studio irgendetwas auffällt. Siehe Stolpersteine.
