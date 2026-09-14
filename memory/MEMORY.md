@@ -40,6 +40,16 @@ Telefon funktioniert.
   blass (Katharina: „größer und etwas dunkler"). **Nur Absätze und Listen** —
   Zwischenüberschriften und Zitat bleiben, wie sie waren (Katharina 14.09.:
   „headline nicht größer").
+- **Schriftgrößen-Regler statt immer größerer Grundschrift** (14.09.,
+  `astro/src/components/Lesegroesse.astro`). Drei Stufen (1 / 1,15 / 1,3) als
+  drei „A", rechts über dem Text. Der Regler wird NICHT in die neun
+  Beitragsseiten eingebaut: er liegt einmal im BaseLayout und setzt sich per
+  Skript über den ersten `.rich`-Block mit mindestens 700 Zeichen — erscheint
+  damit automatisch auf jeder langen Seite und nirgends sonst. Die Wahl liegt in
+  `localStorage` (`werkstatt:lesegroesse`), ein Inline-Skript im `<head>` setzt
+  sie vor dem ersten Zeichnen, sonst blitzt die Normalgröße auf. Technisch:
+  `font-size: calc(clamp(...) * var(--lese-skala, 1))` — ohne JavaScript ist die
+  Skala 1 und alles bleibt wie immer.
 - **An den Glyphen des Lesetexts NICHT drehen** (14.09., teuer gelernt).
   `font-weight: 500` und `-webkit-font-smoothing: auto` sind technisch die
   wirksamsten Hebel gegen „wirkt dünn" — optisch waren sie ein Fehlschlag: die

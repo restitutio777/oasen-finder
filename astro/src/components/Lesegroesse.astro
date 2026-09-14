@@ -1,0 +1,147 @@
+---
+/**
+ * Schriftgrößen-Regler für lange Texte (14.09.26).
+ *
+ * Drei Stufen, als drei „A" in wachsender Größe — ohne Erklärtext, das
+ * Bild sagt es. Die Wahl gilt für die ganze Site und übersteht das
+ * Schließen des Browsers (localStorage, kein Cookie, kein Tracking, keine
+ * Übertragung).
+ *
+ * Bewusst KEIN Einbau in die neun Beitragsseiten: der Regler setzt sich
+ * selbst über den ersten längeren Lesetext einer Seite. Damit erscheint er
+ * automatisch auf jeder Seite, die genug Text trägt — auch auf künftigen —
+ * und nirgends, wo er nur Platz wegnähme. Die Schwelle steht in ZEICHEN
+ * unten im Skript.
+ *
+ * Ohne JavaScript erscheint er nicht. Das ist richtig so: er könnte ohne
+ * JavaScript auch nichts bewirken.
+ */
+---
+
+<div class="lesegroesse" hidden data-lesegroesse>
+  <span class="lesegroesse__label">Schriftgröße</span>
+  <div class="lesegroesse__gruppe" role="group" aria-label="Schriftgröße für den Text">
+    <button type="button" data-stufe="1" aria-label="Normale Schriftgröße" aria-pressed="true"
+      ><span style="font-size: 15px">A</span></button
+    >
+    <button type="button" data-stufe="1.15" aria-label="Größere Schrift" aria-pressed="false"
+      ><span style="font-size: 19px">A</span></button
+    >
+    <button type="button" data-stufe="1.3" aria-label="Größte Schrift" aria-pressed="false"
+      ><span style="font-size: 24px">A</span></button
+    >
+  </div>
+</div>
+
+<style>
+  .lesegroesse {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    /* Oben Luft, damit der Regler nicht am Bild klebt; unten etwas mehr,
+       damit er zum Text gehört und nicht zwischen beiden schwebt. */
+    margin: 1.25rem 0 1.75rem;
+  }
+  .lesegroesse__label {
+    font-family: var(--font-text);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .lesegroesse__gruppe {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--bg-elevated);
+  }
+  /* 44px Mindesthöhe: am Handy muss der Knopf mit dem Daumen sicher zu
+     treffen sein, auch wenn das „A" darin klein ist. */
+  .lesegroesse__gruppe button {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--font-display);
+    line-height: 1;
+    color: var(--text-secondary);
+    transition: color 200ms ease, background-color 200ms ease;
+  }
+  .lesegroesse__gruppe button + button {
+    border-left: 1px solid var(--border-subtle);
+  }
+  .lesegroesse__gruppe button:hover {
+    color: var(--accent-bronze);
+  }
+  .lesegroesse__gruppe button[aria-pressed='true'] {
+    color: var(--accent-bronze);
+    background: var(--bg-warm-soft);
+  }
+  @media (max-width: 480px) {
+    .lesegroesse__label {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+    }
+  }
+</style>
+
+<script>
+  /* Ab wie vielen Zeichen gilt ein Text als „lang genug" für den Regler.
+     Rund zwei Bildschirmhöhen am Handy — kürzere Beiträge bekommen keinen
+     Bedienknopf über den Text gesetzt, den niemand braucht. */
+  const SCHWELLE = 700;
+  const SPEICHER = 'werkstatt:lesegroesse';
+
+  const regler = document.querySelector<HTMLElement>('[data-lesegroesse]');
+  if (regler) {
+    /* Den längsten Lesetext der Seite suchen, nicht den ersten: auf
+       Beitragsseiten mit Übersetzung steht der deutsche Text zuerst, aber
+       ein kurzer Vorspann könnte ihm zuvorkommen. */
+    const texte = [...document.querySelectorAll<HTMLElement>('.rich')]
+      .filter((el) => !el.closest('.translations__body'))
+      .filter((el) => (el.textContent || '').trim().length >= SCHWELLE);
+
+    if (texte.length === 0) {
+      regler.remove();
+    } else {
+      const ziel = texte[0];
+      ziel.parentElement?.insertBefore(regler, ziel);
+      regler.hidden = false;
+
+      const knoepfe = [...regler.querySelectorAll<HTMLButtonElement>('button')];
+      const setze = (stufe: string, speichern: boolean) => {
+        document.documentElement.style.setProperty('--lese-skala', stufe);
+        knoepfe.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.stufe === stufe)));
+        if (speichern) {
+          try {
+            localStorage.setItem(SPEICHER, stufe);
+          } catch {
+            /* Privates Fenster o. Ä. — die Einstellung gilt dann nur für
+               diese Seite. Kein Grund, den Regler kaputtgehen zu lassen. */
+          }
+        }
+      };
+
+      let gespeichert: string | null = null;
+      try {
+        gespeichert = localStorage.getItem(SPEICHER);
+      } catch {
+        /* siehe oben */
+      }
+      setze(gespeichert && ['1', '1.15', '1.3'].includes(gespeichert) ? gespeichert : '1', false);
+
+      knoepfe.forEach((b) =>
+        b.addEventListener('click', () => setze(b.dataset.stufe || '1', true))
+      );
+    }
+  }
+</script>

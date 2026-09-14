@@ -17,6 +17,7 @@ import '@fontsource/inter/700.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Lesegroesse from '../components/Lesegroesse.astro';
 
 export interface Props {
   title?: string;
@@ -96,12 +97,26 @@ const ogLocale = locale === 'de' ? 'de_DE' : locale === 'fr' ? 'fr_FR' : 'en_US'
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <!-- Gespeicherte Schriftgröße setzen, BEVOR gezeichnet wird: sonst
+         erscheint der Text kurz in Normalgröße und springt dann. Muss
+         inline im <head> stehen und darf nichts voraussetzen. -->
+    <script is:inline>
+      try {
+        var g = localStorage.getItem('werkstatt:lesegroesse');
+        if (g === '1.15' || g === '1.3') document.documentElement.style.setProperty('--lese-skala', g);
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <Header />
     <main>
       <slot />
     </main>
+    {/* Schriftgrößen-Regler: liegt hier am Seitenende und setzt sich per
+        Skript über den ersten längeren Lesetext. Seiten ohne solchen Text
+        werfen ihn von selbst wieder weg. */}
+    <Lesegroesse />
+
     <Footer />
 
     {/* Vercel Analytics — ohne Cookies, anonymisiert.
