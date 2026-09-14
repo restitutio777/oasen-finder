@@ -57,7 +57,9 @@
     border: 1px solid var(--border-subtle);
     border-radius: 999px;
     overflow: hidden;
-    background: var(--bg-elevated);
+    /* Kein eigener Grund: der Regler liegt auf dem Seitenton und drängt
+       sich nicht vor den Text. */
+    background: transparent;
   }
   /* 44px Mindesthöhe: am Handy muss der Knopf mit dem Daumen sicher zu
      treffen sein, auch wenn das „A" darin klein ist. */
@@ -82,9 +84,12 @@
   .lesegroesse__gruppe button:hover {
     color: var(--accent-bronze);
   }
+  /* Die gewählte Stufe bekommt einen hellen Goldschimmer statt Grau: Grau
+     las sich am 14.09. wie „ausgeschaltet", das Gold knüpft an die
+     Überschriften und den Hauptknopf an. */
   .lesegroesse__gruppe button[aria-pressed='true'] {
     color: var(--accent-bronze);
-    background: var(--bg-warm-soft);
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
   }
   @media (max-width: 480px) {
     .lesegroesse__label {

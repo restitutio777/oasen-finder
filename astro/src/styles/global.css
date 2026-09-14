@@ -154,6 +154,22 @@
     color: var(--accent-bronze);
   }
 
+  /* „← Zurück zur …" über jedem Beitrag. Eigene Zeile, sonst rutscht die
+     Kennzeichnung dahinter (NOTIZ, hörBAR · …) bei genug Breite in dieselbe
+     Zeile und liest sich als Teil des Links (14.09.). fit-content, damit
+     die Tippfläche nur so breit ist wie der Text. Vorher stand das als
+     Inline-Style in acht Seiten, teils mit, teils ohne Unterstreichung. */
+  .article__back {
+    display: block;
+    width: fit-content;
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .article__back:hover {
+    color: var(--accent-hover);
+  }
+
   p { margin: 0; }
 
   .eyebrow {
