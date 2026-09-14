@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 14.09.2026*
+*Stand: 14.09.2026 (Lesbarkeit, Gold-Überschriften, Schriftgrößen-Regler)*
 
 ## Projektziel
 
@@ -27,6 +27,14 @@ Telefon funktioniert.
 - Teilen: `ShareButton` unter jedem Beitrag, `PageShare` als ruhiger
   Seitenabschluss auf Startseite und allen BAR-Übersichten (04.09.). Web Share
   API mit Clipboard-Fallback, kein Tracking.
+- Übersetzungen (`Translations.astro`, `TranslationLink.astro`, 09.–10.09.):
+  Hinweis unter dem Titel, aufklappbarer Text unten, Anker `#uebersetzung-en`.
+- Lesetext in den Räumen: 21–24 px, `--text-reading` (#3a2f48), Absatzabstand
+  1.75em, dazu der Schriftgrößen-Regler (14.09.).
+- Überschriften im geöffneten Beitrag in `--accent-bronze` (#a76e3a).
+- Eigene 404-Seite (`astro/src/pages/404.astro`, 14.09.). Vorher zeigte Vercel
+  seine rohe Fehlerseite ohne Logo, Menü und Rückweg — beim Verschicken einzelner
+  Links der wahrscheinlichste Fehlerfall.
 
 ## Entscheidungen mit Begründung
 

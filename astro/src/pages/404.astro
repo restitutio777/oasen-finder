@@ -1,0 +1,47 @@
+---
+/**
+ * Seite für Adressen, die es nicht (mehr) gibt.
+ *
+ * Ohne diese Datei zeigt Vercel seine eigene Fehlerseite: schwarzer Text
+ * auf Weiß, „404: NOT_FOUND", kein Logo, kein Menü, kein Weg zurück. Wer
+ * einem alten oder falsch abgetippten Link folgt, landet dann außerhalb
+ * der Site und geht wieder — gerade bei Adressen, die Katharina einzeln
+ * verschickt, der wahrscheinlichste Fall.
+ *
+ * Astro baut daraus 404.html, Vercel liefert sie für jede unbekannte
+ * Adresse automatisch aus. Kein Eintrag in vercel.json nötig.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Seite nicht gefunden — werkSTATT Gemeinschaft"
+  description="Diese Adresse gibt es nicht — hier geht es zurück in die Räume."
+>
+  <section style="padding: 6rem 0; text-align: center; max-width: 620px; margin: 0 auto;">
+    <div class="container">
+      <span class="eyebrow">Nicht gefunden</span>
+      <h1
+        class="article__title"
+        style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); margin: 1rem 0 1.5rem;"
+      >
+        Diese Seite gibt es nicht
+      </h1>
+      <p style="font-family: var(--font-display); font-size: 21px; line-height: 1.6; color: var(--text-reading);">
+        Vielleicht ist die Adresse nicht ganz vollständig angekommen, vielleicht
+        ist der Beitrag umgezogen. Beides lässt sich von hier aus lösen.
+      </p>
+
+      <nav aria-label="Zurück in die Räume" style="margin-top: 2.5rem;">
+        <ul
+          style="list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;"
+        >
+          <li><a href="/" class="btn btn--ghost">Startseite</a></li>
+          <li><a href="/schreibbar/" class="btn btn--ghost">schreibBAR</a></li>
+          <li><a href="/machbar/" class="btn btn--ghost">machBAR</a></li>
+          <li><a href="/mitkommen/" class="btn btn--ghost">Mitkommen</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+</BaseLayout>
