@@ -143,19 +143,24 @@ const html = blocks ? toHTML(blocks, { components }) : '';
   .rich a:hover {
     color: var(--link-hover, #6d4d38);
   }
-  .rich__h2 {
+  /* Farbe: das Gold des Footers, wie die Überschrift des Beitrags darüber
+     (Katharina 14.09.). Begründung steht einmal an .article__title in
+     global.css. */
+  .rich__h1,
+  .rich__h2,
+  .rich__h4 {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 500;
     line-height: 1.2;
-    color: var(--text-primary, #2d2435);
+    color: var(--bg-deep, #8e6c4a);
     margin-top: 2em;
   }
   .rich__h3 {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
     font-size: clamp(1.25rem, 2.4vw, 1.6rem);
     font-weight: 500;
-    color: var(--text-primary, #2d2435);
+    color: var(--bg-deep, #8e6c4a);
     margin-top: 1.6em;
   }
   .rich__quote {

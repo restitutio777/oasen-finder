@@ -131,6 +131,28 @@
   }
   h1 em, h2 em { font-weight: 500; font-style: italic; color: var(--accent); }
 
+  /* Überschriften im geöffneten Beitrag tragen das Gold des Footers
+     (Katharina 14.09.: „die Farbe des Footers, von vornherein, nicht beim
+     Mouseover — ein ganz bisschen dunkler als die Logo-Farbe"). Bewusst
+     --bg-deep und kein neuer Farbwert: es ist derselbe Bronze-Goldton, den
+     der Footer als Fläche trägt, eine Spur tiefer als das Logo-Gold
+     (--accent). Wandert der Footer je auf einen anderen Ton, wandern die
+     Beitrags-Überschriften mit, statt still auseinanderzulaufen.
+
+     Nur im Beitrag: die Übersichten, das Menü und die Startseite behalten
+     ihr Aubergine-Plum, sonst verliert das Gold seine Bedeutung.
+
+     Kontrast auf --bg-base rund 4,5:1 — für Überschriftengrößen (ab 24 px)
+     sicher über der WCAG-AA-Schwelle von 3:1. Für Fließtext wäre der Ton zu
+     hell, deshalb steht er hier ausdrücklich nur an Überschriften.
+
+     Die Zwischenüberschriften im Text (.rich__*) und die Überschrift des
+     Übersetzungs-Aufklappers holen sich denselben Ton in ihrer eigenen
+     Komponente — dort, wo auch ihre übrigen Regeln stehen. */
+  .article__title {
+    color: var(--bg-deep);
+  }
+
   p { margin: 0; }
 
   .eyebrow {
