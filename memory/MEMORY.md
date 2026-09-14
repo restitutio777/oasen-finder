@@ -80,6 +80,12 @@ Telefon funktioniert.
   Titelgröße; zugeklappt las sich die Zeile dann wie der Beginn eines zweiten
   Artikels. Eigener Wert, nicht `--article-title-size`: machBAR und bewegBAR
   setzen ihre H1 größer, der Aufklapper soll nicht mitwachsen.
+- **Zurück-Link über Beiträgen = `.article__back`** (global.css, 14.09.). Eigene
+  Zeile, sonst rutscht die Kennzeichnung (NOTIZ …) in dieselbe Zeile. Nicht
+  wieder als Inline-Style in die Seiten schreiben. Regler-Auswahl: heller
+  Goldschimmer, nicht Grau (Grau las sich wie „aus").
+- **„Alles größer" war Browser-Zoom** (14.09.): Lupe in Braves Adresszeile =
+  Zoom ≠ 100 %, Cmd+0. Erst das prüfen, bevor man CSS verdächtigt.
 - **Statischer Output** (`output: 'static'`). Kein Token im Frontend, schnell,
   billig. Preis: Ein Build-Fehler friert den kompletten Live-Stand ein, ohne dass
   im Studio irgendetwas auffällt. Siehe Stolpersteine.
