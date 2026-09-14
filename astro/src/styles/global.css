@@ -48,6 +48,7 @@
     /* — 3. Akzente ——————————————————————————————————— */
     --accent:            #c89a78;  /* CHAMPAGNE-GOLD · Brand-Anker, CTAs, BAR-Marken */
     --accent-hover:      #a87e5e;  /* Champagne tiefer · Hover */
+    --accent-bronze:     #8d6134;  /* BRONZE-GOLD · Überschriften im geöffneten Beitrag. Derselbe Farbwinkel wie das Footer-Gold (30°), aber satter (46 % statt 31 %) und eine Spur tiefer: als große Fläche liest sich der Footer-Ton golden, als dünne Serifen-Buchstaben kippt er ins Olive (Katharina 14.09.: „wirkt jetzt grün"). Kontrast ~5:1 auf --bg-base. */
     --link:              #3a7894;  /* Fließtext-Links · Bergsee-Türkis, so nah wie möglich am Logo-Ton --accent-blue (#5497b8) während noch WCAG-AA (~4.5:1 auf --bg-base) eingehalten wird. Reines --accent-blue läge nur bei ~3:1. Katharinas Wunsch (14.07.): Türkis aus dem Logo als Link-Kontrastfarbe, möglichst nah am Original. */
     --link-hover:        #2c5a6f;  /* Türkis noch tiefer · Hover */
     --accent-soft:       #e8d2b5;  /* Champagne hell · auf dunklem Grund */
@@ -134,10 +135,10 @@
   /* Überschriften im geöffneten Beitrag tragen das Gold des Footers
      (Katharina 14.09.: „die Farbe des Footers, von vornherein, nicht beim
      Mouseover — ein ganz bisschen dunkler als die Logo-Farbe"). Bewusst
-     --bg-deep und kein neuer Farbwert: es ist derselbe Bronze-Goldton, den
-     der Footer als Fläche trägt, eine Spur tiefer als das Logo-Gold
-     (--accent). Wandert der Footer je auf einen anderen Ton, wandern die
-     Beitrags-Überschriften mit, statt still auseinanderzulaufen.
+     --accent-bronze: das Footer-Gold selbst (--bg-deep) war als Schrift zu
+     entsättigt und kippte ins Olive — derselbe Farbwinkel, aber satter und
+     eine Spur tiefer. Fläche und Schrift brauchen bei gleichem Eindruck
+     nicht denselben Wert.
 
      Nur im Beitrag: die Übersichten, das Menü und die Startseite behalten
      ihr Aubergine-Plum, sonst verliert das Gold seine Bedeutung.
@@ -150,7 +151,7 @@
      Übersetzungs-Aufklappers holen sich denselben Ton in ihrer eigenen
      Komponente — dort, wo auch ihre übrigen Regeln stehen. */
   .article__title {
-    color: var(--bg-deep);
+    color: var(--accent-bronze);
   }
 
   p { margin: 0; }
