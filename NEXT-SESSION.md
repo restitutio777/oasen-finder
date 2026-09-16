@@ -2,6 +2,26 @@
 
 *Aktueller Stand ganz oben. Ältere Stände darunter als historische Schnappschüsse.*
 
+## STAND 16.09.2026 — Schriftgrößen-Regler für die ganze Seite
+
+**Anlass (Katharina):** „Die Standard-Textgröße soll ein bisschen kleiner sein. Und dieses Einstellmodul für die Schriftgröße muss bei allen verfügbar sein, nicht nur bei den neuen. Bei allen Texten der Webseite."
+
+**1. Grundgröße zurückgenommen:** Lesetext `clamp(19px, 1.65vw, 22px)` statt `clamp(21px, 1.85vw, 24px)`, Zitat `clamp(18px, 1.55vw, 21px)` statt `clamp(19px, 1.7vw, 23px)` (`PortableText.astro`). Das ist eine Spur kleiner als der Stand vor dem 14.09. — vertretbar, weil der Regler jetzt überall greift.
+
+**2. Regler auf jeder Seite:** Die 700-Zeichen-Schwelle ist weg. `Lesegroesse.astro` sucht den Anker in dieser Reihenfolge: erster `.rich`-Block (ohne den Übersetzungs-Aufklapper) → erster Absatz mit 80+ Zeichen → irgendein Absatz → Anfang von `<main>`. Liegt der Anker in einer Flex-/Grid-Spalte, rückt der Regler vor den ganzen Kasten, damit er die Spalte nicht verschiebt. Vorher fehlte er auf allen Übersichten, auf der Startseite, im Impressum, auf Danke und 404.
+
+**3. `--lese-skala` gilt für alle Texte:** 153 Größenangaben in `global.css`, den Komponenten und den Inline-Styles der Seiten stehen jetzt als `font-size: calc(<Wert> * var(--lese-skala, 1))`. Bei Stufe 1 rechnet das exakt den alten Wert — ohne JavaScript ändert sich nichts.
+
+**Bewusst NICHT skaliert** (tragen das Layout, brechen bei 1,3): Kopfzeile und Navigation (`.brand`, `.nav*`), die großen Schauüberschriften ab ~32 px (Hero-, Sektions-, Seiten- und Beitragstitel), die Ziffernblöcke der Termin- und Eintragskarten (`__day`), das Anführungszeichen der Stimmen, der Initialbuchstabe, die Leaflet-Karte und der Regler selbst. **Bewusst MIT skaliert:** die Zwischenüberschriften im Lesetext (`.rich__h*`) — fest stünden sie auf Stufe 1,3 kleiner da als der Fließtext darunter.
+
+**Merksatz für später:** Neue Textregeln gleich in der `calc(… * var(--lese-skala, 1))`-Form schreiben. Steht als Block auch in `global.css` über `body`.
+
+**Verifiziert:** `npm run build` grün (104 Seiten). Danach alle 103 Seiten im Browser (Chromium, 390 px und 1280 px) durchgefahren: Regler auf jeder Seite sichtbar, Stufe 1,3 überall wirksam, kein neuer Überlauf. Die drei gefundenen Überläufe (`/bewegbar/` Leaflet-Karte, lange Roh-URLs im Text von `/wunderbar/lieber-vorsichtig/` und `/machbar/nebenuebungen-zu-dritt/`) sind bei Stufe 1 exakt gleich groß — also alt und nicht von dieser Änderung.
+
+**Offen, unangetastet:** Diese langen Roh-URLs im Fließtext laufen am Handy über die Spaltenbreite hinaus (`body { overflow-x: hidden }` verdeckt es). Ein `overflow-wrap: anywhere` auf `.rich` würde es lösen — bewusst nicht mit hineingenommen, weil es mit der Schriftgröße nichts zu tun hat.
+
+---
+
 ## STAND 04.09.2026 — Teilen-Button auch auf den Hauptseiten
 
 **Anlass:** Die Detailseiten trugen den `ShareButton` schon unter dem Beitrag, die Übersichts-Seiten gar nichts. Wer einen ganzen Raum weitergeben wollte, musste die URL aus der Adresszeile holen.

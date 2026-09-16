@@ -60,7 +60,7 @@ const ogImage = event.photo?.asset
       <h1 class="article__title" style="font-family: var(--font-display); font-size: var(--article-title-size); margin: 0.5rem 0 1rem;">
         {localized(event.title)}
       </h1>
-      <p style="font-size: 18px; color: var(--text-body); margin-bottom: 2rem;">
+      <p style="font-size: calc(18px * var(--lese-skala, 1)); color: var(--text-body); margin-bottom: 2rem;">
         <strong>{new Date(event.startDate).toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</strong>
         {event.endDate && ` bis ${new Date(event.endDate).toLocaleDateString('de-DE')}`}
         <br />
@@ -68,7 +68,7 @@ const ogImage = event.photo?.asset
       </p>
 
       {event.dogFriendly && event.format !== 'online' && (
-        <p style="font-size: 14px; color: var(--accent); margin-bottom: 1.5rem;">
+        <p style="font-size: calc(14px * var(--lese-skala, 1)); color: var(--accent); margin-bottom: 1.5rem;">
           🐕 Hundefreundlich — Carla ist dabei
         </p>
       )}

@@ -56,12 +56,12 @@ const ogImage = firstImage?.asset
         {station.name}
       </h1>
       {station.address && (
-        <p style="font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--text-secondary); margin: 0 0 0.5rem;">
+        <p style="font-family: var(--font-display); font-style: italic; font-size: calc(1.1rem * var(--lese-skala, 1)); color: var(--text-secondary); margin: 0 0 0.5rem;">
           {station.address}
         </p>
       )}
       {station.visitedAt && (
-        <p style="color: var(--text-muted); font-size: 14px; margin: 0;">
+        <p style="color: var(--text-muted); font-size: calc(14px * var(--lese-skala, 1)); margin: 0;">
           Besucht: {new Date(station.visitedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}
         </p>
       )}

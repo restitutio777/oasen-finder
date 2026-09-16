@@ -62,7 +62,7 @@ function eventMeta(e: any): string {
       <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin: 1rem 0;">
         mach<em>BAR</em>
       </h1>
-      <p style="font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.4rem); font-style: italic; color: var(--text-secondary); margin-bottom: 1rem;">
+      <p style="font-family: var(--font-display); font-size: calc(clamp(1.1rem, 2vw, 1.4rem) * var(--lese-skala, 1)); font-style: italic; color: var(--text-secondary); margin-bottom: 1rem;">
         Werkstatt-Treffen
       </p>
       <p style="max-width: 640px; color: var(--text-body); margin-bottom: 0.75rem;">
@@ -83,7 +83,7 @@ function eventMeta(e: any): string {
                 <a href={`/machbar/${e.slug}/`} style="display: block; padding: 1.5rem; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border-subtle); text-decoration: none; color: inherit;">
                   <p class="eyebrow">{eventMeta(e)}</p>
                   <h3 style="font-family: var(--font-display); margin: 0.5rem 0;">{localized(e.title)}</h3>
-                  {e.dogFriendly && e.format !== 'online' && <span style="font-size: 12px; color: var(--accent);">🐕 Carla willkommen</span>}
+                  {e.dogFriendly && e.format !== 'online' && <span style="font-size: calc(12px * var(--lese-skala, 1)); color: var(--accent);">🐕 Carla willkommen</span>}
                 </a>
               </li>
             ))}

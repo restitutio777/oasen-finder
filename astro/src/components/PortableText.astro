@@ -119,16 +119,16 @@ const html = blocks ? toHTML(blocks, { components }) : '';
   }
   .rich p {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
-    /* Mindestgröße 19px — Cormorant Garamond wirkt dünner als eine
-       Sans-Serif und braucht für bequeme Lesbarkeit mehr Größe
-       (Katharina 14.07., nochmals angehoben 14.09.). Farbe eine Stufe
-       tiefer als der allgemeine Body-Ton: auf langen Strecken liest
-       sich --text-body blass, --text-reading steht ruhig auf der Seite,
-       ohne so hart zu werden wie eine Headline. */
-    /* Grundgröße eine Spur größer (14.09.), multipliziert mit der vom
-       Leser gewählten Stufe — siehe Lesegroesse.astro. Ohne Regler oder
-       ohne JavaScript ist --lese-skala schlicht 1. */
-    font-size: calc(clamp(21px, 1.85vw, 24px) * var(--lese-skala, 1));
+    /* Grundgröße: 19–22 px (16.09. eine Spur zurückgenommen, vorher
+       21–24 px). Katharina: „die Standard-Textgröße soll ein bisschen
+       kleiner sein". Der Regler trägt den Rest — wer größer lesen will,
+       stellt eine Stufe höher, und diese Wahl gilt seit 16.09. für die
+       ganze Seite. Deshalb darf die Grundgröße wieder ruhig stehen,
+       statt für alle vorsorglich groß zu sein.
+       Farbe eine Stufe tiefer als der allgemeine Body-Ton: auf langen
+       Strecken liest sich --text-body blass, --text-reading steht ruhig
+       auf der Seite, ohne so hart zu werden wie eine Headline. */
+    font-size: calc(clamp(19px, 1.65vw, 22px) * var(--lese-skala, 1));
     line-height: 1.68;
     color: var(--text-reading, #3a2f48);
     /* NICHT anfassen: Strichstärke und Schriftglättung. Am 14.09. stand
@@ -164,7 +164,7 @@ const html = blocks ? toHTML(blocks, { components }) : '';
   .rich__h2,
   .rich__h4 {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: calc(clamp(1.5rem, 3vw, 2rem) * var(--lese-skala, 1));
     font-weight: 500;
     line-height: 1.2;
     color: var(--accent-bronze, #a76e3a);
@@ -172,7 +172,7 @@ const html = blocks ? toHTML(blocks, { components }) : '';
   }
   .rich__h3 {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
-    font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+    font-size: calc(clamp(1.25rem, 2.4vw, 1.6rem) * var(--lese-skala, 1));
     font-weight: 500;
     color: var(--accent-bronze, #a76e3a);
     margin-top: 1.6em;
@@ -182,7 +182,7 @@ const html = blocks ? toHTML(blocks, { components }) : '';
     padding-left: 1.2em;
     font-family: var(--font-display, 'Cormorant Garamond', serif);
     font-style: italic;
-    font-size: calc(clamp(19px, 1.7vw, 23px) * var(--lese-skala, 1));
+    font-size: calc(clamp(18px, 1.55vw, 21px) * var(--lese-skala, 1));
     color: var(--text-primary, #2d2435);
   }
   .rich__list {
@@ -190,7 +190,7 @@ const html = blocks ? toHTML(blocks, { components }) : '';
   }
   .rich__list li {
     font-family: var(--font-display, 'Cormorant Garamond', serif);
-    font-size: calc(clamp(21px, 1.85vw, 24px) * var(--lese-skala, 1));
+    font-size: calc(clamp(19px, 1.65vw, 22px) * var(--lese-skala, 1));
     line-height: 1.6;
     color: var(--text-reading, #3a2f48);
     margin-top: 0.5em;
@@ -210,7 +210,7 @@ const html = blocks ? toHTML(blocks, { components }) : '';
     margin-top: 0.5rem;
     font-family: var(--font-display, 'Cormorant Garamond', serif);
     font-style: italic;
-    font-size: 14px;
+    font-size: calc(14px * var(--lese-skala, 1));
     color: var(--text-secondary, #6a5a78);
   }
 

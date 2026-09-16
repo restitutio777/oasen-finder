@@ -1,17 +1,25 @@
 ---
 /**
- * Schriftgrößen-Regler für lange Texte (14.09.26).
+ * Schriftgrößen-Regler (14.09.26, seit 16.09. für die ganze Seite).
  *
  * Drei Stufen, als drei „A" in wachsender Größe — ohne Erklärtext, das
  * Bild sagt es. Die Wahl gilt für die ganze Site und übersteht das
  * Schließen des Browsers (localStorage, kein Cookie, kein Tracking, keine
  * Übertragung).
  *
- * Bewusst KEIN Einbau in die neun Beitragsseiten: der Regler setzt sich
- * selbst über den ersten längeren Lesetext einer Seite. Damit erscheint er
- * automatisch auf jeder Seite, die genug Text trägt — auch auf künftigen —
- * und nirgends, wo er nur Platz wegnähme. Die Schwelle steht in ZEICHEN
- * unten im Skript.
+ * Reichweite (Katharina 16.09.: „bei allen Texten der Webseite"): der
+ * Regler setzt --lese-skala auf <html>, und JEDE Textgröße der Site
+ * rechnet sich damit — `font-size: calc(<Wert> * var(--lese-skala, 1))`
+ * in global.css und in den Seiten. Fest bleiben nur Kopfzeile, Marke,
+ * die großen Schauüberschriften und die Ziffern der Terminkarten: sie
+ * tragen das Layout und würden bei Stufe 1,3 brechen. Die
+ * Zwischenüberschriften im Lesetext skalieren bewusst MIT — sonst stünden
+ * sie auf der höchsten Stufe kleiner da als der Fließtext darunter.
+ *
+ * Bewusst KEIN Einbau in die einzelnen Seiten: der Regler liegt einmal im
+ * BaseLayout und sucht sich seinen Platz selbst — über dem ersten Text
+ * der Seite. So erscheint er auf JEDER Seite, auch auf künftigen, und
+ * niemand muss daran denken.
  *
  * Ohne JavaScript erscheint er nicht. Das ist richtig so: er könnte ohne
  * JavaScript auch nichts bewirken.
@@ -100,53 +108,74 @@
 </style>
 
 <script>
-  /* Ab wie vielen Zeichen gilt ein Text als „lang genug" für den Regler.
-     Rund zwei Bildschirmhöhen am Handy — kürzere Beiträge bekommen keinen
-     Bedienknopf über den Text gesetzt, den niemand braucht. */
-  const SCHWELLE = 700;
+  /* Ab wie vielen Zeichen ein Absatz als „der Text der Seite" gilt. Auf
+     Übersichtsseiten ist das der Einleitungssatz unter der Überschrift,
+     auf Beitragsseiten der Beitrag selbst. Nur wenn nirgends so viel
+     Text steht, rückt der Regler an den Anfang von <main>. */
+  const SCHWELLE = 80;
   const SPEICHER = 'werkstatt:lesegroesse';
 
   const regler = document.querySelector<HTMLElement>('[data-lesegroesse]');
-  if (regler) {
-    /* Den längsten Lesetext der Seite suchen, nicht den ersten: auf
-       Beitragsseiten mit Übersetzung steht der deutsche Text zuerst, aber
-       ein kurzer Vorspann könnte ihm zuvorkommen. */
-    const texte = [...document.querySelectorAll<HTMLElement>('.rich')]
-      .filter((el) => !el.closest('.translations__body'))
-      .filter((el) => (el.textContent || '').trim().length >= SCHWELLE);
+  const main = document.querySelector('main');
 
-    if (texte.length === 0) {
-      regler.remove();
+  if (regler && main) {
+    const laenge = (el: Element) => (el.textContent || '').trim().length;
+
+    /* Reihenfolge der Ankersuche:
+       1. Lesetext (.rich) — der Beitrag, nicht der Übersetzungs-Aufklapper.
+       2. Der erste Absatz mit genug Text — die Einleitung einer Übersicht.
+       3. Sonst irgendein Absatz; sonst der Anfang von <main>.
+       Vom 14.09. bis 16.09. sprang der Regler ganz weg, wenn kein .rich
+       mit 700 Zeichen da war — damit fehlte er auf allen Übersichts- und
+       Randseiten. Er verschwindet jetzt nirgends mehr. */
+    const richBloecke = [...main.querySelectorAll<HTMLElement>('.rich')].filter(
+      (el) => !el.closest('.translations__body')
+    );
+    const absaetze = [...main.querySelectorAll<HTMLElement>('p')];
+    const ziel =
+      richBloecke[0] ||
+      absaetze.find((el) => laenge(el) >= SCHWELLE) ||
+      absaetze[0] ||
+      null;
+
+    if (!ziel || !ziel.parentElement) {
+      main.insertBefore(regler, main.firstChild);
     } else {
-      const ziel = texte[0];
-      ziel.parentElement?.insertBefore(regler, ziel);
-      regler.hidden = false;
-
-      const knoepfe = [...regler.querySelectorAll<HTMLButtonElement>('button')];
-      const setze = (stufe: string, speichern: boolean) => {
-        document.documentElement.style.setProperty('--lese-skala', stufe);
-        knoepfe.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.stufe === stufe)));
-        if (speichern) {
-          try {
-            localStorage.setItem(SPEICHER, stufe);
-          } catch {
-            /* Privates Fenster o. Ä. — die Einstellung gilt dann nur für
-               diese Seite. Kein Grund, den Regler kaputtgehen zu lassen. */
-          }
-        }
-      };
-
-      let gespeichert: string | null = null;
-      try {
-        gespeichert = localStorage.getItem(SPEICHER);
-      } catch {
-        /* siehe oben */
+      /* In einer Flex- oder Grid-Spalte würde der Regler als eigenes
+         Layout-Element mitgezählt und die Spalte verschieben — dann
+         lieber vor den ganzen Kasten. */
+      const eltern = ziel.parentElement;
+      const anzeige = getComputedStyle(eltern).display;
+      if ((anzeige === 'flex' || anzeige === 'grid') && eltern.parentElement) {
+        eltern.parentElement.insertBefore(regler, eltern);
+      } else {
+        eltern.insertBefore(regler, ziel);
       }
-      setze(gespeichert && ['1', '1.15', '1.3'].includes(gespeichert) ? gespeichert : '1', false);
-
-      knoepfe.forEach((b) =>
-        b.addEventListener('click', () => setze(b.dataset.stufe || '1', true))
-      );
     }
+    regler.hidden = false;
+
+    const knoepfe = [...regler.querySelectorAll<HTMLButtonElement>('button')];
+    const setze = (stufe: string, speichern: boolean) => {
+      document.documentElement.style.setProperty('--lese-skala', stufe);
+      knoepfe.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.stufe === stufe)));
+      if (speichern) {
+        try {
+          localStorage.setItem(SPEICHER, stufe);
+        } catch {
+          /* Privates Fenster o. Ä. — die Einstellung gilt dann nur für
+             diese Seite. Kein Grund, den Regler kaputtgehen zu lassen. */
+        }
+      }
+    };
+
+    let gespeichert: string | null = null;
+    try {
+      gespeichert = localStorage.getItem(SPEICHER);
+    } catch {
+      /* siehe oben */
+    }
+    setze(gespeichert && ['1', '1.15', '1.3'].includes(gespeichert) ? gespeichert : '1', false);
+
+    knoepfe.forEach((b) => b.addEventListener('click', () => setze(b.dataset.stufe || '1', true)));
   }
 </script>
