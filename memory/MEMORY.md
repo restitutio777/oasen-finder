@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 14.09.2026 (Lesbarkeit, Gold-Überschriften, Schriftgrößen-Regler)*
+*Stand: 16.09.2026 (Schriftgrößen-Regler für die ganze Seite)*
 
 ## Projektziel
 
@@ -29,8 +29,9 @@ Telefon funktioniert.
   API mit Clipboard-Fallback, kein Tracking.
 - Übersetzungen (`Translations.astro`, `TranslationLink.astro`, 09.–10.09.):
   Hinweis unter dem Titel, aufklappbarer Text unten, Anker `#uebersetzung-en`.
-- Lesetext in den Räumen: 21–24 px, `--text-reading` (#3a2f48), Absatzabstand
-  1.75em, dazu der Schriftgrößen-Regler (14.09.).
+- Lesetext in den Räumen: 19–22 px (16.09. von 21–24 px zurückgenommen),
+  `--text-reading` (#3a2f48), Absatzabstand 1.75em. Der Schriftgrößen-Regler
+  steht seit 16.09. auf **jeder** Seite und wirkt auf **alle** Texte.
 - Überschriften im geöffneten Beitrag in `--accent-bronze` (#a76e3a).
 - Eigene 404-Seite (`astro/src/pages/404.astro`, 14.09.). Vorher zeigte Vercel
   seine rohe Fehlerseite ohne Logo, Menü und Rückweg — beim Verschicken einzelner
@@ -50,14 +51,31 @@ Telefon funktioniert.
   „headline nicht größer").
 - **Schriftgrößen-Regler statt immer größerer Grundschrift** (14.09.,
   `astro/src/components/Lesegroesse.astro`). Drei Stufen (1 / 1,15 / 1,3) als
-  drei „A", rechts über dem Text. Der Regler wird NICHT in die neun
-  Beitragsseiten eingebaut: er liegt einmal im BaseLayout und setzt sich per
-  Skript über den ersten `.rich`-Block mit mindestens 700 Zeichen — erscheint
-  damit automatisch auf jeder langen Seite und nirgends sonst. Die Wahl liegt in
-  `localStorage` (`werkstatt:lesegroesse`), ein Inline-Skript im `<head>` setzt
-  sie vor dem ersten Zeichnen, sonst blitzt die Normalgröße auf. Technisch:
-  `font-size: calc(clamp(...) * var(--lese-skala, 1))` — ohne JavaScript ist die
+  drei „A", rechts über dem Text. Der Regler wird NICHT in die einzelnen Seiten
+  eingebaut: er liegt einmal im BaseLayout und sucht sich seinen Platz selbst —
+  über dem ersten Text der Seite. Die Wahl liegt in `localStorage`
+  (`werkstatt:lesegroesse`), ein Inline-Skript im `<head>` setzt sie vor dem
+  ersten Zeichnen, sonst blitzt die Normalgröße auf. Technisch:
+  `font-size: calc(<Wert> * var(--lese-skala, 1))` — ohne JavaScript ist die
   Skala 1 und alles bleibt wie immer.
+- **Der Regler gilt für die ganze Seite, nicht nur für lange Beiträge**
+  (16.09., Katharina: „bei allen Texten der Webseite"). Bis dahin erschien er
+  nur, wenn ein `.rich`-Block mit 700+ Zeichen auf der Seite stand — auf allen
+  Übersichten, im Impressum, auf der Startseite fehlte er also. Jetzt: Anker ist
+  der erste `.rich`-Block, sonst der erste Absatz mit 80+ Zeichen, sonst der
+  Anfang von `<main>`; er verschwindet nirgends mehr. Und `--lese-skala` steckt
+  in **jeder** Textgröße der Site (global.css + Inline-Styles der Seiten), nicht
+  mehr nur in `.rich`. Fest bleiben Kopfzeile/Navigation, Marke, die großen
+  Schauüberschriften (ab ~32 px) und die Ziffernblöcke der Termin- und
+  Eintragskarten — sie tragen das Layout und brechen bei Stufe 1,3. Die
+  Zwischenüberschriften im Lesetext skalieren bewusst MIT: fest stünden sie auf
+  der höchsten Stufe kleiner da als der Fließtext darunter. Neue Textregeln
+  gleich in der `calc(… * var(--lese-skala, 1))`-Form schreiben, sonst bleibt
+  genau diese eine Stelle beim Vergrößern zurück (Merksatz steht auch in
+  global.css über `body`).
+- **Grundgröße wieder eine Spur kleiner** (16.09., 19–22 px statt 21–24 px).
+  Seit der Regler überall greift, muss die Grundschrift nicht mehr vorsorglich
+  für alle groß sein — wer größer lesen will, stellt eine Stufe höher.
 - **An den Glyphen des Lesetexts NICHT drehen** (14.09., teuer gelernt).
   `font-weight: 500` und `-webkit-font-smoothing: auto` sind technisch die
   wirksamsten Hebel gegen „wirkt dünn" — optisch waren sie ein Fehlschlag: die

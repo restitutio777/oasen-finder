@@ -80,12 +80,35 @@
 
   html { scroll-behavior: smooth; }
 
+  /* ============================================================
+     SCHRIFTGRÖSSE — --lese-skala
+     ------------------------------------------------------------
+     Der Regler (components/Lesegroesse.astro) setzt --lese-skala auf
+     <html>: 1 · 1,15 · 1,3. Jede Textgröße der Site rechnet sich damit,
+     Schreibweise durchgehend
+
+         font-size: calc(<Wert> * var(--lese-skala, 1));
+
+     — auch in den Inline-Styles der Seiten. Ohne JavaScript ist die
+     Skala 1, dann steht überall exakt der alte Wert. Neue Textregeln
+     bitte gleich in dieser Form schreiben, sonst bleibt genau diese
+     eine Stelle beim Vergrößern zurück.
+
+     Bewusst NICHT skaliert, weil sie das Layout tragen und bei 1,3
+     brechen würden: Kopfzeile und Navigation (.brand, .nav*), die
+     großen Schauüberschriften (ab ~32 px: Hero-, Sektions- und
+     Beitragstitel), die Zifferblöcke der Termin- und Eintragskarten
+     (__day), das Anführungszeichen der Stimmen, der Initialbuchstabe
+     und der Regler selbst. Die Zwischenüberschriften im Lesetext
+     (.rich__h*) skalieren dagegen MIT — stünden sie fest, wären sie auf
+     Stufe 1,3 kleiner als der Fließtext darunter.
+     ============================================================ */
   body {
     margin: 0;
     background: var(--bg-base);
     color: var(--text-body);
     font-family: var(--font-text);
-    font-size: 16px;
+    font-size: calc(16px * var(--lese-skala, 1));
     line-height: 1.6;
     font-feature-settings: 'kern', 'liga', 'calt';
     -webkit-font-smoothing: antialiased;
@@ -162,7 +185,7 @@
   .article__back {
     display: block;
     width: fit-content;
-    font-size: 14px;
+    font-size: calc(14px * var(--lese-skala, 1));
     color: var(--accent);
     text-decoration: none;
   }
@@ -174,7 +197,7 @@
 
   .eyebrow {
     font-family: var(--font-text);
-    font-size: 11px;
+    font-size: calc(11px * var(--lese-skala, 1));
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -215,7 +238,7 @@
   }
   .load-more {
     font-family: var(--font-text);
-    font-size: 14px;
+    font-size: calc(14px * var(--lese-skala, 1));
     font-weight: 500;
     letter-spacing: 0.02em;
     color: var(--accent-hover);
@@ -242,7 +265,7 @@
   }
   .list-filter__btn {
     font-family: var(--font-text);
-    font-size: 13px;
+    font-size: calc(13px * var(--lese-skala, 1));
     font-weight: 500;
     letter-spacing: 0.02em;
     color: var(--text-secondary);
@@ -699,7 +722,7 @@
        auf Bild. */
     text-transform: none;
     letter-spacing: 0;
-    font-size: clamp(20px, 2.1vw, 26px);
+    font-size: calc(clamp(20px, 2.1vw, 26px) * var(--lese-skala, 1));
     font-family: var(--font-display);
     font-style: italic;
     line-height: 1.45;
@@ -778,7 +801,7 @@
     display: inline-block;
     font-family: var(--font-display);
     font-style: italic;
-    font-size: clamp(20px, 2vw, 26px);
+    font-size: calc(clamp(20px, 2vw, 26px) * var(--lese-skala, 1));
     color: var(--accent-hover);
     margin-bottom: clamp(24px, 2.8vw, 36px);
     letter-spacing: 0.01em;
@@ -820,7 +843,7 @@
     max-width: 540px;
     font-family: var(--font-display);
     font-style: italic;
-    font-size: clamp(18px, 1.6vw, 22px);
+    font-size: calc(clamp(18px, 1.6vw, 22px) * var(--lese-skala, 1));
     line-height: 1.55;
     color: var(--text-body);
   }
@@ -828,7 +851,7 @@
   .hero--editorial .hero__subtitle {
     margin-top: clamp(20px, 2.4vw, 28px);
     font-family: var(--font-text);
-    font-size: clamp(13px, 1.1vw, 15px);
+    font-size: calc(clamp(13px, 1.1vw, 15px) * var(--lese-skala, 1));
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--accent-hover);
@@ -916,7 +939,7 @@
   .hero-le__eyebrow {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: clamp(20px, 2vw, 26px);
+    font-size: calc(clamp(20px, 2vw, 26px) * var(--lese-skala, 1));
     line-height: 1.4;
     color: var(--text-body);
     margin: 0;
@@ -943,7 +966,7 @@
   }
   .hero-le__subtitle {
     font-family: var(--font-text);
-    font-size: clamp(13px, 1.1vw, 15px);
+    font-size: calc(clamp(13px, 1.1vw, 15px) * var(--lese-skala, 1));
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--text-body);
@@ -1083,7 +1106,7 @@
   .hero__lead {
     margin-top: clamp(28px, 4vw, 44px);
     max-width: 600px;
-    font-size: clamp(17px, 1.4vw, 19px);
+    font-size: calc(clamp(17px, 1.4vw, 19px) * var(--lese-skala, 1));
     line-height: 1.65;
     color: var(--text-body);
   }
@@ -1097,7 +1120,7 @@
     margin-top: clamp(24px, 3.5vw, 36px);
     max-width: 640px;
     font-family: var(--font-display);
-    font-size: clamp(23px, 2.3vw, 28px);
+    font-size: calc(clamp(23px, 2.3vw, 28px) * var(--lese-skala, 1));
     font-style: normal;
     line-height: 1.5;
     /* Subtitle steht — wie der Eyebrow — direkt auf dem Bild. Heller
@@ -1128,7 +1151,7 @@
   .hero__meta {
     align-self: end;
     text-align: right;
-    font-size: 11px;
+    font-size: calc(11px * var(--lese-skala, 1));
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--text-secondary);
@@ -1192,7 +1215,7 @@
     .hero__cta-row .btn {
       border-radius: 8px;
       padding: 13px 22px;
-      font-size: 15px;
+      font-size: calc(15px * var(--lese-skala, 1));
     }
     /* Primary auf Mobile: warmes Champagne-Gold (--accent), Logo-
        Familie, statt zu schokoladiges Bronze (Katharina · 18.05.:
@@ -1248,7 +1271,7 @@
     gap: 10px;
     padding: 15px 30px;
     font-family: var(--font-text);
-    font-size: 14px;
+    font-size: calc(14px * var(--lese-skala, 1));
     font-weight: 500;
     letter-spacing: 0.02em;
     text-transform: none;
@@ -1319,7 +1342,7 @@
   .manifest__line {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(16px, 1.5vw, 20px);
+    font-size: calc(clamp(16px, 1.5vw, 20px) * var(--lese-skala, 1));
     line-height: 1.5;
     color: var(--text-primary);
     display: inline-flex;
@@ -1342,7 +1365,7 @@
     .manifest__line {
       flex-direction: column;
       gap: 8px;
-      font-size: 16px;
+      font-size: calc(16px * var(--lese-skala, 1));
     }
     .manifest__line span[aria-hidden] { display: none; }
   }
@@ -1395,14 +1418,14 @@
     font-weight: 400;
   }
   .who__lead {
-    font-size: 17px;
+    font-size: calc(17px * var(--lese-skala, 1));
     line-height: 1.65;
     color: var(--text-body);
     margin-bottom: 24px;
   }
   .who__question {
     font-family: var(--font-display);
-    font-size: clamp(20px, 2vw, 26px);
+    font-size: calc(clamp(20px, 2vw, 26px) * var(--lese-skala, 1));
     font-style: italic;
     line-height: 1.4;
     color: var(--text-primary);
@@ -1411,7 +1434,7 @@
     margin: 28px 0;
   }
   .who__text {
-    font-size: 16px;
+    font-size: calc(16px * var(--lese-skala, 1));
     line-height: 1.7;
     color: var(--text-body);
   }
@@ -1453,7 +1476,7 @@
     left: 16px; bottom: 16px;
     padding: 8px 14px;
     background: rgba(251, 246, 243, 0.96);
-    font-size: 11px;
+    font-size: calc(11px * var(--lese-skala, 1));
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--text-secondary);
@@ -1471,12 +1494,12 @@
   .featured__region {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 18px;
+    font-size: calc(18px * var(--lese-skala, 1));
     color: var(--accent);
     margin-bottom: 28px;
   }
   .featured__story p {
-    font-size: 16px;
+    font-size: calc(16px * var(--lese-skala, 1));
     line-height: 1.7;
     color: var(--text-body);
     margin-bottom: 16px;
@@ -1496,7 +1519,7 @@
     padding-left: 24px;
     border-left: 2px solid var(--accent);
     font-family: var(--font-display);
-    font-size: clamp(20px, 2vw, 26px);
+    font-size: calc(clamp(20px, 2vw, 26px) * var(--lese-skala, 1));
     font-style: italic;
     line-height: 1.4;
     color: var(--text-primary);
@@ -1506,7 +1529,7 @@
     margin-top: 12px;
     font-style: normal;
     font-family: var(--font-text);
-    font-size: 12px;
+    font-size: calc(12px * var(--lese-skala, 1));
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -1519,7 +1542,7 @@
   }
   .tag {
     padding: 4px 12px;
-    font-size: 12px;
+    font-size: calc(12px * var(--lese-skala, 1));
     letter-spacing: 0.04em;
     background: var(--bg-warm);
     color: var(--text-secondary);
@@ -1529,7 +1552,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-size: 14px;
+    font-size: calc(14px * var(--lese-skala, 1));
     font-weight: 500;
     color: var(--text-primary);
     border-bottom: 1px solid var(--accent);
@@ -1562,7 +1585,7 @@
   .pillars__title em { font-style: italic; color: var(--accent); }
   .pillars__sub {
     font-family: var(--font-display);
-    font-size: clamp(17px, 1.4vw, 20px);
+    font-size: calc(clamp(17px, 1.4vw, 20px) * var(--lese-skala, 1));
     font-style: italic;
     color: var(--text-secondary);
     line-height: 1.5;
@@ -1616,7 +1639,7 @@
   }
   .pillar__count {
     font-family: var(--font-text);
-    font-size: 11px;
+    font-size: calc(11px * var(--lese-skala, 1));
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -1632,7 +1655,7 @@
     margin: 0 0 14px;
   }
   .pillar__desc {
-    font-size: 15px;
+    font-size: calc(15px * var(--lese-skala, 1));
     line-height: 1.6;
     color: var(--text-body);
     margin: 0 0 22px;
@@ -1649,7 +1672,7 @@
   }
   .pillar__latest-label {
     font-family: var(--font-text);
-    font-size: 10px;
+    font-size: calc(10px * var(--lese-skala, 1));
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -1658,13 +1681,13 @@
   .pillar__latest-title {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 17px;
+    font-size: calc(17px * var(--lese-skala, 1));
     line-height: 1.3;
     color: var(--text-primary);
   }
   .pillar__link {
     font-family: var(--font-text);
-    font-size: 13px;
+    font-size: calc(13px * var(--lese-skala, 1));
     font-weight: 500;
     letter-spacing: 0.04em;
     color: var(--accent);
@@ -1697,13 +1720,13 @@
     font-family: var(--font-display);
     font-style: italic;
     color: var(--text-secondary);
-    font-size: 18px;
+    font-size: calc(18px * var(--lese-skala, 1));
     max-width: 380px;
     margin-top: 16px;
     line-height: 1.45;
   }
   .section-head__link {
-    font-size: 12px;
+    font-size: calc(12px * var(--lese-skala, 1));
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-secondary);
@@ -1748,7 +1771,7 @@
     margin-top: clamp(40px, 5vw, 56px);
     padding-bottom: 6px;
     font-family: var(--font-text);
-    font-size: 12px;
+    font-size: calc(12px * var(--lese-skala, 1));
     font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -1792,12 +1815,12 @@
     background: rgba(251, 246, 243, 0.95);
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 14px;
+    font-size: calc(14px * var(--lese-skala, 1));
     color: var(--accent);
     border-radius: 2px;
   }
   .place__name {
-    font-size: clamp(22px, 2vw, 28px);
+    font-size: calc(clamp(22px, 2vw, 28px) * var(--lese-skala, 1));
     line-height: 1.15;
     letter-spacing: -0.015em;
     margin-bottom: 6px;
@@ -1808,12 +1831,12 @@
     font-family: var(--font-display);
     font-style: italic;
     color: var(--text-secondary);
-    font-size: 15px;
+    font-size: calc(15px * var(--lese-skala, 1));
     margin-bottom: 12px;
   }
   .place__desc {
     color: var(--text-body);
-    font-size: 14.5px;
+    font-size: calc(14.5px * var(--lese-skala, 1));
     line-height: 1.6;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -1822,7 +1845,7 @@
     margin-bottom: 16px;
   }
   .place__tags { display: flex; gap: 6px; flex-wrap: wrap; }
-  .place__tags .tag { font-size: 11px; padding: 3px 10px; }
+  .place__tags .tag { font-size: calc(11px * var(--lese-skala, 1)); padding: 3px 10px; }
 
   @media (max-width: 640px) {
     .places__grid { grid-template-columns: 1fr; }
@@ -1894,14 +1917,14 @@
   .entry__month {
     display: block;
     font-style: italic;
-    font-size: 17px;
+    font-size: calc(17px * var(--lese-skala, 1));
     color: var(--accent);
     margin-top: 2px;
   }
   .entry__year {
     display: block;
     font-family: var(--font-text);
-    font-size: 11px;
+    font-size: calc(11px * var(--lese-skala, 1));
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -1911,7 +1934,7 @@
   .entry__tag {
     display: inline-block;
     font-family: var(--font-text);
-    font-size: 10px;
+    font-size: calc(10px * var(--lese-skala, 1));
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -1928,7 +1951,7 @@
   .entry__tag[data-tag="lied"] { color: var(--accent-green); }
   .entry__tag[data-tag="reflexion"] { color: var(--accent-mauve); }
   .entry__title {
-    font-size: clamp(20px, 1.8vw, 24px);
+    font-size: calc(clamp(20px, 1.8vw, 24px) * var(--lese-skala, 1));
     line-height: 1.2;
     margin-bottom: 14px;
     letter-spacing: -0.015em;
@@ -1970,14 +1993,14 @@
     background: rgba(251, 246, 243, 0.95);
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 13px;
+    font-size: calc(13px * var(--lese-skala, 1));
     color: var(--text-secondary);
     border-radius: 2px;
     max-width: calc(100% - 28px);
   }
   .entry__text {
     color: var(--text-body);
-    font-size: 15px;
+    font-size: calc(15px * var(--lese-skala, 1));
     line-height: 1.65;
     max-width: 580px;
   }
@@ -2016,7 +2039,7 @@
     font-family: var(--font-display);
     font-style: italic;
     color: rgba(251, 246, 243, 0.6);
-    font-size: 18px;
+    font-size: calc(18px * var(--lese-skala, 1));
     max-width: 360px;
     line-height: 1.45;
   }
@@ -2040,7 +2063,7 @@
   }
   .voice__text {
     font-family: var(--font-display);
-    font-size: clamp(20px, 1.8vw, 24px);
+    font-size: calc(clamp(20px, 1.8vw, 24px) * var(--lese-skala, 1));
     font-style: italic;
     line-height: 1.45;
     color: var(--text-inverse);
@@ -2048,7 +2071,7 @@
     font-weight: 400;
   }
   .voice__attr {
-    font-size: 12px;
+    font-size: calc(12px * var(--lese-skala, 1));
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: rgba(251, 246, 243, 0.55);
@@ -2060,7 +2083,7 @@
     font-weight: 400;
     text-transform: none;
     letter-spacing: -0.005em;
-    font-size: 16px;
+    font-size: calc(16px * var(--lese-skala, 1));
     color: var(--accent-soft);
     margin-bottom: 4px;
   }
@@ -2092,7 +2115,7 @@
   .resource__type {
     display: inline-block;
     font-family: var(--font-text);
-    font-size: 10px;
+    font-size: calc(10px * var(--lese-skala, 1));
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -2100,7 +2123,7 @@
     margin-bottom: 12px;
   }
   .resource__title {
-    font-size: clamp(20px, 1.9vw, 24px);
+    font-size: calc(clamp(20px, 1.9vw, 24px) * var(--lese-skala, 1));
     line-height: 1.18;
     letter-spacing: -0.015em;
     margin: 0 0 6px;
@@ -2109,14 +2132,14 @@
     display: block;
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 15px;
+    font-size: calc(15px * var(--lese-skala, 1));
     color: var(--text-secondary);
     margin-bottom: 16px;
   }
   .resource__note {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 16px;
+    font-size: calc(16px * var(--lese-skala, 1));
     line-height: 1.55;
     color: var(--text-body);
     margin: 0 0 18px;
@@ -2125,7 +2148,7 @@
   }
   .resource__link {
     font-family: var(--font-text);
-    font-size: 13px;
+    font-size: calc(13px * var(--lese-skala, 1));
     font-weight: 500;
     color: var(--accent);
     border-bottom: 1px solid var(--accent);
@@ -2167,14 +2190,14 @@
   .termin__month {
     display: block;
     font-style: italic;
-    font-size: 20px;
+    font-size: calc(20px * var(--lese-skala, 1));
     color: var(--accent);
     margin-top: 4px;
   }
   .termin__year {
     display: block;
     font-family: var(--font-text);
-    font-size: 12px;
+    font-size: calc(12px * var(--lese-skala, 1));
     letter-spacing: 0.18em;
     color: var(--text-muted);
     margin-top: 8px;
@@ -2184,7 +2207,7 @@
   .termin__badge {
     display: inline-block;
     font-family: var(--font-text);
-    font-size: 10px;
+    font-size: calc(10px * var(--lese-skala, 1));
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -2208,7 +2231,7 @@
     opacity: 0.7;
   }
   .termin__title {
-    font-size: clamp(22px, 2vw, 28px);
+    font-size: calc(clamp(22px, 2vw, 28px) * var(--lese-skala, 1));
     line-height: 1.2;
     margin-bottom: 8px;
   }
@@ -2216,19 +2239,19 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
+    font-size: calc(13px * var(--lese-skala, 1));
     color: var(--text-secondary);
     margin-bottom: 12px;
   }
   .termin__desc {
     color: var(--text-body);
-    font-size: 15px;
+    font-size: calc(15px * var(--lese-skala, 1));
     line-height: 1.6;
     max-width: 580px;
   }
   .termin__cta {
     align-self: center;
-    font-size: 12px;
+    font-size: calc(12px * var(--lese-skala, 1));
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-secondary);
@@ -2269,7 +2292,7 @@
     justify-content: center;
     text-align: center;
     font-family: var(--font-display);
-    font-size: clamp(15px, 1.4vw, 18px);
+    font-size: calc(clamp(15px, 1.4vw, 18px) * var(--lese-skala, 1));
     line-height: 1.45;
     color: var(--text-body);
   }
@@ -2285,7 +2308,7 @@
   }
   .podcast-bar__cta {
     font-family: var(--font-text);
-    font-size: 12px;
+    font-size: calc(12px * var(--lese-skala, 1));
     font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -2335,7 +2358,7 @@
   }
   .invite__sub {
     font-family: var(--font-display);
-    font-size: clamp(18px, 1.6vw, 22px);
+    font-size: calc(clamp(18px, 1.6vw, 22px) * var(--lese-skala, 1));
     font-style: italic;
     color: var(--text-body);
   }
@@ -2363,12 +2386,12 @@
     display: block;
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 18px;
+    font-size: calc(18px * var(--lese-skala, 1));
     color: var(--accent);
     margin-bottom: 14px;
   }
   .path__title {
-    font-size: clamp(20px, 2vw, 24px);
+    font-size: calc(clamp(20px, 2vw, 24px) * var(--lese-skala, 1));
     line-height: 1.2;
     margin-bottom: 12px;
     letter-spacing: -0.015em;
@@ -2379,14 +2402,14 @@
     font-weight: 400;
   }
   .path__text {
-    font-size: 15px;
+    font-size: calc(15px * var(--lese-skala, 1));
     line-height: 1.6;
     color: var(--text-body);
     margin-bottom: 20px;
   }
   .path__cta {
     font-family: var(--font-text);
-    font-size: 13px;
+    font-size: calc(13px * var(--lese-skala, 1));
     font-weight: 500;
     color: var(--accent);
     border-bottom: 1px solid var(--accent);
@@ -2398,7 +2421,7 @@
     text-align: center;
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 16px;
+    font-size: calc(16px * var(--lese-skala, 1));
     color: var(--text-secondary);
   }
   @media (max-width: 800px) {
@@ -2459,7 +2482,7 @@
   .invite-option__title {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(18px, 1.7vw, 21px);
+    font-size: calc(clamp(18px, 1.7vw, 21px) * var(--lese-skala, 1));
     color: var(--text-primary);
     line-height: 1.3;
   }
@@ -2467,7 +2490,7 @@
     display: block;
     color: var(--text-secondary);
     font-family: var(--font-display);
-    font-size: clamp(15px, 1.4vw, 16px);
+    font-size: calc(clamp(15px, 1.4vw, 16px) * var(--lese-skala, 1));
     line-height: 1.5;
     margin-top: 0.4rem;
   }
@@ -2531,7 +2554,7 @@
   .strand__label {
     display: block;
     font-family: var(--font-text);
-    font-size: 11px;
+    font-size: calc(11px * var(--lese-skala, 1));
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -2540,7 +2563,7 @@
   }
   .strand__text {
     font-family: var(--font-display);
-    font-size: 17px;
+    font-size: calc(17px * var(--lese-skala, 1));
     font-style: italic;
     line-height: 1.5;
     color: var(--text-body);
@@ -2561,7 +2584,7 @@
     font-family: var(--font-display);
     font-style: italic;
     color: var(--text-secondary);
-    font-size: 16px;
+    font-size: calc(16px * var(--lese-skala, 1));
   }
   .purpose__cta {
     margin-top: 48px;
@@ -2593,7 +2616,7 @@
      Brand-Wortmarke komplett weiß für einen klaren Look. */
   .site-footer h4 {
     font-family: var(--font-text);
-    font-size: 11px;
+    font-size: calc(11px * var(--lese-skala, 1));
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -2621,7 +2644,7 @@
   .site-footer__intro {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 16px;
+    font-size: calc(16px * var(--lese-skala, 1));
     line-height: 1.45;
     color: rgba(255, 255, 255, 0.85);
     max-width: 360px;
@@ -2638,7 +2661,7 @@
        (kein einzelner Link mehr unterscheidbar). */
     display: block;
     color: rgba(255, 255, 255, 0.92);
-    font-size: 14px;
+    font-size: calc(14px * var(--lese-skala, 1));
     transition: color var(--t-fast) var(--ease);
   }
   .site-footer__nav a:hover,
@@ -2657,7 +2680,7 @@
   .site-footer__more-toggle {
     cursor: pointer;
     color: rgba(255, 255, 255, 0.65);
-    font-size: 14px;
+    font-size: calc(14px * var(--lese-skala, 1));
     user-select: none;
     list-style: none;
     display: inline-flex;
@@ -2682,7 +2705,7 @@
   .site-footer__more-toggle:hover {
     color: #ffffff;
   }
-  .site-footer__contact { display: flex; flex-direction: column; gap: 9px; font-size: 14px; }
+  .site-footer__contact { display: flex; flex-direction: column; gap: 9px; font-size: calc(14px * var(--lese-skala, 1)); }
   .site-footer__contact em {
     font-family: var(--font-display);
     font-style: italic;
@@ -2693,7 +2716,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 12px;
+    font-size: calc(12px * var(--lese-skala, 1));
     color: rgba(255, 255, 255, 0.7);
     letter-spacing: 0.06em;
   }

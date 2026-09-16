@@ -112,9 +112,10 @@ const ogLocale = locale === 'de' ? 'de_DE' : locale === 'fr' ? 'fr_FR' : 'en_US'
     <main>
       <slot />
     </main>
-    {/* Schriftgrößen-Regler: liegt hier am Seitenende und setzt sich per
-        Skript über den ersten längeren Lesetext. Seiten ohne solchen Text
-        werfen ihn von selbst wieder weg. */}
+    {/* Schriftgrößen-Regler: liegt hier einmal für die ganze Site und
+        setzt sich per Skript über den ersten Text der jeweiligen Seite —
+        auf jeder Seite, nicht nur auf den langen Beiträgen (16.09.). Die
+        gewählte Stufe wirkt über --lese-skala auf alle Textgrößen. */}
     <Lesegroesse />
 
     <Footer />

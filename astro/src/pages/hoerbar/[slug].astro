@@ -73,7 +73,7 @@ const ogImage = episode.coverUrl
       <h1 class="article__title" style="font-family: var(--font-display); font-size: var(--article-title-size); margin: 0.5rem 0 1rem;">
         {localized(episode.title)}
       </h1>
-      <p style="color: var(--text-secondary); font-size: 14px;">
+      <p style="color: var(--text-secondary); font-size: calc(14px * var(--lese-skala, 1));">
         {new Date(episode.publishedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}
       </p>
 
@@ -98,12 +98,12 @@ const ogImage = episode.coverUrl
               Dein Browser kann diese Audio-Datei leider nicht abspielen.
               <a href={episode.audioUrl}>Direkt herunterladen</a>
             </audio>
-            <figcaption style="font-size: 13px; color: var(--text-secondary); margin-top: 0.5rem;">
+            <figcaption style="font-size: calc(13px * var(--lese-skala, 1)); color: var(--text-secondary); margin-top: 0.5rem;">
               Hörzeit · direkt auf der Seite — kein externes Konto nötig
             </figcaption>
           </figure>
           {episode.url && episode.platform !== 'direkt' && (
-            <p style="margin-top: 1rem; font-size: 14px;">
+            <p style="margin-top: 1rem; font-size: calc(14px * var(--lese-skala, 1));">
               Auch hörbar auf <a href={episode.url} target="_blank" rel="noopener" style="color: var(--accent);">{episode.platform === 'youtube' ? 'YouTube' : episode.platform === 'spotify' ? 'Spotify' : episode.platform === 'applemusic' ? 'Apple Music' : episode.platform} →</a>
             </p>
           )}
