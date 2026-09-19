@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 16.09.2026 (Schriftgrößen-Regler für die ganze Seite)*
+*Stand: 19.09.2026 (neue Arten in der schreibBAR)*
 
 ## Projektziel
 
@@ -33,6 +33,8 @@ Telefon funktioniert.
   `--text-reading` (#3a2f48), Absatzabstand 1.75em. Der Schriftgrößen-Regler
   steht seit 16.09. auf **jeder** Seite und wirkt auf **alle** Texte.
 - Überschriften im geöffneten Beitrag in `--accent-bronze` (#a76e3a).
+- schreibBAR-Arten seit 19.09.: Gedanke, Tagebucheintrag, Reisebericht,
+  Begegnung, Brief, Poesie (+ Idee/Vision/Umfrage in der denkBAR).
 - Eigene 404-Seite (`astro/src/pages/404.astro`, 14.09.). Vorher zeigte Vercel
   seine rohe Fehlerseite ohne Logo, Menü und Rückweg — beim Verschicken einzelner
   Links der wahrscheinlichste Fehlerfall.
@@ -118,6 +120,23 @@ Telefon funktioniert.
 - **Studio-Validierungen als Warnung, nicht als Fehler.** Ein blockierter
   „Veröffentlichen"-Button wirkt am Handy wie ein kaputtes Backend. Lieber
   automatisch reparieren und per Toast erklären.
+- **Arten eines schreibBAR-Eintrags stehen in `astro/src/lib/noteKinds.js`**
+  (19.09.). Vorher standen die Beschriftungen dreifach im Code (Liste,
+  Detailseite, Filter). Zwei Dinge dazu, beide teuer gelernt:
+  1. **Der gespeicherte Wert `notiz` heißt überall „Gedanke".** Katharina:
+     „Notiz ist zu gewöhnlich." Nur das Label wurde getauscht — jeder
+     bestehende Eintrag im Dataset trägt `notiz`, ein Umbenennen des Werts wäre
+     eine Migration über alle Dokumente. Wer `notiz` im Code liest, meint
+     „Gedanke". Nicht zurückbenennen.
+  2. **Die schreibBAR-Queries filtern über den Ausschluss der denkBAR-Arten**
+     (`!(kind in ["idee","vision","umfrage"])`), nicht über eine Aufzählung der
+     eigenen. Sonst fällt eine neue Art lautlos aus Liste UND Route — ein
+     veröffentlichter Eintrag, der nirgends auftaucht, ist der teuerste Fehler
+     dieses Projekts. denkBAR behält bewusst die Aufzählung.
+  Die Liste hat einen Zwilling im Studio (`astro/sanity/schemas/note.ts`), weil
+  das Studio ein eigenes npm-Projekt ist und die Datei nicht importieren kann.
+  `noteKinds.test.js` liest das Schema als Text und vergleicht beide Listen —
+  laufen sie auseinander, schlägt der Build fehl statt die Seite.
 - **„Zuletzt veröffentlicht" sortiert nach `_createdAt`**, nicht `_updatedAt`.
   Eine Tippfehler-Korrektur soll einen alten Eintrag nicht wieder nach oben
   holen. `isEventArchived()` nutzt bewusst weiterhin `_updatedAt`, dort ist
@@ -141,6 +160,13 @@ Telefon funktioniert.
   gelöscht) wird. Ein ausgefülltes Titelfeld gewinnt immer.
 
 ## Offene Aufgaben
+
+- **Studio-Deploy für die neuen Arten steht aus** (19.09.). Code ist auf `main`
+  und live, aber Katharina sieht Tagebucheintrag/Reisebericht/Begegnung/Brief
+  erst nach `cd astro/sanity && npm run deploy`. Blockiert, weil die Sanity-CLI
+  mit `info@intuitive-fotografie.de` eingeloggt ist — dieser Account hat keinen
+  Zugriff auf `z6eclgt8`. Erst `sanity login` mit dem WERKstatt-Account
+  (interaktiv, Browser), dann deployen.
 
 - Kosmetisch: Der Google-Photos-Link steht noch im Slug-Feld der Notiz
   `f21faaae-6c23-422b-953d-5b947c3cde8b`. Kein Handlungsdruck, räumt sich beim
