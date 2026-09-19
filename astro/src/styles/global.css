@@ -1944,6 +1944,13 @@
   /* Tag-Differenzierung nach Sektion — bringt subtle Lebendigkeit ohne Chaos */
   .entry__tag[data-tag="werkstatt"] { color: var(--accent-green); }
   .entry__tag[data-tag="poesie"] { color: var(--accent); }
+  /* schreibBAR-Arten (19.09.26). „Gedanke“ (Wert notiz) behält bewusst das
+     Standard-Gold: der häufigste Fall bleibt der ruhige. Reisebericht trägt
+     das Bergsee-Türkis von bewegBAR — gleicher Gedanke, anderer Raum. */
+  .entry__tag[data-tag="tagebuch"] { color: var(--accent-deep); }
+  .entry__tag[data-tag="reisebericht"] { color: var(--accent-blue); }
+  .entry__tag[data-tag="begegnung"] { color: var(--accent-green); }
+  .entry__tag[data-tag="brief"] { color: var(--accent-mauve); }
   /* hörBAR-Episoden-Arten (Gespräch/Vortrag/Gedicht/Lied/Reflexion) */
   .entry__tag[data-tag="gespraech"] { color: var(--accent-blue); }
   .entry__tag[data-tag="vortrag"] { color: var(--accent-deep); }

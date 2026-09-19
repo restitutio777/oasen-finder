@@ -27,7 +27,7 @@ export const episode = defineType({
     defineField({
       name: 'kind',
       title: 'Art',
-      description: 'Wird auf der Website als Kennzeichnung angezeigt — wie Notiz/Poesie in der schreibBAR.',
+      description: 'Wird auf der Website als Kennzeichnung angezeigt — wie Gedanke/Reisebericht in der schreibBAR.',
       type: 'string',
       options: {
         list: [

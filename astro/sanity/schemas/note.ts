@@ -4,11 +4,16 @@ import { docGroups, accentColorField, slugField } from './_shared';
 
 /**
  * SchreibBAR-Eintrag (+ DenkBAR via kind-Filter).
- * Notizen, Gedichte, Ideen, Visionen, Umfragen — der „Schreibtisch-Stream".
+ * Gedanken, Tagebuch, Reiseberichte, Begegnungen, Briefe, Gedichte — der
+ * „Schreibtisch-Stream". Ideen/Visionen/Umfragen zweigen in die DenkBAR ab.
+ *
+ * Die Arten-Liste hat einen Zwilling im Frontend: `astro/src/lib/noteKinds.js`.
+ * Beide zusammen ändern — sonst wählt Katharina eine Art, die die Seite nicht
+ * beschriften kann.
  */
 export const note = defineType({
   name: 'note',
-  title: 'SchreibBAR — Notiz / Gedicht / Idee',
+  title: 'SchreibBAR — Gedanke / Bericht / Gedicht',
   type: 'document',
   icon: ComposeIcon,
   groups: [...docGroups],
@@ -40,10 +45,20 @@ export const note = defineType({
     defineField({
       name: 'kind',
       title: 'Art',
+      description:
+        'Gedanke für alles Kurze, Tagebucheintrag für den eigenen Tag, Reisebericht für einen Ort, Begegnung für einen Menschen, Brief für etwas an die Leser Gerichtetes, Poesie für Verse. Die drei DenkBAR-Arten am Ende erscheinen nicht in der SchreibBAR, sondern in der DenkBAR.',
       type: 'string',
       options: {
         list: [
-          { title: 'Notiz', value: 'notiz' },
+          // Der gespeicherte Wert 'notiz' heißt seit 19.09.26 überall
+          // „Gedanke“ (Katharina: „Notiz ist zu gewöhnlich“). Nur das Label
+          // wurde getauscht — jeder bestehende Eintrag trägt 'notiz', ein
+          // Umschreiben wäre eine Migration über alle Dokumente.
+          { title: 'Gedanke', value: 'notiz' },
+          { title: 'Tagebucheintrag', value: 'tagebuch' },
+          { title: 'Reisebericht', value: 'reisebericht' },
+          { title: 'Begegnung', value: 'begegnung' },
+          { title: 'Brief', value: 'brief' },
           { title: 'Poesie', value: 'poesie' },
           { title: 'Idee (DenkBAR)', value: 'idee' },
           { title: 'Vision (DenkBAR)', value: 'vision' },
@@ -188,7 +203,11 @@ export const note = defineType({
     },
     prepare({ title, kind, publishedAt, media }) {
       const kindLabel: Record<string, string> = {
-        notiz: 'Notiz',
+        notiz: 'Gedanke',
+        tagebuch: 'Tagebucheintrag',
+        reisebericht: 'Reisebericht',
+        begegnung: 'Begegnung',
+        brief: 'Brief',
         poesie: 'Poesie',
         idee: 'Idee',
         vision: 'Vision',
@@ -196,7 +215,7 @@ export const note = defineType({
       };
       return {
         title: title || '(ohne Titel)',
-        subtitle: `${kindLabel[kind] || 'Notiz'} · ${publishedAt || ''}`,
+        subtitle: `${kindLabel[kind] || 'Gedanke'} · ${publishedAt || ''}`,
         media,
       };
     },

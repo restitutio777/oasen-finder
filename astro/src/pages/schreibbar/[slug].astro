@@ -8,15 +8,19 @@ import MediaLink from '../../components/MediaLink.astro';
 import ShareButton from '../../components/ShareButton.astro';
 import { sanity, urlFor, localized, isSanityConfigured } from '../../lib/sanity';
 import { withSafeSlugs } from '../../lib/slug.js';
+import { SCHREIBBAR_KIND_FILTER, noteKindLabel } from '../../lib/noteKinds.js';
 
 export async function getStaticPaths() {
   if (!isSanityConfigured) return [];
 
-  /* Filter: nur notiz/poesie unter /schreibbar/{slug} — idee/vision/
-     umfrage werden unter /denkbar/{slug} ausgespielt (Katharinas
-     Entscheidung 19.05.: eigener denkBAR-Raum). */
+  /* Filter: alles außer idee/vision/umfrage unter /schreibbar/{slug} — die
+     drei werden unter /denkbar/{slug} ausgespielt (Katharinas Entscheidung
+     19.05.: eigener denkBAR-Raum). Ausschluss statt Aufzählung, damit eine
+     neue Art im Studio automatisch eine Detailseite bekommt — dieselbe
+     Bedingung wie in schreibbar/index.astro, sonst zeigt die Liste auf eine
+     Adresse, die die Route nicht kennt. */
   const notes = await sanity.fetch(`
-    *[_type == "note" && kind in ["notiz", "poesie"] && defined(slug.current)] {
+    *[_type == "note" && ${SCHREIBBAR_KIND_FILTER} && defined(slug.current)] {
       "slug": slug.current,
       _id, title, kind, publishedAt,
       body,
@@ -39,20 +43,12 @@ export async function getStaticPaths() {
 
 const { note } = Astro.props;
 
-const kindLabels: Record<string, string> = {
-  notiz: 'Notiz',
-  poesie: 'Poesie',
-  idee: 'Idee · denkBAR',
-  vision: 'Vision · denkBAR',
-  umfrage: 'Umfrage · denkBAR',
-};
-
 // OG-Image: Hero-Bild der Notiz, wenn vorhanden — sonst greift
 // BaseLayouts eigener Marken-Default (kein Unsplash-Fallback mehr, 03.07.).
 const ogImage = note.hero?.asset
   ? urlFor(note.hero).width(1200).height(630).fit('crop').auto('format').quality(85).url()
   : undefined;
-const noteTitle = localized(note.title) || 'Notiz';
+const noteTitle = localized(note.title) || 'Eintrag';
 
 /* Gedichte (kind === 'poesie') bekommen ein eigenes Layout statt der
    allgemeinen Artikel-Typo: enger Zeilen-/Versabstand, wählbare
@@ -86,7 +82,7 @@ const bodyClass = isPoem
         ← Zurück zur schreibBAR
       </a>
       <span class="entry__tag" data-tag={note.kind} style="display: inline-block; margin-top: 1.5rem;">
-        {kindLabels[note.kind] || note.kind}
+        {noteKindLabel(note.kind)}
       </span>
       <h1 class="article__title" style="font-family: var(--font-display); font-size: var(--article-title-size); line-height: 1.1; margin: 0.5rem 0 1rem;">
         {localized(note.title)}

@@ -5,22 +5,28 @@ import PageBanner from '../../components/PageBanner.astro';
 import ListFilter from '../../components/ListFilter.astro';
 import { sanity, localized, isSanityConfigured } from '../../lib/sanity';
 import { withSafeSlugs } from '../../lib/slug.js';
+import {
+  SCHREIBBAR_KINDS,
+  SCHREIBBAR_KIND_FILTER,
+  noteKindLabel,
+} from '../../lib/noteKinds.js';
 
 /**
- * schreibBAR — Notizen-Liste.
- * Lädt alle Notizen aus Sanity, nach Datum absteigend sortiert.
- * Filter nach `kind` (Notiz/Poesie/Idee/Vision/Umfrage) kann
- * client-seitig dazukommen.
+ * schreibBAR — Einträge-Liste.
+ * Lädt alle Einträge aus Sanity, nach Datum absteigend sortiert.
+ * Arten (Gedanke, Tagebucheintrag, Reisebericht, Begegnung, Brief, Poesie)
+ * stehen in `lib/noteKinds.js` — dort ändern, nicht hier.
  */
 
 let notes: any[] = [];
 
 if (isSanityConfigured) {
-  /* Nur notiz + poesie hier — idee/vision/umfrage leben seit
-     19.05. in /denkbar/ (Katharinas Entscheidung: eigener Raum
-     für die Zukunftsschmiede). */
+  /* Alles außer idee/vision/umfrage — die leben seit 19.05. in /denkbar/
+     (Katharinas Entscheidung: eigener Raum für die Zukunftsschmiede).
+     Bewusst als Ausschluss formuliert: eine neue Art im Studio erscheint
+     damit automatisch hier, statt lautlos zu verschwinden. */
   notes = await sanity.fetch(`
-    *[_type == "note" && kind in ["notiz", "poesie"]] | order(publishedAt desc) {
+    *[_type == "note" && ${SCHREIBBAR_KIND_FILTER}] | order(publishedAt desc) {
       _id, title, kind, publishedAt, "slug": slug.current,
       tags, "hero": hero { asset->{ url, metadata { dimensions } }, alt, caption }
     }
@@ -30,18 +36,18 @@ if (isSanityConfigured) {
   notes = withSafeSlugs(notes);
 }
 
-/* Art-Filter (Notiz/Poesie): erscheint erst ab FILTER_THRESHOLD Einträgen
-   automatisch und nur, wenn mindestens zwei Arten vorkommen. */
+/* Art-Filter: erscheint erst ab FILTER_THRESHOLD Einträgen automatisch und
+   nur, wenn mindestens zwei Arten vorkommen. Reihenfolge und Beschriftung
+   kommen aus lib/noteKinds.js; Arten ohne Eintrag fallen raus, damit keine
+   leeren Knöpfe in der Leiste stehen. */
 const FILTER_THRESHOLD = 20;
-const NOTE_LABELS: Record<string, string> = { notiz: 'Notiz', poesie: 'Poesie' };
-const NOTE_ORDER = ['notiz', 'poesie'];
 const noteCounts: Record<string, number> = {};
 for (const n of notes) {
   if (n.kind) noteCounts[n.kind] = (noteCounts[n.kind] ?? 0) + 1;
 }
-const filters = NOTE_ORDER
-  .filter((k) => noteCounts[k])
-  .map((k) => ({ value: k, label: NOTE_LABELS[k], count: noteCounts[k] }));
+const filters = SCHREIBBAR_KINDS
+  .filter((k) => noteCounts[k.value])
+  .map((k) => ({ value: k.value, label: k.label, count: noteCounts[k.value] }));
 const showFilter = notes.length >= FILTER_THRESHOLD && filters.length >= 2;
 ---
 
@@ -94,11 +100,7 @@ const showFilter = notes.length >= FILTER_THRESHOLD && filters.length >= 2;
               </div>
               <div class="entry__body">
                 <span class="entry__tag" data-tag={note.kind}>
-                  {note.kind === 'poesie' && 'Poesie'}
-                  {note.kind === 'notiz' && 'Notiz'}
-                  {note.kind === 'idee' && 'DenkBAR · Idee'}
-                  {note.kind === 'vision' && 'DenkBAR · Vision'}
-                  {note.kind === 'umfrage' && 'DenkBAR · Umfrage'}
+                  {noteKindLabel(note.kind)}
                 </span>
                 <h3 class="entry__title">
                   <a href={`/schreibbar/${note.slug}/`}>{localized(note.title)}</a>
