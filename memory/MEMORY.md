@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 03.10.2026 (neue Arten in der lesBAR)*
+*Stand: 03.10.2026 (lesBAR-Arten, Erstveröffentlichungs-Datum)*
 
 ## Projektziel
 
@@ -140,10 +140,16 @@ Telefon funktioniert.
   das Studio ein eigenes npm-Projekt ist und die Datei nicht importieren kann.
   `noteKinds.test.js` liest das Schema als Text und vergleicht beide Listen —
   laufen sie auseinander, schlägt der Build fehl statt die Seite.
-- **„Zuletzt veröffentlicht" sortiert nach `_createdAt`**, nicht `_updatedAt`.
-  Eine Tippfehler-Korrektur soll einen alten Eintrag nicht wieder nach oben
-  holen. `isEventArchived()` nutzt bewusst weiterhin `_updatedAt`, dort ist
-  „zuletzt angefasst" die richtige Frage.
+- **„Zuletzt veröffentlicht" sortiert nach `coalesce(firstPublishedAt,
+  _createdAt)`** (03.10.), nicht `_updatedAt` — eine Tippfehler-Korrektur soll
+  einen alten Eintrag nicht nach oben holen. `_createdAt` allein reichte nicht:
+  Sanity übernimmt beim Publish das `_createdAt` des ENTWURFS (Hopi-Text: Entwurf
+  19.09., veröffentlicht 03.10., fiel aus der Liste). `firstPublishedAt` setzt
+  die `AutoSlugPublishAction` beim ersten Publish (verstecktes Feld
+  `firstPublishedAtField` in `_shared.ts`, in allen sechs Doc-Types). Ältere
+  Einträge haben es nicht und fallen auf `_createdAt` zurück. Die Liste zeigt
+  bewusst nur 3 Einträge; veröffentlicht Katharina 4 an einem Tag, fällt der
+  früheste raus. `isEventArchived()` nutzt bewusst weiterhin `_updatedAt`.
 - **Direkt auf `main` arbeiten**, kein Feature-Branch-Zwang (seit 16.05.).
 - **Übersetzungen erscheinen im deutschen Beitrag, nicht in einem eigenen
   Sprachbaum** (09.09.). Katharina hatte die `en`/`fr`-Felder längst befüllen
@@ -202,6 +208,17 @@ Telefon funktioniert.
   Komponenten-CSS auf jeder Seite aus, die die Komponente importiert — auch wo
   sie nichts rendert. Am 09.09. sahen so 65 Seiten nach Übersetzung aus, es
   waren zwei. Immer auf das echte Markup prüfen (`<section class="…`).
+
+- **Die eigene Publish-Action umgeht die Pflichtfeld-Prüfung.**
+  `AutoSlugPublishAction` gibt nur `publish.disabled` weiter, nicht die
+  Validierung — so landeten zwei lesBAR-Einträge ohne „Art" (`kind: null`)
+  live (03.10.). Frontend fängt das ab (Rubrik „Weitere", Kennzeichnung nur
+  „lesBAR"). Gewollt im Sinne von „nie blockieren", aber bei neuen Pflicht-
+  feldern daran denken.
+- **History-API von Sanity reicht nur wenige Tage zurück.** Ob ein Eintrag
+  früher schon live war, lässt sich über ältere Vercel-Production-Deployments
+  prüfen (`web_fetch_vercel_url` des Vercel-MCP auf die Deployment-URL).
+  Vercel-Projekt heißt `oasen-finder` (Repo `restitutio777/oasen-finder`).
 
 ## Umgang mit Katharina
 
