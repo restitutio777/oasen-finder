@@ -113,7 +113,7 @@ Site ist live unter der finalen Domain. Domain-Umzug + DSGVO-Härtung + Katharin
 ### Studio-Deploy — WICHTIG für nächstes Mal
 
 Studio: **werkstatt-gemeinschaft.sanity.studio** (Org Intuitivmedia `ow7ACwTD3`, Projekt `z6eclgt8`).
-- **Der per `sanity login` (Google) eingeloggte Account hat KEINEN Zugriff** auf z6eclgt8 (nur 2 Projekt-Member). Deploy daher über **Deploy-Token**: manage.sanity.io → Projekt z6eclgt8 → API → Tokens (Rolle „Deploy Studio"/Administrator) → `SANITY_AUTH_TOKEN=… npx sanity deploy` aus `astro/sanity`.
+- **Login mit dem richtigen der zwei Google-Accounts reicht** (03.10. bestätigt, Befehl in memory/MEMORY.md unter Stolpersteine). Der andere Account hat KEINEN Zugriff auf z6eclgt8. Notweg **Deploy-Token**: manage.sanity.io → Projekt z6eclgt8 → API → Tokens (Rolle „Deploy Studio"/Administrator) → `SANITY_AUTH_TOKEN=… npx sanity deploy` aus `astro/sanity`.
 - **react-is-Fix (Commit `6cb127c`):** `astro/sanity` brauchte `react-is` (Peer von `@sanity/ui` 2.x), sonst bricht `sanity build`.
 
 ### Noch offen (optional, nicht dringend)

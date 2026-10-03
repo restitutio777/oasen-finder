@@ -164,14 +164,6 @@ Telefon funktioniert.
 
 ## Offene Aufgaben
 
-- **Studio-Deploy für die neuen Arten steht aus** (19.09., erneut 03.10.). Code
-  ist auf `main` und live, aber Katharina sieht Tagebucheintrag/Reisebericht/
-  Begegnung/Brief (schreibBAR) und Gedicht/Spruch (lesBAR) erst nach `cd astro/sanity && npm run deploy`. Blockiert: der per `sanity login` (Google)
-  eingeloggte Account hat keinen Zugriff auf `z6eclgt8` (am 03.10. erneut
-  bestätigt, „missing grant sanity.project.read"). Weg laut NEXT-SESSION.md:
-  Deploy-Token aus manage.sanity.io → z6eclgt8 → API → Tokens (Rolle Deploy
-  Studio), dann `SANITY_AUTH_TOKEN=… npm run deploy` in `astro/sanity`.
-
 - Kosmetisch: Der Google-Photos-Link steht noch im Slug-Feld der Notiz
   `f21faaae-6c23-422b-953d-5b947c3cde8b`. Kein Handlungsdruck, räumt sich beim
   nächsten Publish selbst auf.
@@ -186,8 +178,12 @@ Telefon funktioniert.
   Live-Stand halten. HTTP-`last-modified` taugt **nicht** als Deploy-Alter, das
   ist nur die CDN-Cache-Füllung.
 - **Studio-Deploy geht nur aus `astro/sanity/` per `npm run deploy`.** Die CLI
-  liegt nicht global. Vorher prüfen, welcher Sanity-Account eingeloggt ist
-  (`npx sanity projects list`), es sind mehrere Projekte im Spiel.
+  liegt nicht global. Der Betreiber hat zwei Sanity-Accounts (beide per Google);
+  nur einer ist Member von `z6eclgt8`. Bewährter Befehl (03.10.), deployt nur,
+  wenn der Account passt:
+  `npx sanity logout && npx sanity login && npx sanity projects list | grep z6eclgt8 && npm run deploy`
+  Der Browser meldet gern den zuletzt benutzten Google-Account an — dann
+  Account wechseln. Deploy-Token (NEXT-SESSION.md) ist nur der Notweg.
 - **Schema-Änderungen brauchen einen Studio-Deploy.** Ein Vercel-Deploy des Codes
   reicht dafür nicht.
 - **Zwei getrennte npm-Projekte** mit eigenem `node_modules`: `astro/` und
