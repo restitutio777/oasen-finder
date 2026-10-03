@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 19.09.2026 (neue Arten in der schreibBAR)*
+*Stand: 03.10.2026 (neue Arten in der lesBAR)*
 
 ## Projektziel
 
@@ -35,6 +35,9 @@ Telefon funktioniert.
 - Überschriften im geöffneten Beitrag in `--accent-bronze` (#a76e3a).
 - schreibBAR-Arten seit 19.09.: Gedanke, Tagebucheintrag, Reisebericht,
   Begegnung, Brief, Poesie (+ Idee/Vision/Umfrage in der denkBAR).
+- lesBAR-Arten seit 03.10.: Buch, Aufsatz, Film, Podcast, Gespräch, Gedicht,
+  Spruch (`resource.kind`; Labels in `resource.ts`, `lesbar/index.astro`,
+  `lesbar/[slug].astro`).
 - Eigene 404-Seite (`astro/src/pages/404.astro`, 14.09.). Vorher zeigte Vercel
   seine rohe Fehlerseite ohne Logo, Menü und Rückweg — beim Verschicken einzelner
   Links der wahrscheinlichste Fehlerfall.
@@ -161,9 +164,9 @@ Telefon funktioniert.
 
 ## Offene Aufgaben
 
-- **Studio-Deploy für die neuen Arten steht aus** (19.09.). Code ist auf `main`
-  und live, aber Katharina sieht Tagebucheintrag/Reisebericht/Begegnung/Brief
-  erst nach `cd astro/sanity && npm run deploy`. Blockiert, weil die Sanity-CLI
+- **Studio-Deploy für die neuen Arten steht aus** (19.09., erneut 03.10.). Code
+  ist auf `main` und live, aber Katharina sieht Tagebucheintrag/Reisebericht/
+  Begegnung/Brief (schreibBAR) und Gedicht/Spruch (lesBAR) erst nach `cd astro/sanity && npm run deploy`. Blockiert, weil die Sanity-CLI
   mit `info@intuitive-fotografie.de` eingeloggt ist — dieser Account hat keinen
   Zugriff auf `z6eclgt8`. Erst `sanity login` mit dem WERKstatt-Account
   (interaktiv, Browser), dann deployen.

@@ -8,7 +8,7 @@ import { withSafeSlugs } from '../../lib/slug.js';
 let resources: any[] = [];
 if (isSanityConfigured) {
   // webseite/konzept/werkzeug-Resources leben jetzt unter /brauchbar/
-  // — die lesBAR zeigt nur Bücher, Artikel, Filme, Podcasts, Gespräche.
+  // — die lesBAR zeigt nur Bücher, Artikel, Filme, Podcasts, Gespräche, Gedichte, Sprüche.
   resources = await sanity.fetch(`
     *[_type == "resource" && !(kind in ["webseite", "konzept", "werkzeug"])] | order(_createdAt desc) {
       _id, title, kind, authorOrSource, "slug": slug.current,
@@ -34,6 +34,8 @@ const kindLabels: Record<string, string> = {
   film: 'Filme',
   podcast: 'Podcasts',
   gespraech: 'Gespräche',
+  gedicht: 'Gedichte',
+  spruch: 'Sprüche',
 };
 ---
 

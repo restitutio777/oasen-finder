@@ -4,9 +4,9 @@ import { docGroups, accentColorField, slugField } from './_shared';
 
 /**
  * LesBAR-Eintrag (+ BrauchBAR via kind-Filter).
- * Bücher, Aufsätze, Filme, Podcasts, Gespräche — plus Webseiten/Konzepte/
- * Werkzeuge, die in der brauchBAR leben (Kath 18.07.: „Webseite, Konzept,
- * Werkzeug").
+ * Bücher, Aufsätze, Filme, Podcasts, Gespräche, Gedichte, Sprüche —
+ * plus Webseiten/Konzepte/Werkzeuge, die in der brauchBAR leben
+ * (Kath 18.07.: „Webseite, Konzept, Werkzeug").
  */
 export const resource = defineType({
   name: 'resource',
@@ -33,6 +33,8 @@ export const resource = defineType({
           { title: 'Film', value: 'film' },
           { title: 'Podcast', value: 'podcast' },
           { title: 'Gespräch', value: 'gespraech' },
+          { title: 'Gedicht', value: 'gedicht' },
+          { title: 'Spruch', value: 'spruch' },
           { title: 'Webseite (BrauchBAR)', value: 'webseite' },
           { title: 'Konzept (BrauchBAR)', value: 'konzept' },
           { title: 'Werkzeug (BrauchBAR)', value: 'werkzeug' },
@@ -94,6 +96,8 @@ export const resource = defineType({
         film: 'Film',
         podcast: 'Podcast',
         gespraech: 'Gespräch',
+        gedicht: 'Gedicht',
+        spruch: 'Spruch',
         konzept: 'Konzept (brauchBAR)',
         werkzeug: 'Werkzeug (brauchBAR)',
       };
