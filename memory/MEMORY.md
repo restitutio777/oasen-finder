@@ -166,10 +166,11 @@ Telefon funktioniert.
 
 - **Studio-Deploy für die neuen Arten steht aus** (19.09., erneut 03.10.). Code
   ist auf `main` und live, aber Katharina sieht Tagebucheintrag/Reisebericht/
-  Begegnung/Brief (schreibBAR) und Gedicht/Spruch (lesBAR) erst nach `cd astro/sanity && npm run deploy`. Blockiert, weil die Sanity-CLI
-  mit `info@intuitive-fotografie.de` eingeloggt ist — dieser Account hat keinen
-  Zugriff auf `z6eclgt8`. Erst `sanity login` mit dem WERKstatt-Account
-  (interaktiv, Browser), dann deployen.
+  Begegnung/Brief (schreibBAR) und Gedicht/Spruch (lesBAR) erst nach `cd astro/sanity && npm run deploy`. Blockiert: der per `sanity login` (Google)
+  eingeloggte Account hat keinen Zugriff auf `z6eclgt8` (am 03.10. erneut
+  bestätigt, „missing grant sanity.project.read"). Weg laut NEXT-SESSION.md:
+  Deploy-Token aus manage.sanity.io → z6eclgt8 → API → Tokens (Rolle Deploy
+  Studio), dann `SANITY_AUTH_TOKEN=… npm run deploy` in `astro/sanity`.
 
 - Kosmetisch: Der Google-Photos-Link steht noch im Slug-Feld der Notiz
   `f21faaae-6c23-422b-953d-5b947c3cde8b`. Kein Handlungsdruck, räumt sich beim
