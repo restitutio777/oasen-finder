@@ -14,6 +14,8 @@ import { geocode } from '../lib/geocode';
  * einem slug-Feld. Bevor das Dokument veröffentlicht wird, läuft die
  * Action durch ein paar Auto-Enrichment-Schritte:
  *
+ *  0. Erstveröffentlichung — beim ersten Publish wird firstPublishedAt
+ *     gesetzt (Grundlage für „Zuletzt veröffentlicht" auf der Startseite).
  *  1. Slug — wenn slug.current leer ODER unbrauchbar ist, generiere aus
  *     Titel (title.de oder name, je nach Schema).
  *  2. Geocoding (nur für Stationen) — wenn address gefüllt und
@@ -63,6 +65,22 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
   const handle = useCallback(async () => {
     setProcessing(true);
     try {
+      // ---- Step 0: Erstveröffentlichung merken ----
+      // Nur beim allerersten Veröffentlichen (noch kein Published-Dokument).
+      // _createdAt taugt dafür nicht: es stammt vom Entwurf und kann Wochen
+      // alt sein (siehe firstPublishedAtField in schemas/_shared.ts).
+      if (!published && !doc?.firstPublishedAt) {
+        try {
+          await client
+            .patch(patchTargetId)
+            .set({ firstPublishedAt: new Date().toISOString() })
+            .commit();
+        } catch (err) {
+          // Still: das Frontend fällt auf _createdAt zurück.
+          console.error('[AutoSlugPublishAction] firstPublishedAt-Patch fehlgeschlagen:', err);
+        }
+      }
+
       // ---- Step 1: Slug ----
       // Quell-Titel für die Slug-Generierung:
       // - i18n-Titel (note, event, resource, episode, wonder)

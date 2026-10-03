@@ -48,13 +48,21 @@ if (isSanityConfigured) {
   // Veröffentlichung — passt zur Überschrift, bleibt stabil und ist das
   // einzige Datumsfeld, das alle sechs Doc-Types gemeinsam haben.
   //
+  //
+  // 03.10.: _createdAt allein reicht doch nicht. Beim Veröffentlichen
+  // übernimmt Sanity das _createdAt des ENTWURFS — ein Hopi-Text, als
+  // Entwurf am 19.09. angelegt und am 03.10. veröffentlicht, landete auf
+  // Platz 4 und fehlte hier. Deshalb zuerst firstPublishedAt (setzt die
+  // Publish-Action im Studio beim ersten Veröffentlichen), sonst wie
+  // bisher _createdAt für alle älteren Einträge.
+  //
   // defined(slug.current) sichert, dass nur verlinkbare Einträge erscheinen.
   latest = await sanity.fetch(`
     *[
       _type in ["note", "station", "event", "resource", "episode", "wonder"]
       && defined(slug.current)
-    ] | order(_createdAt desc) [0...3] {
-      _type, _id, _createdAt, kind,
+    ] | order(coalesce(firstPublishedAt, _createdAt) desc) [0...3] {
+      _type, _id, "firstPublished": coalesce(firstPublishedAt, _createdAt), kind,
       "slug": slug.current,
       title, name
     }
@@ -115,8 +123,8 @@ const latestItems = latest
       title: title || '(ohne Titel)',
       href: `/${room.base}/${item.slug}/`,
       room,
-      publishedAt: item._createdAt as string,
-      dateLabel: item._createdAt ? latestDateFmt.format(new Date(item._createdAt)) : '',
+      publishedAt: item.firstPublished as string,
+      dateLabel: item.firstPublished ? latestDateFmt.format(new Date(item.firstPublished)) : '',
     };
   })
   .filter((i) => i.room.base);

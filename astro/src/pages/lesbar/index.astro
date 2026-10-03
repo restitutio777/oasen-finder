@@ -10,7 +10,7 @@ if (isSanityConfigured) {
   // webseite/konzept/werkzeug-Resources leben jetzt unter /brauchbar/
   // — die lesBAR zeigt nur Bücher, Artikel, Filme, Podcasts, Gespräche, Gedichte, Sprüche.
   resources = await sanity.fetch(`
-    *[_type == "resource" && !(kind in ["webseite", "konzept", "werkzeug"])] | order(_createdAt desc) {
+    *[_type == "resource" && !(kind in ["webseite", "konzept", "werkzeug"])] | order(coalesce(firstPublishedAt, _createdAt) desc) {
       _id, title, kind, authorOrSource, "slug": slug.current,
       "thumb": coverImage { asset->{ url } }
     }
@@ -66,7 +66,7 @@ const kindLabels: Record<string, string> = {
 
       {Object.entries(byKind).map(([kind, items]) => (
         <section style="margin-bottom: 3rem;">
-          <h2 class="eyebrow">{kindLabels[kind] || kind}</h2>
+          <h2 class="eyebrow">{kindLabels[kind] || 'Weitere'}</h2>
           <ul style="list-style: none; padding: 0; margin-top: 1rem; display: grid; gap: 1rem;">
             {items.map((r) => (
               <li>

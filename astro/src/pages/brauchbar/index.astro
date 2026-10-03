@@ -22,7 +22,7 @@ import { withSafeSlugs } from '../../lib/slug.js';
 let resources: any[] = [];
 if (isSanityConfigured) {
   resources = await sanity.fetch(`
-    *[_type == "resource" && kind in ["webseite", "konzept", "werkzeug"]] | order(_createdAt desc) {
+    *[_type == "resource" && kind in ["webseite", "konzept", "werkzeug"]] | order(coalesce(firstPublishedAt, _createdAt) desc) {
       _id, title, kind, authorOrSource, note, "slug": slug.current
     }
   `);

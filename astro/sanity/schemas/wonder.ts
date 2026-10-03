@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { SparkleIcon } from '@sanity/icons';
-import { docGroups, accentColorField, slugField } from './_shared';
+import { docGroups, accentColorField, slugField, firstPublishedAtField } from './_shared';
 
 /**
  * wunderBAR-Eintrag — Kreatives, Spielerisches, Off-Topic.
@@ -77,6 +77,7 @@ export const wonder = defineType({
       group: 'medien',
     }),
     slugField({ source: 'title.de', group: 'mehr' }),
+    firstPublishedAtField,
     defineField({
       name: 'externalLink',
       title: 'Externer Link',

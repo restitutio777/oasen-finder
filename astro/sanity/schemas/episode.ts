@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { PlayIcon } from '@sanity/icons';
-import { slugField } from './_shared';
+import { slugField, firstPublishedAtField } from './_shared';
 
 /**
  * HörBAR-Episode — eingesprochene Reflexion, Gedicht, Lied, oder Gespräch.
@@ -24,6 +24,7 @@ export const episode = defineType({
       validation: (Rule) => Rule.required(),
     }),
     slugField({ source: 'title.de' }),
+    firstPublishedAtField,
     defineField({
       name: 'kind',
       title: 'Art',

@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { ComposeIcon } from '@sanity/icons';
-import { docGroups, accentColorField, slugField } from './_shared';
+import { docGroups, accentColorField, slugField, firstPublishedAtField } from './_shared';
 
 /**
  * SchreibBAR-Eintrag (+ DenkBAR via kind-Filter).
@@ -172,6 +172,7 @@ export const note = defineType({
       group: 'medien',
     }),
     slugField({ source: 'title.de', group: 'mehr' }),
+    firstPublishedAtField,
     defineField({
       name: 'externalLink',
       title: 'Externer Link',

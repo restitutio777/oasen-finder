@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { CalendarIcon } from '@sanity/icons';
-import { accentColorField, slugField } from './_shared';
+import { accentColorField, slugField, firstPublishedAtField } from './_shared';
 
 /**
  * MachBAR-Event — Werkstatt-Termin.
@@ -170,6 +170,7 @@ export const event = defineType({
       group: 'medien',
     }),
     slugField({ source: 'title.de', group: 'mehr' }),
+    firstPublishedAtField,
     defineField({
       name: 'locationCoords',
       title: 'Koordinaten (für Karten-Verschneidung)',

@@ -99,3 +99,23 @@ export const accentColorField = defineField({
   initialValue: '',
   group: 'mehr',
 });
+
+/**
+ * Zeitpunkt der ERSTEN Veröffentlichung — setzt die AutoSlugPublishAction
+ * automatisch, Katharina sieht das Feld nicht.
+ *
+ * Warum nicht `_createdAt` (03.10.2026): Sanity übernimmt beim
+ * Veröffentlichen das `_createdAt` des Entwurfs. Ein Eintrag, der zwei
+ * Wochen als Entwurf lag, erschien deshalb unter „Zuletzt veröffentlicht"
+ * mit dem alten Datum und fiel aus der Liste — Katharina hatte ihn gerade
+ * eben veröffentlicht. Das Frontend sortiert nach
+ * `coalesce(firstPublishedAt, _createdAt)`; ältere Einträge ohne das Feld
+ * behalten so ihr bisheriges Datum.
+ */
+export const firstPublishedAtField = defineField({
+  name: 'firstPublishedAt',
+  title: 'Erstmals veröffentlicht',
+  type: 'datetime',
+  readOnly: true,
+  hidden: true,
+});

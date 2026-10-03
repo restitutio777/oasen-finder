@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { BookIcon } from '@sanity/icons';
-import { docGroups, accentColorField, slugField } from './_shared';
+import { docGroups, accentColorField, slugField, firstPublishedAtField } from './_shared';
 
 /**
  * LesBAR-Eintrag (+ BrauchBAR via kind-Filter).
@@ -79,6 +79,7 @@ export const resource = defineType({
       group: 'medien',
     }),
     slugField({ source: 'title.de', group: 'mehr' }),
+    firstPublishedAtField,
     accentColorField,
   ],
   preview: {
