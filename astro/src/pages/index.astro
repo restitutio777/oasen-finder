@@ -36,8 +36,10 @@ if (isSanityConfigured) {
   // „Zuletzt veröffentlicht" — eine schlichte Liste der jüngsten Beiträge
   // quer durch alle Räume. Abkürzung für Besucher: zeigt auf einen Blick,
   // wo zuletzt etwas dazukam, mit Direktlink — ohne jeden Raum einzeln zu
-  // öffnen. Bewusst nur drei Einträge und reine Textzeilen, damit es nicht
-  // mit der Raum-Übersicht („Wohin als nächstes?") konkurriert.
+  // öffnen. Bewusst knapp (fünf Einträge, bis 03.10. drei) und reine
+  // Textzeilen, damit es nicht mit der Raum-Übersicht („Wohin als
+  // nächstes?") konkurriert. Drei waren zu wenig: Katharina veröffentlicht
+  // an manchen Tagen vier Beiträge, der früheste fiel dann sofort heraus.
   //
   // Sortiert und datiert nach _createdAt (05.08.: vorher _updatedAt).
   // _updatedAt springt bei JEDER Änderung hoch — eine korrigierte
@@ -61,7 +63,7 @@ if (isSanityConfigured) {
     *[
       _type in ["note", "station", "event", "resource", "episode", "wonder"]
       && defined(slug.current)
-    ] | order(coalesce(firstPublishedAt, _createdAt) desc) [0...3] {
+    ] | order(coalesce(firstPublishedAt, _createdAt) desc) [0...5] {
       _type, _id, "firstPublished": coalesce(firstPublishedAt, _createdAt), kind,
       "slug": slug.current,
       title, name
@@ -193,7 +195,7 @@ const latestItems = latest
     </div>
   </section>
 
-  {/* Zuletzt veröffentlicht — schlichte Textliste der drei jüngsten
+  {/* Zuletzt veröffentlicht — schlichte Textliste der fünf jüngsten
       Beiträge quer durch alle Räume. Bewusst kein Kachel-Grid (sonst
       Doppelung mit „Wohin als nächstes?" direkt darunter): nur Titel,
       Raum und Datum als ruhige Zeilen, jede ein Direktlink. Rendert

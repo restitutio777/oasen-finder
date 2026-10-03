@@ -148,8 +148,8 @@ Telefon funktioniert.
   die `AutoSlugPublishAction` beim ersten Publish (verstecktes Feld
   `firstPublishedAtField` in `_shared.ts`, in allen sechs Doc-Types). Ältere
   Einträge haben es nicht und fallen auf `_createdAt` zurück. Die Liste zeigt
-  bewusst nur 3 Einträge; veröffentlicht Katharina 4 an einem Tag, fällt der
-  früheste raus. `isEventArchived()` nutzt bewusst weiterhin `_updatedAt`.
+  seit 03.10. 5 Einträge (vorher 3; bei 4 Beiträgen an einem Tag fiel einer
+  heraus). `isEventArchived()` nutzt bewusst weiterhin `_updatedAt`.
 - **Direkt auf `main` arbeiten**, kein Feature-Branch-Zwang (seit 16.05.).
 - **Übersetzungen erscheinen im deutschen Beitrag, nicht in einem eigenen
   Sprachbaum** (09.09.). Katharina hatte die `en`/`fr`-Felder längst befüllen
