@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 03.10.2026 (lesBAR-Arten, Erstveröffentlichungs-Datum)*
+*Stand: 05.10.2026 (Katharinas YouTube-Kanal, Videos teilen)*
 
 ## Projektziel
 
@@ -227,3 +227,12 @@ nie eins zu eins wörtlich umsetzen, sondern als Web-Designer interpretieren und
 auf Konsistenz mit dem Rest der Site prüfen. Bei Fehlern: Ursache beim System
 benennen, nicht bei ihr. Meistens stimmt ihre Beobachtung, auch wenn die
 Erklärung daneben liegt.
+
+**Ihre weiteren Kanäle** (05.10.): „mein Kanal" = ihr YouTube-Kanal
+**Anthroposophie lebensnah** (`@AnthroposophieLebensnah`, Glöckler-Auszüge,
+eigene Playlists). Dazu die ältere Website anthroposophie-lebensnah.de (TYPO3,
+NICHT unser Projekt). Auf reise-zueinander.de ist kein Telegram-Link hinterlegt
+(`contact.telegramUrl` leer). Fremde Videos nie herunterladen und neu
+hochladen lassen: auf YouTube in eine Playlist speichern (geht auch bei „nicht
+gelisteten" Videos), in der hörBAR den Link bei „URL zur Folge" eintragen
+(Plattform YouTube), dann zeigt `MediaLink` den Player per Klick-zum-Laden.
