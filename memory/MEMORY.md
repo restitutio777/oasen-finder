@@ -24,7 +24,11 @@ Telefon funktioniert.
 - **Studio läuft seit 28.10.26 auf Sanity v6.20.0** (vorher 3.99.0) und holt
   Patches, Minors und harmlose Majors per `deployment.autoUpdates` selbst.
   Verhaltensändernde Majors (v6 → v7) und der eigene Code bleiben Handarbeit.
-  Hergang, Bruchstellen und Prüfschritte: `SANITY-UPGRADE-PLAN.md`.
+  Kanal steht auf **`stable`** (28.10.), also die Version, die etwa eine Woche
+  im Feld war — bei einer Redakteurin am Handy die ruhigere Wahl. Ein Studio
+  fällt dabei nie unter die Version zurück, mit der zuletzt deployt wurde:
+  deployt ist 6.20.0, `stable` steht auf 6.15.0, also bleibt es bei 6.20.0,
+  bis `stable` aufschließt. Hergang und Bruchstellen: `SANITY-UPGRADE-PLAN.md`.
 - Publish im Studio löst per Webhook einen Vercel-Build aus, ~1 bis 2 Minuten bis
   live.
 - Mitkommen-Formular versendet echt via Infomaniak-SMTP.
@@ -209,6 +213,16 @@ Telefon funktioniert.
   neues Icon also nie aus `@sanity/icons` importieren, sonst bleibt die Stelle
   im Studio leer, ohne Fehlermeldung. Dasselbe Muster bei `@sanity/ui`
   (`useToast` kommt aus `@sanity/ui/toast`).
+- **Riskante Studio-Änderungen gegen ein Wegwerf-Dataset prüfen, nicht gegen
+  production.** Beide Seiten lesen ihr Dataset aus einer Umgebungsvariable
+  (`SANITY_STUDIO_DATASET` im Studio, `PUBLIC_SANITY_DATASET` im Frontend),
+  also: `npx sanity dataset create pruef-temp`, lokalen Dev-Server mit der
+  Variable starten, dort anlegen und veröffentlichen, danach
+  `npx sanity dataset delete pruef-temp --force`. So wurde am 28.10. der ganze
+  Weg nach dem v6-Update geprüft — Publish-Action, Slug-Automatik,
+  `firstPublishedAt`, Liste und Detailseite — ohne einen Testeintrag in
+  Katharinas Live-Dataset und ohne Vercel-Build. Der lokale Studio-Dev-Server
+  muss dabei auf **Port 3333** laufen: nur der steht in den CORS-Origins.
 - **Zwei getrennte npm-Projekte** mit eigenem `node_modules`: `astro/` und
   `astro/sanity/`. Geteilter Code ist nicht möglich, deshalb existiert `slugify`
   doppelt (`astro/src/lib/slug.js` und `astro/sanity/lib/slugify.ts`). Bei
