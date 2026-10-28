@@ -1947,6 +1947,7 @@
   /* schreibBAR-Arten (19.09.26). „Gedanke“ (Wert notiz) behält bewusst das
      Standard-Gold: der häufigste Fall bleibt der ruhige. Reisebericht trägt
      das Bergsee-Türkis von bewegBAR — gleicher Gedanke, anderer Raum. */
+  .entry__tag[data-tag="artikel"] { color: var(--accent-bronze); }
   .entry__tag[data-tag="tagebuch"] { color: var(--accent-deep); }
   .entry__tag[data-tag="reisebericht"] { color: var(--accent-blue); }
   .entry__tag[data-tag="begegnung"] { color: var(--accent-green); }

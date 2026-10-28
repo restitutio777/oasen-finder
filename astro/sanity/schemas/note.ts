@@ -46,7 +46,7 @@ export const note = defineType({
       name: 'kind',
       title: 'Art',
       description:
-        'Gedanke für alles Kurze, Tagebucheintrag für den eigenen Tag, Reisebericht für einen Ort, Begegnung für einen Menschen, Brief für etwas an die Leser Gerichtetes, Poesie für Verse. Die drei DenkBAR-Arten am Ende erscheinen nicht in der SchreibBAR, sondern in der DenkBAR.',
+        'Gedanke für alles Kurze, Artikel für einen ausgearbeiteten Text oder Essay (auch für Substack-Beiträge), Tagebucheintrag für den eigenen Tag, Reisebericht für einen Ort, Begegnung für einen Menschen, Brief für etwas an die Leser Gerichtetes, Poesie für Verse. Die drei DenkBAR-Arten am Ende erscheinen nicht in der SchreibBAR, sondern in der DenkBAR.',
       type: 'string',
       options: {
         list: [
@@ -55,6 +55,7 @@ export const note = defineType({
           // wurde getauscht — jeder bestehende Eintrag trägt 'notiz', ein
           // Umschreiben wäre eine Migration über alle Dokumente.
           { title: 'Gedanke', value: 'notiz' },
+          { title: 'Artikel', value: 'artikel' },
           { title: 'Tagebucheintrag', value: 'tagebuch' },
           { title: 'Reisebericht', value: 'reisebericht' },
           { title: 'Begegnung', value: 'begegnung' },
@@ -205,6 +206,7 @@ export const note = defineType({
     prepare({ title, kind, publishedAt, media }) {
       const kindLabel: Record<string, string> = {
         notiz: 'Gedanke',
+        artikel: 'Artikel',
         tagebuch: 'Tagebucheintrag',
         reisebericht: 'Reisebericht',
         begegnung: 'Begegnung',

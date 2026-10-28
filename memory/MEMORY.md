@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 05.10.2026 (Katharinas YouTube-Kanal, Videos teilen)*
+*Stand: 28.10.2026 (schreibBAR-Art „Artikel" für Substack-Texte)*
 
 ## Projektziel
 
@@ -33,8 +33,12 @@ Telefon funktioniert.
   `--text-reading` (#3a2f48), Absatzabstand 1.75em. Der Schriftgrößen-Regler
   steht seit 16.09. auf **jeder** Seite und wirkt auf **alle** Texte.
 - Überschriften im geöffneten Beitrag in `--accent-bronze` (#a76e3a).
-- schreibBAR-Arten seit 19.09.: Gedanke, Tagebucheintrag, Reisebericht,
-  Begegnung, Brief, Poesie (+ Idee/Vision/Umfrage in der denkBAR).
+- schreibBAR-Arten seit 19.09.: Gedanke, Artikel (28.10. dazu), Tagebucheintrag,
+  Reisebericht, Begegnung, Brief, Poesie (+ Idee/Vision/Umfrage in der denkBAR).
+  „Artikel" ist Katharinas Rubrik für ihre Substack-Texte (Wunsch 28.10.: „Da
+  gibt es die Option Artikel/Essay nicht"); Kennzeichnung in Bronze-Gold
+  (`--accent-bronze`), Querverweis aufs Original über das vorhandene Feld
+  „Substack-Cross-Posting".
 - lesBAR-Arten seit 03.10.: Buch, Aufsatz, Film, Podcast, Gespräch, Gedicht,
   Spruch (`resource.kind`; Labels in `resource.ts`, `lesbar/index.astro`,
   `lesbar/[slug].astro`).
@@ -170,6 +174,11 @@ Telefon funktioniert.
 
 ## Offene Aufgaben
 
+- **Studio-Deploy für die Art „Artikel" steht aus** (28.10.): Code ist auf
+  `main`, die Auswahl erscheint im Studio erst nach `npm run deploy` aus
+  `astro/sanity/` — und dafür muss der Google-Account mit Zugriff auf z6eclgt8
+  eingeloggt sein (`npx sanity projects list` zeigte am 28.10. den falschen
+  der beiden Accounts). Bis dahin kann Katharina die Art nicht wählen.
 - Kosmetisch: Der Google-Photos-Link steht noch im Slug-Feld der Notiz
   `f21faaae-6c23-422b-953d-5b947c3cde8b`. Kein Handlungsdruck, räumt sich beim
   nächsten Publish selbst auf.

@@ -22,6 +22,7 @@ export const DENKBAR_KINDS = ['idee', 'vision', 'umfrage'];
 /** schreibBAR-Arten in Anzeige- und Auswahlreihenfolge. */
 export const SCHREIBBAR_KINDS = [
   { value: 'notiz', label: 'Gedanke' },
+  { value: 'artikel', label: 'Artikel' },
   { value: 'tagebuch', label: 'Tagebucheintrag' },
   { value: 'reisebericht', label: 'Reisebericht' },
   { value: 'begegnung', label: 'Begegnung' },
