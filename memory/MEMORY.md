@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 28.10.2026 (schreibBAR-Art „Artikel" live, zweiter Sanity-Admin)*
+*Stand: 28.10.2026 (Art „Artikel" live, Studio auf v6 mit Auto-Updates)*
 
 ## Projektziel
 
@@ -21,6 +21,10 @@ Telefon funktioniert.
 - Produktiv auf https://reise-zueinander.de (Vercel, statischer Astro-Build).
 - Studio: https://werkstatt-gemeinschaft.sanity.studio, Sanity-Projekt `z6eclgt8`,
   Dataset `production`.
+- **Studio läuft seit 28.10.26 auf Sanity v6.20.0** (vorher 3.99.0) und holt
+  Patches, Minors und harmlose Majors per `deployment.autoUpdates` selbst.
+  Verhaltensändernde Majors (v6 → v7) und der eigene Code bleiben Handarbeit.
+  Hergang, Bruchstellen und Prüfschritte: `SANITY-UPGRADE-PLAN.md`.
 - Publish im Studio löst per Webhook einen Vercel-Build aus, ~1 bis 2 Minuten bis
   live.
 - Mitkommen-Formular versendet echt via Infomaniak-SMTP.
@@ -200,6 +204,11 @@ Telefon funktioniert.
   Account wechseln. Deploy-Token (NEXT-SESSION.md) ist nur der Notweg.
 - **Schema-Änderungen brauchen einen Studio-Deploy.** Ein Vercel-Deploy des Codes
   reicht dafür nicht.
+- **Icons kommen seit v6 aus Einzelpfaden** (`@sanity/icons/Compose`). Im
+  Root-Export stehen die alten Namen weiter — als `never`-Stub ohne Wert. Ein
+  neues Icon also nie aus `@sanity/icons` importieren, sonst bleibt die Stelle
+  im Studio leer, ohne Fehlermeldung. Dasselbe Muster bei `@sanity/ui`
+  (`useToast` kommt aus `@sanity/ui/toast`).
 - **Zwei getrennte npm-Projekte** mit eigenem `node_modules`: `astro/` und
   `astro/sanity/`. Geteilter Code ist nicht möglich, deshalb existiert `slugify`
   doppelt (`astro/src/lib/slug.js` und `astro/sanity/lib/slugify.ts`). Bei
