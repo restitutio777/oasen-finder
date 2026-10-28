@@ -259,6 +259,11 @@ auf Konsistenz mit dem Rest der Site prüfen. Bei Fehlern: Ursache beim System
 benennen, nicht bei ihr. Meistens stimmt ihre Beobachtung, auch wenn die
 Erklärung daneben liegt.
 
+**Wo sie gerade ist:** Seit Oktober 2026 für längere Zeit in New York (Stand
+28.10.26, kein Rückkehrdatum bekannt). Erklärt die Reiseberichte und
+Begegnungen der letzten Wochen und ist für Terminfragen, Zeitzonen
+(NY ist sechs Stunden hinter MEZ) und Erreichbarkeit relevant.
+
 **Ihre weiteren Kanäle** (05.10.): „mein Kanal" = ihr YouTube-Kanal
 **Anthroposophie lebensnah** (`@AnthroposophieLebensnah`, Glöckler-Auszüge,
 eigene Playlists). Dazu die ältere Website anthroposophie-lebensnah.de (TYPO3,
