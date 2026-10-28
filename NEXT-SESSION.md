@@ -225,7 +225,7 @@ Strukturierte Liste in **`KATHARINA-FRAGEN.md`** — direkt copy-paste-fertig. A
 
 ### Bus-Faktor
 
-- **info@intuitive-fotografie.de als zweiter Sanity-Admin** → Bus-Faktor abgesichert *(falls User-Account mal weg ist)*
+- **info@intuitive-fotografie.de als zweiter Sanity-Admin** → **gilt NICHT** (28.10.26 gemessen): dieser Account hat auf `z6eclgt8` kein Leserecht, `npx sanity projects list` zeigt das Projekt nicht. Member ist allein intuitivmedia@gmail.com. Bus-Faktor ist also offen — zweiten Admin in manage.sanity.io wirklich einladen.
 - **Domain bei Registrar in Katharinas Namen** anlegen, sobald Domain entschieden
 
 ### A11y-Audit + Mobile-Test

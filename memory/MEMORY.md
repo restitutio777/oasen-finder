@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 28.10.2026 (schreibBAR-Art „Artikel" für Substack-Texte)*
+*Stand: 28.10.2026 (schreibBAR-Art „Artikel", Studio deployt)*
 
 ## Projektziel
 
@@ -174,11 +174,6 @@ Telefon funktioniert.
 
 ## Offene Aufgaben
 
-- **Studio-Deploy für die Art „Artikel" steht aus** (28.10.): Code ist auf
-  `main`, die Auswahl erscheint im Studio erst nach `npm run deploy` aus
-  `astro/sanity/` — und dafür muss der Google-Account mit Zugriff auf z6eclgt8
-  eingeloggt sein (`npx sanity projects list` zeigte am 28.10. den falschen
-  der beiden Accounts). Bis dahin kann Katharina die Art nicht wählen.
 - Kosmetisch: Der Google-Photos-Link steht noch im Slug-Feld der Notiz
   `f21faaae-6c23-422b-953d-5b947c3cde8b`. Kein Handlungsdruck, räumt sich beim
   nächsten Publish selbst auf.
@@ -194,7 +189,8 @@ Telefon funktioniert.
   ist nur die CDN-Cache-Füllung.
 - **Studio-Deploy geht nur aus `astro/sanity/` per `npm run deploy`.** Die CLI
   liegt nicht global. Der Betreiber hat zwei Sanity-Accounts (beide per Google);
-  nur einer ist Member von `z6eclgt8`. Bewährter Befehl (03.10.), deployt nur,
+  Member von `z6eclgt8` ist **intuitivmedia@gmail.com** (28.10. bestätigt),
+  NICHT info@intuitive-fotografie.de. Bewährter Befehl (03.10.), deployt nur,
   wenn der Account passt:
   `npx sanity logout && npx sanity login && npx sanity projects list | grep z6eclgt8 && npm run deploy`
   Der Browser meldet gern den zuletzt benutzten Google-Account an — dann
