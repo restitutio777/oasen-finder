@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity';
-import { BookIcon } from '@sanity/icons';
+import { BookIcon } from '@sanity/icons/Book';
 import { docGroups, accentColorField, slugField, firstPublishedAtField } from './_shared';
 
 /**

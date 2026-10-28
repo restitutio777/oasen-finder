@@ -5,7 +5,7 @@ import {
   useDocumentOperation,
   useClient,
 } from 'sanity';
-import { useToast } from '@sanity/ui';
+import { useToast } from '@sanity/ui/toast';
 import { slugify, isUsableSlug } from '../lib/slugify';
 import { geocode } from '../lib/geocode';
 
@@ -221,7 +221,12 @@ export const AutoSlugPublishAction: DocumentActionComponent = (
 
   return {
     label: processing ? 'Wird veröffentlicht …' : 'Publish',
-    disabled: publish.disabled,
+    // `publish.disabled` ist seit Studio v6 kein Boolean mehr, sondern ein
+    // Grund-String ('NO_CHANGES', 'ALREADY_PUBLISHED', …) oder false.
+    // Die Action-API will weiter ein Boolean — der Grund wird hier bewusst
+    // verworfen, nicht angezeigt: ein ausgegrauter Knopf mit Erklaerung ist
+    // eine eigene Entscheidung, kein Nebeneffekt eines Versions-Updates.
+    disabled: Boolean(publish.disabled),
     onHandle: handle,
   };
 };

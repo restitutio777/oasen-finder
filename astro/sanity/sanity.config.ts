@@ -2,17 +2,15 @@ import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { presentationTool, defineLocations } from 'sanity/presentation';
 import { visionTool } from '@sanity/vision';
-import {
-  UserIcon,
-  EnvelopeIcon,
-  ComposeIcon,
-  PinIcon,
-  CalendarIcon,
-  BookIcon,
-  WrenchIcon,
-  PlayIcon,
-  SparkleIcon,
-} from '@sanity/icons';
+import { UserIcon } from '@sanity/icons/User';
+import { EnvelopeIcon } from '@sanity/icons/Envelope';
+import { ComposeIcon } from '@sanity/icons/Compose';
+import { PinIcon } from '@sanity/icons/Pin';
+import { CalendarIcon } from '@sanity/icons/Calendar';
+import { BookIcon } from '@sanity/icons/Book';
+import { WrenchIcon } from '@sanity/icons/Wrench';
+import { PlayIcon } from '@sanity/icons/Play';
+import { SparkleIcon } from '@sanity/icons/Sparkle';
 import { schemaTypes } from './schemas';
 import { AutoSlugPublishAction } from './actions/AutoSlugPublishAction';
 

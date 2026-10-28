@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity';
-import { SparkleIcon } from '@sanity/icons';
+import { SparkleIcon } from '@sanity/icons/Sparkle';
 import { docGroups, accentColorField, slugField, firstPublishedAtField } from './_shared';
 
 /**
