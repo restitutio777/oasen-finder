@@ -5,7 +5,7 @@ Kompaktes Langzeitgedächtnis. Destilliert, nicht protokolliert. Details stehen 
 Historie) und `CLAUDE.md` (Arbeitsanweisungen fürs Repo). Diese Datei ist die
 Einstiegsseite: erst hier lesen, dann gezielt nachschlagen.
 
-*Stand: 28.10.2026 (schreibBAR-Art „Artikel", Studio deployt)*
+*Stand: 28.10.2026 (schreibBAR-Art „Artikel" live, zweiter Sanity-Admin)*
 
 ## Projektziel
 
@@ -188,9 +188,12 @@ Telefon funktioniert.
   Live-Stand halten. HTTP-`last-modified` taugt **nicht** als Deploy-Alter, das
   ist nur die CDN-Cache-Füllung.
 - **Studio-Deploy geht nur aus `astro/sanity/` per `npm run deploy`.** Die CLI
-  liegt nicht global. Der Betreiber hat zwei Sanity-Accounts (beide per Google);
-  Member von `z6eclgt8` ist **intuitivmedia@gmail.com** (28.10. bestätigt),
-  NICHT info@intuitive-fotografie.de. Bewährter Befehl (03.10.), deployt nur,
+  liegt nicht global. Der Betreiber hat zwei Sanity-Accounts (beide per Google):
+  **intuitivmedia@gmail.com** war lange der einzige mit Zugriff; seit 28.10.26 ist
+  auch **info@intuitive-fotografie.de** Administrator (Bus-Faktor, Einladung
+  bestätigt). Der Prüfschritt bleibt trotzdem nützlich — `npx sanity projects list`
+  muss `z6eclgt8 · WERKstatt Gemeinschaft` zeigen, sonst hängt ein dritter Account
+  (oder ein abgelaufenes Login) davor. Bewährter Befehl (03.10.), deployt nur,
   wenn der Account passt:
   `npx sanity logout && npx sanity login && npx sanity projects list | grep z6eclgt8 && npm run deploy`
   Der Browser meldet gern den zuletzt benutzten Google-Account an — dann

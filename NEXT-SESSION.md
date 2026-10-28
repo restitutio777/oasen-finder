@@ -225,7 +225,7 @@ Strukturierte Liste in **`KATHARINA-FRAGEN.md`** — direkt copy-paste-fertig. A
 
 ### Bus-Faktor
 
-- **info@intuitive-fotografie.de als zweiter Sanity-Admin** → Einladung als `administrator` ist am 28.10.26 raus (`npx sanity users invite … --role administrator`), steht in `npx sanity users list` als `<pending>`. **Erst mit dem Annehmen der Mail zählt der Bus-Faktor** — danach einmal gegenprüfen: `npx sanity users list` zeigt den Account mit echter ID statt `<pending>`. Vorher hatte er auf `z6eclgt8` kein Leserecht (28.10. gemessen), die alte Zeile „Bus-Faktor abgesichert" war falsch. Members sind sonst: Intuitivmedia, Katharina Offenborn, Robot `studio-deploy` (Rolle `deploy-studio` — das ist der Notweg-Token).
+- **info@intuitive-fotografie.de als zweiter Sanity-Admin** → **erledigt am 28.10.26.** Einladung per `npx sanity users invite … --role administrator` raus, Mail bestätigt, `npx sanity users list` zeigt ihn als `pKCcwSBbs · Philippe Ramakers · administrator`. Vorher war die Zeile hier falsch: der Account war kein Member und hatte auf `z6eclgt8` nicht einmal Leserecht. Members jetzt: Intuitivmedia, Katharina Offenborn, Philippe Ramakers, Robot `studio-deploy` (Rolle `deploy-studio`, der Notweg-Token).
 - **Domain bei Registrar in Katharinas Namen** anlegen, sobald Domain entschieden
 
 ### A11y-Audit + Mobile-Test
